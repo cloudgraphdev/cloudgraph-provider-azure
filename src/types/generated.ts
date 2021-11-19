@@ -11,14 +11,25 @@ export type Scalars = {
   Float: number;
 };
 
-export type Tag = {
+export type AzureRawTag = {
   id: Scalars['String'];
   key?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
+};
+
+export type AzureResourceGroup = {
+  id: Scalars['String'];
+  subscriptionId?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  managedBy?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
 };
 
 export type AzureTag = {
   id: Scalars['String'];
   key: Scalars['String'];
   value: Scalars['String'];
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };

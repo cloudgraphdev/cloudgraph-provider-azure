@@ -1,6 +1,7 @@
 import { AzureServiceClientOptions } from '@azure/ms-rest-azure-js'
 import { ServiceClientCredentials } from '@azure/ms-rest-js'
 import { LinkedSubscription } from '@azure/ms-rest-nodeauth'
+import { Method } from 'axios'
 
 export interface AzureCredentials {
   clientId: string
@@ -32,4 +33,25 @@ export interface Tags {
 
 export interface TagMap {
   [property: string]: string
+}
+
+export interface RequestConfig {
+  baseUrl?: string
+  path: string
+  data?: any
+  verb?: Method
+  headers?: { [key: string]: string }
+}
+
+export interface AzureServiceConfig {
+  clientId?: string
+  tenantId?: string
+  clientSecret?: string
+  subscriptionId: string
+  credentials: ServiceClientCredentials
+}
+
+export interface AzureDebugScope {
+  service: string
+  fullScope: string
 }

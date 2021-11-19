@@ -32,6 +32,8 @@
     "terraform:cleanup": "rimraf ./tests/terraform/{.terraform,.terraform.lock.hcl,tfplan} ./tests/terraform/*.{tfstate,tfplan,backup}"
   },
   "dependencies": {
+    "@azure/arm-appservice": "^9.0.0",
+    "@azure/arm-resources": "^4.2.2",
     "@azure/core-http": "^2.2.2",
     "@azure/ms-rest-azure-js": "^2.1.0",
     "@azure/ms-rest-js": "^2.6.0",
@@ -39,6 +41,7 @@
     "@cloudgraph/sdk": "0.4.0",
     "@graphql-tools/load-files": "6.3.2",
     "@graphql-tools/merge": "8.0.1",
+    "axios": "^0.24.0",
     "chalk": "4.1.2",
     "cuid": "2.1.8",
     "dotenv": "10.0.0",

@@ -1,6 +1,7 @@
 import CloudGraph from '@cloudgraph/sdk'
 import camelCase from 'lodash/camelCase'
 import relations from '../enums/relations'
+import { AzureDebugScope } from '../types'
 
 const { logger } = CloudGraph
 
@@ -62,23 +63,16 @@ export function generateAzureErrorLog(
   functionName: string,
   err?: any
 ): void {
-  if (err.statusCode === 400) {
-    err.retryable = true
-  }
-  const notAuthorized = 'not authorized' // part of the error string aws passes back for permissions errors
-  const accessDenied = 'AccessDeniedException' // an error code aws sometimes sends back for permissions errors
-  const throttling = 'Throttling'
-
-  if (err?.code !== throttling) {
+  if (err.statusCode !== 429) {
     logger.warn(
       `There was a problem getting data for service ${service}, CG encountered an error calling ${functionName}`
     )
-    if (err?.message?.includes(notAuthorized) || err?.code === accessDenied) {
+    if (err.statusCode !== 401 || err.statusCode !== 403) {
       logger.warn(err.message)
     }
     logger.debug(err)
   } else {
-    logger.debug(`Rate exceeded for ${service}:${functionName}. Retrying...`)
+    logger.debug(`Rate exceeded for ${service}:${functionName}`)
   }
 }
 
@@ -108,3 +102,29 @@ export const sortResourcesDependencies = (resourceNames: string[]): string[] =>
     }
     return 0
   })
+
+export const generateAzureDebugScope = (
+  service: string,
+  client: any,
+  scope: string
+): AzureDebugScope => {
+  return {
+    service,
+    fullScope: `${client.constructor.name}:${scope}`,
+  }
+}
+
+export const tryCatchWrapper = async (
+  func: () => void,
+  debugScope: AzureDebugScope,
+  operation: string
+): Promise<void> => {
+  try {
+    await func()
+  } catch (error) {
+    generateAzureErrorLog(
+      debugScope.service,
+      `${debugScope.fullScope}:${operation}`
+    )
+  }
+}
