@@ -17,7 +17,7 @@ export default {
   // networkInterface: 'network_interface',
   // publicIp: 'publicIp',
   // recoveryService: 'recovery_service',
-  // resourceGroup: 'resource_group',
+  resourceGroup: 'resource_group',
   // securityGroup: 'network_security_group',
   // serviceBus: 'serviceBus',
   // sqlVm: 'sql_vm',

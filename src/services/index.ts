@@ -357,7 +357,7 @@ export default class Provider extends CloudGraph.Client {
     const { credentials } = await this.getFullCredentialsAndSubscriptions(
       account
     )
-    const config = { credentials, ...account }
+    const config = { credentials, subscriptionId }
     try {
       for (const resource of resourceNames) {
         const serviceClass = this.getService(resource)

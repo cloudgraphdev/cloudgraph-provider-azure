@@ -2,10 +2,10 @@ type azureTag @key(fields: "id") {
   id: String! @id @search(by: [hash])
   key: String! @search(by: [hash, regexp])
   value: String! @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup]
 }
 
-# TODO: would this cause a collision with other providers? should we rename to like awsRawTag?
-type Tag
+type azureRawTag
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
