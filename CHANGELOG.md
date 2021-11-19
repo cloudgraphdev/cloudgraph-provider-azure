@@ -1,3 +1,10 @@
+# [0.2.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.1.0...0.2.0) (2021-11-19)
+
+
+### Features
+
+* **resourceGroup:** add resourceGroup service ([b0dac0f](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b0dac0f05c991a3187ed836845e20a1a01a15b47))
+
 # [0.1.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.0.0...0.1.0) (2021-11-17)
 
 
