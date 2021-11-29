@@ -1,7 +1,7 @@
 import CloudGraph from '@cloudgraph/sdk'
 import camelCase from 'lodash/camelCase'
 import relations from '../enums/relations'
-import { AzureDebugScope } from '../types'
+import { AzureDebugScope, AzureDebugScopeInitialData } from '../types'
 
 const { logger } = CloudGraph
 
@@ -116,9 +116,14 @@ export const generateAzureDebugScope = (
 
 export const tryCatchWrapper = async (
   func: () => void,
-  debugScope: AzureDebugScope,
-  operation: string
+  {
+    service,
+    client,
+    scope,
+    operation,
+  }: AzureDebugScopeInitialData
 ): Promise<void> => {
+  const debugScope = generateAzureDebugScope(service, client, scope)
   try {
     await func()
   } catch (error) {

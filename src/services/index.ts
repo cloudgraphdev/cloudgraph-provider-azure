@@ -23,6 +23,7 @@ import {
 } from '../config/constants'
 import { obfuscateSensitiveString } from '../utils/format'
 import { sortResourcesDependencies } from '../utils'
+import { createDiffSecs } from '../utils/dateutils'
 
 export const enums = {
   services,
@@ -63,7 +64,7 @@ export default class Provider extends CloudGraph.Client {
         message: 'Please input a valid client ID: ',
         name: 'clientId',
       },
-      
+
       {
         type: 'input',
         message: 'Please input a valid client secret: ',
@@ -191,7 +192,7 @@ export default class Provider extends CloudGraph.Client {
 
     result.accounts = accounts
 
-    const { regions: regionsAnswer } = await this.interface.prompt([
+    const { regions: regionsAnswer = [] } = await this.interface.prompt([
       {
         type: 'checkbox',
         message: 'Select regions to scan',
@@ -203,16 +204,17 @@ export default class Provider extends CloudGraph.Client {
       },
     ])
     this.logger.debug(`Regions selected: ${regionsAnswer}`)
-    if (!regionsAnswer.length) {
+    // Always add global region to ensure that services that don't have location information get filtered
+    regionsAnswer.push(GLOBAL_REGION)
+    if (regionsAnswer.length === 1) {
       this.logger.info(
         `No Regions selected, using default region: ${chalk.green(
           DEFAULT_REGION
         )}`
       )
-      result.regions = DEFAULT_REGION
-    } else {
-      result.regions = regionsAnswer.join(',')
+      regionsAnswer.push(DEFAULT_REGION)
     }
+    result.regions = regionsAnswer.join(',')
 
     // Prompt for resources if flag set
     if (flags.resources) {
@@ -358,26 +360,41 @@ export default class Provider extends CloudGraph.Client {
       account
     )
     const config = { credentials, subscriptionId }
+    const getDataInputData = (rawData: rawDataInterface[]) => ({
+      regions: configuredRegions,
+      config,
+      opts,
+      rawData,
+    })
     try {
+      // Get resourceGroup data in advance to prevent repeated calls :)
+      const rgData = await this.getService(services.resourceGroup).getData(
+        getDataInputData(result)
+      )
+      result.push({
+        name: services.resourceGroup,
+        subscriptionId,
+        data: rgData,
+      })
       for (const resource of resourceNames) {
-        const serviceClass = this.getService(resource)
-        if (serviceClass && serviceClass.getData) {
-          const data = await serviceClass.getData({
-            regions: configuredRegions,
-            config,
-            opts,
-            rawData: result,
-          })
-          result.push({
-            name: resource,
-            subscriptionId,
-            data,
-          })
-          this.logger.success(`${resource} scan completed`)
-        } else {
-          this.logger.warn(
-            `Skipping service ${resource} as there was an issue getting data for it. Is it currently supported?`
-          )
+        if (resource !== services.resourceGroup) {
+          const serviceClass = this.getService(resource)
+          if (serviceClass && serviceClass.getData) {
+            const startDate = new Date()
+            const data = await serviceClass.getData(getDataInputData(result))
+            result.push({
+              name: resource,
+              subscriptionId,
+              data,
+            })
+            this.logger.success(
+              `${resource} scan completed in ${createDiffSecs(startDate)}s`
+            )
+          } else {
+            this.logger.warn(
+              `Skipping service ${resource} as there was an issue getting data for it. Is it currently supported?`
+            )
+          }
         }
       }
       this.logger.success(`Subscription: ${subscriptionId} scan completed`)

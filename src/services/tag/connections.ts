@@ -50,6 +50,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related Azure Functions
+     */
+     const azureFunctions: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.functionApp)
+    if (azureFunctions?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        azureFunctions.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const azureFunction of dataAtRegion) {
+          const { id } = azureFunction
+          connections.push({
+            id,
+            resourceType: services.functionApp,
+            relation: 'child',
+            field: 'functionApp',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

@@ -51,6 +51,19 @@ export interface AzureServiceConfig {
   credentials: ServiceClientCredentials
 }
 
+export interface AzureServiceInput {
+  regions: string
+  config: AzureServiceConfig
+  rawData: rawDataInterface[]
+}
+
+export interface AzureDebugScopeInitialData{
+  service: string
+  client: any
+  scope: string
+  operation?: string
+}
+
 export interface AzureDebugScope {
   service: string
   fullScope: string

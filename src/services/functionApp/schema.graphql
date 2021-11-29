@@ -1,0 +1,80 @@
+type azureHostingEnvironmentProfile {
+  id: String @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureExtendedLocation {
+  id: String @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureWebSiteFunction {
+  id: String! @search(by: [hash])
+  # config?: any;
+  # files?: { [propertyName: string]: string };
+  configHref: String @search(by: [hash, regexp])
+  functionAppId: String @search(by: [hash, regexp])
+  href: String @search(by: [hash, regexp])
+  invokeUrlTemplate: String @search(by: [hash, regexp])
+  isDisabled: Boolean @search
+  language: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  scriptHref: String @search(by: [hash, regexp])
+  scriptRootPathHref: String @search(by: [hash, regexp])
+  secretsFileHref: String @search(by: [hash, regexp])
+  testData: String @search(by: [hash, regexp])
+  testDataHref: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureFunctionApp @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  availabilityState: String @search(by: [hash, regexp])
+  clientAffinityEnabled: Boolean @search
+  clientCertEnabled: Boolean @search
+  clientCertExclusionPaths: String @search(by: [hash, regexp])
+  clientCertMode: String @search(by: [hash, regexp])
+  containerSize: Int @search
+  customDomainVerificationId: String @search(by: [hash, regexp])
+  dailyMemoryTimeQuota: Int @search
+  defaultHostName: String @search(by: [hash, regexp])
+  enabled: Boolean @search
+  enabledHostNames: [String] @search(by: [hash])
+  extendedLocation: azureExtendedLocation
+  hostNames: [String] @search(by: [hash])
+  hostNamesDisabled: Boolean @search
+  hostingEnvironmentProfile: azureHostingEnvironmentProfile
+  httpsOnly: Boolean @search
+  hyperV: Boolean @search
+  inProgressOperationId: String @search(by: [hash, regexp])
+  isDefaultContainer: Boolean @search
+  isXenon: Boolean @search
+  keyVaultReferenceIdentity: String @search(by: [hash, regexp])
+  kind: String @search(by: [hash, regexp])
+  lastModifiedTimeUtc: String @search(by: [hash, regexp])
+  maxNumberOfWorkers: Int @search
+  name: String @search(by: [hash, regexp])
+  outboundIpAddresses: String @search(by: [hash, regexp])
+  possibleOutboundIpAddresses: String @search(by: [hash, regexp])
+  redundancyMode: String @search(by: [hash, regexp])
+  repositorySiteName: String @search(by: [hash, regexp])
+  reserved: Boolean @search
+  resourceGroup: String @search(by: [hash, regexp])
+  scmSiteAlsoStopped: Boolean @search
+  serverFarmId: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  storageAccountRequired: Boolean @search
+  suspendedTill: String @search(by: [hash, regexp])
+  targetSwapSlot: String @search(by: [hash, regexp])
+  trafficManagerHostNames: [String] @search(by: [hash])
+  type: String @search(by: [hash, regexp])
+  usageState: String @search(by: [hash, regexp])
+  virtualNetworkSubnetId: String @search(by: [hash, regexp])
+  functions: [azureWebSiteFunction]
+  tags: [azureRawTag]
+}

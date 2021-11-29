@@ -5,11 +5,13 @@ import { RawAzureResourceGroup } from './data'
 export default ({
   service,
   account,
+  region,
 }: {
   service: RawAzureResourceGroup
   account: string
+  region: string
 }): AzureResourceGroup => {
-  const { id, name, type, region, managedBy, Tags } = service
+  const { id, name, type, managedBy, Tags } = service
   return {
     id,
     subscriptionId: account,
