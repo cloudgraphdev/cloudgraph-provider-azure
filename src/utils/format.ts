@@ -1,5 +1,6 @@
 import { AzureRawTag } from '../types/generated'
 import { TagMap } from '../types'
+import { RawAzureResourceGroup } from '../services/resourceGroup/data'
 
 export const formatTagsFromMap = (tags: TagMap): AzureRawTag[] => {
   const result: AzureRawTag[] = []
@@ -14,3 +15,13 @@ export const obfuscateSensitiveString = (s: string): string => {
   const stars = '*'.repeat(Math.min(30, s.length - 6))
   return s.slice(0, 3) + stars + s.slice(stars.length + 3, s.length)
 }
+
+export const lowerCaseLocation = (location: string): string =>
+  location.split(' ').join('').toLowerCase()
+
+export const getResourceGroupNames = (resourceGroups: {
+  [property: string]: RawAzureResourceGroup[]
+}): string[] =>
+  Object.values(resourceGroups)
+    .flat()
+    .map(({ name }) => name)

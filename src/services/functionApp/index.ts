@@ -4,7 +4,7 @@ import format from './format'
 import mutation from './mutation'
 import getData from './data'
 
-export default class AzureResourceGroup extends BaseService implements Service {
+export default class AzureFunctionApp extends BaseService implements Service {
   format = format.bind(this)
 
   getData = getData.bind(this)

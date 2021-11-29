@@ -3,6 +3,7 @@ type azureTag @key(fields: "id") {
   key: String! @search(by: [hash, regexp])
   value: String! @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup]
+  functionApp: [azureFunctionApp]
 }
 
 type azureRawTag
