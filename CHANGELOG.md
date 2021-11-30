@@ -1,3 +1,10 @@
+# [0.3.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.2.0...0.3.0) (2021-11-30)
+
+
+### Features
+
+* **azureFunction:** add azureFunction service ([d4e8e84](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/d4e8e84d1f1b306c20debb02a0e0f9f7cc281256))
+
 # [0.2.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.1.0...0.2.0) (2021-11-19)
 
 
