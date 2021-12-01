@@ -1,3 +1,10 @@
+# [0.6.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.5.0...0.6.0) (2021-12-01)
+
+
+### Features
+
+* **disk:** add disk service ([671bd68](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/671bd687814b720d5d699c0ad739c9f47f64bedf))
+
 # [0.5.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.4.0...0.5.0) (2021-12-01)
 
 
