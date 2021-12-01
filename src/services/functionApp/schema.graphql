@@ -4,8 +4,6 @@ type azureHostingEnvironmentProfile
     mutation: { add: true, delete: false }
   ) {
   id: String @search(by: [hash])
-  name: String @search(by: [hash, regexp])
-  type: String @search(by: [hash, regexp])
 }
 
 type azureExtendedLocation

@@ -53,7 +53,7 @@ export default ({
     /**
      * Find related Azure Functions
      */
-     const azureFunctions: {
+    const azureFunctions: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.functionApp)
@@ -70,6 +70,30 @@ export default ({
             resourceType: services.functionApp,
             relation: 'child',
             field: 'functionApp',
+          })
+        }
+      }
+    }
+    /**
+     * Find related Virtual Networks
+     */
+    const virtualNetworks: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.virtualNetwork)
+    if (virtualNetworks?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        virtualNetworks.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const virtualNetwork of dataAtRegion) {
+          const { id } = virtualNetwork
+          connections.push({
+            id,
+            resourceType: services.virtualNetwork,
+            relation: 'child',
+            field: 'virtualNetwork',
           })
         }
       }

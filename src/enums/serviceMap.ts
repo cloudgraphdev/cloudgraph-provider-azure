@@ -2,6 +2,7 @@
 import AzureFunctionApp from '../services/functionApp'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureTag from '../services/tag'
+import AzureVirtualNetwork from '../services/virtualNetwork'
 import services from './services'
 
 /**
@@ -11,5 +12,6 @@ import services from './services'
 export default {
   [services.functionApp]: AzureFunctionApp,
   [services.resourceGroup]: AzureResourceGroup,
+  [services.virtualNetwork]: AzureVirtualNetwork,
   tag: AzureTag,
 }

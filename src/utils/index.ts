@@ -116,12 +116,7 @@ export const generateAzureDebugScope = (
 
 export const tryCatchWrapper = async (
   func: () => void,
-  {
-    service,
-    client,
-    scope,
-    operation,
-  }: AzureDebugScopeInitialData
+  { service, client, scope, operation }: AzureDebugScopeInitialData
 ): Promise<void> => {
   const debugScope = generateAzureDebugScope(service, client, scope)
   try {
@@ -133,3 +128,6 @@ export const tryCatchWrapper = async (
     )
   }
 }
+
+export const caseInsensitiveEqual = (s1: string, s2: string): boolean =>
+  s1.toLowerCase() === s2.toLowerCase()
