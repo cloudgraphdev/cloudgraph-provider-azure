@@ -11,16 +11,18 @@ export type Scalars = {
   Float: number;
 };
 
-export type AzureExtendedLocation = {
-  id?: Maybe<Scalars['String']>;
+export type AzureBaseResource = {
+  id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
-export type AzureFunctionApp = {
-  id: Scalars['String'];
-  subscriptionId?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
+export type AzureExtendedLocation = {
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureFunctionApp = AzureResource & {
   availabilityState?: Maybe<Scalars['String']>;
   clientAffinityEnabled?: Maybe<Scalars['Boolean']>;
   clientCertEnabled?: Maybe<Scalars['Boolean']>;
@@ -42,10 +44,8 @@ export type AzureFunctionApp = {
   isDefaultContainer?: Maybe<Scalars['Boolean']>;
   isXenon?: Maybe<Scalars['Boolean']>;
   keyVaultReferenceIdentity?: Maybe<Scalars['String']>;
-  kind?: Maybe<Scalars['String']>;
   lastModifiedTimeUtc?: Maybe<Scalars['String']>;
   maxNumberOfWorkers?: Maybe<Scalars['Int']>;
-  name?: Maybe<Scalars['String']>;
   outboundIpAddresses?: Maybe<Scalars['String']>;
   possibleOutboundIpAddresses?: Maybe<Scalars['String']>;
   redundancyMode?: Maybe<Scalars['String']>;
@@ -59,11 +59,9 @@ export type AzureFunctionApp = {
   suspendedTill?: Maybe<Scalars['String']>;
   targetSwapSlot?: Maybe<Scalars['String']>;
   trafficManagerHostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
-  type?: Maybe<Scalars['String']>;
   usageState?: Maybe<Scalars['String']>;
   virtualNetworkSubnetId?: Maybe<Scalars['String']>;
   functions?: Maybe<Array<Maybe<AzureWebSiteFunction>>>;
-  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
 };
 
 export type AzureHostingEnvironmentProfile = {
@@ -78,14 +76,22 @@ export type AzureRawTag = {
   value?: Maybe<Scalars['String']>;
 };
 
-export type AzureResourceGroup = {
+export type AzureResource = {
   id: Scalars['String'];
-  subscriptionId?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+  kind?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
-  managedBy?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureResourceGroup = AzureResource & {
+  managedBy?: Maybe<Scalars['String']>;
+};
+
+export type AzureSubResource = {
+  id: Scalars['String'];
 };
 
 export type AzureTag = {
@@ -96,8 +102,7 @@ export type AzureTag = {
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
 };
 
-export type AzureWebSiteFunction = {
-  id: Scalars['String'];
+export type AzureWebSiteFunction = AzureBaseResource & {
   configHref?: Maybe<Scalars['String']>;
   functionAppId?: Maybe<Scalars['String']>;
   href?: Maybe<Scalars['String']>;
@@ -105,11 +110,9 @@ export type AzureWebSiteFunction = {
   isDisabled?: Maybe<Scalars['Boolean']>;
   language?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
   scriptHref?: Maybe<Scalars['String']>;
   scriptRootPathHref?: Maybe<Scalars['String']>;
   secretsFileHref?: Maybe<Scalars['String']>;
   testData?: Maybe<Scalars['String']>;
   testDataHref?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
 };
