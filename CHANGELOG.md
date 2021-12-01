@@ -1,3 +1,10 @@
+# [0.4.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.3.0...0.4.0) (2021-12-01)
+
+
+### Features
+
+* **virtualNetwork:** add virtualNetwork service ([93bd08d](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/93bd08dfeadbe2cbb733cd4d44897b9fdb9486b2))
+
 # [0.3.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.2.0...0.3.0) (2021-11-30)
 
 
