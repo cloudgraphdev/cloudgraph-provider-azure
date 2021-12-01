@@ -1,3 +1,10 @@
+# [0.5.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.4.0...0.5.0) (2021-12-01)
+
+
+### Features
+
+* **publicIp:** add publicIp service ([b8089b1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b8089b1cffb2b1e2878bc7045b63f8753338aff6))
+
 # [0.4.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.3.0...0.4.0) (2021-12-01)
 
 
