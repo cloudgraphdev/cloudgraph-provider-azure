@@ -1,0 +1,24 @@
+type azureVirtualNetworkDdosProtectionPlan implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  resourceGuid: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+}
+
+type azureVirtualNetwork implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  addressSpacePrefixes: [String] @search(by: [hash, regexp])
+  dnsServers: [String] @search(by: [hash, regexp])
+  ddosProtectionPlans: [azureVirtualNetworkDdosProtectionPlan]
+  enableDdosProtection: Boolean @search
+  enableVmProtection: Boolean @search
+  flowTimeoutInMinutes: Int @search
+  provisioningState: String @search(by: [hash, regexp])
+  resourceGuid: String @search(by: [hash, regexp])
+}

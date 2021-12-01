@@ -6,6 +6,8 @@ export default {
   foundFunctions: (num: number): string => `Found ${num} functions`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
+  // Virtual Networks
+  foundvirtualNetworks: (num: number): string => `Found ${num} virtual networks`,
   // Generic Rest API
   fetchedDataFromRestApi: (url: string): string =>
     `Fetched data from Azure REST API: ${url}`,

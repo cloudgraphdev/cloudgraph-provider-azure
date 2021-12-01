@@ -66,8 +66,6 @@ export type AzureFunctionApp = AzureResource & {
 
 export type AzureHostingEnvironmentProfile = {
   id?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureRawTag = {
@@ -100,6 +98,23 @@ export type AzureTag = {
   value: Scalars['String'];
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
+  virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+};
+
+export type AzureVirtualNetwork = AzureResource & {
+  addressSpacePrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  ddosProtectionPlans?: Maybe<Array<Maybe<AzureVirtualNetworkDdosProtectionPlan>>>;
+  enableDdosProtection?: Maybe<Scalars['Boolean']>;
+  enableVmProtection?: Maybe<Scalars['Boolean']>;
+  flowTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualNetworkDdosProtectionPlan = AzureBaseResource & {
+  resourceGuid?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
 };
 
 export type AzureWebSiteFunction = AzureBaseResource & {
