@@ -68,6 +68,29 @@ export type AzureHostingEnvironmentProfile = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type AzurePublicIp = AzureResource & {
+  tier?: Maybe<Scalars['String']>;
+  allocationMethod?: Maybe<Scalars['String']>;
+  ipVersion?: Maybe<Scalars['String']>;
+  dnsSettings?: Maybe<AzurePublicIpDnsSettings>;
+  ipTags?: Maybe<Array<Maybe<AzurePublicIpTags>>>;
+  ipAddress?: Maybe<Scalars['String']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzurePublicIpDnsSettings = {
+  domainNameLabel?: Maybe<Scalars['String']>;
+  fqdn?: Maybe<Scalars['String']>;
+  reverseFqdn?: Maybe<Scalars['String']>;
+};
+
+export type AzurePublicIpTags = {
+  ipTagType?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']>;
+};
+
 export type AzureRawTag = {
   id: Scalars['String'];
   key?: Maybe<Scalars['String']>;
@@ -99,6 +122,7 @@ export type AzureTag = {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
 };
 
 export type AzureVirtualNetwork = AzureResource & {
