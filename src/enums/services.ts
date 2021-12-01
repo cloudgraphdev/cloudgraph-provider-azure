@@ -1,4 +1,5 @@
 export default {
+  disk: 'disk',
   functionApp: 'functionApp',
   publicIp: 'publicIp',
   resourceGroup: 'resourceGroup',
