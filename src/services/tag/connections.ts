@@ -98,6 +98,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related Public Ips
+     */
+     const publicIps: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.publicIp)
+    if (publicIps?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        publicIps.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const publicIp of dataAtRegion) {
+          const { id } = publicIp
+          connections.push({
+            id,
+            resourceType: services.publicIp,
+            relation: 'child',
+            field: 'publicIp',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

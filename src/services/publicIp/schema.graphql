@@ -1,0 +1,27 @@
+type azurePublicIpDnsSettings {
+  domainNameLabel: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  reverseFqdn: String @search(by: [hash, regexp])
+}
+
+type azurePublicIpTags {
+  ipTagType: String @search(by: [hash, regexp])
+  tag: String @search(by: [hash, regexp])
+}
+
+type azurePublicIp implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  tier: String @search(by: [hash, regexp])
+  allocationMethod: String @search(by: [hash, regexp])
+  ipVersion: String @search(by: [hash, regexp])
+  dnsSettings: azurePublicIpDnsSettings
+  ipTags: [azurePublicIpTags]
+  ipAddress: String @search(by: [hash, regexp])
+  idleTimeoutInMinutes: Int @search
+  resourceGuid: String @search(by: [hash, regexp])
+  zones: [String] @search(by: [hash, regexp])
+}
