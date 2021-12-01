@@ -99,6 +99,30 @@ export default ({
       }
     }
     /**
+     * Find related Disks
+     */
+     const disks: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.disk)
+    if (disks?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        disks.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const azureFunction of dataAtRegion) {
+          const { id } = azureFunction
+          connections.push({
+            id,
+            resourceType: services.disk,
+            relation: 'child',
+            field: 'disk',
+          })
+        }
+      }
+    }
+    /**
      * Find related Public Ips
      */
      const publicIps: {

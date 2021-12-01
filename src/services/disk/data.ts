@@ -1,0 +1,65 @@
+import CloudGraph from '@cloudgraph/sdk'
+import { ComputeManagementClient } from '@azure/arm-compute'
+import {
+  Disk,
+  DiskList,
+  DisksListNextResponse,
+  DisksListResponse,
+} from '@azure/arm-compute/esm/models'
+
+import azureLoggerText from '../../properties/logger'
+import { getAllResources } from '../../utils/apiUtils'
+import { lowerCaseLocation } from '../../utils/format'
+import { AzureServiceInput, TagMap } from '../../types'
+
+const { logger } = CloudGraph
+const lt = { ...azureLoggerText }
+const serviceName = 'Disk'
+
+export interface RawAzureDisk extends Omit<Disk, 'tags' | 'location'> {
+  Tags: TagMap
+}
+
+export default async ({
+  regions,
+  config,
+}: AzureServiceInput): Promise<{ [property: string]: RawAzureDisk[] }> => {
+  const { credentials, subscriptionId } = config
+  const client = new ComputeManagementClient(credentials, subscriptionId)
+
+  try {
+    const listDisks = async (): Promise<DisksListResponse> =>
+      client.disks.list()
+    const listNextDisks = async (
+      nextLink: string
+    ): Promise<DisksListNextResponse> => client.disks.listNext(nextLink)
+
+    const diskData: DiskList = await getAllResources(listDisks, listNextDisks, {
+      service: serviceName,
+      client,
+      scope: 'disks',
+    })
+
+    const result: { [property: string]: RawAzureDisk[] } = {}
+    let numOfGroups = 0
+    diskData.map(({ tags, location, ...rest }) => {
+      const region = lowerCaseLocation(location)
+      if (regions.includes(region)) {
+        if (!result[region]) {
+          result[region] = []
+        }
+        result[region].push({
+          ...rest,
+          Tags: tags || {},
+        })
+        numOfGroups += 1
+      }
+    })
+    logger.debug(lt.foundDisks(numOfGroups))
+
+    return result
+  } catch (e) {
+    logger.debug(e)
+    return {}
+  }
+}

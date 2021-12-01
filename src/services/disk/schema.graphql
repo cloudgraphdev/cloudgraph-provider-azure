@@ -1,0 +1,23 @@
+type azureDisk implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  managedBy: String @search(by: [hash, regexp])
+  zones: [String] @search(by: [hash, regexp])
+  timeCreated: String @search(by: [hash, regexp])
+  osType: String @search(by: [hash, regexp])
+  hyperVGeneration: String @search(by: [hash, regexp])
+  createOption: String @search(by: [hash, regexp])
+  imageReferenceId: String @search(by: [hash, regexp])
+  diskSizeGb: Int @search
+  diskSizeBytes: Float @search
+  uniqueId: String @search(by: [hash, regexp])
+  diskIopsReadWrite: Int @search
+  diskMbpsReadWrite: Int @search
+  diskState: String @search(by: [hash, regexp])
+  networkAccessPolicy: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  encryptionSettings: String @search(by: [hash, regexp])
+}

@@ -17,6 +17,25 @@ export type AzureBaseResource = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureDisk = AzureResource & {
+  managedBy?: Maybe<Scalars['String']>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+  timeCreated?: Maybe<Scalars['String']>;
+  osType?: Maybe<Scalars['String']>;
+  hyperVGeneration?: Maybe<Scalars['String']>;
+  createOption?: Maybe<Scalars['String']>;
+  imageReferenceId?: Maybe<Scalars['String']>;
+  diskSizeGb?: Maybe<Scalars['Int']>;
+  diskSizeBytes?: Maybe<Scalars['Float']>;
+  uniqueId?: Maybe<Scalars['String']>;
+  diskIopsReadWrite?: Maybe<Scalars['Int']>;
+  diskMbpsReadWrite?: Maybe<Scalars['Int']>;
+  diskState?: Maybe<Scalars['String']>;
+  networkAccessPolicy?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+  encryptionSettings?: Maybe<Scalars['String']>;
+};
+
 export type AzureExtendedLocation = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -120,6 +139,7 @@ export type AzureTag = {
   key: Scalars['String'];
   value: Scalars['String'];
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  disk?: Maybe<Array<Maybe<AzureDisk>>>;
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
