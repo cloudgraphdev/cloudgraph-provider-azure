@@ -1,3 +1,10 @@
+# [0.8.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.7.0...0.8.0) (2021-12-02)
+
+
+### Features
+
+* **securityGroup:** add securityGroup service ([18ef7e5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/18ef7e5f7b326bd8333ff6b4c4a288732229e100))
+
 # [0.7.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.6.0...0.7.0) (2021-12-02)
 
 
