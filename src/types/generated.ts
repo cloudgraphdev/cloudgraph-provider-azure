@@ -114,6 +114,41 @@ export type AzureNetworkInterfaceIpConfiguration = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureNetworkSecurityGroup = AzureResource & {
+  resourceGuid?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  securityRules?: Maybe<Array<Maybe<AzureNetworkSecurityGroupRule>>>;
+  defaultSecurityRules?: Maybe<Array<Maybe<AzureNetworkSecurityGroupRule>>>;
+};
+
+export type AzureNetworkSecurityGroupApplication = AzureBaseResource & {
+  provisioningState?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+};
+
+export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
+  description?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
+  sourcePortRange?: Maybe<Scalars['String']>;
+  destinationPortRange?: Maybe<Scalars['String']>;
+  sourceAddressPrefix?: Maybe<Scalars['String']>;
+  sourceAddressPrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sourceApplicationSecurityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroupApplication>>>;
+  destinationAddressPrefix?: Maybe<Scalars['String']>;
+  destinationAddressPrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationApplicationSecurityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroupApplication>>>;
+  sourcePortRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationPortRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
+  access?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  direction?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzurePublicIp = AzureResource & {
   tier?: Maybe<Scalars['String']>;
   allocationMethod?: Maybe<Scalars['String']>;
@@ -168,8 +203,9 @@ export type AzureTag = {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   disk?: Maybe<Array<Maybe<AzureDisk>>>;
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
+  securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
-  networkInterface?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
+  networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
 };
 

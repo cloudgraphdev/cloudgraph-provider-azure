@@ -75,6 +75,30 @@ export default ({
       }
     }
     /**
+     * Find related network security groups
+     */
+     const securityGroups: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.securityGroup)
+    if (securityGroups?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        securityGroups.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const securityGroup of dataAtRegion) {
+          const { id } = securityGroup
+          connections.push({
+            id,
+            resourceType: services.securityGroup,
+            relation: 'child',
+            field: 'securityGroups',
+          })
+        }
+      }
+    }
+    /**
      * Find related Virtual Networks
      */
     const virtualNetworks: {

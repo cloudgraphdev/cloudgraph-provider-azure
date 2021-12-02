@@ -1,0 +1,47 @@
+type azureNetworkSecurityGroupApplication implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+}
+
+type azureNetworkSecurityGroupRule implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  description: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  sourcePortRange: String @search(by: [hash, regexp])
+  destinationPortRange: String @search(by: [hash, regexp])
+  sourceAddressPrefix: String @search(by: [hash, regexp])
+  sourceAddressPrefixes: [String] @search(by: [hash, regexp])
+  sourceApplicationSecurityGroups: [azureNetworkSecurityGroupApplication]
+  destinationAddressPrefix: String @search(by: [hash, regexp])
+  destinationAddressPrefixes: [String] @search(by: [hash, regexp])
+  destinationApplicationSecurityGroups: [azureNetworkSecurityGroupApplication]
+  sourcePortRanges: [String] @search(by: [hash, regexp])
+  destinationPortRanges: [String] @search(by: [hash, regexp])
+  access: String @search(by: [hash, regexp])
+  priority: Int @search
+  direction: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureNetworkSecurityGroup implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  resourceGuid: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  securityRules: [azureNetworkSecurityGroupRule]
+  defaultSecurityRules: [azureNetworkSecurityGroupRule]
+}
