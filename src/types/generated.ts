@@ -87,6 +87,33 @@ export type AzureHostingEnvironmentProfile = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type AzureNetworkInterface = AzureResource & {
+  macAddress?: Maybe<Scalars['String']>;
+  privateIpAddress?: Maybe<Scalars['String']>;
+  internalDnsNameLabel?: Maybe<Scalars['String']>;
+  enableIpForwarding?: Maybe<Scalars['Boolean']>;
+  virtualMachineId?: Maybe<Scalars['String']>;
+  enableAcceleratedNetworking?: Maybe<Scalars['Boolean']>;
+  internalDomainNameSuffix?: Maybe<Scalars['String']>;
+  ipConfiguration?: Maybe<AzureNetworkInterfaceIpConfiguration>;
+  appliedDnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureNetworkInterfaceIpConfiguration = {
+  gatewayLoadBalancer?: Maybe<AzureSubResource>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  privateIPAddressVersion?: Maybe<Scalars['String']>;
+  subnetId?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzurePublicIp = AzureResource & {
   tier?: Maybe<Scalars['String']>;
   allocationMethod?: Maybe<Scalars['String']>;
@@ -142,6 +169,7 @@ export type AzureTag = {
   disk?: Maybe<Array<Maybe<AzureDisk>>>;
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  networkInterface?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
 };
 

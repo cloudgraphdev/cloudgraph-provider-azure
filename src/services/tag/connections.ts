@@ -99,6 +99,30 @@ export default ({
       }
     }
     /**
+     * Find related Azure Network Interfaces
+     */
+    const azureNetworkInterfaces: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.networkInterface)
+    if (azureNetworkInterfaces?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        azureNetworkInterfaces.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const networkInterface of dataAtRegion) {
+          const { id } = networkInterface
+          connections.push({
+            id,
+            resourceType: services.networkInterface,
+            relation: 'child',
+            field: 'networkInterfaces',
+          })
+        }
+      }
+    }
+    /**
      * Find related Disks
      */
      const disks: {
