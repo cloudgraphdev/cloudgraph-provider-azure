@@ -1,0 +1,35 @@
+type azureNetworkInterfaceIpConfiguration
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  gatewayLoadBalancer: azureSubResource
+  privateIPAddress: String @search(by: [hash, regexp])
+  privateIPAllocationMethod: String @search(by: [hash, regexp])
+  privateIPAddressVersion: String @search(by: [hash, regexp])
+  subnetId: String @search(by: [hash, regexp])
+  primary: Boolean @search
+  provisioningState: String @search(by: [hash, regexp])
+  id: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureNetworkInterface implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  macAddress: String @search(by: [hash, regexp])
+  privateIpAddress: String @search(by: [hash, regexp])
+  internalDnsNameLabel: String @search(by: [hash, regexp])
+  enableIpForwarding: Boolean @search
+  virtualMachineId: String @search(by: [hash, regexp])
+  enableAcceleratedNetworking: Boolean @search
+  internalDomainNameSuffix: String @search(by: [hash, regexp])
+  ipConfiguration: azureNetworkInterfaceIpConfiguration
+  appliedDnsServers: [String] @search(by: [hash, regexp])
+  dnsServers: [String] @search(by: [hash, regexp])
+}

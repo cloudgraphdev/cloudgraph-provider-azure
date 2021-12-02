@@ -4,6 +4,8 @@ export default {
   // Azure Functions
   foundFunctionApps: (num: number): string => `Found ${num} function apps`,
   foundFunctions: (num: number): string => `Found ${num} functions`,
+  // Network Interface
+  foundNetworkInterfaces: (num: number): string => `Found ${num} network interfaces`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Resource Groups

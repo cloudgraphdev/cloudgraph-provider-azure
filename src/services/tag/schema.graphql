@@ -6,6 +6,7 @@ type azureTag @key(fields: "id") {
   disk: [azureDisk]
   functionApp: [azureFunctionApp]
   virtualNetwork: [azureVirtualNetwork]
+  networkInterfaces: [azureNetworkInterface]
   publicIp: [azurePublicIp]
 }
 
