@@ -4,5 +4,6 @@ export default {
   networkInterface: 'networkInterface',
   publicIp: 'publicIp',
   resourceGroup: 'resourceGroup',
+  securityGroup: 'securityGroup',
   virtualNetwork: 'virtualNetwork',
 }

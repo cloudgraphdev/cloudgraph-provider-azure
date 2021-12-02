@@ -10,6 +10,8 @@ export default {
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
+  // Security Groups
+  foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
   // Virtual Networks
   foundvirtualNetworks: (num: number): string => `Found ${num} virtual networks`,
   // Disk

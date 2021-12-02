@@ -5,6 +5,7 @@ type azureTag @key(fields: "id") {
   resourceGroup: [azureResourceGroup]
   disk: [azureDisk]
   functionApp: [azureFunctionApp]
+  securityGroups: [azureNetworkSecurityGroup]
   virtualNetwork: [azureVirtualNetwork]
   networkInterfaces: [azureNetworkInterface]
   publicIp: [azurePublicIp]
