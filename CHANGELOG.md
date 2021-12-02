@@ -1,3 +1,10 @@
+# [0.7.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.6.0...0.7.0) (2021-12-02)
+
+
+### Features
+
+* **networkInterface:** add networkInterface service ([531fece](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/531fece9e489a2ac2abf3e1699d4d2994af5641e))
+
 # [0.6.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.5.0...0.6.0) (2021-12-01)
 
 
