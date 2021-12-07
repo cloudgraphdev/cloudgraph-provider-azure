@@ -42,34 +42,30 @@ export default async ({
     const { credentials, subscriptionId } = config
     const client = new NetworkManagementClient(credentials, subscriptionId)
 
-    const listAllVirtualNetworks =
-      async (): Promise<VirtualNetworksListAllResponse> =>
-        client.virtualNetworks.listAll()
-    const listAllNextVirtualNetworks = async (
-      nextLink: string
-    ): Promise<VirtualNetworksListAllNextResponse> =>
-      client.virtualNetworks.listAllNext(nextLink)
-
-    const virtualNetworks: VirtualNetworkListResult = await getAllResources(
-      listAllVirtualNetworks,
-      listAllNextVirtualNetworks,
-      { service: serviceName, client, scope: 'virtualNetworks' }
-    )
-
-    const listAllDdosProtectionPlans =
-      async (): Promise<DdosProtectionPlansListResponse> =>
-        client.ddosProtectionPlans.list()
-    const listAllNextDdosProtectionPlans = async (
-      nextLink: string
-    ): Promise<DdosProtectionPlansListNextResponse> =>
-      client.ddosProtectionPlans.listNext(nextLink)
+    const virtualNetworks: VirtualNetworkListResult = await getAllResources({
+      listCall: async (): Promise<VirtualNetworksListAllResponse> =>
+        client.virtualNetworks.listAll(),
+      listNextCall: async (
+        nextLink: string
+      ): Promise<VirtualNetworksListAllNextResponse> =>
+        client.virtualNetworks.listAllNext(nextLink),
+      debugScope: { service: serviceName, client, scope: 'virtualNetworks' },
+    })
 
     const ddosProtectionPlans: DdosProtectionPlanListResult =
-      await getAllResources(
-        listAllDdosProtectionPlans,
-        listAllNextDdosProtectionPlans,
-        { service: serviceName, client, scope: 'ddosProtectionPlans' }
-      )
+      await getAllResources({
+        listCall: async (): Promise<DdosProtectionPlansListResponse> =>
+          client.ddosProtectionPlans.list(),
+        listNextCall: async (
+          nextLink: string
+        ): Promise<DdosProtectionPlansListNextResponse> =>
+          client.ddosProtectionPlans.listNext(nextLink),
+        debugScope: {
+          service: serviceName,
+          client,
+          scope: 'ddosProtectionPlans',
+        },
+      })
 
     const result: {
       [property: string]: RawAzureVirtualNetwork[]
@@ -81,7 +77,7 @@ export default async ({
         tags,
         location,
         ddosProtectionPlan: vnDdosProtectionPlan,
-        dhcpOptions: {dnsServers = []} = {},
+        dhcpOptions: { dnsServers = [] } = {},
         ...rest
       }) => {
         const region = lowerCaseLocation(location)
