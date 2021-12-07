@@ -1,3 +1,10 @@
+# [0.9.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.8.0...0.9.0) (2021-12-07)
+
+
+### Features
+
+* refactor to getAllResources to allow function calls with arguments ([b513b31](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b513b31d854a112d070881367a1316660b9d7f65))
+
 # [0.8.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.7.0...0.8.0) (2021-12-02)
 
 
