@@ -126,20 +126,33 @@ export const getResourceByIdFromMsRestApi = async ({
   }
 }
 
-type TListFn = () => Promise<any>
+type TListFnWithArgs = (...args: any[]) => Promise<any>
 type TListNextFn = (nextLinkToken: string) => Promise<any>
 
-export const getAllResources = async (
-  listCall: TListFn,
-  listNextCall: TListNextFn,
-  { service, client, scope }: AzureDebugScopeInitialData
-): Promise<Array<any>> => {
+export const getAllResources = async ({
+  listCall,
+  listNextCall,
+  debugScope: { service, client, scope },
+  resourceGroupName,
+  uniqueIdentifier,
+}: {
+  resourceGroupName?: string
+  uniqueIdentifier?: string
+  listCall: TListFnWithArgs
+  listNextCall: TListNextFn
+  debugScope: AzureDebugScopeInitialData
+}): Promise<Array<any>> => {
   const fullResources = []
 
   let resources: any
   await tryCatchWrapper(
     async () => {
-      resources = await listCall()
+      resources = await listCall(
+        ...[
+          ...(resourceGroupName ? [resourceGroupName] : []),
+          ...(uniqueIdentifier ? [uniqueIdentifier] : []),
+        ]
+      )
       fullResources.push(...resources)
     },
     { service, client, scope, operation: listCall.name }

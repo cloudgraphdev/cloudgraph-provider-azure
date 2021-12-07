@@ -31,19 +31,19 @@ export default async ({
     const { credentials, subscriptionId } = config
     const client = new NetworkManagementClient(credentials, subscriptionId)
 
-    const listAllSecurityGroups =
-      async (): Promise<NetworkSecurityGroupsListAllResponse> =>
-        client.networkSecurityGroups.listAll()
-    const listAllNextSecurityGroups = async (
-      nextLink: string
-    ): Promise<NetworkSecurityGroupsListAllNextResponse> =>
-      client.networkSecurityGroups.listAllNext(nextLink)
-
     const networkInterfaceData: NetworkSecurityGroupListResult =
-      await getAllResources(listAllSecurityGroups, listAllNextSecurityGroups, {
-        service: serviceName,
-        client,
-        scope: 'networkSecurityGroups',
+      await getAllResources({
+        listCall: async (): Promise<NetworkSecurityGroupsListAllResponse> =>
+          client.networkSecurityGroups.listAll(),
+        listNextCall: async (
+          nextLink: string
+        ): Promise<NetworkSecurityGroupsListAllNextResponse> =>
+          client.networkSecurityGroups.listAllNext(nextLink),
+        debugScope: {
+          service: serviceName,
+          client,
+          scope: 'networkSecurityGroups',
+        },
       })
 
     const result: {

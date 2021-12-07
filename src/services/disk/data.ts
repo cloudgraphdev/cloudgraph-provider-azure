@@ -28,16 +28,15 @@ export default async ({
   const client = new ComputeManagementClient(credentials, subscriptionId)
 
   try {
-    const listDisks = async (): Promise<DisksListResponse> =>
-      client.disks.list()
-    const listNextDisks = async (
-      nextLink: string
-    ): Promise<DisksListNextResponse> => client.disks.listNext(nextLink)
-
-    const diskData: DiskList = await getAllResources(listDisks, listNextDisks, {
-      service: serviceName,
-      client,
-      scope: 'disks',
+    const diskData: DiskList = await getAllResources({
+      listCall: async (): Promise<DisksListResponse> => client.disks.list(),
+      listNextCall: async (nextLink: string): Promise<DisksListNextResponse> =>
+        client.disks.listNext(nextLink),
+      debugScope: {
+        service: serviceName,
+        client,
+        scope: 'disks',
+      },
     })
 
     const result: { [property: string]: RawAzureDisk[] } = {}

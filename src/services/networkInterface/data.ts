@@ -31,20 +31,20 @@ export default async ({
     const { credentials, subscriptionId } = config
     const client = new NetworkManagementClient(credentials, subscriptionId)
 
-    const listAllNetworkInterfaces =
-      async (): Promise<NetworkInterfacesListAllResponse> =>
-        client.networkInterfaces.listAll()
-    const listAllNextNetworkInterfaces = async (
-      nextLink: string
-    ): Promise<NetworkInterfacesListAllNextResponse> =>
-      client.networkInterfaces.listAllNext(nextLink)
-
     const networkInterfaceData: NetworkInterfaceListResult =
-      await getAllResources(
-        listAllNetworkInterfaces,
-        listAllNextNetworkInterfaces,
-        { service: serviceName, client, scope: 'networkInterfaces' }
-      )
+      await getAllResources({
+        listCall: async (): Promise<NetworkInterfacesListAllResponse> =>
+          client.networkInterfaces.listAll(),
+        listNextCall: async (
+          nextLink: string
+        ): Promise<NetworkInterfacesListAllNextResponse> =>
+          client.networkInterfaces.listAllNext(nextLink),
+        debugScope: {
+          service: serviceName,
+          client,
+          scope: 'networkInterfaces',
+        },
+      })
 
     const result: {
       [property: string]: RawAzureNetworkInterface[]

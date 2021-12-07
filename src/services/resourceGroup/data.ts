@@ -38,19 +38,15 @@ export default async ({
       const { credentials, subscriptionId } = config
       const client = new ResourceManagementClient(credentials, subscriptionId)
 
-      const listResourceGroups =
-        async (): Promise<ResourceGroupsListResponse> =>
-          client.resourceGroups.list()
-      const listNextResourceGroups = async (
-        nextLink: string
-      ): Promise<ResourceGroupsListNextResponse> =>
-        client.resourceGroups.listNext(nextLink)
-
-      const resourceGroupData: ResourceGroupListResult = await getAllResources(
-        listResourceGroups,
-        listNextResourceGroups,
-        { service: serviceName, client, scope: 'resourceGroups' }
-      )
+      const resourceGroupData: ResourceGroupListResult = await getAllResources({
+        listCall: async (): Promise<ResourceGroupsListResponse> =>
+          client.resourceGroups.list(),
+        listNextCall: async (
+          nextLink: string
+        ): Promise<ResourceGroupsListNextResponse> =>
+          client.resourceGroups.listNext(nextLink),
+        debugScope: { service: serviceName, client, scope: 'resourceGroups' },
+      })
 
       const result = {}
       let numOfGroups = 0

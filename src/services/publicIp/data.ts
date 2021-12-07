@@ -31,19 +31,19 @@ export default async ({
     const { credentials, subscriptionId } = config
     const client = new NetworkManagementClient(credentials, subscriptionId)
 
-    const listAllPublicIps =
-      async (): Promise<PublicIPAddressesListAllResponse> =>
-        client.publicIPAddresses.listAll()
-    const listAllNextPublicIps = async (
-      nextLink: string
-    ): Promise<PublicIPAddressesListAllNextResponse> =>
-      client.publicIPAddresses.listAllNext(nextLink)
-
     const networkInterfaceData: PublicIPAddressListResult =
-      await getAllResources(listAllPublicIps, listAllNextPublicIps, {
-        service: serviceName,
-        client,
-        scope: 'publicIPAddresses',
+      await getAllResources({
+        listCall: async (): Promise<PublicIPAddressesListAllResponse> =>
+          client.publicIPAddresses.listAll(),
+        listNextCall: async (
+          nextLink: string
+        ): Promise<PublicIPAddressesListAllNextResponse> =>
+          client.publicIPAddresses.listAllNext(nextLink),
+        debugScope: {
+          service: serviceName,
+          client,
+          scope: 'publicIPAddresses',
+        },
       })
 
     const result: {

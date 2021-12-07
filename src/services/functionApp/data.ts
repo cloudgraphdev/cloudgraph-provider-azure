@@ -1,5 +1,12 @@
 import { WebSiteManagementClient } from '@azure/arm-appservice'
-import { FunctionEnvelope, Site } from '@azure/arm-appservice/esm/models'
+import {
+  FunctionEnvelope,
+  Site,
+  WebAppsListByResourceGroupNextResponse,
+  WebAppsListByResourceGroupResponse,
+  WebAppsListFunctionsNextResponse,
+  WebAppsListFunctionsResponse,
+} from '@azure/arm-appservice/esm/models'
 import CloudGraph from '@cloudgraph/sdk'
 import head from 'lodash/head'
 
@@ -9,6 +16,7 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupNames, lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils'
+import { getAllResources } from '../../utils/apiUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -51,9 +59,23 @@ export default async ({
         functionApps =
           (
             await Promise.all(
-              (resourceGroupsNames || []).map(
-                async (resourceGroupName: string) =>
-                  client.webApps.listByResourceGroup(resourceGroupName)
+              (resourceGroupsNames || []).map(async (rgName: string) =>
+                getAllResources({
+                  resourceGroupName: rgName,
+                  listCall: (
+                    resourceGroupName: string
+                  ): Promise<WebAppsListByResourceGroupResponse> =>
+                    client.webApps.listByResourceGroup(resourceGroupName),
+                  listNextCall: (
+                    nextLink: string
+                  ): Promise<WebAppsListByResourceGroupNextResponse> =>
+                    client.webApps.listByResourceGroupNext(nextLink),
+                  debugScope: {
+                    service: serviceName,
+                    client,
+                    scope: 'webApps',
+                  },
+                })
               )
             )
           )
@@ -64,8 +86,8 @@ export default async ({
       {
         service: serviceName,
         client,
-        scope: 'webApps',
-        operation: 'listByResourceGroup',
+        scope: 'functionApps',
+        operation: 'getAllResources',
       }
     )
 
@@ -76,8 +98,28 @@ export default async ({
           (
             await Promise.all(
               (functionApps || []).map(
-                async ({ name, resourceGroup: resourceGroupName }) =>
-                  client.webApps.listFunctions(resourceGroupName, name)
+                async ({
+                  name: functionAppName,
+                  resourceGroup: functionAppResourceGroupName,
+                }) =>
+                  getAllResources({
+                    resourceGroupName: functionAppName,
+                    uniqueIdentifier: functionAppResourceGroupName,
+                    listCall: (
+                      name: string,
+                      resourceGroupName: string
+                    ): Promise<WebAppsListFunctionsResponse> =>
+                      client.webApps.listFunctions(resourceGroupName, name),
+                    listNextCall: (
+                      nextLink: string
+                    ): Promise<WebAppsListFunctionsNextResponse> =>
+                      client.webApps.listFunctionsNext(nextLink),
+                    debugScope: {
+                      service: serviceName,
+                      client,
+                      scope: 'webApps',
+                    },
+                  })
               )
             )
           ).flat() || []
@@ -86,8 +128,8 @@ export default async ({
       {
         service: serviceName,
         client,
-        scope: 'webApps',
-        operation: 'listFunctions',
+        scope: 'azureFunctions',
+        operation: 'getAllResources',
       }
     )
 
