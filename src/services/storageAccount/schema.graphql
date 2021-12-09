@@ -1,0 +1,173 @@
+type azureStorageAccountPrimaryEndpoints
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    blob: String @search(by: [hash, regexp])
+    queue: String @search(by: [hash, regexp])
+    table: String @search(by: [hash, regexp])
+    file: String @search(by: [hash, regexp])
+    web: String @search(by: [hash, regexp])
+    dfs: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountPrimaryMicrosoftEndpoints
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    blob: String @search(by: [hash, regexp])
+    queue: String @search(by: [hash, regexp])
+    table: String @search(by: [hash, regexp])
+    file: String @search(by: [hash, regexp])
+    web: String @search(by: [hash, regexp])
+    dfs: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountPrimaryInternetEndpoints
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    blob: String @search(by: [hash, regexp])
+    file: String @search(by: [hash, regexp])
+    web: String @search(by: [hash, regexp])
+    dfs: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountEncryptionService
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    enabled: String @search(by: [hash, regexp])
+    lastEnabledTime: String @search(by: [hash, regexp])
+    keyType: String @search(by: [hash, regexp])
+  }
+
+type azureFilesIdentityBasedAuthenticationActiveDirectoryProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    domainName: String @search(by: [hash, regexp])
+    netBiosDomainName: String @search(by: [hash, regexp])
+    forestName: String @search(by: [hash, regexp])
+    domainGuid: String @search(by: [hash, regexp])
+    domainSid: String @search(by: [hash, regexp])
+    azureStorageSid: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    privateEndpointId: String @search(by: [hash, regexp])
+    privateLinkServiceConnectionStateStatus: String @search(by: [hash, regexp])
+    privateLinkServiceConnectionStateDescription: String @search(by: [hash, regexp])
+    privateLinkServiceConnectionStateActionRequired: String @search(by: [hash, regexp])
+    provisioningState: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountResourceAccessRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    tenantId: String @search(by: [hash, regexp])
+    resourceId: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountVirtualNetworkRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    virtualNetworkResourceId: String @search(by: [hash, regexp])
+    action: String @search(by: [hash, regexp])
+    state: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccountIPRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    iPAddressOrRange: String @search(by: [hash, regexp])
+    action: String @search(by: [hash, regexp])
+  }
+
+type azureStorageAccount implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  extendedLocationName: String @search(by: [hash, regexp])
+  extendedLocationType: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  primaryEndpoints: azureStorageAccountPrimaryEndpoints
+  primaryMicrosoftEndpoints: azureStorageAccountPrimaryMicrosoftEndpoints
+  primaryInternetEndpoints: azureStorageAccountPrimaryInternetEndpoints
+  primaryLocation: String @search(by: [hash, regexp])
+  statusOfPrimary: String @search(by: [hash, regexp])
+  lastGeoFailoverTime: String @search(by: [hash, regexp])
+  secondaryLocation: String @search(by: [hash, regexp])
+  statusOfSecondary: String @search(by: [hash, regexp])
+  customDomainName: String @search(by: [hash, regexp])
+  customDomainUseSubDomainName: String @search(by: [hash, regexp])
+  sasPolicyExpirationPeriod: String @search(by: [hash, regexp])
+  keyPolicyExpirationPeriodInDays: Int @search
+  keyCreationTimeKey1: String @search(by: [hash, regexp])
+  keyCreationTimeKey2: String @search(by: [hash, regexp])
+  encryptionServiceBlob: azureStorageAccountEncryptionService
+  encryptionServiceFile: azureStorageAccountEncryptionService
+  encryptionServiceTable: azureStorageAccountEncryptionService
+  encryptionServiceQueue: azureStorageAccountEncryptionService
+  encryptionKeySource: String @search(by: [hash, regexp])
+  encryptionRequireInfrastructureEncryption: String @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyKeyName: String @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyKeyVersion: String @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyKeyVaultUri: String @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyCurrentVersionedKeyIdentifier: String @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyLastKeyRotationTimestamp: String @search(by: [hash, regexp])
+  encryptionUserAssignedIdentity: String @search(by: [hash, regexp])
+  accessTier: String @search(by: [hash, regexp])
+  azureFilesIdentityBasedAuthenticationDirectoryServiceOptions: String @search(by: [hash, regexp])
+  azureFilesIdentityBasedAuthenticationActiveDirectoryProperties: azureFilesIdentityBasedAuthenticationActiveDirectoryProperties
+  enableHttpsTrafficOnly: String @search(by: [hash, regexp])
+  networkRuleSetByPass: String @search(by: [hash, regexp])
+  networkRuleResourceAccessRules: [azureStorageAccountResourceAccessRule]
+  networkRuleVirtualNetworkRules: [azureStorageAccountVirtualNetworkRule]
+  networkRuleIpRules: [azureStorageAccountIPRule]
+  networkRuleSetDefaultAction: String @search(by: [hash, regexp])
+  isHnsEnabled: String @search(by: [hash, regexp])
+  geoReplicationStatsStatus: String @search(by: [hash, regexp])
+  geoReplicationStatsLastSyncTime: String @search(by: [hash, regexp])
+  geoReplicationStatsCanFailover: String @search(by: [hash, regexp])
+  failoverInProgress: String @search(by: [hash, regexp])
+  largeFileSharesState: String @search(by: [hash, regexp])
+  privateEndpointConnections: [azureStorageAccountPrivateEndpointConnection],
+  routingPreferenceChoice: String @search(by: [hash, regexp])
+  routingPreferencePublishMicrosoftEndpoints: String @search(by: [hash, regexp])
+  routingPreferencePublishInternetEndpoints: String @search(by: [hash, regexp])
+  allowBlobPublicAccess: String @search(by: [hash, regexp])
+  minimumTlsVersion: String @search(by: [hash, regexp])
+  allowSharedKeyAccess: String @search(by: [hash, regexp])
+  enableNfsV3: String @search(by: [hash, regexp])
+  tags: [azureRawTag]
+}

@@ -77,7 +77,7 @@ export default ({
     /**
      * Find related network security groups
      */
-     const securityGroups: {
+    const securityGroups: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.securityGroup)
@@ -149,7 +149,7 @@ export default ({
     /**
      * Find related Disks
      */
-     const disks: {
+    const disks: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.disk)
@@ -173,7 +173,7 @@ export default ({
     /**
      * Find related Public Ips
      */
-     const publicIps: {
+    const publicIps: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.publicIp)
@@ -190,6 +190,31 @@ export default ({
             resourceType: services.publicIp,
             relation: 'child',
             field: 'publicIp',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related Storage Accounts
+     */
+    const azureStorageAccounts: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.storageAccount)
+    if (azureStorageAccounts?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        azureStorageAccounts.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const azureStorageAccount of dataAtRegion) {
+          const { id } = azureStorageAccount
+          connections.push({
+            id,
+            resourceType: services.storageAccount,
+            relation: 'child',
+            field: 'storageAccount',
           })
         }
       }

@@ -69,6 +69,16 @@
     "@azure/ms-rest-js" "^2.2.0"
     tslib "^1.10.0"
 
+"@azure/arm-storage@^16.1.2":
+  version "16.1.2"
+  resolved "https://registry.yarnpkg.com/@azure/arm-storage/-/arm-storage-16.1.2.tgz#1cfd1a110100fb9d81c38d893ba6e3bfce6b349f"
+  integrity sha512-BabggeNU/C8aw3knJV1ajSMX6eA+v674J2zvu1sxV9Dpj6dMaZdjnoNEFM/7OMmf0WFElEmO1r8p3nJb73toyA==
+  dependencies:
+    "@azure/core-auth" "^1.1.4"
+    "@azure/ms-rest-azure-js" "^2.1.0"
+    "@azure/ms-rest-js" "^2.2.0"
+    tslib "^1.10.0"
+
 "@azure/core-asynciterator-polyfill@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@azure/core-asynciterator-polyfill/-/core-asynciterator-polyfill-1.0.0.tgz#dcccebb88406e5c76e0e1d52e8cc4c43a68b3ee7"

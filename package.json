@@ -36,6 +36,7 @@
     "@azure/arm-compute": "^16.5.0",
     "@azure/arm-network": "^25.4.0",
     "@azure/arm-resources": "^4.2.2",
+    "@azure/arm-storage": "^16.1.2",
     "@azure/core-http": "^2.2.2",
     "@azure/ms-rest-azure-js": "^2.1.0",
     "@azure/ms-rest-js": "^2.6.0",

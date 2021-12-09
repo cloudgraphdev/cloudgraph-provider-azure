@@ -9,6 +9,7 @@ type azureTag @key(fields: "id") {
   virtualNetwork: [azureVirtualNetwork]
   networkInterfaces: [azureNetworkInterface]
   publicIp: [azurePublicIp]
+  storageAccount: [azureStorageAccount]
 }
 
 type azureRawTag
