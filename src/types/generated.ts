@@ -41,6 +41,15 @@ export type AzureExtendedLocation = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureFilesIdentityBasedAuthenticationActiveDirectoryProperties = {
+  domainName?: Maybe<Scalars['String']>;
+  netBiosDomainName?: Maybe<Scalars['String']>;
+  forestName?: Maybe<Scalars['String']>;
+  domainGuid?: Maybe<Scalars['String']>;
+  domainSid?: Maybe<Scalars['String']>;
+  azureStorageSid?: Maybe<Scalars['String']>;
+};
+
 export type AzureFunctionApp = AzureResource & {
   availabilityState?: Maybe<Scalars['String']>;
   clientAffinityEnabled?: Maybe<Scalars['Boolean']>;
@@ -192,6 +201,121 @@ export type AzureResourceGroup = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
 };
 
+export type AzureStorageAccount = AzureResource & {
+  extendedLocationName?: Maybe<Scalars['String']>;
+  extendedLocationType?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  primaryEndpoints?: Maybe<AzureStorageAccountPrimaryEndpoints>;
+  primaryMicrosoftEndpoints?: Maybe<AzureStorageAccountPrimaryMicrosoftEndpoints>;
+  primaryInternetEndpoints?: Maybe<AzureStorageAccountPrimaryInternetEndpoints>;
+  primaryLocation?: Maybe<Scalars['String']>;
+  statusOfPrimary?: Maybe<Scalars['String']>;
+  lastGeoFailoverTime?: Maybe<Scalars['String']>;
+  secondaryLocation?: Maybe<Scalars['String']>;
+  statusOfSecondary?: Maybe<Scalars['String']>;
+  customDomainName?: Maybe<Scalars['String']>;
+  customDomainUseSubDomainName?: Maybe<Scalars['String']>;
+  sasPolicyExpirationPeriod?: Maybe<Scalars['String']>;
+  keyPolicyExpirationPeriodInDays?: Maybe<Scalars['Int']>;
+  keyCreationTimeKey1?: Maybe<Scalars['String']>;
+  keyCreationTimeKey2?: Maybe<Scalars['String']>;
+  encryptionServiceBlob?: Maybe<AzureStorageAccountEncryptionService>;
+  encryptionServiceFile?: Maybe<AzureStorageAccountEncryptionService>;
+  encryptionServiceTable?: Maybe<AzureStorageAccountEncryptionService>;
+  encryptionServiceQueue?: Maybe<AzureStorageAccountEncryptionService>;
+  encryptionKeySource?: Maybe<Scalars['String']>;
+  encryptionRequireInfrastructureEncryption?: Maybe<Scalars['String']>;
+  encryptionKeyVaultPropertyKeyName?: Maybe<Scalars['String']>;
+  encryptionKeyVaultPropertyKeyVersion?: Maybe<Scalars['String']>;
+  encryptionKeyVaultPropertyKeyVaultUri?: Maybe<Scalars['String']>;
+  encryptionKeyVaultPropertyCurrentVersionedKeyIdentifier?: Maybe<Scalars['String']>;
+  encryptionKeyVaultPropertyLastKeyRotationTimestamp?: Maybe<Scalars['String']>;
+  encryptionUserAssignedIdentity?: Maybe<Scalars['String']>;
+  accessTier?: Maybe<Scalars['String']>;
+  azureFilesIdentityBasedAuthenticationDirectoryServiceOptions?: Maybe<Scalars['String']>;
+  azureFilesIdentityBasedAuthenticationActiveDirectoryProperties?: Maybe<AzureFilesIdentityBasedAuthenticationActiveDirectoryProperties>;
+  enableHttpsTrafficOnly?: Maybe<Scalars['String']>;
+  networkRuleSetByPass?: Maybe<Scalars['String']>;
+  networkRuleResourceAccessRules?: Maybe<Array<Maybe<AzureStorageAccountResourceAccessRule>>>;
+  networkRuleVirtualNetworkRules?: Maybe<Array<Maybe<AzureStorageAccountVirtualNetworkRule>>>;
+  networkRuleIpRules?: Maybe<Array<Maybe<AzureStorageAccountIpRule>>>;
+  networkRuleSetDefaultAction?: Maybe<Scalars['String']>;
+  isHnsEnabled?: Maybe<Scalars['String']>;
+  geoReplicationStatsStatus?: Maybe<Scalars['String']>;
+  geoReplicationStatsLastSyncTime?: Maybe<Scalars['String']>;
+  geoReplicationStatsCanFailover?: Maybe<Scalars['String']>;
+  failoverInProgress?: Maybe<Scalars['String']>;
+  largeFileSharesState?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureStorageAccountPrivateEndpointConnection>>>;
+  routingPreferenceChoice?: Maybe<Scalars['String']>;
+  routingPreferencePublishMicrosoftEndpoints?: Maybe<Scalars['String']>;
+  routingPreferencePublishInternetEndpoints?: Maybe<Scalars['String']>;
+  allowBlobPublicAccess?: Maybe<Scalars['String']>;
+  minimumTlsVersion?: Maybe<Scalars['String']>;
+  allowSharedKeyAccess?: Maybe<Scalars['String']>;
+  enableNfsV3?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureStorageAccountEncryptionService = {
+  enabled?: Maybe<Scalars['String']>;
+  lastEnabledTime?: Maybe<Scalars['String']>;
+  keyType?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountIpRule = {
+  id: Scalars['String'];
+  iPAddressOrRange?: Maybe<Scalars['String']>;
+  action?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountPrimaryEndpoints = {
+  blob?: Maybe<Scalars['String']>;
+  queue?: Maybe<Scalars['String']>;
+  table?: Maybe<Scalars['String']>;
+  file?: Maybe<Scalars['String']>;
+  web?: Maybe<Scalars['String']>;
+  dfs?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountPrimaryInternetEndpoints = {
+  blob?: Maybe<Scalars['String']>;
+  file?: Maybe<Scalars['String']>;
+  web?: Maybe<Scalars['String']>;
+  dfs?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountPrimaryMicrosoftEndpoints = {
+  blob?: Maybe<Scalars['String']>;
+  queue?: Maybe<Scalars['String']>;
+  table?: Maybe<Scalars['String']>;
+  file?: Maybe<Scalars['String']>;
+  web?: Maybe<Scalars['String']>;
+  dfs?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountPrivateEndpointConnection = {
+  id: Scalars['String'];
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionStateStatus?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionStateDescription?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionStateActionRequired?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountResourceAccessRule = {
+  id: Scalars['String'];
+  tenantId?: Maybe<Scalars['String']>;
+  resourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountVirtualNetworkRule = {
+  id: Scalars['String'];
+  virtualNetworkResourceId?: Maybe<Scalars['String']>;
+  action?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+};
+
 export type AzureSubResource = {
   id: Scalars['String'];
 };
@@ -207,6 +331,7 @@ export type AzureTag = {
   virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
 };
 
 export type AzureVirtualNetwork = AzureResource & {

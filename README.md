@@ -32,6 +32,7 @@ Authenticate the CloudGraph Azure Provider any of the following ways:
 | publicIp         |           |
 | resourceGroup    |           |
 | securityGroup    |           |
+| storageAccount   |           |
 | virtualNetwork   |           |
 
 

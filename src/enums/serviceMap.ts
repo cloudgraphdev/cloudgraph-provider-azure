@@ -5,6 +5,7 @@ import AzurePublicIp from '../services/publicIp'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
+import AzureStorageAccount from '../services/storageAccount'
 import AzureTag from '../services/tag'
 import AzureVirtualNetwork from '../services/virtualNetwork'
 
@@ -17,6 +18,7 @@ export default {
   [services.functionApp]: AzureFunctionApp,
   [services.publicIp]: AzurePublicIp,
   [services.networkInterface]: AzureNetworkInterface,
+  [services.storageAccount]: AzureStorageAccount,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityGroup]: AzureNetworkSecurityGroup,
   [services.virtualNetwork]: AzureVirtualNetwork,

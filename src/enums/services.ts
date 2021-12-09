@@ -3,6 +3,7 @@ export default {
   functionApp: 'functionApp',
   networkInterface: 'networkInterface',
   publicIp: 'publicIp',
+  storageAccount: 'storageAccount',
   resourceGroup: 'resourceGroup',
   securityGroup: 'securityGroup',
   virtualNetwork: 'virtualNetwork',

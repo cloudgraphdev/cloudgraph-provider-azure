@@ -16,6 +16,8 @@ export default {
   foundvirtualNetworks: (num: number): string => `Found ${num} virtual networks`,
   // Disk
   foundDisks: (num: number): string => `Found ${num} disks`,
+  // Storage Account
+  foundStorageAccounts: (num: number): string => `Found ${num} storage accounts`,
   // Generic Rest API
   fetchedDataFromRestApi: (url: string): string =>
     `Fetched data from Azure REST API: ${url}`,
