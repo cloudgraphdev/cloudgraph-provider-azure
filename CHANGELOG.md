@@ -1,3 +1,10 @@
+# [0.10.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.9.0...0.10.0) (2021-12-09)
+
+
+### Features
+
+* **storageAccount:** add storageAccount service ([f859ce4](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/f859ce4dbd0127e2c054afa2093958576dae7f34))
+
 # [0.9.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.8.0...0.9.0) (2021-12-07)
 
 
