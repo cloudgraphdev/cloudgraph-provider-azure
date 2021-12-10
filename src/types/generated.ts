@@ -254,7 +254,7 @@ export type AzureStorageAccount = AzureResource & {
   minimumTlsVersion?: Maybe<Scalars['String']>;
   allowSharedKeyAccess?: Maybe<Scalars['String']>;
   enableNfsV3?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  storageContainer?: Maybe<Array<Maybe<AzureStorageContainer>>>;
 };
 
 export type AzureStorageAccountEncryptionService = {
@@ -314,6 +314,47 @@ export type AzureStorageAccountVirtualNetworkRule = {
   virtualNetworkResourceId?: Maybe<Scalars['String']>;
   action?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageContainer = AzureBaseResource & {
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+  deleted?: Maybe<Scalars['String']>;
+  deletedTime?: Maybe<Scalars['String']>;
+  remainingRetentionDays?: Maybe<Scalars['Int']>;
+  denyEncryptionScopeOverride?: Maybe<Scalars['String']>;
+  publicAccess?: Maybe<Scalars['String']>;
+  lastModifiedTime?: Maybe<Scalars['String']>;
+  leaseStatus?: Maybe<Scalars['String']>;
+  leaseDuration?: Maybe<Scalars['String']>;
+  immutabilityPolicyPeriodSinceCreationInDays?: Maybe<Scalars['Int']>;
+  immutabilityPolicyState?: Maybe<Scalars['String']>;
+  immutabilityPolicyAllowProtectedAppendWrites?: Maybe<Scalars['String']>;
+  immutabilityPolicyUpdateHistory?: Maybe<Array<Maybe<AzureStorageContainerImmutabilityPolicyUpdateHistory>>>;
+  legalHoldTags?: Maybe<Array<Maybe<AzureStorageContainerLegalHoldTag>>>;
+  hasLegalHold?: Maybe<Scalars['String']>;
+  hasImmutabilityPolicy?: Maybe<Scalars['String']>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+};
+
+export type AzureStorageContainerImmutabilityPolicyUpdateHistory = {
+  id: Scalars['String'];
+  update?: Maybe<Scalars['String']>;
+  immutabilityPeriodSinceCreationInDays?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['String']>;
+  objectIdentifier?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  upn?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageContainerLegalHoldTag = {
+  id: Scalars['String'];
+  tag?: Maybe<Scalars['String']>;
+  timestamp?: Maybe<Scalars['String']>;
+  objectIdentifier?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  upn?: Maybe<Scalars['String']>;
 };
 
 export type AzureSubResource = {

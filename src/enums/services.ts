@@ -7,4 +7,5 @@ export default {
   resourceGroup: 'resourceGroup',
   securityGroup: 'securityGroup',
   virtualNetwork: 'virtualNetwork',
+  storageContainer: 'storageContainer',
 }

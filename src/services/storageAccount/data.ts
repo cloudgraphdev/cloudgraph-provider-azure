@@ -12,9 +12,12 @@ import azureLoggerText from '../../properties/logger'
 import { lowerCaseLocation } from '../../utils/format'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
+import { azureResourceIdSegment, parseResourceId } from '../../utils/idParserUtils'
 
 export interface RawAzureStorageAccount
   extends Omit<StorageAccount, 'tags' | 'location'> {
+  resourceGroup: string
+  region: string
   Tags: TagMap
 }
 
@@ -44,14 +47,18 @@ export default async ({
 
     const result = {}
     let numOfAccounts = 0
-    storageAccountData.map(({ tags, location, ...rest }) => {
+    storageAccountData.map(({ id, tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []
         }
+        const resourceGroup = parseResourceId(id)[azureResourceIdSegment.resourceGroups]
         result[region].push({
+          id,
           ...rest,
+          resourceGroup,
+          region,
           Tags: tags || {},
         })
         numOfAccounts += 1

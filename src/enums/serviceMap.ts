@@ -8,6 +8,7 @@ import AzureNetworkSecurityGroup from '../services/securityGroup'
 import AzureStorageAccount from '../services/storageAccount'
 import AzureTag from '../services/tag'
 import AzureVirtualNetwork from '../services/virtualNetwork'
+import AzureStorageContainer from '../services/storageContainer'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -22,5 +23,6 @@ export default {
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityGroup]: AzureNetworkSecurityGroup,
   [services.virtualNetwork]: AzureVirtualNetwork,
+  [services.storageContainer]: AzureStorageContainer,
   tag: AzureTag,
 }

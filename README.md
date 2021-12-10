@@ -3,9 +3,9 @@
 Scan cloud infrastructure via the [Azure SDK](https://github.com/Azure/azure-sdk-for-js)
 
 <!-- toc -->
-- [Install](#install)
-- [Authentication](#authentication)
-- [Supported Services](#supported-services)
+  - [Install](#install)
+  - [Authentication](#authentication)
+  - [Supported Services](#supported-services)
 <!-- tocstop -->
 
 ## Install
@@ -24,16 +24,17 @@ Authenticate the CloudGraph Azure Provider any of the following ways:
 
 ## Supported Services
 
-| Service          | Relations |
-| ---------------- | --------- |
-| disk             |           |
-| functionApp      |           |
-| networkInterface |           |
-| publicIp         |           |
-| resourceGroup    |           |
-| securityGroup    |           |
-| storageAccount   |           |
-| virtualNetwork   |           |
+| Service          | Relations      |
+| ---------------- | -------------- |
+| disk             |                |
+| functionApp      |                |
+| networkInterface |                |
+| publicIp         |                |
+| resourceGroup    |                |
+| securityGroup    |                |
+| storageAccount   |                |
+| storageContainer | storageAccount |
+| virtualNetwork   |                |
 
 
 ## Development
