@@ -1,5 +1,6 @@
 export default {
   disk: 'disk',
+  dns: 'dns',
   functionApp: 'functionApp',
   networkInterface: 'networkInterface',
   publicIp: 'publicIp',
