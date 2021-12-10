@@ -1,3 +1,10 @@
+## [0.10.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.10.0...0.10.1) (2021-12-10)
+
+
+### Bug Fixes
+
+* add configure flags fix ([1452643](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1452643dc80f92f0e48ef6517d86ff4db225a313))
+
 # [0.10.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.9.0...0.10.0) (2021-12-09)
 
 
