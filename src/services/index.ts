@@ -147,10 +147,9 @@ export default class Provider extends CloudGraph.Client {
     )
   }
 
-  async configure(flags: any): Promise<{ [key: string]: any }> {
-    const result: { [key: string]: any } = {
-      ...this.config,
-    }
+  async configure(): Promise<{ [key: string]: any }> {
+    const { flags = {} } = this.config
+    const result: { [key: string]: any } = {}
     const accounts: AzureCredentials[] = []
 
     /**
