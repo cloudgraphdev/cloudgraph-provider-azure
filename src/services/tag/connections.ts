@@ -219,6 +219,30 @@ export default ({
         }
       }
     }
+        /**
+     * Find related Dns Zones
+     */
+    const dnsZones: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.dns)
+    if (dnsZones?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        dnsZones.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const dnsZone of dataAtRegion) {
+          const { id } = dnsZone
+          connections.push({
+            id,
+            resourceType: services.dns,
+            relation: 'child',
+            field: 'dns',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

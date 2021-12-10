@@ -1,0 +1,95 @@
+type azureDnsZoneRecordSetMxRecord
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id
+    exchange: String @search(by: [hash, regexp])
+    preference: Int @search
+  }
+
+type azureDnsZoneRecordSetSrvRecord
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id
+    priority: Int @search
+    weight: Int @search
+    port: Int @search
+    target: String @search(by: [hash, regexp])
+  }
+
+type azureDnsZoneRecordSetTxtRecord
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id
+    value: [String] @search(by: [hash, regexp])
+  }
+
+type azureDnsZoneRecordSetSoaRecord
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+    host: String @search(by: [hash, regexp])
+    email: String @search(by: [hash, regexp])
+    serialNumber: Int @search
+    refreshTime: Int @search
+    retryTime: Int @search
+    expireTime: Int @search
+    minimumTtl: Int @search
+  }
+
+type azureDnsZoneRecordSetCaaRecord
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id
+    flags: Int @search
+    tag: String @search(by: [hash, regexp])
+    value: String @search(by: [hash, regexp])
+  }
+
+
+type azureDnsZoneRecordSet implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  tTL: Int @search
+  fqdn: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  targetResourceId: String @search(by: [hash, regexp])
+  aRecords: [String] @search(by: [hash, regexp])
+  aaaaRecords: [String] @search(by: [hash, regexp])
+  mxRecords: [azureDnsZoneRecordSetMxRecord]
+  nsRecords: [String] @search(by: [hash, regexp])
+  ptrRecords: [String] @search(by: [hash, regexp])
+  srvRecords: [azureDnsZoneRecordSetSrvRecord]
+  txtRecords: [azureDnsZoneRecordSetTxtRecord]
+  cnameRecord: String @search(by: [hash, regexp])
+  soaRecord: azureDnsZoneRecordSetSoaRecord
+  caaRecords: [azureDnsZoneRecordSetCaaRecord]
+}
+
+type azureDnsZone implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  maxNumberOfRecordSets: Int @search
+  numberOfRecordSets: Int @search
+  nameServers: [String] @search(by: [hash, regexp])
+  zoneType: String @search(by: [hash, regexp])
+  recordSets: [azureDnsZoneRecordSet]
+}

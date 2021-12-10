@@ -36,6 +36,67 @@ export type AzureDisk = AzureResource & {
   encryptionSettings?: Maybe<Scalars['String']>;
 };
 
+export type AzureDnsZone = AzureResource & {
+  maxNumberOfRecordSets?: Maybe<Scalars['Int']>;
+  numberOfRecordSets?: Maybe<Scalars['Int']>;
+  nameServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  zoneType?: Maybe<Scalars['String']>;
+  recordSets?: Maybe<Array<Maybe<AzureDnsZoneRecordSet>>>;
+};
+
+export type AzureDnsZoneRecordSet = AzureResource & {
+  tTL?: Maybe<Scalars['Int']>;
+  fqdn?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  targetResourceId?: Maybe<Scalars['String']>;
+  aRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  aaaaRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  mxRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetMxRecord>>>;
+  nsRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  ptrRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  srvRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetSrvRecord>>>;
+  txtRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetTxtRecord>>>;
+  cnameRecord?: Maybe<Scalars['String']>;
+  soaRecord?: Maybe<AzureDnsZoneRecordSetSoaRecord>;
+  caaRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetCaaRecord>>>;
+};
+
+export type AzureDnsZoneRecordSetCaaRecord = {
+  id: Scalars['String'];
+  flags?: Maybe<Scalars['Int']>;
+  tag?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureDnsZoneRecordSetMxRecord = {
+  id: Scalars['String'];
+  exchange?: Maybe<Scalars['String']>;
+  preference?: Maybe<Scalars['Int']>;
+};
+
+export type AzureDnsZoneRecordSetSoaRecord = {
+  host?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  serialNumber?: Maybe<Scalars['Int']>;
+  refreshTime?: Maybe<Scalars['Int']>;
+  retryTime?: Maybe<Scalars['Int']>;
+  expireTime?: Maybe<Scalars['Int']>;
+  minimumTtl?: Maybe<Scalars['Int']>;
+};
+
+export type AzureDnsZoneRecordSetSrvRecord = {
+  id: Scalars['String'];
+  priority?: Maybe<Scalars['Int']>;
+  weight?: Maybe<Scalars['Int']>;
+  port?: Maybe<Scalars['Int']>;
+  target?: Maybe<Scalars['String']>;
+};
+
+export type AzureDnsZoneRecordSetTxtRecord = {
+  id: Scalars['String'];
+  value?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 export type AzureExtendedLocation = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -332,6 +393,7 @@ export type AzureTag = {
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
   storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
 };
 
 export type AzureVirtualNetwork = AzureResource & {

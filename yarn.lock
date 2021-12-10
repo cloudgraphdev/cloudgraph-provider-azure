@@ -49,6 +49,16 @@
     "@azure/ms-rest-js" "^2.2.0"
     tslib "^1.10.0"
 
+"@azure/arm-dns@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@azure/arm-dns/-/arm-dns-4.1.1.tgz#50ad92fd2b292da7753a7f39df2d3c5f3789ffb5"
+  integrity sha512-6AW0gy5v5hugLwtVM8F7Hx1yLmqbs2qmEoTwtbnG7X/6TYQtrWL4CwM7tQ+Ltu0PPYA/swDMH6vtOAUpmd3XFA==
+  dependencies:
+    "@azure/core-auth" "^1.1.4"
+    "@azure/ms-rest-azure-js" "^2.1.0"
+    "@azure/ms-rest-js" "^2.2.0"
+    tslib "^1.10.0"
+
 "@azure/arm-network@^25.4.0":
   version "25.4.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-network/-/arm-network-25.4.0.tgz#4ed36be7c1f2ea6b5e0bc121dde33e4175cf5a92"

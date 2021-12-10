@@ -27,6 +27,7 @@ Authenticate the CloudGraph Azure Provider any of the following ways:
 | Service          | Relations |
 | ---------------- | --------- |
 | disk             |           |
+| dns              |           |
 | functionApp      |           |
 | networkInterface |           |
 | publicIp         |           |
