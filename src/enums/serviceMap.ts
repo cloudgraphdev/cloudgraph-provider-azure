@@ -1,5 +1,6 @@
 import services from './services'
 import AzureDisk from '../services/disk'
+import AzureDns from '../services/dns'
 import AzureFunctionApp from '../services/functionApp'
 import AzurePublicIp from '../services/publicIp'
 import AzureNetworkInterface from '../services/networkInterface'
@@ -16,6 +17,7 @@ import AzureStorageContainer from '../services/storageContainer'
  */
 export default {
   [services.disk]: AzureDisk,
+  [services.dns]: AzureDns,
   [services.functionApp]: AzureFunctionApp,
   [services.publicIp]: AzurePublicIp,
   [services.networkInterface]: AzureNetworkInterface,

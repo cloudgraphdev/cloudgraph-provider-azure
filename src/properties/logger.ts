@@ -20,6 +20,8 @@ export default {
   foundStorageAccounts: (num: number): string => `Found ${num} storage accounts`,
   // Storage Containers
   foundStorageContainers: (num: number): string => `Found ${num} storage containers`,
+  // DNS Zone
+  foundDnsZone: (num: number): string => `Found ${num} DNS Zones`,
   // Generic Rest API
   fetchedDataFromRestApi: (url: string): string =>
     `Fetched data from Azure REST API: ${url}`,
