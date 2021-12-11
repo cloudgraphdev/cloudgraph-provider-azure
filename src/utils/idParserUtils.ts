@@ -1,19 +1,21 @@
-export const azureResourceIdSegment = {
-  parseIdType: 'parseIdType',
-  resourceId: 'resourceId',
-  subscriptionId: 'subscriptionId',
-  resourceGroups: 'resourceGroups',
-  baseResourceProviderNamespace: 'baseResourceProviderNamespace',
-  baseResourceType: 'baseResourceType',
-  baseResourceName: 'baseResourceName',
-  resourceProviderNamespace: 'resourceProviderNamespace',
-  resourceType: 'resourceType',
-  resourceName: 'resourceName',
-  parentResourceType: 'parentResourceType',
-  parentResourceName: 'parentResourceName',
-  grandParentResourceType: 'grandParentResourceType',
-  grandParentResourceName: 'grandParentResourceName',
-  managementGroups: 'managementGroups',
+export interface azureResourceIdSegment {
+  parseIdType?: string
+  resourceId?: string
+  subscriptionId?: string
+  resourceGroups?: string
+  baseResourceProviderNamespace?: string
+  baseResourceType?: string
+  baseResourceName?: string
+  resourceProviderNamespace?: string
+  resourceType?: string
+  resourceName?: string
+  parentResourceType?: string
+  parentResourceName?: string
+  grandParentResourceType?: string
+  grandParentResourceName?: string
+  managementGroups?: string
+  networkInterfaces?: string
+  ipConfigurations?: string
 }
 
 export const azureResourceProviderNamespace = {
@@ -21,12 +23,17 @@ export const azureResourceProviderNamespace = {
   compute: 'Microsoft.Compute',
 }
 
+// ResourceId Format
+// https://docs.microsoft.com/en-us/azure/azure-resource-manager/templates/template-functions-resource
 export const azureResourceIdFormat = {
   resourceAppliedToResource: 'resourceAppliedToResource',
+  // one resource, e.g. /virtualNetwork
   extensionResourceAppliedToResourceGroupL1:
     'extensionResourceAppliedToResourceGroupL1',
+  // resource with sub resource e.g. /virtualNetwork/subnet
   extensionResourceAppliedToResourceGroupL2:
     'extensionResourceAppliedToResourceGroupL2',
+  // resource with sub resources
   extensionResourceAppliedToResourceGroupL3:
     'extensionResourceAppliedToResourceGroupL3',
   extensionResourceAppliedToVMScaleSetResource:
@@ -38,7 +45,7 @@ export const azureResourceIdFormat = {
 }
 
 // TODO need to optimized
-export const parseResourceId = (resourceId: string): any => {
+export const parseResourceId = (resourceId: string): azureResourceIdSegment => {
   // used for subscriptionId
   const regExpUUIDMatcher =
     '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
@@ -76,6 +83,8 @@ export const parseResourceId = (resourceId: string): any => {
     ),
   }
 
+  let azureResourceIdSegment = {}
+
   for (const resourceIdFormat of Object.keys(resourceIdRegExps)) {
     const m = resourceId.match(resourceIdRegExps[resourceIdFormat])
 
@@ -86,7 +95,7 @@ export const parseResourceId = (resourceId: string): any => {
           // eslint-disable-next-line no-case-declarations
           const baseResourceProvider = m[6].split('/')
           resourceProvider = m[9].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType: azureResourceIdFormat.resourceAppliedToResource,
             resourceId,
             subscriptionId: m[2],
@@ -98,9 +107,10 @@ export const parseResourceId = (resourceId: string): any => {
             resourceType: resourceProvider[2],
             resourceName: resourceProvider[3],
           }
+          break
         case azureResourceIdFormat.extensionResourceAppliedToResourceGroupL1:
           resourceProvider = m[6].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType:
               azureResourceIdFormat.extensionResourceAppliedToResourceGroupL1,
             resourceId,
@@ -110,9 +120,10 @@ export const parseResourceId = (resourceId: string): any => {
             resourceType: resourceProvider[2],
             resourceName: resourceProvider[3],
           }
+          break
         case azureResourceIdFormat.extensionResourceAppliedToResourceGroupL2:
           resourceProvider = m[6].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType:
               azureResourceIdFormat.extensionResourceAppliedToResourceGroupL2,
             resourceId,
@@ -124,9 +135,10 @@ export const parseResourceId = (resourceId: string): any => {
             resourceType: resourceProvider[4],
             resourceName: resourceProvider[5],
           }
+          break
         case azureResourceIdFormat.extensionResourceAppliedToResourceGroupL3:
           resourceProvider = m[6].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType:
               azureResourceIdFormat.extensionResourceAppliedToResourceGroupL3,
             resourceId,
@@ -140,9 +152,10 @@ export const parseResourceId = (resourceId: string): any => {
             resourceType: resourceProvider[6],
             resourceName: resourceProvider[7],
           }
+          break
         case azureResourceIdFormat.extensionResourceAppliedToVMScaleSetResource:
           resourceProvider = m[6].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType:
               azureResourceIdFormat.extensionResourceAppliedToVMScaleSetResource,
             resourceId,
@@ -156,9 +169,10 @@ export const parseResourceId = (resourceId: string): any => {
             networkInterfaces: resourceProvider[7],
             ipConfigurations: resourceProvider[9],
           }
+          break
         case azureResourceIdFormat.extensionResourceAppliedToSubscription:
           resourceProvider = m[4].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType:
               azureResourceIdFormat.extensionResourceAppliedToSubscription,
             resourceId,
@@ -167,9 +181,10 @@ export const parseResourceId = (resourceId: string): any => {
             resourceType: resourceProvider[2],
             resourceName: resourceProvider[3],
           }
+          break
         case azureResourceIdFormat.extensionResourceAppliedToManagementGroup:
           resourceProvider = m[6].split('/')
-          return {
+          azureResourceIdSegment = {
             parseIdType:
               azureResourceIdFormat.extensionResourceAppliedToManagementGroup,
             resourceId,
@@ -178,9 +193,14 @@ export const parseResourceId = (resourceId: string): any => {
             resourceType: resourceProvider[2],
             resourceName: resourceProvider[3],
           }
+          break
         default:
-          return null
+          azureResourceIdSegment = {
+            resourceId,
+          }
       }
+      return azureResourceIdSegment
     }
   }
+  return azureResourceIdSegment
 }
