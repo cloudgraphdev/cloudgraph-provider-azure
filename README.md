@@ -39,6 +39,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | disk             |           |
 | dns              |           |
 | functionApp      |           |
+| keyVault         |           |
 | networkInterface |           |
 | publicIp         |           |
 | resourceGroup    |           |
