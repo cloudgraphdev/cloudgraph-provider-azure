@@ -1,3 +1,10 @@
+# [0.12.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.11.0...0.12.0) (2021-12-14)
+
+
+### Features
+
+* **virtualMachine:** add virtualMachine service ([1751b33](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1751b33e98d9548b1437b806db18dc4ec9a3c04e))
+
 # [0.11.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.10.1...0.11.0) (2021-12-10)
 
 
