@@ -367,6 +367,7 @@ export default class Provider extends CloudGraph.Client {
     })
     try {
       // Get resourceGroup data in advance to prevent repeated calls :)
+      const rgStartDate = new Date()
       const rgData = await this.getService(services.resourceGroup).getData(
         getDataInputData(result)
       )
@@ -375,6 +376,11 @@ export default class Provider extends CloudGraph.Client {
         subscriptionId,
         data: rgData,
       })
+      this.logger.success(
+        `${services.resourceGroup} scan completed in ${createDiffSecs(
+          rgStartDate
+        )}s`
+      )
       for (const resource of resourceNames) {
         if (resource !== services.resourceGroup) {
           const serviceClass = this.getService(resource)

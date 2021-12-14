@@ -394,6 +394,43 @@ export type AzureTag = {
   publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
   storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
+  virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
+};
+
+export type AzureVirtualMachine = AzureResource & {
+  managedBy?: Maybe<Scalars['String']>;
+  vmSize?: Maybe<Scalars['String']>;
+  osProfile?: Maybe<AzureVirtualMachineOsProfile>;
+  storageImageReference?: Maybe<AzureVirtualMachineStorageImageReference>;
+  bootDiagnostics?: Maybe<Scalars['Boolean']>;
+  licenseType?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineOsProfile = {
+  computerName?: Maybe<Scalars['String']>;
+  windowsConfiguration?: Maybe<AzureVirtualMachineOsProfileWindowsConfiguration>;
+  linuxConfiguration?: Maybe<AzureVirtualMachineOsProfileLinuxConfiguration>;
+  allowExtensionOperations?: Maybe<Scalars['Boolean']>;
+  requireGuestProvisionSignal?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureVirtualMachineOsProfileLinuxConfiguration = {
+  disablePasswordAuthentication?: Maybe<Scalars['Boolean']>;
+  provisionVMAgent?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureVirtualMachineOsProfileWindowsConfiguration = {
+  provisionVMAgent?: Maybe<Scalars['Boolean']>;
+  enableAutomaticUpdates?: Maybe<Scalars['Boolean']>;
+  timeZone?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineStorageImageReference = {
+  publisher?: Maybe<Scalars['String']>;
+  offer?: Maybe<Scalars['String']>;
+  sku?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+  exactVersion?: Maybe<Scalars['String']>;
 };
 
 export type AzureVirtualNetwork = AzureResource & {

@@ -219,7 +219,7 @@ export default ({
         }
       }
     }
-        /**
+    /**
      * Find related Dns Zones
      */
     const dnsZones: {
@@ -239,6 +239,30 @@ export default ({
             resourceType: services.dns,
             relation: 'child',
             field: 'dns',
+          })
+        }
+      }
+    }
+    /**
+     * Find related Virtual Machines
+     */
+    const virtualMachines: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.virtualMachine)
+    if (virtualMachines?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        virtualMachines.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const virtualMachine of dataAtRegion) {
+          const { id } = virtualMachine
+          connections.push({
+            id,
+            resourceType: services.virtualMachine,
+            relation: 'child',
+            field: 'virtualMachines',
           })
         }
       }

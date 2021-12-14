@@ -1,0 +1,56 @@
+type azureVirtualMachineOSProfileLinuxConfiguration
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+    disablePasswordAuthentication: Boolean @search
+    provisionVMAgent: Boolean @search
+  }
+
+type azureVirtualMachineOSProfileWindowsConfiguration
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  provisionVMAgent: Boolean @search
+  enableAutomaticUpdates: Boolean @search
+  timeZone: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineOSProfile
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  computerName: String @search(by: [hash, regexp])
+  windowsConfiguration: azureVirtualMachineOSProfileWindowsConfiguration
+  linuxConfiguration: azureVirtualMachineOSProfileLinuxConfiguration
+  allowExtensionOperations: Boolean @search
+  requireGuestProvisionSignal: Boolean @search
+}
+
+type azureVirtualMachineStorageImageReference
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  publisher: String @search(by: [hash, regexp])
+  offer: String @search(by: [hash, regexp])
+  sku: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  exactVersion: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachine implements azureResource
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  managedBy: String @search(by: [hash, regexp])
+  vmSize: String @search(by: [hash, regexp])
+  osProfile: azureVirtualMachineOSProfile
+  storageImageReference: azureVirtualMachineStorageImageReference
+  bootDiagnostics: Boolean @search
+  licenseType: String @search(by: [hash, regexp])
+}
