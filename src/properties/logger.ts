@@ -12,6 +12,8 @@ export default {
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Groups
   foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
+  // Virtual Machines
+  foundvirtualMachines: (num: number): string => `Found ${num} virtual machines`,
   // Virtual Networks
   foundvirtualNetworks: (num: number): string => `Found ${num} virtual networks`,
   // Disk
