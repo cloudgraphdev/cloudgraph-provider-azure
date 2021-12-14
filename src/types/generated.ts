@@ -157,6 +157,32 @@ export type AzureHostingEnvironmentProfile = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type AzureKeyVault = AzureResource & {
+  tenantId?: Maybe<Scalars['String']>;
+  accessPolicies?: Maybe<Array<Maybe<AzureKeyVaultAccessPolicy>>>;
+  vaultUri?: Maybe<Scalars['String']>;
+  enabledForDeployment?: Maybe<Scalars['String']>;
+  enabledForDiskEncryption?: Maybe<Scalars['String']>;
+  enabledForTemplateDeployment?: Maybe<Scalars['String']>;
+  enableSoftDelete?: Maybe<Scalars['String']>;
+  createMode?: Maybe<Scalars['String']>;
+  enablePurgeProtection?: Maybe<Scalars['String']>;
+  networkAclBypass?: Maybe<Scalars['String']>;
+  networkAclDefaultAction?: Maybe<Scalars['String']>;
+  networkAclIpRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  networkAclVirtualNetworkRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureKeyVaultAccessPolicy = {
+  id: Scalars['String'];
+  objectId?: Maybe<Scalars['String']>;
+  applicationId?: Maybe<Scalars['String']>;
+  permissionKeys?: Maybe<Array<Maybe<Scalars['String']>>>;
+  permissionSecrets?: Maybe<Array<Maybe<Scalars['String']>>>;
+  permissionCertificates?: Maybe<Array<Maybe<Scalars['String']>>>;
+  permissionStorage?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 export type AzureNetworkInterface = AzureResource & {
   macAddress?: Maybe<Scalars['String']>;
   privateIpAddress?: Maybe<Scalars['String']>;

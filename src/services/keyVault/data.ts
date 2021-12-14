@@ -1,7 +1,7 @@
 import { KeyVaultManagementClient } from '@azure/arm-keyvault'
 import {
-  Resource,
   ResourceListResult,
+  Vault,
   VaultsListNextResponse,
   VaultsListResponse,
 } from '@azure/arm-keyvault/esm/models'
@@ -11,13 +11,14 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
+import { parseResourceId } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'KeyVault'
 
 export interface RawAzureKeyVault
-  extends Omit<Resource, 'tags' | 'location' | 'properties'> {
+  extends Omit<Vault, 'tags' | 'location' > {
   Tags: TagMap
 }
 
@@ -32,26 +33,35 @@ export default async ({
     const credentialsKv: any = credentials // KeyVault clint take different type definition
     const client = new KeyVaultManagementClient(credentialsKv, subscriptionId)
 
-    const keyVaultData: ResourceListResult =
-      await getAllResources({
-        listCall: async (): Promise<VaultsListResponse> =>
-          client.vaults.list(),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<VaultsListNextResponse> =>
-          client.vaults.listNext(nextLink),
-        debugScope: {
-          service: serviceName,
-          client,
-          scope: 'keyVault',
-        },
-      })
+    const keyVaults: ResourceListResult = await getAllResources({
+      listCall: async (): Promise<VaultsListResponse> =>
+        client.vaults.list(),
+      listNextCall: async (
+        nextLink: string
+      ): Promise<VaultsListNextResponse> =>
+        client.vaults.listNext(nextLink),
+      debugScope: {
+        service: serviceName,
+        client,
+        scope: 'keyVault',
+      },
+    })
+
+    const keyValueData = await Promise.all(
+      keyVaults.map(
+        async ({ name: vaultName, id: vaultId }) =>
+          client.vaults.get(
+            parseResourceId(vaultId).resourceGroups,
+            vaultName,
+          )
+      )
+    )
 
     const result: {
       [property: string]: RawAzureKeyVault[]
     } = {}
     let numOfGroups = 0
-    keyVaultData.map(({ tags, location, ...rest }) => {
+    keyValueData.map(({ tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
