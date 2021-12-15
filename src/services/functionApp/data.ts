@@ -40,6 +40,7 @@ export default async ({
   regions,
   config,
   rawData,
+  opts,
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureFunctionApp[]
 }> => {
@@ -50,6 +51,7 @@ export default async ({
       regions,
       config,
       rawData,
+      opts,
     })
     const resourceGroupsNames: string[] = getResourceGroupNames(resourceGroups)
 

@@ -1,6 +1,7 @@
 import { AzureServiceClientOptions } from '@azure/ms-rest-azure-js'
 import { ServiceClientCredentials } from '@azure/ms-rest-js'
 import { LinkedSubscription } from '@azure/ms-rest-nodeauth'
+import { Opts } from '@cloudgraph/sdk'
 import { Method } from 'axios'
 
 export interface AzureCredentials {
@@ -55,6 +56,7 @@ export interface AzureServiceInput {
   regions: string
   config: AzureServiceConfig
   rawData: rawDataInterface[]
+  opts: Opts
 }
 
 export interface AzureDebugScopeInitialData{
