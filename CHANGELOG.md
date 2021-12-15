@@ -1,3 +1,10 @@
+## [0.12.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.12.0...0.12.1) (2021-12-15)
+
+
+### Bug Fixes
+
+* core code cleanup ([0503b39](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/0503b393f9b8d766e4056c143aea281637ba79e9))
+
 # [0.12.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.11.0...0.12.0) (2021-12-14)
 
 
