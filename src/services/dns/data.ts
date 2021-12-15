@@ -30,6 +30,7 @@ export default async ({
   regions,
   config,
   rawData,
+  opts
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureDnsZone[]
 }> => {
@@ -41,6 +42,7 @@ export default async ({
       regions,
       config,
       rawData,
+      opts
     })
     const resourceGroupsNames: string[] = getResourceGroupNames(resourceGroups)
 
