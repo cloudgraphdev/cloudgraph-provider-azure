@@ -2,6 +2,7 @@ import services from './services'
 import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
 import AzureFunctionApp from '../services/functionApp'
+import AzureKeyVault from '../services/keyVault'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
 import AzurePublicIp from '../services/publicIp'
@@ -19,6 +20,7 @@ export default {
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
   [services.functionApp]: AzureFunctionApp,
+  [services.keyVault]: AzureKeyVault,
   [services.networkInterface]: AzureNetworkInterface,
   [services.publicIp]: AzurePublicIp,
   [services.resourceGroup]: AzureResourceGroup,

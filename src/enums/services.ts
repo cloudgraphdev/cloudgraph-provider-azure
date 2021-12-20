@@ -1,6 +1,7 @@
 export default {
   disk: 'disk',
   dns: 'dns',
+  keyVault: 'keyVault',
   functionApp: 'functionApp',
   networkInterface: 'networkInterface',
   publicIp: 'publicIp',

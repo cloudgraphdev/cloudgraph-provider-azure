@@ -6,6 +6,7 @@ import services from './services'
 export default {
   [services.disk]: 'azureDisk',
   [services.functionApp]: 'azureFunctionApp',
+  [services.keyVault]: 'azureKeyVault',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.publicIp]: 'azurePublicIp',
   [services.resourceGroup]: 'azureResourceGroup',
