@@ -9,4 +9,5 @@ export default {
   storageAccount: 'storageAccount',
   virtualMachine: 'virtualMachine',
   virtualNetwork: 'virtualNetwork',
+  storageContainer: 'storageContainer',
 }

@@ -11,6 +11,7 @@ export default {
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityGroup]: 'azureNetworkSecurityGroup',
   [services.storageAccount]: 'azureStorageAccount',
+  [services.storageContainer]: 'azureStorageContainer',
   [services.virtualMachine]: 'azureVirtualMachine',
   [services.virtualNetwork]: 'azureVirtualNetwork',
   tag: 'azureTag',
