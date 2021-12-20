@@ -75,7 +75,7 @@ export default ({
       }
     }
     /**
-     * Find related Azure Functions
+     * Find related Azure KeyVault
      */
     const azureKeyVaults: {
       name: string
@@ -84,7 +84,7 @@ export default ({
     if (azureKeyVaults?.data?.[region]) {
       const dataAtRegion: any = findServiceInstancesWithTag(
         tag,
-        azureFunctions.data[region]
+        azureKeyVaults.data[region]
       )
       if (!isEmpty(dataAtRegion)) {
         for (const azureKeyVault of dataAtRegion) {

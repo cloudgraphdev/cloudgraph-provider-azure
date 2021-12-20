@@ -413,6 +413,7 @@ export type AzureTag = {
   value: Scalars['String'];
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   disk?: Maybe<Array<Maybe<AzureDisk>>>;
+  keyVault?: Maybe<Array<Maybe<AzureKeyVault>>>;
   functionApp?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
