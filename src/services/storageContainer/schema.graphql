@@ -27,14 +27,12 @@ type azureStorageContainerLegalHoldTag
     upn: String @search(by: [hash, regexp])
   }
 
-type azureStorageContainer implements azureBaseResource
+type azureStorageContainer implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
-    region: String @search(by: [hash, regexp])
-    subscriptionId: String @search(by: [hash, regexp])
     version: String @search(by: [hash, regexp])
     deleted: String @search(by: [hash, regexp])
     deletedTime: String @search(by: [hash, regexp])

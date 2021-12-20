@@ -377,9 +377,7 @@ export type AzureStorageAccountVirtualNetworkRule = {
   state?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageContainer = AzureBaseResource & {
-  region?: Maybe<Scalars['String']>;
-  subscriptionId?: Maybe<Scalars['String']>;
+export type AzureStorageContainer = AzureResource & {
   version?: Maybe<Scalars['String']>;
   deleted?: Maybe<Scalars['String']>;
   deletedTime?: Maybe<Scalars['String']>;

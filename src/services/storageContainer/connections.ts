@@ -47,8 +47,8 @@ export default ({
     }
   }
 
-  const asgResult = {
+  const storageContainerResult = {
     [id]: connections,
   }
-  return asgResult;
+  return storageContainerResult;
 }
