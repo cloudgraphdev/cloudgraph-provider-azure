@@ -15,7 +15,12 @@ import regions from '../enums/regions'
 import resources from '../enums/resources'
 import serviceMap from '../enums/serviceMap'
 import services from '../enums/services'
-import { AzureCredentials, AzureConfig, rawDataInterface } from '../types'
+import {
+  AzureCredentials,
+  AzureConfig,
+  rawDataInterface,
+  AzureServiceInput,
+} from '../types'
 import {
   DEFAULT_REGION,
   DEFAULT_RESOURCES,
@@ -336,6 +341,53 @@ export default class Provider extends CloudGraph.Client {
     }
   }
 
+  private async getResourcesData({
+    config,
+    opts,
+    configuredResources,
+    configuredRegions,
+  }: {
+    config: { credentials: ServiceClientCredentials; subscriptionId: string }
+    opts
+    configuredResources: string
+    configuredRegions: string
+  }): Promise<rawDataInterface[]> {
+    const getDataInputData = (
+      rawData: rawDataInterface[]
+    ): AzureServiceInput => ({
+      regions: configuredRegions,
+      config,
+      opts,
+      rawData,
+    })
+    const result: rawDataInterface[] = []
+    const resourceNames: string[] = sortResourcesDependencies([
+      ...new Set<string>(configuredResources.split(',')),
+    ])
+    for (const resource of resourceNames) {
+      if (resource !== services.resourceGroup) {
+        const serviceClass = this.getService(resource)
+        if (serviceClass && serviceClass.getData) {
+          const startDate = new Date()
+          const data = await serviceClass.getData(getDataInputData(result))
+          result.push({
+            name: resource,
+            subscriptionId: config.subscriptionId,
+            data,
+          })
+          this.logger.success(
+            `${resource} scan completed in ${createDiffSecs(startDate)}s`
+          )
+        } else {
+          this.logger.warn(
+            `Skipping service ${resource} as there was an issue getting data for it. Is it currently supported?`
+          )
+        }
+      }
+    }
+    return result
+  }
+
   private async getRawData(
     account: AzureCredentials,
     opts?: Opts
@@ -351,51 +403,30 @@ export default class Provider extends CloudGraph.Client {
     if (!configuredResources) {
       configuredResources = Object.values(this.properties.services).join(',')
     }
-    const resourceNames: string[] = sortResourcesDependencies([
-      ...new Set<string>(configuredResources.split(',')),
-    ])
     const { subscriptionId } = account
     const { credentials } = await this.getFullCredentialsAndSubscriptions(
       account
     )
     const config = { credentials, subscriptionId }
-    const getDataInputData = (rawData: rawDataInterface[]) => ({
-      regions: configuredRegions,
-      config,
-      opts,
-      rawData,
-    })
     try {
       // Get resourceGroup data in advance to prevent repeated calls :)
-      const rgData = await this.getService(services.resourceGroup).getData(
-        getDataInputData(result)
+      const essentialResourcesList = [services.resourceGroup].join(',')
+      result.push(
+        ...(await this.getResourcesData({
+          config,
+          opts,
+          configuredResources: essentialResourcesList,
+          configuredRegions,
+        }))
       )
-      result.push({
-        name: services.resourceGroup,
-        subscriptionId,
-        data: rgData,
-      })
-      for (const resource of resourceNames) {
-        if (resource !== services.resourceGroup) {
-          const serviceClass = this.getService(resource)
-          if (serviceClass && serviceClass.getData) {
-            const startDate = new Date()
-            const data = await serviceClass.getData(getDataInputData(result))
-            result.push({
-              name: resource,
-              subscriptionId,
-              data,
-            })
-            this.logger.success(
-              `${resource} scan completed in ${createDiffSecs(startDate)}s`
-            )
-          } else {
-            this.logger.warn(
-              `Skipping service ${resource} as there was an issue getting data for it. Is it currently supported?`
-            )
-          }
-        }
-      }
+      result.push(
+        ...(await this.getResourcesData({
+          config,
+          opts,
+          configuredResources,
+          configuredRegions,
+        }))
+      )
       this.logger.success(`Subscription: ${subscriptionId} scan completed`)
     } catch (error: any) {
       this.logger.error('There was an error scanning Azure sdk data')

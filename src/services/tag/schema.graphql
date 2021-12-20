@@ -11,6 +11,7 @@ type azureTag @key(fields: "id") {
   publicIp: [azurePublicIp]
   storageAccount: [azureStorageAccount]
   dns: [azureDnsZone]
+  virtualMachines: [azureVirtualMachine]
 }
 
 type azureRawTag
