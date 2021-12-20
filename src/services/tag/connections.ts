@@ -75,6 +75,30 @@ export default ({
       }
     }
     /**
+     * Find related Azure KeyVault
+     */
+    const azureKeyVaults: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.keyVault)
+    if (azureKeyVaults?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        azureKeyVaults.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const azureKeyVault of dataAtRegion) {
+          const { id } = azureKeyVault
+          connections.push({
+            id,
+            resourceType: services.keyVault,
+            relation: 'child',
+            field: 'keyVault',
+          })
+        }
+      }
+    }
+    /**
      * Find related network security groups
      */
     const securityGroups: {

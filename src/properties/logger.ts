@@ -24,6 +24,8 @@ export default {
   foundStorageContainers: (num: number): string => `Found ${num} storage containers`,
   // DNS Zone
   foundDnsZone: (num: number): string => `Found ${num} DNS Zones`,
+  // Key Vault
+  foundKeyVault: (num: number): string => `Found ${num} Key Vault`,
   // Generic Rest API
   fetchedDataFromRestApi: (url: string): string =>
     `Fetched data from Azure REST API: ${url}`,
