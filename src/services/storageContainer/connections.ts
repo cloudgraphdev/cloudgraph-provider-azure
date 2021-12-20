@@ -33,8 +33,8 @@ export default ({
   const storageAccounts = data.find(({ name }) => name === services.storageAccount)
 
   if (storageAccounts?.data?.[region]) {
-    const storageAccount = storageAccounts.data[region].find(({id}) => 
-      id === storageAccountId
+    const storageAccount = storageAccounts.data[region].find(({id: accountId}) => 
+      accountId === storageAccountId
     )
 
     if (storageAccount) {

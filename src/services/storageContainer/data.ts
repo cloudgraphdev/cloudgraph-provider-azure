@@ -26,6 +26,7 @@ export default async ({
   regions,
   config,
   rawData,
+  opts,
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureStorageContainer[]
 }> => {
@@ -37,6 +38,7 @@ export default async ({
       regions,
       config,
       rawData,
+      opts,
     })
     
     const storageContainerData: RawAzureStorageContainer[] = []
@@ -58,7 +60,7 @@ export default async ({
             scope: 'storageContainers',
           },
         })
-      
+
       for (const blobContainer of blobContainers) {
         storageContainerData.push({
           ...blobContainer,
