@@ -20,6 +20,8 @@ export default {
   foundDisks: (num: number): string => `Found ${num} disks`,
   // Storage Account
   foundStorageAccounts: (num: number): string => `Found ${num} storage accounts`,
+  // Storage Containers
+  foundStorageContainers: (num: number): string => `Found ${num} storage containers`,
   // DNS Zone
   foundDnsZone: (num: number): string => `Found ${num} DNS Zones`,
   // Key Vault

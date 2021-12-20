@@ -3,10 +3,9 @@
 Scan cloud infrastructure via the [Azure SDK](https://github.com/Azure/azure-sdk-for-js)
 
 <!-- toc -->
-- [Docs](#docs)
-- [Install](#install)
-- [Authentication](#authentication)
-- [Supported Services](#supported-services)
+  - [Install](#install)
+  - [Authentication](#authentication)
+  - [Supported Services](#supported-services)
 <!-- tocstop -->
 
 # Docs
@@ -34,19 +33,20 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service          | Relations |
-| ---------------- | --------- |
-| disk             |           |
-| dns              |           |
-| functionApp      |           |
-| keyVault         |           |
-| networkInterface |           |
-| publicIp         |           |
-| resourceGroup    |           |
-| securityGroup    |           |
-| storageAccount   |           |
-| virtualMachine   |           |
-| virtualNetwork   |           |
+| Service          | Relations        |
+| ---------------- | ---------------- |
+| disk             |                  |
+| dns              |                  |
+| functionApp      |                  |
+| keyVault         |                  |
+| networkInterface |                  |
+| publicIp         |                  |
+| resourceGroup    |                  |
+| securityGroup    |                  |
+| storageAccount   | storageContainer |
+| storageContainer | storageAccount   |
+| virtualMachine   |                  |
+| virtualNetwork   |                  |
 
 
 ## Development

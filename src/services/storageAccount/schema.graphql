@@ -169,5 +169,5 @@ type azureStorageAccount implements azureResource
   minimumTlsVersion: String @search(by: [hash, regexp])
   allowSharedKeyAccess: String @search(by: [hash, regexp])
   enableNfsV3: String @search(by: [hash, regexp])
-  tags: [azureRawTag]
+  storageContainer: [azureStorageContainer] @hasInverse(field: storageAccount)
 }
