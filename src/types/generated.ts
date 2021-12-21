@@ -127,8 +127,9 @@ export type AzureFirewall = AzureResource & {
   zones?: Maybe<Array<Maybe<Scalars['String']>>>;
   region?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
-  virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
-  publicIp?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
 export type AzureFirewallAdditionalProperty = {
@@ -382,7 +383,7 @@ export type AzurePublicIp = AzureResource & {
   idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
   resourceGuid?: Maybe<Scalars['String']>;
   zones?: Maybe<Array<Maybe<Scalars['String']>>>;
-  firewall?: Maybe<Array<Maybe<AzureFirewall>>>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
 };
 
 export type AzurePublicIpDnsSettings = {
@@ -414,6 +415,7 @@ export type AzureResource = {
 
 export type AzureResourceGroup = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
 };
 
 export type AzureStorageAccount = AzureResource & {
@@ -637,7 +639,7 @@ export type AzureVirtualNetwork = AzureResource & {
   flowTimeoutInMinutes?: Maybe<Scalars['Int']>;
   provisioningState?: Maybe<Scalars['String']>;
   resourceGuid?: Maybe<Scalars['String']>;
-  firewall?: Maybe<Array<Maybe<AzureFirewall>>>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
 };
 
 export type AzureVirtualNetworkDdosProtectionPlan = AzureBaseResource & {
