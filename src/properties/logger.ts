@@ -24,6 +24,8 @@ export default {
   foundStorageContainers: (num: number): string => `Found ${num} storage containers`,
   // DNS Zone
   foundDnsZone: (num: number): string => `Found ${num} DNS Zones`,
+  // Firewall
+  foundFirewalls: (num: number): string => `Found ${num} firewalls`,
   // Key Vault
   foundKeyVault: (num: number): string => `Found ${num} Key Vault`,
   // Generic Rest API

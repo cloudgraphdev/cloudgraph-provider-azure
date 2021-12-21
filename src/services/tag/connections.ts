@@ -183,13 +183,37 @@ export default ({
         disks.data[region]
       )
       if (!isEmpty(dataAtRegion)) {
-        for (const azureFunction of dataAtRegion) {
-          const { id } = azureFunction
+        for (const azureDisk of dataAtRegion) {
+          const { id } = azureDisk
           connections.push({
             id,
             resourceType: services.disk,
             relation: 'child',
             field: 'disk',
+          })
+        }
+      }
+    }
+    /**
+     * Find related Firewall
+     */
+    const firewalls: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.firewall)
+    if (firewalls?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        firewalls.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const azureFirewall of dataAtRegion) {
+          const { id } = azureFirewall
+          connections.push({
+            id,
+            resourceType: services.firewall,
+            relation: 'child',
+            field: 'firewall',
           })
         }
       }

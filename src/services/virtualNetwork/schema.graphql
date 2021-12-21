@@ -21,4 +21,5 @@ type azureVirtualNetwork implements azureResource
   flowTimeoutInMinutes: Int @search
   provisioningState: String @search(by: [hash, regexp])
   resourceGuid: String @search(by: [hash, regexp])
+  firewall: [azureFirewall] @hasInverse(field: virtualNetwork)
 }

@@ -33,20 +33,22 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service          | Relations        |
-| ---------------- | ---------------- |
-| disk             |                  |
-| dns              |                  |
-| functionApp      |                  |
-| keyVault         |                  |
-| networkInterface |                  |
-| publicIp         |                  |
-| resourceGroup    |                  |
-| securityGroup    |                  |
-| storageAccount   | storageContainer |
-| storageContainer | storageAccount   |
-| virtualMachine   |                  |
-| virtualNetwork   |                  |
+
+| Service          | Relations                |
+| ---------------- | ------------------------ |
+| disk             |                          |
+| dns              |                          |
+| firewall         | publicIp, virtualNetwork |
+| functionApp      |                          |
+| keyVault         |                          |
+| networkInterface |                          |
+| publicIp         |                          |
+| resourceGroup    |                          |
+| securityGroup    |                          |
+| storageAccount   | storageContainer         |
+| storageContainer | storageAccount           |
+| virtualMachine   |                          |
+| virtualNetwork   |                          |
 
 
 ## Development

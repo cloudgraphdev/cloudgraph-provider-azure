@@ -1,6 +1,7 @@
 import services from './services'
 import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
+import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
 import AzureKeyVault from '../services/keyVault'
 import AzureNetworkInterface from '../services/networkInterface'
@@ -20,6 +21,7 @@ import AzureStorageContainer from '../services/storageContainer'
 export default {
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
+  [services.firewall]: AzureFirewall,
   [services.functionApp]: AzureFunctionApp,
   [services.keyVault]: AzureKeyVault,
   [services.networkInterface]: AzureNetworkInterface,
