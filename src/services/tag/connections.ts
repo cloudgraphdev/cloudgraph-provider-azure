@@ -213,7 +213,7 @@ export default ({
             id,
             resourceType: services.firewall,
             relation: 'child',
-            field: 'firewall',
+            field: 'firewalls',
           })
         }
       }
