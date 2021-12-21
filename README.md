@@ -8,12 +8,11 @@ Scan cloud infrastructure via the [Azure SDK](https://github.com/Azure/azure-sdk
   - [Supported Services](#supported-services)
 <!-- tocstop -->
 
-# Docs
+## Docs
 
 ⭐ [CloudGraph Readme](https://github.com/cloudgraphdev/cli)  
 
 💻 [Full CloudGraph Documentation Including Azure Examples](https://docs.cloudgraph.dev)
-
 
 ## Install
 
@@ -33,33 +32,32 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service          | Relations        |
-| ---------------- | ---------------- |
-| disk             |                  |
-| dns              |                  |
-| functionApp      |                  |
-| keyVault         |                  |
-| networkInterface |                  |
-| publicIp         |                  |
-| resourceGroup    |                  |
-| securityGroup    |                  |
-| storageAccount   | storageContainer |
-| storageContainer | storageAccount   |
-| virtualMachine   |                  |
-| virtualNetwork   |                  |
-
+| Service          | Relations                                                              |
+| ---------------- | ---------------------------------------------------------------------- |
+| disk             | resourceGroup, virtualMachine                                          |
+| dns              | resourceGroup                                                          |
+| functionApp      | resourceGroup                                                          |
+| keyVault         | resourceGroup                                                          |
+| networkInterface | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork |
+| publicIp         | networkInterface, resourceGroup                                        |
+| resourceGroup    | **all services**                                                       |
+| securityGroup    | networkInterface, resourceGroup                                        |
+| storageAccount   | resourceGroup, storageContainer                                        |
+| storageContainer | resourceGroup, storageAccount                                          |
+| virtualMachine   | disk, networkInterface, resourceGroup, virtualNetwork                  |
+| virtualNetwork   | networkInterface, resourceGroup virtualMachine                         |
 
 ## Development
 
 Install all the dependencies:
 
-```
+```console
 yarn
 ```
 
 Generate types and compile:
 
-```
+```console
 yarn build
 ```
 

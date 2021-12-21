@@ -3,9 +3,9 @@ type azureVirtualMachineOSProfileLinuxConfiguration
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   ) {
-    disablePasswordAuthentication: Boolean @search
-    provisionVMAgent: Boolean @search
-  }
+  disablePasswordAuthentication: Boolean @search
+  provisionVMAgent: Boolean @search
+}
 
 type azureVirtualMachineOSProfileWindowsConfiguration
   @generate(
@@ -53,4 +53,8 @@ type azureVirtualMachine implements azureResource
   storageImageReference: azureVirtualMachineStorageImageReference
   bootDiagnostics: Boolean @search
   licenseType: String @search(by: [hash, regexp])
+  disks: [azureDisk] @hasInverse(field: virtualMachines)
+  networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualMachines)
+  virtualNetworks: [azureVirtualNetwork] @hasInverse(field: virtualMachines)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: virtualMachines)
 }

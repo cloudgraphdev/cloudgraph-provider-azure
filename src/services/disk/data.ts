@@ -11,12 +11,14 @@ import azureLoggerText from '../../properties/logger'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import { AzureServiceInput, TagMap } from '../../types'
+import { parseResourceId } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'Disk'
 
 export interface RawAzureDisk extends Omit<Disk, 'tags' | 'location'> {
+  resourceGroup: string
   Tags: TagMap
 }
 
@@ -47,8 +49,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
+        const resourceGroup = parseResourceId(rest.id).resourceGroups
         result[region].push({
           ...rest,
+          resourceGroup,
           Tags: tags || {},
         })
         numOfGroups += 1

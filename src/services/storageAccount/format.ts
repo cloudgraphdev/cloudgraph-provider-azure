@@ -105,6 +105,7 @@ export default ({
     minimumTlsVersion,
     allowSharedKeyAccess,
     enableNfsV3,
+    resourceGroup,
     Tags,
   } = service
 
@@ -216,6 +217,7 @@ export default ({
     allowSharedKeyAccess: allowSharedKeyAccess? t.yes : t.no,
     enableNfsV3: enableNfsV3? t.yes : t.no,
     region,
+    resourceGroup,
     tags: formatTagsFromMap(Tags),
   }
 }

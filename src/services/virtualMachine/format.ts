@@ -21,6 +21,7 @@ export default ({
     osProfile: { adminUsername, adminPassword, secrets, ...restOsProfile } = {},
     storageProfile: { imageReference: storageImageReference = {} } = {},
     licenseType,
+    resourceGroup,
     Tags,
   } = service
   const {
@@ -42,6 +43,7 @@ export default ({
     storageImageReference,
     bootDiagnostics,
     licenseType,
+    resourceGroup,
     tags: formatTagsFromMap(Tags),
   }
 }

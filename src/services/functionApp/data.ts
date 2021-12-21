@@ -105,11 +105,11 @@ export default async ({
                   resourceGroup: functionAppResourceGroupName,
                 }) =>
                   getAllResources({
-                    resourceGroupName: functionAppName,
-                    uniqueIdentifier: functionAppResourceGroupName,
+                    resourceGroupName: functionAppResourceGroupName,
+                    uniqueIdentifier: functionAppName,
                     listCall: (
-                      name: string,
-                      resourceGroupName: string
+                      resourceGroupName: string,
+                      name: string
                     ): Promise<WebAppsListFunctionsResponse> =>
                       client.webApps.listFunctions(resourceGroupName, name),
                     listNextCall: (

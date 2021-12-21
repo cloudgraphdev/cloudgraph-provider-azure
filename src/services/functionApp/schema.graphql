@@ -70,7 +70,6 @@ type azureFunctionApp implements azureResource
   redundancyMode: String @search(by: [hash, regexp])
   repositorySiteName: String @search(by: [hash, regexp])
   reserved: Boolean @search
-  resourceGroup: String @search(by: [hash, regexp])
   scmSiteAlsoStopped: Boolean @search
   serverFarmId: String @search(by: [hash, regexp])
   state: String @search(by: [hash, regexp])
@@ -81,4 +80,5 @@ type azureFunctionApp implements azureResource
   usageState: String @search(by: [hash, regexp])
   virtualNetworkSubnetId: String @search(by: [hash, regexp])
   functions: [azureWebSiteFunction]
+  resourceGroups: [azureResourceGroup] @hasInverse(field: functionApps)
 }

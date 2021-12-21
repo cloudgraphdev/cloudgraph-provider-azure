@@ -32,4 +32,9 @@ type azureNetworkInterface implements azureResource
   ipConfiguration: azureNetworkInterfaceIpConfiguration
   appliedDnsServers: [String] @search(by: [hash, regexp])
   dnsServers: [String] @search(by: [hash, regexp])
+  publicIps: [azurePublicIp] @hasInverse(field: networkInterfaces)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: networkInterfaces)
+  securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: networkInterfaces)
+  virtualMachines: [azureVirtualMachine] @hasInverse(field: networkInterfaces)
+  virtualNetworks: [azureVirtualNetwork] @hasInverse(field: networkInterfaces)
 }

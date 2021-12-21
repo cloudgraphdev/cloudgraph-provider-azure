@@ -24,4 +24,6 @@ type azurePublicIp implements azureResource
   idleTimeoutInMinutes: Int @search
   resourceGuid: String @search(by: [hash, regexp])
   zones: [String] @search(by: [hash, regexp])
+  networkInterfaces: [azureNetworkInterface] @hasInverse(field: publicIps)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: publicIps)
 }

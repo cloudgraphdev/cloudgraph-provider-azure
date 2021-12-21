@@ -30,5 +30,6 @@ interface azureResource
   kind: String @search(by: [hash, regexp])
   subscriptionId: String @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
   tags: [azureRawTag]
 }
