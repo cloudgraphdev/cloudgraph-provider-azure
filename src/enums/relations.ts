@@ -6,5 +6,4 @@
 export default {
   resourceGroup: ['azureFunction'],
   storageAccount: ['storageContainer'],
-  firewall: ['publicIp', 'virtualNetwork'],
 }
