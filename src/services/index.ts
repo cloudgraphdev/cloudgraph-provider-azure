@@ -36,6 +36,8 @@ export const enums = {
   resources,
 }
 
+const selectableRegionsList = regions.filter(i => i !== GLOBAL_REGION)
+
 export default class Provider extends CloudGraph.Client {
   constructor(config: any) {
     super(config)
@@ -202,7 +204,7 @@ export default class Provider extends CloudGraph.Client {
         message: 'Select regions to scan',
         loop: false,
         name: 'regions',
-        choices: regions.map((region: string) => ({
+        choices: selectableRegionsList.map((region: string) => ({
           name: region,
         })),
       },
@@ -346,11 +348,13 @@ export default class Provider extends CloudGraph.Client {
     opts,
     configuredResources,
     configuredRegions,
+    initialRawData = [],
   }: {
     config: { credentials: ServiceClientCredentials; subscriptionId: string }
     opts
     configuredResources: string
     configuredRegions: string
+    initialRawData?: rawDataInterface[]
   }): Promise<rawDataInterface[]> {
     const getDataInputData = (
       rawData: rawDataInterface[]
@@ -360,29 +364,30 @@ export default class Provider extends CloudGraph.Client {
       opts,
       rawData,
     })
-    const result: rawDataInterface[] = []
+    // For the main loop
+    // we need to pass the essential resources data
+    // to be able to use rawData for children services
+    const result: rawDataInterface[] = initialRawData
     const resourceNames: string[] = sortResourcesDependencies([
       ...new Set<string>(configuredResources.split(',')),
     ])
     for (const resource of resourceNames) {
-      if (resource !== services.resourceGroup) {
-        const serviceClass = this.getService(resource)
-        if (serviceClass && serviceClass.getData) {
-          const startDate = new Date()
-          const data = await serviceClass.getData(getDataInputData(result))
-          result.push({
-            name: resource,
-            subscriptionId: config.subscriptionId,
-            data,
-          })
-          this.logger.success(
-            `${resource} scan completed in ${createDiffSecs(startDate)}s`
-          )
-        } else {
-          this.logger.warn(
-            `Skipping service ${resource} as there was an issue getting data for it. Is it currently supported?`
-          )
-        }
+      const serviceClass = this.getService(resource)
+      if (serviceClass && serviceClass.getData) {
+        const startDate = new Date()
+        const data = await serviceClass.getData(getDataInputData(result))
+        result.push({
+          name: resource,
+          subscriptionId: config.subscriptionId,
+          data,
+        })
+        this.logger.success(
+          `${resource} scan completed in ${createDiffSecs(startDate)}s`
+        )
+      } else {
+        this.logger.warn(
+          `Skipping service ${resource} as there was an issue getting data for it. Is it currently supported?`
+        )
       }
     }
     return result
@@ -395,6 +400,11 @@ export default class Provider extends CloudGraph.Client {
     let { regions: configuredRegions, resources: configuredResources } =
       this.config
     const result: rawDataInterface[] = []
+    const essentialResourcesList = [services.resourceGroup].join(',')
+    const allServices = Object.values(this.properties.services)
+    const restOfServices = allServices
+      .filter(i => !essentialResourcesList.includes(i))
+      .join(',')
     if (!configuredRegions) {
       configuredRegions = this.properties.regions.join(',')
     } else {
@@ -409,8 +419,7 @@ export default class Provider extends CloudGraph.Client {
     )
     const config = { credentials, subscriptionId }
     try {
-      // Get resourceGroup data in advance to prevent repeated calls :)
-      const essentialResourcesList = [services.resourceGroup].join(',')
+      // Get essential services first and push them
       result.push(
         ...(await this.getResourcesData({
           config,
@@ -423,8 +432,9 @@ export default class Provider extends CloudGraph.Client {
         ...(await this.getResourcesData({
           config,
           opts,
-          configuredResources,
+          configuredResources: restOfServices,
           configuredRegions,
+          initialRawData: result, // we pass scanned essential resources as rawData
         }))
       )
       this.logger.success(`Subscription: ${subscriptionId} scan completed`)
@@ -553,7 +563,7 @@ export default class Provider extends CloudGraph.Client {
                   // otherwise, merge connections by unioning on id of the connections
                   if (!isEmpty(serviceConnections)) {
                     const entries: [string, any][] =
-                      Object.values(newConnections)
+                      Object.entries(newConnections)
                     for (const [key, value] of entries) {
                       // If there are no service connections for this entity i.e. { [serviceId]: [] }
                       // use new connections for that key
@@ -562,7 +572,7 @@ export default class Provider extends CloudGraph.Client {
                           serviceConnections[key] = newConnections[key] ?? []
                         } else {
                           serviceConnections[key] = unionBy(
-                            value,
+                            serviceConnections[key],
                             newConnections[key] ?? [],
                             'id'
                           )
@@ -587,7 +597,7 @@ export default class Provider extends CloudGraph.Client {
           }
         }
         /**
-         * we have 2 things to check here, both dealing with multi-account senarios
+         * we have 2 things to check here, both dealing with multi-account scenarios
          * 1. Do we already have an entity by this name in the result
          * 2. Do we already have the data for an entity that lives in multiple accounts
          * If so, we need to merge the data. We use lodash merge to recursively merge arrays as there are

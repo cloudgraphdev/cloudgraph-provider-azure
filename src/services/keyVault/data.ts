@@ -17,8 +17,8 @@ const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'KeyVault'
 
-export interface RawAzureKeyVault
-  extends Omit<Vault, 'tags' | 'location' > {
+export interface RawAzureKeyVault extends Omit<Vault, 'tags' | 'location'> {
+  resourceGroup: string
   Tags: TagMap
 }
 
@@ -34,11 +34,8 @@ export default async ({
     const client = new KeyVaultManagementClient(credentialsKv, subscriptionId)
 
     const keyVaults: ResourceListResult = await getAllResources({
-      listCall: async (): Promise<VaultsListResponse> =>
-        client.vaults.list(),
-      listNextCall: async (
-        nextLink: string
-      ): Promise<VaultsListNextResponse> =>
+      listCall: async (): Promise<VaultsListResponse> => client.vaults.list(),
+      listNextCall: async (nextLink: string): Promise<VaultsListNextResponse> =>
         client.vaults.listNext(nextLink),
       debugScope: {
         service: serviceName,
@@ -48,12 +45,8 @@ export default async ({
     })
 
     const keyValueData = await Promise.all(
-      keyVaults.map(
-        async ({ name: vaultName, id: vaultId }) =>
-          client.vaults.get(
-            parseResourceId(vaultId).resourceGroups,
-            vaultName,
-          )
+      keyVaults.map(async ({ name: vaultName, id: vaultId }) =>
+        client.vaults.get(parseResourceId(vaultId).resourceGroups, vaultName)
       )
     )
 
@@ -67,8 +60,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
+        const resourceGroup = parseResourceId(rest.id).resourceGroups
         result[region].push({
           ...rest,
+          resourceGroup,
           Tags: tags || {},
         })
         numOfGroups += 1

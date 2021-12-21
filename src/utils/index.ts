@@ -1,5 +1,6 @@
 import CloudGraph from '@cloudgraph/sdk'
 import camelCase from 'lodash/camelCase'
+import isEmpty from 'lodash/isEmpty'
 import relations from '../enums/relations'
 import { AzureDebugScope, AzureDebugScopeInitialData } from '../types'
 
@@ -63,16 +64,24 @@ export function generateAzureErrorLog(
   functionName: string,
   err?: any
 ): void {
-  if (err.statusCode !== 429) {
-    logger.warn(
-      `There was a problem getting data for service ${service}, CG encountered an error calling ${functionName}`
-    )
+  logger.warn(
+    `There was a problem getting data for service ${service}, CG encountered an error calling ${functionName}`
+  )
+  if (err?.statusCode !== 429) {
     if (err.statusCode !== 401 || err.statusCode !== 403) {
       logger.warn(err.message)
     }
     logger.debug(err)
+  } else if (err) {
+    if (err.statusCode === 429) {
+      logger.debug(`Rate exceeded for ${service}:${functionName}`)
+    } else {
+      logger.debug(err)
+    }
   } else {
-    logger.debug(`Rate exceeded for ${service}:${functionName}`)
+    logger.debug(
+      `Unknown error on ${service} calling ${functionName}. Error object is undefined?`
+    )
   }
 }
 
@@ -126,8 +135,13 @@ export const tryCatchWrapper = async (
       debugScope.service,
       `${debugScope.fullScope}:${operation}`
     )
+    throw error
   }
 }
 
 export const caseInsensitiveEqual = (s1: string, s2: string): boolean =>
   s1.toLowerCase() === s2.toLowerCase()
+
+export const caseInsensitiveIncludes = (arr: string[], s1: string): boolean =>
+  !isEmpty(arr) &&
+  arr.filter(str => str.toLowerCase().includes(s1.toLowerCase())).length > 0

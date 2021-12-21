@@ -11,6 +11,7 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
+import { parseResourceId } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -18,6 +19,7 @@ const serviceName = 'NetworkSecurityGroup'
 
 export interface RawAzureNetworkSecurityGroup
   extends Omit<NetworkSecurityGroup, 'tags' | 'location'> {
+  resourceGroup: string
   Tags: TagMap
 }
 
@@ -56,8 +58,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
+        const resourceGroup = parseResourceId(rest.id).resourceGroups
         result[region].push({
           ...rest,
+          resourceGroup,
           Tags: tags || {},
         })
         numOfGroups += 1

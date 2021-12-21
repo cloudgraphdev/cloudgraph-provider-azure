@@ -92,4 +92,5 @@ type azureDnsZone implements azureResource
   nameServers: [String] @search(by: [hash, regexp])
   zoneType: String @search(by: [hash, regexp])
   recordSets: [azureDnsZoneRecordSet]
+  resourceGroups: [azureResourceGroup] @hasInverse(field: dns)
 }

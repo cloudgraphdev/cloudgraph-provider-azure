@@ -27,12 +27,19 @@ type azureStorageContainerLegalHoldTag
     upn: String @search(by: [hash, regexp])
   }
 
-type azureStorageContainer implements azureResource
+type azureStorageContainer
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    type: String @search(by: [hash, regexp])
+    kind: String @search(by: [hash, regexp])
+    subscriptionId: String @search(by: [hash, regexp])
+    region: String @search(by: [hash, regexp])
+    resourceGroup: String @search(by: [hash, regexp])
     version: String @search(by: [hash, regexp])
     deleted: String @search(by: [hash, regexp])
     deletedTime: String @search(by: [hash, regexp])
@@ -49,5 +56,6 @@ type azureStorageContainer implements azureResource
     legalHoldTags: [azureStorageContainerLegalHoldTag]
     hasLegalHold: String @search(by: [hash, regexp])
     hasImmutabilityPolicy: String @search(by: [hash, regexp])
-    storageAccount: [azureStorageAccount] @hasInverse(field: storageContainer)
+    resourceGroups: [azureResourceGroup] @hasInverse(field: storageContainers)
+    storageAccounts: [azureStorageAccount] @hasInverse(field: storageContainers)
   }

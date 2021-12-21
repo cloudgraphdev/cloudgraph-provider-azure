@@ -1,7 +1,7 @@
 import CloudGraph from '@cloudgraph/sdk'
 
 import { StorageManagementClient } from '@azure/arm-storage'
-import { 
+import {
   BlobContainersListNextResponse,
   BlobContainersListResponse,
   ListContainerItem,
@@ -16,6 +16,7 @@ import { getAllResources } from '../../utils/apiUtils'
 export interface RawAzureStorageContainer extends ListContainerItem {
   storageAccountId: string
   region: string
+  resourceGroup: string
 }
 
 const { logger } = CloudGraph
@@ -40,30 +41,30 @@ export default async ({
       rawData,
       opts,
     })
-    
+
     const storageContainerData: RawAzureStorageContainer[] = []
 
     for (const storageAccount of Object.values(storageAccounts).flat()) {
-      const {name: accountName , resourceGroup} = storageAccount
+      const { name: accountName, resourceGroup } = storageAccount
 
-      const blobContainers: ListContainerItems =
-        await getAllResources({
-          listCall: async (): Promise<BlobContainersListResponse> =>
-            client.blobContainers.list(resourceGroup, accountName),
-          listNextCall: async (
-            nextLink: string
-          ): Promise<BlobContainersListNextResponse> =>
-            client.blobContainers.listNext(nextLink),
-          debugScope: {
-            service: serviceName,
-            client,
-            scope: 'storageContainers',
-          },
-        })
+      const blobContainers: ListContainerItems = await getAllResources({
+        listCall: async (): Promise<BlobContainersListResponse> =>
+          client.blobContainers.list(resourceGroup, accountName),
+        listNextCall: async (
+          nextLink: string
+        ): Promise<BlobContainersListNextResponse> =>
+          client.blobContainers.listNext(nextLink),
+        debugScope: {
+          service: serviceName,
+          client,
+          scope: 'storageContainers',
+        },
+      })
 
       for (const blobContainer of blobContainers) {
         storageContainerData.push({
           ...blobContainer,
+          resourceGroup,
           storageAccountId: storageAccount.id,
           region: storageAccount.region,
         })

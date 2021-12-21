@@ -1,4 +1,4 @@
-export interface azureResourceIdSegment {
+export interface AzureResourceIdSegment {
   parseIdType?: string
   resourceId?: string
   subscriptionId?: string
@@ -45,7 +45,7 @@ export const azureResourceIdFormat = {
 }
 
 // TODO need to optimized
-export const parseResourceId = (resourceId: string): azureResourceIdSegment => {
+export const parseResourceId = (resourceId: string): AzureResourceIdSegment => {
   // used for subscriptionId
   const regExpUUIDMatcher =
     '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'

@@ -2,17 +2,17 @@ type azureTag @key(fields: "id") {
   id: String! @id @search(by: [hash])
   key: String! @search(by: [hash, regexp])
   value: String! @search(by: [hash, regexp])
-  resourceGroup: [azureResourceGroup]
-  disk: [azureDisk]
-  keyVault: [azureKeyVault]
-  functionApp: [azureFunctionApp]
+  resourceGroups: [azureResourceGroup]
+  disks: [azureDisk]
+  functionApps: [azureFunctionApp]
+  virtualNetworks: [azureVirtualNetwork]
+  publicIps: [azurePublicIp]
+  keyVaults: [azureKeyVault]
   securityGroups: [azureNetworkSecurityGroup]
-  virtualNetwork: [azureVirtualNetwork]
   networkInterfaces: [azureNetworkInterface]
-  publicIp: [azurePublicIp]
-  storageAccount: [azureStorageAccount]
   dns: [azureDnsZone]
   virtualMachines: [azureVirtualMachine]
+  storageAccounts: [azureStorageAccount]
 }
 
 type azureRawTag

@@ -98,6 +98,7 @@ export default ({
     nameServers,
     zoneType,
     recordSets,
+    resourceGroup,
     Tags,
   } = service
 
@@ -111,6 +112,7 @@ export default ({
     numberOfRecordSets,
     nameServers,
     zoneType,
+    resourceGroup,
     tags: formatTagsFromMap(Tags),
     recordSets: recordSets?.map(recordSet => formatRecordSet(recordSet)) || [],
   }
