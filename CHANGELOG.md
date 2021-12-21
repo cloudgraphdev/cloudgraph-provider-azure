@@ -1,3 +1,10 @@
+# [0.13.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.12.1...0.13.0) (2021-12-21)
+
+
+### Features
+
+* **connections:** add connections between existing services ([5888edd](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/5888edd8b6b79937b8b550b36102b6ffc820412c))
+
 ## [0.12.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.12.0...0.12.1) (2021-12-15)
 
 
