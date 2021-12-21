@@ -5,4 +5,5 @@ type azureResourceGroup implements azureResource
     mutation: { add: true, delete: false }
   ) {
   managedBy: String @search(by: [hash, regexp])
+  firewalls: [azureFirewall] @hasInverse(field: resourceGroups)
 }

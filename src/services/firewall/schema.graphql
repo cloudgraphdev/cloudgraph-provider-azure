@@ -197,6 +197,7 @@ type azureFirewall implements azureResource
   zones: [String] @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
   tags: [azureRawTag]
-  virtualNetwork: [azureVirtualNetwork] @hasInverse(field: firewall)
-  publicIp: [azurePublicIp] @hasInverse(field: firewall)
+  virtualNetworks: [azureVirtualNetwork] @hasInverse(field: firewalls)
+  publicIps: [azurePublicIp] @hasInverse(field: firewalls)
+  resourceGroups: [azureResourceGroup] @hasInverse (field: firewalls)
 }
