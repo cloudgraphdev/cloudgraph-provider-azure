@@ -45,7 +45,7 @@ export default ({
             id,
             resourceType: services.resourceGroup,
             relation: 'child',
-            field: 'resourceGroup',
+            field: 'resourceGroups',
           })
         }
       }
@@ -69,7 +69,7 @@ export default ({
             id,
             resourceType: services.functionApp,
             relation: 'child',
-            field: 'functionApp',
+            field: 'functionApps',
           })
         }
       }
@@ -93,7 +93,7 @@ export default ({
             id,
             resourceType: services.keyVault,
             relation: 'child',
-            field: 'keyVault',
+            field: 'keyVaults',
           })
         }
       }
@@ -141,7 +141,7 @@ export default ({
             id,
             resourceType: services.virtualNetwork,
             relation: 'child',
-            field: 'virtualNetwork',
+            field: 'virtualNetworks',
           })
         }
       }
@@ -189,7 +189,7 @@ export default ({
             id,
             resourceType: services.disk,
             relation: 'child',
-            field: 'disk',
+            field: 'disks',
           })
         }
       }
@@ -237,7 +237,7 @@ export default ({
             id,
             resourceType: services.publicIp,
             relation: 'child',
-            field: 'publicIp',
+            field: 'publicIps',
           })
         }
       }
@@ -262,7 +262,7 @@ export default ({
             id,
             resourceType: services.storageAccount,
             relation: 'child',
-            field: 'storageAccount',
+            field: 'storageAccounts',
           })
         }
       }

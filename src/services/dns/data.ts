@@ -23,6 +23,7 @@ const serviceName = 'DNS'
 
 export interface RawAzureDnsZone extends Omit<Zone, 'tags'> {
   recordSets: RecordSet[]
+  resourceGroup: string
   Tags: TagMap
 }
 
@@ -48,33 +49,34 @@ export default async ({
 
     const dnsZones: RawAzureDnsZone[] = []
 
-    for (const resourceGroupsName of resourceGroupsNames) {
+    for (const resourceGroupName of resourceGroupsNames) {
       const dnsZoneList: ZoneListResult = await getAllResources({
         listCall: async (): Promise<ZonesListByResourceGroupResponse> =>
-          client.zones.listByResourceGroup(resourceGroupsName),
+          client.zones.listByResourceGroup(resourceGroupName),
         listNextCall: async (
           nextLink: string
         ): Promise<ZonesListByResourceGroupNextResponse> =>
           client.zones.listByResourceGroupNext(nextLink),
         debugScope: { service: serviceName, client, scope: 'zones' },
-        resourceGroupName: resourceGroupsName,
+        resourceGroupName,
       })
 
       for (const dnsZone of dnsZoneList) {
         const { name } = dnsZone
         const recordSets: RecordSetListResult = await getAllResources({
           listCall: async (): Promise<RecordSetsListAllByDnsZoneResponse> =>
-            client.recordSets.listAllByDnsZone(resourceGroupsName, name),
+            client.recordSets.listAllByDnsZone(resourceGroupName, name),
           listNextCall: async (
             nextLink: string
           ): Promise<RecordSetsListAllByDnsZoneNextResponse> =>
             client.recordSets.listAllByDnsZoneNext(nextLink),
           debugScope: { service: serviceName, client, scope: 'recordSets' },
-          resourceGroupName: resourceGroupsName,
+          resourceGroupName,
           uniqueIdentifier: name,
         })
         dnsZones.push({
           ...dnsZone,
+          resourceGroup: resourceGroupName,
           Tags: dnsZone.tags || {},
           recordSets,
         })

@@ -23,6 +23,7 @@ export default ({
     suspendedTill,
     Tags,
     trafficManagerHostNames = [],
+    resourceGroup,
     ...rest
   } = service
   return {
@@ -30,6 +31,7 @@ export default ({
     ...rest,
     subscriptionId: account,
     region,
+    resourceGroup,
     hostNames,
     enabledHostNames,
     trafficManagerHostNames,

@@ -44,4 +44,6 @@ type azureNetworkSecurityGroup implements azureResource
   etag: String @search(by: [hash, regexp])
   securityRules: [azureNetworkSecurityGroupRule]
   defaultSecurityRules: [azureNetworkSecurityGroupRule]
+  networkInterfaces: [azureNetworkInterface] @hasInverse(field: securityGroups)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: securityGroups)
 }
