@@ -1,3 +1,10 @@
+## [0.13.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.13.0...0.13.1) (2021-12-27)
+
+
+### Bug Fixes
+
+* **virtualNetwork:** added missing defaults in connections file ([5614eef](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/5614eef1dead98bccbcc0db679aa152704645ce1))
+
 # [0.13.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.12.1...0.13.0) (2021-12-21)
 
 
