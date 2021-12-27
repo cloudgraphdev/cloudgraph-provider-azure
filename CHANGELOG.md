@@ -1,3 +1,10 @@
+## [0.13.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.13.1...0.13.2) (2021-12-27)
+
+
+### Bug Fixes
+
+* added osType field for billing ([fc1eb53](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/fc1eb5333cd27ecd0b2c4c3a0786a700ee632405))
+
 ## [0.13.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.13.0...0.13.1) (2021-12-27)
 
 
