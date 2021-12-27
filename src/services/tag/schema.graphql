@@ -4,6 +4,7 @@ type azureTag @key(fields: "id") {
   value: String! @search(by: [hash, regexp])
   resourceGroups: [azureResourceGroup]
   disks: [azureDisk]
+  firewalls: [azureFirewall]
   functionApps: [azureFunctionApp]
   virtualNetworks: [azureVirtualNetwork]
   publicIps: [azurePublicIp]

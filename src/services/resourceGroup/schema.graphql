@@ -7,6 +7,7 @@ type azureResourceGroup implements azureResource
   managedBy: String @search(by: [hash, regexp])
   disks: [azureDisk] @hasInverse(field: resourceGroups)
   dns: [azureDnsZone] @hasInverse(field: resourceGroups)
+  firewalls: [azureFirewall] @hasInverse(field: resourceGroups)
   functionApps: [azureFunctionApp] @hasInverse(field: resourceGroups)
   keyVaults: [azureKeyVault] @hasInverse(field: resourceGroups)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: resourceGroups)

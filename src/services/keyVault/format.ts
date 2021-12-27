@@ -32,12 +32,16 @@ export default ({
 }): AzureKeyVault => {
   const {
     id,
+    name,
+    type,
     properties,
     Tags,
   } = service
 
   return {
     id: id || cuid(),
+    name,
+    type,
     subscriptionId: account,
     region,
     tenantId: properties?.tenantId || '',

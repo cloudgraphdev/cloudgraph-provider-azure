@@ -1,0 +1,203 @@
+type azureFirewallApplicationRuleProtocol
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    protocolType: String @search(by: [hash, regexp])
+    port: Int @search
+  }
+
+type azureFirewallApplicationRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    description: String @search(by: [hash, regexp])
+    sourceAddresses: [String] @search(by: [hash, regexp])
+    protocols: [azureFirewallApplicationRuleProtocol]
+    targetFqdns: [String] @search(by: [hash, regexp])
+    fqdnTags: [String] @search(by: [hash, regexp])
+    sourceIpGroups: [String] @search(by: [hash, regexp])
+  }
+
+type azureFirewallApplicationRuleCollection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    priority: Int @search
+    action: String @search(by: [hash, regexp])
+    rules: [azureFirewallApplicationRule]
+    provisioningState: String @search(by: [hash, regexp])
+  }
+
+type azureFirewallNatRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    description: String @search(by: [hash, regexp])
+    sourceAddresses: [String] @search(by: [hash, regexp])
+    destinationAddresses: [String] @search(by: [hash, regexp])
+    destinationPorts: [String] @search(by: [hash, regexp])
+    protocols: [String] @search(by: [hash, regexp])
+    translatedAddress: String @search(by: [hash, regexp])
+    translatedPort: String @search(by: [hash, regexp])
+    translatedFqdn: String @search(by: [hash, regexp])
+    sourceIpGroups: [String] @search(by: [hash, regexp])
+  }
+
+type azureFirewallNatRuleCollection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    priority: Int @search
+    action: String @search(by: [hash, regexp])
+    rules: [azureFirewallNatRule]
+    provisioningState: String @search(by: [hash, regexp])
+  }
+
+type azureFirewallNetworkRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    description: String @search(by: [hash, regexp])
+    protocols: [String] @search(by: [hash, regexp])
+    sourceAddresses: [String] @search(by: [hash, regexp])
+    destinationAddresses: [String] @search(by: [hash, regexp])
+    destinationPorts: [String] @search(by: [hash, regexp])
+    destinationFqdns: [String] @search(by: [hash, regexp])
+    sourceIpGroups: [String] @search(by: [hash, regexp])
+    destinationIpGroups: [String] @search(by: [hash, regexp])
+  }
+
+type azureFirewallNetworkRuleCollection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    priority: Int @search
+    action: String @search(by: [hash, regexp])
+    rules: [azureFirewallNetworkRule]
+    provisioningState: String @search(by: [hash, regexp])
+  }
+
+type azureFirewallIPConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    name: String @search(by: [hash, regexp])
+    privateIPAddress: String @search(by: [hash, regexp])
+    subnet: String @search(by: [hash, regexp])
+    publicIPAddress: String @search(by: [hash, regexp])
+    provisioningState: String @search(by: [hash, regexp])
+    type: String @search(by: [hash, regexp])
+  }
+
+type azureFirewallAdditionalProperty
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id
+  key: String
+  value: String
+}
+
+type azureFirewallManagementIpConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    id: String! @id @search(by: [hash])
+    privateIPAddress: String @search(by: [hash, regexp])
+    subnet: String @search(by: [hash, regexp])
+    publicIPAddress: String @search(by: [hash, regexp])
+    provisioningState: String @search(by: [hash, regexp])
+    name: String @search(by: [hash, regexp])
+    type: String @search(by: [hash, regexp])
+  }
+
+type azureFirewallHubIPAddresses
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  publicIPs: [String] @search(by: [hash, regexp])
+  privateIPAddress: String @search(by: [hash, regexp])
+}
+
+type azureFirewallIpGroup
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id
+  changeNumber: String @search(by: [hash, regexp])
+}
+
+type azureFirewallAdditionalProperty
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id
+  key: String
+  value: String
+}
+
+type azureFirewall implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  applicationRuleCollections: [azureFirewallApplicationRuleCollection]
+  natRuleCollections: [azureFirewallNatRuleCollection]
+  networkRuleCollections: [azureFirewallNetworkRuleCollection]
+  ipConfigurations: [azureFirewallIPConfiguration]
+  managementIpConfiguration: azureFirewallManagementIpConfiguration
+  provisioningState: String @search(by: [hash, regexp])
+  threatIntelMode: String @search(by: [hash, regexp])
+  virtualHub: String @search(by: [hash, regexp])
+  firewallPolicy: String @search(by: [hash, regexp])
+  hubIPAddresses: azureFirewallHubIPAddresses
+  ipGroups: [azureFirewallIpGroup],
+  additionalProperties: [azureFirewallAdditionalProperty]
+  zones: [String] @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  tags: [azureRawTag]
+  virtualNetworks: [azureVirtualNetwork] @hasInverse(field: firewalls)
+  publicIps: [azurePublicIp] @hasInverse(field: firewalls)
+  resourceGroups: [azureResourceGroup] @hasInverse (field: firewalls)
+}

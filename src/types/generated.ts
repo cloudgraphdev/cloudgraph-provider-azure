@@ -114,6 +114,134 @@ export type AzureFilesIdentityBasedAuthenticationActiveDirectoryProperties = {
   azureStorageSid?: Maybe<Scalars['String']>;
 };
 
+export type AzureFirewall = AzureResource & {
+  applicationRuleCollections?: Maybe<Array<Maybe<AzureFirewallApplicationRuleCollection>>>;
+  natRuleCollections?: Maybe<Array<Maybe<AzureFirewallNatRuleCollection>>>;
+  networkRuleCollections?: Maybe<Array<Maybe<AzureFirewallNetworkRuleCollection>>>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureFirewallIpConfiguration>>>;
+  managementIpConfiguration?: Maybe<AzureFirewallManagementIpConfiguration>;
+  provisioningState?: Maybe<Scalars['String']>;
+  threatIntelMode?: Maybe<Scalars['String']>;
+  virtualHub?: Maybe<Scalars['String']>;
+  firewallPolicy?: Maybe<Scalars['String']>;
+  hubIPAddresses?: Maybe<AzureFirewallHubIpAddresses>;
+  ipGroups?: Maybe<Array<Maybe<AzureFirewallIpGroup>>>;
+  additionalProperties?: Maybe<Array<Maybe<AzureFirewallAdditionalProperty>>>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+  region?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureFirewallAdditionalProperty = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallApplicationRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  sourceAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+  protocols?: Maybe<Array<Maybe<AzureFirewallApplicationRuleProtocol>>>;
+  targetFqdns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  fqdnTags?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sourceIpGroups?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureFirewallApplicationRuleCollection = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  action?: Maybe<Scalars['String']>;
+  rules?: Maybe<Array<Maybe<AzureFirewallApplicationRule>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallApplicationRuleProtocol = {
+  id: Scalars['String'];
+  protocolType?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['Int']>;
+};
+
+export type AzureFirewallHubIpAddresses = {
+  publicIPs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallIpConfiguration = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  subnet?: Maybe<Scalars['String']>;
+  publicIPAddress?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallIpGroup = {
+  id: Scalars['String'];
+  changeNumber?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallManagementIpConfiguration = {
+  id: Scalars['String'];
+  privateIPAddress?: Maybe<Scalars['String']>;
+  subnet?: Maybe<Scalars['String']>;
+  publicIPAddress?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallNatRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  sourceAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationPorts?: Maybe<Array<Maybe<Scalars['String']>>>;
+  protocols?: Maybe<Array<Maybe<Scalars['String']>>>;
+  translatedAddress?: Maybe<Scalars['String']>;
+  translatedPort?: Maybe<Scalars['String']>;
+  translatedFqdn?: Maybe<Scalars['String']>;
+  sourceIpGroups?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureFirewallNatRuleCollection = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  action?: Maybe<Scalars['String']>;
+  rules?: Maybe<Array<Maybe<AzureFirewallNatRule>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureFirewallNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  protocols?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sourceAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationPorts?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationFqdns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sourceIpGroups?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationIpGroups?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureFirewallNetworkRuleCollection = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  action?: Maybe<Scalars['String']>;
+  rules?: Maybe<Array<Maybe<AzureFirewallNetworkRule>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
 export type AzureFunctionApp = AzureResource & {
   availabilityState?: Maybe<Scalars['String']>;
   clientAffinityEnabled?: Maybe<Scalars['Boolean']>;
@@ -266,6 +394,7 @@ export type AzurePublicIp = AzureResource & {
   idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
   resourceGuid?: Maybe<Scalars['String']>;
   zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
@@ -302,6 +431,7 @@ export type AzureResourceGroup = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
@@ -486,6 +616,7 @@ export type AzureTag = {
   value: Scalars['String'];
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
@@ -547,6 +678,7 @@ export type AzureVirtualNetwork = AzureResource & {
   flowTimeoutInMinutes?: Maybe<Scalars['Int']>;
   provisioningState?: Maybe<Scalars['String']>;
   resourceGuid?: Maybe<Scalars['String']>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
