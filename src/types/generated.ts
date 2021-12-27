@@ -501,6 +501,7 @@ export type AzureVirtualMachine = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
   vmSize?: Maybe<Scalars['String']>;
   osProfile?: Maybe<AzureVirtualMachineOsProfile>;
+  osType?: Maybe<Scalars['String']>;
   storageImageReference?: Maybe<AzureVirtualMachineStorageImageReference>;
   bootDiagnostics?: Maybe<Scalars['Boolean']>;
   licenseType?: Maybe<Scalars['String']>;

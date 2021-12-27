@@ -50,6 +50,7 @@ type azureVirtualMachine implements azureResource
   managedBy: String @search(by: [hash, regexp])
   vmSize: String @search(by: [hash, regexp])
   osProfile: azureVirtualMachineOSProfile
+  osType: String @search(by: [hash, regexp])
   storageImageReference: azureVirtualMachineStorageImageReference
   bootDiagnostics: Boolean @search
   licenseType: String @search(by: [hash, regexp])
