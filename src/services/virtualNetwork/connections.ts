@@ -20,11 +20,13 @@ export default ({
 } => {
   const connections: ServiceConnection[] = []
   const { id, subnets = [], resourceGroup: rgName } = service
-  const ipConfigsIds: string[] = subnets
-    .map(({ ipConfigurations }) =>
-      ipConfigurations.map(({ id: ipConfigId }) => ipConfigId)
-    )
-    .flat()
+  const ipConfigsIds: string[] =
+    (subnets || [])
+      .map(
+        ({ ipConfigurations = [] }) =>
+          ipConfigurations.map(({ id: ipConfigId }) => ipConfigId) || []
+      )
+      .flat() || []
 
   /**
    * Find resource group related to this virtual network
