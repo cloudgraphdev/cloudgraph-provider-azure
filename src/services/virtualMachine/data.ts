@@ -19,6 +19,7 @@ const serviceName = 'VirtualMachine'
 
 export interface RawAzureVirtualMachine
   extends Omit<VirtualMachine, 'tags' | 'location'> {
+  osType: string
   resourceGroup: string
   Tags: TagMap
 }
@@ -54,6 +55,7 @@ export default async ({
         const resourceGroup = parseResourceId(rest.id).resourceGroups
         result[region].push({
           ...rest,
+          osType: rest.storageProfile?.osDisk?.osType,
           resourceGroup,
           Tags: tags || {},
         })
