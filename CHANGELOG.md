@@ -1,3 +1,15 @@
+# [0.14.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.13.2...0.14.0) (2021-12-27)
+
+
+### Features
+
+* **firewall:** add azure firewall ([16840b2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/16840b25a188373576ccb42ab8dd3bdb01a2a2bc))
+* **firewall:** add generated ([7ad410a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/7ad410a740596575b2b9b006f4af01f5731c26f1))
+* **firewall:** add resource group connection ([dfc90b8](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/dfc90b84acb59fbdb7c9298a4cc6134c5cc28f58))
+* **firewall:** merge main ([ad4af8d](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/ad4af8d215fd9ec5cb351621320a03ca4f61240e))
+* **firewall:** update firewall tag field name ([dbea1e5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/dbea1e52ab45290ea6360c9669f28136e72b7755))
+* **firewall:** update relations ([dacdaf5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/dacdaf54174ee5671f429e8778abd335f84f06a4))
+
 ## [0.13.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.13.1...0.13.2) (2021-12-27)
 
 
