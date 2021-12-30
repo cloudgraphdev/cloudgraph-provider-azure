@@ -204,3 +204,6 @@ export const parseResourceId = (resourceId: string): AzureResourceIdSegment => {
   }
   return azureResourceIdSegment
 }
+
+export const getResourceGroupFromEntity = (obj: any): string =>
+  obj && obj?.id ? parseResourceId(obj.id).resourceGroups : ''

@@ -24,11 +24,13 @@ type azureWebSiteFunction implements azureBaseResource
   # files?: { [propertyName: string]: string };
   configHref: String @search(by: [hash, regexp])
   functionAppId: String @search(by: [hash, regexp])
+  functionAppName: String @search(by: [hash, regexp])
   href: String @search(by: [hash, regexp])
   invokeUrlTemplate: String @search(by: [hash, regexp])
   isDisabled: Boolean @search
   language: String @search(by: [hash, regexp])
   location: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
   scriptHref: String @search(by: [hash, regexp])
   scriptRootPathHref: String @search(by: [hash, regexp])
   secretsFileHref: String @search(by: [hash, regexp])

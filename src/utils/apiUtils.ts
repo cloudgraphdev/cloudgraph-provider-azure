@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CloudGraph from '@cloudgraph/sdk'
 import axios, { AxiosPromise } from 'axios'
 
 import apiSelectors from '../enums/apiSelectors'
 import azureLoggerText from '../properties/logger'
 import { AzureDebugScopeInitialData, RequestConfig } from '../types'
+import { getResourceGroupFromEntity } from './idParserUtils'
 import { tryCatchWrapper } from './index'
 
 const { logger } = CloudGraph
@@ -129,31 +131,65 @@ export const getResourceByIdFromMsRestApi = async ({
 type TListFnWithArgs = (...args: any[]) => Promise<any>
 type TListNextFn = (nextLinkToken: string) => Promise<any>
 
+/**
+ * Gets all resources from a service, which covers three use cases:
+ * 1. listCall doesn't need any arguments
+ * 2. listCall needs the resourceGroupName as the sole entry argument:
+ *   - resourceGroupName is embedded in each item of the resulting list
+ * 3. listCall requires both resourceGroupName and an unique identifier of the parent resource:
+ *   - resourceGroupName is embedded in each item of the resulting list
+ *   - if the propertyName param exists, a new property is added to each element of the list containing the uniqueIdentifier
+ *
+ * @param {Object} config
+ * @param {TListFnWithArgs} config.listCall List all resources call
+ * @param {TListNextFn} config.listNextCall List all resources call that uses token of the last successful List call
+ * @param {AzureDebugScopeInitialData} config.debugScope Object that describes the service, the client and scope for log tracing purposes
+ * @param {string} config.resourceGroupName Optional string parameter that could be mandatory for the function passed in the listCall param
+ * @param {string} config.uniqueIdentifier Optional string parameter that could be mandatory for the function passed in the listCall param
+ * @param {string} config.propertyName Optional string parameter to name the property that will contain the unique identifier
+ * @returns {Promise<Array<any>>} Result of the listCalls
+ */
 export const getAllResources = async ({
   listCall,
   listNextCall,
   debugScope: { service, client, scope },
   resourceGroupName,
   uniqueIdentifier,
+  propertyName,
 }: {
-  resourceGroupName?: string
-  uniqueIdentifier?: string
   listCall: TListFnWithArgs
   listNextCall: TListNextFn
   debugScope: AzureDebugScopeInitialData
+  resourceGroupName?: string
+  uniqueIdentifier?: string
+  propertyName?: string
 }): Promise<Array<any>> => {
   const fullResources = []
 
   let resources: any
+  // This allows us to add the uniqueIdentifier used to find this item as property
+  // and give it a convenient name, keeping it flexible for schema/format types.
+  // This enables us to easily find/filter items not only for us to associate it to their parent resource
+  // but also pave the road to complex dgraph queries
+  const newPropContainer =
+    uniqueIdentifier && propertyName ? { [propertyName]: uniqueIdentifier } : {}
   await tryCatchWrapper(
     async () => {
       resources = await listCall(
+        // This creates a array-like object that allows destructuring arguments for all three use cases(one, two or no arguments)
         ...[
           ...(resourceGroupName ? [resourceGroupName] : []),
           ...(uniqueIdentifier ? [uniqueIdentifier] : []),
         ]
       )
-      fullResources.push(...resources)
+      fullResources.push(
+        ...resources.map((r: any) => ({
+          ...r,
+          // This adds the resourceGroupName if present if not it parses it from the resource id
+          resourceGroup: resourceGroupName || getResourceGroupFromEntity(r),
+          ...newPropContainer,
+        }))
+      )
     },
     { service, client, scope, operation: listCall.name }
   )
@@ -164,7 +200,14 @@ export const getAllResources = async ({
     async () => {
       while (nextLink) {
         resources = await listNextCall(nextLink)
-        fullResources.push(...resources)
+        fullResources.push(
+          ...resources.map(r => ({
+            ...r,
+            // This adds the resourceGroupName if present if not it parses it from the resource id
+            resourceGroup: resourceGroupName || getResourceGroupFromEntity(r),
+            ...newPropContainer,
+          }))
+        )
         nextLink = resources.nextLink
       }
     },

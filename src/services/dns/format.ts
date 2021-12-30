@@ -1,11 +1,10 @@
-import { RecordSet } from '@azure/arm-dns/esm/models'
 import cuid from 'cuid'
 import { AzureDnsZone, AzureDnsZoneRecordSet } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
-import { RawAzureDnsZone } from './data'
+import { RawAzureDnsZone, RawAzureDnsRecordSet } from './data'
 
 const formatRecordSet = (
-  recordSet: RecordSet,
+  recordSet: RawAzureDnsRecordSet
 ): AzureDnsZoneRecordSet => {
   const {
     id,
@@ -25,6 +24,7 @@ const formatRecordSet = (
     cnameRecord,
     soaRecord,
     caaRecords,
+    resourceGroup,
   } = recordSet
 
   return {
@@ -36,30 +36,37 @@ const formatRecordSet = (
     provisioningState,
     targetResourceId: targetResource?.id || '',
     aRecords: aRecords?.map(aRecord => aRecord?.ipv4Address || '') || [],
-    aaaaRecords: aaaaRecords?.map(aaaaRecord => aaaaRecord?.ipv6Address || '') || [],
-    mxRecords: mxRecords?.map(({exchange, preference}) => {
-      return {
-        id: cuid(),
-        exchange,
-        preference,
-    }}) || [],
+    aaaaRecords:
+      aaaaRecords?.map(aaaaRecord => aaaaRecord?.ipv6Address || '') || [],
+    mxRecords:
+      mxRecords?.map(({ exchange, preference }) => {
+        return {
+          id: cuid(),
+          exchange,
+          preference,
+        }
+      }) || [],
     nsRecords: nsRecords?.map(nsRecord => nsRecord?.nsdname || '') || [],
     ptrRecords: ptrRecords?.map(ptrRecord => ptrRecord?.ptrdname || '') || [],
-    srvRecords: srvRecords?.map(({ priority, weight, port, target }) => {
-      return {
-        id: cuid(),
-        priority,
-        weight,
-        port,
-        target,
-    }}) || [],
-    txtRecords: txtRecords?.map(({value}) => { 
-      return {
-        id: cuid(),
-        value
-      }
-    }) || [],
+    srvRecords:
+      srvRecords?.map(({ priority, weight, port, target }) => {
+        return {
+          id: cuid(),
+          priority,
+          weight,
+          port,
+          target,
+        }
+      }) || [],
+    txtRecords:
+      txtRecords?.map(({ value }) => {
+        return {
+          id: cuid(),
+          value,
+        }
+      }) || [],
     cnameRecord: cnameRecord?.cname || '',
+    resourceGroup,
     soaRecord: {
       host: soaRecord?.host || '',
       email: soaRecord?.email || '',
@@ -69,14 +76,15 @@ const formatRecordSet = (
       expireTime: soaRecord?.expireTime || 0,
       minimumTtl: soaRecord?.minimumTtl || 0,
     },
-    caaRecords: caaRecords?.map(({ flags, tag, value}) => {
-      return {
-        id: cuid(),
-        flags,
-        tag,
-        value,
-      }
-    }) || [],
+    caaRecords:
+      caaRecords?.map(({ flags, tag, value }) => {
+        return {
+          id: cuid(),
+          flags,
+          tag,
+          value,
+        }
+      }) || [],
   }
 }
 

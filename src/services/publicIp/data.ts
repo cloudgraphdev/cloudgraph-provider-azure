@@ -11,7 +11,7 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
-import { parseResourceId } from '../../utils/idParserUtils'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -19,6 +19,7 @@ const serviceName = 'PublicIp'
 
 export interface RawAzurePublicIpAddress
   extends Omit<PublicIPAddress, 'tags' | 'location'> {
+  region: string
   resourceGroup: string
   Tags: TagMap
 }
@@ -58,9 +59,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = parseResourceId(rest.id).resourceGroups
+        const resourceGroup = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
+          region,
           resourceGroup,
           Tags: tags || {},
         })

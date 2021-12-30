@@ -16,7 +16,7 @@ import { AzureServiceInput, TagMap } from '../../types'
 import { caseInsensitiveEqual } from '../../utils'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
-import { parseResourceId } from '../../utils/idParserUtils'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -27,6 +27,7 @@ export interface RawAzureVirtualNetwork
     VirtualNetwork,
     'tags' | 'location' | 'ddosProtectionPlan' | 'addressSpace' | 'dhcpOptions'
   > {
+  region: string
   resourceGroup: string
   addressSpacePrefixes: string[]
   ddosProtectionPlans: DdosProtectionPlan[]
@@ -87,9 +88,10 @@ export default async ({
           if (!result[region]) {
             result[region] = []
           }
-          const resourceGroup = parseResourceId(rest.id).resourceGroups
+          const resourceGroup = getResourceGroupFromEntity(rest)
           result[region].push({
             ...rest,
+            region,
             resourceGroup,
             addressSpacePrefixes: addressSpace?.addressPrefixes || [],
             ddosProtectionPlans: (ddosProtectionPlans || [])?.filter(

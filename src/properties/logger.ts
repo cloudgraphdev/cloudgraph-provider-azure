@@ -24,6 +24,8 @@ export default {
   foundStorageContainers: (num: number): string => `Found ${num} storage containers`,
   // DNS Zone
   foundDnsZone: (num: number): string => `Found ${num} DNS Zones`,
+  // DNS Zone List
+  foundDnsZoneRecordSet: (num: number): string => `Found ${num} DNS Zone Record Sets`,
   // Firewall
   foundFirewalls: (num: number): string => `Found ${num} firewalls`,
   // Key Vault

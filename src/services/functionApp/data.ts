@@ -8,7 +8,6 @@ import {
   WebAppsListFunctionsResponse,
 } from '@azure/arm-appservice/esm/models'
 import CloudGraph from '@cloudgraph/sdk'
-import head from 'lodash/head'
 
 import getResourceGroupData from '../resourceGroup/data'
 import apiSelectors from '../../enums/apiSelectors'
@@ -17,10 +16,15 @@ import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupNames, lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils'
 import { getAllResources } from '../../utils/apiUtils'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'FunctionApp'
+
+export interface RawAzureFunctionEnvelope extends FunctionEnvelope {
+  functionAppName: string
+}
 
 export interface RawAzureFunctionApp
   extends Omit<
@@ -32,6 +36,8 @@ export interface RawAzureFunctionApp
     | 'slotSwapStatus'
     | 'location'
   > {
+  region: string
+  resourceGroup: string
   functions: FunctionEnvelope[]
   Tags: TagMap
 }
@@ -93,7 +99,7 @@ export default async ({
       }
     )
 
-    let azureFunctions: FunctionEnvelope[] = []
+    let azureFunctions: RawAzureFunctionEnvelope[] = []
     await tryCatchWrapper(
       async () => {
         azureFunctions =
@@ -107,6 +113,7 @@ export default async ({
                   getAllResources({
                     resourceGroupName: functionAppResourceGroupName,
                     uniqueIdentifier: functionAppName,
+                    propertyName: 'functionAppName',
                     listCall: (
                       resourceGroupName: string,
                       name: string
@@ -152,14 +159,15 @@ export default async ({
           if (!result[region]) {
             result[region] = []
           }
+          const resourceGroup = getResourceGroupFromEntity(rest)
           result[region].push({
             name,
             ...rest,
-            Tags: tags,
+            region,
+            resourceGroup,
+            Tags: tags || {},
             functions: azureFunctions
-              .filter(
-                ({ name: funcName }) => head(funcName.split('/')) === name
-              )
+              .filter(i => i.functionAppName === name)
               .map(({ config: functionConfig, files, ...restOfFunction }) => ({
                 ...restOfFunction,
               })),
