@@ -18,7 +18,7 @@ export default ({
   const {
     id,
     enableAcceleratedNetworking,
-    virtualMachine: { id: virtualMachineId = '' },
+    virtualMachine: { id: virtualMachineId = '' } = {},
     enableIPForwarding: enableIpForwarding,
     macAddress,
     ipConfigurations = [],
@@ -27,7 +27,7 @@ export default ({
       dnsServers = [],
       internalDnsNameLabel = '',
       internalDomainNameSuffix = '',
-    },
+    } = {},
     resourceGroup,
     Tags,
   } = service

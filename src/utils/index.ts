@@ -140,7 +140,7 @@ export const tryCatchWrapper = async (
 }
 
 export const caseInsensitiveEqual = (s1: string, s2: string): boolean =>
-  s1.toLowerCase() === s2.toLowerCase()
+  !!s1 && !!s2 && s1.toLowerCase() === s2.toLowerCase()
 
 export const caseInsensitiveIncludes = (arr: string[], s1: string): boolean =>
   !isEmpty(arr) &&

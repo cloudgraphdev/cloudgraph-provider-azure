@@ -13,6 +13,7 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -20,6 +21,8 @@ const serviceName = 'ResourceGroup'
 
 export interface RawAzureResourceGroup
   extends Omit<ResourceGroup, 'tags' | 'location'> {
+  region: string
+  resourceGroup: string
   Tags: TagMap
 }
 
@@ -56,8 +59,11 @@ export default async ({
           if (!result[region]) {
             result[region] = []
           }
+          const resourceGroup = getResourceGroupFromEntity(rest)
           result[region].push({
             ...rest,
+            region,
+            resourceGroup,
             Tags: tags || {},
           })
           numOfGroups += 1

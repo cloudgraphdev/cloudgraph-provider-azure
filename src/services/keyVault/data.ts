@@ -11,13 +11,14 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
-import { parseResourceId } from '../../utils/idParserUtils'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'KeyVault'
 
 export interface RawAzureKeyVault extends Omit<Vault, 'tags' | 'location'> {
+  region: string
   resourceGroup: string
   Tags: TagMap
 }
@@ -45,8 +46,8 @@ export default async ({
     })
 
     const keyValueData = await Promise.all(
-      keyVaults.map(async ({ name: vaultName, id: vaultId }) =>
-        client.vaults.get(parseResourceId(vaultId).resourceGroups, vaultName)
+      keyVaults.map(async ({ name: vaultName, ...rest }) =>
+        client.vaults.get(getResourceGroupFromEntity(rest), vaultName)
       )
     )
 
@@ -60,9 +61,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = parseResourceId(rest.id).resourceGroups
+        const resourceGroup = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
+          region,
           resourceGroup,
           Tags: tags || {},
         })

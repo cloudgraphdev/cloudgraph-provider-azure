@@ -24,6 +24,7 @@ export default ({
     Tags,
     trafficManagerHostNames = [],
     resourceGroup,
+    identity,
     ...rest
   } = service
   return {

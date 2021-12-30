@@ -66,7 +66,7 @@ export default ({
 
   if (disks?.data?.[region]) {
     const disksInRegion: RawAzureDisk[] = disks.data[region].filter(
-      ({ managedBy: vmId }: RawAzureDisk) => caseInsensitiveEqual(vmId, id)
+      ({ managedBy: vmId = '' }: RawAzureDisk) => caseInsensitiveEqual(vmId, id)
     )
 
     if (!isEmpty(disksInRegion)) {

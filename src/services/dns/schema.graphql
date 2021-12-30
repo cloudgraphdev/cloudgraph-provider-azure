@@ -79,6 +79,7 @@ type azureDnsZoneRecordSet implements azureResource
   cnameRecord: String @search(by: [hash, regexp])
   soaRecord: azureDnsZoneRecordSetSoaRecord
   caaRecords: [azureDnsZoneRecordSetCaaRecord]
+  resourceGroup: String @search(by: [hash, regexp])
 }
 
 type azureDnsZone implements azureResource

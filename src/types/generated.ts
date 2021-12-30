@@ -62,6 +62,7 @@ export type AzureDnsZoneRecordSet = AzureResource & {
   cnameRecord?: Maybe<Scalars['String']>;
   soaRecord?: Maybe<AzureDnsZoneRecordSetSoaRecord>;
   caaRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetCaaRecord>>>;
+  resourceGroup?: Maybe<Scalars['String']>;
 };
 
 export type AzureDnsZoneRecordSetCaaRecord = {
@@ -128,7 +129,6 @@ export type AzureFirewall = AzureResource & {
   ipGroups?: Maybe<Array<Maybe<AzureFirewallIpGroup>>>;
   additionalProperties?: Maybe<Array<Maybe<AzureFirewallAdditionalProperty>>>;
   zones?: Maybe<Array<Maybe<Scalars['String']>>>;
-  region?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
@@ -692,11 +692,13 @@ export type AzureVirtualNetworkDdosProtectionPlan = AzureBaseResource & {
 export type AzureWebSiteFunction = AzureBaseResource & {
   configHref?: Maybe<Scalars['String']>;
   functionAppId?: Maybe<Scalars['String']>;
+  functionAppName?: Maybe<Scalars['String']>;
   href?: Maybe<Scalars['String']>;
   invokeUrlTemplate?: Maybe<Scalars['String']>;
   isDisabled?: Maybe<Scalars['Boolean']>;
   language?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
   scriptHref?: Maybe<Scalars['String']>;
   scriptRootPathHref?: Maybe<Scalars['String']>;
   secretsFileHref?: Maybe<Scalars['String']>;

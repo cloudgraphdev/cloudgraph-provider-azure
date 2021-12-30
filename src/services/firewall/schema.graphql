@@ -195,7 +195,6 @@ type azureFirewall implements azureResource
   ipGroups: [azureFirewallIpGroup],
   additionalProperties: [azureFirewallAdditionalProperty]
   zones: [String] @search(by: [hash, regexp])
-  region: String @search(by: [hash, regexp])
   tags: [azureRawTag]
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: firewalls)
   publicIps: [azurePublicIp] @hasInverse(field: firewalls)
