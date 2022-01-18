@@ -82,5 +82,5 @@ type azureFunctionApp implements azureResource
   usageState: String @search(by: [hash, regexp])
   virtualNetworkSubnetId: String @search(by: [hash, regexp])
   functions: [azureWebSiteFunction]
-  resourceGroups: [azureResourceGroup] @hasInverse(field: functionApps)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: functionApps) # convert to singular resourceGroup
 }

@@ -56,6 +56,6 @@ type azureStorageContainer
     legalHoldTags: [azureStorageContainerLegalHoldTag]
     hasLegalHold: String @search(by: [hash, regexp])
     hasImmutabilityPolicy: String @search(by: [hash, regexp])
-    resourceGroups: [azureResourceGroup] @hasInverse(field: storageContainers)
-    storageAccounts: [azureStorageAccount] @hasInverse(field: storageContainers)
+    resourceGroups: [azureResourceGroup] @hasInverse(field: storageContainers) # convert to singular resourceGroup
+    storageAccounts: [azureStorageAccount] @hasInverse(field: storageContainers) # convert to singular storageAccount
   }

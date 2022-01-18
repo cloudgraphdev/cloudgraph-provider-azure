@@ -57,5 +57,5 @@ type azureVirtualMachine implements azureResource
   disks: [azureDisk] @hasInverse(field: virtualMachines)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualMachines)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: virtualMachines)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: virtualMachines)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: virtualMachines) # convert to singular resourceGroup
 }

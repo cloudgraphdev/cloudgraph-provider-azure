@@ -31,5 +31,5 @@ type azureKeyVault implements azureResource
     networkAclDefaultAction: String @search(by: [hash, regexp])
     networkAclIpRules: [String] @search(by: [hash, regexp])
     networkAclVirtualNetworkRules: [String] @search(by: [hash, regexp])
-    resourceGroups: [azureResourceGroup] @hasInverse (field: keyVaults)
+    resourceGroups: [azureResourceGroup] @hasInverse (field: keyVaults) # convert to singular resourceGroup
 }

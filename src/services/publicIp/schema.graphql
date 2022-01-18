@@ -25,6 +25,6 @@ type azurePublicIp implements azureResource
   resourceGuid: String @search(by: [hash, regexp])
   zones: [String] @search(by: [hash, regexp])
   firewalls: [azureFirewall] @hasInverse(field: publicIps)
-  networkInterfaces: [azureNetworkInterface] @hasInverse(field: publicIps)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: publicIps)
+  networkInterfaces: [azureNetworkInterface] @hasInverse(field: publicIps) # convert to singular networkInterface
+  resourceGroups: [azureResourceGroup] @hasInverse(field: publicIps) # convert to singular resourceGroup
 }
