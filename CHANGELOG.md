@@ -1,3 +1,10 @@
+## [0.14.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.1...0.14.2) (2022-01-19)
+
+
+### Bug Fixes
+
+* Preserve policies setting during init command ([38618ee](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/38618ee5745933827c435a2ee6f52b34ac3f96a7))
+
 ## [0.14.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.0...0.14.1) (2022-01-19)
 
 
