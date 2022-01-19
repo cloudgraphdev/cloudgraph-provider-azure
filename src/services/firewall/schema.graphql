@@ -198,5 +198,5 @@ type azureFirewall implements azureResource
   tags: [azureRawTag]
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: firewalls)
   publicIps: [azurePublicIp] @hasInverse(field: firewalls)
-  resourceGroups: [azureResourceGroup] @hasInverse (field: firewalls)
+  resourceGroups: [azureResourceGroup] @hasInverse (field: firewalls) # convert to singular resourceGroup
 }

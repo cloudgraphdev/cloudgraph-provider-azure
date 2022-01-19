@@ -45,5 +45,5 @@ type azureNetworkSecurityGroup implements azureResource
   securityRules: [azureNetworkSecurityGroupRule]
   defaultSecurityRules: [azureNetworkSecurityGroupRule]
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: securityGroups)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: securityGroups)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: securityGroups) # convert to singular resourceGroup
 }

@@ -33,8 +33,8 @@ type azureNetworkInterface implements azureResource
   appliedDnsServers: [String] @search(by: [hash, regexp])
   dnsServers: [String] @search(by: [hash, regexp])
   publicIps: [azurePublicIp] @hasInverse(field: networkInterfaces)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: networkInterfaces)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: networkInterfaces) # convert to singular resourceGroup
   securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: networkInterfaces)
-  virtualMachines: [azureVirtualMachine] @hasInverse(field: networkInterfaces)
+  virtualMachines: [azureVirtualMachine] @hasInverse(field: networkInterfaces) # convert to singular virtualMachine
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: networkInterfaces)
 }
