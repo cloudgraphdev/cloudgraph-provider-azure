@@ -1,3 +1,10 @@
+## [0.14.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.0...0.14.1) (2022-01-19)
+
+
+### Bug Fixes
+
+* **services:** add comment to plural/singular connections that need it ([c7436f0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/c7436f0d5782e91bd66a368e52be1e0b92d024d4))
+
 # [0.14.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.13.2...0.14.0) (2021-12-27)
 
 
