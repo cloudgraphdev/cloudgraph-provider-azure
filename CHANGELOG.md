@@ -1,3 +1,10 @@
+## [0.14.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.2...0.14.3) (2022-01-20)
+
+
+### Bug Fixes
+
+* corrected configuredResources passed to main getResourcesData loop ([0de818a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/0de818ab97db95e9172337c4d09d00cd4a6ca994))
+
 ## [0.14.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.1...0.14.2) (2022-01-19)
 
 
