@@ -412,7 +412,7 @@ export default class Provider extends CloudGraph.Client {
       configuredRegions = [...new Set(configuredRegions.split(','))].join(',')
     }
     if (!configuredResources) {
-      configuredResources = Object.values(this.properties.services).join(',')
+      configuredResources = Object.values(restOfServices).join(',')
     }
     const { subscriptionId } = account
     const { credentials } = await this.getFullCredentialsAndSubscriptions(
@@ -433,7 +433,7 @@ export default class Provider extends CloudGraph.Client {
         ...(await this.getResourcesData({
           config,
           opts,
-          configuredResources: restOfServices,
+          configuredResources,
           configuredRegions,
           initialRawData: result, // we pass scanned essential resources as rawData
         }))
