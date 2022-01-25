@@ -1,3 +1,15 @@
+# [0.15.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.3...0.15.0) (2022-01-25)
+
+
+### Bug Fixes
+
+* generateAzureErrorLog bug fix when error is unrelated to a http request ([389a70a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/389a70a280fc5d6f632c3ad32483552f1f70b0d4))
+
+
+### Features
+
+* **policyAssigment:** add azure policyAssigment ([72c0ea3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/72c0ea3764e2ca08514a8d35d5678e3cce8e6099))
+
 ## [0.14.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.2...0.14.3) (2022-01-20)
 
 
