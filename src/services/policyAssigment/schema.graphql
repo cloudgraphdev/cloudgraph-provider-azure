@@ -1,0 +1,46 @@
+type azurePolicyAssigmentIdentity {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azurePolicyAssigmentNonComplianceMessages {
+  id: String! @id @search(by: [hash])
+  message: String @search(by: [hash, regexp])
+  policyDefinitionReferenceId: String @search(by: [hash, regexp])
+}
+
+type azurePolicyAssigmentParameterValue {
+  id: String! @id @search(by: [hash, regexp])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azurePolicyAssigmentParameters {
+  id: String! @id @search(by: [hash, regexp])
+  key: String @search(by: [hash, regexp])
+  value: [azurePolicyAssigmentParameterValue]
+}
+
+type azurePolicyAssigment implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  enforcementMode: String @search(by: [hash, regexp])
+  identity: azurePolicyAssigmentIdentity
+  nonComplianceMessages: [azurePolicyAssigmentNonComplianceMessages]
+  notScopes: [String] @search(by: [hash, regexp])
+  parameters: [azurePolicyAssigmentParameters]
+  policyDefinitionId: String @search(by: [hash, regexp])
+  scope: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+}

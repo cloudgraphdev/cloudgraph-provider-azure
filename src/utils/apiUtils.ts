@@ -116,7 +116,7 @@ export const getResourceByIdFromMsRestApi = async ({
       headers: { Authorization: `Bearer ${authToken}` },
     })
 
-    const resp = response.data
+    const resp = response?.data
 
     // if (resp && !resp.error) {
     //   return resp
