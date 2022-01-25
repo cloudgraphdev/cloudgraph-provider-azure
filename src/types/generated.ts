@@ -384,6 +384,48 @@ export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzurePolicyAssigment = AzureBaseResource & {
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+  enforcementMode?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzurePolicyAssigmentIdentity>;
+  nonComplianceMessages?: Maybe<Array<Maybe<AzurePolicyAssigmentNonComplianceMessages>>>;
+  notScopes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  parameters?: Maybe<Array<Maybe<AzurePolicyAssigmentParameters>>>;
+  policyDefinitionId?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
+};
+
+export type AzurePolicyAssigmentIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzurePolicyAssigmentNonComplianceMessages = {
+  id: Scalars['String'];
+  message?: Maybe<Scalars['String']>;
+  policyDefinitionReferenceId?: Maybe<Scalars['String']>;
+};
+
+export type AzurePolicyAssigmentParameterValue = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzurePolicyAssigmentParameters = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Array<Maybe<AzurePolicyAssigmentParameterValue>>>;
+};
+
 export type AzurePublicIp = AzureResource & {
   tier?: Maybe<Scalars['String']>;
   allocationMethod?: Maybe<Scalars['String']>;

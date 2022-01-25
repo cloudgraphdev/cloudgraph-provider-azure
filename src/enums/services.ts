@@ -5,6 +5,7 @@ export default {
   keyVault: 'keyVault',
   functionApp: 'functionApp',
   networkInterface: 'networkInterface',
+  policyAssigment: 'policyAssigment',
   publicIp: 'publicIp',
   resourceGroup: 'resourceGroup',
   securityGroup: 'securityGroup',

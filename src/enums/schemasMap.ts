@@ -10,6 +10,7 @@ export default {
   [services.functionApp]: 'azureFunctionApp',
   [services.keyVault]: 'azureKeyVault',
   [services.networkInterface]: 'azureNetworkInterface',
+  [services.policyAssigment]: 'azurePolicyAssignment',
   [services.publicIp]: 'azurePublicIp',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityGroup]: 'azureNetworkSecurityGroup',
