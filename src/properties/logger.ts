@@ -23,7 +23,7 @@ export default {
   foundNetworkInterfaces: (num: number): string =>
     `Found ${num} network interfaces`,
   // Policies
-  foundPolicyAssigments: (num: number): string => `Found ${num} policy assigments`,
+  foundPolicyAssignments: (num: number): string => `Found ${num} policy assignments`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Resource Groups

@@ -5,7 +5,7 @@ import format from './format'
 import mutation from './mutation'
 import getData from './data'
 
-export default class AzurePolicyAssigment extends BaseService implements Service {
+export default class AzurePolicyAssignment extends BaseService implements Service {
   format = format.bind(this)
 
   // getConnections = getConnections.bind(this)

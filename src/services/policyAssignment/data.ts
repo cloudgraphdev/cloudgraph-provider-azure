@@ -12,9 +12,9 @@ import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'PolicyAssigment'
+const serviceName = 'PolicyAssignment'
 
-export interface RawAzurePolicyAssigment
+export interface RawAzurePolicyAssignment
   extends Omit<PolicyAssignment, 'tags' | 'location'> {
   region: string
   resourceGroup: string
@@ -24,7 +24,7 @@ export default async ({
   regions,
   config,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzurePolicyAssigment[]
+  [property: string]: RawAzurePolicyAssignment[]
 }> => {
   try {
     const { subscriptionId, tenantId } = config
@@ -33,18 +33,18 @@ export default async ({
     })
     const client = new PolicyClient(credential, subscriptionId)
 
-    const policyAssigmentsData: RawAzurePolicyAssigment[] = []
-    const policyAssigmentsIterable: PagedAsyncIterableIterator<PolicyAssignment> =
+    const policyAssignmentsData: RawAzurePolicyAssignment[] = []
+    const policyAssignmentsIterable: PagedAsyncIterableIterator<PolicyAssignment> =
       client.policyAssignments.list()
 
     await tryCatchWrapper(
       async () => {
-        for await (const policyAssigment of policyAssigmentsIterable) {
-          if (policyAssigment) {
-            const { location, ...rest } = policyAssigment
+        for await (const policyAssignment of policyAssignmentsIterable) {
+          if (policyAssignment) {
+            const { location, ...rest } = policyAssignment
             const resourceGroup = getResourceGroupFromEntity(rest)
             const region = (location && lowerCaseLocation(location)) || 'global'
-            policyAssigmentsData.push({
+            policyAssignmentsData.push({
               ...rest,
               region,
               resourceGroup,
@@ -55,16 +55,16 @@ export default async ({
       {
         service: serviceName,
         client,
-        scope: 'policyAssigments',
+        scope: 'policyAssignments',
         operation: 'list',
       }
     )
 
     const result: {
-      [property: string]: RawAzurePolicyAssigment[]
+      [property: string]: RawAzurePolicyAssignment[]
     } = {}
     let numOfGroups = 0
-    policyAssigmentsData.map(({ region, resourceGroup, ...rest }) => {
+    policyAssignmentsData.map(({ region, resourceGroup, ...rest }) => {
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []
@@ -77,7 +77,7 @@ export default async ({
         numOfGroups += 1
       }
     })
-    logger.debug(lt.foundPolicyAssigments(numOfGroups))
+    logger.debug(lt.foundPolicyAssignments(numOfGroups))
 
     return result
   } catch (e) {

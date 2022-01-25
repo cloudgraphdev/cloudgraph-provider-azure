@@ -15,7 +15,7 @@
 
 ### Features
 
-* **policyAssigment:** add azure policyAssigment ([72c0ea3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/72c0ea3764e2ca08514a8d35d5678e3cce8e6099))
+* **policyAssignment:** add azure policyAssignment ([72c0ea3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/72c0ea3764e2ca08514a8d35d5678e3cce8e6099))
 
 ## [0.14.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.2...0.14.3) (2022-01-20)
 
