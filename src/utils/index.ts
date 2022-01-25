@@ -67,21 +67,19 @@ export function generateAzureErrorLog(
   logger.warn(
     `There was a problem getting data for service ${service}, CG encountered an error calling ${functionName}`
   )
-  if (err?.statusCode !== 429) {
+  if (typeof err === 'undefined') {
+    logger.debug(
+      `Unknown error on ${service} calling ${functionName}. Error object is undefined?`
+    )
+  } else if (err.statusCode !== 429) {
     if (err.statusCode !== 401 || err.statusCode !== 403) {
       logger.warn(err.message)
     }
     logger.debug(err)
-  } else if (err) {
-    if (err.statusCode === 429) {
-      logger.debug(`Rate exceeded for ${service}:${functionName}`)
-    } else {
-      logger.debug(err)
-    }
+  } else if (err?.statusCode === 429) {
+    logger.debug(`Rate exceeded for ${service}:${functionName}`)
   } else {
-    logger.debug(
-      `Unknown error on ${service} calling ${functionName}. Error object is undefined?`
-    )
+    logger.debug(err)
   }
 }
 
