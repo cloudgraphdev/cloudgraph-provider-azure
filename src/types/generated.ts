@@ -485,6 +485,73 @@ export type AzureResourceGroup = AzureResource & {
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
 };
 
+export type AzureSecurityAssesment = AzureBaseResource & {
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  resourceDetails?: Maybe<AzureSecurityAssesmentResourceDetails>;
+  displayName?: Maybe<Scalars['String']>;
+  additionalData?: Maybe<Array<Maybe<AzureSecurityAssesmentAdditionalData>>>;
+  link?: Maybe<Scalars['String']>;
+  status?: Maybe<AzureSecurityAssesmentStatus>;
+  partnerName?: Maybe<Scalars['String']>;
+  metadata?: Maybe<AzureSecurityAssesmentMetadata>;
+};
+
+export type AzureSecurityAssesmentAdditionalData = {
+  id?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureSecurityAssesmentMetadata = {
+  partnerName?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+  policyDefinitionId?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  remediationDescription?: Maybe<Scalars['String']>;
+  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  severity?: Maybe<Scalars['String']>;
+  userImpact?: Maybe<Scalars['String']>;
+  implementationEffort?: Maybe<Scalars['String']>;
+  threats?: Maybe<Array<Maybe<Scalars['String']>>>;
+  preview?: Maybe<Scalars['Boolean']>;
+  assessmentType?: Maybe<Scalars['String']>;
+};
+
+export type AzureSecurityAssesmentResourceDetails = {
+  id?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
+  serverName?: Maybe<Scalars['String']>;
+  databaseName?: Maybe<Scalars['String']>;
+  workspaceId?: Maybe<Scalars['String']>;
+  vmuuid?: Maybe<Scalars['String']>;
+  sourceComputerId?: Maybe<Scalars['String']>;
+  machineName?: Maybe<Scalars['String']>;
+};
+
+export type AzureSecurityAssesmentStatus = {
+  code?: Maybe<Scalars['String']>;
+  cause?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  firstEvaluationDate?: Maybe<Scalars['String']>;
+  statusChangeDate?: Maybe<Scalars['String']>;
+};
+
+export type AzureSecurityPricing = AzureResource & {
+  pricingTier?: Maybe<Scalars['String']>;
+  freeTrialRemainingTime?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+};
+
+export type AzureSecuritySetting = AzureBaseResource & {
+  kind?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+};
+
 export type AzureStorageAccount = AzureResource & {
   extendedLocationName?: Maybe<Scalars['String']>;
   extendedLocationType?: Maybe<Scalars['String']>;

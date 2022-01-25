@@ -32,22 +32,25 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service          | Relations                                                              |
-| ---------------- | ---------------------------------------------------------------------- |
-| disk             | resourceGroup, virtualMachine                                          |
-| dns              | resourceGroup                                                          |
-| firewall         | publicIp, virtualNetwork                                               |
-| functionApp      | resourceGroup                                                          |
-| keyVault         | resourceGroup                                                          |
-| networkInterface | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork |
-| policyAssigment  |                                                                        |
-| publicIp         | networkInterface, resourceGroup                                        |
-| resourceGroup    | **all services**                                                       |
-| securityGroup    | networkInterface, resourceGroup                                        |
-| storageAccount   | resourceGroup, storageContainer                                        |
-| storageContainer | resourceGroup, storageAccount                                          |
-| virtualMachine   | disk, networkInterface, resourceGroup, virtualNetwork                  |
-| virtualNetwork   | networkInterface, resourceGroup virtualMachine                         |
+| Service             | Relations                                                              |
+| ------------------- | ---------------------------------------------------------------------- |
+| disk                | resourceGroup, virtualMachine                                          |
+| dns                 | resourceGroup                                                          |
+| firewall            | publicIp, virtualNetwork                                               |
+| functionApp         | resourceGroup                                                          |
+| keyVault            | resourceGroup                                                          |
+| networkInterface    | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork |
+| policyAssigment     |                                                                        |
+| publicIp            | networkInterface, resourceGroup                                        |
+| resourceGroup       | **all services**                                                       |
+| securityAssessments |                                                                        |
+| securityGroup       | networkInterface, resourceGroup                                        |
+| securityPricings    |                                                                        |
+| securitySettings    |                                                                        |
+| storageAccount      | resourceGroup, storageContainer                                        |
+| storageContainer    | resourceGroup, storageAccount                                          |
+| virtualMachine      | disk, networkInterface, resourceGroup, virtualNetwork                  |
+| virtualNetwork      | networkInterface, resourceGroup virtualMachine                         |
 
 ## Development
 
