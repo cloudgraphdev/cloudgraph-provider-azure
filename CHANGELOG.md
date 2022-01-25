@@ -1,3 +1,10 @@
+# [0.16.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.15.0...0.16.0) (2022-01-25)
+
+
+### Features
+
+* add security center ([a567373](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/a567373183335b5351a3adf1262dca0ac0a634e2))
+
 # [0.15.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.14.3...0.15.0) (2022-01-25)
 
 
