@@ -1,0 +1,11 @@
+type azureSecuritySetting implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  kind: String @search(by: [hash, regexp])
+  enabled: Boolean @search
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+}

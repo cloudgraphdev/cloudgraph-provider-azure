@@ -28,8 +28,14 @@ export default {
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
+  // Security Assesments
+  foundSecurityAssesments: (num: number): string => `Found ${num} security assesments`,
   // Security Groups
   foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
+  // Security Pricings
+  foundSecurityPricings: (num: number): string => `Found ${num} security pricings`,
+  // Security Settings
+  foundSecuritySettings: (num: number): string => `Found ${num} security settings`,
   // Storage Account
   foundStorageAccounts: (num: number): string =>
     `Found ${num} storage accounts`,

@@ -1,0 +1,11 @@
+type azureSecurityPricing implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  pricingTier: String @search(by: [hash, regexp])
+  freeTrialRemainingTime: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+}

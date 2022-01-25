@@ -1,0 +1,57 @@
+type azureSecurityAssesmentResourceDetails {
+  id: String @search(by: [hash, regexp])
+  source: String @search(by: [hash, regexp])
+  serverName: String @search(by: [hash, regexp])
+  databaseName: String @search(by: [hash, regexp])
+  workspaceId: String @search(by: [hash, regexp])
+  vmuuid: String @search(by: [hash, regexp])
+  sourceComputerId: String @search(by: [hash, regexp])
+  machineName: String @search(by: [hash, regexp])
+}
+
+type azureSecurityAssesmentAdditionalData {
+  id: String @search(by: [hash, regexp])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureSecurityAssesmentStatus {
+  code: String @search(by: [hash, regexp])
+  cause: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  firstEvaluationDate: String @search(by: [hash, regexp])
+  statusChangeDate: String @search(by: [hash, regexp])
+}
+
+type azureSecurityAssesmentMetadata {
+  partnerName: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  policyDefinitionId: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  remediationDescription: String @search(by: [hash, regexp])
+  categories: [String] @search(by: [hash, regexp])
+  severity: String @search(by: [hash, regexp])
+  userImpact: String @search(by: [hash, regexp])
+  implementationEffort: String @search(by: [hash, regexp])
+  threats: [String] @search(by: [hash, regexp])
+  preview: Boolean @search
+  assessmentType: String @search(by: [hash, regexp])
+}
+
+type azureSecurityAssesment implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
+  resourceDetails: azureSecurityAssesmentResourceDetails
+  displayName: String @search(by: [hash, regexp])
+  additionalData: [azureSecurityAssesmentAdditionalData]
+  link: String @search(by: [hash, regexp])
+  status: azureSecurityAssesmentStatus
+  partnerName: String @search(by: [hash, regexp])
+  metadata: azureSecurityAssesmentMetadata
+}
