@@ -1,3 +1,10 @@
+## [0.16.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.16.0...0.16.1) (2022-01-26)
+
+
+### Bug Fixes
+
+* fix service, folder and types typo to policyAssignment ([cfaa810](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/cfaa8105de9aa2284fcc1982d96b68bd9714a2f1))
+
 # [0.16.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.15.0...0.16.0) (2022-01-25)
 
 
