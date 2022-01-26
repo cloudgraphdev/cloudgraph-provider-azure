@@ -11,6 +11,34 @@ export type Scalars = {
   Float: number;
 };
 
+export type AzureAuthRoleAssignment = AzureBaseResource & {
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
+  roleDefinitionId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
+  principalType?: Maybe<Scalars['String']>;
+  canDelegate?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureAuthRoleDefinition = AzureBaseResource & {
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  roleName?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  roleType?: Maybe<Scalars['String']>;
+  permissions?: Maybe<Array<Maybe<AzureAuthRoleDefinitionPermission>>>;
+  assignableScopes?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAuthRoleDefinitionPermission = {
+  id: Scalars['String'];
+  actions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  notActions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dataActions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  notDataActions?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 export type AzureBaseResource = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;

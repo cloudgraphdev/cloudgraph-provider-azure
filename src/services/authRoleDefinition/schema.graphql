@@ -1,0 +1,27 @@
+type azureAuthRoleDefinitionPermission
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash])
+  actions: [String] @search(by: [hash, regexp])
+  notActions: [String] @search(by: [hash, regexp])
+  dataActions: [String] @search(by: [hash, regexp])
+  notDataActions: [String] @search(by: [hash, regexp])
+}
+
+type azureAuthRoleDefinition implements azureBaseResource
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  region: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  roleName: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  roleType: String @search(by: [hash, regexp])
+  permissions: [azureAuthRoleDefinitionPermission]
+  assignableScopes: [String] @search(by: [hash, regexp])
+}

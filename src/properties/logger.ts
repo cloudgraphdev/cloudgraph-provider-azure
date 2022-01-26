@@ -5,6 +5,10 @@ export default {
   authenticatingViaOauth:
     'Authenticating Via Ouath to get token for use with REST API...',
   /* Service logs */
+  // Auth Role Assignments
+  foundAuthRoleAssignments: (num: number): string => `Found ${num} authorization role Assignments`,
+  // Auth Role Definitions
+  foundAuthRoleDefinitions: (num: number): string => `Found ${num} authorization role definitions`,
   // Disk
   foundDisks: (num: number): string => `Found ${num} disks`,
   // DNS Zone
