@@ -6,7 +6,7 @@ import AzureFunctionApp from '../services/functionApp'
 import AzureKeyVault from '../services/keyVault'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
-import AzurePolicyAssigment from '../services/policyAssigment'
+import AzurePolicyAssignment from '../services/policyAssignment'
 import AzurePublicIp from '../services/publicIp'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureSecurityAssesments from '../services/securityAssesments'
@@ -29,7 +29,7 @@ export default {
   [services.functionApp]: AzureFunctionApp,
   [services.keyVault]: AzureKeyVault,
   [services.networkInterface]: AzureNetworkInterface,
-  [services.policyAssigment]: AzurePolicyAssigment,
+  [services.policyAssignment]: AzurePolicyAssignment,
   [services.publicIp]: AzurePublicIp,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityAssesments]: AzureSecurityAssesments,

@@ -3,20 +3,20 @@ import isObject from 'lodash/isObject'
 import { isString } from 'lodash'
 import cuid from 'cuid'
 import {
-  AzurePolicyAssigment,
-  AzurePolicyAssigmentParameters,
+  AzurePolicyAssignment,
+  AzurePolicyAssignmentParameters,
 } from '../../types/generated'
-import { RawAzurePolicyAssigment } from './data'
+import { RawAzurePolicyAssignment } from './data'
 
 export default ({
   service,
   account: subscriptionId,
   region,
 }: {
-  service: RawAzurePolicyAssigment
+  service: RawAzurePolicyAssignment
   account: string
   region: string
-}): AzurePolicyAssigment => {
+}): AzurePolicyAssignment => {
   const {
     id,
     type,
@@ -35,7 +35,7 @@ export default ({
     metadata,
   } = service
 
-  const parameters: AzurePolicyAssigmentParameters[] =
+  const parameters: AzurePolicyAssignmentParameters[] =
     Object.entries(params).map(([k, v]) => ({
       id: cuid(),
       key: k,

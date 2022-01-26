@@ -384,17 +384,17 @@ export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
   type?: Maybe<Scalars['String']>;
 };
 
-export type AzurePolicyAssigment = AzureBaseResource & {
+export type AzurePolicyAssignment = AzureBaseResource & {
   subscriptionId?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
   enforcementMode?: Maybe<Scalars['String']>;
-  identity?: Maybe<AzurePolicyAssigmentIdentity>;
-  nonComplianceMessages?: Maybe<Array<Maybe<AzurePolicyAssigmentNonComplianceMessages>>>;
+  identity?: Maybe<AzurePolicyAssignmentIdentity>;
+  nonComplianceMessages?: Maybe<Array<Maybe<AzurePolicyAssignmentNonComplianceMessages>>>;
   notScopes?: Maybe<Array<Maybe<Scalars['String']>>>;
-  parameters?: Maybe<Array<Maybe<AzurePolicyAssigmentParameters>>>;
+  parameters?: Maybe<Array<Maybe<AzurePolicyAssignmentParameters>>>;
   policyDefinitionId?: Maybe<Scalars['String']>;
   scope?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
@@ -402,28 +402,28 @@ export type AzurePolicyAssigment = AzureBaseResource & {
   createdAt?: Maybe<Scalars['String']>;
 };
 
-export type AzurePolicyAssigmentIdentity = {
+export type AzurePolicyAssignmentIdentity = {
   principalId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
-export type AzurePolicyAssigmentNonComplianceMessages = {
+export type AzurePolicyAssignmentNonComplianceMessages = {
   id: Scalars['String'];
   message?: Maybe<Scalars['String']>;
   policyDefinitionReferenceId?: Maybe<Scalars['String']>;
 };
 
-export type AzurePolicyAssigmentParameterValue = {
+export type AzurePolicyAssignmentParameterValue = {
   id: Scalars['String'];
   key?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
 };
 
-export type AzurePolicyAssigmentParameters = {
+export type AzurePolicyAssignmentParameters = {
   id: Scalars['String'];
   key?: Maybe<Scalars['String']>;
-  value?: Maybe<Array<Maybe<AzurePolicyAssigmentParameterValue>>>;
+  value?: Maybe<Array<Maybe<AzurePolicyAssignmentParameterValue>>>;
 };
 
 export type AzurePublicIp = AzureResource & {
