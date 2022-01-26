@@ -1,4 +1,6 @@
 import services from './services'
+import AzureAuthRoleAssignment from '../services/authRoleAssignment'
+import AzureAuthRoleDefinition from '../services/authRoleDefinition'
 import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
 import AzureFirewall from '../services/firewall'
@@ -23,6 +25,8 @@ import AzureVirtualNetwork from '../services/virtualNetwork'
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
+  [services.authRoleAssignment]: AzureAuthRoleAssignment,
+  [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
   [services.firewall]: AzureFirewall,

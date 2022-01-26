@@ -34,6 +34,8 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 | Service             | Relations                                                              |
 | ------------------- | ---------------------------------------------------------------------- |
+| authRoleAssignment   |                                                                        |
+| authRoleDefinition  |                                                                        |
 | disk                | resourceGroup, virtualMachine                                          |
 | dns                 | resourceGroup                                                          |
 | firewall            | publicIp, virtualNetwork                                               |

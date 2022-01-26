@@ -1,0 +1,14 @@
+type azureAuthRoleAssignment implements azureBaseResource
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  region: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  scope: String @search(by: [hash, regexp])
+  roleDefinitionId: String @search(by: [hash, regexp])
+  principalId: String @search(by: [hash, regexp])
+  principalType: String @search(by: [hash, regexp])
+  canDelegate: Boolean @search
+}

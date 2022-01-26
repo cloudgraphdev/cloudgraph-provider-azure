@@ -1,4 +1,6 @@
 export default {
+  authRoleAssignment: 'authRoleAssignment',
+  authRoleDefinition: 'authRoleDefinition',
   disk: 'disk',
   dns: 'dns',
   firewall: 'firewall',
