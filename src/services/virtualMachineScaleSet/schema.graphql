@@ -1,0 +1,271 @@
+type azureVirtualMachineScaleSetExtension
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  forceUpdateTag: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  typeHandlerVersion: String @search(by: [hash, regexp])
+  publisher: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  provisionAfterExtensions: [String] @search(by: [hash, regexp])
+  autoUpgradeMinorVersion: Boolean @search
+  enableAutomaticUpgrade: Boolean @search
+}
+
+type azureVirtualMachineScaleSetExtensionProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  extensions: [azureVirtualMachineScaleSetExtension]
+}
+
+type azureVirtualMachineScaleSetDiagnosticsProfileBoot
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  enabled: Boolean @search
+}
+
+type azureVirtualMachineScaleSetDiagnosticsProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  bootDiagnostics: azureVirtualMachineScaleSetDiagnosticsProfileBoot
+}
+
+type azureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  dnsServers: [String] @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSetIpTag
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  ipTagType: String @search(by: [hash, regexp])
+  tag: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  domainNameLabel: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSetNetworkPublicIpAddresssConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  idleTimeoutInMinutes: Int @search
+  ipTags: [azureVirtualMachineScaleSetIpTag]
+  publicIPPrefix: azureSubResource
+  publicIPAddressVersion: String @search(by: [hash, regexp])
+  deleteOption: String @search(by: [hash, regexp])
+  dnsSettings: azureVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
+
+}
+
+type azureVirtualMachineScaleSetNetworkIpConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  privateIPAddressVersion: String @search(by: [hash, regexp])
+  primary: Boolean @search
+  applicationGatewayBackendAddressPools: [azureSubResource]
+  applicationSecurityGroups: [azureSubResource]
+  loadBalancerBackendAddressPools: [azureSubResource]
+  loadBalancerInboundNatPools: [azureSubResource]
+}
+
+type azureVirtualMachineScaleSetNetworkProfileConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  primary: Boolean @search
+  enableAcceleratedNetworking: Boolean @search
+  enableFpga: Boolean @search
+  enableIPForwarding: Boolean @search
+  deleteOption: String @search(by: [hash, regexp])
+  networkSecurityGroup: azureSubResource
+  dnsSettings: azureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings
+  ipConfigurations: azureVirtualMachineScaleSetNetworkIpConfiguration
+}
+
+type azureVirtualMachineScaleSetNetworkProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  networkInterfaceConfigurations: [azureVirtualMachineScaleSetNetworkProfileConfiguration]
+}
+
+type azureVirtualMachineScaleSetStorageProfileImageReference
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  publisher: String @search(by: [hash, regexp])
+  offer: String @search(by: [hash, regexp])
+  sku: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSetStorageProfileOsDisk
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  caching: String @search(by: [hash, regexp])
+  createOption: String @search(by: [hash, regexp])
+  osType: String @search(by: [hash, regexp])
+  diskSizeGB: Int @search
+  # managedDisk: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSetStorageProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  imageReference: azureVirtualMachineScaleSetStorageProfileImageReference
+  osDisk: azureVirtualMachineScaleSetStorageProfileOsDisk
+}
+
+type azureSshPublicKey
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  path: String @search(by: [hash, regexp])
+  keyData: String @search(by: [hash, regexp])
+}
+
+type azureSshConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  publicKeys: [azureSshPublicKey]
+}
+
+type azureVirtualMachineScaleSetOsProfileLinuxConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  disablePasswordAuthentication: Boolean @search
+  provisionVMAgent: Boolean @search
+  ssh: azureSshConfig
+  uration
+}
+
+type azureVirtualMachineScaleSetOsProfileWindowsConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisionVMAgent: Boolean @search
+  enableAutomaticUpdates: Boolean @search
+  timeZone: String @search(by: [hash, regexp])
+  ssh: azureSshConfiguration
+}
+
+type azureVaultSecretGroup
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  computerNamePrefix: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSetOsProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  computerNamePrefix: String @search(by: [hash, regexp])
+  adminUsername: String @search(by: [hash, regexp])
+  allowExtensionOperations: Boolean @search
+  requireGuestProvisionSignal: Boolean @search
+  linuxConfiguration: azureVirtualMachineScaleSetOsProfileLinuxConfiguration
+  windowsConfiguration: azureVirtualMachineScaleSetOsProfileWindowsConfiguration
+  secrets: [azureVaultSecretGroup]
+}
+
+type azureVirtualMachineScaleSetProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  osProfile: azureVirtualMachineScaleSetOsProfile
+  storageProfile: azureVirtualMachineScaleSetStorageProfile
+  networkProfile: azureVirtualMachineScaleSetNetworkProfile
+  diagnosticsProfile: azureVirtualMachineScaleSetDiagnosticsProfile
+  extensionProfile: azureVirtualMachineScaleSetExtensionProfile
+}
+
+type azureVirtualMachineScaleSetScaleInPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  rules: [String] @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineScaleSet implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  overprovision: Boolean @search
+  doNotRunExtensionsOnOverprovisionedVMs: Boolean @search
+  singlePlacementGroup: Boolean @search
+  platformFaultDomainCount: Int @search
+  uniqueId: String @search(by: [hash, regexp])
+  virtualMachineProfile: azureVirtualMachineScaleSetProfile
+  scaleInPolicy: azureVirtualMachineScaleSetScaleInPolicy
+}
