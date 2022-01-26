@@ -1,3 +1,10 @@
+# [0.17.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.16.1...0.17.0) (2022-01-26)
+
+
+### Features
+
+* add authorization ([b78900f](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b78900f78a1b8f2638bf73636886d24354dacab6))
+
 ## [0.16.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.16.0...0.16.1) (2022-01-26)
 
 
