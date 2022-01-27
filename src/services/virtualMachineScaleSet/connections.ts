@@ -21,7 +21,7 @@ export default ({
   const { id, resourceGroup: rgName } = service
 
   /**
-   * Find resource group related to this disk
+   * Find resource group related to this VM Scale set
    */
   const resourceGroups: {
     name: string

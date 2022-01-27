@@ -22,7 +22,6 @@ export default {
   [services.storageAccount]: 'azureStorageAccount',
   [services.storageContainer]: 'azureStorageContainer',
   [services.virtualMachine]: 'azureVirtualMachine',
-  [services.virtualMachine]: 'azureVirtualMachine',
   [services.virtualMachineScaleSet]: 'azureVirtualMachineScaleSet',
   [services.virtualNetwork]: 'azureVirtualNetwork',
   tag: 'azureTag',

@@ -510,6 +510,7 @@ export type AzureResourceGroup = AzureResource & {
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
+  virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
 };
 
@@ -578,6 +579,15 @@ export type AzureSecuritySetting = AzureBaseResource & {
   enabled?: Maybe<Scalars['Boolean']>;
   subscriptionId?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
+};
+
+export type AzureSshConfiguration = {
+  publicKeys?: Maybe<Array<Maybe<AzureSshPublicKey>>>;
+};
+
+export type AzureSshPublicKey = {
+  path?: Maybe<Scalars['String']>;
+  keyData?: Maybe<Scalars['String']>;
 };
 
 export type AzureStorageAccount = AzureResource & {
@@ -765,6 +775,16 @@ export type AzureTag = {
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
 };
 
+export type AzureVaultCertificate = {
+  certificateUrl?: Maybe<Scalars['String']>;
+  certificateStore?: Maybe<Scalars['String']>;
+};
+
+export type AzureVaultSecretGroup = {
+  sourceVault?: Maybe<AzureSubResource>;
+  vaultCertificates?: Maybe<Array<Maybe<AzureVaultCertificate>>>;
+};
+
 export type AzureVirtualMachine = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
   vmSize?: Maybe<Scalars['String']>;
@@ -796,6 +816,161 @@ export type AzureVirtualMachineOsProfileWindowsConfiguration = {
   provisionVMAgent?: Maybe<Scalars['Boolean']>;
   enableAutomaticUpdates?: Maybe<Scalars['Boolean']>;
   timeZone?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineScaleSet = AzureResource & {
+  provisioningState?: Maybe<Scalars['String']>;
+  overprovision?: Maybe<Scalars['Boolean']>;
+  doNotRunExtensionsOnOverprovisionedVMs?: Maybe<Scalars['Boolean']>;
+  singlePlacementGroup?: Maybe<Scalars['Boolean']>;
+  platformFaultDomainCount?: Maybe<Scalars['Int']>;
+  uniqueId?: Maybe<Scalars['String']>;
+  virtualMachineProfile?: Maybe<AzureVirtualMachineScaleSetProfile>;
+  scaleInPolicy?: Maybe<AzureVirtualMachineScaleSetScaleInPolicy>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureVirtualMachineScaleSetDiagnosticsProfile = {
+  bootDiagnostics?: Maybe<AzureVirtualMachineScaleSetDiagnosticsProfileBoot>;
+};
+
+export type AzureVirtualMachineScaleSetDiagnosticsProfileBoot = {
+  enabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureVirtualMachineScaleSetExtension = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  forceUpdateTag?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  type1?: Maybe<Scalars['String']>;
+  typeHandlerVersion?: Maybe<Scalars['String']>;
+  publisher?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  provisionAfterExtensions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  autoUpgradeMinorVersion?: Maybe<Scalars['Boolean']>;
+  enableAutomaticUpgrade?: Maybe<Scalars['Boolean']>;
+  settings?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineScaleSetExtensionProfile = {
+  extensions?: Maybe<Array<Maybe<AzureVirtualMachineScaleSetExtension>>>;
+};
+
+export type AzureVirtualMachineScaleSetIpTag = {
+  ipTagType?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineScaleSetNetworkIpConfiguration = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  privateIPAddressVersion?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  subnetId?: Maybe<Scalars['String']>;
+  applicationGatewayBackendAddressPools?: Maybe<Array<Maybe<AzureSubResource>>>;
+  applicationSecurityGroups?: Maybe<Array<Maybe<AzureSubResource>>>;
+  loadBalancerBackendAddressPools?: Maybe<Array<Maybe<AzureSubResource>>>;
+  loadBalancerInboundNatPools?: Maybe<Array<Maybe<AzureSubResource>>>;
+};
+
+export type AzureVirtualMachineScaleSetNetworkProfile = {
+  networkInterfaceConfigurations?: Maybe<Array<Maybe<AzureVirtualMachineScaleSetNetworkProfileConfiguration>>>;
+};
+
+export type AzureVirtualMachineScaleSetNetworkProfileConfiguration = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  enableAcceleratedNetworking?: Maybe<Scalars['Boolean']>;
+  enableFpga?: Maybe<Scalars['Boolean']>;
+  enableIPForwarding?: Maybe<Scalars['Boolean']>;
+  deleteOption?: Maybe<Scalars['String']>;
+  networkSecurityGroup?: Maybe<AzureSubResource>;
+  dnsSettings?: Maybe<AzureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureVirtualMachineScaleSetNetworkIpConfiguration>>>;
+};
+
+export type AzureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings = {
+  dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureVirtualMachineScaleSetNetworkPublicIpAddresssConfiguration = {
+  name?: Maybe<Scalars['String']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  ipTags?: Maybe<Array<Maybe<AzureVirtualMachineScaleSetIpTag>>>;
+  publicIPPrefix?: Maybe<AzureSubResource>;
+  publicIPAddressVersion?: Maybe<Scalars['String']>;
+  deleteOption?: Maybe<Scalars['String']>;
+  dnsSettings?: Maybe<AzureVirtualMachineScaleSetPublicIpAddressConfigurationDnsSettings>;
+};
+
+export type AzureVirtualMachineScaleSetOsProfile = {
+  computerNamePrefix?: Maybe<Scalars['String']>;
+  adminUsername?: Maybe<Scalars['String']>;
+  allowExtensionOperations?: Maybe<Scalars['Boolean']>;
+  requireGuestProvisionSignal?: Maybe<Scalars['Boolean']>;
+  linuxConfiguration?: Maybe<AzureVirtualMachineScaleSetOsProfileLinuxConfiguration>;
+  windowsConfiguration?: Maybe<AzureVirtualMachineScaleSetOsProfileWindowsConfiguration>;
+  secrets?: Maybe<Array<Maybe<AzureVaultSecretGroup>>>;
+};
+
+export type AzureVirtualMachineScaleSetOsProfileLinuxConfiguration = {
+  disablePasswordAuthentication?: Maybe<Scalars['Boolean']>;
+  provisionVMAgent?: Maybe<Scalars['Boolean']>;
+  ssh?: Maybe<AzureSshConfiguration>;
+};
+
+export type AzureVirtualMachineScaleSetOsProfileWindowsConfiguration = {
+  provisionVMAgent?: Maybe<Scalars['Boolean']>;
+  enableAutomaticUpdates?: Maybe<Scalars['Boolean']>;
+  timeZone?: Maybe<Scalars['String']>;
+  ssh?: Maybe<AzureSshConfiguration>;
+};
+
+export type AzureVirtualMachineScaleSetProfile = {
+  osProfile?: Maybe<AzureVirtualMachineScaleSetOsProfile>;
+  storageProfile?: Maybe<AzureVirtualMachineScaleSetStorageProfile>;
+  networkProfile?: Maybe<AzureVirtualMachineScaleSetNetworkProfile>;
+  diagnosticsProfile?: Maybe<AzureVirtualMachineScaleSetDiagnosticsProfile>;
+  extensionProfile?: Maybe<AzureVirtualMachineScaleSetExtensionProfile>;
+};
+
+export type AzureVirtualMachineScaleSetPublicIpAddressConfigurationDnsSettings = {
+  domainNameLabel?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineScaleSetScaleInPolicy = {
+  rules?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureVirtualMachineScaleSetStorageProfile = {
+  imageReference?: Maybe<AzureVirtualMachineScaleSetStorageProfileImageReference>;
+  osDisk?: Maybe<AzureVirtualMachineScaleSetStorageProfileOsDisk>;
+};
+
+export type AzureVirtualMachineScaleSetStorageProfileImageReference = {
+  publisher?: Maybe<Scalars['String']>;
+  offer?: Maybe<Scalars['String']>;
+  sku?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineScaleSetStorageProfileManagedDisk = {
+  storageAccountType?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineScaleSetStorageProfileOsDisk = {
+  caching?: Maybe<Scalars['String']>;
+  createOption?: Maybe<Scalars['String']>;
+  osType?: Maybe<Scalars['String']>;
+  diskSizeGB?: Maybe<Scalars['Int']>;
+  writeAcceleratorEnabled?: Maybe<Scalars['Boolean']>;
+  managedDisk?: Maybe<AzureVirtualMachineScaleSetStorageProfileManagedDisk>;
+};
+
+export type AzureVirtualMachineScaleSetSubResource = {
+  id?: Maybe<Scalars['String']>;
 };
 
 export type AzureVirtualMachineStorageImageReference = {

@@ -1,3 +1,12 @@
+type azureVirtualMachineScaleSetSubResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
 type azureVirtualMachineScaleSetExtension
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -8,12 +17,14 @@ type azureVirtualMachineScaleSetExtension
   name: String @search(by: [hash, regexp])
   forceUpdateTag: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
+  type1: String @search(by: [hash, regexp])
   typeHandlerVersion: String @search(by: [hash, regexp])
   publisher: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   provisionAfterExtensions: [String] @search(by: [hash, regexp])
   autoUpgradeMinorVersion: Boolean @search
   enableAutomaticUpgrade: Boolean @search
+  settings: String @search(by: [hash, regexp])
 }
 
 type azureVirtualMachineScaleSetExtensionProfile
@@ -84,7 +95,6 @@ type azureVirtualMachineScaleSetNetworkPublicIpAddresssConfiguration
   publicIPAddressVersion: String @search(by: [hash, regexp])
   deleteOption: String @search(by: [hash, regexp])
   dnsSettings: azureVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
-
 }
 
 type azureVirtualMachineScaleSetNetworkIpConfiguration
@@ -97,6 +107,7 @@ type azureVirtualMachineScaleSetNetworkIpConfiguration
   name: String @search(by: [hash, regexp])
   privateIPAddressVersion: String @search(by: [hash, regexp])
   primary: Boolean @search
+  subnetId: String @search(by: [hash, regexp])
   applicationGatewayBackendAddressPools: [azureSubResource]
   applicationSecurityGroups: [azureSubResource]
   loadBalancerBackendAddressPools: [azureSubResource]
@@ -118,7 +129,7 @@ type azureVirtualMachineScaleSetNetworkProfileConfiguration
   deleteOption: String @search(by: [hash, regexp])
   networkSecurityGroup: azureSubResource
   dnsSettings: azureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings
-  ipConfigurations: azureVirtualMachineScaleSetNetworkIpConfiguration
+  ipConfigurations: [azureVirtualMachineScaleSetNetworkIpConfiguration]
 }
 
 type azureVirtualMachineScaleSetNetworkProfile
@@ -142,6 +153,15 @@ type azureVirtualMachineScaleSetStorageProfileImageReference
   version: String @search(by: [hash, regexp])
 }
 
+type azureVirtualMachineScaleSetStorageProfileManagedDisk
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  storageAccountType: String @search(by: [hash, regexp])
+}
+
 type azureVirtualMachineScaleSetStorageProfileOsDisk
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -152,7 +172,8 @@ type azureVirtualMachineScaleSetStorageProfileOsDisk
   createOption: String @search(by: [hash, regexp])
   osType: String @search(by: [hash, regexp])
   diskSizeGB: Int @search
-  # managedDisk: String @search(by: [hash, regexp])
+  writeAcceleratorEnabled: Boolean @search
+  managedDisk: azureVirtualMachineScaleSetStorageProfileManagedDisk
 }
 
 type azureVirtualMachineScaleSetStorageProfile
@@ -192,8 +213,7 @@ type azureVirtualMachineScaleSetOsProfileLinuxConfiguration
   ) {
   disablePasswordAuthentication: Boolean @search
   provisionVMAgent: Boolean @search
-  ssh: azureSshConfig
-  uration
+  ssh: azureSshConfiguration
 }
 
 type azureVirtualMachineScaleSetOsProfileWindowsConfiguration
@@ -208,13 +228,24 @@ type azureVirtualMachineScaleSetOsProfileWindowsConfiguration
   ssh: azureSshConfiguration
 }
 
+type azureVaultCertificate
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  certificateUrl: String @search(by: [hash, regexp])
+  certificateStore: String @search(by: [hash, regexp])
+}
+
 type azureVaultSecretGroup
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  computerNamePrefix: String @search(by: [hash, regexp])
+  sourceVault: azureSubResource
+  vaultCertificates: [azureVaultCertificate]
 }
 
 type azureVirtualMachineScaleSetOsProfile
@@ -268,4 +299,6 @@ type azureVirtualMachineScaleSet implements azureResource
   uniqueId: String @search(by: [hash, regexp])
   virtualMachineProfile: azureVirtualMachineScaleSetProfile
   scaleInPolicy: azureVirtualMachineScaleSetScaleInPolicy
+  resourceGroups: [azureResourceGroup]
+    @hasInverse(field: virtualMachineScaleSets)
 }

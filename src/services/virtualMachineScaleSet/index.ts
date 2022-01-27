@@ -5,7 +5,10 @@ import format from './format'
 import mutation from './mutation'
 import getData from './data'
 
-export default class AzureDisk extends BaseService implements Service {
+export default class AzureVirtualMachineScaleSet
+  extends BaseService
+  implements Service
+{
   format = format.bind(this)
 
   getConnections = getConnections.bind(this)

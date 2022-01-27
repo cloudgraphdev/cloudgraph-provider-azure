@@ -3,14 +3,15 @@
 Scan cloud infrastructure via the [Azure SDK](https://github.com/Azure/azure-sdk-for-js)
 
 <!-- toc -->
-  - [Install](#install)
-  - [Authentication](#authentication)
-  - [Supported Services](#supported-services)
+
+- [Install](#install)
+- [Authentication](#authentication)
+- [Supported Services](#supported-services)
 <!-- tocstop -->
 
 ## Docs
 
-⭐ [CloudGraph Readme](https://github.com/cloudgraphdev/cli)  
+⭐ [CloudGraph Readme](https://github.com/cloudgraphdev/cli)
 
 💻 [Full CloudGraph Documentation Including Azure Examples](https://docs.cloudgraph.dev)
 
@@ -32,27 +33,28 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service             | Relations                                                              |
-| ------------------- | ---------------------------------------------------------------------- |
-| authRoleAssignment   |                                                                        |
-| authRoleDefinition  |                                                                        |
-| disk                | resourceGroup, virtualMachine                                          |
-| dns                 | resourceGroup                                                          |
-| firewall            | publicIp, virtualNetwork                                               |
-| functionApp         | resourceGroup                                                          |
-| keyVault            | resourceGroup                                                          |
-| networkInterface    | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork |
-| policyAssignment    |                                                                        |
-| publicIp            | networkInterface, resourceGroup                                        |
-| resourceGroup       | **all services**                                                       |
-| securityAssessments |                                                                        |
-| securityGroup       | networkInterface, resourceGroup                                        |
-| securityPricings    |                                                                        |
-| securitySettings    |                                                                        |
-| storageAccount      | resourceGroup, storageContainer                                        |
-| storageContainer    | resourceGroup, storageAccount                                          |
-| virtualMachine      | disk, networkInterface, resourceGroup, virtualNetwork                  |
-| virtualNetwork      | networkInterface, resourceGroup virtualMachine                         |
+| Service                | Relations                                                              |
+| ---------------------- | ---------------------------------------------------------------------- |
+| authRoleAssignment     |                                                                        |
+| authRoleDefinition     |                                                                        |
+| disk                   | resourceGroup, virtualMachine                                          |
+| dns                    | resourceGroup                                                          |
+| firewall               | publicIp, virtualNetwork                                               |
+| functionApp            | resourceGroup                                                          |
+| keyVault               | resourceGroup                                                          |
+| networkInterface       | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork |
+| policyAssignment       |                                                                        |
+| publicIp               | networkInterface, resourceGroup                                        |
+| resourceGroup          | **all services**                                                       |
+| securityAssessments    |                                                                        |
+| securityGroup          | networkInterface, resourceGroup                                        |
+| securityPricings       |                                                                        |
+| securitySettings       |                                                                        |
+| storageAccount         | resourceGroup, storageContainer                                        |
+| storageContainer       | resourceGroup, storageAccount                                          |
+| virtualMachine         | disk, networkInterface, resourceGroup, virtualNetwork                  |
+| virtualMachineScaleSet | resourceGroup                                                          |
+| virtualNetwork         | networkInterface, resourceGroup virtualMachine                         |
 
 ## Development
 
