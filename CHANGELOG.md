@@ -1,3 +1,15 @@
+# [0.18.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.17.0...0.18.0) (2022-01-27)
+
+
+### Bug Fixes
+
+* Updated schema and docs ([ea6f353](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/ea6f3537b48442d3e695516e0327192ea022696d))
+
+
+### Features
+
+* Created VirtualMachineScaleSet service ([1c77b47](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1c77b47f3b9763052607651140fb7231b15d3b49))
+
 # [0.17.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.16.1...0.17.0) (2022-01-26)
 
 
