@@ -17,5 +17,6 @@ export default {
   storageAccount: 'storageAccount',
   storageContainer: 'storageContainer',
   virtualMachine: 'virtualMachine',
+  virtualMachineScaleSet: 'virtualMachineScaleSet',
   virtualNetwork: 'virtualNetwork',
 }

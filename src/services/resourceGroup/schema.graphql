@@ -16,5 +16,7 @@ type azureResourceGroup implements azureResource
   storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroups)
   storageContainers: [azureStorageContainer] @hasInverse(field: resourceGroups)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroups)
+  virtualMachineScaleSets: [azureVirtualMachineScaleSet]
+    @hasInverse(field: resourceGroups)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroups)
 }

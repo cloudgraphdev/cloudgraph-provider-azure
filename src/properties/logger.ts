@@ -6,9 +6,11 @@ export default {
     'Authenticating Via Ouath to get token for use with REST API...',
   /* Service logs */
   // Auth Role Assignments
-  foundAuthRoleAssignments: (num: number): string => `Found ${num} authorization role Assignments`,
+  foundAuthRoleAssignments: (num: number): string =>
+    `Found ${num} authorization role Assignments`,
   // Auth Role Definitions
-  foundAuthRoleDefinitions: (num: number): string => `Found ${num} authorization role definitions`,
+  foundAuthRoleDefinitions: (num: number): string =>
+    `Found ${num} authorization role definitions`,
   // Disk
   foundDisks: (num: number): string => `Found ${num} disks`,
   // DNS Zone
@@ -27,19 +29,23 @@ export default {
   foundNetworkInterfaces: (num: number): string =>
     `Found ${num} network interfaces`,
   // Policies
-  foundPolicyAssignments: (num: number): string => `Found ${num} policy assignments`,
+  foundPolicyAssignments: (num: number): string =>
+    `Found ${num} policy assignments`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Assesments
-  foundSecurityAssesments: (num: number): string => `Found ${num} security assesments`,
+  foundSecurityAssesments: (num: number): string =>
+    `Found ${num} security assesments`,
   // Security Groups
   foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
   // Security Pricings
-  foundSecurityPricings: (num: number): string => `Found ${num} security pricings`,
+  foundSecurityPricings: (num: number): string =>
+    `Found ${num} security pricings`,
   // Security Settings
-  foundSecuritySettings: (num: number): string => `Found ${num} security settings`,
+  foundSecuritySettings: (num: number): string =>
+    `Found ${num} security settings`,
   // Storage Account
   foundStorageAccounts: (num: number): string =>
     `Found ${num} storage accounts`,
@@ -49,6 +55,9 @@ export default {
   // Virtual Machines
   foundvirtualMachines: (num: number): string =>
     `Found ${num} virtual machines`,
+  // Virtual Machines Scale Sets
+  foundvirtualMachinesScaleSets: (num: number): string =>
+    `Found ${num} virtual machines scale sets`,
   // Virtual Networks
   foundvirtualNetworks: (num: number): string =>
     `Found ${num} virtual networks`,

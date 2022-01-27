@@ -19,6 +19,7 @@ import AzureStorageContainer from '../services/storageContainer'
 import AzureTag from '../services/tag'
 import AzureVirtualMachine from '../services/virtualMachine'
 import AzureVirtualNetwork from '../services/virtualNetwork'
+import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -42,6 +43,7 @@ export default {
   [services.securitySettings]: AzureSecuritySettings,
   [services.storageAccount]: AzureStorageAccount,
   [services.virtualMachine]: AzureVirtualMachine,
+  [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
   [services.virtualNetwork]: AzureVirtualNetwork,
   [services.storageContainer]: AzureStorageContainer,
   tag: AzureTag,
