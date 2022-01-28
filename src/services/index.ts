@@ -1,4 +1,9 @@
-import CloudGraph, { Service, Opts, ProviderData } from '@cloudgraph/sdk'
+import CloudGraph, {
+  Service,
+  Opts,
+  ProviderData,
+  sortResourcesDependencies,
+} from '@cloudgraph/sdk'
 import { ServiceClientCredentials } from '@azure/ms-rest-js'
 import {
   LinkedSubscription,
@@ -15,6 +20,7 @@ import regions from '../enums/regions'
 import resources from '../enums/resources'
 import serviceMap from '../enums/serviceMap'
 import services from '../enums/services'
+import relations from '../enums/relations'
 import {
   AzureCredentials,
   AzureConfig,
@@ -27,7 +33,6 @@ import {
   GLOBAL_REGION,
 } from '../config/constants'
 import { obfuscateSensitiveString } from '../utils/format'
-import { sortResourcesDependencies } from '../utils'
 import { createDiffSecs } from '../utils/dateutils'
 
 export const enums = {
@@ -369,7 +374,7 @@ export default class Provider extends CloudGraph.Client {
     // we need to pass the essential resources data
     // to be able to use rawData for children services
     const result: rawDataInterface[] = initialRawData
-    const resourceNames: string[] = sortResourcesDependencies([
+    const resourceNames: string[] = sortResourcesDependencies(relations, [
       ...new Set<string>(configuredResources.split(',')),
     ])
     for (const resource of resourceNames) {

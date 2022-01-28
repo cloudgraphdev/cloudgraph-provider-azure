@@ -1,6 +1,7 @@
 import cuid from 'cuid'
+import { toCamel } from '@cloudgraph/sdk'
+
 import { AzureSecurityAssesment } from '../../types/generated'
-import { toCamel } from '../../utils'
 import { RawAzureSecurityAssesment } from './data'
 
 export default ({
