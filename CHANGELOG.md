@@ -1,3 +1,10 @@
+## [0.18.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.18.0...0.18.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* added custom tokenCredential auth strategy ([d62be36](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/d62be36d336004460facd63a8071ac62e477dc64))
+
 # [0.18.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.17.0...0.18.0) (2022-01-27)
 
 
