@@ -1,5 +1,4 @@
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
-import { DefaultAzureCredential } from '@azure/identity'
 import { SecurityCenter, SettingUnion } from '@azure/arm-security'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -29,11 +28,10 @@ export default async ({
   [property: string]: RawAzureSecuritySetting[]
 }> => {
   try {
-    const { subscriptionId } = config
+    const { subscriptionId, tokenCredentials } = config
     const settingsData: ({ region?: string } & SettingUnion)[] = []
-    const tokenCreds = new DefaultAzureCredential()
     const clientGlobal = new SecurityCenter(
-      tokenCreds,
+      tokenCredentials,
       subscriptionId,
       'global'
     )
@@ -55,7 +53,7 @@ export default async ({
 
     await Promise.all(
       (locations || []).map(async (location: string) => {
-        const client = new SecurityCenter(tokenCreds, subscriptionId, location)
+        const client = new SecurityCenter(tokenCredentials, subscriptionId, location)
         // Security Settings
         const settingsIterableForRegion: PagedAsyncIterableIterator<SettingUnion> =
           client.settings.list()

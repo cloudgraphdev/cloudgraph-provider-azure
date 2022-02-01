@@ -1,4 +1,3 @@
-import { DefaultAzureCredential } from '@azure/identity'
 import {
   SecurityCenter,
   Pricing,
@@ -28,11 +27,10 @@ export default async ({
   [property: string]: RawAzureSecurityPricing[]
 }> => {
   try {
-    const { subscriptionId } = config
+    const { subscriptionId, tokenCredentials } = config
     const pricingData: Pricing & { region: string }[] = []
-    const tokenCreds = new DefaultAzureCredential()
     const clientGlobal = new SecurityCenter(
-      tokenCreds,
+      tokenCredentials,
       subscriptionId,
       'global'
     )
@@ -54,7 +52,7 @@ export default async ({
 
     await Promise.all(
       (locations || []).map(async (location: string) => {
-        const client = new SecurityCenter(tokenCreds, subscriptionId, location)
+        const client = new SecurityCenter(tokenCredentials, subscriptionId, location)
         // Pricing details
         await tryCatchWrapper(
           async () => {

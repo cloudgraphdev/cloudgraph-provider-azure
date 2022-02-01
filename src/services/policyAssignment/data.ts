@@ -1,5 +1,4 @@
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
-import { DefaultAzureCredential } from '@azure/identity'
 import { PolicyClient, PolicyAssignment } from '@azure/arm-policy'
 
 import CloudGraph from '@cloudgraph/sdk'
@@ -27,11 +26,8 @@ export default async ({
   [property: string]: RawAzurePolicyAssignment[]
 }> => {
   try {
-    const { subscriptionId, tenantId } = config
-    const credential = new DefaultAzureCredential({
-      tenantId,
-    })
-    const client = new PolicyClient(credential, subscriptionId)
+    const { subscriptionId, tokenCredentials } = config
+    const client = new PolicyClient(tokenCredentials, subscriptionId)
 
     const policyAssignmentsData: RawAzurePolicyAssignment[] = []
     const policyAssignmentsIterable: PagedAsyncIterableIterator<PolicyAssignment> =

@@ -1,4 +1,5 @@
 import CloudGraph, { Service, Opts, ProviderData } from '@cloudgraph/sdk'
+import { TokenCredential } from '@azure/core-http'
 import { ServiceClientCredentials } from '@azure/ms-rest-js'
 import {
   LinkedSubscription,
@@ -29,6 +30,7 @@ import {
 import { obfuscateSensitiveString } from '../utils/format'
 import { sortResourcesDependencies } from '../utils'
 import { createDiffSecs } from '../utils/dateutils'
+import { getTokenCredentialsUsingApplicationTokenCredentials } from '../utils/authUtils'
 
 export const enums = {
   services,
@@ -99,6 +101,7 @@ export default class Provider extends CloudGraph.Client {
   async getFullCredentialsAndSubscriptions(creds: AzureCredentials): Promise<{
     subscriptions: LinkedSubscription[]
     credentials: ServiceClientCredentials
+    tokenCredentials: TokenCredential
   }> {
     try {
       const { credentials, subscriptions = [] } =
@@ -123,6 +126,10 @@ export default class Provider extends CloudGraph.Client {
           ? [subscription]
           : subscriptions.map(s => s.subscriptionId),
         credentials,
+        tokenCredentials:
+          await getTokenCredentialsUsingApplicationTokenCredentials(
+            credentials
+          ),
       }
     } catch (e) {
       this.logger.error(e)
@@ -351,7 +358,11 @@ export default class Provider extends CloudGraph.Client {
     configuredRegions,
     initialRawData = [],
   }: {
-    config: { credentials: ServiceClientCredentials; subscriptionId: string }
+    config: {
+      tokenCredentials: TokenCredential
+      credentials: ServiceClientCredentials
+      subscriptionId: string
+    }
     opts
     configuredResources: string
     configuredRegions: string
@@ -415,10 +426,9 @@ export default class Provider extends CloudGraph.Client {
       configuredResources = Object.values(restOfServices).join(',')
     }
     const { subscriptionId } = account
-    const { credentials } = await this.getFullCredentialsAndSubscriptions(
-      account
-    )
-    const config = { credentials, subscriptionId }
+    const { tokenCredentials, credentials } =
+      await this.getFullCredentialsAndSubscriptions(account)
+    const config = { tokenCredentials, credentials, subscriptionId }
     try {
       // Get essential services first and push them
       result.push(
@@ -565,7 +575,7 @@ export default class Provider extends CloudGraph.Client {
                   if (!isEmpty(serviceConnections)) {
                     const entries: [string, any][] =
                       Object.entries(newConnections)
-                    for (const [key, value] of entries) {
+                    for (const [key] of entries) {
                       // If there are no service connections for this entity i.e. { [serviceId]: [] }
                       // use new connections for that key
                       if (serviceConnections[key]) {
