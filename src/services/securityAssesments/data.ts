@@ -1,5 +1,4 @@
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
-import { DefaultAzureCredential } from '@azure/identity'
 import {
   SecurityCenter,
   SecurityAssessmentResponse,
@@ -28,11 +27,10 @@ export default async ({
   [property: string]: RawAzureSecurityAssesment[]
 }> => {
   try {
-    const { subscriptionId } = config
+    const { subscriptionId, tokenCredentials } = config
     const assestmentData: SecurityAssessmentResponse & { region: string }[] = []
-    const tokenCreds = new DefaultAzureCredential()
     const clientGlobal = new SecurityCenter(
-      tokenCreds,
+      tokenCredentials,
       subscriptionId,
       'global'
     )
@@ -54,7 +52,7 @@ export default async ({
 
     await Promise.all(
       (locations || []).map(async (location: string) => {
-        const client = new SecurityCenter(tokenCreds, subscriptionId, location)
+        const client = new SecurityCenter(tokenCredentials, subscriptionId, location)
         const scope = `/subscriptions/${subscriptionId}`
         const assesmentsIterableForRegion: PagedAsyncIterableIterator<SecurityAssessmentResponse> =
           client.assessments.list(scope)

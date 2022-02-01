@@ -1,3 +1,6 @@
+import { AccessToken } from '@azure/core-http'
+import { TokenCredential } from '@azure/identity'
+import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth'
 import { ConfidentialClientApplication } from '@azure/msal-node'
 import { AxiosResponse } from 'axios'
 import { URLSearchParams } from 'url'
@@ -55,5 +58,20 @@ export const getAadTokenViaMsal = async ({
   return {
     result: (await getToken())?.access_token,
     getToken,
+  }
+}
+
+export const getTokenCredentialsUsingApplicationTokenCredentials = async (
+  credentials: ApplicationTokenCredentials
+): Promise<TokenCredential> => {
+  return {
+    getToken: async (): Promise<AccessToken | null> => {
+      const { accessToken: token, expiresOnTimestamp } =
+        await credentials.getToken()
+      return {
+        token,
+        expiresOnTimestamp,
+      }
+    },
   }
 }

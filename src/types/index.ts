@@ -1,3 +1,4 @@
+import { TokenCredential } from '@azure/core-http'
 import { AzureServiceClientOptions } from '@azure/ms-rest-azure-js'
 import { ServiceClientCredentials } from '@azure/ms-rest-js'
 import { LinkedSubscription } from '@azure/ms-rest-nodeauth'
@@ -50,6 +51,7 @@ export interface AzureServiceConfig {
   clientSecret?: string
   subscriptionId: string
   credentials: ServiceClientCredentials
+  tokenCredentials: TokenCredential
 }
 
 export interface AzureServiceInput {
