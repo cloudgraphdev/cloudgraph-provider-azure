@@ -3,6 +3,7 @@ import CloudGraph from '@cloudgraph/sdk'
 import { StorageManagementClient } from '@azure/arm-storage'
 import {
   StorageAccount,
+  StorageAccountKey,
   StorageAccountListResult,
   StorageAccountsListNextResponse,
   StorageAccountsListResponse,
@@ -20,6 +21,7 @@ export interface RawAzureStorageAccount
   extends Omit<StorageAccount, 'tags' | 'location'> {
   resourceGroup: string
   region: string
+  keys: StorageAccountKey[]
   Tags: TagMap
 }
 
@@ -41,38 +43,52 @@ export default async ({
     if (isEmpty(existingData)) {
       const { subscriptionId, credentials } = config
       const client = new StorageManagementClient(credentials, subscriptionId)
-  
-      const storageAccountData: StorageAccountListResult = await getAllResources({
-        listCall: async (): Promise<StorageAccountsListResponse> =>
-          client.storageAccounts.list(),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<StorageAccountsListNextResponse> =>
-          client.storageAccounts.listNext(nextLink),
-        debugScope: { service: serviceName, client, scope: 'storageAccounts' },
-      })
-  
+      const storageAccountData: StorageAccountListResult =
+        await getAllResources({
+          listCall: async (): Promise<StorageAccountsListResponse> =>
+            client.storageAccounts.list(),
+          listNextCall: async (
+            nextLink: string
+          ): Promise<StorageAccountsListNextResponse> =>
+            client.storageAccounts.listNext(nextLink),
+          debugScope: {
+            service: serviceName,
+            client,
+            scope: 'storageAccounts',
+          },
+        })
+
       const result = {}
       let numOfAccounts = 0
-      storageAccountData.map(({ id, tags, location, ...rest }) => {
+
+      for await (const { id, tags, location, ...rest } of storageAccountData) {
         const region = lowerCaseLocation(location)
+
         if (regions.includes(region)) {
           if (!result[region]) {
             result[region] = []
           }
           const resourceGroup = parseResourceId(id).resourceGroups
+          // Fetch Storage Account Keys
+          const storageAccountKeys = await client.storageAccounts.listKeys(
+            resourceGroup,
+            rest.name
+          )
+          const { keys = [] } = storageAccountKeys
           result[region].push({
             id,
             ...rest,
             resourceGroup,
             region,
+            keys,
             Tags: tags || {},
           })
           numOfAccounts += 1
         }
-      })
+      }
+
       logger.debug(lt.foundStorageAccounts(numOfAccounts))
-  
+
       return result
     }
     return existingData

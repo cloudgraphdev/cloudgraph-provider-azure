@@ -6,6 +6,7 @@ import {
   BlobContainersListResponse,
   ListContainerItem,
   ListContainerItems,
+  StorageAccountKey,
 } from '@azure/arm-storage/esm/models'
 import getStorageAccountData from '../storageAccount/data'
 import azureLoggerText from '../../properties/logger'
@@ -15,6 +16,8 @@ import { getAllResources } from '../../utils/apiUtils'
 
 export interface RawAzureStorageContainer extends ListContainerItem {
   storageAccountId: string
+  storageAccountName: string
+  keys: StorageAccountKey[]
   region: string
   resourceGroup: string
 }
@@ -45,7 +48,7 @@ export default async ({
     const storageContainerData: RawAzureStorageContainer[] = []
 
     for (const storageAccount of Object.values(storageAccounts).flat()) {
-      const { name: accountName, resourceGroup } = storageAccount
+      const { name: accountName, keys, resourceGroup } = storageAccount
 
       const blobContainers: ListContainerItems = await getAllResources({
         listCall: async (): Promise<BlobContainersListResponse> =>
@@ -66,6 +69,8 @@ export default async ({
           ...blobContainer,
           resourceGroup,
           storageAccountId: storageAccount.id,
+          storageAccountName: accountName,
+          keys,
           region: storageAccount.region,
         })
       }
