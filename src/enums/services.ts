@@ -20,6 +20,7 @@ export default {
   securityPricings: 'securityPricings',
   securitySettings: 'securitySettings',
   storageAccount: 'storageAccount',
+  storageBlob: 'storageBlob',
   storageContainer: 'storageContainer',
   virtualMachine: 'virtualMachine',
   virtualMachineScaleSet: 'virtualMachineScaleSet',

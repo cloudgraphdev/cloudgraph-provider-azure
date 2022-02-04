@@ -1029,6 +1029,76 @@ export type AzureStorageAccountVirtualNetworkRule = {
   state?: Maybe<Scalars['String']>;
 };
 
+export type AzureStorageBlob = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  deleted?: Maybe<Scalars['String']>;
+  snapshot?: Maybe<Scalars['String']>;
+  versionId?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureStorageBlobProperties>;
+  isCurrentVersion?: Maybe<Scalars['Boolean']>;
+  hasVersionsOnly?: Maybe<Scalars['Boolean']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  objectReplicationSourceProperties?: Maybe<Array<Maybe<AzureStorageBlobReplicationPolicy>>>;
+};
+
+export type AzureStorageBlobProperties = {
+  createdOn?: Maybe<Scalars['String']>;
+  lastModified?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  contentLength?: Maybe<Scalars['Int']>;
+  contentType?: Maybe<Scalars['String']>;
+  contentEncoding?: Maybe<Scalars['String']>;
+  contentLanguage?: Maybe<Scalars['String']>;
+  contentDisposition?: Maybe<Scalars['String']>;
+  cacheControl?: Maybe<Scalars['String']>;
+  blobSequenceNumber?: Maybe<Scalars['Int']>;
+  blobType?: Maybe<Scalars['String']>;
+  leaseStatus?: Maybe<Scalars['String']>;
+  leaseState?: Maybe<Scalars['String']>;
+  leaseDuration?: Maybe<Scalars['String']>;
+  copyId?: Maybe<Scalars['String']>;
+  copyStatus?: Maybe<Scalars['String']>;
+  copySource?: Maybe<Scalars['String']>;
+  copyProgress?: Maybe<Scalars['String']>;
+  copyCompletedOn?: Maybe<Scalars['String']>;
+  copyStatusDescription?: Maybe<Scalars['String']>;
+  serverEncrypted?: Maybe<Scalars['Boolean']>;
+  incrementalCopy?: Maybe<Scalars['Boolean']>;
+  destinationSnapshot?: Maybe<Scalars['String']>;
+  deletedOn?: Maybe<Scalars['String']>;
+  remainingRetentionDays?: Maybe<Scalars['Int']>;
+  accessTier?: Maybe<Scalars['String']>;
+  accessTierInferred?: Maybe<Scalars['Boolean']>;
+  archiveStatus?: Maybe<Scalars['String']>;
+  customerProvidedKeySha256?: Maybe<Scalars['String']>;
+  encryptionScope?: Maybe<Scalars['String']>;
+  accessTierChangedOn?: Maybe<Scalars['String']>;
+  tagCount?: Maybe<Scalars['Int']>;
+  expiresOn?: Maybe<Scalars['String']>;
+  isSealed?: Maybe<Scalars['Boolean']>;
+  rehydratePriority?: Maybe<Scalars['String']>;
+  lastAccessedOn?: Maybe<Scalars['String']>;
+  immutabilityPolicyExpiresOn?: Maybe<Scalars['String']>;
+  immutabilityPolicyMode?: Maybe<Scalars['String']>;
+  contentCRC64?: Maybe<Scalars['String']>;
+  legalHold?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureStorageBlobReplicationPolicy = {
+  id: Scalars['String'];
+  policyId?: Maybe<Scalars['String']>;
+  rules?: Maybe<Array<Maybe<AzureStorageBlobReplicationRule>>>;
+};
+
+export type AzureStorageBlobReplicationRule = {
+  ruleId: Scalars['String'];
+  replicationStatus?: Maybe<Scalars['String']>;
+};
+
 export type AzureStorageContainer = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
