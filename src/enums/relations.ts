@@ -6,5 +6,6 @@ import services from './services'
  */
 export default {
   [services.appServicePlan]: [services.appServiceWebApp],
-  [services.storageAccount]: [services.storageContainer, services.storageBlob],
+  [services.storageAccount]: [services.storageContainer],
+  [services.storageContainer]: [services.storageBlob],
 }

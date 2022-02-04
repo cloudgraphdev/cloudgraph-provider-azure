@@ -5,7 +5,9 @@ import {
   StorageSharedKeyCredential,
 } from '@azure/storage-blob'
 
-import getStorageContainerData from '../storageContainer/data'
+import getStorageContainerData, {
+  RawAzureStorageContainer,
+} from '../storageContainer/data'
 import azureLoggerText from '../../properties/logger'
 
 import { AzureServiceInput, TagMap } from '../../types'
@@ -31,7 +33,9 @@ export default async ({
   [property: string]: RawAzureStorageBlob[]
 }> => {
   try {
-    const storageContainers = await getStorageContainerData({
+    const storageContainers: {
+      [property: string]: RawAzureStorageContainer[]
+    } = await getStorageContainerData({
       regions,
       config,
       rawData,
@@ -39,7 +43,6 @@ export default async ({
     })
 
     const storageBlobData: RawAzureStorageBlob[] = []
-
     for (const storageContainer of Object.values(storageContainers).flat()) {
       const {
         storageAccountName: accountName,

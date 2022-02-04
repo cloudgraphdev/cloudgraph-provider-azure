@@ -56,7 +56,7 @@ export default ({
   }
 
   /**
-   * Find storage account related to this storage blob
+   * Find storage container related to this storage blob
    */
   const storageContainers = data.find(
     ({ name }) => name === services.storageContainer
