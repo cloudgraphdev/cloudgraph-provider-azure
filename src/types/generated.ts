@@ -829,6 +829,7 @@ export type AzureResourceGroup = AzureResource & {
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
@@ -911,7 +912,7 @@ export type AzureSshPublicKey = {
   keyData?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageAccount = AzureResource & {
+export type AzureStorageAccount = AzureStorageResource & {
   extendedLocationName?: Maybe<Scalars['String']>;
   extendedLocationType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
@@ -964,7 +965,7 @@ export type AzureStorageAccount = AzureResource & {
   minimumTlsVersion?: Maybe<Scalars['String']>;
   allowSharedKeyAccess?: Maybe<Scalars['String']>;
   enableNfsV3?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
   appServiceWebApp?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
@@ -1029,20 +1030,16 @@ export type AzureStorageAccountVirtualNetworkRule = {
   state?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageBlob = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
+export type AzureStorageBlob = AzureStorageResource & {
   deleted?: Maybe<Scalars['String']>;
   snapshot?: Maybe<Scalars['String']>;
   versionId?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureStorageBlobProperties>;
   isCurrentVersion?: Maybe<Scalars['Boolean']>;
   hasVersionsOnly?: Maybe<Scalars['Boolean']>;
-  subscriptionId?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   objectReplicationSourceProperties?: Maybe<Array<Maybe<AzureStorageBlobReplicationPolicy>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  storageContainer?: Maybe<Array<Maybe<AzureStorageContainer>>>;
 };
 
 export type AzureStorageBlobProperties = {
@@ -1099,14 +1096,7 @@ export type AzureStorageBlobReplicationRule = {
   replicationStatus?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageContainer = {
-  id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  kind?: Maybe<Scalars['String']>;
-  subscriptionId?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
+export type AzureStorageContainer = AzureStorageResource & {
   version?: Maybe<Scalars['String']>;
   deleted?: Maybe<Scalars['String']>;
   deletedTime?: Maybe<Scalars['String']>;
@@ -1123,8 +1113,9 @@ export type AzureStorageContainer = {
   legalHoldTags?: Maybe<Array<Maybe<AzureStorageContainerLegalHoldTag>>>;
   hasLegalHold?: Maybe<Scalars['String']>;
   hasImmutabilityPolicy?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
-  storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
 };
 
 export type AzureStorageContainerImmutabilityPolicyUpdateHistory = {
@@ -1144,6 +1135,16 @@ export type AzureStorageContainerLegalHoldTag = {
   objectIdentifier?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
   upn?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageResource = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  kind?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
 };
 
 export type AzureSubResource = {

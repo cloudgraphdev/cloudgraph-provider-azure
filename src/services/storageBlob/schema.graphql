@@ -67,23 +67,19 @@ type azureStorageBlobProperties
   legalHold: Boolean @search
 }
 
-type azureStorageBlob
+type azureStorageBlob implements azureStorageResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
-  id: String! @id @search(by: [hash])
-  name: String @search(by: [hash, regexp])
   deleted: String @search(by: [hash, regexp])
   snapshot: String @search(by: [hash, regexp])
   versionId: String @search(by: [hash, regexp])
   properties: azureStorageBlobProperties
   isCurrentVersion: Boolean @search
   hasVersionsOnly: Boolean @search
-  subscriptionId: String @search(by: [hash, regexp])
-  region: String @search(by: [hash, regexp])
-  resourceGroup: String @search(by: [hash, regexp])
-  tags: [azureRawTag]
   objectReplicationSourceProperties: [azureStorageBlobReplicationPolicy]
+  resourceGroup: [azureResourceGroup] @hasInverse(field: storageBlobs)
+  storageContainer: [azureStorageContainer] @hasInverse(field: storageBlobs)
 }

@@ -17,8 +17,9 @@ type azureResourceGroup implements azureResource
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: resourceGroups)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroups)
   securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: resourceGroups)
-  storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroups)
-  storageContainers: [azureStorageContainer] @hasInverse(field: resourceGroups)
+  storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroup)
+  storageBlobs: [azureStorageBlob] @hasInverse(field: resourceGroup)
+  storageContainers: [azureStorageContainer] @hasInverse(field: resourceGroup)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroups)
   virtualMachineScaleSets: [azureVirtualMachineScaleSet]
     @hasInverse(field: resourceGroups)

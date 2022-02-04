@@ -4,14 +4,14 @@ type azureStorageContainerImmutabilityPolicyUpdateHistory
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    id: String! @id @search(by: [hash])
-    update: String @search(by: [hash, regexp])
-    immutabilityPeriodSinceCreationInDays: Int @search
-    timestamp: String @search(by: [hash, regexp])
-    objectIdentifier: String @search(by: [hash, regexp])
-    tenantId: String @search(by: [hash, regexp])
-    upn: String @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  update: String @search(by: [hash, regexp])
+  immutabilityPeriodSinceCreationInDays: Int @search
+  timestamp: String @search(by: [hash, regexp])
+  objectIdentifier: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  upn: String @search(by: [hash, regexp])
+}
 
 type azureStorageContainerLegalHoldTag
   @generate(
@@ -19,43 +19,38 @@ type azureStorageContainerLegalHoldTag
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    id: String! @id @search(by: [hash])
-    tag: String @search(by: [hash, regexp])
-    timestamp: String @search(by: [hash, regexp])
-    objectIdentifier: String @search(by: [hash, regexp])
-    tenantId: String @search(by: [hash, regexp])
-    upn: String @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  tag: String @search(by: [hash, regexp])
+  timestamp: String @search(by: [hash, regexp])
+  objectIdentifier: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  upn: String @search(by: [hash, regexp])
+}
 
-type azureStorageContainer
+type azureStorageContainer implements azureStorageResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
-    id: String! @id @search(by: [hash])
-    name: String @search(by: [hash, regexp])
-    type: String @search(by: [hash, regexp])
-    kind: String @search(by: [hash, regexp])
-    subscriptionId: String @search(by: [hash, regexp])
-    region: String @search(by: [hash, regexp])
-    resourceGroup: String @search(by: [hash, regexp])
-    version: String @search(by: [hash, regexp])
-    deleted: String @search(by: [hash, regexp])
-    deletedTime: String @search(by: [hash, regexp])
-    remainingRetentionDays: Int @search
-    denyEncryptionScopeOverride: String @search(by: [hash, regexp])
-    publicAccess: String @search(by: [hash, regexp])
-    lastModifiedTime: String @search(by: [hash, regexp])
-    leaseStatus: String @search(by: [hash, regexp])
-    leaseDuration: String @search(by: [hash, regexp])
-    immutabilityPolicyPeriodSinceCreationInDays: Int @search
-    immutabilityPolicyState: String @search(by: [hash, regexp])
-    immutabilityPolicyAllowProtectedAppendWrites: String @search(by: [hash, regexp])
-    immutabilityPolicyUpdateHistory: [azureStorageContainerImmutabilityPolicyUpdateHistory]
-    legalHoldTags: [azureStorageContainerLegalHoldTag]
-    hasLegalHold: String @search(by: [hash, regexp])
-    hasImmutabilityPolicy: String @search(by: [hash, regexp])
-    resourceGroups: [azureResourceGroup] @hasInverse(field: storageContainers) # convert to singular resourceGroup
-    storageAccounts: [azureStorageAccount] @hasInverse(field: storageContainers) # convert to singular storageAccount
-  }
+  version: String @search(by: [hash, regexp])
+  deleted: String @search(by: [hash, regexp])
+  deletedTime: String @search(by: [hash, regexp])
+  remainingRetentionDays: Int @search
+  denyEncryptionScopeOverride: String @search(by: [hash, regexp])
+  publicAccess: String @search(by: [hash, regexp])
+  lastModifiedTime: String @search(by: [hash, regexp])
+  leaseStatus: String @search(by: [hash, regexp])
+  leaseDuration: String @search(by: [hash, regexp])
+  immutabilityPolicyPeriodSinceCreationInDays: Int @search
+  immutabilityPolicyState: String @search(by: [hash, regexp])
+  immutabilityPolicyAllowProtectedAppendWrites: String
+    @search(by: [hash, regexp])
+  immutabilityPolicyUpdateHistory: [azureStorageContainerImmutabilityPolicyUpdateHistory]
+  legalHoldTags: [azureStorageContainerLegalHoldTag]
+  hasLegalHold: String @search(by: [hash, regexp])
+  hasImmutabilityPolicy: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: storageContainers)
+  storageAccount: [azureStorageAccount] @hasInverse(field: storageContainers)
+  storageBlobs: [azureStorageBlob] @hasInverse(field: storageContainer)
+}

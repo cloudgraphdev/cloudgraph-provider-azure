@@ -41,7 +41,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

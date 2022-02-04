@@ -83,7 +83,6 @@ export default ({
     properties,
     isCurrentVersion,
     hasVersionsOnly,
-    resourceGroup,
     storageContainerId,
     Tags = {},
     objectReplicationSourceProperties,
@@ -98,7 +97,6 @@ export default ({
     versionId,
     isCurrentVersion,
     hasVersionsOnly,
-    resourceGroup,
     deleted: deleted ? t.yes : t.no,
     tags: formatTagsFromMap(Tags),
     objectReplicationSourceProperties: objectReplicationSourceProperties?.map(

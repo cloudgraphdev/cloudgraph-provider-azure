@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
+import isEmpty from 'lodash/isEmpty'
 import { ServiceConnection } from '@cloudgraph/sdk'
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
@@ -26,16 +26,12 @@ export default ({
    * related to the Storage Container
    */
 
-  const {
-    id,
-    storageAccountId,
-    resourceGroup: rgName
-  } = storageContainer
+  const { id, storageAccountId, resourceGroup: rgName } = storageContainer
 
   /**
    * Find resource group related to this storage container
    */
-   const resourceGroups: {
+  const resourceGroups: {
     name: string
     data: { [property: string]: RawAzureResourceGroup[] }
   } = data.find(({ name }) => name === services.resourceGroup)
@@ -53,7 +49,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }
@@ -62,11 +58,13 @@ export default ({
   /**
    * Find storage account related to this storage container
    */
-  const storageAccounts = data.find(({ name }) => name === services.storageAccount)
+  const storageAccounts = data.find(
+    ({ name }) => name === services.storageAccount
+  )
 
   if (storageAccounts?.data?.[region]) {
-    const storageAccount = storageAccounts.data[region].find(({id: accountId}) => 
-      accountId === storageAccountId
+    const storageAccount = storageAccounts.data[region].find(
+      ({ id: accountId }) => accountId === storageAccountId
     )
 
     if (storageAccount) {
@@ -74,7 +72,7 @@ export default ({
         id: storageAccountId,
         resourceType: services.storageAccount,
         relation: 'child',
-        field: 'storageAccounts',
+        field: 'storageAccount',
       })
     }
   }
@@ -82,5 +80,5 @@ export default ({
   const storageContainerResult = {
     [id]: connections,
   }
-  return storageContainerResult;
+  return storageContainerResult
 }

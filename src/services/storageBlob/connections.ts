@@ -26,7 +26,7 @@ export default ({
    * related to the Storage Blob
    */
 
-  const { id, storageAccountId, resourceGroup: rgName } = storageBlob
+  const { name: id, storageContainerId, resourceGroup: rgName } = storageBlob
 
   /**
    * Find resource group related to this storage blob
@@ -49,36 +49,35 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }
   }
 
   /**
-   * Find storage account related to this storage container
+   * Find storage account related to this storage blob
    */
-  const storageAccounts = data.find(
-    ({ name }) => name === services.storageAccount
+  const storageContainers = data.find(
+    ({ name }) => name === services.storageContainer
   )
 
-  if (storageAccounts?.data?.[region]) {
-    const storageAccount = storageAccounts.data[region].find(
-      ({ id: accountId }) => accountId === storageAccountId
+  if (storageContainers?.data?.[region]) {
+    const storageContainer = storageContainers.data[region].find(
+      ({ id: containerId }) => storageContainerId === containerId
     )
-
-    if (storageAccount) {
+    if (storageContainer) {
       connections.push({
-        id: storageAccountId,
-        resourceType: services.storageAccount,
+        id: storageContainerId,
+        resourceType: services.storageContainer,
         relation: 'child',
-        field: 'storageAccounts',
+        field: 'storageContainer',
       })
     }
   }
 
   const storageContainerResult = {
-    [id]: connections,
+    [`${storageContainerId}/${id}`]: connections,
   }
   return storageContainerResult
 }
