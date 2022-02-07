@@ -1,12 +1,8 @@
-import { WebSiteManagementClient } from '@azure/arm-appservice'
 import {
   FunctionEnvelope,
   Site,
-  WebAppsListByResourceGroupNextResponse,
-  WebAppsListByResourceGroupResponse,
-  WebAppsListFunctionsNextResponse,
-  WebAppsListFunctionsResponse,
-} from '@azure/arm-appservice/esm/models'
+  WebSiteManagementClient,
+} from '@azure/arm-appservice'
 import CloudGraph from '@cloudgraph/sdk'
 
 import getResourceGroupData from '../resourceGroup/data'
@@ -15,7 +11,6 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupNames, lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils'
-import { getAllResources } from '../../utils/apiUtils'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
@@ -50,8 +45,8 @@ export default async ({
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureFunctionApp[]
 }> => {
-  const { subscriptionId, credentials } = config
-  const client = new WebSiteManagementClient(credentials, subscriptionId)
+  const { subscriptionId, tokenCredentials } = config
+  const client = new WebSiteManagementClient(tokenCredentials, subscriptionId)
   try {
     const resourceGroups = await getResourceGroupData({
       regions,
@@ -61,77 +56,61 @@ export default async ({
     })
     const resourceGroupsNames: string[] = getResourceGroupNames(resourceGroups)
 
-    let functionApps: Site[] = []
+    const functionApps: Site[] = []
     await tryCatchWrapper(
       async () => {
-        functionApps =
-          (
-            await Promise.all(
-              (resourceGroupsNames || []).map(async (rgName: string) =>
-                getAllResources({
-                  resourceGroupName: rgName,
-                  listCall: (
-                    resourceGroupName: string
-                  ): Promise<WebAppsListByResourceGroupResponse> =>
-                    client.webApps.listByResourceGroup(resourceGroupName),
-                  listNextCall: (
-                    nextLink: string
-                  ): Promise<WebAppsListByResourceGroupNextResponse> =>
-                    client.webApps.listByResourceGroupNext(nextLink),
-                  debugScope: {
-                    service: serviceName,
-                    client,
-                    scope: 'webApps',
-                  },
+        await Promise.all(
+          (resourceGroupsNames || []).map(async (rgName: string) => {
+            const functionAppsIterable =
+              client.webApps.listByResourceGroup(rgName)
+            for await (const functionApp of functionAppsIterable) {
+              if (
+                functionApp &&
+                functionApp.kind.includes(apiSelectors.functionApp)
+              ) {
+                const resourceGroup = getResourceGroupFromEntity(functionApp)
+                functionApps.push({
+                  ...functionApp,
+                  resourceGroup,
                 })
-              )
-            )
-          )
-            .flat()
-            .filter(({ kind }) => kind.includes(apiSelectors.functionApp)) || []
+              }
+            }
+          })
+        )
         logger.debug(lt.foundFunctionApps(functionApps.length))
       },
       {
         service: serviceName,
         client,
-        scope: 'functionApps',
-        operation: 'getAllResources',
+        scope: 'webApps',
+        operation: 'listByResourceGroup',
       }
     )
 
-    let azureFunctions: RawAzureFunctionEnvelope[] = []
+    const azureFunctions: RawAzureFunctionEnvelope[] = []
     await tryCatchWrapper(
       async () => {
-        azureFunctions =
-          (
-            await Promise.all(
-              (functionApps || []).map(
-                async ({
-                  name: functionAppName,
-                  resourceGroup: functionAppResourceGroupName,
-                }) =>
-                  getAllResources({
-                    resourceGroupName: functionAppResourceGroupName,
-                    uniqueIdentifier: functionAppName,
-                    propertyName: 'functionAppName',
-                    listCall: (
-                      resourceGroupName: string,
-                      name: string
-                    ): Promise<WebAppsListFunctionsResponse> =>
-                      client.webApps.listFunctions(resourceGroupName, name),
-                    listNextCall: (
-                      nextLink: string
-                    ): Promise<WebAppsListFunctionsNextResponse> =>
-                      client.webApps.listFunctionsNext(nextLink),
-                    debugScope: {
-                      service: serviceName,
-                      client,
-                      scope: 'webApps',
-                    },
-                  })
+        await Promise.all(
+          (functionApps || []).map(
+            async ({
+              name: functionAppName,
+              resourceGroup: functionAppResourceGroupName,
+            }) => {
+              const functionsIterable = client.webApps.listFunctions(
+                functionAppResourceGroupName,
+                functionAppName
               )
-            )
-          ).flat() || []
+              for await (const functionObj of functionsIterable) {
+                if (functionObj) {
+                  azureFunctions.push({
+                    ...functionObj,
+                    functionAppName,
+                  })
+                }
+              }
+            }
+          )
+        )
         logger.debug(lt.foundFunctions(azureFunctions.length))
       },
       {

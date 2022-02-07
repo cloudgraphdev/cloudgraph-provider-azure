@@ -11,6 +11,224 @@ export type Scalars = {
   Float: number;
 };
 
+export type AzureAppServicePlan = AzureResource & {
+  skuDescription?: Maybe<AzureAppServicePlanSkuDescription>;
+  workerTierName?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  subscription?: Maybe<Scalars['String']>;
+  maximumNumberOfWorkers?: Maybe<Scalars['Int']>;
+  geoRegion?: Maybe<Scalars['String']>;
+  perSiteScaling?: Maybe<Scalars['Boolean']>;
+  elasticScaleEnabled?: Maybe<Scalars['Boolean']>;
+  maximumElasticWorkerCount?: Maybe<Scalars['Int']>;
+  numberOfSites?: Maybe<Scalars['Int']>;
+  isSpot?: Maybe<Scalars['Boolean']>;
+  spotExpirationTime?: Maybe<Scalars['String']>;
+  freeOfferExpirationTime?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  reserved?: Maybe<Scalars['Boolean']>;
+  isXenon?: Maybe<Scalars['Boolean']>;
+  hyperV?: Maybe<Scalars['Boolean']>;
+  targetWorkerCount?: Maybe<Scalars['Int']>;
+  targetWorkerSizeId?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  zoneRedundant?: Maybe<Scalars['Boolean']>;
+  appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureAppServicePlanSkuCapability = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+  reason?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServicePlanSkuCapacity = {
+  minimum?: Maybe<Scalars['Int']>;
+  maximum?: Maybe<Scalars['Int']>;
+  elasticMaximum?: Maybe<Scalars['Int']>;
+  default?: Maybe<Scalars['Int']>;
+  scaleType?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServicePlanSkuDescription = {
+  name?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  capacity?: Maybe<Scalars['Int']>;
+  skuCapacity?: Maybe<AzureAppServicePlanSkuCapacity>;
+  locations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  capabilities?: Maybe<Array<Maybe<AzureAppServicePlanSkuCapability>>>;
+};
+
+export type AzureAppServiceWebApp = AzureResource & {
+  state?: Maybe<Scalars['String']>;
+  hostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  repositorySiteName?: Maybe<Scalars['String']>;
+  usageState?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  enabledHostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  availabilityState?: Maybe<Scalars['String']>;
+  hostNameSslStates?: Maybe<Array<Maybe<AzureAppServiceWebAppHostNameSslState>>>;
+  serverFarmId?: Maybe<Scalars['String']>;
+  reserved?: Maybe<Scalars['Boolean']>;
+  isXenon?: Maybe<Scalars['Boolean']>;
+  hyperV?: Maybe<Scalars['Boolean']>;
+  lastModifiedTimeUtc?: Maybe<Scalars['String']>;
+  siteConfig?: Maybe<AzureAppServiceWebAppSiteConfig>;
+  trafficManagerHostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  scmSiteAlsoStopped?: Maybe<Scalars['Boolean']>;
+  targetSwapSlot?: Maybe<Scalars['String']>;
+  hostingEnvironmentProfile?: Maybe<AzureOptionalResource>;
+  clientAffinityEnabled?: Maybe<Scalars['Boolean']>;
+  clientCertEnabled?: Maybe<Scalars['Boolean']>;
+  clientCertMode?: Maybe<Scalars['String']>;
+  clientCertExclusionPaths?: Maybe<Scalars['String']>;
+  hostNamesDisabled?: Maybe<Scalars['Boolean']>;
+  customDomainVerificationId?: Maybe<Scalars['String']>;
+  outboundIpAddresses?: Maybe<Scalars['String']>;
+  possibleOutboundIpAddresses?: Maybe<Scalars['String']>;
+  containerSize?: Maybe<Scalars['Int']>;
+  dailyMemoryTimeQuota?: Maybe<Scalars['Int']>;
+  suspendedTill?: Maybe<Scalars['String']>;
+  maxNumberOfWorkers?: Maybe<Scalars['Int']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  isDefaultContainer?: Maybe<Scalars['Boolean']>;
+  defaultHostName?: Maybe<Scalars['String']>;
+  httpsOnly?: Maybe<Scalars['Boolean']>;
+  redundancyMode?: Maybe<Scalars['String']>;
+  inProgressOperationId?: Maybe<Scalars['String']>;
+  storageAccountRequired?: Maybe<Scalars['Boolean']>;
+  keyVaultReferenceIdentity?: Maybe<Scalars['String']>;
+  virtualNetworkSubnetId?: Maybe<Scalars['String']>;
+  appServicePlan?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+};
+
+export type AzureAppServiceWebAppHostNameSslState = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  sslState?: Maybe<Scalars['String']>;
+  ipBasedSslResult?: Maybe<Scalars['String']>;
+  ipBasedSslState?: Maybe<Scalars['String']>;
+  virtualIP?: Maybe<Scalars['String']>;
+  thumbprint?: Maybe<Scalars['String']>;
+  toUpdate?: Maybe<Scalars['Boolean']>;
+  toUpdateIpBasedSsl?: Maybe<Scalars['Boolean']>;
+  hostType?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfig = {
+  numberOfWorkers?: Maybe<Scalars['Int']>;
+  defaultDocuments?: Maybe<Array<Maybe<Scalars['String']>>>;
+  netFrameworkVersion?: Maybe<Scalars['String']>;
+  phpVersion?: Maybe<Scalars['String']>;
+  pythonVersion?: Maybe<Scalars['String']>;
+  nodeVersion?: Maybe<Scalars['String']>;
+  powerShellVersion?: Maybe<Scalars['String']>;
+  linuxFxVersion?: Maybe<Scalars['String']>;
+  windowsFxVersion?: Maybe<Scalars['String']>;
+  requestTracingEnabled?: Maybe<Scalars['Boolean']>;
+  requestTracingExpirationTime?: Maybe<Scalars['String']>;
+  remoteDebuggingEnabled?: Maybe<Scalars['Boolean']>;
+  remoteDebuggingVersion?: Maybe<Scalars['String']>;
+  httpLoggingEnabled?: Maybe<Scalars['Boolean']>;
+  acrUseManagedIdentityCreds?: Maybe<Scalars['Boolean']>;
+  acrUserManagedIdentityID?: Maybe<Scalars['String']>;
+  logsDirectorySizeLimit?: Maybe<Scalars['Int']>;
+  detailedErrorLoggingEnabled?: Maybe<Scalars['Boolean']>;
+  publishingUsername?: Maybe<Scalars['String']>;
+  appSettings?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigAppSettings>>>;
+  connectionStrings?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigDatabaseConnectionInfo>>>;
+  documentRoot?: Maybe<Scalars['String']>;
+  scmType?: Maybe<Scalars['String']>;
+  use32BitWorkerProcess?: Maybe<Scalars['Boolean']>;
+  webSocketsEnabled?: Maybe<Scalars['Boolean']>;
+  alwaysOn?: Maybe<Scalars['Boolean']>;
+  javaVersion?: Maybe<Scalars['String']>;
+  javaContainer?: Maybe<Scalars['String']>;
+  javaContainerVersion?: Maybe<Scalars['String']>;
+  appCommandLine?: Maybe<Scalars['String']>;
+  managedPipelineMode?: Maybe<Scalars['String']>;
+  virtualApplications?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigVirtualApplication>>>;
+  loadBalancing?: Maybe<Scalars['String']>;
+  limits?: Maybe<AzureAppServiceWebAppSiteConfigLimits>;
+  autoHealEnabled?: Maybe<Scalars['Boolean']>;
+  tracingOptions?: Maybe<Scalars['String']>;
+  vnetName?: Maybe<Scalars['String']>;
+  vnetRouteAllEnabled?: Maybe<Scalars['Boolean']>;
+  vnetPrivatePortsCount?: Maybe<Scalars['Int']>;
+  cors?: Maybe<AzureAppServiceWebAppSiteConfigCorsSettings>;
+  isPushEnabled?: Maybe<Scalars['Boolean']>;
+  apiDefinitionInfoUrl?: Maybe<Scalars['String']>;
+  apiManagementConfigId?: Maybe<Scalars['String']>;
+  autoSwapSlotName?: Maybe<Scalars['String']>;
+  localMySqlEnabled?: Maybe<Scalars['Boolean']>;
+  managedServiceIdentityId?: Maybe<Scalars['Int']>;
+  xManagedServiceIdentityId?: Maybe<Scalars['Int']>;
+  keyVaultReferenceIdentity?: Maybe<Scalars['String']>;
+  scmIpSecurityRestrictionsUseMain?: Maybe<Scalars['Boolean']>;
+  http20Enabled?: Maybe<Scalars['Boolean']>;
+  http20ProxyFlag?: Maybe<Scalars['String']>;
+  minTlsVersion?: Maybe<Scalars['String']>;
+  scmMinTlsVersion?: Maybe<Scalars['String']>;
+  ftpsState?: Maybe<Scalars['String']>;
+  preWarmedInstanceCount?: Maybe<Scalars['Int']>;
+  functionAppScaleLimit?: Maybe<Scalars['Int']>;
+  healthCheckPath?: Maybe<Scalars['String']>;
+  functionsRuntimeScaleMonitoringEnabled?: Maybe<Scalars['Boolean']>;
+  websiteTimeZone?: Maybe<Scalars['String']>;
+  minimumElasticInstanceCount?: Maybe<Scalars['Int']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  sitePort?: Maybe<Scalars['String']>;
+  azureMonitorLogCategories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  fileChangeAuditEnabled?: Maybe<Scalars['Boolean']>;
+  antivirusScanEnabled?: Maybe<Scalars['Boolean']>;
+  winAuthAdminState?: Maybe<Scalars['String']>;
+  winAuthTenantState?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigAppSettings = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigCorsSettings = {
+  allowedOrigins?: Maybe<Array<Maybe<Scalars['String']>>>;
+  supportCredentials?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigDatabaseConnectionInfo = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  connectionString?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigLimits = {
+  maxPercentageCpu?: Maybe<Scalars['Int']>;
+  maxMemoryInMb?: Maybe<Scalars['Int']>;
+  maxDiskSizeInMb?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigVirtualApplication = {
+  id: Scalars['String'];
+  virtualPath?: Maybe<Scalars['String']>;
+  physicalPath?: Maybe<Scalars['String']>;
+  preloadEnabled?: Maybe<Scalars['Boolean']>;
+  virtualDirectories?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigVirtualDirectory>>>;
+};
+
+export type AzureAppServiceWebAppSiteConfigVirtualDirectory = {
+  id?: Maybe<Scalars['String']>;
+  virtualPath?: Maybe<Scalars['String']>;
+  physicalPath?: Maybe<Scalars['String']>;
+};
+
 export type AzureAuthRoleAssignment = AzureBaseResource & {
   region?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
@@ -451,6 +669,12 @@ export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureOptionalResource = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzurePolicyAssignment = AzureBaseResource & {
   subscriptionId?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
@@ -538,6 +762,8 @@ export type AzureResource = {
 
 export type AzureResourceGroup = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
+  appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
+  appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
@@ -684,6 +910,7 @@ export type AzureStorageAccount = AzureResource & {
   enableNfsV3?: Maybe<Scalars['String']>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+  appServiceWebApp?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
 };
 
 export type AzureStorageAccountEncryptionService = {
@@ -801,6 +1028,8 @@ export type AzureTag = {
   key: Scalars['String'];
   value: Scalars['String'];
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
+  appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;

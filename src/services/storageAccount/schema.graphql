@@ -171,4 +171,5 @@ type azureStorageAccount implements azureResource
   enableNfsV3: String @search(by: [hash, regexp])
   resourceGroups: [azureResourceGroup] @hasInverse(field: storageAccounts) # convert to singular resourceGroup
   storageContainers: [azureStorageContainer] @hasInverse(field: storageAccounts)
+  appServiceWebApp: [azureAppServiceWebApp] @hasInverse(field: storageAccounts)
 }

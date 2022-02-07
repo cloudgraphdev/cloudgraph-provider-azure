@@ -1,4 +1,6 @@
 export default {
+  appServicePlan: 'appServicePlan',
+  appServiceWebApp: 'appServiceWebApp',
   authRoleAssignment: 'authRoleAssignment',
   authRoleDefinition: 'authRoleDefinition',
   disk: 'disk',

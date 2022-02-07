@@ -1,0 +1,56 @@
+type azureAppServicePlanSkuCapability {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+  reason: String @search(by: [hash, regexp])
+}
+
+type azureAppServicePlanSkuCapacity {
+  minimum: Int @search
+  maximum: Int @search
+  elasticMaximum: Int @search
+  default: Int @search
+  scaleType: String @search(by: [hash, regexp])
+}
+
+type azureAppServicePlanSkuDescription {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  capacity: Int @search
+  skuCapacity: azureAppServicePlanSkuCapacity
+  locations: [String] @search(by: [hash, regexp])
+  capabilities: [azureAppServicePlanSkuCapability]
+}
+
+type azureAppServicePlan implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  skuDescription: azureAppServicePlanSkuDescription
+  workerTierName: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+  subscription: String @search(by: [hash, regexp])
+  maximumNumberOfWorkers: Int @search
+  geoRegion: String @search(by: [hash, regexp])
+  perSiteScaling: Boolean @search
+  elasticScaleEnabled: Boolean @search
+  maximumElasticWorkerCount: Int @search
+  numberOfSites: Int @search
+  isSpot: Boolean @search
+  spotExpirationTime: String @search(by: [hash, regexp])
+  freeOfferExpirationTime: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
+  reserved: Boolean @search
+  isXenon: Boolean @search
+  hyperV: Boolean @search
+  targetWorkerCount: Int @search
+  targetWorkerSizeId: Int @search
+  provisioningState: String @search(by: [hash, regexp])
+  zoneRedundant: Boolean @search
+  appServiceWebApps: [azureAppServiceWebApp] @hasInverse(field: appServicePlan)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: appServicePlans) # convert to singular resourceGroup
+}

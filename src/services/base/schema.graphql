@@ -18,6 +18,17 @@ interface azureBaseResource
   type: String @search(by: [hash, regexp])
 }
 
+interface azureOptionalResource
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
 interface azureResource
   @generate(
     query: { get: false, query: false, aggregate: false }

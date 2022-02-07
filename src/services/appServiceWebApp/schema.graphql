@@ -1,0 +1,170 @@
+type azureAppServiceWebAppHostNameSslState {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  sslState: String @search(by: [hash, regexp])
+  ipBasedSslResult: String @search(by: [hash, regexp])
+  ipBasedSslState: String @search(by: [hash, regexp])
+  virtualIP: String @search(by: [hash, regexp])
+  thumbprint: String @search(by: [hash, regexp])
+  toUpdate: Boolean @search
+  toUpdateIpBasedSsl: Boolean @search
+  hostType: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigAppSettings {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigDatabaseConnectionInfo {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  connectionString: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigVirtualDirectory {
+  id: String @search(by: [hash, regexp])
+  virtualPath: String @search(by: [hash, regexp])
+  physicalPath: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigVirtualApplication {
+  id: String! @id @search(by: [hash, regexp])
+  virtualPath: String @search(by: [hash, regexp])
+  physicalPath: String @search(by: [hash, regexp])
+  preloadEnabled: Boolean @search
+  virtualDirectories: [azureAppServiceWebAppSiteConfigVirtualDirectory]
+}
+
+type azureAppServiceWebAppSiteConfigLimits {
+  maxPercentageCpu: Int @search
+  maxMemoryInMb: Int @search
+  maxDiskSizeInMb: Int @search
+}
+
+type azureAppServiceWebAppSiteConfigCorsSettings {
+  allowedOrigins: [String] @search(by: [hash, regexp])
+  supportCredentials: Boolean @search
+}
+
+type azureAppServiceWebAppSiteConfig {
+  numberOfWorkers: Int @search
+  defaultDocuments: [String] @search(by: [hash, regexp])
+  netFrameworkVersion: String @search(by: [hash, regexp])
+  phpVersion: String @search(by: [hash, regexp])
+  pythonVersion: String @search(by: [hash, regexp])
+  nodeVersion: String @search(by: [hash, regexp])
+  powerShellVersion: String @search(by: [hash, regexp])
+  linuxFxVersion: String @search(by: [hash, regexp])
+  windowsFxVersion: String @search(by: [hash, regexp])
+  requestTracingEnabled: Boolean @search
+  requestTracingExpirationTime: String @search(by: [hash, regexp])
+  remoteDebuggingEnabled: Boolean @search
+  remoteDebuggingVersion: String @search(by: [hash, regexp])
+  httpLoggingEnabled: Boolean @search
+  acrUseManagedIdentityCreds: Boolean @search
+  acrUserManagedIdentityID: String @search(by: [hash, regexp])
+  logsDirectorySizeLimit: Int @search
+  detailedErrorLoggingEnabled: Boolean @search
+  publishingUsername: String @search(by: [hash, regexp])
+  appSettings: [azureAppServiceWebAppSiteConfigAppSettings]
+  connectionStrings: [azureAppServiceWebAppSiteConfigDatabaseConnectionInfo]
+  documentRoot: String @search(by: [hash, regexp])
+  scmType: String @search(by: [hash, regexp])
+  use32BitWorkerProcess: Boolean @search
+  webSocketsEnabled: Boolean @search
+  alwaysOn: Boolean @search
+  javaVersion: String @search(by: [hash, regexp])
+  javaContainer: String @search(by: [hash, regexp])
+  javaContainerVersion: String @search(by: [hash, regexp])
+  appCommandLine: String @search(by: [hash, regexp])
+  managedPipelineMode: String @search(by: [hash, regexp])
+  virtualApplications: [azureAppServiceWebAppSiteConfigVirtualApplication]
+  loadBalancing: String @search(by: [hash, regexp])
+  limits: azureAppServiceWebAppSiteConfigLimits
+  autoHealEnabled: Boolean @search
+  tracingOptions: String @search(by: [hash, regexp])
+  vnetName: String @search(by: [hash, regexp])
+  vnetRouteAllEnabled: Boolean @search
+  vnetPrivatePortsCount: Int @search
+  cors: azureAppServiceWebAppSiteConfigCorsSettings
+  isPushEnabled: Boolean @search
+  apiDefinitionInfoUrl: String @search(by: [hash, regexp])
+  apiManagementConfigId: String @search(by: [hash, regexp])
+  autoSwapSlotName: String @search(by: [hash, regexp])
+  localMySqlEnabled: Boolean @search
+  managedServiceIdentityId: Int @search
+  xManagedServiceIdentityId: Int @search
+  keyVaultReferenceIdentity: String @search(by: [hash, regexp])
+  scmIpSecurityRestrictionsUseMain: Boolean @search
+  http20Enabled: Boolean @search
+  http20ProxyFlag: String @search(by: [hash, regexp])
+  minTlsVersion: String @search(by: [hash, regexp])
+  scmMinTlsVersion: String @search(by: [hash, regexp])
+  ftpsState: String @search(by: [hash, regexp])
+  preWarmedInstanceCount: Int @search
+  functionAppScaleLimit: Int @search
+  healthCheckPath: String @search(by: [hash, regexp])
+  functionsRuntimeScaleMonitoringEnabled: Boolean @search
+  websiteTimeZone: String @search(by: [hash, regexp])
+  minimumElasticInstanceCount: Int @search
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  sitePort: String @search(by: [hash, regexp])
+  azureMonitorLogCategories: [String] @search(by: [hash, regexp])
+  fileChangeAuditEnabled: Boolean @search
+  antivirusScanEnabled: Boolean @search
+  winAuthAdminState: String @search(by: [hash, regexp])
+  winAuthTenantState: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebApp implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  state: String @search(by: [hash, regexp])
+  hostNames: [String] @search(by: [hash, regexp])
+  repositorySiteName: String @search(by: [hash, regexp])
+  usageState: String @search(by: [hash, regexp])
+  enabled: Boolean @search
+  enabledHostNames: [String] @search(by: [hash, regexp])
+  availabilityState: String @search(by: [hash, regexp])
+  hostNameSslStates: [azureAppServiceWebAppHostNameSslState]
+  serverFarmId: String @search(by: [hash, regexp])
+  reserved: Boolean @search
+  isXenon: Boolean @search
+  hyperV: Boolean @search
+  lastModifiedTimeUtc: String @search(by: [hash, regexp])
+  siteConfig: azureAppServiceWebAppSiteConfig
+  trafficManagerHostNames: [String] @search(by: [hash, regexp])
+  scmSiteAlsoStopped: Boolean @search
+  targetSwapSlot: String @search(by: [hash, regexp])
+  hostingEnvironmentProfile: azureOptionalResource
+  clientAffinityEnabled: Boolean @search
+  clientCertEnabled: Boolean @search
+  clientCertMode: String @search(by: [hash, regexp])
+  clientCertExclusionPaths: String @search(by: [hash, regexp])
+  hostNamesDisabled: Boolean @search
+  customDomainVerificationId: String @search(by: [hash, regexp])
+  outboundIpAddresses: String @search(by: [hash, regexp])
+  possibleOutboundIpAddresses: String @search(by: [hash, regexp])
+  containerSize: Int @search
+  dailyMemoryTimeQuota: Int @search
+  suspendedTill: String @search(by: [hash, regexp])
+  maxNumberOfWorkers: Int @search
+  resourceGroup: String @search(by: [hash, regexp])
+  isDefaultContainer: Boolean @search
+  defaultHostName: String @search(by: [hash, regexp])
+  httpsOnly: Boolean @search
+  redundancyMode: String @search(by: [hash, regexp])
+  inProgressOperationId: String @search(by: [hash, regexp])
+  storageAccountRequired: Boolean @search
+  keyVaultReferenceIdentity: String @search(by: [hash, regexp])
+  virtualNetworkSubnetId: String @search(by: [hash, regexp])
+  appServicePlan: [azureAppServicePlan] @hasInverse(field: appServiceWebApps)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: appServiceWebApps) # convert to singular resourceGroup
+  storageAccounts: [azureStorageAccount] @hasInverse(field: appServiceWebApp)
+}

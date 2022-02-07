@@ -5,6 +5,8 @@ type azureResourceGroup implements azureResource
     mutation: { add: true, delete: false }
   ) {
   managedBy: String @search(by: [hash, regexp])
+  appServicePlans: [azureAppServicePlan] @hasInverse(field: resourceGroups)
+  appServiceWebApps: [azureAppServiceWebApp] @hasInverse(field: resourceGroups)
   disks: [azureDisk] @hasInverse(field: resourceGroups)
   dns: [azureDnsZone] @hasInverse(field: resourceGroups)
   firewalls: [azureFirewall] @hasInverse(field: resourceGroups)
