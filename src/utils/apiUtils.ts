@@ -4,7 +4,14 @@ import axios, { AxiosPromise } from 'axios'
 
 import apiSelectors from '../enums/apiSelectors'
 import azureLoggerText from '../properties/logger'
-import { AzureDebugScopeInitialData, RequestConfig } from '../types'
+import {
+  AzureDebugScopeInitialData,
+  AzureRestApiClientRequestParams,
+  AzureRestApiNewClientParams,
+  AzureServiceConfig,
+  RequestConfig,
+} from '../types'
+import { getAadTokenViaAxios } from './authUtils'
 import { getResourceGroupFromEntity } from './idParserUtils'
 import { tryCatchWrapper } from './index'
 
@@ -38,7 +45,7 @@ export const baseUrl = 'https://management.azure.com'
 export const createUriForMsRestApiRequest = ({
   id,
   filter = '',
-  version = '2020-06-01',
+  version = '2020-10-01',
 }: {
   id: string
   filter?: string
@@ -78,11 +85,11 @@ export const getDataFromMsRestApi = async ({
       )
 
       if (nextLink) {
-        logger.info(lt.fetchingMoreRestApiData)
+        logger.debug(lt.fetchingMoreRestApiData)
         await getAllData(nextLink)
       }
 
-      logger.info(lt.fetchedDataFromRestApi(path))
+      logger.debug(lt.fetchedDataFromRestApi(path))
       return data
     } catch (e) {
       logger.error(e)
@@ -215,4 +222,49 @@ export const getAllResources = async ({
   )
 
   return fullResources
+}
+export class RestApiClient {
+  $host: string
+
+  subscriptionId: string
+
+  scope: string
+
+  kind: string
+
+  config: AzureServiceConfig
+
+  constructor({ config, scope, kind, options }: AzureRestApiNewClientParams) {
+    if (config === undefined) {
+      throw new Error("'config' cannot be null")
+    }
+    if (!options) {
+      options = {}
+    }
+    this.subscriptionId = config.subscriptionId
+    this.kind = kind
+    this.scope = scope
+    this.$host = options.$host || baseUrl
+    this.config = config
+  }
+
+  async getRequestedData({
+    type,
+    resourceGroupName,
+    filters,
+  }: AzureRestApiClientRequestParams): Promise<any> {
+    const authToken = await getAadTokenViaAxios(this.config)
+    try {
+      const path = `/subscriptions/${this.config.subscriptionId}/resourceGroups/${resourceGroupName}/${this.scope}/${this.kind}/${type}`
+      return getDataFromMsRestApi({
+        authToken,
+        initialUrl: createUriForMsRestApiRequest({
+          id: path,
+          filter: `$filter=${(filters || []).join(' or ')}&`,
+        }),
+      })
+    } catch (error) {
+      logger.debug(error)
+    }
+  }
 }

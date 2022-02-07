@@ -428,7 +428,7 @@ export default class Provider extends CloudGraph.Client {
     const { subscriptionId } = account
     const { tokenCredentials, credentials } =
       await this.getFullCredentialsAndSubscriptions(account)
-    const config = { tokenCredentials, credentials, subscriptionId }
+    const config = { ...account, tokenCredentials, credentials, subscriptionId }
     try {
       // Get essential services first and push them
       result.push(

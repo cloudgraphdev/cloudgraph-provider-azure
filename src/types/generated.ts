@@ -343,6 +343,45 @@ export type AzureKeyVaultAccessPolicy = {
   permissionStorage?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type AzureMonitorInsightsActivityLogAlertRule = AzureBaseResource & {
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  condition?: Maybe<AzureMonitorInsightsActivityLogAlertRuleCondition>;
+  actionGroups?: Maybe<Array<Maybe<AzureMonitorInsightsActivityLogAlertRuleActionGroup>>>;
+  description?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureMonitorInsightsActivityLogAlertRuleActionGroup = {
+  id: Scalars['String'];
+  actionGroupId?: Maybe<Scalars['String']>;
+  webhookProperties?: Maybe<Array<Maybe<AzureMonitorInsightsActivityLogAlertRuleWebhookProperty>>>;
+};
+
+export type AzureMonitorInsightsActivityLogAlertRuleBaseCondition = AzureMonitorInsightsActivityLogAlertRuleConditionInterface & {
+  id: Scalars['String'];
+};
+
+export type AzureMonitorInsightsActivityLogAlertRuleCondition = AzureMonitorInsightsActivityLogAlertRuleConditionInterface & {
+  allOf?: Maybe<Array<Maybe<AzureMonitorInsightsActivityLogAlertRuleBaseCondition>>>;
+};
+
+export type AzureMonitorInsightsActivityLogAlertRuleConditionInterface = {
+  containsAny?: Maybe<Array<Maybe<Scalars['String']>>>;
+  equals?: Maybe<Scalars['String']>;
+  field?: Maybe<Scalars['String']>;
+  odataType?: Maybe<Scalars['String']>;
+};
+
+export type AzureMonitorInsightsActivityLogAlertRuleWebhookProperty = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
 export type AzureNetworkInterface = AzureResource & {
   macAddress?: Maybe<Scalars['String']>;
   privateIpAddress?: Maybe<Scalars['String']>;

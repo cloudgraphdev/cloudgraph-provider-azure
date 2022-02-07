@@ -1,41 +1,45 @@
+import CloudGraph from '@cloudgraph/sdk'
 import { AccessToken } from '@azure/core-http'
 import { TokenCredential } from '@azure/identity'
 import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth'
 import { ConfidentialClientApplication } from '@azure/msal-node'
-import { AxiosResponse } from 'axios'
 import { URLSearchParams } from 'url'
 import { AzureServiceConfig } from '../types'
 import { generateAxiosRequest } from './apiUtils'
+
+const { logger } = CloudGraph
 
 export const getAadTokenViaAxios = async ({
   clientId,
   clientSecret,
   tenantId,
-}: {
-  clientId: string
-  clientSecret: string
-  tenantId: string
-}): Promise<AxiosResponse<string>> => {
+}: AzureServiceConfig): Promise<string> => {
   const data = new URLSearchParams()
   data.append('grant_type', 'client_credentials')
   data.append('resource', 'https://management.azure.com/')
   data.append('client_id', clientId)
   data.append('client_secret', clientSecret)
 
-  const response = await generateAxiosRequest({
-    baseUrl: 'https://login.microsoftonline.com',
-    path: `/${tenantId}/oauth2/token`,
-    verb: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    data: data.toString(),
-  })
-  const { access_token: authToken = '' } = response?.data || {}
-  return authToken
+  try {
+    const response = await generateAxiosRequest({
+      baseUrl: 'https://login.microsoftonline.com',
+      path: `/${tenantId}/oauth2/token`,
+      verb: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      data: data.toString(),
+    })
+    const { access_token: authToken = '' } = response?.data || {}
+    return authToken
+  } catch (error) {
+    logger.debug('Error fetching AAD Token!')
+    logger.debug(error)
+    logger.debug(data)
+  }
 }
 
-export const getAadTokenViaMsal = async ({
+export const getAadTokenViaMsalForGraph = async ({
   clientId,
   tenantId,
   clientSecret,

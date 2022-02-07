@@ -11,6 +11,7 @@ export default {
   [services.firewall]: 'azureFirewall',
   [services.functionApp]: 'azureFunctionApp',
   [services.keyVault]: 'azureKeyVault',
+  [services.monitorInsightsActivityLogAlertRule]: 'azureMonitorInsightsActivityLogAlertRule',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.policyAssignment]: 'azurePolicyAssignment',
   [services.publicIp]: 'azurePublicIp',
