@@ -1,0 +1,43 @@
+interface azureMonitorInsightsActivityLogAlertRuleConditionInterface {
+  containsAny: [String] @search(by: [hash, regexp])
+  equals: String @search(by: [hash, regexp])
+  field: String @search(by: [hash, regexp])
+  odataType: String @search(by: [hash, regexp])
+}
+
+type azureMonitorInsightsActivityLogAlertRuleWebhookProperty {
+  id: String! @id @search(by: [hash, regexp])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureMonitorInsightsActivityLogAlertRuleActionGroup {
+  id: String! @id @search(by: [hash, regexp])
+  actionGroupId: String @search(by: [hash, regexp])
+  webhookProperties: [azureMonitorInsightsActivityLogAlertRuleWebhookProperty]
+}
+
+type azureMonitorInsightsActivityLogAlertRuleBaseCondition implements azureMonitorInsightsActivityLogAlertRuleConditionInterface {
+  id: String! @id @search(by: [hash, regexp])
+}
+
+type azureMonitorInsightsActivityLogAlertRuleCondition implements azureMonitorInsightsActivityLogAlertRuleConditionInterface {
+  allOf: [azureMonitorInsightsActivityLogAlertRuleBaseCondition]
+}
+
+type azureMonitorInsightsActivityLogAlertRule implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
+  condition: azureMonitorInsightsActivityLogAlertRuleCondition
+  actionGroups: [azureMonitorInsightsActivityLogAlertRuleActionGroup]
+  description: String @search(by: [hash, regexp])
+  enabled: Boolean @search
+  scopes: [String] @search(by: [hash, regexp])
+  tags: [azureRawTag]
+}

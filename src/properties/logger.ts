@@ -25,6 +25,8 @@ export default {
   foundFunctions: (num: number): string => `Found ${num} functions`,
   // Key Vault
   foundKeyVault: (num: number): string => `Found ${num} Key Vault`,
+  // Monitor Alert Rules
+  foundMonitorAlertRules: (num: number): string => `Found ${num} monitor rules`,
   // Network Interface
   foundNetworkInterfaces: (num: number): string =>
     `Found ${num} network interfaces`,

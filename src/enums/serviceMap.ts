@@ -6,6 +6,7 @@ import AzureDns from '../services/dns'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
 import AzureKeyVault from '../services/keyVault'
+import AzureMonitorInsightsActivityLogAlertRule from '../services/monitorInsightsActivityLogAlertRule'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
 import AzurePolicyAssignment from '../services/policyAssignment'
@@ -33,6 +34,8 @@ export default {
   [services.firewall]: AzureFirewall,
   [services.functionApp]: AzureFunctionApp,
   [services.keyVault]: AzureKeyVault,
+  [services.monitorInsightsActivityLogAlertRule]:
+    AzureMonitorInsightsActivityLogAlertRule,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,
   [services.publicIp]: AzurePublicIp,

@@ -72,3 +72,18 @@ export interface AzureDebugScope {
   service: string
   fullScope: string
 }
+
+
+
+export interface AzureRestApiNewClientParams {
+  config: AzureServiceConfig
+  scope: string
+  kind: string
+  options?: any
+}
+
+export interface AzureRestApiClientRequestParams {
+  type: string
+  resourceGroupName: string
+  filters?: string[]
+}

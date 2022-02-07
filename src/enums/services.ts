@@ -6,6 +6,7 @@ export default {
   firewall: 'firewall',
   functionApp: 'functionApp',
   keyVault: 'keyVault',
+  monitorInsightsActivityLogAlertRule: 'monitorInsightsActivityLogAlertRule',
   networkInterface: 'networkInterface',
   policyAssignment: 'policyAssignment',
   publicIp: 'publicIp',
