@@ -1,3 +1,10 @@
+# [0.19.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.18.1...0.19.0) (2022-02-07)
+
+
+### Features
+
+* add monitorInsightsActivityLogAlertRule service ([e47c0fd](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/e47c0fd31881d06b591bee545d9f79b7c2f28ad1))
+
 ## [0.18.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.18.0...0.18.1) (2022-02-01)
 
 
