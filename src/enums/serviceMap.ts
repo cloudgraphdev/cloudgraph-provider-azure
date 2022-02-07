@@ -1,4 +1,6 @@
 import services from './services'
+import AzureAppServicePlan from '../services/appServicePlan'
+import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureAuthRoleAssignment from '../services/authRoleAssignment'
 import AzureAuthRoleDefinition from '../services/authRoleDefinition'
 import AzureDisk from '../services/disk'
@@ -27,6 +29,8 @@ import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
+  [services.appServicePlan]: AzureAppServicePlan,
+  [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.disk]: AzureDisk,

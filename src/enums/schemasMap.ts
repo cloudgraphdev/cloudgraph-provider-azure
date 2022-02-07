@@ -4,6 +4,8 @@ import services from './services'
  * schemasMap is an object that contains schemas name by resource
  */
 export default {
+  [services.appServicePlan]: 'azureAppServicePlan',
+  [services.appServiceWebApp]: 'azureAppServiceWebApp',
   [services.authRoleAssignment]: 'azureAuthRoleAssignment',
   [services.authRoleDefinition]: 'azureAuthRoleDefinition',
   [services.disk]: 'azureDisk',

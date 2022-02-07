@@ -35,6 +35,8 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 | Service                             | Relations                                                              |
 | ----------------------------------- | ---------------------------------------------------------------------- |
+| appServicePlan                      | resourceGroup, appServiceWebApp                                        |
+| appServiceWebApp                    | resourceGroup, appServicePlan, storageAccount                          |
 | authRoleAssignment                  |                                                                        |
 | authRoleDefinition                  |                                                                        |
 | disk                                | resourceGroup, virtualMachine                                          |

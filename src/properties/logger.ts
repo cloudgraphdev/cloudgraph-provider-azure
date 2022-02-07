@@ -1,4 +1,7 @@
 export default {
+  /* App Service */
+  foundAppServicePlans: (num: number): string => `Found ${num} app service plans`,
+  foundWebApps: (num: number): string => `Found ${num} web apps`,
   /* Auth logs */
   authenticatingWithServicePrincipalSecret:
     'Authenticating with the Azure node SDK using Service Principal and Secret',

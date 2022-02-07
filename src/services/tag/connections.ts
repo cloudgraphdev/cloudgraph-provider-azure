@@ -51,6 +51,54 @@ export default ({
       }
     }
     /**
+     * Find related App Service Plan
+     */
+     const appServicePlans: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.appServicePlan)
+    if (appServicePlans?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        appServicePlans.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const appServicePlan of dataAtRegion) {
+          const { id } = appServicePlan
+          connections.push({
+            id,
+            resourceType: services.appServicePlan,
+            relation: 'child',
+            field: 'appServicePlans',
+          })
+        }
+      }
+    }
+    /**
+     * Find related App Service Web App
+     */
+     const appServiceWebApps: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.appServiceWebApp)
+    if (appServiceWebApps?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        appServiceWebApps.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const appServiceWebApp of dataAtRegion) {
+          const { id } = appServiceWebApp
+          connections.push({
+            id,
+            resourceType: services.appServiceWebApp,
+            relation: 'child',
+            field: 'appServiceWebApps',
+          })
+        }
+      }
+    }
+    /**
      * Find related Azure Functions
      */
     const azureFunctions: {
