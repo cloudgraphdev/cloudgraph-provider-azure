@@ -1,3 +1,10 @@
+# [0.20.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.19.0...0.20.0) (2022-02-07)
+
+
+### Features
+
+* **appService,functionApp:** add appServicePlans and appServiceWebApps, refactor functionApp service ([dae269b](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/dae269b6dfb469307a4368231cfeb107291f3b7c))
+
 # [0.19.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.18.1...0.19.0) (2022-02-07)
 
 
