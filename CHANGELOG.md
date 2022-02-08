@@ -1,3 +1,10 @@
+# [0.21.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.20.0...0.21.0) (2022-02-08)
+
+
+### Features
+
+* **eventHub:** add eventHub service ([ac36ca8](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/ac36ca84ed10b1d75662507fdeec1e543939703d))
+
 # [0.20.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.19.0...0.20.0) (2022-02-07)
 
 
