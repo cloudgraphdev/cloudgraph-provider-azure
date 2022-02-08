@@ -1,0 +1,17 @@
+type azurePrivateDnsZone implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  maxNumberOfRecordSets: Int @search
+  numberOfRecordSets: Int @search
+  maxNumberOfVirtualNetworkLinks: Int @search
+  numberOfVirtualNetworkLinks: Int @search
+  maxNumberOfVirtualNetworkLinksWithRegistration: Int @search
+  numberOfVirtualNetworkLinksWithRegistration: Int @search
+  provisioningState: String @search(by: [hash, regexp])
+  internalId: String @search(by: [hash, regexp])
+  resourceGroups: [azureResourceGroup] @hasInverse(field: privateDns) # convert to singular resourceGroup
+}

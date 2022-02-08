@@ -11,6 +11,7 @@ export default {
   monitorInsightsActivityLogAlertRule: 'monitorInsightsActivityLogAlertRule',
   networkInterface: 'networkInterface',
   policyAssignment: 'policyAssignment',
+  privateDns: 'privateDns',
   publicIp: 'publicIp',
   resourceGroup: 'resourceGroup',
   securityAssesments: 'securityAssesments',

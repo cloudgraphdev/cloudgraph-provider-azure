@@ -39,6 +39,7 @@
     "@azure/arm-keyvault": "^1.3.2",
     "@azure/arm-network": "^25.4.0",
     "@azure/arm-policy": "^5.0.0",
+    "@azure/arm-privatedns": "^3.0.0",
     "@azure/arm-resources": "^4.2.2",
     "@azure/arm-security": "^4.0.0",
     "@azure/arm-storage": "^16.1.2",
