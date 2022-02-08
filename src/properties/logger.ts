@@ -21,6 +21,11 @@ export default {
   // DNS Zone List
   foundDnsZoneRecordSet: (num: number): string =>
     `Found ${num} DNS Zone Record Sets`,
+  // Event hubs
+  foundEventHubNamespaces: (num: number): string =>
+    `Found ${num} event hub namespaces`,
+  foundEventHubs: (num: number): string =>
+    `Found ${num} event hubs`,
   // Firewall
   foundFirewalls: (num: number): string => `Found ${num} firewalls`,
   // Azure Functions

@@ -10,6 +10,7 @@ export default {
   [services.authRoleDefinition]: 'azureAuthRoleDefinition',
   [services.disk]: 'azureDisk',
   [services.dns]: 'azureDnsZone',
+  [services.eventHub]: 'azureEventHub',
   [services.firewall]: 'azureFirewall',
   [services.functionApp]: 'azureFunctionApp',
   [services.keyVault]: 'azureKeyVault',
