@@ -347,6 +347,45 @@ export type AzureDnsZoneRecordSetTxtRecord = {
   value?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type AzureEventHub = AzureBaseResource & {
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  partitionIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  updatedAt?: Maybe<Scalars['String']>;
+  messageRetentionInDays?: Maybe<Scalars['Int']>;
+  partitionCount?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  captureDescription?: Maybe<AzureEventHubCaptureDescription>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+};
+
+export type AzureEventHubCaptureDescription = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  encoding?: Maybe<Scalars['String']>;
+  intervalInSeconds?: Maybe<Scalars['Int']>;
+  sizeLimitInBytes?: Maybe<Scalars['Int']>;
+  destination?: Maybe<AzureEventHubCaptureDestination>;
+  skipEmptyArchives?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureEventHubCaptureDestination = {
+  name?: Maybe<Scalars['String']>;
+  storageAccountResourceId?: Maybe<Scalars['String']>;
+  blobContainer?: Maybe<Scalars['String']>;
+  archiveNameFormat?: Maybe<Scalars['String']>;
+  dataLakeSubscriptionId?: Maybe<Scalars['String']>;
+  dataLakeAccountName?: Maybe<Scalars['String']>;
+  dataLakeFolderPath?: Maybe<Scalars['String']>;
+};
+
 export type AzureExtendedLocation = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -766,6 +805,7 @@ export type AzureResourceGroup = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
+  eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
@@ -911,6 +951,7 @@ export type AzureStorageAccount = AzureResource & {
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
   appServiceWebApp?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
+  eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
 };
 
 export type AzureStorageAccountEncryptionService = {

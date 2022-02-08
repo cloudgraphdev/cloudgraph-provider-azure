@@ -72,6 +72,19 @@
     "@azure/ms-rest-js" "^2.2.0"
     tslib "^1.10.0"
 
+"@azure/arm-eventhub@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-eventhub/-/arm-eventhub-5.0.0.tgz#54c661d95732300f5c6505f6ae89c71e935acc17"
+  integrity sha512-ENVwQBIT2MGER0GcG+rI0Bg6RBGKpqyMkwwAEmsRqscrTVwjFpeoS2pysoyKJMvQCEMpgp/bzstLUvwoQD5/2Q==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-keyvault@^1.3.2":
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/@azure/arm-keyvault/-/arm-keyvault-1.3.2.tgz#639a2f07eb5cea1bfd2e66eaf0044b1596d7fe3e"

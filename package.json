@@ -36,6 +36,7 @@
     "@azure/arm-authorization": "^8.4.1",
     "@azure/arm-compute": "^16.5.0",
     "@azure/arm-dns": "^4.1.1",
+    "@azure/arm-eventhub": "^5.0.0",
     "@azure/arm-keyvault": "^1.3.2",
     "@azure/arm-network": "^25.4.0",
     "@azure/arm-policy": "^5.0.0",

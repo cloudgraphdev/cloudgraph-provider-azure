@@ -1,0 +1,44 @@
+type azureEventHubCaptureDestination{
+  name: String @search(by: [hash, regexp])
+  storageAccountResourceId: String @search(by: [hash, regexp])
+  blobContainer: String @search(by: [hash, regexp])
+  archiveNameFormat: String @search(by: [hash, regexp])
+  dataLakeSubscriptionId: String @search(by: [hash, regexp])
+  dataLakeAccountName: String @search(by: [hash, regexp])
+  dataLakeFolderPath: String @search(by: [hash, regexp])
+}
+
+type azureEventHubCaptureDescription{
+  enabled: Boolean @search
+  encoding: String @search(by: [hash, regexp])
+  intervalInSeconds: Int @search
+  sizeLimitInBytes: Int @search
+  destination: azureEventHubCaptureDestination
+  skipEmptyArchives: Boolean @search
+}
+
+type azureEventHub implements azureBaseResource
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  partitionIds: [String] @search(by: [hash, regexp])
+  updatedAt: String @search(by: [hash, regexp])
+  messageRetentionInDays: Int @search
+  partitionCount: Int @search
+  status: String @search(by: [hash, regexp])
+  captureDescription: azureEventHubCaptureDescription
+  resourceGroups: [azureResourceGroup] @hasInverse(field: eventHubs)
+  storageAccount: [azureStorageAccount] @hasInverse(field: eventHubs)
+  # connection to data lake?
+}
