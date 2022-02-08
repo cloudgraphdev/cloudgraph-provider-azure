@@ -1,3 +1,13 @@
+# [0.23.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.22.0...0.23.0) (2022-02-08)
+
+
+### Features
+
+* Created Storage Blob service ([c6a82d6](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/c6a82d6c8591ecfda709f4465e4875011d10bf7e))
+* Fetched keys from storage account ([832265e](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/832265ea78986f137480fde36682b548c38153df))
+* Included connections to StorageBlob ([fbbe839](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/fbbe839a7a5ad645aedbca571e0b2bf5a8ea249c))
+* Reuse data between storage services ([f0ea987](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/f0ea987651c1531a98f65c6b809735c2d5dad2f3))
+
 # [0.22.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.21.0...0.22.0) (2022-02-08)
 
 
