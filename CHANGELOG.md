@@ -1,3 +1,10 @@
+# [0.22.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.21.0...0.22.0) (2022-02-08)
+
+
+### Features
+
+* **eventGrid:** add eventGrid service ([f856300](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/f856300471e8dbf6f21d14f988cd95481e92a9ed))
+
 # [0.21.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.20.0...0.21.0) (2022-02-08)
 
 
