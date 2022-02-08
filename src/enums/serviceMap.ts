@@ -20,6 +20,7 @@ import AzureSecurityAssesments from '../services/securityAssesments'
 import AzureSecurityPricings from '../services/securityPricings'
 import AzureSecuritySettings from '../services/securitySettings'
 import AzureStorageAccount from '../services/storageAccount'
+import AzureStorageBlob from '../services/storageBlob'
 import AzureStorageContainer from '../services/storageContainer'
 import AzureTag from '../services/tag'
 import AzureVirtualMachine from '../services/virtualMachine'
@@ -53,6 +54,7 @@ export default {
   [services.securityPricings]: AzureSecurityPricings,
   [services.securitySettings]: AzureSecuritySettings,
   [services.storageAccount]: AzureStorageAccount,
+  [services.storageBlob]: AzureStorageBlob,
   [services.virtualMachine]: AzureVirtualMachine,
   [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
   [services.virtualNetwork]: AzureVirtualNetwork,

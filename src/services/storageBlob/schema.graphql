@@ -1,0 +1,85 @@
+type azureStorageBlobReplicationRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  ruleId: String! @id @search(by: [hash, regexp])
+  replicationStatus: String @search(by: [hash, regexp])
+}
+
+type azureStorageBlobReplicationPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  policyId: String @search(by: [hash, regexp])
+  rules: [azureStorageBlobReplicationRule]
+}
+
+type azureStorageBlobProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  createdOn: String @search(by: [hash, regexp])
+  lastModified: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  contentLength: Int @search
+  contentType: String @search(by: [hash, regexp])
+  contentEncoding: String @search(by: [hash, regexp])
+  contentLanguage: String @search(by: [hash, regexp])
+  contentDisposition: String @search(by: [hash, regexp])
+  cacheControl: String @search(by: [hash, regexp])
+  blobSequenceNumber: Int @search
+  blobType: String @search(by: [hash, regexp])
+  leaseStatus: String @search(by: [hash, regexp])
+  leaseState: String @search(by: [hash, regexp])
+  leaseDuration: String @search(by: [hash, regexp])
+  copyId: String @search(by: [hash, regexp])
+  copyStatus: String @search(by: [hash, regexp])
+  copySource: String @search(by: [hash, regexp])
+  copyProgress: String @search(by: [hash, regexp])
+  copyCompletedOn: String @search(by: [hash, regexp])
+  copyStatusDescription: String @search(by: [hash, regexp])
+  serverEncrypted: Boolean @search
+  incrementalCopy: Boolean @search
+  destinationSnapshot: String @search(by: [hash, regexp])
+  deletedOn: String @search(by: [hash, regexp])
+  remainingRetentionDays: Int @search
+  accessTier: String @search(by: [hash, regexp])
+  accessTierInferred: Boolean @search
+  archiveStatus: String @search(by: [hash, regexp])
+  customerProvidedKeySha256: String @search(by: [hash, regexp])
+  encryptionScope: String @search(by: [hash, regexp])
+  accessTierChangedOn: String @search(by: [hash, regexp])
+  tagCount: Int @search
+  expiresOn: String @search(by: [hash, regexp])
+  isSealed: Boolean @search
+  rehydratePriority: String @search(by: [hash, regexp])
+  lastAccessedOn: String @search(by: [hash, regexp])
+  immutabilityPolicyExpiresOn: String @search(by: [hash, regexp])
+  immutabilityPolicyMode: String @search(by: [hash, regexp])
+  contentCRC64: String @search(by: [hash, regexp])
+  legalHold: Boolean @search
+}
+
+type azureStorageBlob implements azureStorageResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  deleted: String @search(by: [hash, regexp])
+  snapshot: String @search(by: [hash, regexp])
+  versionId: String @search(by: [hash, regexp])
+  properties: azureStorageBlobProperties
+  isCurrentVersion: Boolean @search
+  hasVersionsOnly: Boolean @search
+  objectReplicationSourceProperties: [azureStorageBlobReplicationPolicy]
+  resourceGroup: [azureResourceGroup] @hasInverse(field: storageBlobs)
+  storageContainer: [azureStorageContainer] @hasInverse(field: storageBlobs)
+}

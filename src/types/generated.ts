@@ -829,6 +829,7 @@ export type AzureResourceGroup = AzureResource & {
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
@@ -911,7 +912,7 @@ export type AzureSshPublicKey = {
   keyData?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageAccount = AzureResource & {
+export type AzureStorageAccount = AzureStorageResource & {
   extendedLocationName?: Maybe<Scalars['String']>;
   extendedLocationType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
@@ -964,7 +965,7 @@ export type AzureStorageAccount = AzureResource & {
   minimumTlsVersion?: Maybe<Scalars['String']>;
   allowSharedKeyAccess?: Maybe<Scalars['String']>;
   enableNfsV3?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
   appServiceWebApp?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
@@ -1029,14 +1030,73 @@ export type AzureStorageAccountVirtualNetworkRule = {
   state?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageContainer = {
+export type AzureStorageBlob = AzureStorageResource & {
+  deleted?: Maybe<Scalars['String']>;
+  snapshot?: Maybe<Scalars['String']>;
+  versionId?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureStorageBlobProperties>;
+  isCurrentVersion?: Maybe<Scalars['Boolean']>;
+  hasVersionsOnly?: Maybe<Scalars['Boolean']>;
+  objectReplicationSourceProperties?: Maybe<Array<Maybe<AzureStorageBlobReplicationPolicy>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  storageContainer?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+};
+
+export type AzureStorageBlobProperties = {
+  createdOn?: Maybe<Scalars['String']>;
+  lastModified?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  contentLength?: Maybe<Scalars['Int']>;
+  contentType?: Maybe<Scalars['String']>;
+  contentEncoding?: Maybe<Scalars['String']>;
+  contentLanguage?: Maybe<Scalars['String']>;
+  contentDisposition?: Maybe<Scalars['String']>;
+  cacheControl?: Maybe<Scalars['String']>;
+  blobSequenceNumber?: Maybe<Scalars['Int']>;
+  blobType?: Maybe<Scalars['String']>;
+  leaseStatus?: Maybe<Scalars['String']>;
+  leaseState?: Maybe<Scalars['String']>;
+  leaseDuration?: Maybe<Scalars['String']>;
+  copyId?: Maybe<Scalars['String']>;
+  copyStatus?: Maybe<Scalars['String']>;
+  copySource?: Maybe<Scalars['String']>;
+  copyProgress?: Maybe<Scalars['String']>;
+  copyCompletedOn?: Maybe<Scalars['String']>;
+  copyStatusDescription?: Maybe<Scalars['String']>;
+  serverEncrypted?: Maybe<Scalars['Boolean']>;
+  incrementalCopy?: Maybe<Scalars['Boolean']>;
+  destinationSnapshot?: Maybe<Scalars['String']>;
+  deletedOn?: Maybe<Scalars['String']>;
+  remainingRetentionDays?: Maybe<Scalars['Int']>;
+  accessTier?: Maybe<Scalars['String']>;
+  accessTierInferred?: Maybe<Scalars['Boolean']>;
+  archiveStatus?: Maybe<Scalars['String']>;
+  customerProvidedKeySha256?: Maybe<Scalars['String']>;
+  encryptionScope?: Maybe<Scalars['String']>;
+  accessTierChangedOn?: Maybe<Scalars['String']>;
+  tagCount?: Maybe<Scalars['Int']>;
+  expiresOn?: Maybe<Scalars['String']>;
+  isSealed?: Maybe<Scalars['Boolean']>;
+  rehydratePriority?: Maybe<Scalars['String']>;
+  lastAccessedOn?: Maybe<Scalars['String']>;
+  immutabilityPolicyExpiresOn?: Maybe<Scalars['String']>;
+  immutabilityPolicyMode?: Maybe<Scalars['String']>;
+  contentCRC64?: Maybe<Scalars['String']>;
+  legalHold?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureStorageBlobReplicationPolicy = {
   id: Scalars['String'];
-  name?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  kind?: Maybe<Scalars['String']>;
-  subscriptionId?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  policyId?: Maybe<Scalars['String']>;
+  rules?: Maybe<Array<Maybe<AzureStorageBlobReplicationRule>>>;
+};
+
+export type AzureStorageBlobReplicationRule = {
+  ruleId: Scalars['String'];
+  replicationStatus?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageContainer = AzureStorageResource & {
   version?: Maybe<Scalars['String']>;
   deleted?: Maybe<Scalars['String']>;
   deletedTime?: Maybe<Scalars['String']>;
@@ -1053,8 +1113,9 @@ export type AzureStorageContainer = {
   legalHoldTags?: Maybe<Array<Maybe<AzureStorageContainerLegalHoldTag>>>;
   hasLegalHold?: Maybe<Scalars['String']>;
   hasImmutabilityPolicy?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
-  storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
 };
 
 export type AzureStorageContainerImmutabilityPolicyUpdateHistory = {
@@ -1074,6 +1135,16 @@ export type AzureStorageContainerLegalHoldTag = {
   objectIdentifier?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
   upn?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageResource = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  kind?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
 };
 
 export type AzureSubResource = {

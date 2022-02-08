@@ -5,16 +5,22 @@ import {
   BlobContainersListNextResponse,
   BlobContainersListResponse,
   ListContainerItem,
-  ListContainerItems,
+  StorageAccountKey,
 } from '@azure/arm-storage/esm/models'
-import getStorageAccountData from '../storageAccount/data'
+import isEmpty from 'lodash/isEmpty'
+import getStorageAccountData, {
+  RawAzureStorageAccount,
+} from '../storageAccount/data'
 import azureLoggerText from '../../properties/logger'
 
 import { AzureServiceInput } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
+import services from '../../enums/services'
 
 export interface RawAzureStorageContainer extends ListContainerItem {
   storageAccountId: string
+  storageAccountName: string
+  keys: StorageAccountKey[]
   region: string
   resourceGroup: string
 }
@@ -35,60 +41,69 @@ export default async ({
   const client = new StorageManagementClient(credentials, subscriptionId)
 
   try {
-    const storageAccounts = await getStorageAccountData({
-      regions,
-      config,
-      rawData,
-      opts,
-    })
+    const existingData: { [property: string]: RawAzureStorageContainer[] } =
+      rawData.find(({ name }) => name === services.storageContainer)?.data || {}
 
-    const storageContainerData: RawAzureStorageContainer[] = []
-
-    for (const storageAccount of Object.values(storageAccounts).flat()) {
-      const { name: accountName, resourceGroup } = storageAccount
-
-      const blobContainers: ListContainerItems = await getAllResources({
-        listCall: async (): Promise<BlobContainersListResponse> =>
-          client.blobContainers.list(resourceGroup, accountName),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<BlobContainersListNextResponse> =>
-          client.blobContainers.listNext(nextLink),
-        debugScope: {
-          service: serviceName,
-          client,
-          scope: 'storageContainers',
-        },
+    if (isEmpty(existingData)) {
+      const storageAccounts: {
+        [property: string]: RawAzureStorageAccount[]
+      } = await getStorageAccountData({
+        regions,
+        config,
+        rawData,
+        opts,
       })
 
-      for (const blobContainer of blobContainers) {
-        storageContainerData.push({
-          ...blobContainer,
-          resourceGroup,
-          storageAccountId: storageAccount.id,
-          region: storageAccount.region,
-        })
-      }
-    }
+      const storageContainerData: RawAzureStorageContainer[] = []
 
-    const result: {
-      [property: string]: RawAzureStorageContainer[]
-    } = {}
-    let numOfGroups = 0
-    storageContainerData.map(({ region, ...rest }) => {
-      if (regions.includes(region)) {
-        if (!result[region]) {
-          result[region] = []
-        }
-        result[region].push({
-          ...rest,
-          region,
+      for (const storageAccount of Object.values(storageAccounts).flat()) {
+        const { name: accountName, keys, resourceGroup } = storageAccount
+        const blobContainers = await getAllResources({
+          listCall: async (): Promise<BlobContainersListResponse> =>
+            client.blobContainers.list(resourceGroup, accountName),
+          listNextCall: async (
+            nextLink: string
+          ): Promise<BlobContainersListNextResponse> =>
+            client.blobContainers.listNext(nextLink),
+          debugScope: {
+            service: serviceName,
+            client,
+            scope: 'storageContainers',
+          },
         })
-        numOfGroups += 1
+
+        for (const blobContainer of blobContainers) {
+          storageContainerData.push({
+            ...blobContainer,
+            resourceGroup,
+            storageAccountId: storageAccount.id,
+            storageAccountName: accountName,
+            keys,
+            region: storageAccount.region,
+          })
+        }
       }
-    })
-    logger.debug(lt.foundStorageContainers(numOfGroups))
-    return result
+
+      const result: {
+        [property: string]: RawAzureStorageContainer[]
+      } = {}
+      let numOfGroups = 0
+      storageContainerData.map(({ region, ...rest }) => {
+        if (regions.includes(region)) {
+          if (!result[region]) {
+            result[region] = []
+          }
+          result[region].push({
+            ...rest,
+            region,
+          })
+          numOfGroups += 1
+        }
+      })
+      logger.debug(lt.foundStorageContainers(numOfGroups))
+      return result
+    }
+    return existingData
   } catch (e) {
     logger.error(e)
   }

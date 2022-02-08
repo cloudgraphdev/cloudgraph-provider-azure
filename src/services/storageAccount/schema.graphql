@@ -4,13 +4,13 @@ type azureStorageAccountPrimaryEndpoints
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    blob: String @search(by: [hash, regexp])
-    queue: String @search(by: [hash, regexp])
-    table: String @search(by: [hash, regexp])
-    file: String @search(by: [hash, regexp])
-    web: String @search(by: [hash, regexp])
-    dfs: String @search(by: [hash, regexp])
-  }
+  blob: String @search(by: [hash, regexp])
+  queue: String @search(by: [hash, regexp])
+  table: String @search(by: [hash, regexp])
+  file: String @search(by: [hash, regexp])
+  web: String @search(by: [hash, regexp])
+  dfs: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountPrimaryMicrosoftEndpoints
   @generate(
@@ -18,13 +18,13 @@ type azureStorageAccountPrimaryMicrosoftEndpoints
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    blob: String @search(by: [hash, regexp])
-    queue: String @search(by: [hash, regexp])
-    table: String @search(by: [hash, regexp])
-    file: String @search(by: [hash, regexp])
-    web: String @search(by: [hash, regexp])
-    dfs: String @search(by: [hash, regexp])
-  }
+  blob: String @search(by: [hash, regexp])
+  queue: String @search(by: [hash, regexp])
+  table: String @search(by: [hash, regexp])
+  file: String @search(by: [hash, regexp])
+  web: String @search(by: [hash, regexp])
+  dfs: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountPrimaryInternetEndpoints
   @generate(
@@ -32,11 +32,11 @@ type azureStorageAccountPrimaryInternetEndpoints
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    blob: String @search(by: [hash, regexp])
-    file: String @search(by: [hash, regexp])
-    web: String @search(by: [hash, regexp])
-    dfs: String @search(by: [hash, regexp])
-  }
+  blob: String @search(by: [hash, regexp])
+  file: String @search(by: [hash, regexp])
+  web: String @search(by: [hash, regexp])
+  dfs: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountEncryptionService
   @generate(
@@ -44,10 +44,10 @@ type azureStorageAccountEncryptionService
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    enabled: String @search(by: [hash, regexp])
-    lastEnabledTime: String @search(by: [hash, regexp])
-    keyType: String @search(by: [hash, regexp])
-  }
+  enabled: String @search(by: [hash, regexp])
+  lastEnabledTime: String @search(by: [hash, regexp])
+  keyType: String @search(by: [hash, regexp])
+}
 
 type azureFilesIdentityBasedAuthenticationActiveDirectoryProperties
   @generate(
@@ -55,13 +55,13 @@ type azureFilesIdentityBasedAuthenticationActiveDirectoryProperties
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    domainName: String @search(by: [hash, regexp])
-    netBiosDomainName: String @search(by: [hash, regexp])
-    forestName: String @search(by: [hash, regexp])
-    domainGuid: String @search(by: [hash, regexp])
-    domainSid: String @search(by: [hash, regexp])
-    azureStorageSid: String @search(by: [hash, regexp])
-  }
+  domainName: String @search(by: [hash, regexp])
+  netBiosDomainName: String @search(by: [hash, regexp])
+  forestName: String @search(by: [hash, regexp])
+  domainGuid: String @search(by: [hash, regexp])
+  domainSid: String @search(by: [hash, regexp])
+  azureStorageSid: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountPrivateEndpointConnection
   @generate(
@@ -69,13 +69,15 @@ type azureStorageAccountPrivateEndpointConnection
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    id: String! @id @search(by: [hash])
-    privateEndpointId: String @search(by: [hash, regexp])
-    privateLinkServiceConnectionStateStatus: String @search(by: [hash, regexp])
-    privateLinkServiceConnectionStateDescription: String @search(by: [hash, regexp])
-    privateLinkServiceConnectionStateActionRequired: String @search(by: [hash, regexp])
-    provisioningState: String @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  privateEndpointId: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionStateStatus: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionStateDescription: String
+    @search(by: [hash, regexp])
+  privateLinkServiceConnectionStateActionRequired: String
+    @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountResourceAccessRule
   @generate(
@@ -83,10 +85,10 @@ type azureStorageAccountResourceAccessRule
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    id: String! @id @search(by: [hash])
-    tenantId: String @search(by: [hash, regexp])
-    resourceId: String @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  tenantId: String @search(by: [hash, regexp])
+  resourceId: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountVirtualNetworkRule
   @generate(
@@ -94,11 +96,11 @@ type azureStorageAccountVirtualNetworkRule
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    id: String! @id @search(by: [hash])
-    virtualNetworkResourceId: String @search(by: [hash, regexp])
-    action: String @search(by: [hash, regexp])
-    state: String @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  virtualNetworkResourceId: String @search(by: [hash, regexp])
+  action: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+}
 
 type azureStorageAccountIPRule
   @generate(
@@ -106,12 +108,12 @@ type azureStorageAccountIPRule
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-    id: String! @id @search(by: [hash])
-    iPAddressOrRange: String @search(by: [hash, regexp])
-    action: String @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  iPAddressOrRange: String @search(by: [hash, regexp])
+  action: String @search(by: [hash, regexp])
+}
 
-type azureStorageAccount implements azureResource
+type azureStorageAccount implements azureStorageResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
@@ -143,11 +145,14 @@ type azureStorageAccount implements azureResource
   encryptionKeyVaultPropertyKeyName: String @search(by: [hash, regexp])
   encryptionKeyVaultPropertyKeyVersion: String @search(by: [hash, regexp])
   encryptionKeyVaultPropertyKeyVaultUri: String @search(by: [hash, regexp])
-  encryptionKeyVaultPropertyCurrentVersionedKeyIdentifier: String @search(by: [hash, regexp])
-  encryptionKeyVaultPropertyLastKeyRotationTimestamp: String @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyCurrentVersionedKeyIdentifier: String
+    @search(by: [hash, regexp])
+  encryptionKeyVaultPropertyLastKeyRotationTimestamp: String
+    @search(by: [hash, regexp])
   encryptionUserAssignedIdentity: String @search(by: [hash, regexp])
   accessTier: String @search(by: [hash, regexp])
-  azureFilesIdentityBasedAuthenticationDirectoryServiceOptions: String @search(by: [hash, regexp])
+  azureFilesIdentityBasedAuthenticationDirectoryServiceOptions: String
+    @search(by: [hash, regexp])
   azureFilesIdentityBasedAuthenticationActiveDirectoryProperties: azureFilesIdentityBasedAuthenticationActiveDirectoryProperties
   enableHttpsTrafficOnly: String @search(by: [hash, regexp])
   networkRuleSetByPass: String @search(by: [hash, regexp])
@@ -161,7 +166,7 @@ type azureStorageAccount implements azureResource
   geoReplicationStatsCanFailover: String @search(by: [hash, regexp])
   failoverInProgress: String @search(by: [hash, regexp])
   largeFileSharesState: String @search(by: [hash, regexp])
-  privateEndpointConnections: [azureStorageAccountPrivateEndpointConnection],
+  privateEndpointConnections: [azureStorageAccountPrivateEndpointConnection]
   routingPreferenceChoice: String @search(by: [hash, regexp])
   routingPreferencePublishMicrosoftEndpoints: String @search(by: [hash, regexp])
   routingPreferencePublishInternetEndpoints: String @search(by: [hash, regexp])
@@ -169,8 +174,8 @@ type azureStorageAccount implements azureResource
   minimumTlsVersion: String @search(by: [hash, regexp])
   allowSharedKeyAccess: String @search(by: [hash, regexp])
   enableNfsV3: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: storageAccounts) # convert to singular resourceGroup
-  storageContainers: [azureStorageContainer] @hasInverse(field: storageAccounts)
+  resourceGroup: [azureResourceGroup] @hasInverse(field: storageAccounts)
+  storageContainers: [azureStorageContainer] @hasInverse(field: storageAccount)
   appServiceWebApp: [azureAppServiceWebApp] @hasInverse(field: storageAccounts)
   eventHubs: [azureEventHub] @hasInverse(field: storageAccount)
 }

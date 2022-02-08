@@ -65,6 +65,8 @@ export default {
   // Storage Containers
   foundStorageContainers: (num: number): string =>
     `Found ${num} storage containers`,
+  // Storage Blobs
+  foundStorageBlobs: (num: number): string => `Found ${num} storage blobs`,
   // Virtual Machines
   foundvirtualMachines: (num: number): string =>
     `Found ${num} virtual machines`,

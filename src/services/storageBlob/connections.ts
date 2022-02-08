@@ -4,32 +4,32 @@ import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
 
-import { RawAzureStorageContainer } from './data'
+import { RawAzureStorageBlob } from './data'
 
 /**
- * StorageContainer
+ * StorageBlob
  */
 
 export default ({
-  service: storageContainer,
+  service: storageBlob,
   data,
   region,
 }: {
   data: { name: string; data: { [property: string]: any[] } }[]
-  service: RawAzureStorageContainer
+  service: RawAzureStorageBlob
   region: string
 }): { [key: string]: ServiceConnection[] } => {
   const connections: ServiceConnection[] = []
 
   /**
    * Find Storage Account
-   * related to the Storage Container
+   * related to the Storage Blob
    */
 
-  const { id, storageAccountId, resourceGroup: rgName } = storageContainer
+  const { name: id, storageContainerId, resourceGroup: rgName } = storageBlob
 
   /**
-   * Find resource group related to this storage container
+   * Find resource group related to this storage blob
    */
   const resourceGroups: {
     name: string
@@ -56,29 +56,28 @@ export default ({
   }
 
   /**
-   * Find storage account related to this storage container
+   * Find storage container related to this storage blob
    */
-  const storageAccounts = data.find(
-    ({ name }) => name === services.storageAccount
+  const storageContainers = data.find(
+    ({ name }) => name === services.storageContainer
   )
 
-  if (storageAccounts?.data?.[region]) {
-    const storageAccount = storageAccounts.data[region].find(
-      ({ id: accountId }) => accountId === storageAccountId
+  if (storageContainers?.data?.[region]) {
+    const storageContainer = storageContainers.data[region].find(
+      ({ id: containerId }) => storageContainerId === containerId
     )
-
-    if (storageAccount) {
+    if (storageContainer) {
       connections.push({
-        id: storageAccountId,
-        resourceType: services.storageAccount,
+        id: storageContainerId,
+        resourceType: services.storageContainer,
         relation: 'child',
-        field: 'storageAccount',
+        field: 'storageContainer',
       })
     }
   }
 
   const storageContainerResult = {
-    [id]: connections,
+    [`${storageContainerId}/${id}`]: connections,
   }
   return storageContainerResult
 }

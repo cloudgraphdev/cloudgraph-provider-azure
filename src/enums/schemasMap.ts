@@ -25,6 +25,7 @@ export default {
   [services.securityPricings]: 'azureSecurityPricings',
   [services.securitySettings]: 'azureSecuritySettings',
   [services.storageAccount]: 'azureStorageAccount',
+  [services.storageBlob]: 'azureStorageBlob',
   [services.storageContainer]: 'azureStorageContainer',
   [services.virtualMachine]: 'azureVirtualMachine',
   [services.virtualMachineScaleSet]: 'azureVirtualMachineScaleSet',

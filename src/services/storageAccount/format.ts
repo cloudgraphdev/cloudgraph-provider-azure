@@ -25,9 +25,12 @@ const formatPrivateEndpointConnection = ({
   return {
     id: cuid(),
     privateEndpointId: privateEndpoint?.id || '',
-    privateLinkServiceConnectionStateStatus: privateLinkServiceConnectionState?.status || '',
-    privateLinkServiceConnectionStateDescription: privateLinkServiceConnectionState?.description || '',
-    privateLinkServiceConnectionStateActionRequired: privateLinkServiceConnectionState?.actionRequired || '',
+    privateLinkServiceConnectionStateStatus:
+      privateLinkServiceConnectionState?.status || '',
+    privateLinkServiceConnectionStateDescription:
+      privateLinkServiceConnectionState?.description || '',
+    privateLinkServiceConnectionStateActionRequired:
+      privateLinkServiceConnectionState?.actionRequired || '',
     provisioningState,
   }
 }
@@ -57,7 +60,7 @@ const formatVirtualNetworkRule = ({
 const formatIpRule = ({
   iPAddressOrRange,
   action,
-}:IPRule): AzureStorageAccountIpRule=> {
+}: IPRule): AzureStorageAccountIpRule => {
   return {
     id: cuid(),
     iPAddressOrRange,
@@ -145,79 +148,110 @@ export default ({
     secondaryLocation,
     statusOfSecondary,
     customDomainName: customDomain?.name || '',
-    customDomainUseSubDomainName: customDomain?.useSubDomainName? t.yes : t.no,
+    customDomainUseSubDomainName: customDomain?.useSubDomainName ? t.yes : t.no,
     sasPolicyExpirationPeriod: sasPolicy?.sasExpirationPeriod || '',
     keyPolicyExpirationPeriodInDays: keyPolicy?.keyExpirationPeriodInDays || 0,
     keyCreationTimeKey1: keyCreationTime?.key1?.toUTCString() || '',
     keyCreationTimeKey2: keyCreationTime?.key2?.toUTCString() || '',
     encryptionServiceBlob: {
       enabled: encryption?.services?.blob?.enabled ? t.yes : t.no,
-      lastEnabledTime: encryption?.services?.blob?.lastEnabledTime?.toUTCString() || '',
+      lastEnabledTime:
+        encryption?.services?.blob?.lastEnabledTime?.toUTCString() || '',
       keyType: encryption?.services?.blob?.keyType || '',
     },
     encryptionServiceFile: {
       enabled: encryption?.services?.file?.enabled ? t.yes : t.no,
-      lastEnabledTime: encryption?.services?.file?.lastEnabledTime?.toUTCString() || '',
+      lastEnabledTime:
+        encryption?.services?.file?.lastEnabledTime?.toUTCString() || '',
       keyType: encryption?.services?.file?.keyType || '',
     },
     encryptionServiceTable: {
       enabled: encryption?.services?.table?.enabled ? t.yes : t.no,
-      lastEnabledTime: encryption?.services?.table?.lastEnabledTime?.toUTCString() || '',
+      lastEnabledTime:
+        encryption?.services?.table?.lastEnabledTime?.toUTCString() || '',
       keyType: encryption?.services?.table?.keyType || '',
     },
     encryptionServiceQueue: {
       enabled: encryption?.services?.queue?.enabled ? t.yes : t.no,
-      lastEnabledTime: encryption?.services?.blob?.lastEnabledTime?.toUTCString() || '',
+      lastEnabledTime:
+        encryption?.services?.blob?.lastEnabledTime?.toUTCString() || '',
       keyType: encryption?.services?.blob?.keyType || '',
     },
     encryptionKeySource: encryption?.keySource || '',
-    encryptionRequireInfrastructureEncryption: encryption?.requireInfrastructureEncryption ? t.yes : t.no,
-    encryptionKeyVaultPropertyKeyName: encryption?.keyVaultProperties?.keyName || '',
-    encryptionKeyVaultPropertyKeyVersion: encryption?.keyVaultProperties?.keyVersion || '',
-    encryptionKeyVaultPropertyKeyVaultUri: encryption?.keyVaultProperties?.keyVaultUri || '',
-    encryptionKeyVaultPropertyCurrentVersionedKeyIdentifier: encryption?.keyVaultProperties?.currentVersionedKeyIdentifier || '',
-    encryptionKeyVaultPropertyLastKeyRotationTimestamp: encryption?.keyVaultProperties?.lastKeyRotationTimestamp?.toUTCString() || '',
-    encryptionUserAssignedIdentity: encryption?.encryptionIdentity?.encryptionUserAssignedIdentity || '',
+    encryptionRequireInfrastructureEncryption:
+      encryption?.requireInfrastructureEncryption ? t.yes : t.no,
+    encryptionKeyVaultPropertyKeyName:
+      encryption?.keyVaultProperties?.keyName || '',
+    encryptionKeyVaultPropertyKeyVersion:
+      encryption?.keyVaultProperties?.keyVersion || '',
+    encryptionKeyVaultPropertyKeyVaultUri:
+      encryption?.keyVaultProperties?.keyVaultUri || '',
+    encryptionKeyVaultPropertyCurrentVersionedKeyIdentifier:
+      encryption?.keyVaultProperties?.currentVersionedKeyIdentifier || '',
+    encryptionKeyVaultPropertyLastKeyRotationTimestamp:
+      encryption?.keyVaultProperties?.lastKeyRotationTimestamp?.toUTCString() ||
+      '',
+    encryptionUserAssignedIdentity:
+      encryption?.encryptionIdentity?.encryptionUserAssignedIdentity || '',
     accessTier,
-    azureFilesIdentityBasedAuthenticationDirectoryServiceOptions: azureFilesIdentityBasedAuthentication?.directoryServiceOptions || '',
+    azureFilesIdentityBasedAuthenticationDirectoryServiceOptions:
+      azureFilesIdentityBasedAuthentication?.directoryServiceOptions || '',
     azureFilesIdentityBasedAuthenticationActiveDirectoryProperties: {
-      domainName: azureFilesIdentityBasedAuthentication?.activeDirectoryProperties?.domainName || '',
-      netBiosDomainName: azureFilesIdentityBasedAuthentication?.activeDirectoryProperties?.netBiosDomainName || '',
-      forestName: azureFilesIdentityBasedAuthentication?.activeDirectoryProperties?.forestName || '',
-      domainGuid:  azureFilesIdentityBasedAuthentication?.activeDirectoryProperties?.domainGuid || '',
-      domainSid: azureFilesIdentityBasedAuthentication?.activeDirectoryProperties?.domainSid || '',
-      azureStorageSid: azureFilesIdentityBasedAuthentication?.activeDirectoryProperties?.azureStorageSid || '',
+      domainName:
+        azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
+          ?.domainName || '',
+      netBiosDomainName:
+        azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
+          ?.netBiosDomainName || '',
+      forestName:
+        azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
+          ?.forestName || '',
+      domainGuid:
+        azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
+          ?.domainGuid || '',
+      domainSid:
+        azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
+          ?.domainSid || '',
+      azureStorageSid:
+        azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
+          ?.azureStorageSid || '',
     },
     enableHttpsTrafficOnly: enableHttpsTrafficOnly ? t.yes : t.no,
     networkRuleSetByPass: networkRuleSet?.bypass || '',
-    networkRuleResourceAccessRules: networkRuleSet?.resourceAccessRules?.map(
-      rar => formatResourceAccessRule(rar)
-    ) || [],
-    networkRuleVirtualNetworkRules: networkRuleSet?.virtualNetworkRules?.map(
-      vnr => formatVirtualNetworkRule(vnr)
-    ) || [],
-    networkRuleIpRules: networkRuleSet?.ipRules?.map(
-      ir => formatIpRule(ir)
-    ) || [],
+    networkRuleResourceAccessRules:
+      networkRuleSet?.resourceAccessRules?.map(rar =>
+        formatResourceAccessRule(rar)
+      ) || [],
+    networkRuleVirtualNetworkRules:
+      networkRuleSet?.virtualNetworkRules?.map(vnr =>
+        formatVirtualNetworkRule(vnr)
+      ) || [],
+    networkRuleIpRules:
+      networkRuleSet?.ipRules?.map(ir => formatIpRule(ir)) || [],
     networkRuleSetDefaultAction: networkRuleSet?.defaultAction || '',
     isHnsEnabled: isHnsEnabled ? t.yes : t.no,
     geoReplicationStatsStatus: geoReplicationStats?.status || '',
-    geoReplicationStatsLastSyncTime: geoReplicationStats?.lastSyncTime?.toUTCString() || '',
-    geoReplicationStatsCanFailover: geoReplicationStats?.canFailover? t.yes : t.no,
-    failoverInProgress: failoverInProgress? t.yes : t.no,
+    geoReplicationStatsLastSyncTime:
+      geoReplicationStats?.lastSyncTime?.toUTCString() || '',
+    geoReplicationStatsCanFailover: geoReplicationStats?.canFailover
+      ? t.yes
+      : t.no,
+    failoverInProgress: failoverInProgress ? t.yes : t.no,
     largeFileSharesState,
-    privateEndpointConnections: privateEndpointConnections?.map(
-      privateEndpointConnection => formatPrivateEndpointConnection(privateEndpointConnection)
-    ) || [],
+    privateEndpointConnections:
+      privateEndpointConnections?.map(privateEndpointConnection =>
+        formatPrivateEndpointConnection(privateEndpointConnection)
+      ) || [],
     routingPreferenceChoice: routingPreference?.routingChoice || '',
-    routingPreferencePublishMicrosoftEndpoints: routingPreference?.publishMicrosoftEndpoints? t.yes : t.no,
-    routingPreferencePublishInternetEndpoints: routingPreference?.publishInternetEndpoints? t.yes : t.no,
-    allowBlobPublicAccess: allowBlobPublicAccess? t.yes : t.no,
+    routingPreferencePublishMicrosoftEndpoints:
+      routingPreference?.publishMicrosoftEndpoints ? t.yes : t.no,
+    routingPreferencePublishInternetEndpoints:
+      routingPreference?.publishInternetEndpoints ? t.yes : t.no,
+    allowBlobPublicAccess: allowBlobPublicAccess ? t.yes : t.no,
     minimumTlsVersion,
-    allowSharedKeyAccess: allowSharedKeyAccess? t.yes : t.no,
-    enableNfsV3: enableNfsV3? t.yes : t.no,
+    allowSharedKeyAccess: allowSharedKeyAccess ? t.yes : t.no,
+    enableNfsV3: enableNfsV3 ? t.yes : t.no,
     region,
-    resourceGroup,
     tags: formatTagsFromMap(Tags),
   }
 }
