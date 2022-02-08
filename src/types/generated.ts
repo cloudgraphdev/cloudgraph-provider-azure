@@ -347,6 +347,21 @@ export type AzureDnsZoneRecordSetTxtRecord = {
   value?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type AzureEventGrid = AzureBaseResource & {
+  subscriptionId?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  domainName?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
 export type AzureEventHub = AzureBaseResource & {
   subscriptionId?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
@@ -805,6 +820,7 @@ export type AzureResourceGroup = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
+  eventGrids?: Maybe<Array<Maybe<AzureEventGrid>>>;
   eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;

@@ -9,6 +9,7 @@ type azureResourceGroup implements azureResource
   appServiceWebApps: [azureAppServiceWebApp] @hasInverse(field: resourceGroups)
   disks: [azureDisk] @hasInverse(field: resourceGroups)
   dns: [azureDnsZone] @hasInverse(field: resourceGroups)
+  eventGrids: [azureEventGrid] @hasInverse(field: resourceGroups)
   eventHubs: [azureEventHub] @hasInverse(field: resourceGroups)
   firewalls: [azureFirewall] @hasInverse(field: resourceGroups)
   functionApps: [azureFunctionApp] @hasInverse(field: resourceGroups)

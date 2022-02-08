@@ -5,6 +5,7 @@ export default {
   authRoleDefinition: 'authRoleDefinition',
   disk: 'disk',
   dns: 'dns',
+  eventGrid: 'eventGrid',
   eventHub: 'eventHub',
   firewall: 'firewall',
   functionApp: 'functionApp',
