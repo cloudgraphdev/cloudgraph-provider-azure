@@ -5,6 +5,7 @@ import AzureAuthRoleAssignment from '../services/authRoleAssignment'
 import AzureAuthRoleDefinition from '../services/authRoleDefinition'
 import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
+import AzureEventGrid from '../services/eventGrid'
 import AzureEventHub from '../services/eventHub'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
@@ -36,6 +37,7 @@ export default {
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
+  [services.eventGrid]: AzureEventGrid,
   [services.eventHub]: AzureEventHub,
   [services.firewall]: AzureFirewall,
   [services.functionApp]: AzureFunctionApp,

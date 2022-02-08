@@ -21,6 +21,9 @@ export default {
   // DNS Zone List
   foundDnsZoneRecordSet: (num: number): string =>
     `Found ${num} DNS Zone Record Sets`,
+  // Event Grid
+  foundEventGridDomains: (num: number): string => `Found ${num} event grid domains`,
+  foundEventGridsTopic: (num: number): string => `Found ${num} event grids topics`,
   // Event hubs
   foundEventHubNamespaces: (num: number): string =>
     `Found ${num} event hub namespaces`,

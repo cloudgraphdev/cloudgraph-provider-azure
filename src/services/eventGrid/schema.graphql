@@ -1,0 +1,19 @@
+type azureEventGrid implements azureBaseResource
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroup: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  domainName: String @search(by: [hash, regexp])
+  resourceGroups: [azureResourceGroup] @hasInverse(field: eventGrids)
+}
