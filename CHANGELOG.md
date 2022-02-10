@@ -1,3 +1,10 @@
+# [0.24.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.23.0...0.24.0) (2022-02-10)
+
+
+### Features
+
+* **privateDns:** Add privateDns service ([26f7711](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/26f7711bd1125999e08e14a58ab118d229ed27ff))
+
 # [0.23.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.22.0...0.23.0) (2022-02-08)
 
 
