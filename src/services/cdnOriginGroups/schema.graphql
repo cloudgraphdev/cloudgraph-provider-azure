@@ -1,0 +1,40 @@
+type azureCdnHealthProbeParameters {
+  probePath: String @search(by: [hash, regexp])
+  probeRequestType: String @search(by: [hash, regexp])
+  probeProtocol: String @search(by: [hash, regexp])
+  probeIntervalInSeconds: Int @search
+}
+
+type azureCdnHttpErrorRangeParameters {
+  id: String! @id @search(by: [hash, regexp])
+  begin: Int @search
+  end: Int @search
+}
+
+type azureCdnResponseBasedOriginErrorDetectionParameters {
+  responseBasedDetectedErrorTypes: String @search(by: [hash, regexp])
+  responseBasedFailoverThresholdPercentage: Int @search
+  httpErrorRanges: [azureCdnHttpErrorRangeParameters]
+}
+
+type azureCdnOriginGroup implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  healthProbeSettings: azureCdnHealthProbeParameters
+  trafficRestorationTimeToHealedOrNewEndpointsInMinutes: Int @search
+  responseBasedOriginErrorDetectionSettings: azureCdnResponseBasedOriginErrorDetectionParameters
+  resourceState: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  resourceGroups: [azureResourceGroup] @hasInverse(field: cdnOriginGroups) # convert to singular resourceGroup
+  cdnEndpoints: [azureCdnEndpoint] @hasInverse(field: cdnOriginGroups)
+  cdnOrigins: [azureCdnOrigin] @hasInverse(field: cdnOriginGroups)
+}

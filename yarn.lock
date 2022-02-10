@@ -52,6 +52,19 @@
     "@azure/ms-rest-js" "^2.2.0"
     tslib "^1.9.3"
 
+"@azure/arm-cdn@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-cdn/-/arm-cdn-6.0.0.tgz#63b90d0a444c32014da30c9dec5566aa679204f6"
+  integrity sha512-QTGYbc/NEYXekCa1h5EmyDE6qzhBuLWRlQ8AXoXydxHnrII3kLYl++jnuaD5Q99ZsT83DT1vLWls/at81Q78xw==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-compute@^16.5.0":
   version "16.5.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-compute/-/arm-compute-16.5.0.tgz#2ca6e85c9c8c25e12a0cd9dc31311a32087140cf"

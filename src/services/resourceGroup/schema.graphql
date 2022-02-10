@@ -25,4 +25,9 @@ type azureResourceGroup implements azureResource
     @hasInverse(field: resourceGroups)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroups)
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroups)
+  cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroups)
+  cdnEndpoints: [azureCdnEndpoint] @hasInverse(field: resourceGroups)
+  cdnCustomDomains: [azureCdnCustomDomain] @hasInverse(field: resourceGroups)
+  cdnOrigins: [azureCdnOrigin] @hasInverse(field: resourceGroups)
+  cdnOriginGroups: [azureCdnOriginGroup] @hasInverse(field: resourceGroups)
 }

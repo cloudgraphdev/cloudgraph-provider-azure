@@ -81,6 +81,16 @@ export default {
     `Fetched data from Azure REST API: ${url}`,
   /* Other */
   fetchingMoreRestApiData: 'Found more REST API data, fetching more data...',
-   /* Private Dns zones */
-   foundPrivateDnsZones: (num: number): string => `Found ${num} private dns zones`,
+  /* Private Dns zones */
+  foundPrivateDnsZones: (num: number): string => `Found ${num} private dns zones`,
+  /* CDN Profiles */
+  foundCdnProfiles: (num: number): string => `Found ${num} CDN profiles`,
+  /* CDN Endpoints */
+  foundCdnEndpoints: (num: number): string => `Found ${num} CDN endpoints`,
+  /* CDN Custom Domains */
+  foundCdnCustomDomains: (num: number): string => `Found ${num} CDN custom domains`,
+  /* CDN Origins */
+  foundCdnOrigins: (num: number): string => `Found ${num} CDN origins`,
+  /* CDN Origin Groups */
+  foundCdnOriginGroups: (num: number): string => `Found ${num} CDN origin groups`,
 }

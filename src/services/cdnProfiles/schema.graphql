@@ -1,0 +1,13 @@
+type azureCdnProfile implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  resourceState: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  frontdoorId: String @search(by: [hash, regexp])
+  sku: String @search(by: [hash, regexp])
+  resourceGroups: [azureResourceGroup] @hasInverse(field: cdnProfiles) # convert to singular resourceGroup
+  cdnEndpoints: [azureCdnEndpoint] @hasInverse(field: cdnProfiles)
+}

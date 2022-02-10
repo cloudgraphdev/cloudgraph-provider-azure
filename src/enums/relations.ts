@@ -8,4 +8,6 @@ export default {
   [services.appServicePlan]: [services.appServiceWebApp],
   [services.storageAccount]: [services.storageContainer],
   [services.storageContainer]: [services.storageBlob],
+  [services.cdnProfiles]: [services.cdnEndpoints],
+  [services.cdnEndpoints]: [services.cdnCustomDomains, services.cdnOrigins, services.cdnOriginGroups],
 }
