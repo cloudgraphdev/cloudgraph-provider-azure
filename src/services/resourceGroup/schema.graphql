@@ -24,4 +24,5 @@ type azureResourceGroup implements azureResource
   virtualMachineScaleSets: [azureVirtualMachineScaleSet]
     @hasInverse(field: resourceGroups)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroups)
+  privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroups)
 }

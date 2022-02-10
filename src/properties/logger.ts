@@ -81,4 +81,6 @@ export default {
     `Fetched data from Azure REST API: ${url}`,
   /* Other */
   fetchingMoreRestApiData: 'Found more REST API data, fetching more data...',
+   /* Private Dns zones */
+   foundPrivateDnsZones: (num: number): string => `Found ${num} private dns zones`,
 }

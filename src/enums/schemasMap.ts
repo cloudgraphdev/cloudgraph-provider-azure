@@ -18,6 +18,7 @@ export default {
   [services.monitorInsightsActivityLogAlertRule]: 'azureMonitorInsightsActivityLogAlertRule',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.policyAssignment]: 'azurePolicyAssignment',
+  [services.privateDns]: 'azurePrivateDnsZone',
   [services.publicIp]: 'azurePublicIp',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityAssesments]: 'azureSecurityAssesments',

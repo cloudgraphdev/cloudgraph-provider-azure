@@ -771,6 +771,19 @@ export type AzurePolicyAssignmentParameters = {
   value?: Maybe<Array<Maybe<AzurePolicyAssignmentParameterValue>>>;
 };
 
+export type AzurePrivateDnsZone = AzureResource & {
+  etag?: Maybe<Scalars['String']>;
+  maxNumberOfRecordSets?: Maybe<Scalars['Int']>;
+  numberOfRecordSets?: Maybe<Scalars['Int']>;
+  maxNumberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
+  numberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
+  maxNumberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
+  numberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  internalId?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
 export type AzurePublicIp = AzureResource & {
   tier?: Maybe<Scalars['String']>;
   allocationMethod?: Maybe<Scalars['String']>;
@@ -834,6 +847,7 @@ export type AzureResourceGroup = AzureResource & {
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
 };
 
 export type AzureSecurityAssesment = AzureBaseResource & {
