@@ -114,6 +114,19 @@
     "@azure/ms-rest-js" "^1.11.0"
     tslib "^1.9.3"
 
+"@azure/arm-mysql@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-mysql/-/arm-mysql-5.0.0.tgz#9afcfbc136e80f54771d8d433d9a62ca96bdb78a"
+  integrity sha512-Cnuqd9MdyzVe6G0bjeG64w6MFglQonD5MWD97lAGzRm29L3Szttwt9I7khVdpos/jlDFpspOIHH/7iJ0i1TBwQ==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-network@^25.4.0":
   version "25.4.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-network/-/arm-network-25.4.0.tgz#4ed36be7c1f2ea6b5e0bc121dde33e4175cf5a92"
@@ -131,6 +144,19 @@
   dependencies:
     "@azure/core-auth" "^1.3.0"
     "@azure/core-client" "^1.0.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
+"@azure/arm-postgresql@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-postgresql/-/arm-postgresql-6.0.0.tgz#b55b6b26c9c6c4f02afa313c8fb01b8af4a6aaf7"
+  integrity sha512-7t9kVbUzfmd4OpbfPuZOYn6Gh/LatBg3EdHGM33vBJ6wl7bFZHMHyyF9K2rjnVnCotdqXxtByo2s5txUAgkUiA==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
     "@azure/core-paging" "^1.2.0"
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
@@ -170,6 +196,29 @@
     "@azure/core-paging" "^1.2.0"
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
+
+"@azure/arm-sql@^9.0.0":
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-sql/-/arm-sql-9.0.0.tgz#2f966a8aa5861f26c90cf7005a4fce4446664966"
+  integrity sha512-voEc9kP/S92lrNY68h+JSc67zZpSNlr3XYjmnShC/kMlNApy2io8ODsgpU9wuXdSDE++UUeRSNDT7pTCJff8eg==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
+"@azure/arm-sqlvirtualmachine@^4.1.1":
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/@azure/arm-sqlvirtualmachine/-/arm-sqlvirtualmachine-4.1.1.tgz#7c257a272ec071536cbd22e4a367c1d515ed99b7"
+  integrity sha512-z47ZyQcyn93Tanlfjm8z/IwP8c0COQ6IoUZR561lArx34TaqygE+Tw8OvJ8YL91zMNoLrsfwvrtJQshE3LOZvQ==
+  dependencies:
+    "@azure/core-auth" "^1.1.4"
+    "@azure/ms-rest-azure-js" "^2.1.0"
+    "@azure/ms-rest-js" "^2.2.0"
+    tslib "^1.10.0"
 
 "@azure/arm-storage@^16.1.2":
   version "16.1.2"

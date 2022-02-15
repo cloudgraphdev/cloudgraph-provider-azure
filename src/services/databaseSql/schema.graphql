@@ -1,0 +1,122 @@
+type azureDatabaseSql implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  kind: String @search(by: [hash, regexp])
+  managedBy: String @search(by: [hash, regexp])
+  sku: azureDatabaseSqlDiskSku
+  identity: azureDatabaseSqlDatabaseIdentity
+  createMode: String @search(by: [hash, regexp])
+  collation: String @search(by: [hash, regexp])
+  maxSizeBytes: String @search(by: [hash, regexp])
+  sampleName: String @search(by: [hash, regexp])
+  elasticPoolId: String @search(by: [hash, regexp])
+  sourceDatabaseId: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+  databaseId: String @search(by: [hash, regexp])
+  creationDate: String @search(by: [hash, regexp])
+  currentServiceObjectiveName: String @search(by: [hash, regexp])
+  requestedServiceObjectiveName: String @search(by: [hash, regexp])
+  defaultSecondaryLocation: String @search(by: [hash, regexp])
+  failoverGroupId: String @search(by: [hash, regexp])
+  restorePointInTime: String @search(by: [hash, regexp])
+  sourceDatabaseDeletionDate: String @search(by: [hash, regexp])
+  recoveryServicesRecoveryPointId: String @search(by: [hash, regexp])
+  longTermRetentionBackupResourceId: String @search(by: [hash, regexp])
+  recoverableDatabaseId: String @search(by: [hash, regexp])
+  restorableDroppedDatabaseId: String @search(by: [hash, regexp])
+  catalogCollation: String @search(by: [hash, regexp])
+  zoneRedundant: Boolean @search
+  licenseType: String @search(by: [hash, regexp])
+  maxLogSizeBytes: Int @search
+  earliestRestoreDate: String @search(by: [hash, regexp])
+  readScale: String @search(by: [hash, regexp])
+  highAvailabilityReplicaCount: Int @search
+  secondaryType: String @search(by: [hash, regexp])
+  currentSku: azureDatabaseSqlSku
+  autoPauseDelay: Int @search
+  currentBackupStorageRedundancy: String @search(by: [hash, regexp])
+  requestedBackupStorageRedundancy: String @search(by: [hash, regexp])
+  minCapacity: Int @search
+  pausedDate: String @search(by: [hash, regexp])
+  resumedDate: String @search(by: [hash, regexp])
+  maintenanceConfigurationId: String @search(by: [hash, regexp])
+  isLedgerOn: Boolean @search
+  isInfraEncryptionEnabled: Boolean @search
+  federatedClientId: String @search(by: [hash, regexp])
+  primaryDelegatedIdentityClientId: String @search(by: [hash, regexp])
+  resourceGroups: [azureResourceGroup] @hasInverse(field: databaseSql) # convert to singular resourceGroup
+}
+
+type azureDatabaseSqlDiskSku
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  capacity: Int @search
+}
+
+type azureDatabaseSqlDatabaseIdentity
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureDatabaseSqlUserAssignedIdentity]
+  delegatedResources: [azureDatabaseSqldelegatedResource]
+}
+
+type azureDatabaseSqlDatabaseUserIdentity
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  clientId: String @search(by: [hash, regexp])
+}
+type azureDatabaseSqlDelegation
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  resourceId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlUserAssignedIdentity
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: azureDatabaseSqlDatabaseUserIdentity
+}
+
+type azureDatabaseSqldelegatedResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: azureDatabaseSqlDelegation
+}
+
+type azureDatabaseSqlSku
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  capacity: Int @search
+}

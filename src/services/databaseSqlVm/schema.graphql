@@ -1,0 +1,152 @@
+type azureDatabaseSqlVm implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  identity: azureDatabaseSqlVmResourceIdentity
+  virtualMachineResourceId: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  sqlImageOffer: String @search(by: [hash, regexp])
+  sqlServerLicenseType: String @search(by: [hash, regexp])
+  sqlManagement: String @search(by: [hash, regexp])
+  sqlImageSku: String @search(by: [hash, regexp])
+  sqlVirtualMachineGroupResourceId: String @search(by: [hash, regexp])
+  wsfcDomainCredentials: azureDatabaseSqlVmWsfcDomainCredentials
+  autoPatchingSettings: azureDatabaseSqlVmAutoPatchingSettings
+  autoBackupSettings: azureDatabaseSqlVmAutoBackupSettings
+  keyVaultCredentialSettings: azureDatabaseSqlVmKeyVaultCredentialSettings
+  serverConfigurationsManagementSettings: azureDatabaseSqlVmServerConfigurationsManagementSettings
+  storageConfigurationSettings: azureDatabaseSqlVmStorageConfigurationSettings
+  resourceGroups: [azureResourceGroup] @hasInverse(field: databaseSqlVm) # convert to singular resourceGroup
+}
+
+type azureDatabaseSqlVmResourceIdentity
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmWsfcDomainCredentials
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  clusterBootstrapAccountPassword: String @search(by: [hash, regexp])
+  clusterOperatorAccountPassword: String @search(by: [hash, regexp])
+  sqlServiceAccountPassword: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmAutoPatchingSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  enable: Boolean @search
+  dayOfWeek: String @search(by: [hash, regexp])
+  maintenanceWindowStartingHour: Int @search
+  maintenanceWindowDuration: Int @search
+}
+
+type azureDatabaseSqlVmAutoBackupSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  enable: Boolean @search
+  enableEncryption: Boolean @search
+  retentionPeriod: Int @search
+  storageAccountUrl: String @search(by: [hash, regexp])
+  storageAccessKey: String @search(by: [hash, regexp])
+  password: String @search(by: [hash, regexp])
+  backupSystemDbs: Boolean @search
+  backupScheduleType: String @search(by: [hash, regexp])
+  fullBackupFrequency: String @search(by: [hash, regexp])
+  fullBackupStartTime: Int @search
+  fullBackupWindowHours: Int @search
+  logBackupFrequency: Int @search
+}
+
+type azureDatabaseSqlVmKeyVaultCredentialSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  enable: Boolean @search
+  credentialName: String @search(by: [hash, regexp])
+  azureKeyVaultUrl: String @search(by: [hash, regexp])
+  servicePrincipalName: String @search(by: [hash, regexp])
+  servicePrincipalSecret: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmServerConfigurationsManagementSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  sqlConnectivityUpdateSettings: azureDatabaseSqlVmSqlConnectivityUpdateSettings
+  sqlWorkloadTypeUpdateSettings: azureDatabaseSqlVmSqlWorkloadTypeUpdateSettings
+  sqlStorageUpdateSettings: azureDatabaseSqlVmSqlStorageUpdateSettings
+  additionalFeaturesServerConfigurations: azureDatabaseSqlVmAdditionalFeaturesServerConfigurations
+}
+
+type azureDatabaseSqlVmSqlConnectivityUpdateSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  connectivityType: String @search(by: [hash, regexp])
+  port: Int @search
+  sqlAuthUpdateUserName: String @search(by: [hash, regexp])
+  sqlAuthUpdatePassword: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmSqlWorkloadTypeUpdateSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  sqlWorkloadType: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmSqlStorageUpdateSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  diskCount: Int @search
+  startingDeviceId: Int @search
+  diskConfigurationType: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmAdditionalFeaturesServerConfigurations
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  isRServicesEnabled: Boolean @search
+}
+
+type azureDatabaseSqlVmStorageConfigurationSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  sqlDataSettings: azureDatabaseSqlVmSQLStorageSettings
+  sqlLogSettings: azureDatabaseSqlVmSQLStorageSettings
+  sqlTempDbSettings: azureDatabaseSqlVmSQLStorageSettings
+  diskConfigurationType: String @search(by: [hash, regexp])
+  storageWorkloadType: String @search(by: [hash, regexp])
+}
+
+type azureDatabaseSqlVmSQLStorageSettings
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  luns: [Int]
+  defaultFilePath: String @search(by: [hash, regexp])
+}
