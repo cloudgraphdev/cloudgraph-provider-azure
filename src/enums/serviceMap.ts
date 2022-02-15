@@ -27,6 +27,11 @@ import AzureTag from '../services/tag'
 import AzureVirtualMachine from '../services/virtualMachine'
 import AzureVirtualNetwork from '../services/virtualNetwork'
 import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
+import AzureCdnEndpoints from '../services/cdnEndpoints'
+import AzureCdnProfiles from '../services/cdnProfiles'
+import AzureCdnCustomDomains from '../services/cdnCustomDomains'
+import AzureCdnOrigins from '../services/cdnOrigins'
+import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -37,6 +42,11 @@ export default {
   [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
+  [services.cdnCustomDomains]: AzureCdnCustomDomains,
+  [services.cdnEndpoints]: AzureCdnEndpoints,
+  [services.cdnProfiles]: AzureCdnProfiles,
+  [services.cdnOrigins]: AzureCdnOrigins,
+  [services.cdnOriginGroups]: AzureCdnOriginGroups,
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
   [services.eventGrid]: AzureEventGrid,

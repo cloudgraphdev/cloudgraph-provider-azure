@@ -363,6 +363,54 @@ export default ({
         }
       }
     }
+    /**
+     * Find related CDN Profiles
+     */
+     const cdnProfiles: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.cdnProfiles)
+    if (cdnProfiles?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        cdnProfiles.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const cdnProfile of dataAtRegion) {
+          const { id } = cdnProfile
+          connections.push({
+            id,
+            resourceType: services.cdnProfiles,
+            relation: 'child',
+            field: 'cdnProfiles',
+          })
+        }
+      }
+    }
+    /**
+     * Find related CDN Endpoints
+     */
+     const cdnEndpoints: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.cdnEndpoints)
+    if (cdnEndpoints?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        cdnEndpoints.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const cdnEndpoint of dataAtRegion) {
+          const { id } = cdnEndpoint
+          connections.push({
+            id,
+            resourceType: services.cdnEndpoints,
+            relation: 'child',
+            field: 'cdnEndpoints',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

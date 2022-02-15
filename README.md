@@ -33,34 +33,39 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service                             | Relations                                                              |
-| ----------------------------------- | ---------------------------------------------------------------------- |
-| appServicePlan                      | resourceGroup, appServiceWebApp                                        |
-| appServiceWebApp                    | resourceGroup, appServicePlan, storageAccount                          |
-| authRoleAssignment                  |                                                                        |
-| authRoleDefinition                  |                                                                        |
-| disk                                | resourceGroup, virtualMachine                                          |
-| dns                                 | resourceGroup                                                          |
-| eventGrid                           | resourceGroup                                                          |
-| eventHub                            | resourceGroup, storageAccount                                          |
-| firewall                            | publicIp, virtualNetwork                                               |
-| functionApp                         | resourceGroup                                                          |
-| keyVault                            | resourceGroup                                                          |
-| monitorInsightsActivityLogAlertRule |                                                                        |
-| networkInterface                    | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork |
-| policyAssignment                    |                                                                        |
-| privateDns                          | resourceGroup                                                          |
-| publicIp                            | networkInterface, resourceGroup                                        |
-| resourceGroup                       | **all services**                                                       |
-| securityAssessments                 |                                                                        |
-| securityGroup                       | networkInterface, resourceGroup                                        |
-| securityPricings                    |                                                                        |
-| securitySettings                    |                                                                        |
-| storageAccount                      | resourceGroup, storageContainer                                        |
-| storageContainer                    | resourceGroup, storageAccount                                          |
-| virtualMachine                      | disk, networkInterface, resourceGroup, virtualNetwork                  |
-| virtualMachineScaleSet              | resourceGroup                                                          |
-| virtualNetwork                      | networkInterface, resourceGroup virtualMachine                         |
+| Service                             | Relations                                                                 |
+| ----------------------------------- | ------------------------------------------------------------------------- |
+| appServicePlan                      | resourceGroup, appServiceWebApp                                           |
+| appServiceWebApp                    | resourceGroup, appServicePlan, storageAccount                             |
+| authRoleAssignment                  |                                                                           |
+| authRoleDefinition                  |                                                                           |
+| cdnCustomDomains                    | cdnEndpoints, resourceGroup                                               |
+| cdnEndpoints                        | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |
+| cdnProfiles                         | cdnEndpoints, resourceGroup                                               |
+| cdnOrigins                          | cdnEndpoints, cdnOriginGroups, resourceGroup                              |
+| cdnOriginGroups                     | cdnEndpoints, cdnOrigins, resourceGroup                                   |
+| disk                                | resourceGroup, virtualMachine                                             |
+| dns                                 | resourceGroup                                                             |
+| eventGrid                           | resourceGroup                                                             |
+| eventHub                            | resourceGroup, storageAccount                                             |
+| firewall                            | publicIp, virtualNetwork                                                  |
+| functionApp                         | resourceGroup                                                             |
+| keyVault                            | resourceGroup                                                             |
+| monitorInsightsActivityLogAlertRule |                                                                           |
+| networkInterface                    | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork    |
+| policyAssignment                    |                                                                           |
+| privateDns                          | resourceGroup                                                             |
+| publicIp                            | networkInterface, resourceGroup                                           |
+| resourceGroup                       | **all services**                                                          |
+| securityAssessments                 |                                                                           |
+| securityGroup                       | networkInterface, resourceGroup                                           |
+| securityPricings                    |                                                                           |
+| securitySettings                    |                                                                           |
+| storageAccount                      | resourceGroup, storageContainer                                           |
+| storageContainer                    | resourceGroup, storageAccount                                             |
+| virtualMachine                      | disk, networkInterface, resourceGroup, virtualNetwork                     |
+| virtualMachineScaleSet              | resourceGroup                                                             |
+| virtualNetwork                      | networkInterface, resourceGroup virtualMachine                            |
 
 ## Development
 

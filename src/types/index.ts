@@ -87,3 +87,8 @@ export interface AzureRestApiClientRequestParams {
   resourceGroupName: string
   filters?: string[]
 }
+
+export interface AzureDeliveryRuleConditionAction {
+  name: string
+  parameters: any
+}
