@@ -1,3 +1,10 @@
+# [0.25.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.24.0...0.25.0) (2022-02-15)
+
+
+### Features
+
+* **services:** Add Azure Content Delivery Network services ([7012fd2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/7012fd29accfe915191050a2699d04137ef8f26c))
+
 # [0.24.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.23.0...0.24.0) (2022-02-10)
 
 
