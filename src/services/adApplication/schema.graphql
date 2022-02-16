@@ -1,0 +1,58 @@
+type azureADApplicationRole @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  allowedMemberTypes: [String] @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  isEnabled: Boolean @search
+  origin: String @search(by: [hash, regexp]) # Specifies if the app role is defined on the application object or on the servicePrincipal entity
+  value: String @search(by: [hash, regexp])
+}
+
+type azureADApplicationRoleAssignment @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  appRoleId: String @search(by: [hash, regexp])
+  createdDateTime: String @search(by: [hash, regexp])
+  principalDisplayName: String @search(by: [hash, regexp])
+  principalId: String @search(by: [hash, regexp]) # The unique identifier (id) for the user, group or service principal being granted the app role
+  principalType: String @search(by: [hash, regexp]) # The type of the assigned principal. This can either be User, Group or ServicePrincipal
+  resourceDisplayName: String @search(by: [hash, regexp])
+  resourceId: String @search(by: [hash, regexp]) # The unique identifier (id) for the resource service principal for which the assignment is made
+}
+
+type azureADApplication
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  appId: String @search(by: [hash, regexp])
+  applicationTemplateId: String @search(by: [hash, regexp])
+  apiAcceptMappedClaims: Boolean @search
+  apiKnownClientApplications: [String] @search(by: [hash, regexp])
+  apiPreAuthorizedApplications: [String] @search(by: [hash, regexp])
+  appRoles: [azureADApplicationRole]
+  createdDateTime: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  disabledByMicrosoftStatus: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  groupMembershipClaims: String @search(by: [hash, regexp])
+  identifierUris: [String] @search(by: [hash, regexp])
+  isDeviceOnlyAuthSupported: Boolean @search
+  isFallbackPublicClient: Boolean @search
+  notes: String @search(by: [hash, regexp])
+  oauth2RequirePostResponse: Boolean @search
+  publicClientRedirectUris: [String] @search(by: [hash, regexp])
+  publisherDomain: String @search(by: [hash, regexp])
+  signInAudience: String @search(by: [hash, regexp])
+  spaApplicationRedirectUris: [String] @search(by: [hash, regexp])
+  webAppHomePageUrl: String @search(by: [hash, regexp])
+  webAppRedirectUris: [String] @search(by: [hash, regexp])
+  tags: [azureRawTag]
+  authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: applications)
+  instancedBy: [azureADServicePrincipal] @hasInverse(field: instanceOf)
+  ownerGroups: [azureADGroup] @hasInverse(field: appOwnerOf)
+  ownerServicePrincipals: [azureADServicePrincipal] @hasInverse(field: appOwnerOf)
+  ownerUsers: [azureADUser] @hasInverse(field: appOwnerOf)
+}

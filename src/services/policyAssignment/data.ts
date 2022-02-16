@@ -8,6 +8,7 @@ import { AzureServiceInput } from '../../types'
 import { tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
+import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -39,7 +40,7 @@ export default async ({
           if (policyAssignment) {
             const { location, ...rest } = policyAssignment
             const resourceGroup = getResourceGroupFromEntity(rest)
-            const region = (location && lowerCaseLocation(location)) || 'global'
+            const region = (location && lowerCaseLocation(location)) || regionMap.global
             policyAssignmentsData.push({
               ...rest,
               region,

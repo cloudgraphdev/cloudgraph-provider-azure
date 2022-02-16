@@ -10,6 +10,7 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils/index'
+import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -56,7 +57,7 @@ export default async ({
               if (webApp) {
                 const { location, extendedLocation, identity, tags, ...rest } =
                   webApp
-                const region = location && lowerCaseLocation(location) || 'global'
+                const region = location && lowerCaseLocation(location) || regionMap.global
                 return {
                   ...rest,
                   appServicePlanId: appService.id,

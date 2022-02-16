@@ -196,7 +196,7 @@ export default ({
     accessTier,
     azureFilesIdentityBasedAuthenticationDirectoryServiceOptions:
       azureFilesIdentityBasedAuthentication?.directoryServiceOptions || '',
-    azureFilesIdentityBasedAuthenticationActiveDirectoryProperties: {
+    azureFilesIdentityBasedAuthenticationADProperties: {
       domainName:
         azureFilesIdentityBasedAuthentication?.activeDirectoryProperties
           ?.domainName || '',

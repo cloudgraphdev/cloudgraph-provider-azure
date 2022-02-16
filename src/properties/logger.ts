@@ -1,4 +1,9 @@
 export default {
+  /* Active Directory */
+  foundAdApplications: (num: number): string => `Found ${num} AD applications`,
+  foundAdGroups: (num: number): string => `Found ${num} AD groups`,
+  foundAdServicePrincipals: (num: number): string => `Found ${num} AD service principals`,
+  foundAdUsers: (num: number): string => `Found ${num} AD users`,
   /* App Service */
   foundAppServicePlans: (num: number): string => `Found ${num} app service plans`,
   foundWebApps: (num: number): string => `Found ${num} web apps`,
@@ -10,7 +15,7 @@ export default {
   /* Service logs */
   // Auth Role Assignments
   foundAuthRoleAssignments: (num: number): string =>
-    `Found ${num} authorization role Assignments`,
+    `Found ${num} authorization role assignments`,
   // Auth Role Definitions
   foundAuthRoleDefinitions: (num: number): string =>
     `Found ${num} authorization role definitions`,

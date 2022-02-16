@@ -9,6 +9,7 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput } from '../../types'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { tryCatchWrapper } from '../../utils'
+import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -32,7 +33,7 @@ export default async ({
     const clientGlobal = new SecurityCenter(
       tokenCredentials,
       subscriptionId,
-      'global'
+      regionMap.global
     )
     const locationsIterable = clientGlobal.locations.list()
     const locations: string[] = []

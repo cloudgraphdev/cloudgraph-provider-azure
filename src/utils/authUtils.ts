@@ -4,6 +4,7 @@ import { TokenCredential } from '@azure/identity'
 import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth'
 import { ConfidentialClientApplication } from '@azure/msal-node'
 import { URLSearchParams } from 'url'
+import { AuthenticationProvider } from '@microsoft/microsoft-graph-client/lib/src/IAuthenticationProvider'
 import { AzureServiceConfig } from '../types'
 import { generateAxiosRequest } from './apiUtils'
 
@@ -39,14 +40,10 @@ export const getAadTokenViaAxios = async ({
   }
 }
 
-export const getAadTokenViaMsalForGraph = async ({
-  clientId,
-  tenantId,
-  clientSecret,
-}: AzureServiceConfig): Promise<{
-  result: any
-  getToken: () => Promise<any>
-}> => {
+export const getAuthProviderViaMsalForGraph = async (
+  { clientId, tenantId, clientSecret }: AzureServiceConfig,
+  scopes: string[]
+): Promise<AuthenticationProvider> => {
   const cca = new ConfidentialClientApplication({
     auth: {
       clientId,
@@ -54,14 +51,13 @@ export const getAadTokenViaMsalForGraph = async ({
       clientSecret,
     },
   })
-  async function getToken(): Promise<any> {
-    return cca.acquireTokenByClientCredential({
-      scopes: ['https://graph.microsoft.com/.default'],
-    })
-  }
   return {
-    result: (await getToken())?.access_token,
-    getToken,
+    getAccessToken: async (): Promise<string> => {
+      const { accessToken } = await cca.acquireTokenByClientCredential({
+        scopes,
+      })
+      return accessToken
+    },
   }
 }
 
