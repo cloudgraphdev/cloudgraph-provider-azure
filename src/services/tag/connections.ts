@@ -53,7 +53,7 @@ export default ({
     /**
      * Find related App Service Plan
      */
-     const appServicePlans: {
+    const appServicePlans: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.appServicePlan)
@@ -77,7 +77,7 @@ export default ({
     /**
      * Find related App Service Web App
      */
-     const appServiceWebApps: {
+    const appServiceWebApps: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.appServiceWebApp)
@@ -359,6 +359,54 @@ export default ({
             resourceType: services.virtualMachine,
             relation: 'child',
             field: 'virtualMachines',
+          })
+        }
+      }
+    }
+    /**
+     * Find related AD Applications
+     */
+    const adApplications: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.adApplication)
+    if (adApplications?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        adApplications.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const adApplication of dataAtRegion) {
+          const { id } = adApplication
+          connections.push({
+            id,
+            resourceType: services.adApplication,
+            relation: 'child',
+            field: 'adApplications',
+          })
+        }
+      }
+    }
+    /**
+     * Find related AD Service Principals
+     */
+    const adServicePrincipals: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.adServicePrincipal)
+    if (adServicePrincipals?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        adServicePrincipals.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const adServicePrincipal of dataAtRegion) {
+          const { id } = adServicePrincipal
+          connections.push({
+            id,
+            resourceType: services.adServicePrincipal,
+            relation: 'child',
+            field: 'adServicePrincipals',
           })
         }
       }

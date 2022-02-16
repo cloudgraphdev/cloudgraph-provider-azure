@@ -1,0 +1,64 @@
+type azureADGroupResourceSpecificPermissionGrant @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  clientAppId: String @search(by: [hash, regexp])
+  clientId: String @search(by: [hash, regexp])
+  permission: String @search(by: [hash, regexp])
+  permissionType: String @search(by: [hash, regexp])
+  resourceAppId: String @search(by: [hash, regexp])
+}
+
+type azureADSettingValue @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureADGroupSetting @key(fields: "id"){
+  id: String! @id @search(by: [hash, regexp])
+  deletedDateTime: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  templateId: String @search(by: [hash, regexp])
+  values: [azureADSettingValue]
+}
+
+type azureADGroup
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  deletedDateTime: String @search(by: [hash, regexp])
+  classification: String @search(by: [hash, regexp])
+  createdDateTime: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  expirationDateTime: String @search(by: [hash, regexp])
+  groupTypes: [String] @search(by: [hash, regexp])
+  isAssignableToRole: Boolean @search
+  mail: String @search(by: [hash, regexp])
+  mailEnabled: Boolean @search
+  mailNickname: String @search(by: [hash, regexp])
+  membershipRule: String @search(by: [hash, regexp])
+  membershipRuleProcessingState: String @search(by: [hash, regexp])
+  onPremisesDomainName: String @search(by: [hash, regexp])
+  onPremisesLastSyncDateTime: String @search(by: [hash, regexp])
+  onPremisesNetBiosName: String @search(by: [hash, regexp])
+  onPremisesSamAccountName: String @search(by: [hash, regexp])
+  onPremisesSecurityIdentifier: String @search(by: [hash, regexp])
+  onPremisesSyncEnabled: Boolean @search
+  preferredDataLocation: String @search(by: [hash, regexp])
+  preferredLanguage: String @search(by: [hash, regexp])
+  proxyAddresses: [String] @search(by: [hash, regexp])
+  renewedDateTime: String @search(by: [hash, regexp])
+  securityEnabled: Boolean @search
+  visibility: String @search(by: [hash, regexp])
+  allowExternalSenders: Boolean @search
+  isSubscribedByMail: Boolean @search
+  isArchived: Boolean @search
+  appRoleAssignments: [azureADApplicationRoleAssignment]
+  permissionGrants: [azureADGroupResourceSpecificPermissionGrant]
+  settings: [azureADGroupSetting]
+  appOwnerOf: [azureADApplication] @hasInverse(field: ownerGroups)
+  authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: groups)
+}

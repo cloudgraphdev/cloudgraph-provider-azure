@@ -5,6 +5,7 @@ import {
   RoleAssignmentsListNextResponse,
 } from '@azure/arm-authorization/esm/models'
 import CloudGraph from '@cloudgraph/sdk'
+import { regionMap } from '../../enums/regions'
 
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput } from '../../types'
@@ -52,7 +53,7 @@ export default async ({
       const resourceGroup = getResourceGroupFromEntity(role)
       return {
         resourceGroup,
-        region: 'global',
+        region: regionMap.global,
         ...role,
       }
     })

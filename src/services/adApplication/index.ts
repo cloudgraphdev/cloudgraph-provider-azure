@@ -5,7 +5,7 @@ import format from './format'
 import mutation from './mutation'
 import getData from './data'
 
-export default class AzureAuthRoleAssignment extends BaseService implements Service {
+export default class AzureADApplication extends BaseService implements Service {
   format = format.bind(this)
 
   getConnections = getConnections.bind(this)

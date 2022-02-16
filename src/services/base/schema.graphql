@@ -1,3 +1,14 @@
+interface azureKeyValueProperty
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
 interface azureSubResource
   @generate(
     query: { get: false, query: false, aggregate: false }

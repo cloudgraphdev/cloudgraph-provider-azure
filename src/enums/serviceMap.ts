@@ -1,4 +1,8 @@
 import services from './services'
+import AzureADApplication from '../services/adApplication'
+import AzureADGroup from '../services/adGroup'
+import AzureADServicePrincipal from '../services/adServicePrincipal'
+import AzureADUser from '../services/adUser'
 import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureAuthRoleAssignment from '../services/authRoleAssignment'
@@ -38,6 +42,10 @@ import AzureCdnOriginGroups from '../services/cdnOriginGroups'
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
+  [services.adApplication]: AzureADApplication,
+  [services.adGroup]: AzureADGroup,
+  [services.adServicePrincipal]: AzureADServicePrincipal,
+  [services.adUser]: AzureADUser,
   [services.appServicePlan]: AzureAppServicePlan,
   [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.authRoleAssignment]: AzureAuthRoleAssignment,

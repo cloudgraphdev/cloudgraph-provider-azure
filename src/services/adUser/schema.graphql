@@ -1,0 +1,49 @@
+type azureADUser
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  deletedDateTime: String @search(by: [hash, regexp])
+  accountEnabled: Boolean @search
+  ageGroup: String @search(by: [hash, regexp])
+  city: String @search(by: [hash, regexp])
+  companyName: String @search(by: [hash, regexp])
+  country: String @search(by: [hash, regexp])
+  createdDateTime: String @search(by: [hash, regexp])
+  creationType: String @search(by: [hash, regexp])
+  department: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  employeeHireDate: String @search(by: [hash, regexp])
+  employeeId: String @search(by: [hash, regexp])
+  employeeType: String @search(by: [hash, regexp])
+  externalUserState: String @search(by: [hash, regexp])
+  externalUserStateChangeDateTime: String @search(by: [hash, regexp])
+  givenName: String @search(by: [hash, regexp])
+  isResourceAccount: Boolean @search
+  lastPasswordChangeDateTime: String @search(by: [hash, regexp])
+  mail: String @search(by: [hash, regexp])
+  mailNickname: String @search(by: [hash, regexp])
+  officeLocation: String @search(by: [hash, regexp])
+  onPremisesDistinguishedName: String @search(by: [hash, regexp])
+  onPremisesDomainName: String @search(by: [hash, regexp])
+  onPremisesImmutableId: String @search(by: [hash, regexp])
+  onPremisesLastSyncDateTime: String @search(by: [hash, regexp])
+  onPremisesSyncEnabled: Boolean @search
+  onPremisesUserPrincipalName: String @search(by: [hash, regexp])
+  otherMails: [String] @search(by: [hash, regexp])
+  passwordPolicies: String @search(by: [hash, regexp])
+  preferredLanguage: String @search(by: [hash, regexp])
+  proxyAddresses: [String] @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  surname: String @search(by: [hash, regexp])
+  usageLocation: String @search(by: [hash, regexp])
+  userPrincipalName: String @search(by: [hash, regexp])
+  userType: String @search(by: [hash, regexp])
+  preferredName: String @search(by: [hash, regexp])
+  responsibilities: [String] @search(by: [hash, regexp])
+  appOwnerOf: [azureADApplication] @hasInverse(field: ownerUsers)
+  appRoleAssignments: [azureADApplicationRoleAssignment]
+  authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: users)
+}

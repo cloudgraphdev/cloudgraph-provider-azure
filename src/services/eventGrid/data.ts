@@ -4,6 +4,7 @@ import {
   EventGridManagementClient,
 } from '@azure/arm-eventgrid'
 import CloudGraph from '@cloudgraph/sdk'
+import { regionMap } from '../../enums/regions'
 
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput } from '../../types'
@@ -77,7 +78,7 @@ export default async ({
     const result = {}
     let numOfGroups = 0
     domainTopics.map(({ ...rest }) => {
-      const region = 'global'
+      const region = regionMap.global
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []

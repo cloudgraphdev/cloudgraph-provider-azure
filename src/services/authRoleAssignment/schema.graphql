@@ -11,4 +11,9 @@ type azureAuthRoleAssignment implements azureBaseResource
   principalId: String @search(by: [hash, regexp])
   principalType: String @search(by: [hash, regexp])
   canDelegate: Boolean @search
+  applications: [azureADApplication] @hasInverse(field: authRoleAssignments)
+  groups: [azureADGroup] @hasInverse(field: authRoleAssignments)
+  roleDefinition: [azureAuthRoleDefinition] @hasInverse(field: authRoleAssignments)
+  servicePrincipals: [azureADServicePrincipal] @hasInverse(field: authRoleAssignments)
+  users: [azureADUser] @hasInverse(field: authRoleAssignments)
 }

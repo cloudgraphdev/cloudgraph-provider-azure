@@ -1,0 +1,49 @@
+type azureADServicePrincipalEndpoint @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  deletedDateTime: String @search(by: [hash, regexp])
+  capability: String @search(by: [hash, regexp])
+  providerId: String @search(by: [hash, regexp])
+  providerName: String @search(by: [hash, regexp])
+  providerResourceId: String @search(by: [hash, regexp])
+  uri: String @search(by: [hash, regexp])
+}
+
+type azureADServicePrincipal
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  deletedDateTime: String @search(by: [hash, regexp])
+  accountEnabled: Boolean @search
+  alternativeNames: [String] @search(by: [hash, regexp])
+  appDescription: String @search(by: [hash, regexp])
+  appDisplayName: String @search(by: [hash, regexp])
+  appId: String @search(by: [hash, regexp])
+  applicationTemplateId: String @search(by: [hash, regexp])
+  appOwnerOrganizationId: String @search(by: [hash, regexp])
+  appRoleAssignmentRequired: Boolean @search
+  appRoles: [azureADApplicationRole]
+  description: String @search(by: [hash, regexp])
+  disabledByMicrosoftStatus: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  homepage: String @search(by: [hash, regexp])
+  loginUrl: String @search(by: [hash, regexp])
+  logoutUrl: String @search(by: [hash, regexp])
+  notes: String @search(by: [hash, regexp])
+  notificationEmailAddresses: [String] @search(by: [hash, regexp])
+  preferredSingleSignOnMode: String @search(by: [hash, regexp])
+  replyUrls: [String] @search(by: [hash, regexp])
+  servicePrincipalNames: [String] @search(by: [hash, regexp])
+  servicePrincipalType: String @search(by: [hash, regexp])
+  signInAudience: String @search(by: [hash, regexp])
+  tokenEncryptionKeyId: String @search(by: [hash, regexp])
+  appRoleAssignedTo: [azureADApplicationRoleAssignment]
+  appRoleAssignments: [azureADApplicationRoleAssignment]
+  endpoints: [azureADServicePrincipalEndpoint]
+  tags: [azureRawTag]
+  appOwnerOf: [azureADApplication] @hasInverse(field: ownerServicePrincipals)
+  instanceOf: [azureADApplication] @hasInverse(field: instancedBy)
+  authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: servicePrincipals)
+}

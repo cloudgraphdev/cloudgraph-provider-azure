@@ -35,10 +35,14 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 | Service                             | Relations                                                                 |
 | ----------------------------------- | ------------------------------------------------------------------------- |
+| adApplication                       | authRoleAssignment, adGroup, adServicePrincipal, adUser                   |
+| adGroup                             | adApplication, authRoleAssignment                                         |
+| adServicePrincipal                  | adApplication, authRoleAssignment                                         |
+| adUser                              | adApplication, authRoleAssignment                                         |
 | appServicePlan                      | resourceGroup, appServiceWebApp                                           |
 | appServiceWebApp                    | resourceGroup, appServicePlan, storageAccount                             |
-| authRoleAssignment                  |                                                                           |
-| authRoleDefinition                  |                                                                           |
+| authRoleAssignment                  | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
+| authRoleDefinition                  | authRoleAssignment                                                        |
 | cdnCustomDomains                    | cdnEndpoints, resourceGroup                                               |
 | cdnEndpoints                        | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |
 | cdnProfiles                         | cdnEndpoints, resourceGroup                                               |

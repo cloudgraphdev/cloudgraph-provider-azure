@@ -1,4 +1,8 @@
 export default {
+  adApplication: 'adApplication',
+  adGroup: 'adGroup',
+  adServicePrincipal: 'adServicePrincipal',
+  adUser: 'adUser',
   appServicePlan: 'appServicePlan',
   appServiceWebApp: 'appServiceWebApp',
   authRoleAssignment: 'authRoleAssignment',
