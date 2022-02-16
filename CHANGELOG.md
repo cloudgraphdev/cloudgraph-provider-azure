@@ -1,3 +1,10 @@
+# [0.26.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.25.0...0.26.0) (2022-02-16)
+
+
+### Features
+
+* **activeDirectory:** add adApplication, adGroup, adServicePrincipal and adUser services ([89712fb](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/89712fb56fc753e3f7910df20bd564565fbe4196))
+
 # [0.25.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.24.0...0.25.0) (2022-02-15)
 
 
