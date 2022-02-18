@@ -1,3 +1,10 @@
+# [0.27.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.26.0...0.27.0) (2022-02-18)
+
+
+### Features
+
+* **database:** Add database services ([36e6847](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/36e68475068aadffd837aff0501c4da338cacb67))
+
 # [0.26.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.25.0...0.26.0) (2022-02-16)
 
 
