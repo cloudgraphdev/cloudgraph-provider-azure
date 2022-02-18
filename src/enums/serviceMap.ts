@@ -7,6 +7,10 @@ import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureAuthRoleAssignment from '../services/authRoleAssignment'
 import AzureAuthRoleDefinition from '../services/authRoleDefinition'
+import AzureDatabaseMySql from '../services/databaseMySql'
+import AzureDatabasePostgreSql from '../services/databasePostgreSql'
+import AzureDatabaseSql from '../services/databaseSql'
+import AzureDatabaseSqlVm from '../services/databaseSqlVm'
 import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
 import AzureEventGrid from '../services/eventGrid'
@@ -55,6 +59,10 @@ export default {
   [services.cdnProfiles]: AzureCdnProfiles,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
+  [services.databaseMySql]: AzureDatabaseMySql,
+  [services.databasePostgreSql]: AzureDatabasePostgreSql,
+  [services.databaseSql]: AzureDatabaseSql,
+  [services.databaseSqlVm]: AzureDatabaseSqlVm,
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
   [services.eventGrid]: AzureEventGrid,

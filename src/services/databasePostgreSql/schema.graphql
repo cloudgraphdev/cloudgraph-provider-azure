@@ -1,0 +1,9 @@
+type azureDatabasePostgreSql implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  charset: String @search(by: [hash, regexp])
+  collation: String @search(by: [hash, regexp])
+  resourceGroups: [azureResourceGroup] @hasInverse(field: databasePostgreSql) # convert to singular resourceGroup
+}

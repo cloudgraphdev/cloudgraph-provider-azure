@@ -696,6 +696,211 @@ export type AzureCdnUrlSigningKey = {
   keySourceParameters?: Maybe<AzureCdnKeyVaultSigningKeyParameters>;
 };
 
+export type AzureDatabaseMySql = AzureResource & {
+  charset?: Maybe<Scalars['String']>;
+  collation?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureDatabasePostgreSql = AzureResource & {
+  charset?: Maybe<Scalars['String']>;
+  collation?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureDatabaseSql = AzureResource & {
+  autoPauseDelay?: Maybe<Scalars['Int']>;
+  catalogCollation?: Maybe<Scalars['String']>;
+  collation?: Maybe<Scalars['String']>;
+  createMode?: Maybe<Scalars['String']>;
+  creationDate?: Maybe<Scalars['String']>;
+  currentBackupStorageRedundancy?: Maybe<Scalars['String']>;
+  currentServiceObjectiveName?: Maybe<Scalars['String']>;
+  currentSku?: Maybe<AzureDatabaseSqlSku>;
+  databaseId?: Maybe<Scalars['String']>;
+  defaultSecondaryLocation?: Maybe<Scalars['String']>;
+  earliestRestoreDate?: Maybe<Scalars['String']>;
+  elasticPoolId?: Maybe<Scalars['String']>;
+  failoverGroupId?: Maybe<Scalars['String']>;
+  federatedClientId?: Maybe<Scalars['String']>;
+  highAvailabilityReplicaCount?: Maybe<Scalars['Int']>;
+  identity?: Maybe<AzureDatabaseSqlDatabaseIdentity>;
+  isInfraEncryptionEnabled?: Maybe<Scalars['Boolean']>;
+  isLedgerOn?: Maybe<Scalars['Boolean']>;
+  kind?: Maybe<Scalars['String']>;
+  licenseType?: Maybe<Scalars['String']>;
+  longTermRetentionBackupResourceId?: Maybe<Scalars['String']>;
+  maintenanceConfigurationId?: Maybe<Scalars['String']>;
+  managedBy?: Maybe<Scalars['String']>;
+  maxLogSizeBytes?: Maybe<Scalars['Int']>;
+  maxSizeBytes?: Maybe<Scalars['String']>;
+  minCapacity?: Maybe<Scalars['Int']>;
+  pausedDate?: Maybe<Scalars['String']>;
+  primaryDelegatedIdentityClientId?: Maybe<Scalars['String']>;
+  readScale?: Maybe<Scalars['String']>;
+  recoverableDatabaseId?: Maybe<Scalars['String']>;
+  recoveryServicesRecoveryPointId?: Maybe<Scalars['String']>;
+  requestedBackupStorageRedundancy?: Maybe<Scalars['String']>;
+  requestedServiceObjectiveName?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  restorableDroppedDatabaseId?: Maybe<Scalars['String']>;
+  restorePointInTime?: Maybe<Scalars['String']>;
+  resumedDate?: Maybe<Scalars['String']>;
+  sampleName?: Maybe<Scalars['String']>;
+  secondaryType?: Maybe<Scalars['String']>;
+  sku?: Maybe<AzureDatabaseSqlDiskSku>;
+  sourceDatabaseDeletionDate?: Maybe<Scalars['String']>;
+  sourceDatabaseId?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  zoneRedundant?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureDatabaseSqlDatabaseIdentity = {
+  delegatedResources?: Maybe<Array<Maybe<AzureDatabaseSqldelegatedResource>>>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureDatabaseSqlUserAssignedIdentity>>>;
+};
+
+export type AzureDatabaseSqlDatabaseUserIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlDelegation = {
+  resourceId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlDiskSku = {
+  capacity?: Maybe<Scalars['Int']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlSku = {
+  capacity?: Maybe<Scalars['Int']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlUserAssignedIdentity = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureDatabaseSqlDatabaseUserIdentity>;
+};
+
+export type AzureDatabaseSqlVm = AzureResource & {
+  autoBackupSettings?: Maybe<AzureDatabaseSqlVmAutoBackupSettings>;
+  autoPatchingSettings?: Maybe<AzureDatabaseSqlVmAutoPatchingSettings>;
+  identity?: Maybe<AzureDatabaseSqlVmResourceIdentity>;
+  keyVaultCredentialSettings?: Maybe<AzureDatabaseSqlVmKeyVaultCredentialSettings>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  serverConfigurationsManagementSettings?: Maybe<AzureDatabaseSqlVmServerConfigurationsManagementSettings>;
+  sqlImageOffer?: Maybe<Scalars['String']>;
+  sqlImageSku?: Maybe<Scalars['String']>;
+  sqlManagement?: Maybe<Scalars['String']>;
+  sqlServerLicenseType?: Maybe<Scalars['String']>;
+  sqlVirtualMachineGroupResourceId?: Maybe<Scalars['String']>;
+  storageConfigurationSettings?: Maybe<AzureDatabaseSqlVmStorageConfigurationSettings>;
+  virtualMachineResourceId?: Maybe<Scalars['String']>;
+  wsfcDomainCredentials?: Maybe<AzureDatabaseSqlVmWsfcDomainCredentials>;
+};
+
+export type AzureDatabaseSqlVmAdditionalFeaturesServerConfigurations = {
+  isRServicesEnabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureDatabaseSqlVmAutoBackupSettings = {
+  backupScheduleType?: Maybe<Scalars['String']>;
+  backupSystemDbs?: Maybe<Scalars['Boolean']>;
+  enable?: Maybe<Scalars['Boolean']>;
+  enableEncryption?: Maybe<Scalars['Boolean']>;
+  fullBackupFrequency?: Maybe<Scalars['String']>;
+  fullBackupStartTime?: Maybe<Scalars['Int']>;
+  fullBackupWindowHours?: Maybe<Scalars['Int']>;
+  logBackupFrequency?: Maybe<Scalars['Int']>;
+  password?: Maybe<Scalars['String']>;
+  retentionPeriod?: Maybe<Scalars['Int']>;
+  storageAccessKey?: Maybe<Scalars['String']>;
+  storageAccountUrl?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlVmAutoPatchingSettings = {
+  dayOfWeek?: Maybe<Scalars['String']>;
+  enable?: Maybe<Scalars['Boolean']>;
+  maintenanceWindowDuration?: Maybe<Scalars['Int']>;
+  maintenanceWindowStartingHour?: Maybe<Scalars['Int']>;
+};
+
+export type AzureDatabaseSqlVmKeyVaultCredentialSettings = {
+  azureKeyVaultUrl?: Maybe<Scalars['String']>;
+  credentialName?: Maybe<Scalars['String']>;
+  enable?: Maybe<Scalars['Boolean']>;
+  servicePrincipalName?: Maybe<Scalars['String']>;
+  servicePrincipalSecret?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlVmResourceIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlVmSqlStorageSettings = {
+  defaultFilePath?: Maybe<Scalars['String']>;
+  luns?: Maybe<Array<Maybe<Scalars['Int']>>>;
+};
+
+export type AzureDatabaseSqlVmServerConfigurationsManagementSettings = {
+  additionalFeaturesServerConfigurations?: Maybe<AzureDatabaseSqlVmAdditionalFeaturesServerConfigurations>;
+  sqlConnectivityUpdateSettings?: Maybe<AzureDatabaseSqlVmSqlConnectivityUpdateSettings>;
+  sqlStorageUpdateSettings?: Maybe<AzureDatabaseSqlVmSqlStorageUpdateSettings>;
+  sqlWorkloadTypeUpdateSettings?: Maybe<AzureDatabaseSqlVmSqlWorkloadTypeUpdateSettings>;
+};
+
+export type AzureDatabaseSqlVmSqlConnectivityUpdateSettings = {
+  connectivityType?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['Int']>;
+  sqlAuthUpdatePassword?: Maybe<Scalars['String']>;
+  sqlAuthUpdateUserName?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlVmSqlStorageUpdateSettings = {
+  diskConfigurationType?: Maybe<Scalars['String']>;
+  diskCount?: Maybe<Scalars['Int']>;
+  startingDeviceId?: Maybe<Scalars['Int']>;
+};
+
+export type AzureDatabaseSqlVmSqlWorkloadTypeUpdateSettings = {
+  sqlWorkloadType?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlVmStorageConfigurationSettings = {
+  diskConfigurationType?: Maybe<Scalars['String']>;
+  sqlDataSettings?: Maybe<AzureDatabaseSqlVmSqlStorageSettings>;
+  sqlLogSettings?: Maybe<AzureDatabaseSqlVmSqlStorageSettings>;
+  sqlTempDbSettings?: Maybe<AzureDatabaseSqlVmSqlStorageSettings>;
+  storageWorkloadType?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlVmWsfcDomainCredentials = {
+  clusterBootstrapAccountPassword?: Maybe<Scalars['String']>;
+  clusterOperatorAccountPassword?: Maybe<Scalars['String']>;
+  sqlServiceAccountPassword?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqldelegatedResource = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureDatabaseSqlDelegation>;
+};
+
 export type AzureDisk = AzureResource & {
   createOption?: Maybe<Scalars['String']>;
   diskIopsReadWrite?: Maybe<Scalars['Int']>;
@@ -1274,6 +1479,10 @@ export type AzureResourceGroup = AzureResource & {
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
+  databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
+  databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
+  databaseSqlVm?: Maybe<Array<Maybe<AzureDatabaseSqlVm>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
   eventGrids?: Maybe<Array<Maybe<AzureEventGrid>>>;

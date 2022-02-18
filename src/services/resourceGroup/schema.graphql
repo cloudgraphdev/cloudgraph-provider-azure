@@ -30,4 +30,8 @@ type azureResourceGroup implements azureResource
   cdnCustomDomains: [azureCdnCustomDomain] @hasInverse(field: resourceGroups)
   cdnOrigins: [azureCdnOrigin] @hasInverse(field: resourceGroups)
   cdnOriginGroups: [azureCdnOriginGroup] @hasInverse(field: resourceGroups)
+  databaseMySql: [azureDatabaseMySql] @hasInverse(field: resourceGroups)
+  databasePostgreSql: [azureDatabasePostgreSql] @hasInverse(field: resourceGroups)
+  databaseSql: [azureDatabaseSql] @hasInverse(field: resourceGroups)
+  databaseSqlVm: [azureDatabaseSqlVm] @hasInverse(field: resourceGroups)
 }

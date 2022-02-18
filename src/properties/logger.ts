@@ -98,4 +98,9 @@ export default {
   foundCdnOrigins: (num: number): string => `Found ${num} CDN origins`,
   /* CDN Origin Groups */
   foundCdnOriginGroups: (num: number): string => `Found ${num} CDN origin groups`,
+  /* Database */
+  foundDatabaseMySql: (num: number): string => `Found ${num} MySQL databases`,
+  foundDatabasePostgreSql: (num: number): string => `Found ${num} PostgreSQL databases`,
+  foundDatabaseSql: (num: number): string => `Found ${num} SQL databases`,
+  foundDatabaseSqlVm: (num: number): string => `Found ${num} SQL virtual machines`,
 }
