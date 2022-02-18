@@ -1,3 +1,15 @@
+# [0.28.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.27.0...0.28.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* added missing field privateLinkConnectionProperties ([9c52342](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/9c52342d0fbd0c8b962b3167c08197e1a805effb))
+
+
+### Features
+
+* **service:** Create Azure service identitySecurityDefaultsEnforcementPolicy ([4bf42dd](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/4bf42ddb03dc3f0ef8b4545f98190a40018c568f))
+
 # [0.27.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.26.0...0.27.0) (2022-02-18)
 
 
