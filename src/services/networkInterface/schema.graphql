@@ -1,3 +1,9 @@
+type azureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties {
+  groupId: String @search(by: [hash, regexp])
+  requiredMemberName: String @search(by: [hash, regexp])
+  fqdns: [String] @search(by: [hash, regexp])
+}
+
 type azureNetworkInterfaceIpConfiguration
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -10,6 +16,7 @@ type azureNetworkInterfaceIpConfiguration
   subnetId: String @search(by: [hash, regexp])
   primary: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
+  privateLinkConnectionProperties: azureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   etag: String @search(by: [hash, regexp])
@@ -34,7 +41,8 @@ type azureNetworkInterface implements azureResource
   dnsServers: [String] @search(by: [hash, regexp])
   publicIps: [azurePublicIp] @hasInverse(field: networkInterfaces)
   resourceGroups: [azureResourceGroup] @hasInverse(field: networkInterfaces) # convert to singular resourceGroup
-  securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: networkInterfaces)
+  securityGroups: [azureNetworkSecurityGroup]
+    @hasInverse(field: networkInterfaces)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: networkInterfaces) # convert to singular virtualMachine
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: networkInterfaces)
 }

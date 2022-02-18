@@ -1325,9 +1325,16 @@ export type AzureNetworkInterfaceIpConfiguration = {
   privateIPAddress?: Maybe<Scalars['String']>;
   privateIPAddressVersion?: Maybe<Scalars['String']>;
   privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  privateLinkConnectionProperties?: Maybe<AzureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties>;
   provisioningState?: Maybe<Scalars['String']>;
   subnetId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties = {
+  fqdns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  groupId?: Maybe<Scalars['String']>;
+  requiredMemberName?: Maybe<Scalars['String']>;
 };
 
 export type AzureNetworkSecurityGroup = AzureResource & {
