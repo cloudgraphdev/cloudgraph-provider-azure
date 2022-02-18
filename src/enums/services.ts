@@ -1,6 +1,7 @@
 export default {
   adApplication: 'adApplication',
   adGroup: 'adGroup',
+  adIdentitySecurityDefaultsEnforcementPolicy: 'adIdentitySecurityDefaultsEnforcementPolicy',
   adServicePrincipal: 'adServicePrincipal',
   adUser: 'adUser',
   appServicePlan: 'appServicePlan',

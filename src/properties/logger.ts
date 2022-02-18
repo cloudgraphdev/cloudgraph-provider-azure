@@ -1,7 +1,9 @@
+/* eslint-disable max-len */
 export default {
   /* Active Directory */
   foundAdApplications: (num: number): string => `Found ${num} AD applications`,
   foundAdGroups: (num: number): string => `Found ${num} AD groups`,
+  foundAdIdentitySecurityDefaultsEnforcementPolicy: (num: number): string => `Found ${num} AD Identity Security Defaults Enforcement Policy`,
   foundAdServicePrincipals: (num: number): string => `Found ${num} AD service principals`,
   foundAdUsers: (num: number): string => `Found ${num} AD users`,
   /* App Service */

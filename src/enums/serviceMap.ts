@@ -40,6 +40,7 @@ import AzureCdnProfiles from '../services/cdnProfiles'
 import AzureCdnCustomDomains from '../services/cdnCustomDomains'
 import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnOriginGroups from '../services/cdnOriginGroups'
+import AzureADIdentitySecurityDefaultsEnforcementPolicy from '../services/adIdentitySecurityDefaultsEnforcementPolicy'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -48,6 +49,7 @@ import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 export default {
   [services.adApplication]: AzureADApplication,
   [services.adGroup]: AzureADGroup,
+  [services.adIdentitySecurityDefaultsEnforcementPolicy]: AzureADIdentitySecurityDefaultsEnforcementPolicy,
   [services.adServicePrincipal]: AzureADServicePrincipal,
   [services.adUser]: AzureADUser,
   [services.appServicePlan]: AzureAppServicePlan,

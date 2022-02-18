@@ -6,6 +6,7 @@ import services from './services'
 export default {
   [services.adApplication]: 'azureADApplication',
   [services.adGroup]: 'azureADGroup',
+  [services.adIdentitySecurityDefaultsEnforcementPolicy]: 'azureADIdentitySecurityDefaultsEnforcementPolicy',
   [services.adServicePrincipal]: 'azureADServicePrincipal',
   [services.adUser]: 'azureADUser',
   [services.appServicePlan]: 'azureAppServicePlan',
