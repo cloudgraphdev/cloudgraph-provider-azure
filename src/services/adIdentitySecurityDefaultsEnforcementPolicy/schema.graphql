@@ -1,0 +1,12 @@
+type azureAdIdentitySecurityDefaultsEnforcementPolicy
+  @key(fields: "id")
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  isEnabled: Boolean @search
+}

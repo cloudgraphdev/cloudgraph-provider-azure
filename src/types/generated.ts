@@ -216,6 +216,14 @@ export type AzureAdUser = {
   userType?: Maybe<Scalars['String']>;
 };
 
+export type AzureAdIdentitySecurityDefaultsEnforcementPolicy = {
+  description?: Maybe<Scalars['String']>;
+  displayName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  isEnabled?: Maybe<Scalars['Boolean']>;
+  region?: Maybe<Scalars['String']>;
+};
+
 export type AzureAppServicePlan = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   elasticScaleEnabled?: Maybe<Scalars['Boolean']>;
