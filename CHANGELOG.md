@@ -1,3 +1,10 @@
+## [0.29.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.0...0.29.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* Exported schemas map ([c975b79](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/c975b792720b52755d0a3a3cf9a79e2228ad0202))
+
 # [0.29.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.28.0...0.29.0) (2022-02-21)
 
 
