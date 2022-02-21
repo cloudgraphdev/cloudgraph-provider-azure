@@ -1,0 +1,149 @@
+type azureContainerRegistryPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  privateEndpointId: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionStateStatus: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionStateDescription: String
+    @search(by: [hash, regexp])
+  privateLinkServiceConnectionStateActionsRequired: String
+    @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistryKeyVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyIdentifier: String @search(by: [hash, regexp])
+  versionedKeyIdentifier: String @search(by: [hash, regexp])
+  identity: String @search(by: [hash, regexp])
+  keyRotationEnabled: Boolean @search
+  lastKeyRotationTimestamp: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistryEncryption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  keyVaultProperties: azureContainerRegistryKeyVaultProperties
+}
+
+type azureContainerRegistryPolicyInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  days: Int @search
+  lastUpdatedTime: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistryPolicies
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  quarantinePolicy: azureContainerRegistryPolicyInfo
+  trustPolicy: azureContainerRegistryPolicyInfo
+  retentionPolicy: azureContainerRegistryPolicyInfo
+  exportPolicy: azureContainerRegistryPolicyInfo
+}
+
+type azureContainerRegistryNetworkRuleIPSetRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  action: String @search(by: [hash, regexp])
+  iPAddressOrRange: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistryNetworkRuleSet
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  defaultAction: String @search(by: [hash, regexp])
+  ipRules: [azureContainerRegistryNetworkRuleIPSetRule]
+}
+
+type azureContainerRegistryStatus
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  displayStatus: String @search(by: [hash, regexp])
+  message: String @search(by: [hash, regexp])
+  timestamp: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistryIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistrySku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistry implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  sku: azureContainerRegistrySku
+  identity: azureContainerRegistryIdentity
+  loginServer: String @search(by: [hash, regexp])
+  creationDate: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  status: azureContainerRegistryStatus
+  adminUserEnabled: Boolean @search
+  networkRuleSet: azureContainerRegistryNetworkRuleSet
+  policies: azureContainerRegistryPolicies
+  encryption: azureContainerRegistryEncryption
+  dataEndpointEnabled: Boolean @search
+  dataEndpointHostNames: [String] @search(by: [hash, regexp])
+  privateEndpointConnections: [azureContainerRegistryPrivateEndpointConnection]
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  networkRuleBypassOptions: String @search(by: [hash, regexp])
+  zoneRedundancy: String @search(by: [hash, regexp])
+  keyVault: [azureKeyVault] @hasInverse(field: containerRegistries)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: containerRegistries) # convert to singular resourceGroup
+}

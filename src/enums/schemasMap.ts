@@ -14,6 +14,7 @@ export default {
   [services.authRoleAssignment]: 'azureAuthRoleAssignment',
   [services.authRoleDefinition]: 'azureAuthRoleDefinition',
   [services.cdnCustomDomains]: 'azureCdnCustomDomains',
+  [services.containerRegistry]: 'azureContainerRegistry',
   [services.cdnEndpoints]: 'azureCdnEndpoints',
   [services.cdnProfiles]: 'azureCdnProfiles',
   [services.cdnOrigins]: 'azureCdnOrigins',

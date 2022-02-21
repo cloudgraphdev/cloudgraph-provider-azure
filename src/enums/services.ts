@@ -13,6 +13,7 @@ export default {
   cdnProfiles: 'cdnProfiles',
   cdnOrigins: 'cdnOrigins',
   cdnOriginGroups: 'cdnOriginGroups',
+  containerRegistry:'containerRegistry',
   databaseMySql: 'databaseMySql',
   databasePostgreSql: 'databasePostgreSql',
   databaseSql: 'databaseSql',

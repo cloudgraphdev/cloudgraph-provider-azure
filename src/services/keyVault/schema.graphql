@@ -1,16 +1,16 @@
 type azureKeyVaultAccessPolicy
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
   ) {
-    id: String! @id @search(by: [hash])
-    objectId: String @search(by: [hash, regexp])
-    applicationId: String @search(by: [hash, regexp])
-    permissionKeys: [String] @search(by: [hash, regexp])
-    permissionSecrets: [String] @search(by: [hash, regexp])
-    permissionCertificates: [String] @search(by: [hash, regexp])
-    permissionStorage: [String] @search(by: [hash, regexp])
-  }
+  id: String! @id @search(by: [hash])
+  objectId: String @search(by: [hash, regexp])
+  applicationId: String @search(by: [hash, regexp])
+  permissionKeys: [String] @search(by: [hash, regexp])
+  permissionSecrets: [String] @search(by: [hash, regexp])
+  permissionCertificates: [String] @search(by: [hash, regexp])
+  permissionStorage: [String] @search(by: [hash, regexp])
+}
 
 type azureKeyVault implements azureResource
   @generate(
@@ -18,18 +18,19 @@ type azureKeyVault implements azureResource
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
-    tenantId: String @search(by: [hash, regexp])
-    accessPolicies: [azureKeyVaultAccessPolicy]
-    vaultUri: String @search(by: [hash, regexp])
-    enabledForDeployment: String @search(by: [hash, regexp])
-    enabledForDiskEncryption: String @search(by: [hash, regexp])
-    enabledForTemplateDeployment: String @search(by: [hash, regexp])
-    enableSoftDelete: String @search(by: [hash, regexp])
-    createMode: String @search(by: [hash, regexp])
-    enablePurgeProtection: String @search(by: [hash, regexp])
-    networkAclBypass: String @search(by: [hash, regexp])
-    networkAclDefaultAction: String @search(by: [hash, regexp])
-    networkAclIpRules: [String] @search(by: [hash, regexp])
-    networkAclVirtualNetworkRules: [String] @search(by: [hash, regexp])
-    resourceGroups: [azureResourceGroup] @hasInverse (field: keyVaults) # convert to singular resourceGroup
+  tenantId: String @search(by: [hash, regexp])
+  accessPolicies: [azureKeyVaultAccessPolicy]
+  vaultUri: String @search(by: [hash, regexp])
+  enabledForDeployment: String @search(by: [hash, regexp])
+  enabledForDiskEncryption: String @search(by: [hash, regexp])
+  enabledForTemplateDeployment: String @search(by: [hash, regexp])
+  enableSoftDelete: String @search(by: [hash, regexp])
+  createMode: String @search(by: [hash, regexp])
+  enablePurgeProtection: String @search(by: [hash, regexp])
+  networkAclBypass: String @search(by: [hash, regexp])
+  networkAclDefaultAction: String @search(by: [hash, regexp])
+  networkAclIpRules: [String] @search(by: [hash, regexp])
+  networkAclVirtualNetworkRules: [String] @search(by: [hash, regexp])
+  containerRegistries: [azureContainerRegistry] @hasInverse(field: keyVault)
+  resourceGroups: [azureResourceGroup] @hasInverse(field: keyVaults) # convert to singular resourceGroup
 }

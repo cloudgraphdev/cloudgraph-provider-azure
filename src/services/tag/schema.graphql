@@ -2,24 +2,25 @@ type azureTag @key(fields: "id") {
   id: String! @id @search(by: [hash])
   key: String! @search(by: [hash, regexp])
   value: String! @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup]
   adApplications: [azureADApplication]
   adServicePrincipals: [azureADServicePrincipal]
   appServicePlans: [azureAppServicePlan]
   appServiceWebApps: [azureAppServiceWebApp]
+  cdnEndpoints: [azureCdnEndpoint]
+  cdnProfiles: [azureCdnProfile]
+  containerRegistries: [azureContainerRegistry]
   disks: [azureDisk]
+  dns: [azureDnsZone]
   firewalls: [azureFirewall]
   functionApps: [azureFunctionApp]
-  virtualNetworks: [azureVirtualNetwork]
-  publicIps: [azurePublicIp]
   keyVaults: [azureKeyVault]
-  securityGroups: [azureNetworkSecurityGroup]
   networkInterfaces: [azureNetworkInterface]
-  dns: [azureDnsZone]
-  virtualMachines: [azureVirtualMachine]
+  publicIps: [azurePublicIp]
+  resourceGroups: [azureResourceGroup]
+  securityGroups: [azureNetworkSecurityGroup]
   storageAccounts: [azureStorageAccount]
-  cdnProfiles: [azureCdnProfile]
-  cdnEndpoints: [azureCdnEndpoint]
+  virtualMachines: [azureVirtualMachine]
+  virtualNetworks: [azureVirtualNetwork]
 }
 
 type azureRawTag

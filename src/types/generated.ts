@@ -704,6 +704,98 @@ export type AzureCdnUrlSigningKey = {
   keySourceParameters?: Maybe<AzureCdnKeyVaultSigningKeyParameters>;
 };
 
+export type AzureContainerRegistry = AzureResource & {
+  adminUserEnabled?: Maybe<Scalars['Boolean']>;
+  creationDate?: Maybe<Scalars['String']>;
+  dataEndpointEnabled?: Maybe<Scalars['Boolean']>;
+  dataEndpointHostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  encryption?: Maybe<AzureContainerRegistryEncryption>;
+  identity?: Maybe<AzureContainerRegistryIdentity>;
+  keyVault?: Maybe<Array<Maybe<AzureKeyVault>>>;
+  loginServer?: Maybe<Scalars['String']>;
+  networkRuleBypassOptions?: Maybe<Scalars['String']>;
+  networkRuleSet?: Maybe<AzureContainerRegistryNetworkRuleSet>;
+  policies?: Maybe<AzureContainerRegistryPolicies>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureContainerRegistryPrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sku?: Maybe<AzureContainerRegistrySku>;
+  status?: Maybe<AzureContainerRegistryStatus>;
+  zoneRedundancy?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryEncryption = {
+  keyVaultProperties?: Maybe<AzureContainerRegistryKeyVaultProperties>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryKeyVaultProperties = {
+  identity?: Maybe<Scalars['String']>;
+  keyIdentifier?: Maybe<Scalars['String']>;
+  keyRotationEnabled?: Maybe<Scalars['Boolean']>;
+  lastKeyRotationTimestamp?: Maybe<Scalars['String']>;
+  versionedKeyIdentifier?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryNetworkRuleIpSetRule = {
+  action?: Maybe<Scalars['String']>;
+  iPAddressOrRange?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryNetworkRuleSet = {
+  defaultAction?: Maybe<Scalars['String']>;
+  ipRules?: Maybe<Array<Maybe<AzureContainerRegistryNetworkRuleIpSetRule>>>;
+};
+
+export type AzureContainerRegistryPolicies = {
+  exportPolicy?: Maybe<AzureContainerRegistryPolicyInfo>;
+  quarantinePolicy?: Maybe<AzureContainerRegistryPolicyInfo>;
+  retentionPolicy?: Maybe<AzureContainerRegistryPolicyInfo>;
+  trustPolicy?: Maybe<AzureContainerRegistryPolicyInfo>;
+};
+
+export type AzureContainerRegistryPolicyInfo = {
+  days?: Maybe<Scalars['Int']>;
+  lastUpdatedTime?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryPrivateEndpointConnection = {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionStateActionsRequired?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionStateDescription?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionStateStatus?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistrySku = {
+  name?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerRegistryStatus = {
+  displayStatus?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+  timestamp?: Maybe<Scalars['String']>;
+};
+
 export type AzureDatabaseMySql = AzureResource & {
   charset?: Maybe<Scalars['String']>;
   collation?: Maybe<Scalars['String']>;
@@ -1242,6 +1334,7 @@ export type AzureKeyValueProperty = {
 
 export type AzureKeyVault = AzureResource & {
   accessPolicies?: Maybe<Array<Maybe<AzureKeyVaultAccessPolicy>>>;
+  containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   createMode?: Maybe<Scalars['String']>;
   enablePurgeProtection?: Maybe<Scalars['String']>;
   enableSoftDelete?: Maybe<Scalars['String']>;
@@ -1494,6 +1587,7 @@ export type AzureResourceGroup = AzureResource & {
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
   databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
@@ -1840,6 +1934,7 @@ export type AzureTag = {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
