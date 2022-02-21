@@ -414,7 +414,7 @@ export default ({
     /**
      * Find related CDN Profiles
      */
-     const cdnProfiles: {
+    const cdnProfiles: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.cdnProfiles)
@@ -438,7 +438,7 @@ export default ({
     /**
      * Find related CDN Endpoints
      */
-     const cdnEndpoints: {
+    const cdnEndpoints: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.cdnEndpoints)
@@ -455,6 +455,30 @@ export default ({
             resourceType: services.cdnEndpoints,
             relation: 'child',
             field: 'cdnEndpoints',
+          })
+        }
+      }
+    }
+    /**
+     * Find related Container Registries
+     */
+    const containerRegistries: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.containerRegistry)
+    if (containerRegistries?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        containerRegistries.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const containerRegistry of dataAtRegion) {
+          const { id } = containerRegistry
+          connections.push({
+            id,
+            resourceType: services.containerRegistry,
+            relation: 'child',
+            field: 'containerRegistries',
           })
         }
       }
