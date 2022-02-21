@@ -1,3 +1,10 @@
+# [0.29.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.28.0...0.29.0) (2022-02-21)
+
+
+### Features
+
+* **containerRegistry:** add ACR service ([af3f73e](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/af3f73e7a193d7e07d474b55ac8f46a2f5b72cdf))
+
 # [0.28.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.27.0...0.28.0) (2022-02-18)
 
 
