@@ -15,6 +15,7 @@ import path from 'path'
 import regions from '../enums/regions'
 import resources from '../enums/resources'
 import serviceMap from '../enums/serviceMap'
+import schemasMap from '../enums/schemasMap'
 import services from '../enums/services'
 import {
   AzureCredentials,
@@ -36,6 +37,7 @@ export const enums = {
   services,
   regions,
   resources,
+  schemasMap,
 }
 
 const selectableRegionsList = regions.filter(i => i !== GLOBAL_REGION)
