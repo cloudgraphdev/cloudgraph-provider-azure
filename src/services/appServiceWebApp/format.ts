@@ -118,6 +118,7 @@ export default ({
     storageAccountRequired,
     keyVaultReferenceIdentity,
     virtualNetworkSubnetId,
+    AuthSettings,
   } = service
 
   return {
@@ -171,5 +172,6 @@ export default ({
     storageAccountRequired,
     keyVaultReferenceIdentity,
     virtualNetworkSubnetId,
+    authEnabled: AuthSettings?.enabled,
   }
 }
