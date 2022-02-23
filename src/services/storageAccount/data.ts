@@ -7,6 +7,7 @@ import {
   StorageAccountListResult,
   StorageAccountsListNextResponse,
   StorageAccountsListResponse,
+  BlobServiceProperties
 } from '@azure/arm-storage/esm/models'
 import { isEmpty } from 'lodash'
 import azureLoggerText from '../../properties/logger'
@@ -23,6 +24,7 @@ export interface RawAzureStorageAccount
   region: string
   keys: StorageAccountKey[]
   Tags: TagMap
+  blobServiceProperties: BlobServiceProperties
 }
 
 const { logger } = CloudGraph
@@ -75,6 +77,10 @@ export default async ({
             rest.name
           )
           const { keys = [] } = storageAccountKeys
+
+          // Fetch Storage Account Blob Service Properties
+          const blobServiceProperties = await client.blobServices.getServiceProperties(resourceGroup,  rest.name)
+
           result[region].push({
             id,
             ...rest,
@@ -82,6 +88,7 @@ export default async ({
             region,
             keys,
             Tags: tags || {},
+            blobServiceProperties
           })
           numOfAccounts += 1
         }

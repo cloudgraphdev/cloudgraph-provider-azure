@@ -113,6 +113,36 @@ type azureStorageAccountIPRule
   action: String @search(by: [hash, regexp])
 }
 
+type azureStorageAccountServicePropertiesCorsRules
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash])
+  allowedOrigins: [String] @search(by: [hash, regexp])
+  allowedMethods: [String] @search(by: [hash, regexp])
+  maxAgeInSeconds: Int @search
+  exposedHeaders: [String] @search(by: [hash, regexp])
+  allowedHeaders: [String] @search(by: [hash, regexp])
+}
+
+type azureStorageAccountServiceProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  corsRules: [azureStorageAccountServicePropertiesCorsRules]
+  deleteRetentionPolicyEnabled: Boolean @search
+  deleteRetentionPolicyDays: Int @search
+  skuName: String @search(by: [hash, regexp])
+  skuTier: String @search(by: [hash, regexp])
+}
+
 type azureStorageAccount implements azureStorageResource
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -174,6 +204,7 @@ type azureStorageAccount implements azureStorageResource
   minimumTlsVersion: String @search(by: [hash, regexp])
   allowSharedKeyAccess: String @search(by: [hash, regexp])
   enableNfsV3: String @search(by: [hash, regexp])
+  blobServiceProperties: azureStorageAccountServiceProperties
   resourceGroup: [azureResourceGroup] @hasInverse(field: storageAccounts)
   storageContainers: [azureStorageContainer] @hasInverse(field: storageAccount)
   appServiceWebApp: [azureAppServiceWebApp] @hasInverse(field: storageAccounts)

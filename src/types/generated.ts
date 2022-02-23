@@ -1696,6 +1696,7 @@ export type AzureStorageAccount = AzureStorageResource & {
   appServiceWebApp?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   azureFilesIdentityBasedAuthenticationADProperties?: Maybe<AzureFilesIdentityBasedAuthenticationAdProperties>;
   azureFilesIdentityBasedAuthenticationDirectoryServiceOptions?: Maybe<Scalars['String']>;
+  blobServiceProperties?: Maybe<AzureStorageAccountServiceProperties>;
   customDomainName?: Maybe<Scalars['String']>;
   customDomainUseSubDomainName?: Maybe<Scalars['String']>;
   enableHttpsTrafficOnly?: Maybe<Scalars['String']>;
@@ -1798,6 +1799,26 @@ export type AzureStorageAccountResourceAccessRule = {
   id: Scalars['String'];
   resourceId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountServiceProperties = {
+  corsRules?: Maybe<Array<Maybe<AzureStorageAccountServicePropertiesCorsRules>>>;
+  deleteRetentionPolicyDays?: Maybe<Scalars['Int']>;
+  deleteRetentionPolicyEnabled?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  skuName?: Maybe<Scalars['String']>;
+  skuTier?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountServicePropertiesCorsRules = {
+  allowedHeaders?: Maybe<Array<Maybe<Scalars['String']>>>;
+  allowedMethods?: Maybe<Array<Maybe<Scalars['String']>>>;
+  allowedOrigins?: Maybe<Array<Maybe<Scalars['String']>>>;
+  exposedHeaders?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  maxAgeInSeconds?: Maybe<Scalars['Int']>;
 };
 
 export type AzureStorageAccountVirtualNetworkRule = {
