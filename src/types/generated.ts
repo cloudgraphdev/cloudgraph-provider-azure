@@ -278,6 +278,7 @@ export type AzureAppServicePlanSkuDescription = {
 
 export type AzureAppServiceWebApp = AzureResource & {
   appServicePlan?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
+  authEnabled?: Maybe<Scalars['Boolean']>;
   availabilityState?: Maybe<Scalars['String']>;
   clientAffinityEnabled?: Maybe<Scalars['Boolean']>;
   clientCertEnabled?: Maybe<Scalars['Boolean']>;

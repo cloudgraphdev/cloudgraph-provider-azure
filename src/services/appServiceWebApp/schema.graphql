@@ -164,6 +164,7 @@ type azureAppServiceWebApp implements azureResource
   storageAccountRequired: Boolean @search
   keyVaultReferenceIdentity: String @search(by: [hash, regexp])
   virtualNetworkSubnetId: String @search(by: [hash, regexp])
+  authEnabled: Boolean @search
   appServicePlan: [azureAppServicePlan] @hasInverse(field: appServiceWebApps)
   resourceGroups: [azureResourceGroup] @hasInverse(field: appServiceWebApps) # convert to singular resourceGroup
   storageAccounts: [azureStorageAccount] @hasInverse(field: appServiceWebApp)

@@ -1,4 +1,4 @@
-import { WebSiteManagementClient, Site } from '@azure/arm-appservice'
+import { WebSiteManagementClient, Site, SiteAuthSettings } from '@azure/arm-appservice'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -22,6 +22,7 @@ export interface RawAzureAppServiceWebApp
   region: string
   resourceGroup: string
   Tags: TagMap
+  AuthSettings?: SiteAuthSettings
 }
 
 export default async ({
@@ -55,15 +56,19 @@ export default async ({
               client.appServicePlans.listWebApps(resourceGroup, name)
             for await (const webApp of webAppsIterable) {
               if (webApp) {
-                const { location, extendedLocation, identity, tags, ...rest } =
+                const { name: webAppName, location, extendedLocation, identity, tags, ...rest } =
                   webApp
                 const region = location && lowerCaseLocation(location) || regionMap.global
+
+                const authSettings = await client.webApps.getAuthSettings(resourceGroup, webAppName) 
+
                 return {
                   ...rest,
                   appServicePlanId: appService.id,
                   region,
                   resourceGroup,
                   Tags: tags || {},
+                  AuthSettings: authSettings
                 }
               }
             }
