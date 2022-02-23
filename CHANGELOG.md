@@ -1,3 +1,11 @@
+## [0.29.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.1...0.29.2) (2022-02-23)
+
+
+### Bug Fixes
+
+* Add Blob Service Properties to Storage Account ([2f05315](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/2f05315ba7ff0b30988631ef0eb540e9ec265e63))
+* WebApp add AuthSettings ([57eecb9](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/57eecb9c20bf62b8fa0dac23906ed11eb510f147))
+
 ## [0.29.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.0...0.29.1) (2022-02-21)
 
 
