@@ -108,8 +108,8 @@ export default ({
     minimumTlsVersion,
     allowSharedKeyAccess,
     enableNfsV3,
-    resourceGroup,
     Tags,
+    blobServiceProperties,
   } = service
 
   return {
@@ -253,5 +253,18 @@ export default ({
     enableNfsV3: enableNfsV3 ? t.yes : t.no,
     region,
     tags: formatTagsFromMap(Tags),
+    blobServiceProperties: {
+      id: blobServiceProperties?.id || cuid(),
+      name: blobServiceProperties?.name,
+      type: blobServiceProperties?.type,
+      corsRules: blobServiceProperties?.cors?.corsRules?.map(({ ...rest}) => ({
+        id: cuid(),
+        ...rest,
+      })),
+      deleteRetentionPolicyEnabled: blobServiceProperties?.deleteRetentionPolicy?.enabled,
+      deleteRetentionPolicyDays: blobServiceProperties?.deleteRetentionPolicy?.days,
+      skuName: blobServiceProperties?.sku?.name,
+      skuTier: blobServiceProperties?.sku?.tier,
+   }
   }
 }
