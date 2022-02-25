@@ -1,3 +1,10 @@
+## [0.29.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.2...0.29.3) (2022-02-25)
+
+
+### Bug Fixes
+
+* Added missing filed for virtualMachineScaleSet service ([902aff4](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/902aff408a6e505f141dd35e5bddaace02ccef86))
+
 ## [0.29.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.1...0.29.2) (2022-02-23)
 
 
