@@ -2149,6 +2149,7 @@ export type AzureVirtualMachineScaleSetStorageProfile = {
 };
 
 export type AzureVirtualMachineScaleSetStorageProfileImageReference = {
+  id?: Maybe<Scalars['String']>;
   offer?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
