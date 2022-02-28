@@ -1,3 +1,10 @@
+# [0.30.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.5...0.30.0) (2022-02-28)
+
+
+### Features
+
+* **loadBalancer:** add loadBalancer service ([1502d7a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1502d7ada8b3a34f80e6c057f67a1e0cb6466d2d))
+
 ## [0.29.5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.4...0.29.5) (2022-02-28)
 
 
