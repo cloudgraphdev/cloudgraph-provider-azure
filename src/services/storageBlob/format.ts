@@ -86,6 +86,7 @@ export default ({
     storageContainerId,
     Tags = {},
     objectReplicationSourceProperties,
+    resourceGroupId,
   } = service
 
   return {
@@ -103,5 +104,6 @@ export default ({
       replicationPolicy => formatReplicationPolicy(replicationPolicy)
     ),
     properties: formatBlobProperties(properties),
+    resourceGroupId,
   }
 }

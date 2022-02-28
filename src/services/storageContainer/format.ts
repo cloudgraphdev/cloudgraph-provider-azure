@@ -70,6 +70,7 @@ export default ({
     legalHold,
     hasLegalHold,
     hasImmutabilityPolicy,
+    resourceGroupId
   } = service
 
   return {
@@ -96,5 +97,6 @@ export default ({
     legalHoldTags: legalHold?.tags?.map(tag => formatLegalHoldTag(tag)) || [],
     hasLegalHold: hasLegalHold? t.yes : t.no,
     hasImmutabilityPolicy: hasImmutabilityPolicy? t.yes : t.no,
+    resourceGroupId
   }
 }

@@ -30,6 +30,7 @@ export default ({
     partitionCount,
     status,
     captureDescription,
+    resourceGroupId,
   } = service
   return {
     id: id || cuid(),
@@ -49,5 +50,6 @@ export default ({
     partitionCount,
     status,
     captureDescription,
+    resourceGroupId,
   }
 }

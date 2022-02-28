@@ -7,7 +7,7 @@ import {
   AzureFirewallNetworkRuleCollection as FirewallNetworkRuleCollection,
   AzureFirewallNetworkRule as FirewallNetworkRule,
   AzureFirewallIPConfiguration as FirewallIPConfiguration,
-} from '@azure/arm-network/esm/models'
+} from '@azure/arm-network'
 import cuid from 'cuid'
 import {
   AzureFirewall,
@@ -49,7 +49,10 @@ const formatAzureFirewallApplicationRule = ({
     name,
     description,
     sourceAddresses,
-    protocols: protocols?.map(protocol => formatAzureFirewallApplicationRuleProtocol(protocol)) || [],
+    protocols:
+      protocols?.map(protocol =>
+        formatAzureFirewallApplicationRuleProtocol(protocol)
+      ) || [],
     targetFqdns,
     fqdnTags,
     sourceIpGroups,
@@ -122,15 +125,15 @@ const formatNatRuleCollection = ({
 
 // networkRuleCollections
 const formatAzureFirewallNetworkRule = ({
-    name,
-    description,
-    protocols,
-    sourceAddresses,
-    destinationAddresses,
-    destinationPorts,
-    destinationFqdns,
-    sourceIpGroups,
-    destinationIpGroups,
+  name,
+  description,
+  protocols,
+  sourceAddresses,
+  destinationAddresses,
+  destinationPorts,
+  destinationFqdns,
+  sourceIpGroups,
+  destinationIpGroups,
 }: FirewallNetworkRule): AzureFirewallNetworkRule => {
   return {
     id: cuid(),
@@ -185,9 +188,9 @@ const formatIpConfiguration = ({
   }
 }
 
-export const formatAdditionalProperties = (
-  properties: {[property: string]: string },
-): AzureFirewallAdditionalProperty[] => {
+export const formatAdditionalProperties = (properties: {
+  [property: string]: string
+}): AzureFirewallAdditionalProperty[] => {
   const result: AzureFirewallAdditionalProperty[] = []
   for (const [key, value] of Object.entries(properties)) {
     result.push({ id: `${key}:${value}`, key, value })
@@ -229,18 +232,22 @@ export default ({
     name,
     type,
     subscriptionId: account,
-    applicationRuleCollections: applicationRuleCollections?.map(
-      applicationRuleCollection => formatAzureFirewallApplicationRuleCollection(applicationRuleCollection)
-    ) || [],
-    natRuleCollections: natRuleCollections?.map(
-      natRuleCollection => formatNatRuleCollection(natRuleCollection)
-    ) || [],
-    networkRuleCollections: networkRuleCollections?.map(
-      networkRuleCollection => formatNetworkRuleCollection(networkRuleCollection)
-    ) || [],
-    ipConfigurations: ipConfigurations?.map(
-      ipConfiguration => formatIpConfiguration(ipConfiguration)
-    ) || [],
+    applicationRuleCollections:
+      applicationRuleCollections?.map(applicationRuleCollection =>
+        formatAzureFirewallApplicationRuleCollection(applicationRuleCollection)
+      ) || [],
+    natRuleCollections:
+      natRuleCollections?.map(natRuleCollection =>
+        formatNatRuleCollection(natRuleCollection)
+      ) || [],
+    networkRuleCollections:
+      networkRuleCollections?.map(networkRuleCollection =>
+        formatNetworkRuleCollection(networkRuleCollection)
+      ) || [],
+    ipConfigurations:
+      ipConfigurations?.map(ipConfiguration =>
+        formatIpConfiguration(ipConfiguration)
+      ) || [],
     managementIpConfiguration: {
       id: managementIpConfiguration?.id || cuid(),
       name: managementIpConfiguration?.name || '',
@@ -255,15 +262,18 @@ export default ({
     virtualHub: virtualHub?.id || '',
     firewallPolicy: firewallPolicy?.id || '',
     hubIPAddresses: {
-      publicIPs: hubIPAddresses?.publicIPs?.addresses?.map(({address}) => address) || [],
+      publicIPs:
+        hubIPAddresses?.publicIPs?.addresses?.map(({ address }) => address) ||
+        [],
       privateIPAddress: hubIPAddresses?.privateIPAddress || '',
     },
-    ipGroups: ipGroups?.map(({id: ipGroupId, changeNumber}) => {
-      return {
-        id: ipGroupId,
-        changeNumber,
-      }
-    }) || [],
+    ipGroups:
+      ipGroups?.map(({ id: ipGroupId, changeNumber }) => {
+        return {
+          id: ipGroupId,
+          changeNumber,
+        }
+      }) || [],
     additionalProperties: formatAdditionalProperties(additionalProperties),
     zones,
     region,

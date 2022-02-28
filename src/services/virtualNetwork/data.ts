@@ -1,20 +1,14 @@
-import { NetworkManagementClient } from '@azure/arm-network'
 import {
   DdosProtectionPlan,
-  DdosProtectionPlanListResult,
-  DdosProtectionPlansListNextResponse,
-  DdosProtectionPlansListResponse,
+  NetworkManagementClient,
   VirtualNetwork,
-  VirtualNetworkListResult,
-  VirtualNetworksListAllNextResponse,
-  VirtualNetworksListAllResponse,
-} from '@azure/arm-network/esm/models'
+} from '@azure/arm-network'
+import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { caseInsensitiveEqual } from '../../utils'
-import { getAllResources } from '../../utils/apiUtils'
+import { caseInsensitiveEqual, tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
@@ -42,33 +36,40 @@ export default async ({
   [property: string]: RawAzureVirtualNetwork[]
 }> => {
   try {
-    const { credentials, subscriptionId } = config
-    const client = new NetworkManagementClient(credentials, subscriptionId)
+    const { tokenCredentials, subscriptionId } = config
+    const client = new NetworkManagementClient(tokenCredentials, subscriptionId)
 
-    const virtualNetworks: VirtualNetworkListResult = await getAllResources({
-      listCall: async (): Promise<VirtualNetworksListAllResponse> =>
-        client.virtualNetworks.listAll(),
-      listNextCall: async (
-        nextLink: string
-      ): Promise<VirtualNetworksListAllNextResponse> =>
-        client.virtualNetworks.listAllNext(nextLink),
-      debugScope: { service: serviceName, client, scope: 'virtualNetworks' },
-    })
+    const virtualNetworks: VirtualNetwork[] = []
+    await tryCatchWrapper(
+      async () => {
+        const virtualNetworkIterable: PagedAsyncIterableIterator<VirtualNetwork> =
+          client.virtualNetworks.listAll()
+        for await (const virtualNetwork of virtualNetworkIterable) {
+          virtualNetwork && virtualNetworks.push(virtualNetwork)
+        }
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'virtualNetworks',
+      }
+    )
 
-    const ddosProtectionPlans: DdosProtectionPlanListResult =
-      await getAllResources({
-        listCall: async (): Promise<DdosProtectionPlansListResponse> =>
-          client.ddosProtectionPlans.list(),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<DdosProtectionPlansListNextResponse> =>
-          client.ddosProtectionPlans.listNext(nextLink),
-        debugScope: {
-          service: serviceName,
-          client,
-          scope: 'ddosProtectionPlans',
-        },
-      })
+    const ddosProtectionPlans: DdosProtectionPlan[] = []
+    await tryCatchWrapper(
+      async () => {
+        const ddosProtectionPlanIterable: PagedAsyncIterableIterator<DdosProtectionPlan> =
+          client.ddosProtectionPlans.list()
+        for await (const ddosProtectionPlan of ddosProtectionPlanIterable) {
+          ddosProtectionPlan && ddosProtectionPlans.push(ddosProtectionPlan)
+        }
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'ddosProtectionPlans',
+      }
+    )
 
     const result: {
       [property: string]: RawAzureVirtualNetwork[]

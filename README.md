@@ -62,6 +62,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | functionApp                                 | resourceGroup                                                             |
 | keyVault                                    | resourceGroup                                                             |
 | monitorInsightsActivityLogAlertRule         |                                                                           |
+| loadBalancer                                | loadBalancer, publicIp, resourceGroup, virtualNetwork                     |
 | networkInterface                            | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork    |
 | policyAssignment                            |                                                                           |
 | privateDns                                  | resourceGroup                                                             |

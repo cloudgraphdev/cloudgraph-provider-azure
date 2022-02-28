@@ -483,6 +483,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related Container Registries
+     */
+     const loadBalancers: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.loadBalancer)
+    if (loadBalancers?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        loadBalancers.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const loadBalancer of dataAtRegion) {
+          const { id } = loadBalancer
+          connections.push({
+            id,
+            resourceType: services.loadBalancer,
+            relation: 'child',
+            field: 'loadBalancers',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

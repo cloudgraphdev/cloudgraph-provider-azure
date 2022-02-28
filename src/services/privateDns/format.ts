@@ -26,6 +26,7 @@ export default ({
     numberOfVirtualNetworkLinksWithRegistration,
     provisioningState,
     internalId,
+    resourceGroupId
   } = service
   return {
     id: id || cuid(),
@@ -43,5 +44,6 @@ export default ({
     provisioningState,
     internalId,
     tags: formatTagsFromMap(Tags),
+    resourceGroupId
   }
 }

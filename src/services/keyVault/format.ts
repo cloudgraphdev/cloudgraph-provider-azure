@@ -36,6 +36,7 @@ export default ({
     type,
     properties,
     Tags,
+    resourceGroupId
   } = service
 
   return {
@@ -64,5 +65,6 @@ export default ({
       virtualNetworkRule => virtualNetworkRule?.id || ''
     ) || [],
     tags: formatTagsFromMap(Tags),
+    resourceGroupId
   }
 }

@@ -25,6 +25,7 @@ export default {
   firewall: 'firewall',
   functionApp: 'functionApp',
   keyVault: 'keyVault',
+  loadBalancer: 'loadBalancer',
   monitorInsightsActivityLogAlertRule: 'monitorInsightsActivityLogAlertRule',
   networkInterface: 'networkInterface',
   policyAssignment: 'policyAssignment',
