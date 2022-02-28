@@ -24,6 +24,7 @@ type azureResourceGroup implements azureResource
   firewalls: [azureFirewall] @hasInverse(field: resourceGroup)
   functionApps: [azureFunctionApp] @hasInverse(field: resourceGroup)
   keyVaults: [azureKeyVault] @hasInverse(field: resourceGroup)
+  loadBalancers: [azureLoadBalancer] @hasInverse(field: resourceGroup)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: resourceGroup)
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroup)

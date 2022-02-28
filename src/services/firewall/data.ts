@@ -1,14 +1,10 @@
-import { NetworkManagementClient } from '@azure/arm-network'
-import {
-  AzureFirewall,
-  AzureFirewallListResult,
-  AzureFirewallsListAllNextResponse,
-  AzureFirewallsListAllResponse,
-} from '@azure/arm-network/esm/models'
+import { AzureFirewall, NetworkManagementClient } from '@azure/arm-network'
+import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
+
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { getAllResources } from '../../utils/apiUtils'
+import { tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
@@ -30,29 +26,27 @@ export default async ({
   [property: string]: RawAzureFirewall[]
 }> => {
   try {
-    const { credentials, subscriptionId } = config
-    const client = await new NetworkManagementClient(
-      credentials,
-      subscriptionId
-    )
+    const { tokenCredentials, subscriptionId } = config
+    const client = new NetworkManagementClient(tokenCredentials, subscriptionId)
 
-    const firewallData: AzureFirewallListResult = await getAllResources({
-      listCall: async (): Promise<AzureFirewallsListAllResponse> =>
-        client.azureFirewalls.listAll(),
-      listNextCall: async (
-        nextLink: string
-      ): Promise<AzureFirewallsListAllNextResponse> =>
-        client.azureFirewalls.listAllNext(nextLink),
-      debugScope: {
+    const firewallData: AzureFirewall[] = []
+    await tryCatchWrapper(
+      async () => {
+        const firewallIterable: PagedAsyncIterableIterator<AzureFirewall> =
+          client.azureFirewalls.listAll()
+        for await (const firewall of firewallIterable) {
+          firewall && firewallData.push(firewall)
+        }
+      },
+      {
         service: serviceName,
         client,
         scope: 'firewall',
-      },
-    })
+      }
+    )
 
     const result: { [property: string]: RawAzureFirewall[] } = {}
     let numOfGroups = 0
-
     firewallData.map(({ tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {

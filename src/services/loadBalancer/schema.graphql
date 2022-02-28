@@ -1,0 +1,146 @@
+type azureLbFrontendIpConfiguration implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  inboundNatRules: [String] @search(by: [hash, regexp])
+  inboundNatPools: [String] @search(by: [hash, regexp])
+  outboundRules: [String] @search(by: [hash, regexp])
+  loadBalancingRules: [String] @search(by: [hash, regexp])
+  privateIPAddress: String @search(by: [hash, regexp])
+  privateIPAllocationMethod: String @search(by: [hash, regexp])
+  privateIPAddressVersion: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  zones: [String] @search(by: [hash, regexp])
+}
+
+type azureLbBackendAddressPool implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  inboundNatRules: [String] @search(by: [hash, regexp])
+  loadBalancingRules: [String] @search(by: [hash, regexp])
+  outboundRule: String @search(by: [hash, regexp])
+  outboundRules: [String] @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureLbLoadBalancingRule implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  loadDistribution: String @search(by: [hash, regexp])
+  frontendPort: Int @search
+  backendPort: Int @search
+  idleTimeoutInMinutes: Int @search
+  enableFloatingIP: Boolean @search
+  enableTcpReset: Boolean @search
+  disableOutboundSnat: Boolean @search
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureLbProbe implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  port: Int @search
+  intervalInSeconds: Int @search
+  numberOfProbes: Int @search
+  requestPath: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureLbInboundNatRule implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  frontendPort: Int @search
+  backendPort: Int @search
+  idleTimeoutInMinutes: Int @search
+  enableFloatingIP: Boolean @search
+  enableTcpReset: Boolean @search
+  frontendPortRangeStart: Int @search
+  frontendPortRangeEnd: Int @search
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureLbInboundNatPool implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  frontendPortRangeStart: Int @search
+  frontendPortRangeEnd: Int @search
+  backendPort: Int @search
+  idleTimeoutInMinutes: Int @search
+  enableFloatingIP: Boolean @search
+  enableTcpReset: Boolean @search
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureLbOutboundRule implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  allocatedOutboundPorts: Int @search
+  provisioningState: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  enableTcpReset: Boolean @search
+  idleTimeoutInMinutes: Int @search
+}
+
+type azureLoadBalancer implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  skuName: String @search(by: [hash, regexp])
+  skuTier: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  frontendIPConfigurations: [azureLbFrontendIpConfiguration]
+  backendAddressPools: [azureLbBackendAddressPool]
+  loadBalancingRules: [azureLbLoadBalancingRule]
+  probes: [azureLbProbe]
+  inboundNatRules: [azureLbInboundNatRule]
+  inboundNatPools: [azureLbInboundNatPool]
+  outboundRules: [azureLbOutboundRule]
+  provisioningState: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: loadBalancers)
+  frontendPublicIps: [azurePublicIp] @hasInverse(field: lbFrontendOf)
+  backendPublicIps: [azurePublicIp] @hasInverse(field: lbBackendOf)
+  gatewayLoadBalancers: [azureLoadBalancer] @hasInverse(field: gatewayLoadBalancerOf)
+  gatewayLoadBalancerOf: [azureLoadBalancer] @hasInverse(field: gatewayLoadBalancers)
+  loadBalancerBackendVirtualNetworks: [azureVirtualNetwork] @hasInverse(field: lbVirtualNetworkOf)
+}

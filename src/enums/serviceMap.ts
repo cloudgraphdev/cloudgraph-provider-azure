@@ -1,12 +1,18 @@
 import services from './services'
 import AzureADApplication from '../services/adApplication'
 import AzureADGroup from '../services/adGroup'
+import AzureADIdentitySecurityDefaultsEnforcementPolicy from '../services/adIdentitySecurityDefaultsEnforcementPolicy'
 import AzureADServicePrincipal from '../services/adServicePrincipal'
 import AzureADUser from '../services/adUser'
 import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureAuthRoleAssignment from '../services/authRoleAssignment'
 import AzureAuthRoleDefinition from '../services/authRoleDefinition'
+import AzureCdnCustomDomains from '../services/cdnCustomDomains'
+import AzureCdnEndpoints from '../services/cdnEndpoints'
+import AzureCdnOriginGroups from '../services/cdnOriginGroups'
+import AzureCdnOrigins from '../services/cdnOrigins'
+import AzureCdnProfiles from '../services/cdnProfiles'
 import AzureContainerRegistry from '../services/containerRegistry'
 import AzureDatabaseMySql from '../services/databaseMySql'
 import AzureDatabasePostgreSql from '../services/databasePostgreSql'
@@ -19,6 +25,7 @@ import AzureEventHub from '../services/eventHub'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
 import AzureKeyVault from '../services/keyVault'
+import AzureLoadBalancer from '../services/loadBalancer'
 import AzureMonitorInsightsActivityLogAlertRule from '../services/monitorInsightsActivityLogAlertRule'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
@@ -34,14 +41,8 @@ import AzureStorageBlob from '../services/storageBlob'
 import AzureStorageContainer from '../services/storageContainer'
 import AzureTag from '../services/tag'
 import AzureVirtualMachine from '../services/virtualMachine'
-import AzureVirtualNetwork from '../services/virtualNetwork'
 import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
-import AzureCdnEndpoints from '../services/cdnEndpoints'
-import AzureCdnProfiles from '../services/cdnProfiles'
-import AzureCdnCustomDomains from '../services/cdnCustomDomains'
-import AzureCdnOrigins from '../services/cdnOrigins'
-import AzureCdnOriginGroups from '../services/cdnOriginGroups'
-import AzureADIdentitySecurityDefaultsEnforcementPolicy from '../services/adIdentitySecurityDefaultsEnforcementPolicy'
+import AzureVirtualNetwork from '../services/virtualNetwork'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -57,16 +58,16 @@ export default {
   [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
-  [services.containerRegistry]: AzureContainerRegistry,
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
-  [services.cdnProfiles]: AzureCdnProfiles,
-  [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
+  [services.cdnOrigins]: AzureCdnOrigins,
+  [services.cdnProfiles]: AzureCdnProfiles,
+  [services.containerRegistry]: AzureContainerRegistry,
   [services.databaseMySql]: AzureDatabaseMySql,
   [services.databasePostgreSql]: AzureDatabasePostgreSql,
-  [services.databaseSql]: AzureDatabaseSql,
   [services.databaseSqlVm]: AzureDatabaseSqlVm,
+  [services.databaseSql]: AzureDatabaseSql,
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
   [services.eventGrid]: AzureEventGrid,
@@ -74,8 +75,8 @@ export default {
   [services.firewall]: AzureFirewall,
   [services.functionApp]: AzureFunctionApp,
   [services.keyVault]: AzureKeyVault,
-  [services.monitorInsightsActivityLogAlertRule]:
-    AzureMonitorInsightsActivityLogAlertRule,
+  [services.loadBalancer]: AzureLoadBalancer,
+  [services.monitorInsightsActivityLogAlertRule]:AzureMonitorInsightsActivityLogAlertRule,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,
   [services.privateDns]: AzurePrivateDns,
@@ -87,9 +88,9 @@ export default {
   [services.securitySettings]: AzureSecuritySettings,
   [services.storageAccount]: AzureStorageAccount,
   [services.storageBlob]: AzureStorageBlob,
-  [services.virtualMachine]: AzureVirtualMachine,
-  [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
-  [services.virtualNetwork]: AzureVirtualNetwork,
   [services.storageContainer]: AzureStorageContainer,
+  [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
+  [services.virtualMachine]: AzureVirtualMachine,
+  [services.virtualNetwork]: AzureVirtualNetwork,
   tag: AzureTag,
 }

@@ -1,7 +1,4 @@
-import {
-  ApplicationSecurityGroup,
-  SecurityRule,
-} from '@azure/arm-network/esm/models'
+import { ApplicationSecurityGroup, SecurityRule } from '@azure/arm-network'
 import cuid from 'cuid'
 import {
   AzureNetworkSecurityGroup,

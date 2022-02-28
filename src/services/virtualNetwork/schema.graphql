@@ -23,6 +23,7 @@ type azureVirtualNetwork implements azureResource
   provisioningState: String @search(by: [hash, regexp])
   resourceGuid: String @search(by: [hash, regexp])
   firewalls: [azureFirewall] @hasInverse(field: virtualNetworks)
+  lbVirtualNetworkOf: [azureLoadBalancer] @hasInverse(field: loadBalancerBackendVirtualNetworks)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualNetworks)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: virtualNetworks)
   resourceGroup: [azureResourceGroup] @hasInverse(field: virtualNetworks)

@@ -25,6 +25,7 @@ export default ({
     } = {},
     provisioningState,
     domainName,
+    resourceGroupId
   } = service
   return {
     id: id || cuid(),
@@ -40,5 +41,6 @@ export default ({
     lastModifiedAt: lastModifiedAt?.toISOString(),
     provisioningState,
     domainName,
+    resourceGroupId
   }
 }

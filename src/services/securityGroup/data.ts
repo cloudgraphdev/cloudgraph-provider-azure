@@ -1,15 +1,13 @@
-import { NetworkManagementClient } from '@azure/arm-network'
 import {
+  NetworkManagementClient,
   NetworkSecurityGroup,
-  NetworkSecurityGroupsListAllResponse,
-  NetworkSecurityGroupsListAllNextResponse,
-  NetworkSecurityGroupListResult,
-} from '@azure/arm-network/esm/models'
+} from '@azure/arm-network'
+import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { getAllResources } from '../../utils/apiUtils'
+import { tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
@@ -31,29 +29,30 @@ export default async ({
   [property: string]: RawAzureNetworkSecurityGroup[]
 }> => {
   try {
-    const { credentials, subscriptionId } = config
-    const client = new NetworkManagementClient(credentials, subscriptionId)
+    const { tokenCredentials, subscriptionId } = config
+    const client = new NetworkManagementClient(tokenCredentials, subscriptionId)
 
-    const networkInterfaceData: NetworkSecurityGroupListResult =
-      await getAllResources({
-        listCall: async (): Promise<NetworkSecurityGroupsListAllResponse> =>
-          client.networkSecurityGroups.listAll(),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<NetworkSecurityGroupsListAllNextResponse> =>
-          client.networkSecurityGroups.listAllNext(nextLink),
-        debugScope: {
-          service: serviceName,
-          client,
-          scope: 'networkSecurityGroups',
-        },
-      })
+    const securityGroupData: NetworkSecurityGroup[] = []
+    await tryCatchWrapper(
+      async () => {
+        const securityGroupITerable: PagedAsyncIterableIterator<NetworkSecurityGroup> =
+          client.networkSecurityGroups.listAll()
+        for await (const securityGroup of securityGroupITerable) {
+          securityGroup && securityGroupData.push(securityGroup)
+        }
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'networkSecurityGroups',
+      }
+    )
 
     const result: {
       [property: string]: RawAzureNetworkSecurityGroup[]
     } = {}
     let numOfGroups = 0
-    networkInterfaceData.map(({ tags, location, ...rest }) => {
+    securityGroupData.map(({ tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {

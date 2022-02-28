@@ -1,15 +1,10 @@
-import { NetworkManagementClient } from '@azure/arm-network'
-import {
-  NetworkInterface,
-  NetworkInterfaceListResult,
-  NetworkInterfacesListAllNextResponse,
-  NetworkInterfacesListAllResponse,
-} from '@azure/arm-network/esm/models'
+import { NetworkInterface, NetworkManagementClient } from '@azure/arm-network'
+import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { getAllResources } from '../../utils/apiUtils'
+import { tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
@@ -31,23 +26,24 @@ export default async ({
   [property: string]: RawAzureNetworkInterface[]
 }> => {
   try {
-    const { credentials, subscriptionId } = config
-    const client = new NetworkManagementClient(credentials, subscriptionId)
+    const { tokenCredentials, subscriptionId } = config
+    const client = new NetworkManagementClient(tokenCredentials, subscriptionId)
 
-    const networkInterfaceData: NetworkInterfaceListResult =
-      await getAllResources({
-        listCall: async (): Promise<NetworkInterfacesListAllResponse> =>
-          client.networkInterfaces.listAll(),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<NetworkInterfacesListAllNextResponse> =>
-          client.networkInterfaces.listAllNext(nextLink),
-        debugScope: {
-          service: serviceName,
-          client,
-          scope: 'networkInterfaces',
-        },
-      })
+    const networkInterfaceData: NetworkInterface[] = []
+    await tryCatchWrapper(
+      async () => {
+        const networkInterfaceIterable: PagedAsyncIterableIterator<NetworkInterface> =
+          client.networkInterfaces.listAll()
+        for await (const networkInterface of networkInterfaceIterable) {
+          networkInterface && networkInterfaceData.push(networkInterface)
+        }
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'networkInterfaces',
+      }
+    )
 
     const result: {
       [property: string]: RawAzureNetworkInterface[]

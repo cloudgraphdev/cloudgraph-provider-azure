@@ -35,6 +35,8 @@ type azurePublicIp implements azureResource
   resourceGuid: String @search(by: [hash, regexp])
   zones: [String] @search(by: [hash, regexp])
   firewalls: [azureFirewall] @hasInverse(field: publicIps)
+  lbFrontendOf: [azureLoadBalancer] @hasInverse(field: frontendPublicIps)
+  lbBackendOf: [azureLoadBalancer] @hasInverse(field: backendPublicIps)
   networkInterface: [azureNetworkInterface] @hasInverse(field: publicIps)
   resourceGroup: [azureResourceGroup] @hasInverse(field: publicIps)
 }

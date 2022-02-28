@@ -1,4 +1,4 @@
-import { NetworkManagementClient, PublicIPAddress } from '@azure/arm-network'
+import { LoadBalancer, NetworkManagementClient } from '@azure/arm-network'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -10,10 +10,10 @@ import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'PublicIp'
+const serviceName = 'LoadBalancer'
 
-export interface RawAzurePublicIpAddress
-  extends Omit<PublicIPAddress, 'tags' | 'location'> {
+export interface RawAzureLoadBalancer
+  extends Omit<LoadBalancer, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
   Tags: TagMap
@@ -23,33 +23,33 @@ export default async ({
   regions,
   config,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzurePublicIpAddress[]
+  [property: string]: RawAzureLoadBalancer[]
 }> => {
   try {
     const { tokenCredentials, subscriptionId } = config
     const client = new NetworkManagementClient(tokenCredentials, subscriptionId)
 
-    const publicIpData: PublicIPAddress[] = []
+    const loadBalancerData: LoadBalancer[] = []
     await tryCatchWrapper(
       async () => {
-        const publicIpIterable: PagedAsyncIterableIterator<PublicIPAddress> =
-          client.publicIPAddresses.listAll()
-        for await (const publicIp of publicIpIterable) {
-          publicIp && publicIpData.push(publicIp)
+        const loadBalancerIterable: PagedAsyncIterableIterator<LoadBalancer> =
+          client.loadBalancers.listAll()
+        for await (const loadBalancer of loadBalancerIterable) {
+          loadBalancer && loadBalancerData.push(loadBalancer)
         }
       },
       {
         service: serviceName,
         client,
-        scope: 'publicIPAddresses',
+        scope: 'loadBalancers',
       }
     )
 
     const result: {
-      [property: string]: RawAzurePublicIpAddress[]
+      [property: string]: RawAzureLoadBalancer[]
     } = {}
     let numOfGroups = 0
-    publicIpData.map(({ tags, location, ...rest }) => {
+    loadBalancerData.map(({ tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
@@ -65,7 +65,7 @@ export default async ({
         numOfGroups += 1
       }
     })
-    logger.debug(lt.foundPublicIps(numOfGroups))
+    logger.debug(lt.foundLoadBalancers(numOfGroups))
 
     return result
   } catch (e) {

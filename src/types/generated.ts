@@ -1361,6 +1361,106 @@ export type AzureKeyVaultAccessPolicy = {
   permissionStorage?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type AzureLbBackendAddressPool = AzureBaseResource & {
+  etag?: Maybe<Scalars['String']>;
+  inboundNatRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  loadBalancingRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  location?: Maybe<Scalars['String']>;
+  outboundRule?: Maybe<Scalars['String']>;
+  outboundRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureLbFrontendIpConfiguration = AzureBaseResource & {
+  etag?: Maybe<Scalars['String']>;
+  inboundNatPools?: Maybe<Array<Maybe<Scalars['String']>>>;
+  inboundNatRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  loadBalancingRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  outboundRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAddressVersion?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureLbInboundNatPool = AzureBaseResource & {
+  backendPort?: Maybe<Scalars['Int']>;
+  enableFloatingIP?: Maybe<Scalars['Boolean']>;
+  enableTcpReset?: Maybe<Scalars['Boolean']>;
+  etag?: Maybe<Scalars['String']>;
+  frontendPortRangeEnd?: Maybe<Scalars['Int']>;
+  frontendPortRangeStart?: Maybe<Scalars['Int']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureLbInboundNatRule = AzureBaseResource & {
+  backendPort?: Maybe<Scalars['Int']>;
+  enableFloatingIP?: Maybe<Scalars['Boolean']>;
+  enableTcpReset?: Maybe<Scalars['Boolean']>;
+  etag?: Maybe<Scalars['String']>;
+  frontendPort?: Maybe<Scalars['Int']>;
+  frontendPortRangeEnd?: Maybe<Scalars['Int']>;
+  frontendPortRangeStart?: Maybe<Scalars['Int']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureLbLoadBalancingRule = AzureBaseResource & {
+  backendPort?: Maybe<Scalars['Int']>;
+  disableOutboundSnat?: Maybe<Scalars['Boolean']>;
+  enableFloatingIP?: Maybe<Scalars['Boolean']>;
+  enableTcpReset?: Maybe<Scalars['Boolean']>;
+  etag?: Maybe<Scalars['String']>;
+  frontendPort?: Maybe<Scalars['Int']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  loadDistribution?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureLbOutboundRule = AzureBaseResource & {
+  allocatedOutboundPorts?: Maybe<Scalars['Int']>;
+  enableTcpReset?: Maybe<Scalars['Boolean']>;
+  etag?: Maybe<Scalars['String']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureLbProbe = AzureBaseResource & {
+  etag?: Maybe<Scalars['String']>;
+  intervalInSeconds?: Maybe<Scalars['Int']>;
+  numberOfProbes?: Maybe<Scalars['Int']>;
+  port?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  requestPath?: Maybe<Scalars['String']>;
+};
+
+export type AzureLoadBalancer = AzureResource & {
+  backendAddressPools?: Maybe<Array<Maybe<AzureLbBackendAddressPool>>>;
+  backendPublicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  etag?: Maybe<Scalars['String']>;
+  frontendIPConfigurations?: Maybe<Array<Maybe<AzureLbFrontendIpConfiguration>>>;
+  frontendPublicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  gatewayLoadBalancerOf?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  gatewayLoadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  inboundNatPools?: Maybe<Array<Maybe<AzureLbInboundNatPool>>>;
+  inboundNatRules?: Maybe<Array<Maybe<AzureLbInboundNatRule>>>;
+  loadBalancerBackendVirtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  loadBalancingRules?: Maybe<Array<Maybe<AzureLbLoadBalancingRule>>>;
+  outboundRules?: Maybe<Array<Maybe<AzureLbOutboundRule>>>;
+  probes?: Maybe<Array<Maybe<AzureLbProbe>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  skuName?: Maybe<Scalars['String']>;
+  skuTier?: Maybe<Scalars['String']>;
+};
+
 export type AzureMonitorInsightsActivityLogAlertRule = AzureBaseResource & {
   actionGroups?: Maybe<Array<Maybe<AzureMonitorInsightsActivityLogAlertRuleActionGroup>>>;
   condition?: Maybe<AzureMonitorInsightsActivityLogAlertRuleCondition>;
@@ -1545,6 +1645,8 @@ export type AzurePublicIp = AzureResource & {
   ipAddress?: Maybe<Scalars['String']>;
   ipTags?: Maybe<Array<Maybe<AzurePublicIpTags>>>;
   ipVersion?: Maybe<Scalars['String']>;
+  lbBackendOf?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  lbFrontendOf?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   networkInterface?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGuid?: Maybe<Scalars['String']>;
@@ -1600,6 +1702,7 @@ export type AzureResourceGroup = AzureResource & {
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
+  loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   managedBy?: Maybe<Scalars['String']>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
@@ -1954,6 +2057,7 @@ export type AzureTag = {
   id: Scalars['String'];
   key: Scalars['String'];
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
+  loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -2179,6 +2283,7 @@ export type AzureVirtualNetwork = AzureResource & {
   enableVmProtection?: Maybe<Scalars['Boolean']>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   flowTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  lbVirtualNetworkOf?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   provisioningState?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
