@@ -1,3 +1,10 @@
+## [0.29.4](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.3...0.29.4) (2022-02-28)
+
+
+### Bug Fixes
+
+* singularize resourceGroup relationship in all services ([67c81d0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/67c81d096148ecebf20f307c628703dc4a3df0dd))
+
 ## [0.29.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.2...0.29.3) (2022-02-25)
 
 
