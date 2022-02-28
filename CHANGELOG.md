@@ -1,3 +1,10 @@
+## [0.29.5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.4...0.29.5) (2022-02-28)
+
+
+### Bug Fixes
+
+* fix adApplications owners async fetch cycle ([f793d11](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/f793d11e7915ad2f725daaae04b8ac9264b5645c))
+
 ## [0.29.4](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.3...0.29.4) (2022-02-28)
 
 
