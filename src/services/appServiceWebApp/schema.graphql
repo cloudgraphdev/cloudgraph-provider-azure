@@ -1,4 +1,10 @@
-type azureAppServiceWebAppHostNameSslState {
+type azureAppServiceWebAppHostNameSslState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   sslState: String @search(by: [hash, regexp])
@@ -11,26 +17,49 @@ type azureAppServiceWebAppHostNameSslState {
   hostType: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigAppSettings {
+type azureAppServiceWebAppSiteConfigAppSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   value: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigDatabaseConnectionInfo {
+type azureAppServiceWebAppSiteConfigDatabaseConnectionInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   connectionString: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigVirtualDirectory {
+type azureAppServiceWebAppSiteConfigVirtualDirectory
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   id: String @search(by: [hash, regexp])
   virtualPath: String @search(by: [hash, regexp])
   physicalPath: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigVirtualApplication {
+type azureAppServiceWebAppSiteConfigVirtualApplication
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   virtualPath: String @search(by: [hash, regexp])
   physicalPath: String @search(by: [hash, regexp])
@@ -38,18 +67,33 @@ type azureAppServiceWebAppSiteConfigVirtualApplication {
   virtualDirectories: [azureAppServiceWebAppSiteConfigVirtualDirectory]
 }
 
-type azureAppServiceWebAppSiteConfigLimits {
+type azureAppServiceWebAppSiteConfigLimits
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   maxPercentageCpu: Int @search
   maxMemoryInMb: Int @search
   maxDiskSizeInMb: Int @search
 }
 
-type azureAppServiceWebAppSiteConfigCorsSettings {
+type azureAppServiceWebAppSiteConfigCorsSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   allowedOrigins: [String] @search(by: [hash, regexp])
   supportCredentials: Boolean @search
 }
 
-type azureAppServiceWebAppSiteConfig {
+type azureAppServiceWebAppSiteConfig
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   numberOfWorkers: Int @search
   defaultDocuments: [String] @search(by: [hash, regexp])
   netFrameworkVersion: String @search(by: [hash, regexp])
@@ -155,7 +199,7 @@ type azureAppServiceWebApp implements azureResource
   dailyMemoryTimeQuota: Int @search
   suspendedTill: String @search(by: [hash, regexp])
   maxNumberOfWorkers: Int @search
-  resourceGroup: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   isDefaultContainer: Boolean @search
   defaultHostName: String @search(by: [hash, regexp])
   httpsOnly: Boolean @search
@@ -166,6 +210,6 @@ type azureAppServiceWebApp implements azureResource
   virtualNetworkSubnetId: String @search(by: [hash, regexp])
   authEnabled: Boolean @search
   appServicePlan: [azureAppServicePlan] @hasInverse(field: appServiceWebApps)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: appServiceWebApps) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: appServiceWebApps)
   storageAccounts: [azureStorageAccount] @hasInverse(field: appServiceWebApp)
 }

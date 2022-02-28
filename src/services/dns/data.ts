@@ -20,13 +20,13 @@ const lt = { ...azureLoggerText }
 const serviceName = 'DNS'
 
 export interface RawAzureDnsRecordSet extends RecordSet {
-  resourceGroup: string
+  resourceGroupId: string
   dnsZoneName: string
 }
 
 export interface RawAzureDnsZone extends Omit<Zone, 'tags'> {
   recordSets: RawAzureDnsRecordSet[]
-  resourceGroup: string
+  resourceGroupId: string
   region: string
   Tags: TagMap
 }
@@ -51,7 +51,7 @@ export default async ({
     })
     const resourceGroupsNames: string[] = getResourceGroupNames(resourceGroups)
 
-    const dnsZoneList: Array<Zone & { resourceGroup: string }> = (
+    const dnsZoneList: Array<Zone & { resourceGroupId: string }> = (
       await Promise.all(
         (resourceGroupsNames || []).map(async (rgName: string) =>
           getAllResources({
@@ -74,7 +74,7 @@ export default async ({
           (dnsZoneList || []).map(
             async ({
               name: dnsZoneName,
-              resourceGroup: dnsZoneResourceGroupName,
+              resourceGroupId: dnsZoneResourceGroupName,
             }) =>
               getAllResources({
                 listCall:

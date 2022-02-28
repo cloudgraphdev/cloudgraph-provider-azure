@@ -16,7 +16,7 @@ const serviceName = 'CDN Profiles'
 
 export interface RawAzureCdnProfile extends Omit<Profile, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -43,12 +43,12 @@ export default async ({
           for await (const cdnProfile of cdnProfilesIterable) {
             if (cdnProfile) {
               const { location, tags, ...rest } = cdnProfile
-              const resourceGroup = getResourceGroupFromEntity(rest)
+              const resourceGroupId = getResourceGroupFromEntity(rest)
               const region = location && lowerCaseLocation(location)
               cdnProfiles.push({
                 ...rest,
                 region,
-                resourceGroup,
+                resourceGroupId,
                 Tags: tags || {},
               })
             }

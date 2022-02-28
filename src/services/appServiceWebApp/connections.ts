@@ -22,7 +22,7 @@ export default ({
   const connections: ServiceConnection[] = []
   const {
     id,
-    resourceGroup: rgName,
+    resourceGroupId: rgName,
     appServicePlanId: planId,
     siteConfig: { azureStorageAccounts = {} } = {},
   } = service
@@ -54,7 +54,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

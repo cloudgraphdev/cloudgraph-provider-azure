@@ -193,7 +193,7 @@ export const getAllResources = async ({
         ...resources.map((r: any) => ({
           ...r,
           // This adds the resourceGroupName if present if not it parses it from the resource id
-          resourceGroup: resourceGroupName || getResourceGroupFromEntity(r),
+          resourceGroupId: resourceGroupName || getResourceGroupFromEntity(r),
           ...newPropContainer,
         }))
       )
@@ -211,7 +211,7 @@ export const getAllResources = async ({
           ...resources.map(r => ({
             ...r,
             // This adds the resourceGroupName if present if not it parses it from the resource id
-            resourceGroup: resourceGroupName || getResourceGroupFromEntity(r),
+            resourceGroupId: resourceGroupName || getResourceGroupFromEntity(r),
             ...newPropContainer,
           }))
         )

@@ -17,7 +17,7 @@ const serviceName = 'PolicyAssignment'
 export interface RawAzurePolicyAssignment
   extends Omit<PolicyAssignment, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -39,12 +39,12 @@ export default async ({
         for await (const policyAssignment of policyAssignmentsIterable) {
           if (policyAssignment) {
             const { location, ...rest } = policyAssignment
-            const resourceGroup = getResourceGroupFromEntity(rest)
-            const region = (location && lowerCaseLocation(location)) || regionMap.global
+            const resourceGroupId = getResourceGroupFromEntity(rest)
+            const region = lowerCaseLocation(location)
             policyAssignmentsData.push({
               ...rest,
               region,
-              resourceGroup,
+              resourceGroupId,
             })
           }
         }
@@ -61,7 +61,7 @@ export default async ({
       [property: string]: RawAzurePolicyAssignment[]
     } = {}
     let numOfGroups = 0
-    policyAssignmentsData.map(({ region, resourceGroup, ...rest }) => {
+    policyAssignmentsData.map(({ region, resourceGroupId, ...rest }) => {
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []
@@ -69,7 +69,7 @@ export default async ({
         result[region].push({
           ...rest,
           region,
-          resourceGroup
+          resourceGroupId,
         })
         numOfGroups += 1
       }

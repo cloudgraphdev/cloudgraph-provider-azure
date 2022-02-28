@@ -18,7 +18,7 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, resourceGroup: rgName } = service
+  const { id, resourceGroupId: rgName } = service
 
   /**
    * Find resource group related to this storage account

@@ -1,5 +1,11 @@
-type azureSecurityAssesmentResourceDetails {
-  id: String @search(by: [hash, regexp])
+type azureSecurityAssesmentResourceDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
   source: String @search(by: [hash, regexp])
   serverName: String @search(by: [hash, regexp])
   databaseName: String @search(by: [hash, regexp])
@@ -9,13 +15,23 @@ type azureSecurityAssesmentResourceDetails {
   machineName: String @search(by: [hash, regexp])
 }
 
-type azureSecurityAssesmentAdditionalData {
+type azureSecurityAssesmentAdditionalData
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   id: String @search(by: [hash, regexp])
   key: String @search(by: [hash, regexp])
   value: String @search(by: [hash, regexp])
 }
 
-type azureSecurityAssesmentStatus {
+type azureSecurityAssesmentStatus
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   code: String @search(by: [hash, regexp])
   cause: String @search(by: [hash, regexp])
   description: String @search(by: [hash, regexp])
@@ -23,7 +39,12 @@ type azureSecurityAssesmentStatus {
   statusChangeDate: String @search(by: [hash, regexp])
 }
 
-type azureSecurityAssesmentMetadata {
+type azureSecurityAssesmentMetadata
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   partnerName: String @search(by: [hash, regexp])
   displayName: String @search(by: [hash, regexp])
   policyDefinitionId: String @search(by: [hash, regexp])
@@ -46,7 +67,7 @@ type azureSecurityAssesment implements azureBaseResource
   @key(fields: "id") {
   subscriptionId: String @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
-  resourceGroup: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   resourceDetails: azureSecurityAssesmentResourceDetails
   displayName: String @search(by: [hash, regexp])
   additionalData: [azureSecurityAssesmentAdditionalData]

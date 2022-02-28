@@ -5,5 +5,5 @@ type azureDatabasePostgreSql implements azureResource
   ) @key(fields: "id") {
   charset: String @search(by: [hash, regexp])
   collation: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: databasePostgreSql) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: databasePostgreSql)
 }

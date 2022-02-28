@@ -22,7 +22,7 @@ export default ({
   const {
     id,
     ipConfigurations,
-    resourceGroup: rgName
+    resourceGroupId: rgName
   } = firewall
   /**
    * Find resource group related to this firewall
@@ -45,7 +45,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

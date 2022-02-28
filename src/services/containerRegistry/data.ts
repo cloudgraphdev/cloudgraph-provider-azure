@@ -20,7 +20,7 @@ const serviceName = 'ContainerRegistry'
 export interface RawAzureContainerRegistry
   extends Omit<Registry, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -51,12 +51,12 @@ export default async ({
           for await (const containerRegistry of containerRegistryIterable) {
             if (containerRegistry) {
               const { location, tags, ...rest } = containerRegistry
-              const resourceGroup = getResourceGroupFromEntity(rest)
+              const resourceGroupId = getResourceGroupFromEntity(rest)
               const region = location && lowerCaseLocation(location)
               containerRegistries.push({
                 ...rest,
                 region,
-                resourceGroup,
+                resourceGroupId,
                 Tags: tags || {},
               })
             }

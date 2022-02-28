@@ -19,7 +19,7 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, subnets = [], resourceGroup: rgName } = service
+  const { id, subnets = [], resourceGroupId: rgName } = service
   const ipConfigsIds: string[] =
     (subnets || [])
       .map(
@@ -49,7 +49,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

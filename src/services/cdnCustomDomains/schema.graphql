@@ -1,4 +1,9 @@
-type azureCdnCertificateSourceParameters {
+type azureCdnCertificateSourceParameters
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   odataType: String @search(by: [hash, regexp])
   certificateType: String @search(by: [hash, regexp])
   subscriptionId: String @search(by: [hash, regexp])
@@ -10,7 +15,12 @@ type azureCdnCertificateSourceParameters {
   deleteRule: String @search(by: [hash, regexp])
 }
 
-type azureCdnCustomDomainHttpsParametersUnion {
+type azureCdnCustomDomainHttpsParametersUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   certificateSource: String @search(by: [hash, regexp])
   protocolType: String @search(by: [hash, regexp])
   minimumTlsVersion: String @search(by: [hash, regexp])
@@ -36,6 +46,6 @@ type azureCdnCustomDomain implements azureResource
   validationData: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   customHttpsParameters: azureCdnCustomDomainHttpsParametersUnion
-  resourceGroups: [azureResourceGroup] @hasInverse(field: cdnCustomDomains) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: cdnCustomDomains)
   cdnEndpoints: [azureCdnEndpoint] @hasInverse(field: cdnCustomDomains)
 }

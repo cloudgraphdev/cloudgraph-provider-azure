@@ -21,7 +21,7 @@ export interface RawAzureVirtualMachine
   extends Omit<VirtualMachine, 'tags' | 'location'> {
   osType: string
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -45,7 +45,9 @@ export default async ({
       debugScope: { service: serviceName, client, scope: 'virtualMachines' },
     })
 
-    const result = {}
+    const result: {
+      [property: string]: RawAzureVirtualMachine[]
+    } = {}
     let numOfGroups = 0
     vmsData.map(({ tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
@@ -53,12 +55,12 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           osType: rest.storageProfile?.osDisk?.osType,
           region,
-          resourceGroup,
+          resourceGroupId,
           Tags: tags || {},
         })
         numOfGroups += 1

@@ -1,4 +1,10 @@
-type azureADGroupResourceSpecificPermissionGrant @key(fields: "id") {
+type azureADGroupResourceSpecificPermissionGrant
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   clientAppId: String @search(by: [hash, regexp])
   clientId: String @search(by: [hash, regexp])
@@ -7,13 +13,25 @@ type azureADGroupResourceSpecificPermissionGrant @key(fields: "id") {
   resourceAppId: String @search(by: [hash, regexp])
 }
 
-type azureADSettingValue @key(fields: "id") {
+type azureADSettingValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   value: String @search(by: [hash, regexp])
 }
 
-type azureADGroupSetting @key(fields: "id"){
+type azureADGroupSetting
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   deletedDateTime: String @search(by: [hash, regexp])
   displayName: String @search(by: [hash, regexp])

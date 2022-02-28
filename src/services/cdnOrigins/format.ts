@@ -37,6 +37,7 @@ export default ({
     resourceState,
     provisioningState,
     privateEndpointStatus,
+    resourceGroupId
   } = service
 
   return {
@@ -65,5 +66,6 @@ export default ({
     resourceState,
     provisioningState,
     privateEndpointStatus,
+    resourceGroupId
   }
 }

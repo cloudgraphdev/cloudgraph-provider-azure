@@ -55,7 +55,7 @@ export default ({
     securityRules = [],
     defaultSecurityRules = [],
     etag,
-    resourceGroup,
+    resourceGroupId,
     Tags,
   } = service
   return {
@@ -65,7 +65,7 @@ export default ({
     type,
     region,
     resourceGuid,
-    resourceGroup,
+    resourceGroupId,
     provisioningState,
     securityRules: normalizeSecurityRules(securityRules),
     defaultSecurityRules: normalizeSecurityRules(defaultSecurityRules),

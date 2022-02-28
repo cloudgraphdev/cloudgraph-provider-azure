@@ -22,7 +22,7 @@ export interface RawAzureStorageContainer extends ListContainerItem {
   storageAccountName: string
   keys: StorageAccountKey[]
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 const { logger } = CloudGraph
@@ -57,10 +57,10 @@ export default async ({
       const storageContainerData: RawAzureStorageContainer[] = []
 
       for (const storageAccount of Object.values(storageAccounts).flat()) {
-        const { name: accountName, keys, resourceGroup } = storageAccount
+        const { name: accountName, keys, resourceGroupId } = storageAccount
         const blobContainers = await getAllResources({
           listCall: async (): Promise<BlobContainersListResponse> =>
-            client.blobContainers.list(resourceGroup, accountName),
+            client.blobContainers.list(resourceGroupId, accountName),
           listNextCall: async (
             nextLink: string
           ): Promise<BlobContainersListNextResponse> =>
@@ -75,7 +75,7 @@ export default async ({
         for (const blobContainer of blobContainers) {
           storageContainerData.push({
             ...blobContainer,
-            resourceGroup,
+            resourceGroupId,
             storageAccountId: storageAccount.id,
             storageAccountName: accountName,
             keys,

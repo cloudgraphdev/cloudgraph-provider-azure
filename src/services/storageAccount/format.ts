@@ -108,6 +108,7 @@ export default ({
     minimumTlsVersion,
     allowSharedKeyAccess,
     enableNfsV3,
+    resourceGroupId,
     Tags,
     blobServiceProperties,
   } = service
@@ -116,6 +117,7 @@ export default ({
     id: id || cuid(),
     name,
     subscriptionId: account,
+    resourceGroupId,
     kind,
     extendedLocationName: extendedLocation?.name || '',
     extendedLocationType: extendedLocation?.type || '',

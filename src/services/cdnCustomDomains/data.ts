@@ -16,7 +16,7 @@ const serviceName = 'CDN Custom Domains'
 export interface RawAzureCdnCustomDomain extends CustomDomain {
   endpointId: string
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -49,14 +49,14 @@ export default async ({
           cdnCustomDomains = await Promise.all(
             cdnEndpoints.map(async cdnEndpoint => {
               const {
-                resourceGroup,
+                resourceGroupId,
                 name,
                 profileName,
                 region: endpointRegion,
               } = cdnEndpoint
               const cdnCustomDomainsIterable: PagedAsyncIterableIterator<CustomDomain> =
                 client.customDomains.listByEndpoint(
-                  resourceGroup,
+                  resourceGroupId,
                   profileName,
                   name
                 )
@@ -69,7 +69,7 @@ export default async ({
                     ...rest,
                     endpointId: cdnEndpoint.id,
                     region,
-                    resourceGroup,
+                    resourceGroupId,
                   }
                 }
               }

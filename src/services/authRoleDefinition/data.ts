@@ -17,7 +17,7 @@ const lt = { ...azureLoggerText }
 const serviceName = 'AuthorizationRoleDefinition'
 
 export interface RawAzureAuthRoleDefinition extends RoleDefinition {
-  resourceGroup: string
+  resourceGroupId: string
   region: string
 }
 
@@ -51,9 +51,9 @@ export default async ({
       global: RawAzureAuthRoleDefinition[]
     } = { global: [] }
     result.global = roleAssignmentData.map(role => {
-      const resourceGroup = getResourceGroupFromEntity(role)
+      const resourceGroupId = getResourceGroupFromEntity(role)
       return {
-        resourceGroup,
+        resourceGroupId,
         region: regionMap.global,
         ...role,
       }

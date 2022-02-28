@@ -30,6 +30,7 @@ export default ({
     customHttpsParameters,
     validationData,
     provisioningState,
+    resourceGroupId
   } = service
 
   return {
@@ -51,5 +52,6 @@ export default ({
     customHttpsParameters,
     validationData,
     provisioningState,
+    resourceGroupId
   }
 }

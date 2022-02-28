@@ -1,22 +1,45 @@
-type azurePolicyAssignmentIdentity {
+type azurePolicyAssignmentIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   principalId: String @search(by: [hash, regexp])
   tenantId: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
 }
 
-type azurePolicyAssignmentNonComplianceMessages {
+type azurePolicyAssignmentNonComplianceMessages
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   message: String @search(by: [hash, regexp])
   policyDefinitionReferenceId: String @search(by: [hash, regexp])
 }
 
-type azurePolicyAssignmentParameterValue {
+type azurePolicyAssignmentParameterValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   key: String @search(by: [hash, regexp])
   value: String @search(by: [hash, regexp])
 }
 
-type azurePolicyAssignmentParameters {
+type azurePolicyAssignmentParameters
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   key: String @search(by: [hash, regexp])
   value: [azurePolicyAssignmentParameterValue]
@@ -30,7 +53,7 @@ type azurePolicyAssignment implements azureBaseResource
   @key(fields: "id") {
   subscriptionId: String @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
-  resourceGroup: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   description: String @search(by: [hash, regexp])
   displayName: String @search(by: [hash, regexp])
   enforcementMode: String @search(by: [hash, regexp])

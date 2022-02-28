@@ -23,7 +23,7 @@ export default ({
     resourceGuid,
     enableDdosProtection,
     enableVmProtection,
-    resourceGroup,
+    resourceGroupId,
     Tags,
   } = service
   return {
@@ -54,7 +54,7 @@ export default ({
     flowTimeoutInMinutes,
     provisioningState,
     resourceGuid,
-    resourceGroup,
+    resourceGroupId,
     tags: formatTagsFromMap(Tags),
   }
 }

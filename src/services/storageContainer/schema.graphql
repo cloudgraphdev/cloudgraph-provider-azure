@@ -3,7 +3,8 @@ type azureStorageContainerImmutabilityPolicyUpdateHistory
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   update: String @search(by: [hash, regexp])
   immutabilityPeriodSinceCreationInDays: Int @search
@@ -18,7 +19,8 @@ type azureStorageContainerLegalHoldTag
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   tag: String @search(by: [hash, regexp])
   timestamp: String @search(by: [hash, regexp])
@@ -27,7 +29,7 @@ type azureStorageContainerLegalHoldTag
   upn: String @search(by: [hash, regexp])
 }
 
-type azureStorageContainer implements azureStorageResource
+type azureStorageContainer implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }

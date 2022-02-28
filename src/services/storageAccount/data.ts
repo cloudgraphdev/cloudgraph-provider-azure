@@ -7,7 +7,7 @@ import {
   StorageAccountListResult,
   StorageAccountsListNextResponse,
   StorageAccountsListResponse,
-  BlobServiceProperties
+  BlobServiceProperties,
 } from '@azure/arm-storage/esm/models'
 import { isEmpty } from 'lodash'
 import azureLoggerText from '../../properties/logger'
@@ -15,12 +15,12 @@ import azureLoggerText from '../../properties/logger'
 import { lowerCaseLocation } from '../../utils/format'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getAllResources } from '../../utils/apiUtils'
-import { parseResourceId } from '../../utils/idParserUtils'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import services from '../../enums/services'
 
 export interface RawAzureStorageAccount
   extends Omit<StorageAccount, 'tags' | 'location'> {
-  resourceGroup: string
+  resourceGroupId: string
   region: string
   keys: StorageAccountKey[]
   Tags: TagMap
@@ -70,25 +70,29 @@ export default async ({
           if (!result[region]) {
             result[region] = []
           }
-          const resourceGroup = parseResourceId(id).resourceGroups
+          const resourceGroupId = getResourceGroupFromEntity({ id })
           // Fetch Storage Account Keys
           const storageAccountKeys = await client.storageAccounts.listKeys(
-            resourceGroup,
+            resourceGroupId,
             rest.name
           )
           const { keys = [] } = storageAccountKeys
 
           // Fetch Storage Account Blob Service Properties
-          const blobServiceProperties = await client.blobServices.getServiceProperties(resourceGroup,  rest.name)
+          const blobServiceProperties =
+            await client.blobServices.getServiceProperties(
+              resourceGroupId,
+              rest.name
+            )
 
           result[region].push({
             id,
             ...rest,
-            resourceGroup,
+            resourceGroupId,
             region,
             keys,
             Tags: tags || {},
-            blobServiceProperties
+            blobServiceProperties,
           })
           numOfAccounts += 1
         }

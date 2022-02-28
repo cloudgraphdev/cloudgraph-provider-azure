@@ -42,16 +42,19 @@ interface RestApiActivityLogAlertRule {
     enabled: boolean
     scopes: string[]
   }
-  resourceGroup: string
+  resourceGroupId: string
   tags: {
     [property: string]: string
   }
 }
 
 export interface RawMonitorInsightsActivityLogAlertRule
-  extends Omit<RestApiActivityLogAlertRule, 'tags' | 'location'> {
+  extends Omit<
+    RestApiActivityLogAlertRule,
+    'tags' | 'location' | 'resourceGroup'
+  > {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -85,11 +88,15 @@ export default async ({
       async () => {
         await Promise.all(
           (resourceGroupsNames || []).map(async (rgName: string) => {
-            const alertRulesInResourceGroup = await client.getRequestedData({
-              type: 'activityLogAlerts',
-              resourceGroupName: rgName,
+            const { resourceGroup, ...restAlertRulesInResourceGroup } =
+              await client.getRequestedData({
+                type: 'activityLogAlerts',
+                resourceGroupName: rgName,
+              })
+            alertRules.push({
+              ...restAlertRulesInResourceGroup,
+              resourceGroupId: resourceGroup,
             })
-            alertRules.push(...alertRulesInResourceGroup)
           })
         )
       },
@@ -111,11 +118,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           region,
-          resourceGroup,
+          resourceGroupId,
           Tags: tags || {},
         })
         numOfGroups += 1

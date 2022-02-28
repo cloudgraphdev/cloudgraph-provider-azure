@@ -23,14 +23,14 @@ export default ({
     publicIPAddressVersion: ipVersion,
     resourceGuid,
     zones = [],
-    resourceGroup,
+    resourceGroupId,
     Tags,
   } = service
   return {
     id,
     name,
     region,
-    resourceGroup,
+    resourceGroupId,
     subscriptionId,
     tier,
     allocationMethod,

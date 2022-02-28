@@ -16,7 +16,7 @@ const serviceName = 'CDN Origin Groups'
 export interface RawAzureCdnOriginGroup extends OriginGroup {
   endpointId: string
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -49,14 +49,14 @@ export default async ({
           cdnOriginGroups = await Promise.all(
             cdnEndpoints.map(async cdnEndpoint => {
               const {
-                resourceGroup,
+                resourceGroupId,
                 name,
                 profileName,
                 region: endpointRegion,
               } = cdnEndpoint
               const cdnOriginsIterable: PagedAsyncIterableIterator<OriginGroup> =
                 client.originGroups.listByEndpoint(
-                  resourceGroup,
+                  resourceGroupId,
                   profileName,
                   name
                 )
@@ -69,7 +69,7 @@ export default async ({
                     ...rest,
                     endpointId: cdnEndpoint.id,
                     region,
-                    resourceGroup,
+                    resourceGroupId,
                   }
                 }
               }

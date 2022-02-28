@@ -1,7 +1,8 @@
 type azureVirtualMachineOSProfileLinuxConfiguration
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   disablePasswordAuthentication: Boolean @search
   provisionVMAgent: Boolean @search
@@ -9,8 +10,9 @@ type azureVirtualMachineOSProfileLinuxConfiguration
 
 type azureVirtualMachineOSProfileWindowsConfiguration
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   provisionVMAgent: Boolean @search
   enableAutomaticUpdates: Boolean @search
@@ -19,8 +21,9 @@ type azureVirtualMachineOSProfileWindowsConfiguration
 
 type azureVirtualMachineOSProfile
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   computerName: String @search(by: [hash, regexp])
   windowsConfiguration: azureVirtualMachineOSProfileWindowsConfiguration
@@ -31,8 +34,9 @@ type azureVirtualMachineOSProfile
 
 type azureVirtualMachineStorageImageReference
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   publisher: String @search(by: [hash, regexp])
   offer: String @search(by: [hash, regexp])
@@ -54,8 +58,8 @@ type azureVirtualMachine implements azureResource
   storageImageReference: azureVirtualMachineStorageImageReference
   bootDiagnostics: Boolean @search
   licenseType: String @search(by: [hash, regexp])
-  disks: [azureDisk] @hasInverse(field: virtualMachines)
+  disks: [azureDisk] @hasInverse(field: virtualMachine)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualMachines)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: virtualMachines)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: virtualMachines) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: virtualMachines)
 }

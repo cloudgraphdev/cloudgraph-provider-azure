@@ -15,7 +15,7 @@ import { tryCatchWrapper } from '../../utils'
 
 export interface RawAzureStorageBlob extends Omit<BlobItem, 'tags'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   storageContainerId: string
   Tags: TagMap
 }
@@ -69,7 +69,7 @@ export default async ({
             storageBlobData.push({
               ...blob,
               storageContainerId,
-              resourceGroup: storageContainer.resourceGroup,
+              resourceGroupId: storageContainer.resourceGroupId,
               region: storageContainer.region,
               Tags: tags,
             })

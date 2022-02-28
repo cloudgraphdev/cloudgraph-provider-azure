@@ -15,7 +15,7 @@ const serviceName = 'Private DNS'
 export interface RawAzurePrivateDnsZone
   extends Omit<PrivateZone, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -40,12 +40,12 @@ export default async ({
         for await (const privateDnsZone of privateDnsZoneIterable) {
           if (privateDnsZone) {
             const { location, tags, ...rest } = privateDnsZone
-            const resourceGroup = getResourceGroupFromEntity(rest)
-            const region = location && lowerCaseLocation(location)
+            const resourceGroupId = getResourceGroupFromEntity(rest)
+            const region = lowerCaseLocation(location)
             privateDnsZones.push({
               ...rest,
               region,
-              resourceGroup,
+              resourceGroupId,
               Tags: tags || {},
             })
           }

@@ -1,24 +1,22 @@
 type azureHostingEnvironmentProfile
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   id: String @search(by: [hash])
 }
 
-type azureExtendedLocation
-  @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
-  ) {
+type azureExtendedLocation {
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
 }
 
 type azureWebSiteFunction implements azureBaseResource
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   # config?: any;
   # files?: { [propertyName: string]: string };
@@ -30,7 +28,7 @@ type azureWebSiteFunction implements azureBaseResource
   isDisabled: Boolean @search
   language: String @search(by: [hash, regexp])
   location: String @search(by: [hash, regexp])
-  resourceGroup: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   scriptHref: String @search(by: [hash, regexp])
   scriptRootPathHref: String @search(by: [hash, regexp])
   secretsFileHref: String @search(by: [hash, regexp])
@@ -82,5 +80,5 @@ type azureFunctionApp implements azureResource
   usageState: String @search(by: [hash, regexp])
   virtualNetworkSubnetId: String @search(by: [hash, regexp])
   functions: [azureWebSiteFunction]
-  resourceGroups: [azureResourceGroup] @hasInverse(field: functionApps) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: functionApps)
 }

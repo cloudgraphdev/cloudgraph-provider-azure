@@ -145,5 +145,5 @@ type azureContainerRegistry implements azureResource
   networkRuleBypassOptions: String @search(by: [hash, regexp])
   zoneRedundancy: String @search(by: [hash, regexp])
   keyVault: [azureKeyVault] @hasInverse(field: containerRegistries)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: containerRegistries) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: containerRegistries)
 }

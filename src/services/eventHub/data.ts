@@ -17,7 +17,7 @@ const serviceName = 'EventHub'
 
 export interface RawAzureEventHub extends Omit<Eventhub, 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -52,9 +52,9 @@ export default async ({
     const eventHubs: Eventhub[] = []
     await Promise.all(
       (namespaces || []).map(async ({ name, ...rest }) => {
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         const eventHubIterable = client.eventHubs.listByNamespace(
-          resourceGroup,
+          resourceGroupId,
           name
         )
         await tryCatchWrapper(
@@ -82,11 +82,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           region,
-          resourceGroup,
+          resourceGroupId,
         })
         numOfGroups += 1
       }

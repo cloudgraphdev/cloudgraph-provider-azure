@@ -18,7 +18,7 @@ const serviceName = 'AppServicePlan'
 export interface RawAzureAppServicePlan
   extends Omit<AppServicePlan, 'tags' | 'location' | 'extendedLocation'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -52,12 +52,12 @@ export default async ({
             ) {
               const { location, tags, extendedLocation, ...rest } =
                 appServicePlan
-              const resourceGroup = getResourceGroupFromEntity(rest)
-              const region = location && lowerCaseLocation(location)
+              const resourceGroupId = getResourceGroupFromEntity(rest)
+              const region = lowerCaseLocation(location)
               appServicePlans.push({
                 ...rest,
                 region,
-                resourceGroup,
+                resourceGroupId,
                 Tags: tags || {},
               })
             }

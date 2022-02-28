@@ -1,7 +1,8 @@
 type azureVirtualNetworkDdosProtectionPlan implements azureBaseResource
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   resourceGuid: String @search(by: [hash, regexp])
   etag: String @search(by: [hash, regexp])
@@ -24,5 +25,5 @@ type azureVirtualNetwork implements azureResource
   firewalls: [azureFirewall] @hasInverse(field: virtualNetworks)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualNetworks)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: virtualNetworks)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: virtualNetworks) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: virtualNetworks)
 }

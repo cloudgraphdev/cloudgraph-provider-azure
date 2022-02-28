@@ -68,7 +68,8 @@ type azureStorageAccountPrivateEndpointConnection
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   privateEndpointId: String @search(by: [hash, regexp])
   privateLinkServiceConnectionStateStatus: String @search(by: [hash, regexp])
@@ -84,7 +85,8 @@ type azureStorageAccountResourceAccessRule
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   tenantId: String @search(by: [hash, regexp])
   resourceId: String @search(by: [hash, regexp])
@@ -95,7 +97,8 @@ type azureStorageAccountVirtualNetworkRule
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   virtualNetworkResourceId: String @search(by: [hash, regexp])
   action: String @search(by: [hash, regexp])
@@ -107,7 +110,8 @@ type azureStorageAccountIPRule
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   iPAddressOrRange: String @search(by: [hash, regexp])
   action: String @search(by: [hash, regexp])
@@ -143,7 +147,7 @@ type azureStorageAccountServiceProperties
   skuTier: String @search(by: [hash, regexp])
 }
 
-type azureStorageAccount implements azureStorageResource
+type azureStorageAccount implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }

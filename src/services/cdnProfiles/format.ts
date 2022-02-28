@@ -20,7 +20,7 @@ export default ({
     resourceState,
     provisioningState,
     frontdoorId,
-    resourceGroup,
+    resourceGroupId,
     sku,
   } = service
   return {
@@ -32,7 +32,7 @@ export default ({
     resourceState,
     provisioningState,
     frontdoorId,
-    resourceGroup,
+    resourceGroupId,
     sku: sku?.name || '',
     tags: formatTagsFromMap(Tags),
   }

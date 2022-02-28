@@ -1,4 +1,10 @@
-type azureADApplicationRole @key(fields: "id") {
+type azureADApplicationRole
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   allowedMemberTypes: [String] @search(by: [hash, regexp])
   description: String @search(by: [hash, regexp])
@@ -8,7 +14,13 @@ type azureADApplicationRole @key(fields: "id") {
   value: String @search(by: [hash, regexp])
 }
 
-type azureADApplicationRoleAssignment @key(fields: "id") {
+type azureADApplicationRoleAssignment
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   appRoleId: String @search(by: [hash, regexp])
   createdDateTime: String @search(by: [hash, regexp])
@@ -50,9 +62,11 @@ type azureADApplication
   webAppHomePageUrl: String @search(by: [hash, regexp])
   webAppRedirectUris: [String] @search(by: [hash, regexp])
   tags: [azureRawTag]
-  authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: applications)
+  authRoleAssignments: [azureAuthRoleAssignment]
+    @hasInverse(field: applications)
   instancedBy: [azureADServicePrincipal] @hasInverse(field: instanceOf)
   ownerGroups: [azureADGroup] @hasInverse(field: appOwnerOf)
-  ownerServicePrincipals: [azureADServicePrincipal] @hasInverse(field: appOwnerOf)
+  ownerServicePrincipals: [azureADServicePrincipal]
+    @hasInverse(field: appOwnerOf)
   ownerUsers: [azureADUser] @hasInverse(field: appOwnerOf)
 }

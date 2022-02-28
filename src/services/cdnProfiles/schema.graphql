@@ -8,6 +8,6 @@ type azureCdnProfile implements azureResource
   provisioningState: String @search(by: [hash, regexp])
   frontdoorId: String @search(by: [hash, regexp])
   sku: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: cdnProfiles) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: cdnProfiles)
   cdnEndpoints: [azureCdnEndpoint] @hasInverse(field: cdnProfiles)
 }

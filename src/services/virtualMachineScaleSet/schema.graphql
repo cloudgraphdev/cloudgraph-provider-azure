@@ -3,8 +3,9 @@ type azureVirtualMachineScaleSetSubResource
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
-  id: String @search(by: [hash, regexp])
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
 }
 
 type azureVirtualMachineScaleSetExtension
@@ -12,7 +13,8 @@ type azureVirtualMachineScaleSetExtension
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   forceUpdateTag: String @search(by: [hash, regexp])
@@ -102,7 +104,8 @@ type azureVirtualMachineScaleSetNetworkIpConfiguration
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   privateIPAddressVersion: String @search(by: [hash, regexp])
@@ -119,7 +122,8 @@ type azureVirtualMachineScaleSetNetworkProfileConfiguration
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   primary: Boolean @search
@@ -300,6 +304,6 @@ type azureVirtualMachineScaleSet implements azureResource
   uniqueId: String @search(by: [hash, regexp])
   virtualMachineProfile: azureVirtualMachineScaleSetProfile
   scaleInPolicy: azureVirtualMachineScaleSetScaleInPolicy
-  resourceGroups: [azureResourceGroup]
+  resourceGroup: [azureResourceGroup]
     @hasInverse(field: virtualMachineScaleSets)
 }

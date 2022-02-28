@@ -1,11 +1,22 @@
-type azureAppServicePlanSkuCapability {
+type azureAppServicePlanSkuCapability
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   value: String @search(by: [hash, regexp])
   reason: String @search(by: [hash, regexp])
 }
 
-type azureAppServicePlanSkuCapacity {
+type azureAppServicePlanSkuCapacity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   minimum: Int @search
   maximum: Int @search
   elasticMaximum: Int @search
@@ -13,7 +24,12 @@ type azureAppServicePlanSkuCapacity {
   scaleType: String @search(by: [hash, regexp])
 }
 
-type azureAppServicePlanSkuDescription {
+type azureAppServicePlanSkuDescription
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   name: String @search(by: [hash, regexp])
   tier: String @search(by: [hash, regexp])
   size: String @search(by: [hash, regexp])
@@ -43,7 +59,7 @@ type azureAppServicePlan implements azureResource
   isSpot: Boolean @search
   spotExpirationTime: String @search(by: [hash, regexp])
   freeOfferExpirationTime: String @search(by: [hash, regexp])
-  resourceGroup: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   reserved: Boolean @search
   isXenon: Boolean @search
   hyperV: Boolean @search
@@ -52,5 +68,5 @@ type azureAppServicePlan implements azureResource
   provisioningState: String @search(by: [hash, regexp])
   zoneRedundant: Boolean @search
   appServiceWebApps: [azureAppServiceWebApp] @hasInverse(field: appServicePlan)
-  resourceGroups: [azureResourceGroup] @hasInverse(field: appServicePlans) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: appServicePlans)
 }

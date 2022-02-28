@@ -21,7 +21,7 @@ export default ({
   const connections: ServiceConnection[] = []
   const {
     id,
-    resourceGroup: rgName,
+    resourceGroupId: rgName,
     encryption: {
       keyVaultProperties: { keyIdentifier: keyVaultUri } = {},
     } = {},
@@ -48,7 +48,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }
