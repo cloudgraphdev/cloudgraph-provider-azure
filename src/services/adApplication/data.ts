@@ -35,21 +35,21 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         applications = (await client.getData())?.value || []
-        let numOfGroups = 0
         const region = regionMap.global
-        applications.map(async ({ id, tags, ...rest }) => {
-          const owners: DirectoryObject[] =
-            (await client.getData(`/${id}/owners`))?.value || []
-          result.global.push({
-            id,
-            ...rest,
-            owners,
-            region,
-            Tags: { ...tags }, // Array to Object
+        await Promise.all(
+          applications.map(async ({ id, tags, ...rest }) => {
+            const owners: DirectoryObject[] =
+              (await client.getData(`/${id}/owners`))?.value || []
+            result.global.push({
+              id,
+              ...rest,
+              owners,
+              region,
+              Tags: { ...tags }, // Array to Object
+            })
           })
-          numOfGroups += 1
-        })
-        logger.debug(lt.foundAdApplications(numOfGroups))
+        )
+        logger.debug(lt.foundAdApplications(applications.length))
       },
       {
         service: serviceName,
