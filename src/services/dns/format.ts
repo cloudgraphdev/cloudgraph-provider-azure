@@ -24,7 +24,7 @@ const formatRecordSet = (
     cnameRecord,
     soaRecord,
     caaRecords,
-    resourceGroup,
+    resourceGroupId,
   } = recordSet
 
   return {
@@ -66,7 +66,7 @@ const formatRecordSet = (
         }
       }) || [],
     cnameRecord: cnameRecord?.cname || '',
-    resourceGroup,
+    resourceGroupId,
     soaRecord: {
       host: soaRecord?.host || '',
       email: soaRecord?.email || '',
@@ -106,7 +106,7 @@ export default ({
     nameServers,
     zoneType,
     recordSets,
-    resourceGroup,
+    resourceGroupId,
     Tags,
   } = service
 
@@ -120,7 +120,7 @@ export default ({
     numberOfRecordSets,
     nameServers,
     zoneType,
-    resourceGroup,
+    resourceGroupId,
     tags: formatTagsFromMap(Tags),
     recordSets: recordSets?.map(recordSet => formatRecordSet(recordSet)) || [],
   }

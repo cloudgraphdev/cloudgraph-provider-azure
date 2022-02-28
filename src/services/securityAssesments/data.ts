@@ -1,8 +1,5 @@
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
-import {
-  SecurityCenter,
-  SecurityAssessmentResponse,
-} from '@azure/arm-security'
+import { SecurityCenter, SecurityAssessmentResponse } from '@azure/arm-security'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
@@ -15,10 +12,9 @@ const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'SecurityAssesments'
 
-export interface RawAzureSecurityAssesment
-  extends SecurityAssessmentResponse {
+export interface RawAzureSecurityAssesment extends SecurityAssessmentResponse {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -53,7 +49,11 @@ export default async ({
 
     await Promise.all(
       (locations || []).map(async (location: string) => {
-        const client = new SecurityCenter(tokenCredentials, subscriptionId, location)
+        const client = new SecurityCenter(
+          tokenCredentials,
+          subscriptionId,
+          location
+        )
         const scope = `/subscriptions/${subscriptionId}`
         const assesmentsIterableForRegion: PagedAsyncIterableIterator<SecurityAssessmentResponse> =
           client.assessments.list(scope)
@@ -82,11 +82,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           region,
-          resourceGroup,
+          resourceGroupId,
         })
         numOfGroups += 1
       }

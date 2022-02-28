@@ -20,7 +20,7 @@ const serviceName = 'NetworkInterface'
 export interface RawAzureNetworkInterface
   extends Omit<NetworkInterface, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -59,11 +59,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           region,
-          resourceGroup,
+          resourceGroupId,
           Tags: tags || {},
         })
         numOfGroups += 1

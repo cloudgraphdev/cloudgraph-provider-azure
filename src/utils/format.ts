@@ -17,7 +17,7 @@ export const obfuscateSensitiveString = (s: string): string => {
 }
 
 export const lowerCaseLocation = (location: string): string =>
-  location.split(' ').join('').toLowerCase()
+  (location && location.split(' ').join('').toLowerCase()) || 'global'
 
 export const getResourceGroupNames = (resourceGroups: {
   [property: string]: RawAzureResourceGroup[]

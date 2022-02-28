@@ -28,6 +28,7 @@ export default ({
     responseBasedOriginErrorDetectionSettings: settings,
     resourceState,
     provisioningState,
+    resourceGroupId
   } = service
 
   return {
@@ -57,5 +58,6 @@ export default ({
     },
     resourceState,
     provisioningState,
+    resourceGroupId
   }
 }

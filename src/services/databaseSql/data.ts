@@ -15,7 +15,7 @@ const serviceName = 'SQL Database'
 export interface RawAzureDatabaseSql
   extends Omit<Database, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -80,10 +80,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
-          resourceGroup,
+          resourceGroupId,
           region,
           Tags: tags || {},
         })

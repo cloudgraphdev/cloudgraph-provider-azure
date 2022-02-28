@@ -3,7 +3,8 @@ type azureAuthRoleDefinitionPermission
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash])
   actions: [String] @search(by: [hash, regexp])
   notActions: [String] @search(by: [hash, regexp])

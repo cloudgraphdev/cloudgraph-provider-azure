@@ -15,7 +15,7 @@ export default ({
     id,
     name,
     type,
-    resourceGroup,
+    resourceGroupId,
     charset,
     collation,
   } = service
@@ -26,7 +26,7 @@ export default ({
     region,
     type,
     subscriptionId: account,
-    resourceGroup,
+    resourceGroupId,
     charset,
     collation,
   }

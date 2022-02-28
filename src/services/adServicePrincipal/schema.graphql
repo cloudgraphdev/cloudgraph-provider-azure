@@ -1,4 +1,10 @@
-type azureADServicePrincipalEndpoint @key(fields: "id") {
+type azureADServicePrincipalEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   deletedDateTime: String @search(by: [hash, regexp])
   capability: String @search(by: [hash, regexp])
@@ -45,5 +51,6 @@ type azureADServicePrincipal
   tags: [azureRawTag]
   appOwnerOf: [azureADApplication] @hasInverse(field: ownerServicePrincipals)
   instanceOf: [azureADApplication] @hasInverse(field: instancedBy)
-  authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: servicePrincipals)
+  authRoleAssignments: [azureAuthRoleAssignment]
+    @hasInverse(field: servicePrincipals)
 }

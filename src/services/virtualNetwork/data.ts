@@ -28,7 +28,7 @@ export interface RawAzureVirtualNetwork
     'tags' | 'location' | 'ddosProtectionPlan' | 'addressSpace' | 'dhcpOptions'
   > {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   addressSpacePrefixes: string[]
   ddosProtectionPlans: DdosProtectionPlan[]
   dnsServers: string[]
@@ -88,11 +88,11 @@ export default async ({
           if (!result[region]) {
             result[region] = []
           }
-          const resourceGroup = getResourceGroupFromEntity(rest)
+          const resourceGroupId = getResourceGroupFromEntity(rest)
           result[region].push({
             ...rest,
             region,
-            resourceGroup,
+            resourceGroupId,
             addressSpacePrefixes: addressSpace?.addressPrefixes || [],
             ddosProtectionPlans: (ddosProtectionPlans || [])?.filter(
               ddosProtectionPlan =>

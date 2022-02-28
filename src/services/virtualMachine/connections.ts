@@ -24,7 +24,7 @@ export default ({
   const {
     id,
     networkProfile: { networkInterfaces: rawNetworkInterfaces = [] },
-    resourceGroup: rgName,
+    resourceGroupId: rgName,
   } = service
   const networkInterfaces = rawNetworkInterfaces.map(
     ({ id: rawNIId }) => rawNIId
@@ -51,7 +51,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

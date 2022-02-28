@@ -17,7 +17,7 @@ export default ({
     id,
     name,
     uniqueId,
-    resourceGroup,
+    resourceGroupId,
     provisioningState,
     overprovision,
     doNotRunExtensionsOnOverprovisionedVMs,
@@ -130,7 +130,7 @@ export default ({
       osProfile: os,
     },
     uniqueId,
-    resourceGroup,
+    resourceGroupId,
     tags: formatTagsFromMap(Tags),
   }
 }

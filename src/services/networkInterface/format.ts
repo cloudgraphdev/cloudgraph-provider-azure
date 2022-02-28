@@ -28,7 +28,7 @@ export default ({
       internalDnsNameLabel = '',
       internalDomainNameSuffix = '',
     } = {},
-    resourceGroup,
+    resourceGroupId,
     Tags,
   } = service
   let ipConfiguration: AzureNetworkInterfaceIpConfiguration = {}
@@ -49,7 +49,7 @@ export default ({
     id: id || cuid(),
     subscriptionId: account,
     region,
-    resourceGroup,
+    resourceGroupId,
     macAddress,
     privateIpAddress,
     internalDnsNameLabel,

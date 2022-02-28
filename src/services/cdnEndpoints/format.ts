@@ -35,6 +35,7 @@ export default ({
     hostName,
     resourceState,
     provisioningState,
+    resourceGroupId
   } = service
 
   const formatActionParameters = parameters => {
@@ -103,5 +104,6 @@ export default ({
     resourceState,
     provisioningState,
     tags: formatTagsFromMap(Tags),
+    resourceGroupId
   }
 }

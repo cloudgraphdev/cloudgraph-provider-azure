@@ -1,4 +1,8 @@
-import { WebSiteManagementClient, Site, SiteAuthSettings } from '@azure/arm-appservice'
+import {
+  WebSiteManagementClient,
+  Site,
+  SiteAuthSettings,
+} from '@azure/arm-appservice'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -10,7 +14,6 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils/index'
-import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -20,7 +23,7 @@ export interface RawAzureAppServiceWebApp
   extends Omit<Site, 'tags' | 'location' | 'identity' | 'extendedLocation'> {
   appServicePlanId: string
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
   AuthSettings?: SiteAuthSettings
 }
@@ -51,24 +54,31 @@ export default async ({
       async () => {
         appServiceWebApps = await Promise.all(
           appServicePlans.map(async appService => {
-            const { resourceGroup, name } = appService
+            const { resourceGroupId, name } = appService
             const webAppsIterable: PagedAsyncIterableIterator<Site> =
-              client.appServicePlans.listWebApps(resourceGroup, name)
+              client.appServicePlans.listWebApps(resourceGroupId, name)
             for await (const webApp of webAppsIterable) {
               if (webApp) {
-                const { name: webAppName, location, extendedLocation, identity, tags, ...rest } =
-                  webApp
-                const region = location && lowerCaseLocation(location) || regionMap.global
-
-                const authSettings = await client.webApps.getAuthSettings(resourceGroup, webAppName) 
-
+                const {
+                  name: webAppName,
+                  location,
+                  extendedLocation,
+                  identity,
+                  tags,
+                  ...rest
+                } = webApp
+                const region = lowerCaseLocation(location)
+                const authSettings = await client.webApps.getAuthSettings(
+                  resourceGroupId,
+                  webAppName
+                )
                 return {
                   ...rest,
                   appServicePlanId: appService.id,
                   region,
-                  resourceGroup,
+                  resourceGroupId,
                   Tags: tags || {},
-                  AuthSettings: authSettings
+                  AuthSettings: authSettings,
                 }
               }
             }

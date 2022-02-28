@@ -5,23 +5,46 @@ interface azureMonitorInsightsActivityLogAlertRuleConditionInterface {
   odataType: String @search(by: [hash, regexp])
 }
 
-type azureMonitorInsightsActivityLogAlertRuleWebhookProperty {
+type azureMonitorInsightsActivityLogAlertRuleWebhookProperty
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   key: String @search(by: [hash, regexp])
   value: String @search(by: [hash, regexp])
 }
 
-type azureMonitorInsightsActivityLogAlertRuleActionGroup {
+type azureMonitorInsightsActivityLogAlertRuleActionGroup
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
   actionGroupId: String @search(by: [hash, regexp])
   webhookProperties: [azureMonitorInsightsActivityLogAlertRuleWebhookProperty]
 }
 
-type azureMonitorInsightsActivityLogAlertRuleBaseCondition implements azureMonitorInsightsActivityLogAlertRuleConditionInterface {
+type azureMonitorInsightsActivityLogAlertRuleBaseCondition implements azureMonitorInsightsActivityLogAlertRuleConditionInterface
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
 }
 
-type azureMonitorInsightsActivityLogAlertRuleCondition implements azureMonitorInsightsActivityLogAlertRuleConditionInterface {
+type azureMonitorInsightsActivityLogAlertRuleCondition implements azureMonitorInsightsActivityLogAlertRuleConditionInterface
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   allOf: [azureMonitorInsightsActivityLogAlertRuleBaseCondition]
 }
 
@@ -33,7 +56,7 @@ type azureMonitorInsightsActivityLogAlertRule implements azureBaseResource
   @key(fields: "id") {
   subscriptionId: String @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
-  resourceGroup: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   condition: azureMonitorInsightsActivityLogAlertRuleCondition
   actionGroups: [azureMonitorInsightsActivityLogAlertRuleActionGroup]
   description: String @search(by: [hash, regexp])

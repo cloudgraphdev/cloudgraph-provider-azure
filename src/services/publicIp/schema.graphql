@@ -1,10 +1,20 @@
-type azurePublicIpDnsSettings {
+type azurePublicIpDnsSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   domainNameLabel: String @search(by: [hash, regexp])
   fqdn: String @search(by: [hash, regexp])
   reverseFqdn: String @search(by: [hash, regexp])
 }
 
-type azurePublicIpTags {
+type azurePublicIpTags
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
   ipTagType: String @search(by: [hash, regexp])
   tag: String @search(by: [hash, regexp])
 }
@@ -25,6 +35,6 @@ type azurePublicIp implements azureResource
   resourceGuid: String @search(by: [hash, regexp])
   zones: [String] @search(by: [hash, regexp])
   firewalls: [azureFirewall] @hasInverse(field: publicIps)
-  networkInterfaces: [azureNetworkInterface] @hasInverse(field: publicIps) # convert to singular networkInterface
-  resourceGroups: [azureResourceGroup] @hasInverse(field: publicIps) # convert to singular resourceGroup
+  networkInterface: [azureNetworkInterface] @hasInverse(field: publicIps)
+  resourceGroup: [azureResourceGroup] @hasInverse(field: publicIps)
 }

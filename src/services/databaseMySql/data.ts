@@ -15,7 +15,7 @@ const serviceName = 'MySQL Database'
 export interface RawAzureDatabaseMySql
   extends Omit<Database, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -58,11 +58,11 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const database of databaseIterable) {
-              const resourceGroup = getResourceGroupFromEntity(rest)
+              const resourceGroupId = getResourceGroupFromEntity(rest)
               databases.push({
                 region: lowerCaseLocation(location),
                 ...database,
-                resourceGroup,
+                resourceGroupId,
               })
             }
           },
@@ -83,11 +83,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           region,
           ...rest,
-          resourceGroup,
+          resourceGroupId,
         })
       }
     })

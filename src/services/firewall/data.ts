@@ -19,7 +19,7 @@ const serviceName = 'Firewall'
 export interface RawAzureFirewall
   extends Omit<AzureFirewall, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -59,11 +59,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           region,
-          resourceGroup,
+          resourceGroupId,
           Tags: tags || {},
         })
         numOfGroups += 1

@@ -30,9 +30,10 @@ export interface RawAzureFunctionApp
     | 'cloningInfo'
     | 'slotSwapStatus'
     | 'location'
+    | 'resourceGroup'
   > {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   functions: FunctionEnvelope[]
   Tags: TagMap
 }
@@ -131,6 +132,7 @@ export default async ({
         hostNameSslStates,
         cloningInfo,
         slotSwapStatus,
+        resourceGroup,
         ...rest
       }) => {
         const region = lowerCaseLocation(location)
@@ -138,12 +140,11 @@ export default async ({
           if (!result[region]) {
             result[region] = []
           }
-          const resourceGroup = getResourceGroupFromEntity(rest)
           result[region].push({
             name,
             ...rest,
             region,
-            resourceGroup,
+            resourceGroupId: resourceGroup,
             Tags: tags || {},
             functions: azureFunctions
               .filter(i => i.functionAppName === name)

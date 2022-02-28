@@ -33,7 +33,7 @@ export default ({
     networkAccessPolicy,
     tier,
     encryption: { type: encryptionSettings = null } = {},
-    resourceGroup,
+    resourceGroupId,
     Tags,
   } = service
 
@@ -61,7 +61,7 @@ export default ({
     networkAccessPolicy,
     tier,
     encryptionSettings,
-    resourceGroup,
+    resourceGroupId,
     tags: formatTagsFromMap(Tags),
   }
 }

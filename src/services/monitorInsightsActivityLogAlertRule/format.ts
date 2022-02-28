@@ -26,7 +26,7 @@ export default ({
       enabled,
       scopes,
     } = {},
-    resourceGroup,
+    resourceGroupId,
     region,
     Tags,
   } = service
@@ -44,7 +44,7 @@ export default ({
     type,
     subscriptionId: account,
     region,
-    resourceGroup,
+    resourceGroupId,
     tags: formatTagsFromMap(Tags),
     condition: {
       allOf,

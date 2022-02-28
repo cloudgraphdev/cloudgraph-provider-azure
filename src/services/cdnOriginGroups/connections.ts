@@ -19,7 +19,7 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, resourceGroup: rgName, origins } = service
+  const { id, resourceGroupId: rgName, origins } = service
 
   /**
    * Find resource group related to this cdn origin group
@@ -42,7 +42,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

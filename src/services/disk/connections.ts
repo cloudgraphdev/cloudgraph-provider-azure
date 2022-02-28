@@ -18,7 +18,7 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, resourceGroup: rgName } = service
+  const { id, resourceGroupId: rgName } = service
 
   /**
    * Find resource group related to this disk
@@ -41,7 +41,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

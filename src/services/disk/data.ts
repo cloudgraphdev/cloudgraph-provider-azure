@@ -18,7 +18,7 @@ const lt = { ...azureLoggerText }
 const serviceName = 'Disk'
 
 export interface RawAzureDisk extends Omit<Disk, 'tags' | 'location'> {
-  resourceGroup: string
+  resourceGroupId: string
   region: string
   Tags: TagMap
 }
@@ -50,10 +50,10 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
-          resourceGroup,
+          resourceGroupId,
           region,
           Tags: tags || {},
         })

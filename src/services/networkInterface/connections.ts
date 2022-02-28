@@ -25,7 +25,7 @@ export default ({
     id,
     ipConfigurations = [],
     networkSecurityGroup: { id: netSGId } = {},
-    resourceGroup: rgName
+    resourceGroupId: rgName
   } = service
   const subnetsIds = []
   const publicIpAddressesIds = []
@@ -56,7 +56,7 @@ export default ({
           id: rg.id,
           resourceType: services.resourceGroup,
           relation: 'child',
-          field: 'resourceGroups',
+          field: 'resourceGroup',
         })
       }
     }

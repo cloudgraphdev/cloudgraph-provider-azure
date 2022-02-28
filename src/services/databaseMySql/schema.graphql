@@ -5,5 +5,5 @@ type azureDatabaseMySql implements azureResource
   ) @key(fields: "id") {
   charset: String @search(by: [hash, regexp])
   collation: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: databaseMySql) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: databaseMySql)
 }

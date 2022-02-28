@@ -238,8 +238,8 @@ export type AzureAppServicePlan = AzureResource & {
   perSiteScaling?: Maybe<Scalars['Boolean']>;
   provisioningState?: Maybe<Scalars['String']>;
   reserved?: Maybe<Scalars['Boolean']>;
-  resourceGroup?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   skuDescription?: Maybe<AzureAppServicePlanSkuDescription>;
   spotExpirationTime?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
@@ -307,8 +307,8 @@ export type AzureAppServiceWebApp = AzureResource & {
   redundancyMode?: Maybe<Scalars['String']>;
   repositorySiteName?: Maybe<Scalars['String']>;
   reserved?: Maybe<Scalars['Boolean']>;
-  resourceGroup?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   scmSiteAlsoStopped?: Maybe<Scalars['Boolean']>;
   serverFarmId?: Maybe<Scalars['String']>;
   siteConfig?: Maybe<AzureAppServiceWebAppSiteConfig>;
@@ -508,7 +508,7 @@ export type AzureCdnCustomDomain = AzureResource & {
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceState?: Maybe<Scalars['String']>;
   validationData?: Maybe<Scalars['String']>;
 };
@@ -592,7 +592,7 @@ export type AzureCdnEndpoint = AzureResource & {
   probePath?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
   queryStringCachingBehavior?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceState?: Maybe<Scalars['String']>;
   urlSigningKeys?: Maybe<Array<Maybe<AzureCdnUrlSigningKey>>>;
   webApplicationFirewallPolicyLinkId?: Maybe<Scalars['String']>;
@@ -653,7 +653,7 @@ export type AzureCdnOrigin = AzureResource & {
   privateLinkLocation?: Maybe<Scalars['String']>;
   privateLinkResourceId?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceState?: Maybe<Scalars['String']>;
   weight?: Maybe<Scalars['Int']>;
 };
@@ -669,7 +669,7 @@ export type AzureCdnOriginGroup = AzureResource & {
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceState?: Maybe<Scalars['String']>;
   responseBasedOriginErrorDetectionSettings?: Maybe<AzureCdnResponseBasedOriginErrorDetectionParameters>;
   trafficRestorationTimeToHealedOrNewEndpointsInMinutes?: Maybe<Scalars['Int']>;
@@ -679,7 +679,7 @@ export type AzureCdnProfile = AzureResource & {
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   frontdoorId?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceState?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
 };
@@ -720,7 +720,7 @@ export type AzureContainerRegistry = AzureResource & {
   privateEndpointConnections?: Maybe<Array<Maybe<AzureContainerRegistryPrivateEndpointConnection>>>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccess?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   sku?: Maybe<AzureContainerRegistrySku>;
   status?: Maybe<AzureContainerRegistryStatus>;
   zoneRedundancy?: Maybe<Scalars['String']>;
@@ -800,13 +800,13 @@ export type AzureContainerRegistryStatus = {
 export type AzureDatabaseMySql = AzureResource & {
   charset?: Maybe<Scalars['String']>;
   collation?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
 export type AzureDatabasePostgreSql = AzureResource & {
   charset?: Maybe<Scalars['String']>;
   collation?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
 export type AzureDatabaseSql = AzureResource & {
@@ -843,7 +843,7 @@ export type AzureDatabaseSql = AzureResource & {
   recoveryServicesRecoveryPointId?: Maybe<Scalars['String']>;
   requestedBackupStorageRedundancy?: Maybe<Scalars['String']>;
   requestedServiceObjectiveName?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   restorableDroppedDatabaseId?: Maybe<Scalars['String']>;
   restorePointInTime?: Maybe<Scalars['String']>;
   resumedDate?: Maybe<Scalars['String']>;
@@ -901,7 +901,7 @@ export type AzureDatabaseSqlVm = AzureResource & {
   identity?: Maybe<AzureDatabaseSqlVmResourceIdentity>;
   keyVaultCredentialSettings?: Maybe<AzureDatabaseSqlVmKeyVaultCredentialSettings>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   serverConfigurationsManagementSettings?: Maybe<AzureDatabaseSqlVmServerConfigurationsManagementSettings>;
   sqlImageOffer?: Maybe<Scalars['String']>;
   sqlImageSku?: Maybe<Scalars['String']>;
@@ -1015,11 +1015,11 @@ export type AzureDisk = AzureResource & {
   managedBy?: Maybe<Scalars['String']>;
   networkAccessPolicy?: Maybe<Scalars['String']>;
   osType?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   tier?: Maybe<Scalars['String']>;
   timeCreated?: Maybe<Scalars['String']>;
   uniqueId?: Maybe<Scalars['String']>;
-  virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
+  virtualMachine?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   zones?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
@@ -1028,7 +1028,7 @@ export type AzureDnsZone = AzureResource & {
   nameServers?: Maybe<Array<Maybe<Scalars['String']>>>;
   numberOfRecordSets?: Maybe<Scalars['Int']>;
   recordSets?: Maybe<Array<Maybe<AzureDnsZoneRecordSet>>>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   zoneType?: Maybe<Scalars['String']>;
 };
 
@@ -1042,7 +1042,7 @@ export type AzureDnsZoneRecordSet = AzureResource & {
   nsRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
   provisioningState?: Maybe<Scalars['String']>;
   ptrRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   soaRecord?: Maybe<AzureDnsZoneRecordSetSoaRecord>;
   srvRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetSrvRecord>>>;
   tTL?: Maybe<Scalars['Int']>;
@@ -1096,8 +1096,8 @@ export type AzureEventGrid = AzureBaseResource & {
   lastModifiedByType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
 };
 
@@ -1113,8 +1113,8 @@ export type AzureEventHub = AzureBaseResource & {
   partitionCount?: Maybe<Scalars['Int']>;
   partitionIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   subscriptionId?: Maybe<Scalars['String']>;
@@ -1166,7 +1166,7 @@ export type AzureFirewall = AzureResource & {
   networkRuleCollections?: Maybe<Array<Maybe<AzureFirewallNetworkRuleCollection>>>;
   provisioningState?: Maybe<Scalars['String']>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   threatIntelMode?: Maybe<Scalars['String']>;
   virtualHub?: Maybe<Scalars['String']>;
@@ -1311,7 +1311,7 @@ export type AzureFunctionApp = AzureResource & {
   redundancyMode?: Maybe<Scalars['String']>;
   repositorySiteName?: Maybe<Scalars['String']>;
   reserved?: Maybe<Scalars['Boolean']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   scmSiteAlsoStopped?: Maybe<Scalars['Boolean']>;
   serverFarmId?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
@@ -1346,7 +1346,7 @@ export type AzureKeyVault = AzureResource & {
   networkAclDefaultAction?: Maybe<Scalars['String']>;
   networkAclIpRules?: Maybe<Array<Maybe<Scalars['String']>>>;
   networkAclVirtualNetworkRules?: Maybe<Array<Maybe<Scalars['String']>>>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   tenantId?: Maybe<Scalars['String']>;
   vaultUri?: Maybe<Scalars['String']>;
 };
@@ -1367,7 +1367,7 @@ export type AzureMonitorInsightsActivityLogAlertRule = AzureBaseResource & {
   description?: Maybe<Scalars['String']>;
   enabled?: Maybe<Scalars['Boolean']>;
   region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
   subscriptionId?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
@@ -1411,7 +1411,7 @@ export type AzureNetworkInterface = AzureResource & {
   macAddress?: Maybe<Scalars['String']>;
   privateIpAddress?: Maybe<Scalars['String']>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   virtualMachineId?: Maybe<Scalars['String']>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
@@ -1444,7 +1444,7 @@ export type AzureNetworkSecurityGroup = AzureResource & {
   etag?: Maybe<Scalars['String']>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGuid?: Maybe<Scalars['String']>;
   securityRules?: Maybe<Array<Maybe<AzureNetworkSecurityGroupRule>>>;
 };
@@ -1495,7 +1495,7 @@ export type AzurePolicyAssignment = AzureBaseResource & {
   parameters?: Maybe<Array<Maybe<AzurePolicyAssignmentParameters>>>;
   policyDefinitionId?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   scope?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
 };
@@ -1534,7 +1534,7 @@ export type AzurePrivateDnsZone = AzureResource & {
   numberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
   numberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
 export type AzurePublicIp = AzureResource & {
@@ -1545,8 +1545,8 @@ export type AzurePublicIp = AzureResource & {
   ipAddress?: Maybe<Scalars['String']>;
   ipTags?: Maybe<Array<Maybe<AzurePublicIpTags>>>;
   ipVersion?: Maybe<Scalars['String']>;
-  networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  networkInterface?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGuid?: Maybe<Scalars['String']>;
   tier?: Maybe<Scalars['String']>;
   zones?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1574,7 +1574,7 @@ export type AzureResource = {
   kind?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   type?: Maybe<Scalars['String']>;
@@ -1621,7 +1621,7 @@ export type AzureSecurityAssesment = AzureBaseResource & {
   partnerName?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
   resourceDetails?: Maybe<AzureSecurityAssesmentResourceDetails>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   status?: Maybe<AzureSecurityAssesmentStatus>;
   subscriptionId?: Maybe<Scalars['String']>;
 };
@@ -1649,7 +1649,7 @@ export type AzureSecurityAssesmentMetadata = {
 
 export type AzureSecurityAssesmentResourceDetails = {
   databaseName?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   machineName?: Maybe<Scalars['String']>;
   serverName?: Maybe<Scalars['String']>;
   source?: Maybe<Scalars['String']>;
@@ -1689,7 +1689,7 @@ export type AzureSshPublicKey = {
   path?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageAccount = AzureStorageResource & {
+export type AzureStorageAccount = AzureResource & {
   accessTier?: Maybe<Scalars['String']>;
   allowBlobPublicAccess?: Maybe<Scalars['String']>;
   allowSharedKeyAccess?: Maybe<Scalars['String']>;
@@ -1828,7 +1828,7 @@ export type AzureStorageAccountVirtualNetworkRule = {
   virtualNetworkResourceId?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageBlob = AzureStorageResource & {
+export type AzureStorageBlob = AzureResource & {
   deleted?: Maybe<Scalars['String']>;
   hasVersionsOnly?: Maybe<Scalars['Boolean']>;
   isCurrentVersion?: Maybe<Scalars['Boolean']>;
@@ -1894,7 +1894,7 @@ export type AzureStorageBlobReplicationRule = {
   ruleId: Scalars['String'];
 };
 
-export type AzureStorageContainer = AzureStorageResource & {
+export type AzureStorageContainer = AzureResource & {
   deleted?: Maybe<Scalars['String']>;
   deletedTime?: Maybe<Scalars['String']>;
   denyEncryptionScopeOverride?: Maybe<Scalars['String']>;
@@ -1933,16 +1933,6 @@ export type AzureStorageContainerLegalHoldTag = {
   tenantId?: Maybe<Scalars['String']>;
   timestamp?: Maybe<Scalars['String']>;
   upn?: Maybe<Scalars['String']>;
-};
-
-export type AzureStorageResource = {
-  id: Scalars['String'];
-  kind?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  region?: Maybe<Scalars['String']>;
-  subscriptionId?: Maybe<Scalars['String']>;
-  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
-  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureSubResource = {
@@ -1992,7 +1982,7 @@ export type AzureVirtualMachine = AzureResource & {
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   osProfile?: Maybe<AzureVirtualMachineOsProfile>;
   osType?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageImageReference?: Maybe<AzureVirtualMachineStorageImageReference>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   vmSize?: Maybe<Scalars['String']>;
@@ -2022,7 +2012,7 @@ export type AzureVirtualMachineScaleSet = AzureResource & {
   overprovision?: Maybe<Scalars['Boolean']>;
   platformFaultDomainCount?: Maybe<Scalars['Int']>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   scaleInPolicy?: Maybe<AzureVirtualMachineScaleSetScaleInPolicy>;
   singlePlacementGroup?: Maybe<Scalars['Boolean']>;
   uniqueId?: Maybe<Scalars['String']>;
@@ -2169,7 +2159,7 @@ export type AzureVirtualMachineScaleSetStorageProfileOsDisk = {
 };
 
 export type AzureVirtualMachineScaleSetSubResource = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export type AzureVirtualMachineStorageImageReference = {
@@ -2190,7 +2180,7 @@ export type AzureVirtualNetwork = AzureResource & {
   flowTimeoutInMinutes?: Maybe<Scalars['Int']>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   provisioningState?: Maybe<Scalars['String']>;
-  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGuid?: Maybe<Scalars['String']>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
 };
@@ -2209,7 +2199,7 @@ export type AzureWebSiteFunction = AzureBaseResource & {
   isDisabled?: Maybe<Scalars['Boolean']>;
   language?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
-  resourceGroup?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   scriptHref?: Maybe<Scalars['String']>;
   scriptRootPathHref?: Maybe<Scalars['String']>;
   secretsFileHref?: Maybe<Scalars['String']>;

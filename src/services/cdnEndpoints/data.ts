@@ -20,7 +20,7 @@ export interface RawAzureCdnEndpoint
   profileId: string
   profileName: string
   region: string
-  resourceGroup: string
+  resourceGroupId: string
   Tags: TagMap
 }
 
@@ -54,9 +54,9 @@ export default async ({
         async () => {
           cdnEndpoints = await Promise.all(
             cdnProfiles.map(async cdnProfile => {
-              const { resourceGroup, name } = cdnProfile
+              const { resourceGroupId, name } = cdnProfile
               const cdnEndpointsIterable: PagedAsyncIterableIterator<Endpoint> =
-                client.endpoints.listByProfile(resourceGroup, name)
+                client.endpoints.listByProfile(resourceGroupId, name)
               for await (const cdnEndpoint of cdnEndpointsIterable) {
                 if (cdnEndpoint) {
                   const { location, tags, ...rest } = cdnEndpoint
@@ -67,7 +67,7 @@ export default async ({
                     profileId: cdnProfile.id,
                     profileName: cdnProfile.name,
                     region,
-                    resourceGroup,
+                    resourceGroupId,
                     Tags: tags || {},
                   }
                 }

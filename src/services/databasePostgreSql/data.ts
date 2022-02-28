@@ -1,4 +1,8 @@
-import { PostgreSQLManagementClient, Database, Server } from '@azure/arm-postgresql'
+import {
+  PostgreSQLManagementClient,
+  Database,
+  Server,
+} from '@azure/arm-postgresql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -15,7 +19,7 @@ const serviceName = 'PostgreSQL Database'
 export interface RawAzureDatabasePostgreSql
   extends Omit<Database, 'tags' | 'location'> {
   region: string
-  resourceGroup: string
+  resourceGroupId: string
 }
 
 export default async ({
@@ -50,19 +54,18 @@ export default async ({
     const databases: RawAzureDatabasePostgreSql[] = []
     await Promise.all(
       (sqlServers || []).map(async ({ name, location, ...rest }) => {
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         const databaseIterable = client.databases.listByServer(
-          resourceGroup,
+          resourceGroupId,
           name
         )
         await tryCatchWrapper(
           async () => {
             for await (const database of databaseIterable) {
-              const resourceGroup = getResourceGroupFromEntity(rest)
               databases.push({
                 region: lowerCaseLocation(location),
                 ...database,
-                resourceGroup,
+                resourceGroupId,
               })
             }
           },
@@ -83,11 +86,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           region,
           ...rest,
-          resourceGroup,
+          resourceGroupId,
         })
       }
     })

@@ -24,7 +24,7 @@ type azureCdnOrigin implements azureResource
   resourceState: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   privateEndpointStatus: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: cdnOrigins) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: cdnOrigins)
   cdnEndpoints: [azureCdnEndpoint] @hasInverse(field: cdnOrigins)
   cdnOriginGroups: [azureCdnOriginGroup] @hasInverse(field: cdnOrigins)
 }

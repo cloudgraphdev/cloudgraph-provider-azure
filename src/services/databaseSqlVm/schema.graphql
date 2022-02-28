@@ -2,7 +2,8 @@ type azureDatabaseSqlVm implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
-  ) @key(fields: "id") {
+  )
+  @key(fields: "id") {
   identity: azureDatabaseSqlVmResourceIdentity
   virtualMachineResourceId: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
@@ -17,13 +18,14 @@ type azureDatabaseSqlVm implements azureResource
   keyVaultCredentialSettings: azureDatabaseSqlVmKeyVaultCredentialSettings
   serverConfigurationsManagementSettings: azureDatabaseSqlVmServerConfigurationsManagementSettings
   storageConfigurationSettings: azureDatabaseSqlVmStorageConfigurationSettings
-  resourceGroups: [azureResourceGroup] @hasInverse(field: databaseSqlVm) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: databaseSqlVm)
 }
 
 type azureDatabaseSqlVmResourceIdentity
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   principalId: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
@@ -32,8 +34,9 @@ type azureDatabaseSqlVmResourceIdentity
 
 type azureDatabaseSqlVmWsfcDomainCredentials
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   clusterBootstrapAccountPassword: String @search(by: [hash, regexp])
   clusterOperatorAccountPassword: String @search(by: [hash, regexp])
@@ -42,8 +45,9 @@ type azureDatabaseSqlVmWsfcDomainCredentials
 
 type azureDatabaseSqlVmAutoPatchingSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   enable: Boolean @search
   dayOfWeek: String @search(by: [hash, regexp])
@@ -53,8 +57,9 @@ type azureDatabaseSqlVmAutoPatchingSettings
 
 type azureDatabaseSqlVmAutoBackupSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   enable: Boolean @search
   enableEncryption: Boolean @search
@@ -72,8 +77,9 @@ type azureDatabaseSqlVmAutoBackupSettings
 
 type azureDatabaseSqlVmKeyVaultCredentialSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   enable: Boolean @search
   credentialName: String @search(by: [hash, regexp])
@@ -84,8 +90,9 @@ type azureDatabaseSqlVmKeyVaultCredentialSettings
 
 type azureDatabaseSqlVmServerConfigurationsManagementSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   sqlConnectivityUpdateSettings: azureDatabaseSqlVmSqlConnectivityUpdateSettings
   sqlWorkloadTypeUpdateSettings: azureDatabaseSqlVmSqlWorkloadTypeUpdateSettings
@@ -95,8 +102,9 @@ type azureDatabaseSqlVmServerConfigurationsManagementSettings
 
 type azureDatabaseSqlVmSqlConnectivityUpdateSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   connectivityType: String @search(by: [hash, regexp])
   port: Int @search
@@ -106,16 +114,18 @@ type azureDatabaseSqlVmSqlConnectivityUpdateSettings
 
 type azureDatabaseSqlVmSqlWorkloadTypeUpdateSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   sqlWorkloadType: String @search(by: [hash, regexp])
 }
 
 type azureDatabaseSqlVmSqlStorageUpdateSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   diskCount: Int @search
   startingDeviceId: Int @search
@@ -124,16 +134,18 @@ type azureDatabaseSqlVmSqlStorageUpdateSettings
 
 type azureDatabaseSqlVmAdditionalFeaturesServerConfigurations
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   isRServicesEnabled: Boolean @search
 }
 
 type azureDatabaseSqlVmStorageConfigurationSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   sqlDataSettings: azureDatabaseSqlVmSQLStorageSettings
   sqlLogSettings: azureDatabaseSqlVmSQLStorageSettings
@@ -144,8 +156,9 @@ type azureDatabaseSqlVmStorageConfigurationSettings
 
 type azureDatabaseSqlVmSQLStorageSettings
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   luns: [Int]
   defaultFilePath: String @search(by: [hash, regexp])

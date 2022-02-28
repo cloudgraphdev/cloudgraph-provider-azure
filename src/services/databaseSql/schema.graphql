@@ -2,7 +2,8 @@ type azureDatabaseSql implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
-  ) @key(fields: "id") {
+  )
+  @key(fields: "id") {
   kind: String @search(by: [hash, regexp])
   managedBy: String @search(by: [hash, regexp])
   sku: azureDatabaseSqlDiskSku
@@ -46,13 +47,14 @@ type azureDatabaseSql implements azureResource
   isInfraEncryptionEnabled: Boolean @search
   federatedClientId: String @search(by: [hash, regexp])
   primaryDelegatedIdentityClientId: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: databaseSql) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: databaseSql)
 }
 
 type azureDatabaseSqlDiskSku
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   name: String @search(by: [hash, regexp])
   tier: String @search(by: [hash, regexp])
@@ -63,8 +65,9 @@ type azureDatabaseSqlDiskSku
 
 type azureDatabaseSqlDatabaseIdentity
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   type: String @search(by: [hash, regexp])
   tenantId: String @search(by: [hash, regexp])
@@ -74,16 +77,18 @@ type azureDatabaseSqlDatabaseIdentity
 
 type azureDatabaseSqlDatabaseUserIdentity
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   principalId: String @search(by: [hash, regexp])
   clientId: String @search(by: [hash, regexp])
 }
 type azureDatabaseSqlDelegation
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   resourceId: String @search(by: [hash, regexp])
   tenantId: String @search(by: [hash, regexp])
@@ -91,9 +96,11 @@ type azureDatabaseSqlDelegation
 
 type azureDatabaseSqlUserAssignedIdentity
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
-  ) {
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id
   key: String @search(by: [hash, regexp])
   value: azureDatabaseSqlDatabaseUserIdentity
@@ -101,9 +108,11 @@ type azureDatabaseSqlUserAssignedIdentity
 
 type azureDatabaseSqldelegatedResource
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
-  ) {
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
   id: String! @id
   key: String @search(by: [hash, regexp])
   value: azureDatabaseSqlDelegation
@@ -111,8 +120,9 @@ type azureDatabaseSqldelegatedResource
 
 type azureDatabaseSqlSku
   @generate(
-    query: { get: true, query: true, aggregate: true }
-    mutation: { add: true, delete: false }
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
   ) {
   name: String @search(by: [hash, regexp])
   tier: String @search(by: [hash, regexp])

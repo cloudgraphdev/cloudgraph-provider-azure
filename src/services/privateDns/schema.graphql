@@ -13,5 +13,5 @@ type azurePrivateDnsZone implements azureResource
   numberOfVirtualNetworkLinksWithRegistration: Int @search
   provisioningState: String @search(by: [hash, regexp])
   internalId: String @search(by: [hash, regexp])
-  resourceGroups: [azureResourceGroup] @hasInverse(field: privateDns) # convert to singular resourceGroup
+  resourceGroup: [azureResourceGroup] @hasInverse(field: privateDns)
 }

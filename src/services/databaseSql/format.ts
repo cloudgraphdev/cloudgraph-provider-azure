@@ -17,7 +17,7 @@ export default ({
     name,
     type,
     kind,
-    resourceGroup,
+    resourceGroupId,
     managedBy,
     sku,
     identity,
@@ -70,7 +70,7 @@ export default ({
     subscriptionId: account,
     type,
     kind,
-    resourceGroup,
+    resourceGroupId,
     managedBy,
     sku,
     identity: {

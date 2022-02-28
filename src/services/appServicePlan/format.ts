@@ -30,7 +30,7 @@ export default ({
     perSiteScaling,
     provisioningState,
     reserved,
-    resourceGroup,
+    resourceGroupId,
     sku: { capabilities = [], ...restOfSku } = {},
     spotExpirationTime,
     status,
@@ -58,7 +58,7 @@ export default ({
     perSiteScaling,
     provisioningState,
     reserved,
-    resourceGroup,
+    resourceGroupId,
     skuDescription: {
       capabilities:
         capabilities?.map((c: Capability) => ({ id: cuid(), ...c })) || [],

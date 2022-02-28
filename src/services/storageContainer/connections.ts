@@ -26,7 +26,7 @@ export default ({
    * related to the Storage Container
    */
 
-  const { id, storageAccountId, resourceGroup: rgName } = storageContainer
+  const { id, storageAccountId, resourceGroupId: rgName } = storageContainer
 
   /**
    * Find resource group related to this storage container

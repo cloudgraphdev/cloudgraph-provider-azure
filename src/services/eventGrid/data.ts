@@ -16,7 +16,7 @@ const lt = { ...azureLoggerText }
 const serviceName = 'EventGrid'
 
 export interface RawAzureEventGrid extends Omit<DomainTopic, 'location'> {
-  resourceGroup: string
+  resourceGroupId: string
   region: string
   domainName: string
 }
@@ -83,11 +83,11 @@ export default async ({
         if (!result[region]) {
           result[region] = []
         }
-        const resourceGroup = getResourceGroupFromEntity(rest)
+        const resourceGroupId = getResourceGroupFromEntity(rest)
         result[region].push({
           ...rest,
           region,
-          resourceGroup,
+          resourceGroupId,
         })
         numOfGroups += 1
       }
