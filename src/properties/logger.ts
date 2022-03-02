@@ -68,6 +68,8 @@ export default {
   foundFunctions: (num: number): string => `Found ${num} functions`,
   // Key Vault
   foundKeyVault: (num: number): string => `Found ${num} Key Vault`,
+  foundKeyVaultKeys: (num: number): string => `Found ${num} Key Vault keys`,
+  foundKeyVaultSecrets: (num: number): string => `Found ${num} Key Vault secrets`,
   // Load balancer
   foundLoadBalancers: (num: number): string => `Found ${num} load balancers`,
   // Monitor Alert Rules

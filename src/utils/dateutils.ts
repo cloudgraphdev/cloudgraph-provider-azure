@@ -37,3 +37,8 @@ export const getCurrentDayOfMonth = (): string => {
 
 export const createDiffSecs = (startDate: Date): number =>
   (new Date().getTime() - startDate.getTime()) / 1000
+
+export const toISOString = (seconds: string): string => {
+  if (!seconds && !seconds?.length) return null
+  return new Date(parseInt(seconds, 10) * 1000).toISOString()
+}
