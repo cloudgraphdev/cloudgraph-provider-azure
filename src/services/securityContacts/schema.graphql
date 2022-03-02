@@ -1,0 +1,13 @@
+type azureSecurityContact implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  email: String @search(by: [hash, regexp])
+  phone: String @search(by: [hash, regexp])
+  alertNotifications: String @search(by: [hash, regexp])
+  alertsToAdmins: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+}

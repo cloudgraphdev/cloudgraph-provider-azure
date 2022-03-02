@@ -1769,6 +1769,15 @@ export type AzureSecurityAssesmentStatus = {
   statusChangeDate?: Maybe<Scalars['String']>;
 };
 
+export type AzureSecurityContact = AzureBaseResource & {
+  alertNotifications?: Maybe<Scalars['String']>;
+  alertsToAdmins?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+};
+
 export type AzureSecurityPricing = AzureResource & {
   freeTrialRemainingTime?: Maybe<Scalars['String']>;
   pricingTier?: Maybe<Scalars['String']>;

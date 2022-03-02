@@ -33,6 +33,7 @@ export default {
   publicIp: 'publicIp',
   resourceGroup: 'resourceGroup',
   securityAssesments: 'securityAssesments',
+  securityContacts: 'securityContacts',
   securityGroup: 'securityGroup',
   securityPricings: 'securityPricings',
   securitySettings: 'securitySettings',
