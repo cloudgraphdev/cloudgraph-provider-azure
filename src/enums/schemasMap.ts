@@ -40,6 +40,7 @@ export default {
   [services.publicIp]: 'azurePublicIp',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityAssesments]: 'azureSecurityAssesment',
+  [services.securityContacts]: 'azureSecurityContact',
   [services.securityGroup]: 'azureNetworkSecurityGroup',
   [services.securityPricings]: 'azureSecurityPricing',
   [services.securitySettings]: 'azureSecuritySetting',

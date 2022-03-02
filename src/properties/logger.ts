@@ -88,6 +88,9 @@ export default {
   // Security Assesments
   foundSecurityAssesments: (num: number): string =>
     `Found ${num} security assesments`,
+  // Security Contacts
+  foundSecurityContacts: (num: number): string =>
+    `Found ${num} security contacts`,
   // Security Groups
   foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
   // Security Pricings

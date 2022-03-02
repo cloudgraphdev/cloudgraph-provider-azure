@@ -69,6 +69,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | publicIp                                    | networkInterface, resourceGroup                                           |
 | resourceGroup                               | **all services**                                                          |
 | securityAssessments                         |                                                                           |
+| securityContacts                            |                                                                           |
 | securityGroup                               | networkInterface, resourceGroup                                           |
 | securityPricings                            |                                                                           |
 | securitySettings                            |                                                                           |

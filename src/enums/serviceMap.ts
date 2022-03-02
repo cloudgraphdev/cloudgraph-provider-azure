@@ -34,6 +34,7 @@ import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureSecurityAssesments from '../services/securityAssesments'
+import AzureSecurityContacts from '../services/securityContacts'
 import AzureSecurityPricings from '../services/securityPricings'
 import AzureSecuritySettings from '../services/securitySettings'
 import AzureStorageAccount from '../services/storageAccount'
@@ -83,6 +84,7 @@ export default {
   [services.publicIp]: AzurePublicIp,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityAssesments]: AzureSecurityAssesments,
+  [services.securityContacts]: AzureSecurityContacts,
   [services.securityGroup]: AzureNetworkSecurityGroup,
   [services.securityPricings]: AzureSecurityPricings,
   [services.securitySettings]: AzureSecuritySettings,
