@@ -14,6 +14,7 @@ export default {
   [services.appServiceWebApp]: 'azureAppServiceWebApp',
   [services.authRoleAssignment]: 'azureAuthRoleAssignment',
   [services.authRoleDefinition]: 'azureAuthRoleDefinition',
+  [services.autoProvisioningSettings]: 'azureAutoProvisioningSetting',
   [services.cdnCustomDomains]: 'azureCdnCustomDomain',
   [services.cdnEndpoints]: 'azureCdnEndpoint',
   [services.cdnOriginGroups]: 'azureCdnOriginGroup',

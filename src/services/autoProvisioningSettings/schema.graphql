@@ -1,0 +1,10 @@
+type azureAutoProvisioningSetting implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  autoProvision: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+}

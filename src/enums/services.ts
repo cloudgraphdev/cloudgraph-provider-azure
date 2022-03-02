@@ -8,6 +8,7 @@ export default {
   appServiceWebApp: 'appServiceWebApp',
   authRoleAssignment: 'authRoleAssignment',
   authRoleDefinition: 'authRoleDefinition',
+  autoProvisioningSettings: 'autoProvisioningSettings',
   cdnCustomDomains: 'cdnCustomDomains',
   cdnEndpoints: 'cdnEndpoints',
   cdnProfiles: 'cdnProfiles',
