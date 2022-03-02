@@ -9,6 +9,7 @@ type azureTag @key(fields: "id") {
   cdnEndpoints: [azureCdnEndpoint]
   cdnProfiles: [azureCdnProfile]
   containerRegistries: [azureContainerRegistry]
+  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
   disks: [azureDisk]
   dns: [azureDnsZone]
   firewalls: [azureFirewall]
