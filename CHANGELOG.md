@@ -1,3 +1,10 @@
+## [0.30.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.30.0...0.30.1) (2022-03-02)
+
+
+### Bug Fixes
+
+* fixed securityAssesmentResourceDetails schema ([b85d268](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b85d2680decd2d77f77e2e10a4d3f3f26a0d3c21))
+
 # [0.30.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.29.5...0.30.0) (2022-02-28)
 
 
