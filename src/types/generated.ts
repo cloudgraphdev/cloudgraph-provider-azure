@@ -477,6 +477,12 @@ export type AzureAuthRoleDefinitionPermission = {
   notDataActions?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type AzureAutoProvisioningSetting = AzureBaseResource & {
+  autoProvision?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+};
+
 export type AzureBaseResource = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;

@@ -24,6 +24,9 @@ export default {
   // Auth Role Definitions
   foundAuthRoleDefinitions: (num: number): string =>
     `Found ${num} authorization role definitions`,
+  // AutoProvisioningSetting
+  foundAutoProvisioningSettings: (num: number): string =>
+    `Found ${num} auto provisioning settings`,
   /* CDN Profiles */
   foundCdnProfiles: (num: number): string => `Found ${num} CDN profiles`,
   /* CDN Endpoints */

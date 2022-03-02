@@ -44,6 +44,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | appServiceWebApp                            | resourceGroup, appServicePlan, storageAccount                             |
 | authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
 | authRoleDefinition                          | authRoleAssignment                                                        |
+| autoProvisioningSettings                    |                                                                           |
 | containerRegistry                           | keyVault, resourceGroup                                                   |
 | cdnCustomDomains                            | cdnEndpoints, resourceGroup                                               |
 | cdnEndpoints                                | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |

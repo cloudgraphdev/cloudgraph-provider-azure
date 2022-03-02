@@ -8,6 +8,7 @@ import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureAuthRoleAssignment from '../services/authRoleAssignment'
 import AzureAuthRoleDefinition from '../services/authRoleDefinition'
+import AzureAutoProvisioningSettings from '../services/autoProvisioningSettings'
 import AzureCdnCustomDomains from '../services/cdnCustomDomains'
 import AzureCdnEndpoints from '../services/cdnEndpoints'
 import AzureCdnOriginGroups from '../services/cdnOriginGroups'
@@ -59,6 +60,7 @@ export default {
   [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
+  [services.autoProvisioningSettings]: AzureAutoProvisioningSettings,
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
