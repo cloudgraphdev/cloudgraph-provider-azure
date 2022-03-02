@@ -1343,16 +1343,22 @@ export type AzureKeyVault = AzureResource & {
   accessPolicies?: Maybe<Array<Maybe<AzureKeyVaultAccessPolicy>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   createMode?: Maybe<Scalars['String']>;
-  enablePurgeProtection?: Maybe<Scalars['String']>;
-  enableSoftDelete?: Maybe<Scalars['String']>;
-  enabledForDeployment?: Maybe<Scalars['String']>;
-  enabledForDiskEncryption?: Maybe<Scalars['String']>;
-  enabledForTemplateDeployment?: Maybe<Scalars['String']>;
+  enablePurgeProtection?: Maybe<Scalars['Boolean']>;
+  enableRbacAuthorization?: Maybe<Scalars['Boolean']>;
+  enableSoftDelete?: Maybe<Scalars['Boolean']>;
+  enabledForDeployment?: Maybe<Scalars['Boolean']>;
+  enabledForDiskEncryption?: Maybe<Scalars['Boolean']>;
+  enabledForTemplateDeployment?: Maybe<Scalars['Boolean']>;
+  keys?: Maybe<Array<Maybe<AzureKeyVaultKey>>>;
   networkAclBypass?: Maybe<Scalars['String']>;
   networkAclDefaultAction?: Maybe<Scalars['String']>;
   networkAclIpRules?: Maybe<Array<Maybe<Scalars['String']>>>;
   networkAclVirtualNetworkRules?: Maybe<Array<Maybe<Scalars['String']>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  secrets?: Maybe<Array<Maybe<AzureKeyVaultSecret>>>;
+  softDeleteRetentionInDays?: Maybe<Scalars['Int']>;
   tenantId?: Maybe<Scalars['String']>;
   vaultUri?: Maybe<Scalars['String']>;
 };
@@ -1465,6 +1471,51 @@ export type AzureLoadBalancer = AzureResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   skuName?: Maybe<Scalars['String']>;
   skuTier?: Maybe<Scalars['String']>;
+};
+
+export type AzureKeyVaultKey = {
+  attributes?: Maybe<AzureKeyVaultKeyAttributes>;
+  id: Scalars['String'];
+  keyUri?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureKeyVaultKeyAttributes = {
+  created?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  expires?: Maybe<Scalars['String']>;
+  exportable?: Maybe<Scalars['Boolean']>;
+  notBefore?: Maybe<Scalars['String']>;
+  recoveryLevel?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
+};
+
+export type AzureKeyVaultSecret = {
+  id: Scalars['String'];
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureKeyVaultSecretProperties>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureKeyVaultSecretAttributes = {
+  created?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  expires?: Maybe<Scalars['String']>;
+  notBefore?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
+};
+
+export type AzureKeyVaultSecretProperties = {
+  attributes?: Maybe<AzureKeyVaultSecretAttributes>;
+  contentType?: Maybe<Scalars['String']>;
+  secretUri?: Maybe<Scalars['String']>;
+  secretUriWithVersion?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type AzureMonitorInsightsActivityLogAlertRule = AzureBaseResource & {

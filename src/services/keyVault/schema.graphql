@@ -1,3 +1,68 @@
+type azureKeyVaultKeyAttributes
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  enabled: Boolean @search
+  notBefore: String @search(by: [hash, regexp])
+  expires: String @search(by: [hash, regexp])
+  created: String @search(by: [hash, regexp])
+  updated: String @search(by: [hash, regexp])
+  recoveryLevel: String @search(by: [hash, regexp])
+  exportable: Boolean @search
+}
+
+type azureKeyVaultKey
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  keyUri: String @search(by: [hash, regexp])
+  attributes: azureKeyVaultKeyAttributes
+  tags: [azureRawTag]
+}
+
+type azureKeyVaultSecretAttributes
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  enabled: Boolean @search
+  notBefore: String @search(by: [hash, regexp])
+  expires: String @search(by: [hash, regexp])
+  created: String @search(by: [hash, regexp])
+  updated: String @search(by: [hash, regexp])
+}
+
+type azureKeyVaultSecretProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  value: String @search(by: [hash, regexp])
+  contentType: String @search(by: [hash, regexp])
+  attributes: azureKeyVaultSecretAttributes
+  secretUri: String @search(by: [hash, regexp])
+  secretUriWithVersion: String @search(by: [hash, regexp])
+}
+
+type azureKeyVaultSecret
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  tags: [azureRawTag]
+  properties: azureKeyVaultSecretProperties
+}
+
 type azureKeyVaultAccessPolicy
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -24,16 +89,22 @@ type azureKeyVault implements azureResource
     tenantId: String @search(by: [hash, regexp])
     accessPolicies: [azureKeyVaultAccessPolicy]
     vaultUri: String @search(by: [hash, regexp])
-    enabledForDeployment: String @search(by: [hash, regexp])
-    enabledForDiskEncryption: String @search(by: [hash, regexp])
-    enabledForTemplateDeployment: String @search(by: [hash, regexp])
-    enableSoftDelete: String @search(by: [hash, regexp])
+    enabledForDeployment: Boolean @search
+    enabledForDiskEncryption: Boolean @search
+    enabledForTemplateDeployment: Boolean @search
+    enableSoftDelete: Boolean @search
     createMode: String @search(by: [hash, regexp])
-    enablePurgeProtection: String @search(by: [hash, regexp])
+    enablePurgeProtection: Boolean @search
     networkAclBypass: String @search(by: [hash, regexp])
     networkAclDefaultAction: String @search(by: [hash, regexp])
     networkAclIpRules: [String] @search(by: [hash, regexp])
     networkAclVirtualNetworkRules: [String] @search(by: [hash, regexp])
+    softDeleteRetentionInDays: Int @search
+    enableRbacAuthorization: Boolean @search
+    provisioningState: String @search(by: [hash, regexp])
+    publicNetworkAccess: String @search(by: [hash, regexp])
+    keys: [azureKeyVaultKey]
+    secrets: [azureKeyVaultSecret]
     resourceGroup: [azureResourceGroup] @hasInverse (field: keyVaults)
-  containerRegistries: [azureContainerRegistry] @hasInverse(field: keyVault)
+    containerRegistries: [azureContainerRegistry] @hasInverse(field: keyVault)
 }
