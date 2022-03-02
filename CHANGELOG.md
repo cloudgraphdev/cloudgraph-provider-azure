@@ -1,3 +1,10 @@
+# [0.31.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.30.1...0.31.0) (2022-03-02)
+
+
+### Features
+
+* **autoProvisioningSettings:** add auto provisioning settings service ([c32c41f](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/c32c41f01de83f1a2d1db8db63680d7ec5c4aa9f))
+
 ## [0.30.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.30.0...0.30.1) (2022-03-02)
 
 
