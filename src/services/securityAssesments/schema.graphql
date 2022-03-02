@@ -3,9 +3,8 @@ type azureSecurityAssesmentResourceDetails
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  )
-  @key(fields: "id") {
-  id: String! @id @search(by: [hash, regexp])
+  ) {
+  id: String @search(by: [hash, regexp])
   source: String @search(by: [hash, regexp])
   serverName: String @search(by: [hash, regexp])
   databaseName: String @search(by: [hash, regexp])
