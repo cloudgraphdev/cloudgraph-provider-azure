@@ -1,3 +1,10 @@
+# [0.32.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.31.0...0.32.0) (2022-03-02)
+
+
+### Features
+
+* **service:** Add Keys and Secrets to keyVault service ([aebb5d0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/aebb5d0e60cc4b6fb30261b934a7920e1cdc9c75))
+
 # [0.31.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.30.1...0.31.0) (2022-03-02)
 
 
