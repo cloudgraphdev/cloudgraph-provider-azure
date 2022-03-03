@@ -12,6 +12,8 @@ export default {
   foundAppServicePlans: (num: number): string =>
     `Found ${num} app service plans`,
   foundWebApps: (num: number): string => `Found ${num} web apps`,
+  foundWebAppsSiteAuthSettings: (num: number): string => `Found ${num} web apps site auth settings`,
+  foundWebAppsSiteConfigs: (num: number): string => `Found ${num} web apps site configs`,
   /* Auth logs */
   authenticatingWithServicePrincipalSecret:
     'Authenticating with the Azure node SDK using Service Principal and Secret',
@@ -70,6 +72,7 @@ export default {
   // Azure Functions
   foundFunctionApps: (num: number): string => `Found ${num} function apps`,
   foundFunctions: (num: number): string => `Found ${num} functions`,
+  foundFunctionAppsSiteConfigs: (num: number): string => `Found ${num} function apps site configs`,
   // Key Vault
   foundKeyVault: (num: number): string => `Found ${num} Key Vault`,
   foundKeyVaultKeys: (num: number): string => `Found ${num} Key Vault keys`,

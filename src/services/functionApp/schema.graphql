@@ -36,6 +36,17 @@ type azureWebSiteFunction implements azureBaseResource
   testDataHref: String @search(by: [hash, regexp])
 }
 
+type azureFunctionAppConfiguration
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String! @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  ftpsState: String @search(by: [hash, regexp])
+}
+
 type azureFunctionApp implements azureResource
   @key(fields: "id")
   @generate(
@@ -79,6 +90,8 @@ type azureFunctionApp implements azureResource
   trafficManagerHostNames: [String] @search(by: [hash])
   usageState: String @search(by: [hash, regexp])
   virtualNetworkSubnetId: String @search(by: [hash, regexp])
+  configuration: azureFunctionAppConfiguration
   functions: [azureWebSiteFunction]
+  siteConfig: azureAppServiceWebAppSiteConfig
   resourceGroup: [azureResourceGroup] @hasInverse(field: functionApps)
 }

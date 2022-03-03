@@ -2,6 +2,7 @@ import {
   FunctionEnvelope,
   Site,
   WebSiteManagementClient,
+  SiteConfigResource,
 } from '@azure/arm-appservice'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -35,6 +36,7 @@ export interface RawAzureFunctionApp
   region: string
   resourceGroupId: string
   functions: FunctionEnvelope[]
+  siteConfig: SiteConfigResource
   Tags: TagMap
 }
 
@@ -122,6 +124,37 @@ export default async ({
       }
     )
 
+    const siteConfigs: SiteConfigResource[] = []
+    await tryCatchWrapper(
+      async () => {
+        await Promise.all(
+          (functionApps || []).map(
+            async ({
+              name: functionAppName,
+              resourceGroup: functionAppResourceGroupName,
+            }) => {
+              const configuration = await client.webApps.getConfiguration(
+                functionAppResourceGroupName,
+                functionAppName
+              )
+              if (configuration) {
+                siteConfigs.push({
+                  ...configuration,
+                })
+              }
+            }
+          )
+        )
+        logger.debug(lt.foundFunctionAppsSiteConfigs(siteConfigs.length))
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'siteConfigs',
+        operation: 'getConfiguration',
+      }
+    )
+
     const result: { [property: string]: RawAzureFunctionApp[] } = {}
     functionApps.map(
       ({
@@ -151,6 +184,7 @@ export default async ({
               .map(({ config: functionConfig, files, ...restOfFunction }) => ({
                 ...restOfFunction,
               })),
+            siteConfig: siteConfigs.find(i => i.name === name) || {},
           })
         }
       }

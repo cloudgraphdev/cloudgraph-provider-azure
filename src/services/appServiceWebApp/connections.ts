@@ -108,7 +108,7 @@ export default ({
           id: plan.id,
           resourceType: services.storageAccount,
           relation: 'child',
-          field: 'storageAccount',
+          field: 'storageAccounts',
         })
       }
     }

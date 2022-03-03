@@ -47,8 +47,9 @@ type azureAppServiceWebAppSiteConfigVirtualDirectory
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
-  id: String @search(by: [hash, regexp])
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
   virtualPath: String @search(by: [hash, regexp])
   physicalPath: String @search(by: [hash, regexp])
 }
@@ -88,12 +89,222 @@ type azureAppServiceWebAppSiteConfigCorsSettings
   supportCredentials: Boolean @search
 }
 
-type azureAppServiceWebAppSiteConfig
+type azureAppServiceWebAppSiteConfigRampUpRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  actionHostName: String @search(by: [hash, regexp])
+  reroutePercentage: Int @search
+  changeStep: Int @search
+  changeIntervalInMinutes: Int @search
+  minReroutePercentage: Int @search
+  maxReroutePercentage: Int @search
+  changeDecisionCallbackUrl: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigExperiments {
+  rampUpRules: [azureAppServiceWebAppSiteConfigRampUpRule]
+}
+
+type azureAppServiceWebAppSiteConfigHeaders
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: [String] @search(by: [hash])
+}
+
+type azureAppServiceWebAppSiteConfigIpSecurityRestriction
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  ipAddress: String @search(by: [hash, regexp])
+  subnetMask: String @search(by: [hash, regexp])
+  vnetSubnetResourceId: String @search(by: [hash, regexp])
+  vnetTrafficTag: Int @search
+  subnetTrafficTag: Int @search
+  action: String @search(by: [hash, regexp])
+  tag: String @search
+  priority: Int @search
+  name: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  headers: [azureAppServiceWebAppSiteConfigHeaders]
+}
+
+type azureAppServiceWebAppSiteConfigAzureStorageInfoValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  accountName: String @search(by: [hash, regexp])
+  shareName: String @search(by: [hash, regexp])
+  accessKey: String @search(by: [hash, regexp])
+  mountPath: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigARequestsBasedTrigger
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
+  count: Int @search
+  timeInterval: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigStatusCodesBasedTrigger
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  status: Int @search
+  subStatus: Int @search
+  win32Status: Int @search
+  count: Int @search
+  timeInterval: String @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  timeTaken: String @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+  count: Int @search
+  timeInterval: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  timeTaken: String @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+  count: Int @search
+  timeInterval: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  statusCodes: String @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+  count: Int @search
+  timeInterval: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigAutoHealTriggers
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  requests: azureAppServiceWebAppSiteConfigARequestsBasedTrigger
+  privateBytesInKB: Int @search
+  statusCodes: [azureAppServiceWebAppSiteConfigStatusCodesBasedTrigger]
+  slowRequests: azureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger
+  slowRequestsWithPath: [azureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers]
+  statusCodesRange: [azureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger]
+}
+
+type azureAppServiceWebAppSiteConfigAutoHealCustomAction
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  exe: String @search(by: [hash, regexp])
+  parameters: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigAutoHealActions
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  actionType: String @search(by: [hash, regexp])
+  customAction: azureAppServiceWebAppSiteConfigAutoHealCustomAction
+  minProcessExecutionTime: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigAutoHealRules
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  triggers: azureAppServiceWebAppSiteConfigAutoHealTriggers
+  actions: azureAppServiceWebAppSiteConfigAutoHealActions
+}
+
+type azureAppServiceWebAppSiteConfigHandlerMapping
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  extension: String @search(by: [hash, regexp])
+  scriptProcessor: String @search(by: [hash, regexp])
+  arguments: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfigSiteMachineKey
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  validation: String @search(by: [hash, regexp])
+  validationKey: String @search(by: [hash, regexp])
+  decryption: String @search(by: [hash, regexp])
+  decryptionKey: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceWebAppSiteConfig
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
   numberOfWorkers: Int @search
   defaultDocuments: [String] @search(by: [hash, regexp])
   netFrameworkVersion: String @search(by: [hash, regexp])
@@ -114,7 +325,10 @@ type azureAppServiceWebAppSiteConfig
   detailedErrorLoggingEnabled: Boolean @search
   publishingUsername: String @search(by: [hash, regexp])
   appSettings: [azureAppServiceWebAppSiteConfigAppSettings]
+  autoHealRules: azureAppServiceWebAppSiteConfigAutoHealRules
   connectionStrings: [azureAppServiceWebAppSiteConfigDatabaseConnectionInfo]
+  handlerMappings: [azureAppServiceWebAppSiteConfigHandlerMapping]
+  machineKey: azureAppServiceWebAppSiteConfigSiteMachineKey
   documentRoot: String @search(by: [hash, regexp])
   scmType: String @search(by: [hash, regexp])
   use32BitWorkerProcess: Boolean @search
@@ -127,6 +341,7 @@ type azureAppServiceWebAppSiteConfig
   managedPipelineMode: String @search(by: [hash, regexp])
   virtualApplications: [azureAppServiceWebAppSiteConfigVirtualApplication]
   loadBalancing: String @search(by: [hash, regexp])
+  experiments: azureAppServiceWebAppSiteConfigExperiments
   limits: azureAppServiceWebAppSiteConfigLimits
   autoHealEnabled: Boolean @search
   tracingOptions: String @search(by: [hash, regexp])
@@ -142,6 +357,8 @@ type azureAppServiceWebAppSiteConfig
   managedServiceIdentityId: Int @search
   xManagedServiceIdentityId: Int @search
   keyVaultReferenceIdentity: String @search(by: [hash, regexp])
+  ipSecurityRestrictions: [azureAppServiceWebAppSiteConfigIpSecurityRestriction]
+  scmIpSecurityRestrictions: [azureAppServiceWebAppSiteConfigIpSecurityRestriction]
   scmIpSecurityRestrictionsUseMain: Boolean @search
   http20Enabled: Boolean @search
   http20ProxyFlag: String @search(by: [hash, regexp])
@@ -154,13 +371,10 @@ type azureAppServiceWebAppSiteConfig
   functionsRuntimeScaleMonitoringEnabled: Boolean @search
   websiteTimeZone: String @search(by: [hash, regexp])
   minimumElasticInstanceCount: Int @search
+  azureStorageAccounts: [azureAppServiceWebAppSiteConfigAzureStorageInfoValue]
   publicNetworkAccess: String @search(by: [hash, regexp])
-  sitePort: String @search(by: [hash, regexp])
-  azureMonitorLogCategories: [String] @search(by: [hash, regexp])
-  fileChangeAuditEnabled: Boolean @search
-  antivirusScanEnabled: Boolean @search
-  winAuthAdminState: String @search(by: [hash, regexp])
-  winAuthTenantState: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  tags: [azureRawTag]
 }
 
 type azureAppServiceWebApp implements azureResource
