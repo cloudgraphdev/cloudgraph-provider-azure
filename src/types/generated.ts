@@ -339,27 +339,30 @@ export type AzureAppServiceWebAppSiteConfig = {
   acrUseManagedIdentityCreds?: Maybe<Scalars['Boolean']>;
   acrUserManagedIdentityID?: Maybe<Scalars['String']>;
   alwaysOn?: Maybe<Scalars['Boolean']>;
-  antivirusScanEnabled?: Maybe<Scalars['Boolean']>;
   apiDefinitionInfoUrl?: Maybe<Scalars['String']>;
   apiManagementConfigId?: Maybe<Scalars['String']>;
   appCommandLine?: Maybe<Scalars['String']>;
   appSettings?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigAppSettings>>>;
   autoHealEnabled?: Maybe<Scalars['Boolean']>;
+  autoHealRules?: Maybe<AzureAppServiceWebAppSiteConfigAutoHealRules>;
   autoSwapSlotName?: Maybe<Scalars['String']>;
-  azureMonitorLogCategories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  azureStorageAccounts?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigAzureStorageInfoValue>>>;
   connectionStrings?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigDatabaseConnectionInfo>>>;
   cors?: Maybe<AzureAppServiceWebAppSiteConfigCorsSettings>;
   defaultDocuments?: Maybe<Array<Maybe<Scalars['String']>>>;
   detailedErrorLoggingEnabled?: Maybe<Scalars['Boolean']>;
   documentRoot?: Maybe<Scalars['String']>;
-  fileChangeAuditEnabled?: Maybe<Scalars['Boolean']>;
+  experiments?: Maybe<AzureAppServiceWebAppSiteConfigExperiments>;
   ftpsState?: Maybe<Scalars['String']>;
   functionAppScaleLimit?: Maybe<Scalars['Int']>;
   functionsRuntimeScaleMonitoringEnabled?: Maybe<Scalars['Boolean']>;
+  handlerMappings?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigHandlerMapping>>>;
   healthCheckPath?: Maybe<Scalars['String']>;
   http20Enabled?: Maybe<Scalars['Boolean']>;
   http20ProxyFlag?: Maybe<Scalars['String']>;
   httpLoggingEnabled?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  ipSecurityRestrictions?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigIpSecurityRestriction>>>;
   isPushEnabled?: Maybe<Scalars['Boolean']>;
   javaContainer?: Maybe<Scalars['String']>;
   javaContainerVersion?: Maybe<Scalars['String']>;
@@ -369,11 +372,14 @@ export type AzureAppServiceWebAppSiteConfig = {
   linuxFxVersion?: Maybe<Scalars['String']>;
   loadBalancing?: Maybe<Scalars['String']>;
   localMySqlEnabled?: Maybe<Scalars['Boolean']>;
+  location?: Maybe<Scalars['String']>;
   logsDirectorySizeLimit?: Maybe<Scalars['Int']>;
+  machineKey?: Maybe<AzureAppServiceWebAppSiteConfigSiteMachineKey>;
   managedPipelineMode?: Maybe<Scalars['String']>;
   managedServiceIdentityId?: Maybe<Scalars['Int']>;
   minTlsVersion?: Maybe<Scalars['String']>;
   minimumElasticInstanceCount?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
   netFrameworkVersion?: Maybe<Scalars['String']>;
   nodeVersion?: Maybe<Scalars['String']>;
   numberOfWorkers?: Maybe<Scalars['Int']>;
@@ -387,11 +393,13 @@ export type AzureAppServiceWebAppSiteConfig = {
   remoteDebuggingVersion?: Maybe<Scalars['String']>;
   requestTracingEnabled?: Maybe<Scalars['Boolean']>;
   requestTracingExpirationTime?: Maybe<Scalars['String']>;
+  scmIpSecurityRestrictions?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigIpSecurityRestriction>>>;
   scmIpSecurityRestrictionsUseMain?: Maybe<Scalars['Boolean']>;
   scmMinTlsVersion?: Maybe<Scalars['String']>;
   scmType?: Maybe<Scalars['String']>;
-  sitePort?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   tracingOptions?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   use32BitWorkerProcess?: Maybe<Scalars['Boolean']>;
   virtualApplications?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigVirtualApplication>>>;
   vnetName?: Maybe<Scalars['String']>;
@@ -399,16 +407,55 @@ export type AzureAppServiceWebAppSiteConfig = {
   vnetRouteAllEnabled?: Maybe<Scalars['Boolean']>;
   webSocketsEnabled?: Maybe<Scalars['Boolean']>;
   websiteTimeZone?: Maybe<Scalars['String']>;
-  winAuthAdminState?: Maybe<Scalars['String']>;
-  winAuthTenantState?: Maybe<Scalars['String']>;
   windowsFxVersion?: Maybe<Scalars['String']>;
   xManagedServiceIdentityId?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigARequestsBasedTrigger = {
+  count?: Maybe<Scalars['Int']>;
+  timeInterval?: Maybe<Scalars['String']>;
 };
 
 export type AzureAppServiceWebAppSiteConfigAppSettings = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   value?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigAutoHealActions = {
+  actionType?: Maybe<Scalars['String']>;
+  customAction?: Maybe<AzureAppServiceWebAppSiteConfigAutoHealCustomAction>;
+  minProcessExecutionTime?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigAutoHealCustomAction = {
+  exe?: Maybe<Scalars['String']>;
+  parameters?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigAutoHealRules = {
+  actions?: Maybe<AzureAppServiceWebAppSiteConfigAutoHealActions>;
+  triggers?: Maybe<AzureAppServiceWebAppSiteConfigAutoHealTriggers>;
+};
+
+export type AzureAppServiceWebAppSiteConfigAutoHealTriggers = {
+  privateBytesInKB?: Maybe<Scalars['Int']>;
+  requests?: Maybe<AzureAppServiceWebAppSiteConfigARequestsBasedTrigger>;
+  slowRequests?: Maybe<AzureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger>;
+  slowRequestsWithPath?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers>>>;
+  statusCodes?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigStatusCodesBasedTrigger>>>;
+  statusCodesRange?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger>>>;
+};
+
+export type AzureAppServiceWebAppSiteConfigAzureStorageInfoValue = {
+  accessKey?: Maybe<Scalars['String']>;
+  accountName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  mountPath?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  shareName?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureAppServiceWebAppSiteConfigCorsSettings = {
@@ -423,10 +470,93 @@ export type AzureAppServiceWebAppSiteConfigDatabaseConnectionInfo = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureAppServiceWebAppSiteConfigExperiments = {
+  rampUpRules?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigRampUpRule>>>;
+};
+
+export type AzureAppServiceWebAppSiteConfigHandlerMapping = {
+  arguments?: Maybe<Scalars['String']>;
+  extension?: Maybe<Scalars['String']>;
+  scriptProcessor?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigHeaders = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppServiceWebAppSiteConfigIpSecurityRestriction = {
+  action?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  headers?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigHeaders>>>;
+  id: Scalars['String'];
+  ipAddress?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  subnetMask?: Maybe<Scalars['String']>;
+  subnetTrafficTag?: Maybe<Scalars['Int']>;
+  tag?: Maybe<Scalars['String']>;
+  vnetSubnetResourceId?: Maybe<Scalars['String']>;
+  vnetTrafficTag?: Maybe<Scalars['Int']>;
+};
+
 export type AzureAppServiceWebAppSiteConfigLimits = {
   maxDiskSizeInMb?: Maybe<Scalars['Int']>;
   maxMemoryInMb?: Maybe<Scalars['Int']>;
   maxPercentageCpu?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigRampUpRule = {
+  actionHostName?: Maybe<Scalars['String']>;
+  changeDecisionCallbackUrl?: Maybe<Scalars['String']>;
+  changeIntervalInMinutes?: Maybe<Scalars['Int']>;
+  changeStep?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  maxReroutePercentage?: Maybe<Scalars['Int']>;
+  minReroutePercentage?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  reroutePercentage?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigSiteMachineKey = {
+  decryption?: Maybe<Scalars['String']>;
+  decryptionKey?: Maybe<Scalars['String']>;
+  validation?: Maybe<Scalars['String']>;
+  validationKey?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger = {
+  count?: Maybe<Scalars['Int']>;
+  path?: Maybe<Scalars['String']>;
+  timeInterval?: Maybe<Scalars['String']>;
+  timeTaken?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers = {
+  count?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  path?: Maybe<Scalars['String']>;
+  timeInterval?: Maybe<Scalars['String']>;
+  timeTaken?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigStatusCodesBasedTrigger = {
+  count?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  path?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['Int']>;
+  subStatus?: Maybe<Scalars['Int']>;
+  timeInterval?: Maybe<Scalars['String']>;
+  win32Status?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger = {
+  count?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  path?: Maybe<Scalars['String']>;
+  statusCodes?: Maybe<Scalars['String']>;
+  timeInterval?: Maybe<Scalars['String']>;
 };
 
 export type AzureAppServiceWebAppSiteConfigVirtualApplication = {
@@ -438,7 +568,7 @@ export type AzureAppServiceWebAppSiteConfigVirtualApplication = {
 };
 
 export type AzureAppServiceWebAppSiteConfigVirtualDirectory = {
-  id?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
   physicalPath?: Maybe<Scalars['String']>;
   virtualPath?: Maybe<Scalars['String']>;
 };
@@ -1338,6 +1468,7 @@ export type AzureFunctionApp = AzureResource & {
   clientCertEnabled?: Maybe<Scalars['Boolean']>;
   clientCertExclusionPaths?: Maybe<Scalars['String']>;
   clientCertMode?: Maybe<Scalars['String']>;
+  configuration?: Maybe<AzureFunctionAppConfiguration>;
   containerSize?: Maybe<Scalars['Int']>;
   customDomainVerificationId?: Maybe<Scalars['String']>;
   dailyMemoryTimeQuota?: Maybe<Scalars['Int']>;
@@ -1365,6 +1496,7 @@ export type AzureFunctionApp = AzureResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   scmSiteAlsoStopped?: Maybe<Scalars['Boolean']>;
   serverFarmId?: Maybe<Scalars['String']>;
+  siteConfig?: Maybe<AzureAppServiceWebAppSiteConfig>;
   state?: Maybe<Scalars['String']>;
   storageAccountRequired?: Maybe<Scalars['Boolean']>;
   suspendedTill?: Maybe<Scalars['String']>;
@@ -1372,6 +1504,13 @@ export type AzureFunctionApp = AzureResource & {
   trafficManagerHostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
   usageState?: Maybe<Scalars['String']>;
   virtualNetworkSubnetId?: Maybe<Scalars['String']>;
+};
+
+export type AzureFunctionAppConfiguration = {
+  ftpsState?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureHostingEnvironmentProfile = {

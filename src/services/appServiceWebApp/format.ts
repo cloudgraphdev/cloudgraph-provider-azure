@@ -1,5 +1,10 @@
-import { SiteConfig } from '@azure/arm-appservice'
+import {
+  AzureStorageInfoValue,
+  SiteConfigResource,
+} from '@azure/arm-appservice'
 import cuid from 'cuid'
+import isArray from 'lodash/isArray'
+import toString from 'lodash/toString'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureAppServiceWebApp } from './data'
 import {
@@ -8,46 +13,91 @@ import {
   AzureAppServiceWebAppSiteConfig,
 } from '../../types/generated'
 
-interface ExtendedAzureAppServiceWebAppSiteConfig extends SiteConfig {
-  apiManagementConfig: any
-  customAppPoolIdentityAdminState: any
-  customAppPoolIdentityTenantState: any
-  ipSecurityRestrictions: any[]
-  machineKey: any
-  metadata: any
-  publishingPassword: string
-  push: any
-  routingRules: any[]
-  runtimeADUser: string
-  runtimeADUserPassword: string
-  scmIpSecurityRestrictions: any[]
+export interface RawAzureStorageInfoValue extends AzureStorageInfoValue {
+  id: string
+  name: string
+}
+
+export interface RawSiteConfigResource extends SiteConfigResource {
+  tags?: {
+    [propertyName: string]: string
+  }
+}
+
+const formatAzureStorageAccounts = (azureStorageAccounts: {
+  [propertyName: string]: AzureStorageInfoValue
+}): RawAzureStorageInfoValue[] => {
+  return Object.entries(azureStorageAccounts).map(([key, value]) => {
+    if (!value) return {} as RawAzureStorageInfoValue
+    return {
+      id: cuid(),
+      name: key,
+      type: value.type,
+      accountName: value.accountName,
+      shareName: value.shareName,
+      accessKey: value.accessKey,
+      mountPath: value.mountPath,
+      state: value.state,
+    }
+  })
+}
+
+const formatHeaders = headers => {
+  if (!headers) return null
+  return Object.entries(headers).map(([key, value]) => {
+    const conVal = (isArray(value) ? value : [value]) || []
+    return {
+      id: cuid(),
+      key,
+      value: conVal.map(val => toString(val)),
+    }
+  })
 }
 
 const formatSiteConfig = ({
+  id,
   apiDefinition = {},
   apiManagementConfig = {},
   appSettings = [],
-  autoHealRules, // ignored
-  azureStorageAccounts, // ignored
+  autoHealRules = {},
+  azureStorageAccounts = {},
   connectionStrings = [],
-  customAppPoolIdentityAdminState, // ignored
-  customAppPoolIdentityTenantState, // ignored
-  experiments, // ignored
-  handlerMappings, // ignored
-  ipSecurityRestrictions, // ignored
-  machineKey, // ignored
-  metadata, // ignored
-  publishingPassword, // ignored
+  experiments = {},
+  handlerMappings = [],
+  ipSecurityRestrictions = [],
   push = {},
   requestTracingExpirationTime,
-  routingRules, // ignored
-  runtimeADUser, // ignored
-  runtimeADUserPassword, // ignored
-  scmIpSecurityRestrictions, // ignored
+  scmIpSecurityRestrictions = [],
   virtualApplications = [],
+  tags = {},
   ...restConfig
-}: ExtendedAzureAppServiceWebAppSiteConfig): AzureAppServiceWebAppSiteConfig => {
+}: RawSiteConfigResource): AzureAppServiceWebAppSiteConfig => {
   return {
+    id: id || cuid(),
+    autoHealRules: {
+      triggers:
+        {
+          requests: autoHealRules?.triggers?.requests,
+          privateBytesInKB: autoHealRules?.triggers?.privateBytesInKB,
+          statusCodes:
+            autoHealRules?.triggers?.statusCodes?.map(s => ({
+              id: cuid(),
+              ...s,
+            })) || [],
+          slowRequests: autoHealRules?.triggers?.slowRequests,
+          slowRequestsWithPath:
+            autoHealRules?.triggers?.slowRequestsWithPath?.map(s => ({
+              id: cuid(),
+              ...s,
+            })) || [],
+          statusCodesRange:
+            autoHealRules?.triggers?.statusCodesRange?.map(s => ({
+              id: cuid(),
+              ...s,
+            })) || [],
+        } || {},
+      actions: autoHealRules?.actions || {},
+    },
     appSettings:
       appSettings?.map(({ name, value }) => ({
         id: cuid(),
@@ -61,7 +111,34 @@ const formatSiteConfig = ({
     requestTracingExpirationTime: requestTracingExpirationTime?.toISOString(),
     isPushEnabled: push?.isPushEnabled || false,
     virtualApplications:
-      virtualApplications?.map(v => ({ id: cuid(), ...v })) || [],
+      virtualApplications?.map(({ virtualDirectories, ...v }) => ({
+        id: cuid(),
+        virtualDirectories:
+          virtualDirectories?.map(d => ({
+            id: cuid(),
+            ...d,
+          })) || [],
+        ...v,
+      })) || [],
+    experiments: {
+      rampUpRules:
+        experiments?.rampUpRules?.map(r => ({ id: cuid(), ...r })) || [],
+    },
+    ipSecurityRestrictions:
+      ipSecurityRestrictions?.map(({ headers, ...i }) => ({
+        id: cuid(),
+        headers: formatHeaders(headers),
+        ...i,
+      })) || [],
+    scmIpSecurityRestrictions:
+      scmIpSecurityRestrictions?.map(({ headers, ...s }) => ({
+        id: cuid(),
+        headers: formatHeaders(headers),
+        ...s,
+      })) || [],
+    handlerMappings: handlerMappings?.map(h => ({ id: cuid(), ...h })) || [],
+    azureStorageAccounts: formatAzureStorageAccounts(azureStorageAccounts),
+    tags: formatTagsFromMap(tags),
     ...restConfig,
   }
 }
@@ -118,7 +195,7 @@ export default ({
     storageAccountRequired,
     keyVaultReferenceIdentity,
     virtualNetworkSubnetId,
-    AuthSettings,
+    siteAuthSettings,
   } = service
 
   return {
@@ -146,9 +223,7 @@ export default ({
       })) || [],
     serverFarmId,
     lastModifiedTimeUtc: lastModifiedTimeUtc?.toISOString(),
-    siteConfig: formatSiteConfig(
-      siteConfig as ExtendedAzureAppServiceWebAppSiteConfig
-    ),
+    siteConfig: formatSiteConfig(siteConfig as RawSiteConfigResource),
     trafficManagerHostNames,
     scmSiteAlsoStopped,
     targetSwapSlot,
@@ -172,6 +247,6 @@ export default ({
     storageAccountRequired,
     keyVaultReferenceIdentity,
     virtualNetworkSubnetId,
-    authEnabled: AuthSettings?.enabled,
+    authEnabled: siteAuthSettings?.enabled,
   }
 }

@@ -2,6 +2,7 @@ import {
   WebSiteManagementClient,
   Site,
   SiteAuthSettings,
+  SiteConfigResource,
 } from '@azure/arm-appservice'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
@@ -20,12 +21,16 @@ const lt = { ...azureLoggerText }
 const serviceName = 'AppServiceWebApp'
 
 export interface RawAzureAppServiceWebApp
-  extends Omit<Site, 'tags' | 'location' | 'identity' | 'extendedLocation'> {
+  extends Omit<
+    Site,
+    'tags' | 'location' | 'identity' | 'extendedLocation' | 'siteConfig'
+  > {
   appServicePlanId: string
   region: string
   resourceGroupId: string
   Tags: TagMap
-  AuthSettings?: SiteAuthSettings
+  siteAuthSettings?: SiteAuthSettings
+  siteConfig?: SiteConfigResource
 }
 
 export default async ({
@@ -60,7 +65,6 @@ export default async ({
             for await (const webApp of webAppsIterable) {
               if (webApp) {
                 const {
-                  name: webAppName,
                   location,
                   extendedLocation,
                   identity,
@@ -68,17 +72,12 @@ export default async ({
                   ...rest
                 } = webApp
                 const region = lowerCaseLocation(location)
-                const authSettings = await client.webApps.getAuthSettings(
-                  resourceGroupId,
-                  webAppName
-                )
                 return {
                   ...rest,
                   appServicePlanId: appService.id,
                   region,
                   resourceGroupId,
                   Tags: tags || {},
-                  AuthSettings: authSettings,
                 }
               }
             }
@@ -94,15 +93,80 @@ export default async ({
       }
     )
 
+    const siteAuthSettings: { [name: string]: SiteAuthSettings } = {}
+    await tryCatchWrapper(
+      async () => {
+        await Promise.all(
+          (appServiceWebApps || []).map(
+            async ({
+              name: webAppName,
+              resourceGroup: webAppResourceGroupName,
+            }) => {
+              const siteAuthSetting = await client.webApps.getAuthSettings(
+                webAppResourceGroupName,
+                webAppName
+              )
+              if (siteAuthSetting) {
+                siteAuthSettings[webAppName] = siteAuthSetting
+              }
+            }
+          )
+        )
+        logger.debug(
+          lt.foundWebAppsSiteAuthSettings(Object.keys(siteAuthSettings).length)
+        )
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'siteAuthSettings',
+        operation: 'getAuthSettings',
+      }
+    )
+
+    const siteConfigs: SiteConfigResource[] = []
+    await tryCatchWrapper(
+      async () => {
+        await Promise.all(
+          (appServiceWebApps || []).map(
+            async ({
+              name: webAppName,
+              resourceGroup: webAppResourceGroupName,
+            }) => {
+              const configuration = await client.webApps.getConfiguration(
+                webAppResourceGroupName,
+                webAppName
+              )
+              if (configuration) {
+                siteConfigs.push({
+                  ...configuration,
+                })
+              }
+            }
+          )
+        )
+        logger.debug(lt.foundWebAppsSiteConfigs(siteConfigs.length))
+      },
+      {
+        service: serviceName,
+        client,
+        scope: 'siteConfigs',
+        operation: 'getConfiguration',
+      }
+    )
+
     const result: { [property: string]: RawAzureAppServiceWebApp[] } = {}
-    appServiceWebApps.map(({ region, ...rest }) => {
+    appServiceWebApps.map(({ name, region, ...rest }) => {
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []
         }
         result[region].push({
+          name,
           region,
           ...rest,
+          siteAuthSettings: siteAuthSettings[name] || {},
+          siteConfig: siteConfigs.find(i => i.name === name) || {},
         })
       }
     })
