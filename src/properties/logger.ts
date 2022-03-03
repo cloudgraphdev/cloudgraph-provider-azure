@@ -42,6 +42,7 @@ export default {
   foundContainerRegistries: (num: number): string =>
     `Found ${num} container registries`,
   /* Database */
+  foundManagedSqlInstance: (num: number): string => `Found ${num} managed SQL instances`,
   foundDatabaseMySql: (num: number): string => `Found ${num} MySQL databases`,
   foundDatabasePostgreSql: (num: number): string =>
     `Found ${num} PostgreSQL databases`,

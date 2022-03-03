@@ -55,3 +55,16 @@ interface azureResource
   resourceGroupId: String @search(by: [hash, regexp])
   tags: [azureRawTag]
 }
+
+interface azureArmResourceSku
+  @generate(
+    query: { get: false, query: false, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  capacity: Int @search
+}

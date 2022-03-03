@@ -15,6 +15,7 @@ import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnProfiles from '../services/cdnProfiles'
 import AzureContainerRegistry from '../services/containerRegistry'
+import AzureDatabaseManagedSqlInstance from '../services/databaseManagedSqlInstance'
 import AzureDatabaseMySql from '../services/databaseMySql'
 import AzureDatabasePostgreSql from '../services/databasePostgreSql'
 import AzureDatabaseSql from '../services/databaseSql'
@@ -66,7 +67,10 @@ export default {
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnProfiles]: AzureCdnProfiles,
+  [services.cdnOrigins]: AzureCdnOrigins,
+  [services.cdnOriginGroups]: AzureCdnOriginGroups,
   [services.containerRegistry]: AzureContainerRegistry,
+  [services.databaseManagedSqlInstance]: AzureDatabaseManagedSqlInstance,
   [services.databaseMySql]: AzureDatabaseMySql,
   [services.databasePostgreSql]: AzureDatabasePostgreSql,
   [services.databaseSqlVm]: AzureDatabaseSqlVm,

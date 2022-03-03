@@ -507,6 +507,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related Managed SQL Instances
+     */
+     const managedInstances: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.databaseManagedSqlInstance)
+    if (managedInstances?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        managedInstances.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const managedInstance of dataAtRegion) {
+          const { id } = managedInstance
+          connections.push({
+            id,
+            resourceType: services.databaseManagedSqlInstance,
+            relation: 'child',
+            field: 'databaseManagedSqlInstances',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

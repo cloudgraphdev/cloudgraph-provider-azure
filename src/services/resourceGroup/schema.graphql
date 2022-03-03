@@ -13,6 +13,7 @@ type azureResourceGroup implements azureResource
   cdnOrigins: [azureCdnOrigin] @hasInverse(field: resourceGroup)
   cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroup)
   containerRegistries: [azureContainerRegistry] @hasInverse(field: resourceGroup)
+  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance] @hasInverse(field: resourceGroup)
   databaseMySql: [azureDatabaseMySql] @hasInverse(field: resourceGroup)
   databasePostgreSql: [azureDatabasePostgreSql] @hasInverse(field: resourceGroup)
   databaseSql: [azureDatabaseSql] @hasInverse(field: resourceGroup)

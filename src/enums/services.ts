@@ -15,6 +15,7 @@ export default {
   cdnOrigins: 'cdnOrigins',
   cdnOriginGroups: 'cdnOriginGroups',
   containerRegistry:'containerRegistry',
+  databaseManagedSqlInstance: 'databaseManagedSqlInstance',
   databaseMySql: 'databaseMySql',
   databasePostgreSql: 'databasePostgreSql',
   databaseSql: 'databaseSql',

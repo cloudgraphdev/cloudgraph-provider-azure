@@ -1,0 +1,46 @@
+type azureDatabaseManagedSqlInstance implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  identity: azureDatabaseManagedSqlInstanceIdentity
+  skuName: String @search(by: [hash, regexp])
+  skuTier: String @search(by: [hash, regexp])
+  collation: String @search(by: [hash, regexp])
+  restorePointInTime: String @search(by: [hash, regexp])
+  zoneRedundant: Boolean @search
+  licenseType: String @search(by: [hash, regexp])
+  currentBackupStorageRedundancy: String @search(by: [hash, regexp])
+  requestedBackupStorageRedundancy: String @search(by: [hash, regexp])
+  maintenanceConfigurationId: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  proxyOverride: String @search(by: [hash, regexp])
+  fullyQualifiedDomainName: String @search(by: [hash, regexp])
+  subnetId: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  vCores: Int @search
+  storageSizeInGB: Int @search
+  dnsZone: String @search(by: [hash, regexp])
+  dnsZonePartner: String @search(by: [hash, regexp])
+  primaryUserAssignedIdentityId: String @search(by: [hash, regexp])
+  publicDataEndpointEnabled: Boolean @search
+  sourceManagedInstanceId: String @search(by: [hash, regexp])
+  timezoneId: String @search(by: [hash, regexp])
+  instancePoolId: String @search(by: [hash, regexp])
+  minimalTlsVersion: String @search(by: [hash, regexp])
+  keyId: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: databaseManagedSqlInstances)
+}
+
+type azureDatabaseManagedSqlInstanceIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  principalId: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureDatabaseSqlUserAssignedIdentity]
+}
