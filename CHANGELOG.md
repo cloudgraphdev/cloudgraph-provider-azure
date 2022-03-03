@@ -1,3 +1,10 @@
+# [0.34.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.33.0...0.34.0) (2022-03-03)
+
+
+### Features
+
+* **service:** Add Azure Site Config to WebApps and FunctionApps services ([e8ff62a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/e8ff62ae7e8d1d35b4bcd8cc3361c155d8d43d5f))
+
 # [0.33.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.32.0...0.33.0) (2022-03-03)
 
 
