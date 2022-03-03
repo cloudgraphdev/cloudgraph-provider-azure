@@ -51,6 +51,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | cdnProfiles                                 | cdnEndpoints, resourceGroup                                               |
 | cdnOrigins                                  | cdnEndpoints, cdnOriginGroups, resourceGroup                              |
 | cdnOriginGroups                             | cdnEndpoints, cdnOrigins, resourceGroup                                   |
+| dataFactory                                 | resourceGroup                                                             |
 | databaseManagedSqlInstance                  | resourceGroup                                                             |
 | databaseMySql                               | resourceGroup                                                             |
 | databasePostgreSql                          | resourceGroup                                                             |

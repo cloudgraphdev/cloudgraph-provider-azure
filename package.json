@@ -37,6 +37,7 @@
     "@azure/arm-cdn": "^6.0.0",
     "@azure/arm-compute": "^16.5.0",
     "@azure/arm-containerregistry": "^10.0.0",
+    "@azure/arm-datafactory": "^10.2.0",
     "@azure/arm-dns": "^4.1.1",
     "@azure/arm-eventgrid": "^13.0.0",
     "@azure/arm-eventhub": "^5.0.0",

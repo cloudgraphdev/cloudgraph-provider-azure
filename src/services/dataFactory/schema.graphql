@@ -1,0 +1,20 @@
+type azureDataFactoryIdentity {
+  type: String @search(by: [hash, regexp])
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureDataFactory implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  eTag: String @search(by: [hash, regexp])
+  identity: azureDataFactoryIdentity
+  provisioningState: String @search(by: [hash, regexp])
+  createTime: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: dataFactories)
+}
