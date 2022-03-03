@@ -1,3 +1,10 @@
+# [0.33.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.32.0...0.33.0) (2022-03-03)
+
+
+### Features
+
+* **managedSqlInstance:** add databaseManagedSqlInstance service ([a1d901a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/a1d901ad1f3ba46cfd2543ab1daa3958c32a7aa8))
+
 # [0.32.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.31.0...0.32.0) (2022-03-02)
 
 
