@@ -1,3 +1,15 @@
+# [0.35.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.34.0...0.35.0) (2022-03-04)
+
+
+### Bug Fixes
+
+* **monitorInsightsActivityLogAlertRule:** request data response, iterate rules in response ([93dbd27](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/93dbd27073a01db4b1e3700a987073bfe8ef1296))
+
+
+### Features
+
+* **dataFactory:** add dataFactory service ([30973ee](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/30973ee4543e367973b3d5ab45dde90cdefef1cf))
+
 # [0.34.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.33.0...0.34.0) (2022-03-03)
 
 
