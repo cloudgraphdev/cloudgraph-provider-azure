@@ -22,6 +22,7 @@ type azureTag @key(fields: "id") {
   resourceGroups: [azureResourceGroup]
   securityGroups: [azureNetworkSecurityGroup]
   storageAccounts: [azureStorageAccount]
+  trafficManagerProfiles: [azureTrafficManagerProfile]
   virtualMachines: [azureVirtualMachine]
   virtualNetworks: [azureVirtualNetwork]
 }

@@ -1970,6 +1970,7 @@ export type AzureResourceGroup = AzureResource & {
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+  trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
@@ -2333,9 +2334,76 @@ export type AzureTag = {
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
   value: Scalars['String'];
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+};
+
+export type AzureTrafficManagerProfile = AzureResource & {
+  allowedEndpointRecordTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dnsConfig?: Maybe<AzureTrafficManagerProfileDnsConfig>;
+  endpoints?: Maybe<Array<Maybe<AzureTrafficManagerProfileEndpoint>>>;
+  maxReturn?: Maybe<Scalars['Int']>;
+  monitorConfig?: Maybe<AzureTrafficManagerProfileMonitorConfig>;
+  profileStatus?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  trafficRoutingMethod?: Maybe<Scalars['String']>;
+  trafficViewEnrollmentStatus?: Maybe<Scalars['String']>;
+};
+
+export type AzureTrafficManagerProfileCustomHeadersItem = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureTrafficManagerProfileDnsConfig = {
+  fqdn?: Maybe<Scalars['String']>;
+  relativeName?: Maybe<Scalars['String']>;
+  ttl?: Maybe<Scalars['Int']>;
+};
+
+export type AzureTrafficManagerProfileEndpoint = {
+  customHeaders?: Maybe<Array<Maybe<AzureTrafficManagerProfileCustomHeadersItem>>>;
+  endpointLocation?: Maybe<Scalars['String']>;
+  endpointMonitorStatus?: Maybe<Scalars['String']>;
+  endpointStatus?: Maybe<Scalars['String']>;
+  geoMapping?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  minChildEndpoints?: Maybe<Scalars['Int']>;
+  minChildEndpointsIPv4?: Maybe<Scalars['Int']>;
+  minChildEndpointsIPv6?: Maybe<Scalars['Int']>;
+  priority?: Maybe<Scalars['Int']>;
+  subnets?: Maybe<Array<Maybe<AzureTrafficManagerProfileEndpointPropertiesSubnetsItem>>>;
+  target?: Maybe<Scalars['String']>;
+  targetResourceId?: Maybe<Scalars['String']>;
+  weight?: Maybe<Scalars['Int']>;
+};
+
+export type AzureTrafficManagerProfileEndpointPropertiesSubnetsItem = {
+  first?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  last?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['Int']>;
+};
+
+export type AzureTrafficManagerProfileMonitorConfig = {
+  customHeaders?: Maybe<Array<Maybe<AzureTrafficManagerProfileCustomHeadersItem>>>;
+  expectedStatusCodeRanges?: Maybe<Array<Maybe<AzureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem>>>;
+  intervalInSeconds?: Maybe<Scalars['Int']>;
+  path?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['Int']>;
+  profileMonitorStatus?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
+  timeoutInSeconds?: Maybe<Scalars['Int']>;
+  toleratedNumberOfFailures?: Maybe<Scalars['Int']>;
+};
+
+export type AzureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem = {
+  id: Scalars['String'];
+  max?: Maybe<Scalars['Int']>;
+  min?: Maybe<Scalars['Int']>;
 };
 
 export type AzureVaultCertificate = {

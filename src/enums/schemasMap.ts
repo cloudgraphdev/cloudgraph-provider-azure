@@ -52,6 +52,7 @@ export default {
   [services.storageAccount]: 'azureStorageAccount',
   [services.storageBlob]: 'azureStorageBlob',
   [services.storageContainer]: 'azureStorageContainer',
+  [services.trafficManagerProfile]: 'azureTrafficManagerProfile',
   [services.virtualMachineScaleSet]: 'azureVirtualMachineScaleSet',
   [services.virtualMachine]: 'azureVirtualMachine',
   [services.virtualNetwork]: 'azureVirtualNetwork',

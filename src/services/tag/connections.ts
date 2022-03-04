@@ -486,7 +486,7 @@ export default ({
     /**
      * Find related Container Registries
      */
-     const loadBalancers: {
+    const loadBalancers: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.loadBalancer)
@@ -510,7 +510,7 @@ export default ({
     /**
      * Find related Managed SQL Instances
      */
-     const managedInstances: {
+    const managedInstances: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.databaseManagedSqlInstance)
@@ -551,6 +551,30 @@ export default ({
             resourceType: services.dataFactory,
             relation: 'child',
             field: 'dataFactories',
+          })
+        }
+      }
+    }
+    /**
+     * Find related traffic manager profiles
+     */
+    const trafficManagerProfiles: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.trafficManagerProfile)
+    if (trafficManagerProfiles?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        trafficManagerProfiles.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const trafficManagerProfile of dataAtRegion) {
+          const { id } = trafficManagerProfile
+          connections.push({
+            id,
+            resourceType: services.trafficManagerProfile,
+            relation: 'child',
+            field: 'trafficManagerProfiles',
           })
         }
       }

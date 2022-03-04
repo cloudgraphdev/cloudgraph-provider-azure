@@ -44,6 +44,7 @@ import AzureStorageAccount from '../services/storageAccount'
 import AzureStorageBlob from '../services/storageBlob'
 import AzureStorageContainer from '../services/storageContainer'
 import AzureTag from '../services/tag'
+import AzureTrafficManagerProfile from '../services/trafficManagerProfile'
 import AzureVirtualMachine from '../services/virtualMachine'
 import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
 import AzureVirtualNetwork from '../services/virtualNetwork'
@@ -99,6 +100,7 @@ export default {
   [services.storageAccount]: AzureStorageAccount,
   [services.storageBlob]: AzureStorageBlob,
   [services.storageContainer]: AzureStorageContainer,
+  [services.trafficManagerProfile]: AzureTrafficManagerProfile,
   [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
   [services.virtualMachine]: AzureVirtualMachine,
   [services.virtualNetwork]: AzureVirtualNetwork,
