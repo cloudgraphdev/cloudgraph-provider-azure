@@ -1,3 +1,10 @@
+# [0.36.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.35.0...0.36.0) (2022-03-04)
+
+
+### Features
+
+* **trafficManager:** add trafficManagerProfile service ([cbcc8fa](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/cbcc8fa77c256259389c4ea38f9e882c085a1112))
+
 # [0.35.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.34.0...0.35.0) (2022-03-04)
 
 
