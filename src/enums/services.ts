@@ -43,6 +43,7 @@ export default {
   storageAccount: 'storageAccount',
   storageBlob: 'storageBlob',
   storageContainer: 'storageContainer',
+  trafficManagerProfile: 'trafficManagerProfile',
   virtualMachine: 'virtualMachine',
   virtualMachineScaleSet: 'virtualMachineScaleSet',
   virtualNetwork: 'virtualNetwork',

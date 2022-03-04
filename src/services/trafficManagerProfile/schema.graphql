@@ -1,0 +1,104 @@
+type azureTrafficManagerProfileDnsConfig
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  relativeName: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  ttl: Int @search
+}
+
+type azureTrafficManagerProfileMonitorConfig
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  profileMonitorStatus: String @search(by: [hash, regexp])
+  protocol: String @search(by: [hash, regexp])
+  port: Int @search
+  path: String @search(by: [hash, regexp])
+  intervalInSeconds: Int @search
+  timeoutInSeconds: Int @search
+  toleratedNumberOfFailures: Int @search
+  customHeaders: [azureTrafficManagerProfileCustomHeadersItem]
+  expectedStatusCodeRanges: [azureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem]
+}
+
+type azureTrafficManagerProfileCustomHeadersItem
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  min: Int @search
+  max: Int @search
+}
+
+type azureTrafficManagerProfileEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  targetResourceId: String @search(by: [hash, regexp])
+  target: String @search(by: [hash, regexp])
+  endpointStatus: String @search(by: [hash, regexp])
+  weight: Int @search
+  priority: Int @search
+  endpointLocation: String @search(by: [hash, regexp])
+  endpointMonitorStatus: String @search(by: [hash, regexp])
+  minChildEndpoints: Int @search
+  minChildEndpointsIPv4: Int @search
+  minChildEndpointsIPv6: Int @search
+  geoMapping: [String] @search(by: [hash, regexp])
+  subnets: [azureTrafficManagerProfileEndpointPropertiesSubnetsItem]
+  customHeaders: [azureTrafficManagerProfileCustomHeadersItem]
+}
+
+type azureTrafficManagerProfileEndpointPropertiesSubnetsItem
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  first: String @search(by: [hash, regexp])
+  last: String @search(by: [hash, regexp])
+  scope: Int @search
+}
+
+type azureTrafficManagerProfile implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  profileStatus: String @search(by: [hash, regexp])
+  trafficRoutingMethod: String @search(by: [hash, regexp])
+  dnsConfig: azureTrafficManagerProfileDnsConfig
+  monitorConfig: azureTrafficManagerProfileMonitorConfig
+  endpoints: [azureTrafficManagerProfileEndpoint]
+  trafficViewEnrollmentStatus: String @search(by: [hash, regexp])
+  allowedEndpointRecordTypes: [String] @search(by: [hash, regexp])
+  maxReturn: Int @search
+  resourceGroup: [azureResourceGroup] @hasInverse(field: trafficManagerProfiles)
+}
