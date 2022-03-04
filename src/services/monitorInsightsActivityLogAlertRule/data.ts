@@ -1,5 +1,5 @@
+import isEmpty from 'lodash/isEmpty'
 import CloudGraph from '@cloudgraph/sdk'
-
 import getResourceGroupData from '../resourceGroup/data'
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
@@ -88,15 +88,20 @@ export default async ({
       async () => {
         await Promise.all(
           (resourceGroupsNames || []).map(async (rgName: string) => {
-            const { resourceGroup, ...restAlertRulesInResourceGroup } =
+            const restAlertRulesInResourceGroup =
               await client.getRequestedData({
                 type: 'activityLogAlerts',
                 resourceGroupName: rgName,
               })
-            alertRules.push({
-              ...restAlertRulesInResourceGroup,
-              resourceGroupId: resourceGroup,
-            })
+
+            if (!isEmpty(restAlertRulesInResourceGroup)) {
+              for (const alertRule of restAlertRulesInResourceGroup) {
+                alertRules.push({
+                  ...alertRule,
+                  resourceGroupId: rgName,
+                })
+              }
+            }
           })
         )
       },
