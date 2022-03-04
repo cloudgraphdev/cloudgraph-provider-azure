@@ -13,6 +13,7 @@ type azureResourceGroup implements azureResource
   cdnOrigins: [azureCdnOrigin] @hasInverse(field: resourceGroup)
   cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroup)
   containerRegistries: [azureContainerRegistry] @hasInverse(field: resourceGroup)
+  dataFactories: [azureDataFactory] @hasInverse(field: resourceGroup)
   databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance] @hasInverse(field: resourceGroup)
   databaseMySql: [azureDatabaseMySql] @hasInverse(field: resourceGroup)
   databasePostgreSql: [azureDatabasePostgreSql] @hasInverse(field: resourceGroup)
@@ -33,7 +34,7 @@ type azureResourceGroup implements azureResource
   storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroup)
   storageBlobs: [azureStorageBlob] @hasInverse(field: resourceGroup)
   storageContainers: [azureStorageContainer] @hasInverse(field: resourceGroup)
-  virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroup)
   virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: resourceGroup)
+  virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroup)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroup)
 }

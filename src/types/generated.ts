@@ -941,6 +941,22 @@ export type AzureContainerRegistryStatus = {
   timestamp?: Maybe<Scalars['String']>;
 };
 
+export type AzureDataFactory = AzureResource & {
+  createTime?: Maybe<Scalars['String']>;
+  eTag?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureDataFactoryIdentity>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  version?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureDatabaseManagedSqlInstance = AzureResource & {
   collation?: Maybe<Scalars['String']>;
   currentBackupStorageRedundancy?: Maybe<Scalars['String']>;
@@ -1932,6 +1948,7 @@ export type AzureResourceGroup = AzureResource & {
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
+  dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
   databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
@@ -2301,6 +2318,7 @@ export type AzureTag = {
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
+  dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;

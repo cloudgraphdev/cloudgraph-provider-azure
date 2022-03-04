@@ -531,6 +531,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related Container Registries
+     */
+     const dataFactories: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.dataFactory)
+    if (dataFactories?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        dataFactories.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const dataFactory of dataAtRegion) {
+          const { id } = dataFactory
+          connections.push({
+            id,
+            resourceType: services.dataFactory,
+            relation: 'child',
+            field: 'dataFactories',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

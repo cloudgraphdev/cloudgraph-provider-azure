@@ -81,6 +81,19 @@
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
 
+"@azure/arm-datafactory@^10.2.0":
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-datafactory/-/arm-datafactory-10.2.0.tgz#345520225fb0f7fd9d7fcbc7d51dbd49d9825ded"
+  integrity sha512-FrrPHW0cTHc7R0q3kvIMpPCf9fN4pEuVCJqGlLQ6VM9qGsLLfuITp96XQFP1FJE6puhWirUHW+Ub2IkWIKS33g==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-dns@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@azure/arm-dns/-/arm-dns-4.1.1.tgz#50ad92fd2b292da7753a7f39df2d3c5f3789ffb5"

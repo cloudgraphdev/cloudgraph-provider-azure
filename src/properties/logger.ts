@@ -43,6 +43,8 @@ export default {
     `Found ${num} CDN origin groups`,
   foundContainerRegistries: (num: number): string =>
     `Found ${num} container registries`,
+  /* Data Factory */
+  foundDataFactory: (num: number): string => `Found ${num} data factories`,
   /* Database */
   foundManagedSqlInstance: (num: number): string => `Found ${num} managed SQL instances`,
   foundDatabaseMySql: (num: number): string => `Found ${num} MySQL databases`,
