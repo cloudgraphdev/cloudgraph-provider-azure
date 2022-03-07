@@ -71,7 +71,7 @@ export default ({
     parameters,
     policyDefinitionId,
     scope,
-    createdBy: systemData?.createdBy || metadata?.createdBy.toString(),
+    createdBy: systemData?.createdBy || metadata?.createdBy?.toString() || '',
     createdByType: systemData?.createdByType,
     createdAt:
       systemData?.createdAt?.toISOString() ||
