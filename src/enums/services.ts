@@ -43,6 +43,7 @@ export default {
   securityGroup: 'securityGroup',
   securityPricings: 'securityPricings',
   securitySettings: 'securitySettings',
+  sqlServers: 'sqlServers',
   storageAccount: 'storageAccount',
   storageBlob: 'storageBlob',
   storageContainer: 'storageContainer',

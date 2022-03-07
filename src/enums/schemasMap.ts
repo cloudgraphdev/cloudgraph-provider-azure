@@ -52,6 +52,7 @@ export default {
   [services.securityGroup]: 'azureNetworkSecurityGroup',
   [services.securityPricings]: 'azureSecurityPricing',
   [services.securitySettings]: 'azureSecuritySetting',
+  [services.sqlServers]: 'azureSqlServer',
   [services.storageAccount]: 'azureStorageAccount',
   [services.storageBlob]: 'azureStorageBlob',
   [services.storageContainer]: 'azureStorageContainer',

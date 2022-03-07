@@ -48,6 +48,7 @@ type azureDatabaseSql implements azureResource
   federatedClientId: String @search(by: [hash, regexp])
   primaryDelegatedIdentityClientId: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: databaseSql)
+  sqlServers: [azureSqlServer] @hasInverse(field: databaseSql)
 }
 
 type azureDatabaseSqlDiskSku
