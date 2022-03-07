@@ -1,3 +1,10 @@
+# [0.37.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.36.0...0.37.0) (2022-03-07)
+
+
+### Features
+
+* **kubernetes:** add aksManagedCluster and arcConnectedCluster services ([becc3f3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/becc3f38339a9d12b1ac3f2e8be86b3f73d22468))
+
 # [0.36.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.35.0...0.36.0) (2022-03-04)
 
 
