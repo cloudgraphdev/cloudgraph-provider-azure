@@ -1,3 +1,10 @@
+# [0.38.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.37.0...0.38.0) (2022-03-07)
+
+
+### Features
+
+* **sqlServers:** Add Azure SQL Servers service ([06384fa](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/06384fa2f7368dbb18f17f83124b06816d6aed30))
+
 # [0.37.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.36.0...0.37.0) (2022-03-07)
 
 
