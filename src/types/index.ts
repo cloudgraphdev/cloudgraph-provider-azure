@@ -79,12 +79,17 @@ export interface AzureRestApiNewClientParams {
   config: AzureServiceConfig
   scope: string
   kind: string
-  options?: any
+  options?: {
+    $host?: string
+    version: string
+  }
+  version?: string
+  debug?: boolean
 }
 
 export interface AzureRestApiClientRequestParams {
   type: string
-  resourceGroupName: string
+  resourceGroupName?: string
   filters?: string[]
 }
 

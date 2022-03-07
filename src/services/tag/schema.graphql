@@ -4,8 +4,11 @@ type azureTag @key(fields: "id") {
   value: String! @search(by: [hash, regexp])
   adApplications: [azureADApplication]
   adServicePrincipals: [azureADServicePrincipal]
+  aksManagedClusters: [azureAksManagedCluster]
+  # appServiceKubeEnvironment: [azureAppServiceKubeEnvironment]
   appServicePlans: [azureAppServicePlan]
   appServiceWebApps: [azureAppServiceWebApp]
+  arcConnectedClusters: [azureArcConnectedCluster]
   cdnEndpoints: [azureCdnEndpoint]
   cdnProfiles: [azureCdnProfile]
   containerRegistries: [azureContainerRegistry]

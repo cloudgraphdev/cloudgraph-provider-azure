@@ -1,0 +1,37 @@
+type azureArcConnectedClusterIdentity
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureArcConnectedCluster implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  identity: azureArcConnectedClusterIdentity
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  agentPublicKeyCertificate: String @search(by: [hash, regexp])
+  kubernetesVersion: String @search(by: [hash, regexp])
+  totalNodeCount: Int @search
+  totalCoreCount: Int @search
+  agentVersion: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  distribution: String @search(by: [hash, regexp])
+  infrastructure: String @search(by: [hash, regexp])
+  offering: String @search(by: [hash, regexp])
+  managedIdentityCertificateExpirationTime: String @search(by: [hash, regexp])
+  lastConnectivityTime: String @search(by: [hash, regexp])
+  connectivityStatus: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: arcConnectedClusters)
+}

@@ -8,7 +8,12 @@ export default {
   foundAdServicePrincipals: (num: number): string =>
     `Found ${num} AD service principals`,
   foundAdUsers: (num: number): string => `Found ${num} AD users`,
+  // Arc Connected Clusters
+  foundArcConnectedClusters: (num: number): string => `Found ${num} Arc connected clusters`,
+  // AKS Managed Clusters
+  foundAKSManagedClusters: (num: number): string => `Found ${num} AKS managed clusters`,
   /* App Service */
+  foundKubesEnvs: (num: number): string => `Found ${num} kube environments`,
   foundAppServicePlans: (num: number): string =>
     `Found ${num} app service plans`,
   foundWebApps: (num: number): string => `Found ${num} web apps`,

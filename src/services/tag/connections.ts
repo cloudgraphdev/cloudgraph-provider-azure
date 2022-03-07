@@ -579,6 +579,78 @@ export default ({
         }
       }
     }
+    // /**
+    //  * Find related App Service Kube Environment
+    //  */
+    // const kubeEnvironments: {
+    //   name: string
+    //   data: { [property: string]: any[] }
+    // } = data.find(({ name }) => name === services.appServiceKubeEnvironment)
+    // if (kubeEnvironments?.data?.[region]) {
+    //   const dataAtRegion: any = findServiceInstancesWithTag(
+    //     tag,
+    //     kubeEnvironments.data[region]
+    //   )
+    //   if (!isEmpty(dataAtRegion)) {
+    //     for (const appServiceKubeEnvironment of dataAtRegion) {
+    //       const { id } = appServiceKubeEnvironment
+    //       connections.push({
+    //         id,
+    //         resourceType: services.appServiceKubeEnvironment,
+    //         relation: 'child',
+    //         field: 'appServiceKubeEnvironments',
+    //       })
+    //     }
+    //   }
+    // }
+    /**
+     * Find related Aks Managed Clusters
+     */
+     const managedClusters: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.aksManagedCluster)
+    if (managedClusters?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        managedClusters.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const aksManagedCluster of dataAtRegion) {
+          const { id } = aksManagedCluster
+          connections.push({
+            id,
+            resourceType: services.aksManagedCluster,
+            relation: 'child',
+            field: 'aksManagedClusters',
+          })
+        }
+      }
+    }
+    /**
+     * Find related Aks Managed Clusters
+     */
+     const connectedClusters: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.arcConnectedCluster)
+    if (connectedClusters?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        connectedClusters.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const arcConnectedCluster of dataAtRegion) {
+          const { id } = arcConnectedCluster
+          connections.push({
+            id,
+            resourceType: services.arcConnectedCluster,
+            relation: 'child',
+            field: 'arcConnectedClusters',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

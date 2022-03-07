@@ -4,8 +4,10 @@ import AzureADGroup from '../services/adGroup'
 import AzureADIdentitySecurityDefaultsEnforcementPolicy from '../services/adIdentitySecurityDefaultsEnforcementPolicy'
 import AzureADServicePrincipal from '../services/adServicePrincipal'
 import AzureADUser from '../services/adUser'
+import AzureAksManagedCluster from '../services/aksManagedCluster'
 import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
+import AzureArcConnectedCluster from '../services/arcConnectedCluster'
 import AzureAuthRoleAssignment from '../services/authRoleAssignment'
 import AzureAuthRoleDefinition from '../services/authRoleDefinition'
 import AzureAutoProvisioningSettings from '../services/autoProvisioningSettings'
@@ -27,6 +29,7 @@ import AzureEventGrid from '../services/eventGrid'
 import AzureEventHub from '../services/eventHub'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
+// import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureKeyVault from '../services/keyVault'
 import AzureLoadBalancer from '../services/loadBalancer'
 import AzureMonitorInsightsActivityLogAlertRule from '../services/monitorInsightsActivityLogAlertRule'
@@ -56,11 +59,15 @@ import AzureVirtualNetwork from '../services/virtualNetwork'
 export default {
   [services.adApplication]: AzureADApplication,
   [services.adGroup]: AzureADGroup,
-  [services.adIdentitySecurityDefaultsEnforcementPolicy]: AzureADIdentitySecurityDefaultsEnforcementPolicy,
+  [services.adIdentitySecurityDefaultsEnforcementPolicy]:
+    AzureADIdentitySecurityDefaultsEnforcementPolicy,
   [services.adServicePrincipal]: AzureADServicePrincipal,
   [services.adUser]: AzureADUser,
+  [services.aksManagedCluster]: AzureAksManagedCluster,
+  // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appServicePlan]: AzureAppServicePlan,
   [services.appServiceWebApp]: AzureAppServiceWebApp,
+  [services.arcConnectedCluster]: AzureArcConnectedCluster,
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.autoProvisioningSettings]: AzureAutoProvisioningSettings,
