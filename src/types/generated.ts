@@ -1234,6 +1234,7 @@ export type AzureDatabaseSql = AzureResource & {
   sku?: Maybe<AzureDatabaseSqlDiskSku>;
   sourceDatabaseDeletionDate?: Maybe<Scalars['String']>;
   sourceDatabaseId?: Maybe<Scalars['String']>;
+  sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   status?: Maybe<Scalars['String']>;
   zoneRedundant?: Maybe<Scalars['Boolean']>;
 };
@@ -2154,6 +2155,7 @@ export type AzureResourceGroup = AzureResource & {
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
+  sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
@@ -2246,6 +2248,79 @@ export type AzureSecuritySetting = AzureBaseResource & {
   kind?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServer = AzureResource & {
+  administratorLogin?: Maybe<Scalars['String']>;
+  administratorLoginPassword?: Maybe<Scalars['String']>;
+  administrators?: Maybe<AzureSqlServerExternalAdministrator>;
+  databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
+  federatedClientId?: Maybe<Scalars['String']>;
+  firewallRules?: Maybe<Array<Maybe<AzureSqlServerFirewallRule>>>;
+  fullyQualifiedDomainName?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureSqlServerIdentity>;
+  keyId?: Maybe<Scalars['String']>;
+  minimalTlsVersion?: Maybe<Scalars['String']>;
+  primaryUserAssignedIdentityId?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureSqlServerPrivateEndpointConnection>>>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  restrictOutboundNetworkAccess?: Maybe<Scalars['String']>;
+  state?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+  workspaceFeature?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerExternalAdministrator = {
+  administratorType?: Maybe<Scalars['String']>;
+  azureADOnlyAuthentication?: Maybe<Scalars['Boolean']>;
+  login?: Maybe<Scalars['String']>;
+  principalType?: Maybe<Scalars['String']>;
+  sid?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerFirewallRule = {
+  endIpAddress?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  startIpAddress?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureSqlServerUserAssignedIdentity>>>;
+};
+
+export type AzureSqlServerPrivateEndpointConnection = {
+  id: Scalars['String'];
+  properties?: Maybe<AzureSqlServerPrivateEndpointConnectionProperties>;
+};
+
+export type AzureSqlServerPrivateEndpointConnectionProperties = {
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionState?: Maybe<AzureSqlServerPrivateLinkServiceConnectionStateProperty>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerPrivateLinkServiceConnectionStateProperty = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerUserAssignedIdentity = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureSqlServerUserIdentity>;
+};
+
+export type AzureSqlServerUserIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
 };
 
 export type AzureSshConfiguration = {
@@ -2531,6 +2606,7 @@ export type AzureTag = {
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
+  sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
   value: Scalars['String'];

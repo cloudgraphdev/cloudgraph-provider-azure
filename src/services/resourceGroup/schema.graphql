@@ -34,6 +34,7 @@ type azureResourceGroup implements azureResource
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroup)
   securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: resourceGroup)
+  sqlServers: [azureSqlServer] @hasInverse(field: resourceGroup)
   storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroup)
   storageBlobs: [azureStorageBlob] @hasInverse(field: resourceGroup)
   storageContainers: [azureStorageContainer] @hasInverse(field: resourceGroup)

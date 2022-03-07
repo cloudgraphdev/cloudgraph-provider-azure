@@ -534,7 +534,7 @@ export default ({
     /**
      * Find related Container Registries
      */
-     const dataFactories: {
+    const dataFactories: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.dataFactory)
@@ -606,7 +606,7 @@ export default ({
     /**
      * Find related Aks Managed Clusters
      */
-     const managedClusters: {
+    const managedClusters: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.aksManagedCluster)
@@ -630,7 +630,7 @@ export default ({
     /**
      * Find related Aks Managed Clusters
      */
-     const connectedClusters: {
+    const connectedClusters: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.arcConnectedCluster)
@@ -647,6 +647,30 @@ export default ({
             resourceType: services.arcConnectedCluster,
             relation: 'child',
             field: 'arcConnectedClusters',
+          })
+        }
+      }
+    }
+    /**
+     * Find related SQL Servers
+     */
+    const sqlServers: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.sqlServers)
+    if (sqlServers?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        sqlServers.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const sqlServer of dataAtRegion) {
+          const { id } = sqlServer
+          connections.push({
+            id,
+            resourceType: services.sqlServers,
+            relation: 'child',
+            field: 'sqlServers',
           })
         }
       }

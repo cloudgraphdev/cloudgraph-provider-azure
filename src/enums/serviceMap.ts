@@ -51,6 +51,7 @@ import AzureTrafficManagerProfile from '../services/trafficManagerProfile'
 import AzureVirtualMachine from '../services/virtualMachine'
 import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
 import AzureVirtualNetwork from '../services/virtualNetwork'
+import AzureSqlServers from '../services/sqlServers'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -104,6 +105,7 @@ export default {
   [services.securityGroup]: AzureNetworkSecurityGroup,
   [services.securityPricings]: AzureSecurityPricings,
   [services.securitySettings]: AzureSecuritySettings,
+  [services.sqlServers]: AzureSqlServers,
   [services.storageAccount]: AzureStorageAccount,
   [services.storageBlob]: AzureStorageBlob,
   [services.storageContainer]: AzureStorageContainer,

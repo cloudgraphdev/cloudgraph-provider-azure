@@ -120,6 +120,9 @@ export default {
   // Security Settings
   foundSecuritySettings: (num: number): string =>
     `Found ${num} security settings`,
+  // SQL Servers
+  foundSqlServers: (num: number): string => `Found ${num} SQL servers`,
+  foundSqlServerFirewallRules: (num: number): string => `Found ${num} SQL server firewall rules`,
   // Storage Account
   foundStorageAccounts: (num: number): string =>
     `Found ${num} storage accounts`,
