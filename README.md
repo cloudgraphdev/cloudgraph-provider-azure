@@ -40,8 +40,10 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | adIdentitySecurityDefaultsEnforcementPolicy |                                                                           |
 | adServicePrincipal                          | adApplication, authRoleAssignment                                         |
 | adUser                                      | adApplication, authRoleAssignment                                         |
+| aksManagedCluster                           | resourceGroup                                                             |
 | appServicePlan                              | resourceGroup, appServiceWebApp                                           |
 | appServiceWebApp                            | resourceGroup, appServicePlan, storageAccount                             |
+| arcConnectedCluster                         | resourceGroup                                                             |
 | authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
 | authRoleDefinition                          | authRoleAssignment                                                        |
 | autoProvisioningSettings                    |                                                                           |

@@ -232,20 +232,33 @@ export class RestApiClient {
 
   kind: string
 
+  version: string
+
   config: AzureServiceConfig
 
-  constructor({ config, scope, kind, options }: AzureRestApiNewClientParams) {
+  debug: boolean
+
+  constructor({
+    config,
+    scope,
+    kind,
+    options: { $host = baseUrl, version = '2020-10-01' } = {
+      $host: baseUrl,
+      version: '2020-10-01',
+    },
+    debug = false,
+  }: AzureRestApiNewClientParams) {
+    debug && logger.debug('RestApiClient DEBUG MODE')
     if (config === undefined) {
       throw new Error("'config' cannot be null")
-    }
-    if (!options) {
-      options = {}
     }
     this.subscriptionId = config.subscriptionId
     this.kind = kind
     this.scope = scope
-    this.$host = options.$host || baseUrl
+    this.$host = $host
+    this.version = version
     this.config = config
+    this.debug = debug
   }
 
   async getRequestedData({
@@ -255,12 +268,16 @@ export class RestApiClient {
   }: AzureRestApiClientRequestParams): Promise<any> {
     const authToken = await getAadTokenViaAxios(this.config)
     try {
-      const path = `/subscriptions/${this.config.subscriptionId}/resourceGroups/${resourceGroupName}/${this.scope}/${this.kind}/${type}`
+      const resourceGroupPath =
+        (resourceGroupName && `resourceGroups/${resourceGroupName}/`) || ''
+      const path = `/subscriptions/${this.config.subscriptionId}/${resourceGroupPath}${this.scope}/${this.kind}/${type}`
+      this.debug && logger.debug(path)
       return getDataFromMsRestApi({
         authToken,
         initialUrl: createUriForMsRestApiRequest({
           id: path,
           filter: `$filter=${(filters || []).join(' or ')}&`,
+          version: this.version,
         }),
       })
     } catch (error) {

@@ -5,6 +5,9 @@ type azureResourceGroup implements azureResource
     mutation: { add: true, delete: false }
   ) {
   managedBy: String @search(by: [hash, regexp])
+  arcConnectedClusters: [azureArcConnectedCluster] @hasInverse(field: resourceGroup)
+  aksManagedClusters: [azureAksManagedCluster] @hasInverse(field: resourceGroup)
+  # appServiceKubeEnvironments: [azureAppServiceKubeEnvironment] @hasInverse(field: resourceGroup)
   appServicePlans: [azureAppServicePlan] @hasInverse(field: resourceGroup)
   appServiceWebApps: [azureAppServiceWebApp] @hasInverse(field: resourceGroup)
   cdnCustomDomains: [azureCdnCustomDomain] @hasInverse(field: resourceGroup)

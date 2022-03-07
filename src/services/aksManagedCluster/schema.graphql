@@ -1,0 +1,196 @@
+type azureAksManagedClusterManagedIdentity
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureAksManagedClusterAgentPoolProfile
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  count: Int @search
+  vmSize: String @search(by: [hash, regexp])
+  osDiskSizeGB: Int @search
+  osDiskType: String @search(by: [hash, regexp])
+  kubeletDiskType: String @search(by: [hash, regexp])
+  workloadRuntime: String @search(by: [hash, regexp])
+  vnetSubnetID: String @search(by: [hash, regexp])
+  podSubnetID: String @search(by: [hash, regexp])
+  maxPods: Int @search
+  osType: String @search(by: [hash, regexp])
+  osSKU: String @search(by: [hash, regexp])
+  maxCount: Int @search
+  minCount: Int @search
+  enableAutoScaling: Boolean @search
+  scaleDownMode: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  mode: String @search(by: [hash, regexp])
+  orchestratorVersion: String @search(by: [hash, regexp])
+  nodeImageVersion: String @search(by: [hash, regexp])
+  upgradeMaxSurge: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  powerStateCode: String @search(by: [hash, regexp])
+  availabilityZones: [String] @search(by: [hash, regexp])
+  enableNodePublicIP: Boolean @search
+  nodePublicIPPrefixID: String @search(by: [hash, regexp])
+  scaleSetPriority: String @search(by: [hash, regexp])
+  scaleSetEvictionPolicy: String @search(by: [hash, regexp])
+  spotMaxPrice: Int @search
+  nodeTaints: [String] @search(by: [hash, regexp])
+  proximityPlacementGroupID: String @search(by: [hash, regexp])
+  kubeletConfig: azureAksManagedClusterAgentPoolKubeletConfig
+  linuxOSConfig: azureAksManagedClusterAgentPoolLinuxOSConfig
+  enableEncryptionAtHost: Boolean @search
+  enableUltraSSD: Boolean @search
+  enableFips: Boolean @search
+}
+
+type azureAksManagedClusterAgentPoolKubeletConfig
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  cpuManagerPolicy: String @search(by: [hash, regexp])
+  cpuCfsQuota: Boolean @search
+  cpuCfsQuotaPeriod: String @search(by: [hash, regexp])
+  imageGcHighThreshold: Int @search
+  imageGcLowThreshold: Int @search
+  topologyManagerPolicy: String @search(by: [hash, regexp])
+  allowedUnsafeSysctls: [String] @search(by: [hash, regexp])
+  failSwapOn: Boolean @search
+  containerLogMaxSizeMB: Int @search
+  containerLogMaxFiles: Int @search
+  podMaxPids: Int @search
+}
+
+type azureAksManagedClusterAgentPoolLinuxOSConfig
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  transparentHugePageEnabled: String @search(by: [hash, regexp])
+  transparentHugePageDefrag: String @search(by: [hash, regexp])
+  swapFileSizeMB: Int @search
+}
+
+type azureAksManagedClusterNetworkProfile
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  networkPlugin: String @search(by: [hash, regexp])
+  networkPolicy: String @search(by: [hash, regexp])
+  networkMode: String @search(by: [hash, regexp])
+  podCidr: String @search(by: [hash, regexp])
+  serviceCidr: String @search(by: [hash, regexp])
+  dnsServiceIP: String @search(by: [hash, regexp])
+  dockerBridgeCidr: String @search(by: [hash, regexp])
+  outboundType: String @search(by: [hash, regexp])
+  loadBalancerSku: String @search(by: [hash, regexp])
+  podCidrs: [String] @search(by: [hash, regexp])
+  serviceCidrs: [String] @search(by: [hash, regexp])
+  ipFamilies: [String] @search(by: [hash, regexp])
+}
+
+type azureAksManagedClusterAADProfile
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  managed: Boolean @search
+  enableAzureRbac: Boolean @search
+  adminGroupObjectIDs: [String] @search(by: [hash, regexp])
+  clientAppID: String @search(by: [hash, regexp])
+  serverAppID: String @search(by: [hash, regexp])
+  tenantID: String @search(by: [hash, regexp])
+}
+
+type azureAksManagedClusterPropertiesAutoScalerProfile 
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  balanceSimilarNodeGroups: String @search(by: [hash, regexp])
+  expander: String @search(by: [hash, regexp])
+  maxEmptyBulkDelete: String @search(by: [hash, regexp])
+  maxGracefulTerminationSec: String @search(by: [hash, regexp])
+  maxNodeProvisionTime: String @search(by: [hash, regexp])
+  maxTotalUnreadyPercentage: String @search(by: [hash, regexp])
+  newPodScaleUpDelay: String @search(by: [hash, regexp])
+  okTotalUnreadyCount: String @search(by: [hash, regexp])
+  scanInterval: String @search(by: [hash, regexp])
+  scaleDownDelayAfterAdd: String @search(by: [hash, regexp])
+  scaleDownDelayAfterDelete: String @search(by: [hash, regexp])
+  scaleDownDelayAfterFailure: String @search(by: [hash, regexp])
+  scaleDownUnneededTime: String @search(by: [hash, regexp])
+  scaleDownUnreadyTime: String @search(by: [hash, regexp])
+  scaleDownUtilizationThreshold: String @search(by: [hash, regexp])
+  skipNodesWithLocalStorage: String @search(by: [hash, regexp])
+  skipNodesWithSystemPods: String @search(by: [hash, regexp])
+}
+
+type azureAksManagedClusterAPIServerAccessProfile 
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  authorizedIPRanges: [String] @search(by: [hash, regexp])
+  enablePrivateCluster: Boolean @search
+  privateDNSZone: String @search(by: [hash, regexp])
+  enablePrivateClusterPublicFqdn: Boolean @search
+  disableRunCommand: Boolean @search
+}
+
+type azureAksManagedClusterHttpProxyConfig @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+    httpProxy: String @search(by: [hash, regexp])
+    httpsProxy: String @search(by: [hash, regexp])
+    noProxy: [String] @search(by: [hash, regexp])
+  }
+
+type azureAksManagedCluster implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  aadProfile: azureAksManagedClusterAADProfile
+  agentPoolProfiles: [azureAksManagedClusterAgentPoolProfile]
+  apiServerAccessProfile: azureAksManagedClusterAPIServerAccessProfile
+  autoScalerProfile: azureAksManagedClusterPropertiesAutoScalerProfile
+  autoUpgradeChannel: String @search(by: [hash, regexp])
+  azureDefenderEnabled: Boolean @search
+  azurePortalFqdn: String @search(by: [hash, regexp])
+  disableLocalAccounts: Boolean @search
+  diskEncryptionSetID: String @search(by: [hash, regexp])
+  dnsPrefix: String @search(by: [hash, regexp])
+  enableRbac: Boolean @search
+  fqdn: String @search(by: [hash, regexp])
+  fqdnSubdomain: String @search(by: [hash, regexp])
+  httpProxyConfig: azureAksManagedClusterHttpProxyConfig
+  identity: azureAksManagedClusterManagedIdentity
+  kubernetesVersion: String @search(by: [hash, regexp])
+  maxAgentPools: Int @search
+  networkProfile: azureAksManagedClusterNetworkProfile
+  nodeResourceGroup: String @search(by: [hash, regexp])
+  podIdentityProfileAllowNetworkPluginKubenet: Boolean @search
+  podIdentityProfileEnabled: Boolean @search
+  powerStateCode: String @search(by: [hash, regexp])
+  privateFqdn: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  servicePrincipalProfileClientId: String @search(by: [hash, regexp])
+  skuName: String @search(by: [hash, regexp])
+  skuTier: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: aksManagedClusters)
+}

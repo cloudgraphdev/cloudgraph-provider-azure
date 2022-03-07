@@ -224,6 +224,162 @@ export type AzureAdIdentitySecurityDefaultsEnforcementPolicy = {
   region?: Maybe<Scalars['String']>;
 };
 
+export type AzureAksManagedCluster = AzureResource & {
+  aadProfile?: Maybe<AzureAksManagedClusterAadProfile>;
+  agentPoolProfiles?: Maybe<Array<Maybe<AzureAksManagedClusterAgentPoolProfile>>>;
+  apiServerAccessProfile?: Maybe<AzureAksManagedClusterApiServerAccessProfile>;
+  autoScalerProfile?: Maybe<AzureAksManagedClusterPropertiesAutoScalerProfile>;
+  autoUpgradeChannel?: Maybe<Scalars['String']>;
+  azureDefenderEnabled?: Maybe<Scalars['Boolean']>;
+  azurePortalFqdn?: Maybe<Scalars['String']>;
+  disableLocalAccounts?: Maybe<Scalars['Boolean']>;
+  diskEncryptionSetID?: Maybe<Scalars['String']>;
+  dnsPrefix?: Maybe<Scalars['String']>;
+  enableRbac?: Maybe<Scalars['Boolean']>;
+  fqdn?: Maybe<Scalars['String']>;
+  fqdnSubdomain?: Maybe<Scalars['String']>;
+  httpProxyConfig?: Maybe<AzureAksManagedClusterHttpProxyConfig>;
+  identity?: Maybe<AzureAksManagedClusterManagedIdentity>;
+  kubernetesVersion?: Maybe<Scalars['String']>;
+  maxAgentPools?: Maybe<Scalars['Int']>;
+  networkProfile?: Maybe<AzureAksManagedClusterNetworkProfile>;
+  nodeResourceGroup?: Maybe<Scalars['String']>;
+  podIdentityProfileAllowNetworkPluginKubenet?: Maybe<Scalars['Boolean']>;
+  podIdentityProfileEnabled?: Maybe<Scalars['Boolean']>;
+  powerStateCode?: Maybe<Scalars['String']>;
+  privateFqdn?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  servicePrincipalProfileClientId?: Maybe<Scalars['String']>;
+  skuName?: Maybe<Scalars['String']>;
+  skuTier?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterAadProfile = {
+  adminGroupObjectIDs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  clientAppID?: Maybe<Scalars['String']>;
+  enableAzureRbac?: Maybe<Scalars['Boolean']>;
+  managed?: Maybe<Scalars['Boolean']>;
+  serverAppID?: Maybe<Scalars['String']>;
+  tenantID?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterApiServerAccessProfile = {
+  authorizedIPRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
+  disableRunCommand?: Maybe<Scalars['Boolean']>;
+  enablePrivateCluster?: Maybe<Scalars['Boolean']>;
+  enablePrivateClusterPublicFqdn?: Maybe<Scalars['Boolean']>;
+  privateDNSZone?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterAgentPoolKubeletConfig = {
+  allowedUnsafeSysctls?: Maybe<Array<Maybe<Scalars['String']>>>;
+  containerLogMaxFiles?: Maybe<Scalars['Int']>;
+  containerLogMaxSizeMB?: Maybe<Scalars['Int']>;
+  cpuCfsQuota?: Maybe<Scalars['Boolean']>;
+  cpuCfsQuotaPeriod?: Maybe<Scalars['String']>;
+  cpuManagerPolicy?: Maybe<Scalars['String']>;
+  failSwapOn?: Maybe<Scalars['Boolean']>;
+  imageGcHighThreshold?: Maybe<Scalars['Int']>;
+  imageGcLowThreshold?: Maybe<Scalars['Int']>;
+  podMaxPids?: Maybe<Scalars['Int']>;
+  topologyManagerPolicy?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterAgentPoolLinuxOsConfig = {
+  swapFileSizeMB?: Maybe<Scalars['Int']>;
+  transparentHugePageDefrag?: Maybe<Scalars['String']>;
+  transparentHugePageEnabled?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterAgentPoolProfile = {
+  availabilityZones?: Maybe<Array<Maybe<Scalars['String']>>>;
+  count?: Maybe<Scalars['Int']>;
+  enableAutoScaling?: Maybe<Scalars['Boolean']>;
+  enableEncryptionAtHost?: Maybe<Scalars['Boolean']>;
+  enableFips?: Maybe<Scalars['Boolean']>;
+  enableNodePublicIP?: Maybe<Scalars['Boolean']>;
+  enableUltraSSD?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  kubeletConfig?: Maybe<AzureAksManagedClusterAgentPoolKubeletConfig>;
+  kubeletDiskType?: Maybe<Scalars['String']>;
+  linuxOSConfig?: Maybe<AzureAksManagedClusterAgentPoolLinuxOsConfig>;
+  maxCount?: Maybe<Scalars['Int']>;
+  maxPods?: Maybe<Scalars['Int']>;
+  minCount?: Maybe<Scalars['Int']>;
+  mode?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nodeImageVersion?: Maybe<Scalars['String']>;
+  nodePublicIPPrefixID?: Maybe<Scalars['String']>;
+  nodeTaints?: Maybe<Array<Maybe<Scalars['String']>>>;
+  orchestratorVersion?: Maybe<Scalars['String']>;
+  osDiskSizeGB?: Maybe<Scalars['Int']>;
+  osDiskType?: Maybe<Scalars['String']>;
+  osSKU?: Maybe<Scalars['String']>;
+  osType?: Maybe<Scalars['String']>;
+  podSubnetID?: Maybe<Scalars['String']>;
+  powerStateCode?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  proximityPlacementGroupID?: Maybe<Scalars['String']>;
+  scaleDownMode?: Maybe<Scalars['String']>;
+  scaleSetEvictionPolicy?: Maybe<Scalars['String']>;
+  scaleSetPriority?: Maybe<Scalars['String']>;
+  spotMaxPrice?: Maybe<Scalars['Int']>;
+  type?: Maybe<Scalars['String']>;
+  upgradeMaxSurge?: Maybe<Scalars['String']>;
+  vmSize?: Maybe<Scalars['String']>;
+  vnetSubnetID?: Maybe<Scalars['String']>;
+  workloadRuntime?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterHttpProxyConfig = {
+  httpProxy?: Maybe<Scalars['String']>;
+  httpsProxy?: Maybe<Scalars['String']>;
+  noProxy?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAksManagedClusterManagedIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAksManagedClusterNetworkProfile = {
+  dnsServiceIP?: Maybe<Scalars['String']>;
+  dockerBridgeCidr?: Maybe<Scalars['String']>;
+  ipFamilies?: Maybe<Array<Maybe<Scalars['String']>>>;
+  loadBalancerSku?: Maybe<Scalars['String']>;
+  networkMode?: Maybe<Scalars['String']>;
+  networkPlugin?: Maybe<Scalars['String']>;
+  networkPolicy?: Maybe<Scalars['String']>;
+  outboundType?: Maybe<Scalars['String']>;
+  podCidr?: Maybe<Scalars['String']>;
+  podCidrs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  serviceCidr?: Maybe<Scalars['String']>;
+  serviceCidrs?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAksManagedClusterPropertiesAutoScalerProfile = {
+  balanceSimilarNodeGroups?: Maybe<Scalars['String']>;
+  expander?: Maybe<Scalars['String']>;
+  maxEmptyBulkDelete?: Maybe<Scalars['String']>;
+  maxGracefulTerminationSec?: Maybe<Scalars['String']>;
+  maxNodeProvisionTime?: Maybe<Scalars['String']>;
+  maxTotalUnreadyPercentage?: Maybe<Scalars['String']>;
+  newPodScaleUpDelay?: Maybe<Scalars['String']>;
+  okTotalUnreadyCount?: Maybe<Scalars['String']>;
+  scaleDownDelayAfterAdd?: Maybe<Scalars['String']>;
+  scaleDownDelayAfterDelete?: Maybe<Scalars['String']>;
+  scaleDownDelayAfterFailure?: Maybe<Scalars['String']>;
+  scaleDownUnneededTime?: Maybe<Scalars['String']>;
+  scaleDownUnreadyTime?: Maybe<Scalars['String']>;
+  scaleDownUtilizationThreshold?: Maybe<Scalars['String']>;
+  scanInterval?: Maybe<Scalars['String']>;
+  skipNodesWithLocalStorage?: Maybe<Scalars['String']>;
+  skipNodesWithSystemPods?: Maybe<Scalars['String']>;
+};
+
 export type AzureAppServicePlan = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   elasticScaleEnabled?: Maybe<Scalars['Boolean']>;
@@ -571,6 +727,35 @@ export type AzureAppServiceWebAppSiteConfigVirtualDirectory = {
   id: Scalars['String'];
   physicalPath?: Maybe<Scalars['String']>;
   virtualPath?: Maybe<Scalars['String']>;
+};
+
+export type AzureArcConnectedCluster = AzureResource & {
+  agentPublicKeyCertificate?: Maybe<Scalars['String']>;
+  agentVersion?: Maybe<Scalars['String']>;
+  connectivityStatus?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  distribution?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureArcConnectedClusterIdentity>;
+  infrastructure?: Maybe<Scalars['String']>;
+  kubernetesVersion?: Maybe<Scalars['String']>;
+  lastConnectivityTime?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  managedIdentityCertificateExpirationTime?: Maybe<Scalars['String']>;
+  offering?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  totalCoreCount?: Maybe<Scalars['Int']>;
+  totalNodeCount?: Maybe<Scalars['Int']>;
+};
+
+export type AzureArcConnectedClusterIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureArmResourceSku = {
@@ -1940,8 +2125,10 @@ export type AzureResource = {
 };
 
 export type AzureResourceGroup = AzureResource & {
+  aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
+  arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
@@ -1974,6 +2161,15 @@ export type AzureResourceGroup = AzureResource & {
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+};
+
+export type AzureResourceSystemData = {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
 };
 
 export type AzureSecurityAssesment = AzureBaseResource & {
@@ -2314,8 +2510,10 @@ export type AzureSubResource = {
 export type AzureTag = {
   adApplications?: Maybe<Array<Maybe<AzureAdApplication>>>;
   adServicePrincipals?: Maybe<Array<Maybe<AzureAdServicePrincipal>>>;
+  aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
+  arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
