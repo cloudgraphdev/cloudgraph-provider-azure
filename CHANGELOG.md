@@ -1,3 +1,10 @@
+## [0.38.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.38.0...0.38.1) (2022-03-07)
+
+
+### Bug Fixes
+
+* added missing optional chaining ([2aa81df](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/2aa81df5777736e4079d45224feecad9529d25b3))
+
 # [0.38.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.37.0...0.38.0) (2022-03-07)
 
 
