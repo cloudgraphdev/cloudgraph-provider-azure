@@ -1,11 +1,13 @@
 import CloudGraph from '@cloudgraph/sdk'
-import { AccessToken } from '@azure/core-http'
-import { TokenCredential } from '@azure/identity'
-import { ApplicationTokenCredentials } from '@azure/ms-rest-nodeauth'
+import {
+  AccessToken,
+  ClientSecretCredential,
+  TokenCredential,
+} from '@azure/identity'
 import { ConfidentialClientApplication } from '@azure/msal-node'
 import { URLSearchParams } from 'url'
 import { AuthenticationProvider } from '@microsoft/microsoft-graph-client/lib/src/IAuthenticationProvider'
-import { AzureServiceConfig } from '../types'
+import { AzureCredentials, AzureServiceConfig } from '../types'
 import { generateAxiosRequest } from './apiUtils'
 
 const { logger } = CloudGraph
@@ -61,17 +63,27 @@ export const getAuthProviderViaMsalForGraph = async (
   }
 }
 
-export const getTokenCredentialsUsingApplicationTokenCredentials = async (
-  credentials: ApplicationTokenCredentials
+export const getClientSecretCredentials = (
+  credentials: AzureCredentials
+): ClientSecretCredential => {
+  const { tenantId, clientId, clientSecret } = credentials
+  return new ClientSecretCredential(tenantId, clientId, clientSecret)
+}
+
+export const getTokenCredentials = async (
+  clientSecretCredentials: ClientSecretCredential,
+  { tenantId }: AzureCredentials
 ): Promise<TokenCredential> => {
   return {
     getToken: async (): Promise<AccessToken | null> => {
-      const { accessToken: token, expiresOnTimestamp } =
-        await credentials.getToken()
-      return {
-        token,
-        expiresOnTimestamp,
-      }
+      const { token, expiresOnTimestamp } =
+        await clientSecretCredentials.getToken(
+          'https://management.azure.com/.default',
+          {
+            tenantId,
+          }
+        )
+      return { token, expiresOnTimestamp }
     },
   }
 }

@@ -38,8 +38,8 @@ export default async ({
       rawData.find(({ name }) => name === services.resourceGroup)?.data || {}
     if (isEmpty(existingData)) {
       // Refresh data
-      const { credentials, subscriptionId } = config
-      const client = new ResourceManagementClient(credentials, subscriptionId)
+      const { tokenCredentials, subscriptionId } = config
+      const client = new ResourceManagementClient(tokenCredentials, subscriptionId)
 
       const resourceGroupData: ResourceGroupListResult = await getAllResources({
         listCall: async (): Promise<ResourceGroupsListResponse> =>
