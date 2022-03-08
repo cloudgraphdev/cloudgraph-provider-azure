@@ -218,6 +218,36 @@ export type AzureAdUser = {
   userType?: Maybe<Scalars['String']>;
 };
 
+export type AzureActivityLogAlert = AzureBaseResource & {
+  actions?: Maybe<AzureActivityLogAlertActionList>;
+  condition?: Maybe<AzureActivityLogAlertAllOfCondition>;
+  description?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  region?: Maybe<Scalars['String']>;
+  scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subscriptionId?: Maybe<Scalars['String']>;
+};
+
+export type AzureActivityLogAlertActionGroup = {
+  actionGroupId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  webhookProperties?: Maybe<Array<Maybe<AzureKeyValueProperty>>>;
+};
+
+export type AzureActivityLogAlertActionList = {
+  actionGroups?: Maybe<Array<Maybe<AzureActivityLogAlertActionGroup>>>;
+};
+
+export type AzureActivityLogAlertAllOfCondition = {
+  allOf?: Maybe<Array<Maybe<AzureActivityLogAlertLeafCondition>>>;
+};
+
+export type AzureActivityLogAlertLeafCondition = {
+  equals?: Maybe<Scalars['String']>;
+  field?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+};
+
 export type AzureAdIdentitySecurityDefaultsEnforcementPolicy = {
   description?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;

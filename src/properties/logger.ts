@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 export default {
+  // Activity Log Alerts
+  foundActivityLogAlerts: (num: number): string => `Found ${num} Activity Log Alerts`,
   /* Active Directory */
   foundAdApplications: (num: number): string => `Found ${num} AD applications`,
   foundAdGroups: (num: number): string => `Found ${num} AD groups`,

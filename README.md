@@ -35,6 +35,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 | Service                                     | Relations                                                                 |
 | ------------------------------------------- | ------------------------------------------------------------------------- |
+| activityLogAlerts                           |                                                                           |
 | adApplication                               | authRoleAssignment, adGroup, adServicePrincipal, adUser                   |
 | adGroup                                     | adApplication, authRoleAssignment                                         |
 | adIdentitySecurityDefaultsEnforcementPolicy |                                                                           |

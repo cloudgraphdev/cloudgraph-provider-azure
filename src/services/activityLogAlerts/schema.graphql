@@ -1,0 +1,54 @@
+type azureActivityLogAlert implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  scopes: [String] @search(by: [hash, regexp])
+  enabled: Boolean @search
+  condition: azureActivityLogAlertAllOfCondition
+  actions: azureActivityLogAlertActionList
+  description: String @search(by: [hash, regexp])
+}
+
+type azureActivityLogAlertAllOfCondition
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  allOf: [azureActivityLogAlertLeafCondition]
+}
+
+type azureActivityLogAlertLeafCondition
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  field: String @search(by: [hash, regexp])
+  equals: String @search(by: [hash, regexp])
+}
+
+type azureActivityLogAlertActionList
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  actionGroups: [azureActivityLogAlertActionGroup]
+}
+
+type azureActivityLogAlertActionGroup
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  actionGroupId: String @search(by: [hash, regexp])
+  webhookProperties: [azureKeyValueProperty]
+}
