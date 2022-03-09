@@ -1,3 +1,10 @@
+# [0.39.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.38.2...0.39.0) (2022-03-09)
+
+
+### Features
+
+* **service:** Add Flow Logs to security groups services ([2d3cac6](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/2d3cac688e4721c474120ff787b7bc8362d93ac8))
+
 ## [0.38.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.38.1...0.38.2) (2022-03-09)
 
 
