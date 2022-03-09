@@ -234,7 +234,7 @@ type azureAppServiceWebAppSiteConfigAutoHealTriggers
     subscription: false
   ) {
   requests: azureAppServiceWebAppSiteConfigARequestsBasedTrigger
-  privateBytesInKB: Int @search
+  privateBytesInKB: Int64 @search
   statusCodes: [azureAppServiceWebAppSiteConfigStatusCodesBasedTrigger]
   slowRequests: azureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger
   slowRequestsWithPath: [azureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers]

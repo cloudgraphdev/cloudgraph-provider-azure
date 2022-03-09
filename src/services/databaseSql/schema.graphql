@@ -30,7 +30,7 @@ type azureDatabaseSql implements azureResource
   catalogCollation: String @search(by: [hash, regexp])
   zoneRedundant: Boolean @search
   licenseType: String @search(by: [hash, regexp])
-  maxLogSizeBytes: Int @search
+  maxLogSizeBytes: Int64 @search
   earliestRestoreDate: String @search(by: [hash, regexp])
   readScale: String @search(by: [hash, regexp])
   highAvailabilityReplicaCount: Int @search

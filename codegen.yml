@@ -7,3 +7,6 @@ generates:
       - "typescript"
     config:
         skipTypename: true
+        scalars:
+          Int64: number
+          DateTime: string

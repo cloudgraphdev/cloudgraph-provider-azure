@@ -10,6 +10,8 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  DateTime: string;
+  Int64: number;
 };
 
 export type AzureAdApplication = {
@@ -595,7 +597,7 @@ export type AzureAppServiceWebAppSiteConfigAutoHealRules = {
 };
 
 export type AzureAppServiceWebAppSiteConfigAutoHealTriggers = {
-  privateBytesInKB?: Maybe<Scalars['Int']>;
+  privateBytesInKB?: Maybe<Scalars['Int64']>;
   requests?: Maybe<AzureAppServiceWebAppSiteConfigARequestsBasedTrigger>;
   slowRequests?: Maybe<AzureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger>;
   slowRequestsWithPath?: Maybe<Array<Maybe<AzureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers>>>;
@@ -1215,7 +1217,7 @@ export type AzureDatabaseSql = AzureResource & {
   longTermRetentionBackupResourceId?: Maybe<Scalars['String']>;
   maintenanceConfigurationId?: Maybe<Scalars['String']>;
   managedBy?: Maybe<Scalars['String']>;
-  maxLogSizeBytes?: Maybe<Scalars['Int']>;
+  maxLogSizeBytes?: Maybe<Scalars['Int64']>;
   maxSizeBytes?: Maybe<Scalars['String']>;
   minCapacity?: Maybe<Scalars['Int']>;
   pausedDate?: Maybe<Scalars['String']>;
@@ -1389,7 +1391,7 @@ export type AzureDisk = AzureResource & {
   createOption?: Maybe<Scalars['String']>;
   diskIopsReadWrite?: Maybe<Scalars['Int']>;
   diskMbpsReadWrite?: Maybe<Scalars['Int']>;
-  diskSizeBytes?: Maybe<Scalars['Float']>;
+  diskSizeBytes?: Maybe<Scalars['Int64']>;
   diskSizeGb?: Maybe<Scalars['Int']>;
   diskState?: Maybe<Scalars['String']>;
   encryptionSettings?: Maybe<Scalars['String']>;
@@ -1509,7 +1511,7 @@ export type AzureEventHubCaptureDescription = {
   enabled?: Maybe<Scalars['Boolean']>;
   encoding?: Maybe<Scalars['String']>;
   intervalInSeconds?: Maybe<Scalars['Int']>;
-  sizeLimitInBytes?: Maybe<Scalars['Int']>;
+  sizeLimitInBytes?: Maybe<Scalars['Int64']>;
   skipEmptyArchives?: Maybe<Scalars['Boolean']>;
 };
 
