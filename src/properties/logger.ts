@@ -114,6 +114,7 @@ export default {
     `Found ${num} security contacts`,
   // Security Groups
   foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
+  foundSecurityGroupFlowLogs: (num: number): string => `Found ${num} security group flow logs`,
   // Security Pricings
   foundSecurityPricings: (num: number): string =>
     `Found ${num} security pricings`,

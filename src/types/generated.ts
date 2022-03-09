@@ -1987,6 +1987,7 @@ export type AzureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties 
 export type AzureNetworkSecurityGroup = AzureResource & {
   defaultSecurityRules?: Maybe<Array<Maybe<AzureNetworkSecurityGroupRule>>>;
   etag?: Maybe<Scalars['String']>;
+  flowLogs?: Maybe<Array<Maybe<AzureNetworkSecurityGroupFlowLog>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   provisioningState?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -1997,6 +1998,20 @@ export type AzureNetworkSecurityGroup = AzureResource & {
 export type AzureNetworkSecurityGroupApplication = AzureBaseResource & {
   etag?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureNetworkSecurityGroupFlowLog = AzureResource & {
+  enabled?: Maybe<Scalars['Boolean']>;
+  etag?: Maybe<Scalars['String']>;
+  formatType?: Maybe<Scalars['String']>;
+  formatVersion?: Maybe<Scalars['Int']>;
+  networkWatcherFlowAnalyticsConfiguration?: Maybe<AzureNetworkWatcherFlowAnalyticsConfiguration>;
+  provisioningState?: Maybe<Scalars['String']>;
+  retentionPolicyDays?: Maybe<Scalars['Int']>;
+  retentionPolicyEnabled?: Maybe<Scalars['Boolean']>;
+  storageId?: Maybe<Scalars['String']>;
+  targetResourceGuid?: Maybe<Scalars['String']>;
+  targetResourceId?: Maybe<Scalars['String']>;
 };
 
 export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
@@ -2019,6 +2034,14 @@ export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
   sourcePortRange?: Maybe<Scalars['String']>;
   sourcePortRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzureNetworkWatcherFlowAnalyticsConfiguration = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  trafficAnalyticsInterval?: Maybe<Scalars['Int']>;
+  workspaceId?: Maybe<Scalars['String']>;
+  workspaceRegion?: Maybe<Scalars['String']>;
+  workspaceResourceId?: Maybe<Scalars['String']>;
 };
 
 export type AzureOptionalResource = {

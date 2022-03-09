@@ -4,9 +4,10 @@ import {
   AzureNetworkSecurityGroup,
   AzureNetworkSecurityGroupApplication,
   AzureNetworkSecurityGroupRule,
+  AzureNetworkSecurityGroupFlowLog,
 } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
-import { RawAzureNetworkSecurityGroup } from './data'
+import { RawAzureNetworkSecurityGroup, RawAzureFlowLog } from './data'
 
 const normalizeApplicationSecurityGroups = (
   asgArr: Array<ApplicationSecurityGroup>
@@ -34,6 +35,59 @@ const normalizeSecurityRules = (
     })
   )
 
+const normalizeFlowLogs = (
+  flowLogs: Array<RawAzureFlowLog>
+): Array<AzureNetworkSecurityGroupFlowLog> =>
+  flowLogs.map(
+    ({
+      id: flowLogId,
+      name,
+      type,
+      etag,
+      targetResourceId,
+      targetResourceGuid,
+      storageId,
+      Tags: flowLogTags,
+      retentionPolicy,
+      enabled,
+      provisioningState,
+      format,
+      flowAnalyticsConfiguration,
+    }) => ({
+      id: flowLogId || cuid(),
+      name,
+      type,
+      etag,
+      targetResourceId,
+      targetResourceGuid,
+      storageId,
+      enabled,
+      provisioningState,
+      retentionPolicyDays: retentionPolicy?.days,
+      retentionPolicyEnabled: retentionPolicy?.enabled,
+      formatType: format?.type,
+      formatVersion: format?.version,
+      networkWatcherFlowAnalyticsConfiguration: {
+        enabled:
+          flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration
+            ?.enabled,
+        workspaceId:
+          flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration
+            ?.workspaceId,
+        workspaceRegion:
+          flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration
+            ?.workspaceRegion,
+        workspaceResourceId:
+          flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration
+            ?.workspaceResourceId,
+        trafficAnalyticsInterval:
+          flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration
+            ?.trafficAnalyticsInterval,
+      },
+      tags: formatTagsFromMap(flowLogTags),
+    })
+  )
+
 export default ({
   service,
   account: subscriptionId,
@@ -54,6 +108,7 @@ export default ({
     etag,
     resourceGroupId,
     Tags,
+    flowLogs = [],
   } = service
   return {
     id: id || cuid(),
@@ -68,5 +123,6 @@ export default ({
     defaultSecurityRules: normalizeSecurityRules(defaultSecurityRules),
     etag,
     tags: formatTagsFromMap(Tags),
+    flowLogs: normalizeFlowLogs(flowLogs) || [],
   }
 }

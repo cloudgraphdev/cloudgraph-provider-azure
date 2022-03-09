@@ -35,6 +35,39 @@ type azureNetworkSecurityGroupRule implements azureBaseResource
   type: String @search(by: [hash, regexp])
 }
 
+type azureNetworkWatcherFlowAnalyticsConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  enabled: Boolean @search
+  workspaceId: String @search(by: [hash, regexp])
+  workspaceRegion: String @search(by: [hash, regexp])
+  workspaceResourceId: String @search(by: [hash, regexp])
+  trafficAnalyticsInterval: Int @search
+}
+
+type azureNetworkSecurityGroupFlowLog implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  targetResourceId: String @search(by: [hash, regexp])
+  targetResourceGuid: String @search(by: [hash, regexp])
+  storageId: String @search(by: [hash, regexp])
+  enabled: Boolean @search
+  retentionPolicyDays: Int @search
+  retentionPolicyEnabled: Boolean @search
+  formatType: String @search(by: [hash, regexp])
+  formatVersion: Int @search
+  networkWatcherFlowAnalyticsConfiguration: azureNetworkWatcherFlowAnalyticsConfiguration
+  provisioningState:  String @search(by: [hash, regexp])
+}
+
 type azureNetworkSecurityGroup implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -46,6 +79,7 @@ type azureNetworkSecurityGroup implements azureResource
   etag: String @search(by: [hash, regexp])
   securityRules: [azureNetworkSecurityGroupRule]
   defaultSecurityRules: [azureNetworkSecurityGroupRule]
+  flowLogs: [azureNetworkSecurityGroupFlowLog]
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: securityGroups)
   resourceGroup: [azureResourceGroup] @hasInverse(field: securityGroups)
 }
