@@ -1,3 +1,10 @@
+## [0.39.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.0...0.39.1) (2022-03-09)
+
+
+### Bug Fixes
+
+* bugfixes for networkInterface and virtualMachine ([523ff10](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/523ff109f3fb1d479c68f859f61d8f2c82870388))
+
 # [0.39.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.38.2...0.39.0) (2022-03-09)
 
 
