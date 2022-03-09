@@ -40,10 +40,15 @@ const formatNetworkProfile = ({
   ...rest
 }: ContainerServiceNetworkProfile): AzureAksManagedClusterNetworkProfile => rest
 
+interface ExtendedAadProfile extends ManagedClusterAADProfile{
+  adminUsers?: any
+}
+
 const formatAadProfile = ({
   serverAppSecret,
+  adminUsers,
   ...rest
-}: ManagedClusterAADProfile): AzureAksManagedClusterAadProfile => rest
+}: ExtendedAadProfile): AzureAksManagedClusterAadProfile => rest
 
 export default ({
   service,

@@ -66,6 +66,7 @@ const formatSiteConfig = ({
   requestTracingExpirationTime,
   scmIpSecurityRestrictions = [],
   virtualApplications = [],
+  machineKey,
   tags = {},
   ...restConfig
 }: RawSiteConfigResource): AzureAppServiceWebAppSiteConfig => {
