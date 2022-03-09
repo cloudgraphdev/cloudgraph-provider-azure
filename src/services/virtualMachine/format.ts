@@ -1,4 +1,7 @@
-import { AzureVirtualMachine } from '../../types/generated'
+import {
+  AzureVirtualMachine,
+  AzureVirtualMachineStorageImageReference,
+} from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureVirtualMachine } from './data'
 
@@ -19,7 +22,7 @@ export default ({
       bootDiagnostics: { enabled: bootDiagnostics = false } = {},
     } = {},
     osProfile: { adminUsername, adminPassword, secrets, ...restOsProfile } = {},
-    storageProfile: { imageReference: storageImageReference = {} } = {},
+    storageProfile: { imageReference } = {},
     licenseType,
     resourceGroupId,
     Tags,
@@ -33,6 +36,8 @@ export default ({
     windowsConfiguration: { patchSettings: wps, ...windowsConfiguration } = {},
     ...osProfile
   } = restOsProfile
+  const storageImageReference: AzureVirtualMachineStorageImageReference =
+    imageReference || {}
   return {
     id,
     subscriptionId: account,
