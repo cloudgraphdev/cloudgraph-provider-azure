@@ -12,7 +12,7 @@ type azureDisk implements azureResource
   createOption: String @search(by: [hash, regexp])
   imageReferenceId: String @search(by: [hash, regexp])
   diskSizeGb: Int @search
-  diskSizeBytes: Float @search
+  diskSizeBytes: Int64 @search
   uniqueId: String @search(by: [hash, regexp])
   diskIopsReadWrite: Int @search
   diskMbpsReadWrite: Int @search

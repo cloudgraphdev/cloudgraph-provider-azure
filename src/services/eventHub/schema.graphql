@@ -12,7 +12,7 @@ type azureEventHubCaptureDescription{
   enabled: Boolean @search
   encoding: String @search(by: [hash, regexp])
   intervalInSeconds: Int @search
-  sizeLimitInBytes: Int @search
+  sizeLimitInBytes: Int64 @search
   destination: azureEventHubCaptureDestination
   skipEmptyArchives: Boolean @search
 }
