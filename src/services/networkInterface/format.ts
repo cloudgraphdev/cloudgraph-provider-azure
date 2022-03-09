@@ -35,14 +35,34 @@ export default ({
   let privateIpAddress = ''
   if (ipConfigurations.length > 0) {
     const {
+      etag,
+      gatewayLoadBalancer,
+      id: ipConfigId,
+      name,
+      primary,
+      privateIPAddress,
+      privateIPAddressVersion,
+      privateIPAllocationMethod,
+      privateLinkConnectionProperties,
+      provisioningState,
       subnet: { id: subnetId },
-      publicIPAddress,
-      ...rest
+      type,
     } = ipConfigurations[0]
-    ipConfiguration = {
-      subnetId,
-      ...rest,
-    } as AzureNetworkInterfaceIpConfiguration || {}
+    ipConfiguration =
+      ({
+        etag,
+        gatewayLoadBalancer,
+        id: ipConfigId,
+        name,
+        primary,
+        privateIPAddress,
+        privateIPAddressVersion,
+        privateIPAllocationMethod,
+        privateLinkConnectionProperties,
+        provisioningState,
+        subnetId,
+        type,
+      } as AzureNetworkInterfaceIpConfiguration) || {}
     privateIpAddress = ipConfigurations[0].privateIPAddress
   }
   return {

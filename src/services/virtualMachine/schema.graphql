@@ -43,6 +43,7 @@ type azureVirtualMachineStorageImageReference
   sku: String @search(by: [hash, regexp])
   version: String @search(by: [hash, regexp])
   exactVersion: String @search(by: [hash, regexp])
+  sharedGalleryImageId: String @search(by: [hash, regexp])
 }
 
 type azureVirtualMachine implements azureResource

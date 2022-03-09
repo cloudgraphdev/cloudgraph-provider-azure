@@ -2908,6 +2908,7 @@ export type AzureVirtualMachineStorageImageReference = {
   exactVersion?: Maybe<Scalars['String']>;
   offer?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['String']>;
+  sharedGalleryImageId?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
 };
