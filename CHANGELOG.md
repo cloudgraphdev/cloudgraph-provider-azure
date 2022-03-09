@@ -1,3 +1,10 @@
+## [0.38.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.38.1...0.38.2) (2022-03-09)
+
+
+### Bug Fixes
+
+* Added support for DateTime and Int64. Fixes out of range error ([1528558](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1528558295a9b2b0abcc5f8a58df2ccae683e7bb))
+
 ## [0.38.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.38.0...0.38.1) (2022-03-07)
 
 
