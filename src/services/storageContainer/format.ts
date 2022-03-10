@@ -1,11 +1,11 @@
-import cuid from 'cuid';
-import { TagProperty, UpdateHistoryProperty } from '@azure/arm-storage/esm/models';
+import { UpdateHistoryProperty, TagProperty } from '@azure/arm-storage'
+import cuid from 'cuid'
 import {
   AzureStorageContainer,
   AzureStorageContainerImmutabilityPolicyUpdateHistory,
   AzureStorageContainerLegalHoldTag,
-} from '../../types/generated';
-import { RawAzureStorageContainer } from './data';
+} from '../../types/generated'
+import { RawAzureStorageContainer } from './data'
 import t from '../../properties/translations'
 
 const formatImmutabilityPolicyUpdateHistory = ({
@@ -15,7 +15,7 @@ const formatImmutabilityPolicyUpdateHistory = ({
   objectIdentifier,
   tenantId,
   upn,
-}:UpdateHistoryProperty): AzureStorageContainerImmutabilityPolicyUpdateHistory => {
+}: UpdateHistoryProperty): AzureStorageContainerImmutabilityPolicyUpdateHistory => {
   return {
     id: cuid(),
     update,
@@ -33,7 +33,7 @@ const formatLegalHoldTag = ({
   objectIdentifier,
   tenantId,
   upn,
-}:TagProperty): AzureStorageContainerLegalHoldTag => {
+}: TagProperty): AzureStorageContainerLegalHoldTag => {
   return {
     id: cuid(),
     tag,
@@ -70,7 +70,7 @@ export default ({
     legalHold,
     hasLegalHold,
     hasImmutabilityPolicy,
-    resourceGroupId
+    resourceGroupId,
   } = service
 
   return {
@@ -80,23 +80,26 @@ export default ({
     region,
     subscriptionId: account,
     version,
-    deleted: deleted? t.yes : t.no,
+    deleted: deleted ? t.yes : t.no,
     deletedTime: deletedTime?.toUTCString() || '',
     remainingRetentionDays,
-    denyEncryptionScopeOverride: denyEncryptionScopeOverride? t.yes : t.no,
+    denyEncryptionScopeOverride: denyEncryptionScopeOverride ? t.yes : t.no,
     publicAccess,
     lastModifiedTime: lastModifiedTime?.toUTCString() || '',
     leaseStatus,
     leaseDuration,
-    immutabilityPolicyPeriodSinceCreationInDays: immutabilityPolicy?.immutabilityPeriodSinceCreationInDays || 0,
+    immutabilityPolicyPeriodSinceCreationInDays:
+      immutabilityPolicy?.immutabilityPeriodSinceCreationInDays || 0,
     immutabilityPolicyState: immutabilityPolicy?.state || '',
-    immutabilityPolicyAllowProtectedAppendWrites: immutabilityPolicy?.allowProtectedAppendWrites? t.yes : t.no,
-    immutabilityPolicyUpdateHistory: immutabilityPolicy?.updateHistory?.map(
-      history => formatImmutabilityPolicyUpdateHistory(history)
-    ) || [],
+    immutabilityPolicyAllowProtectedAppendWrites:
+      immutabilityPolicy?.allowProtectedAppendWrites ? t.yes : t.no,
+    immutabilityPolicyUpdateHistory:
+      immutabilityPolicy?.updateHistory?.map(history =>
+        formatImmutabilityPolicyUpdateHistory(history)
+      ) || [],
     legalHoldTags: legalHold?.tags?.map(tag => formatLegalHoldTag(tag)) || [],
-    hasLegalHold: hasLegalHold? t.yes : t.no,
-    hasImmutabilityPolicy: hasImmutabilityPolicy? t.yes : t.no,
-    resourceGroupId
+    hasLegalHold: hasLegalHold ? t.yes : t.no,
+    hasImmutabilityPolicy: hasImmutabilityPolicy ? t.yes : t.no,
+    resourceGroupId,
   }
 }

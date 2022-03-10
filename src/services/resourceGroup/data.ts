@@ -1,17 +1,11 @@
-import { ResourceManagementClient } from '@azure/arm-resources'
-import {
-  ResourceGroup,
-  ResourceGroupListResult,
-  ResourceGroupsListNextResponse,
-  ResourceGroupsListResponse,
-} from '@azure/arm-resources/esm/models'
+import { ResourceGroup, ResourceManagementClient } from '@azure/arm-resources'
 import CloudGraph from '@cloudgraph/sdk'
 import isEmpty from 'lodash/isEmpty'
 
 import services from '../../enums/services'
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { getAllResources } from '../../utils/apiUtils'
+import { tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
@@ -39,21 +33,31 @@ export default async ({
     if (isEmpty(existingData)) {
       // Refresh data
       const { tokenCredentials, subscriptionId } = config
-      const client = new ResourceManagementClient(tokenCredentials, subscriptionId)
-
-      const resourceGroupData: ResourceGroupListResult = await getAllResources({
-        listCall: async (): Promise<ResourceGroupsListResponse> =>
-          client.resourceGroups.list(),
-        listNextCall: async (
-          nextLink: string
-        ): Promise<ResourceGroupsListNextResponse> =>
-          client.resourceGroups.listNext(nextLink),
-        debugScope: { service: serviceName, client, scope: 'resourceGroups' },
-      })
+      const client = new ResourceManagementClient(
+        tokenCredentials,
+        subscriptionId
+      )
+      const resourceGroups: ResourceGroup[] = []
+      const resourceGroupListIterable = client.resourceGroups.list()
+      await tryCatchWrapper(
+        async () => {
+          for await (const resourceGroup of resourceGroupListIterable) {
+            if (resourceGroup) {
+              resourceGroups.push(resourceGroup)
+            }
+          }
+        },
+        {
+          service: serviceName,
+          client,
+          scope: 'resourceGroups',
+          operation: 'list',
+        }
+      )
 
       const result = {}
       let numOfGroups = 0
-      resourceGroupData.map(({ tags, location, ...rest }) => {
+      resourceGroups.map(({ tags, location, ...rest }) => {
         const region = lowerCaseLocation(location)
         if (regions.includes(region)) {
           if (!result[region]) {

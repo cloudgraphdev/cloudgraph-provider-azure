@@ -1422,8 +1422,8 @@ export type AzureDnsZoneRecordSet = AzureResource & {
   resourceGroupId?: Maybe<Scalars['String']>;
   soaRecord?: Maybe<AzureDnsZoneRecordSetSoaRecord>;
   srvRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetSrvRecord>>>;
-  tTL?: Maybe<Scalars['Int']>;
   targetResourceId?: Maybe<Scalars['String']>;
+  ttl?: Maybe<Scalars['Int']>;
   txtRecords?: Maybe<Array<Maybe<AzureDnsZoneRecordSetTxtRecord>>>;
 };
 
@@ -2773,6 +2773,7 @@ export type AzureVirtualMachineScaleSetExtension = {
   type?: Maybe<Scalars['String']>;
   type1?: Maybe<Scalars['String']>;
   typeHandlerVersion?: Maybe<Scalars['String']>;
+  typePropertiesType?: Maybe<Scalars['String']>;
 };
 
 export type AzureVirtualMachineScaleSetExtensionProfile = {

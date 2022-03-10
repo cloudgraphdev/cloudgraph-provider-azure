@@ -108,7 +108,7 @@ export default async ({
       {
         service: serviceName,
         client,
-        scope: 'alertRules',
+        scope: 'activityLogAlertsRules',
         operation: 'list',
       }
     )
