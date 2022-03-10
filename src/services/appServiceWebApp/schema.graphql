@@ -283,18 +283,6 @@ type azureAppServiceWebAppSiteConfigHandlerMapping
   arguments: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigSiteMachineKey
-  @generate(
-    query: { get: false, query: true, aggregate: false }
-    mutation: { add: false, delete: false }
-    subscription: false
-  ) {
-  validation: String @search(by: [hash, regexp])
-  validationKey: String @search(by: [hash, regexp])
-  decryption: String @search(by: [hash, regexp])
-  decryptionKey: String @search(by: [hash, regexp])
-}
-
 type azureAppServiceWebAppSiteConfig
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -328,7 +316,6 @@ type azureAppServiceWebAppSiteConfig
   autoHealRules: azureAppServiceWebAppSiteConfigAutoHealRules
   connectionStrings: [azureAppServiceWebAppSiteConfigDatabaseConnectionInfo]
   handlerMappings: [azureAppServiceWebAppSiteConfigHandlerMapping]
-  machineKey: azureAppServiceWebAppSiteConfigSiteMachineKey
   documentRoot: String @search(by: [hash, regexp])
   scmType: String @search(by: [hash, regexp])
   use32BitWorkerProcess: Boolean @search

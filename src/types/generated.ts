@@ -532,7 +532,6 @@ export type AzureAppServiceWebAppSiteConfig = {
   localMySqlEnabled?: Maybe<Scalars['Boolean']>;
   location?: Maybe<Scalars['String']>;
   logsDirectorySizeLimit?: Maybe<Scalars['Int']>;
-  machineKey?: Maybe<AzureAppServiceWebAppSiteConfigSiteMachineKey>;
   managedPipelineMode?: Maybe<Scalars['String']>;
   managedServiceIdentityId?: Maybe<Scalars['Int']>;
   minTlsVersion?: Maybe<Scalars['String']>;
@@ -675,13 +674,6 @@ export type AzureAppServiceWebAppSiteConfigRampUpRule = {
   minReroutePercentage?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   reroutePercentage?: Maybe<Scalars['Int']>;
-};
-
-export type AzureAppServiceWebAppSiteConfigSiteMachineKey = {
-  decryption?: Maybe<Scalars['String']>;
-  decryptionKey?: Maybe<Scalars['String']>;
-  validation?: Maybe<Scalars['String']>;
-  validationKey?: Maybe<Scalars['String']>;
 };
 
 export type AzureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger = {

@@ -70,6 +70,7 @@ const formatSiteConfig = ({
   scmIpSecurityRestrictions = [],
   virtualApplications = [],
   tags = {},
+  machineKey,
   ...restConfig
 }: RawSiteConfigResource): AzureAppServiceWebAppSiteConfig => {
   return {
