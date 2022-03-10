@@ -113,6 +113,42 @@ type azureSqlServerSecurityAlertPolicy
   creationTime: String @search(by: [hash, regexp])
 }
 
+type azureSqlServerADAdministrator
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  administratorType: String @search(by: [hash, regexp])
+  login: String @search(by: [hash, regexp])
+  sid: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureSqlServerEncryptionProtector
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  kind: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  subregion: String @search(by: [hash, regexp])
+  serverKeyName: String @search(by: [hash, regexp])
+  serverKeyType: String @search(by: [hash, regexp])
+  uri: String @search(by: [hash, regexp])
+  thumbprint: String @search(by: [hash, regexp])
+  autoRotationEnabled: Boolean @search
+}
+
 type azureSqlServer implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -136,6 +172,8 @@ type azureSqlServer implements azureResource
   restrictOutboundNetworkAccess: String @search(by: [hash, regexp])
   firewallRules: [azureSqlServerFirewallRule]
   serverSecurityAlertPolicies: [azureSqlServerSecurityAlertPolicy]
+  adAdministrators: [azureSqlServerADAdministrator]
+  encryptionProtectors: [azureSqlServerEncryptionProtector]
   resourceGroup: [azureResourceGroup] @hasInverse(field: sqlServers)
   databaseSql: [azureDatabaseSql] @hasInverse(field: sqlServers)
 }

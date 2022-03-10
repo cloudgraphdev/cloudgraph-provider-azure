@@ -2268,10 +2268,12 @@ export type AzureSecuritySetting = AzureBaseResource & {
 };
 
 export type AzureSqlServer = AzureResource & {
+  adAdministrators?: Maybe<Array<Maybe<AzureSqlServerAdAdministrator>>>;
   administratorLogin?: Maybe<Scalars['String']>;
   administratorLoginPassword?: Maybe<Scalars['String']>;
   administrators?: Maybe<AzureSqlServerExternalAdministrator>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
+  encryptionProtectors?: Maybe<Array<Maybe<AzureSqlServerEncryptionProtector>>>;
   federatedClientId?: Maybe<Scalars['String']>;
   firewallRules?: Maybe<Array<Maybe<AzureSqlServerFirewallRule>>>;
   fullyQualifiedDomainName?: Maybe<Scalars['String']>;
@@ -2287,6 +2289,30 @@ export type AzureSqlServer = AzureResource & {
   state?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
   workspaceFeature?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerAdAdministrator = {
+  administratorType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  login?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  sid?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerEncryptionProtector = {
+  autoRotationEnabled?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  kind?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  serverKeyName?: Maybe<Scalars['String']>;
+  serverKeyType?: Maybe<Scalars['String']>;
+  subregion?: Maybe<Scalars['String']>;
+  thumbprint?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  uri?: Maybe<Scalars['String']>;
 };
 
 export type AzureSqlServerExternalAdministrator = {
