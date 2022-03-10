@@ -1,3 +1,10 @@
+## [0.39.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.1...0.39.2) (2022-03-10)
+
+
+### Bug Fixes
+
+* removed sensitive data from schemas ([8781524](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/8781524a451dc836b2b73f5a28c486d9bee574bf))
+
 ## [0.39.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.0...0.39.1) (2022-03-09)
 
 
