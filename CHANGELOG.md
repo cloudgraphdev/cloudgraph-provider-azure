@@ -1,3 +1,10 @@
+## [0.39.4](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.3...0.39.4) (2022-03-10)
+
+
+### Bug Fixes
+
+* update all azure sdk dependencies ([6392171](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/6392171ca9a559aa648fd3ff220e7825a4e0dc7a))
+
 ## [0.39.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.2...0.39.3) (2022-03-10)
 
 
