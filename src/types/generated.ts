@@ -2283,6 +2283,7 @@ export type AzureSqlServer = AzureResource & {
   publicNetworkAccess?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   restrictOutboundNetworkAccess?: Maybe<Scalars['String']>;
+  serverSecurityAlertPolicies?: Maybe<Array<Maybe<AzureSqlServerSecurityAlertPolicy>>>;
   state?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
   workspaceFeature?: Maybe<Scalars['String']>;
@@ -2327,6 +2328,20 @@ export type AzureSqlServerPrivateLinkServiceConnectionStateProperty = {
   actionsRequired?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerSecurityAlertPolicy = {
+  creationTime?: Maybe<Scalars['String']>;
+  disabledAlerts?: Maybe<Array<Maybe<Scalars['String']>>>;
+  emailAccountAdmins?: Maybe<Scalars['Boolean']>;
+  emailAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  retentionDays?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  storageAccountAccessKey?: Maybe<Scalars['String']>;
+  storageEndpoint?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureSqlServerUserAssignedIdentity = {

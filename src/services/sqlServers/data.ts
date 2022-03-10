@@ -1,7 +1,6 @@
-import { SqlManagementClient, Server, FirewallRule } from '@azure/arm-sql'
+import { SqlManagementClient, Server, FirewallRule, ServerSecurityAlertPolicy } from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
-
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
@@ -12,15 +11,68 @@ const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'SQL Servers'
 
-export interface RawAzureFirewallRule extends FirewallRule {
-  serverName: string
-}
-
 export interface RawAzureServer extends Omit<Server, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
   Tags: TagMap
   firewallRules: FirewallRule[]
+  serverSecurityAlertPolicies: ServerSecurityAlertPolicy[]
+}
+
+const listFirewallRules = async (
+  client: SqlManagementClient, 
+  resourceGroup: string, 
+  serverName: string
+): Promise<FirewallRule[]> => {
+  const firewallRules: FirewallRule[] = []
+  const firewallRuleIterable = client.firewallRules.listByServer(
+    resourceGroup,
+    serverName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const firewallRule of firewallRuleIterable) {
+        if (firewallRule) {
+          firewallRules.push(firewallRule)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'firewallRules',
+      operation: 'listByServer',
+    }
+  )
+  return firewallRules
+}
+
+const listServerSecurityAlertPolicies = async (
+  client: SqlManagementClient, 
+  resourceGroup: string, 
+  serverName: string
+): Promise<ServerSecurityAlertPolicy[]> => {
+  const serverSecurityAlertPolicies: ServerSecurityAlertPolicy[] = []
+  const alertPoliciesIterable = client.serverSecurityAlertPolicies.listByServer(
+    resourceGroup,
+    serverName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const alertPolicy of alertPoliciesIterable) {
+        if (alertPolicy) {
+          serverSecurityAlertPolicies.push(alertPolicy)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'serverSecurityAlertPolicies',
+      operation: 'listByServer',
+    }
+  )
+  return serverSecurityAlertPolicies
 }
 
 export default async ({
@@ -50,38 +102,8 @@ export default async ({
     )
     logger.debug(lt.foundSqlServers(sqlServers.length))
 
-    const firewallRules: RawAzureFirewallRule[] = []
-    await Promise.all(
-      (sqlServers || []).map(async ({ name: serverName, ...rest }) => {
-        const resourceGroup = getResourceGroupFromEntity(rest)
-        const firewallRuleIterable = client.firewallRules.listByServer(
-          resourceGroup,
-          serverName
-        )
-        await tryCatchWrapper(
-          async () => {
-            for await (const firewallRule of firewallRuleIterable) {
-              if (firewallRule) {
-                firewallRules.push({
-                  ...firewallRule,
-                  serverName,
-                })
-              }
-            }
-          },
-          {
-            service: serviceName,
-            client,
-            scope: 'firewallRules',
-            operation: 'listByServer',
-          }
-        )
-      })
-    )
-    logger.debug(lt.foundSqlServerFirewallRules(firewallRules.length))
-
     const result: { [property: string]: RawAzureServer[] } = {}
-    sqlServers.map(({ name, tags, location, ...rest }) => {
+    await sqlServers.map(async ({ name, tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
@@ -94,11 +116,8 @@ export default async ({
           resourceGroupId,
           region,
           Tags: tags || {},
-          firewallRules: firewallRules
-            .filter(i => i.serverName === name)
-            .map(({ serverName, ...restOfFirewallRules }) => ({
-              ...restOfFirewallRules,
-            })),
+          firewallRules: await listFirewallRules(client, resourceGroupId, name),
+          serverSecurityAlertPolicies: await listServerSecurityAlertPolicies(client, resourceGroupId, name),
         })
       }
     })
