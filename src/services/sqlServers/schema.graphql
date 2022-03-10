@@ -93,6 +93,26 @@ type azureSqlServerFirewallRule
   endIpAddress: String @search(by: [hash, regexp])
 }
 
+type azureSqlServerSecurityAlertPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  disabledAlerts: [String] @search(by: [hash, regexp])
+  emailAddresses: [String] @search(by: [hash, regexp])
+  emailAccountAdmins: Boolean @search
+  storageEndpoint: String @search(by: [hash, regexp])
+  storageAccountAccessKey: String @search(by: [hash, regexp])
+  retentionDays: Int @search
+  creationTime: String @search(by: [hash, regexp])
+}
+
 type azureSqlServer implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -115,6 +135,7 @@ type azureSqlServer implements azureResource
   workspaceFeature: String @search(by: [hash, regexp])
   restrictOutboundNetworkAccess: String @search(by: [hash, regexp])
   firewallRules: [azureSqlServerFirewallRule]
+  serverSecurityAlertPolicies: [azureSqlServerSecurityAlertPolicy]
   resourceGroup: [azureResourceGroup] @hasInverse(field: sqlServers)
   databaseSql: [azureDatabaseSql] @hasInverse(field: sqlServers)
 }

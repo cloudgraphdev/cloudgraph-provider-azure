@@ -1,4 +1,4 @@
-import { SqlManagementClient, Server, FirewallRule } from '@azure/arm-sql'
+import { SqlManagementClient, Server, FirewallRule, ServerSecurityAlertPolicy } from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -21,6 +21,7 @@ export interface RawAzureServer extends Omit<Server, 'tags' | 'location'> {
   resourceGroupId: string
   Tags: TagMap
   firewallRules: FirewallRule[]
+  serverSecurityAlertPolicies: ServerSecurityAlertPolicy[]
 }
 
 export default async ({
@@ -80,6 +81,33 @@ export default async ({
     )
     logger.debug(lt.foundSqlServerFirewallRules(firewallRules.length))
 
+    const serverSecurityAlertPolicies: ServerSecurityAlertPolicy[] = []
+    await Promise.all(
+      (sqlServers || []).map(async ({ name: serverName, ...rest }) => {
+        const resourceGroup = getResourceGroupFromEntity(rest)
+        const alertPoliciesIterable = client.serverSecurityAlertPolicies.listByServer(
+          resourceGroup,
+          serverName
+        )
+        await tryCatchWrapper(
+          async () => {
+            for await (const alertPolicy of alertPoliciesIterable) {
+              if (alertPolicy) {
+                serverSecurityAlertPolicies.push(alertPolicy)
+              }
+            }
+          },
+          {
+            service: serviceName,
+            client,
+            scope: 'serverSecurityAlertPolicies',
+            operation: 'listByServer',
+          }
+        )
+      })
+    )
+    logger.debug(lt.foundSqlServerSecurityAlertPolicies(serverSecurityAlertPolicies.length))
+
     const result: { [property: string]: RawAzureServer[] } = {}
     sqlServers.map(({ name, tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
@@ -99,6 +127,7 @@ export default async ({
             .map(({ serverName, ...restOfFirewallRules }) => ({
               ...restOfFirewallRules,
             })),
+          serverSecurityAlertPolicies,
         })
       }
     })
