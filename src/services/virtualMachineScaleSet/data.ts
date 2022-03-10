@@ -1,16 +1,14 @@
 import CloudGraph from '@cloudgraph/sdk'
-import { ComputeManagementClient } from '@azure/arm-compute'
 import {
+  ComputeManagementClient,
   VirtualMachineScaleSet,
-  VirtualMachineScaleSetsListResponse,
-  VirtualMachineScaleSetsListNextResponse,
-} from '@azure/arm-compute/esm/models'
+} from '@azure/arm-compute'
 
 import azureLoggerText from '../../properties/logger'
-import { getAllResources } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
+import { tryCatchWrapper } from '../../utils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -29,27 +27,32 @@ export default async ({
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureVirtualMachineScaleSet[]
 }> => {
-  const { credentials, subscriptionId } = config
-  const client = new ComputeManagementClient(credentials, subscriptionId)
+  const { tokenCredentials, subscriptionId } = config
+  const client = new ComputeManagementClient(tokenCredentials, subscriptionId)
 
   try {
-    const vmScaleSetData: VirtualMachineScaleSet[] = await getAllResources({
-      listCall: async (): Promise<VirtualMachineScaleSetsListResponse> =>
-        client.virtualMachineScaleSets.listAll(),
-      listNextCall: async (
-        nextLink: string
-      ): Promise<VirtualMachineScaleSetsListNextResponse> =>
-        client.virtualMachineScaleSets.listNext(nextLink),
-      debugScope: {
+    const virtualMachineScaleSets: VirtualMachineScaleSet[] = []
+    const virtualMachineScaleSetListIterable =
+      client.virtualMachineScaleSets.listAll()
+    await tryCatchWrapper(
+      async () => {
+        for await (const virtualMachineScaleSet of virtualMachineScaleSetListIterable) {
+          if (virtualMachineScaleSet) {
+            virtualMachineScaleSets.push(virtualMachineScaleSet)
+          }
+        }
+      },
+      {
         service: serviceName,
         client,
         scope: 'virtualMachineScaleSets',
-      },
-    })
+        operation: 'listAll',
+      }
+    )
 
     const result: { [property: string]: RawAzureVirtualMachineScaleSet[] } = {}
     let numOfGroups = 0
-    vmScaleSetData.map(({ tags, location, ...rest }) => {
+    virtualMachineScaleSets.map(({ tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {

@@ -1,19 +1,11 @@
-import { DnsManagementClient } from '@azure/arm-dns'
+import { DnsManagementClient, RecordSet, Zone } from '@azure/arm-dns'
 import CloudGraph from '@cloudgraph/sdk'
-import {
-  RecordSet,
-  RecordSetsListAllByDnsZoneNextResponse,
-  RecordSetsListAllByDnsZoneResponse,
-  Zone,
-  ZonesListByResourceGroupNextResponse,
-  ZonesListByResourceGroupResponse,
-} from '@azure/arm-dns/esm/models'
 import azureLoggerText from '../../properties/logger'
 
 import getResourceGroupData from '../resourceGroup/data'
 import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupNames, lowerCaseLocation } from '../../utils/format'
-import { getAllResources } from '../../utils/apiUtils'
+import { tryCatchWrapper } from '../../utils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -40,8 +32,8 @@ export default async ({
   [property: string]: RawAzureDnsZone[]
 }> => {
   try {
-    const { credentials, subscriptionId } = config
-    const client = new DnsManagementClient(credentials, subscriptionId)
+    const { tokenCredentials, subscriptionId } = config
+    const client = new DnsManagementClient(tokenCredentials, subscriptionId)
 
     const resourceGroups = await getResourceGroupData({
       regions,
@@ -51,59 +43,66 @@ export default async ({
     })
     const resourceGroupsNames: string[] = getResourceGroupNames(resourceGroups)
 
-    const dnsZoneList: Array<Zone & { resourceGroupId: string }> = (
-      await Promise.all(
-        (resourceGroupsNames || []).map(async (rgName: string) =>
-          getAllResources({
-            listCall: async (): Promise<ZonesListByResourceGroupResponse> =>
-              client.zones.listByResourceGroup(rgName),
-            listNextCall: async (
-              nextLink: string
-            ): Promise<ZonesListByResourceGroupNextResponse> =>
-              client.zones.listByResourceGroupNext(nextLink),
-            debugScope: { service: serviceName, client, scope: 'zones' },
-            resourceGroupName: rgName,
-          })
+    const dnsZones: Array<Zone & { resourceGroupId: string }> = []
+    await Promise.all(
+      (resourceGroupsNames || []).map(async (rgName: string) => {
+        const dnsZoneListIterable = client.zones.listByResourceGroup(rgName)
+        await tryCatchWrapper(
+          async () => {
+            for await (const dnsZone of dnsZoneListIterable) {
+              if (dnsZone) {
+                dnsZones.push({ ...dnsZone, resourceGroupId: rgName })
+              }
+            }
+          },
+          {
+            service: serviceName,
+            client,
+            scope: 'zones',
+            operation: 'listByResource',
+          }
         )
-      )
-    ).flat()
+      })
+    )
 
-    const recordSets: RawAzureDnsRecordSet[] =
-      (
-        await Promise.all(
-          (dnsZoneList || []).map(
-            async ({
-              name: dnsZoneName,
-              resourceGroupId: dnsZoneResourceGroupName,
-            }) =>
-              getAllResources({
-                listCall:
-                  async (): Promise<RecordSetsListAllByDnsZoneResponse> =>
-                    client.recordSets.listAllByDnsZone(
-                      dnsZoneResourceGroupName,
-                      dnsZoneName
-                    ),
-                listNextCall: async (
-                  nextLink: string
-                ): Promise<RecordSetsListAllByDnsZoneNextResponse> =>
-                  client.recordSets.listAllByDnsZoneNext(nextLink),
-                debugScope: {
-                  service: serviceName,
-                  client,
-                  scope: 'recordSets',
-                },
-                resourceGroupName: dnsZoneResourceGroupName,
-                uniqueIdentifier: dnsZoneName,
-                propertyName: 'dnsZoneName',
-              })
+    const recordSets: RawAzureDnsRecordSet[] = []
+    await Promise.all(
+      (dnsZones || []).map(
+        async ({
+          name: dnsZoneName,
+          resourceGroupId: dnsZoneResourceGroupName,
+        }) => {
+          const recordSetListIterable = client.recordSets.listAllByDnsZone(
+            dnsZoneResourceGroupName,
+            dnsZoneName
           )
-        )
-      ).flat() || []
-      logger.debug(lt.foundDnsZoneRecordSet(recordSets.length))
+          await tryCatchWrapper(
+            async () => {
+              for await (const recordSet of recordSetListIterable) {
+                if (recordSet) {
+                  recordSets.push({
+                    ...recordSet,
+                    resourceGroupId: dnsZoneResourceGroupName,
+                    dnsZoneName,
+                  })
+                }
+              }
+            },
+            {
+              service: serviceName,
+              client,
+              scope: 'recordSets',
+              operation: 'listAllByDnsZone',
+            }
+          )
+        }
+      )
+    )
+    logger.debug(lt.foundDnsZoneRecordSet(recordSets.length))
 
     const result: { [property: string]: RawAzureDnsZone[] } = {}
     let numOfGroups = 0
-    dnsZoneList.map(dnsZone => {
+    dnsZones.map(dnsZone => {
       const region = lowerCaseLocation(dnsZone.location)
       if (regions.includes(region)) {
         if (!result[region]) {

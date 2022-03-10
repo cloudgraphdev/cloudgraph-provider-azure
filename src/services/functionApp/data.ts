@@ -119,8 +119,8 @@ export default async ({
       {
         service: serviceName,
         client,
-        scope: 'azureFunctions',
-        operation: 'getAllResources',
+        scope: 'webApps',
+        operation: 'listFunctions',
       }
     )
 
@@ -150,7 +150,7 @@ export default async ({
       {
         service: serviceName,
         client,
-        scope: 'siteConfigs',
+        scope: 'webApps',
         operation: 'getConfiguration',
       }
     )

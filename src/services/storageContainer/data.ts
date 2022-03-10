@@ -1,12 +1,10 @@
 import CloudGraph from '@cloudgraph/sdk'
 
-import { StorageManagementClient } from '@azure/arm-storage'
 import {
-  BlobContainersListNextResponse,
-  BlobContainersListResponse,
   ListContainerItem,
   StorageAccountKey,
-} from '@azure/arm-storage/esm/models'
+  StorageManagementClient,
+} from '@azure/arm-storage'
 import isEmpty from 'lodash/isEmpty'
 import getStorageAccountData, {
   RawAzureStorageAccount,
@@ -14,8 +12,8 @@ import getStorageAccountData, {
 import azureLoggerText from '../../properties/logger'
 
 import { AzureServiceInput } from '../../types'
-import { getAllResources } from '../../utils/apiUtils'
 import services from '../../enums/services'
+import { tryCatchWrapper } from '../../utils'
 
 export interface RawAzureStorageContainer extends ListContainerItem {
   storageAccountId: string
@@ -37,8 +35,8 @@ export default async ({
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureStorageContainer[]
 }> => {
-  const { subscriptionId, credentials } = config
-  const client = new StorageManagementClient(credentials, subscriptionId)
+  const { subscriptionId, tokenCredentials } = config
+  const client = new StorageManagementClient(tokenCredentials, subscriptionId)
 
   try {
     const existingData: { [property: string]: RawAzureStorageContainer[] } =
@@ -58,19 +56,26 @@ export default async ({
 
       for (const storageAccount of Object.values(storageAccounts).flat()) {
         const { name: accountName, keys, resourceGroupId } = storageAccount
-        const blobContainers = await getAllResources({
-          listCall: async (): Promise<BlobContainersListResponse> =>
-            client.blobContainers.list(resourceGroupId, accountName),
-          listNextCall: async (
-            nextLink: string
-          ): Promise<BlobContainersListNextResponse> =>
-            client.blobContainers.listNext(nextLink),
-          debugScope: {
+        const blobContainers: ListContainerItem[] = []
+        const blobContainerListIterable = client.blobContainers.list(
+          resourceGroupId,
+          accountName
+        )
+        await tryCatchWrapper(
+          async () => {
+            for await (const blobContainer of blobContainerListIterable) {
+              if (blobContainer) {
+                blobContainers.push(blobContainer)
+              }
+            }
+          },
+          {
             service: serviceName,
             client,
-            scope: 'storageContainers',
-          },
-        })
+            scope: 'blobContainers',
+            operation: '',
+          }
+        )
 
         for (const blobContainer of blobContainers) {
           storageContainerData.push({

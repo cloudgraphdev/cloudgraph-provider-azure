@@ -21,6 +21,7 @@ type azureVirtualMachineScaleSetExtension
   type: String @search(by: [hash, regexp])
   type1: String @search(by: [hash, regexp])
   typeHandlerVersion: String @search(by: [hash, regexp])
+  typePropertiesType: String @search(by: [hash, regexp])
   publisher: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   provisionAfterExtensions: [String] @search(by: [hash, regexp])

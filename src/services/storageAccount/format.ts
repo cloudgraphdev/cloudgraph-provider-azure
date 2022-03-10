@@ -1,10 +1,10 @@
-import cuid from 'cuid'
 import {
-  IPRule,
-  PrivateEndpointConnection,
   ResourceAccessRule,
   VirtualNetworkRule,
-} from '@azure/arm-storage/esm/models'
+  IPRule,
+  PrivateEndpointConnection,
+} from '@azure/arm-storage'
+import cuid from 'cuid'
 import t from '../../properties/translations'
 
 import {
@@ -259,14 +259,16 @@ export default ({
       id: blobServiceProperties?.id || cuid(),
       name: blobServiceProperties?.name,
       type: blobServiceProperties?.type,
-      corsRules: blobServiceProperties?.cors?.corsRules?.map(({ ...rest}) => ({
+      corsRules: blobServiceProperties?.cors?.corsRules?.map(({ ...rest }) => ({
         id: cuid(),
         ...rest,
       })),
-      deleteRetentionPolicyEnabled: blobServiceProperties?.deleteRetentionPolicy?.enabled,
-      deleteRetentionPolicyDays: blobServiceProperties?.deleteRetentionPolicy?.days,
+      deleteRetentionPolicyEnabled:
+        blobServiceProperties?.deleteRetentionPolicy?.enabled,
+      deleteRetentionPolicyDays:
+        blobServiceProperties?.deleteRetentionPolicy?.days,
       skuName: blobServiceProperties?.sku?.name,
       skuTier: blobServiceProperties?.sku?.tier,
-   }
+    },
   }
 }

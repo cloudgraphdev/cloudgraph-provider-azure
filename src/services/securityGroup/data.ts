@@ -52,6 +52,7 @@ export default async ({
         service: serviceName,
         client,
         scope: 'networkSecurityGroups',
+        operation: 'listAll'
       }
     )
 

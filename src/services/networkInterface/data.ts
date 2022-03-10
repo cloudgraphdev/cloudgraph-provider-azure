@@ -42,6 +42,7 @@ export default async ({
         service: serviceName,
         client,
         scope: 'networkInterfaces',
+        operation: 'listAll'
       }
     )
 

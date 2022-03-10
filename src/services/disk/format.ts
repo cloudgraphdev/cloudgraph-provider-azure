@@ -27,7 +27,7 @@ export default ({
     diskSizeGB: diskSizeGb,
     diskSizeBytes,
     uniqueId,
-    diskIOPSReadWrite: diskIopsReadWrite,
+    diskIopsReadWrite,
     diskMBpsReadWrite: diskMbpsReadWrite,
     diskState,
     networkAccessPolicy,

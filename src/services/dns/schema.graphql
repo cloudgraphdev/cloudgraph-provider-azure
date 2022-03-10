@@ -70,7 +70,7 @@ type azureDnsZoneRecordSet implements azureResource
     subscription: false
   )
   @key(fields: "id") {
-  tTL: Int @search
+  ttl: Int @search
   fqdn: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   targetResourceId: String @search(by: [hash, regexp])

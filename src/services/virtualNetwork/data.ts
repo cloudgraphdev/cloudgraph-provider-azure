@@ -52,6 +52,7 @@ export default async ({
         service: serviceName,
         client,
         scope: 'virtualNetworks',
+        operation: 'listAll'
       }
     )
 
@@ -68,6 +69,7 @@ export default async ({
         service: serviceName,
         client,
         scope: 'ddosProtectionPlans',
+        operation: 'list'
       }
     )
 

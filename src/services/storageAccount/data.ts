@@ -1,22 +1,18 @@
 import CloudGraph from '@cloudgraph/sdk'
-
-import { StorageManagementClient } from '@azure/arm-storage'
 import {
+  BlobServiceProperties,
   StorageAccount,
   StorageAccountKey,
-  StorageAccountListResult,
-  StorageAccountsListNextResponse,
-  StorageAccountsListResponse,
-  BlobServiceProperties,
-} from '@azure/arm-storage/esm/models'
+  StorageManagementClient,
+} from '@azure/arm-storage'
 import { isEmpty } from 'lodash'
 import azureLoggerText from '../../properties/logger'
 
 import { lowerCaseLocation } from '../../utils/format'
 import { AzureServiceInput, TagMap } from '../../types'
-import { getAllResources } from '../../utils/apiUtils'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import services from '../../enums/services'
+import { tryCatchWrapper } from '../../utils'
 
 export interface RawAzureStorageAccount
   extends Omit<StorageAccount, 'tags' | 'location'> {
@@ -43,27 +39,34 @@ export default async ({
       rawData.find(({ name }) => name === services.storageAccount)?.data || {}
 
     if (isEmpty(existingData)) {
-      const { subscriptionId, credentials } = config
-      const client = new StorageManagementClient(credentials, subscriptionId)
-      const storageAccountData: StorageAccountListResult =
-        await getAllResources({
-          listCall: async (): Promise<StorageAccountsListResponse> =>
-            client.storageAccounts.list(),
-          listNextCall: async (
-            nextLink: string
-          ): Promise<StorageAccountsListNextResponse> =>
-            client.storageAccounts.listNext(nextLink),
-          debugScope: {
-            service: serviceName,
-            client,
-            scope: 'storageAccounts',
-          },
-        })
+      const { subscriptionId, tokenCredentials } = config
+      const client = new StorageManagementClient(
+        tokenCredentials,
+        subscriptionId
+      )
+      const storageAccounts: StorageAccount[] = []
+      const storageAccountListIterable = client.storageAccounts.list()
+      await tryCatchWrapper(
+        async () => {
+          for await (const storageAccount of storageAccountListIterable) {
+            if (storageAccount) {
+              storageAccounts.push(storageAccount)
+            }
+          }
+        },
+        {
+          service: serviceName,
+          client,
+          scope: 'storageAccount',
+          operation: 'list',
+        }
+      )
+      //   })
 
       const result = {}
       let numOfAccounts = 0
 
-      for await (const { id, tags, location, ...rest } of storageAccountData) {
+      for await (const { id, tags, location, ...rest } of storageAccounts) {
         const region = lowerCaseLocation(location)
 
         if (regions.includes(region)) {
