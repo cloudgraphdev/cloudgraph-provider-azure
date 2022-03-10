@@ -201,26 +201,27 @@ export const getAllResources = async ({
     { service, client, scope, operation: listCall.name }
   )
 
-  let { nextLink } = resources
-
-  await tryCatchWrapper(
-    async () => {
-      while (nextLink) {
-        resources = await listNextCall(nextLink)
-        fullResources.push(
-          ...resources.map(r => ({
-            ...r,
-            // This adds the resourceGroupName if present if not it parses it from the resource id
-            resourceGroupId: resourceGroupName || getResourceGroupFromEntity(r),
-            ...newPropContainer,
-          }))
-        )
-        nextLink = resources.nextLink
-      }
-    },
-    { service, client, scope, operation: listNextCall.name }
-  )
-
+  if (resources) {
+    let { nextLink } = resources
+    await tryCatchWrapper(
+      async () => {
+        while (nextLink) {
+          resources = await listNextCall(nextLink)
+          fullResources.push(
+            ...resources.map(r => ({
+              ...r,
+              // This adds the resourceGroupName if present if not it parses it from the resource id
+              resourceGroupId:
+                resourceGroupName || getResourceGroupFromEntity(r),
+              ...newPropContainer,
+            }))
+          )
+          nextLink = resources.nextLink
+        }
+      },
+      { service, client, scope, operation: listNextCall.name }
+    )
+  }
   return fullResources
 }
 export class RestApiClient {

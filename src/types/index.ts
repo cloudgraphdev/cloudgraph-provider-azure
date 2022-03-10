@@ -90,3 +90,7 @@ export interface AzureDeliveryRuleConditionAction {
   name: string
   parameters: any
 }
+
+export interface AzureError extends Error {
+  statusCode?: any
+}
