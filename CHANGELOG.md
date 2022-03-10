@@ -1,3 +1,10 @@
+## [0.39.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.2...0.39.3) (2022-03-10)
+
+
+### Bug Fixes
+
+* migrate from @azure/ms-rest-nodeauth to @azure/identity v2 ([e86c577](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/e86c577c74fd03b3e7cca4578af4540515147013))
+
 ## [0.39.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.1...0.39.2) (2022-03-10)
 
 
