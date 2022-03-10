@@ -1,10 +1,7 @@
 import CloudGraph, { Service, Opts, ProviderData } from '@cloudgraph/sdk'
 import { TokenCredential } from '@azure/core-http'
-import { ServiceClientCredentials } from '@azure/ms-rest-js'
-import {
-  LinkedSubscription,
-  loginWithServicePrincipalSecretWithAuthResponse,
-} from '@azure/ms-rest-nodeauth'
+import { ClientSecretCredential } from '@azure/identity'
+import { Subscription, SubscriptionClient } from '@azure/arm-subscriptions'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs } from '@graphql-tools/merge'
 import chalk from 'chalk'
@@ -31,7 +28,10 @@ import {
 import { obfuscateSensitiveString } from '../utils/format'
 import { sortResourcesDependencies } from '../utils'
 import { createDiffSecs } from '../utils/dateutils'
-import { getTokenCredentialsUsingApplicationTokenCredentials } from '../utils/authUtils'
+import {
+  getClientSecretCredentials,
+  getTokenCredentials,
+} from '../utils/authUtils'
 
 export const enums = {
   services,
@@ -42,15 +42,29 @@ export const enums = {
 
 const selectableRegionsList = regions.filter(i => i !== GLOBAL_REGION)
 
+export const getSubscriptions = async (
+  creds: ClientSecretCredential
+): Promise<Subscription[]> => {
+  const client = new SubscriptionClient(creds)
+  const subscriptions: Subscription[] = []
+  const subsIterable = client.subscriptions.list()
+  for await (const sub of subsIterable) {
+    if (sub) {
+      subscriptions.push(sub)
+    }
+  }
+  return subscriptions
+}
+
 export default class Provider extends CloudGraph.Client {
   constructor(config: any) {
     super(config)
     this.properties = enums
   }
 
-  private credentials: ServiceClientCredentials | undefined
+  private credentials: ClientSecretCredential | undefined
 
-  private subscriptions: LinkedSubscription[]
+  private subscriptions: string[]
 
   private properties: {
     services: { [key: string]: string }
@@ -101,37 +115,29 @@ export default class Provider extends CloudGraph.Client {
   }
 
   async getFullCredentialsAndSubscriptions(creds: AzureCredentials): Promise<{
-    subscriptions: LinkedSubscription[]
-    credentials: ServiceClientCredentials
+    subscriptions: string[]
+    credentials: ClientSecretCredential
     tokenCredentials: TokenCredential
   }> {
     try {
-      const { credentials, subscriptions = [] } =
-        await loginWithServicePrincipalSecretWithAuthResponse(
-          creds.clientId,
-          creds.clientSecret,
-          creds.tenantId
-        )
-
-      const subscription = subscriptions.find(
-        ({ id }) => id === creds.subscriptionId
-      )
-
+      const credentials = getClientSecretCredentials(creds)
       if (isEmpty(credentials)) {
         throw new Error(
           `❌ Unable to authenticate with Azure for tenant: ${creds.tenantId}`
         )
       }
 
+      const tokenCredentials = await getTokenCredentials(credentials, creds)
+      const subList = await getSubscriptions(credentials)
+      const subscription = subList.find(({ id }) => id === creds.subscriptionId)
+      const subscriptions = subscription
+        ? [subscription.subscriptionId]
+        : subList.map(s => s.subscriptionId)
+
       return {
-        subscriptions: subscription
-          ? [subscription]
-          : subscriptions.map(s => s.subscriptionId),
+        subscriptions,
         credentials,
-        tokenCredentials:
-          await getTokenCredentialsUsingApplicationTokenCredentials(
-            credentials
-          ),
+        tokenCredentials,
       }
     } catch (e) {
       this.logger.error(e)
@@ -362,7 +368,7 @@ export default class Provider extends CloudGraph.Client {
   }: {
     config: {
       tokenCredentials: TokenCredential
-      credentials: ServiceClientCredentials
+      credentials: ClientSecretCredential
       subscriptionId: string
     }
     opts

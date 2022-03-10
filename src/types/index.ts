@@ -1,7 +1,5 @@
 import { TokenCredential } from '@azure/core-http'
-import { AzureServiceClientOptions } from '@azure/ms-rest-azure-js'
-import { ServiceClientCredentials } from '@azure/ms-rest-js'
-import { LinkedSubscription } from '@azure/ms-rest-nodeauth'
+import { ClientSecretCredential } from '@azure/identity'
 import { Opts } from '@cloudgraph/sdk'
 import { Method } from 'axios'
 
@@ -18,14 +16,9 @@ export interface rawDataInterface {
   data: any
 }
 
-export interface BaseClientOptions extends AzureServiceClientOptions {
-  baseUri?: string
-}
-
 export interface AzureConfig {
-  credentials: ServiceClientCredentials
-  subscriptions: LinkedSubscription[]
-  options?: BaseClientOptions
+  credentials: ClientSecretCredential
+  subscriptions: string[]
 }
 
 export interface Tags {
@@ -50,7 +43,7 @@ export interface AzureServiceConfig {
   tenantId?: string
   clientSecret?: string
   subscriptionId: string
-  credentials: ServiceClientCredentials
+  credentials: ClientSecretCredential
   tokenCredentials: TokenCredential
 }
 
