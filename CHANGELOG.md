@@ -1,3 +1,11 @@
+## [0.39.5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.4...0.39.5) (2022-03-10)
+
+
+### Bug Fixes
+
+* **sqlServers:** add serverSecurityAlertPolicies ([1368e96](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1368e96df34c761b8bec7a59ca0a24058fb9c891))
+* **sqlServers:** use fn list additional data ([d402367](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/d40236745517819e1f61f09ee84582ed183ad98e))
+
 ## [0.39.4](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.3...0.39.4) (2022-03-10)
 
 
