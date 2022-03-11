@@ -34,7 +34,9 @@ export default ({
     restrictOutboundNetworkAccess,
     resourceGroupId,
     firewallRules = [],
-    serverSecurityAlertPolicies,
+    serverSecurityAlertPolicies = [],
+    adAdministrators = [],
+    encryptionProtectors = [],
     Tags,
   } = service
 
@@ -81,11 +83,15 @@ export default ({
     resourceGroupId,
     firewallRules:
       firewallRules?.map(r => ({ id: r.id || cuid(), ...r })) || [],
-    serverSecurityAlertPolicies: serverSecurityAlertPolicies.map(alertPolicy => ({
+    serverSecurityAlertPolicies: serverSecurityAlertPolicies?.map(alertPolicy => ({
       ...alertPolicy,
       id: alertPolicy.id || cuid(),
       creationTime: alertPolicy?.creationTime?.toISOString(),
     })),
+    adAdministrators:
+      adAdministrators?.map(a => ({ id: a.id || cuid(), ...a })) || [],
+    encryptionProtectors:
+      encryptionProtectors?.map(e => ({ id: e.id || cuid(), ...e })) || [],
     tags: formatTagsFromMap(Tags),
   }
 }

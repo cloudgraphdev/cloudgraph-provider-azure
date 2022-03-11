@@ -1,4 +1,11 @@
-import { SqlManagementClient, Server, FirewallRule, ServerSecurityAlertPolicy } from '@azure/arm-sql'
+import {
+  SqlManagementClient,
+  Server,
+  FirewallRule,
+  ServerSecurityAlertPolicy,
+  ServerAzureADAdministrator,
+  EncryptionProtector,
+} from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 import azureLoggerText from '../../properties/logger'
@@ -17,11 +24,13 @@ export interface RawAzureServer extends Omit<Server, 'tags' | 'location'> {
   Tags: TagMap
   firewallRules: FirewallRule[]
   serverSecurityAlertPolicies: ServerSecurityAlertPolicy[]
+  adAdministrators: ServerAzureADAdministrator[]
+  encryptionProtectors: EncryptionProtector[]
 }
 
 const listFirewallRules = async (
-  client: SqlManagementClient, 
-  resourceGroup: string, 
+  client: SqlManagementClient,
+  resourceGroup: string,
   serverName: string
 ): Promise<FirewallRule[]> => {
   const firewallRules: FirewallRule[] = []
@@ -48,8 +57,8 @@ const listFirewallRules = async (
 }
 
 const listServerSecurityAlertPolicies = async (
-  client: SqlManagementClient, 
-  resourceGroup: string, 
+  client: SqlManagementClient,
+  resourceGroup: string,
   serverName: string
 ): Promise<ServerSecurityAlertPolicy[]> => {
   const serverSecurityAlertPolicies: ServerSecurityAlertPolicy[] = []
@@ -73,6 +82,60 @@ const listServerSecurityAlertPolicies = async (
     }
   )
   return serverSecurityAlertPolicies
+}
+
+const listADAdministrators = async (
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
+): Promise<ServerAzureADAdministrator[]> => {
+  const adAdministrators: ServerAzureADAdministrator[] = []
+  const adAdministratorsIterable =
+    client.serverAzureADAdministrators.listByServer(resourceGroup, serverName)
+  await tryCatchWrapper(
+    async () => {
+      for await (const adAdministrator of adAdministratorsIterable) {
+        if (adAdministrator) {
+          adAdministrators.push(adAdministrator)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'serverAzureADAdministrators',
+      operation: 'listByServer',
+    }
+  )
+  return adAdministrators
+}
+
+const listEncryptionProtectors = async (
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
+): Promise<EncryptionProtector[]> => {
+  const encryptionProtectors: EncryptionProtector[] = []
+  const encryptionProtectorsIterable = client.encryptionProtectors.listByServer(
+    resourceGroup,
+    serverName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const encryptionProtector of encryptionProtectorsIterable) {
+        if (encryptionProtector) {
+          encryptionProtectors.push(encryptionProtector)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'encryptionProtectors',
+      operation: 'listByServer',
+    }
+  )
+  return encryptionProtectors
 }
 
 export default async ({
@@ -117,7 +180,21 @@ export default async ({
           region,
           Tags: tags || {},
           firewallRules: await listFirewallRules(client, resourceGroupId, name),
-          serverSecurityAlertPolicies: await listServerSecurityAlertPolicies(client, resourceGroupId, name),
+          serverSecurityAlertPolicies: await listServerSecurityAlertPolicies(
+            client,
+            resourceGroupId,
+            name
+          ),
+          adAdministrators: await listADAdministrators(
+            client,
+            resourceGroupId,
+            name
+          ),
+          encryptionProtectors: await listEncryptionProtectors(
+            client,
+            resourceGroupId,
+            name
+          ),
         })
       }
     })
