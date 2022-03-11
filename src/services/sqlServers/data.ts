@@ -166,7 +166,7 @@ export default async ({
     logger.debug(lt.foundSqlServers(sqlServers.length))
 
     const result: { [property: string]: RawAzureServer[] } = {}
-    await sqlServers.map(async ({ name, tags, location, ...rest }) => {
+    await Promise.all(sqlServers.map(async ({ name, tags, location, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
@@ -197,7 +197,7 @@ export default async ({
           ),
         })
       }
-    })
+    }))
     return result
   } catch (e) {
     logger.error(e)
