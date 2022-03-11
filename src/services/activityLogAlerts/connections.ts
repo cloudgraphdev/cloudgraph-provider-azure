@@ -21,7 +21,7 @@ export default ({
   const { id, resourceGroupId: rgName } = service
 
   /**
-   * Find resource group related to this function app
+   * Find resource group related to this activity log alert
    */
   const resourceGroups: {
     name: string
