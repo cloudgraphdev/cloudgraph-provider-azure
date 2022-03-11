@@ -1,3 +1,10 @@
+# [0.40.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.5...0.40.0) (2022-03-11)
+
+
+### Features
+
+* **service:** Add AD Administrators and Encryption Protectors to sqlServers service ([fd66a9f](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/fd66a9fe013ad467be57315e9a22936e0e3a1fec))
+
 ## [0.39.5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.4...0.39.5) (2022-03-10)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@cloudgraph/cg-provider-azure",
-  "version": "0.39.5",
+  "version": "0.40.0",
   "description": "CloudGraph provider plugin for Azure used to fetch Azure cloud data.",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
