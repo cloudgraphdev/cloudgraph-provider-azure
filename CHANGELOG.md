@@ -1,3 +1,10 @@
+## [0.40.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.40.0...0.40.1) (2022-03-11)
+
+
+### Bug Fixes
+
+* **sqlServers:** Added promise all to fix no listed data ([f0a6513](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/f0a65130a85b2111c5500085a02581d19506dee4))
+
 # [0.40.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.39.5...0.40.0) (2022-03-11)
 
 
