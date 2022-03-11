@@ -43,4 +43,5 @@ type azureResourceGroup implements azureResource
   virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: resourceGroup)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroup)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroup)
+  activityLogAlerts: [azureActivityLogAlert] @hasInverse(field: resourceGroup)
 }

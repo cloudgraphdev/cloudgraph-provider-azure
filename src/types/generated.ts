@@ -224,6 +224,7 @@ export type AzureActivityLogAlert = AzureBaseResource & {
   description?: Maybe<Scalars['String']>;
   enabled?: Maybe<Scalars['Boolean']>;
   region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
   subscriptionId?: Maybe<Scalars['String']>;
 };
@@ -2234,6 +2235,7 @@ export type AzureResource = {
 };
 
 export type AzureResourceGroup = AzureResource & {
+  activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;

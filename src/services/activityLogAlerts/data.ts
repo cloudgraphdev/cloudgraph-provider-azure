@@ -1,10 +1,11 @@
 import { MonitorClient, ActivityLogAlertResource } from '@azure/arm-monitor'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
+import getResourceGroupData from '../resourceGroup/data'
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput } from '../../types'
 import { tryCatchWrapper } from '../../utils/index'
-import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
+import { getResourceGroupNames } from '../../utils/format'
 import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
@@ -17,32 +18,44 @@ export interface RawAzureActivityLogAlert extends ActivityLogAlertResource {
 }
 
 export default async ({
+  regions,
   config,
+  rawData,
+  opts,
 }: AzureServiceInput): Promise<{
   [property: string]: RawAzureActivityLogAlert[]
 }> => {
   try {
+    const resourceGroups = await getResourceGroupData({
+      regions,
+      config,
+      rawData,
+      opts,
+    })
+    const resourceGroupsNames: string[] = getResourceGroupNames(resourceGroups)
     const { tokenCredentials, subscriptionId } = config
     const client = new MonitorClient(tokenCredentials, subscriptionId)
-    const logAlertsIterable: PagedAsyncIterableIterator<ActivityLogAlertResource> =
-      client.activityLogAlerts.listBySubscriptionId()
-
     const logAlerts: RawAzureActivityLogAlert[] = []
     const result = { global: [] }
     await tryCatchWrapper(
       async () => {
-        for await (const logAlert of logAlertsIterable) {
-          if (logAlert) {
-            const { tags, ...rest } = logAlert
-            const resourceGroupId = getResourceGroupFromEntity(rest)
-            const region = regionMap.global
-            logAlerts.push({
-              ...rest,
-              region,
-              resourceGroupId,
-            })
-          }
-        }
+        await Promise.all(
+          (resourceGroupsNames || []).map(async (rgName: string) => {
+            const logAlertsIterable: PagedAsyncIterableIterator<ActivityLogAlertResource> =
+              client.activityLogAlerts.listByResourceGroup(rgName)
+            for await (const logAlert of logAlertsIterable) {
+              if (logAlert) {
+                const { tags, ...rest } = logAlert
+                const region = regionMap.global
+                logAlerts.push({
+                  ...rest,
+                  region,
+                  resourceGroupId: rgName,
+                })
+              }
+            }
+          })
+        )
       },
       {
         service: serviceName,
