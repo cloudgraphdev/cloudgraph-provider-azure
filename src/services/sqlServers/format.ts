@@ -94,8 +94,8 @@ export default ({
     encryptionProtectors:
       encryptionProtectors?.map(e => ({ id: e.id || cuid(), ...e })) || [],
     vulnerabilityAssessments: vulnerabilityAssessments?.map(va => ({
-      id: cuid(),
       ...va,
+      id: va.id || cuid(),
     })),
     tags: formatTagsFromMap(Tags),
   }
