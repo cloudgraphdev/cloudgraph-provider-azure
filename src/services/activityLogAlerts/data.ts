@@ -3,7 +3,7 @@ import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 import getResourceGroupData from '../resourceGroup/data'
 import azureLoggerText from '../../properties/logger'
-import { AzureServiceInput } from '../../types'
+import { AzureServiceInput, TagMap } from '../../types'
 import { tryCatchWrapper } from '../../utils/index'
 import { getResourceGroupNames } from '../../utils/format'
 import { regionMap } from '../../enums/regions'
@@ -15,6 +15,7 @@ const serviceName = 'ActivityLogAlerts'
 export interface RawAzureActivityLogAlert extends ActivityLogAlertResource {
   resourceGroupId: string
   region: string
+  Tags: TagMap
 }
 
 export default async ({
@@ -51,6 +52,7 @@ export default async ({
                   ...rest,
                   region,
                   resourceGroupId: rgName,
+                  Tags: tags || {},
                 })
               }
             }

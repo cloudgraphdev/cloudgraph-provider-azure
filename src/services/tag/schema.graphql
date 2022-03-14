@@ -2,6 +2,7 @@ type azureTag @key(fields: "id") {
   id: String! @id @search(by: [hash])
   key: String! @search(by: [hash, regexp])
   value: String! @search(by: [hash, regexp])
+  activityLogAlerts: [azureActivityLogAlert]
   adApplications: [azureADApplication]
   adServicePrincipals: [azureADServicePrincipal]
   aksManagedClusters: [azureAksManagedCluster]

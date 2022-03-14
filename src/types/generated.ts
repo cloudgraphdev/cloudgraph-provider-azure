@@ -2752,6 +2752,7 @@ export type AzureSubResource = {
 };
 
 export type AzureTag = {
+  activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   adApplications?: Maybe<Array<Maybe<AzureAdApplication>>>;
   adServicePrincipals?: Maybe<Array<Maybe<AzureAdServicePrincipal>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
