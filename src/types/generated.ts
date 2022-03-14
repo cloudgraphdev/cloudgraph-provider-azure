@@ -2288,6 +2288,7 @@ export type AzureSqlServer = AzureResource & {
   serverSecurityAlertPolicies?: Maybe<Array<Maybe<AzureSqlServerSecurityAlertPolicy>>>;
   state?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  vulnerabilityAssessments?: Maybe<Array<Maybe<AzureSqlServerVulnerabilityAssessment>>>;
   workspaceFeature?: Maybe<Scalars['String']>;
 };
 
@@ -2379,6 +2380,22 @@ export type AzureSqlServerUserAssignedIdentity = {
 export type AzureSqlServerUserIdentity = {
   clientId?: Maybe<Scalars['String']>;
   principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerVulnerabilityAssessment = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  recurringScans?: Maybe<AzureSqlServerVulnerabilityAssessmentRecurringScansProperties>;
+  storageAccountAccessKey?: Maybe<Scalars['String']>;
+  storageContainerPath?: Maybe<Scalars['String']>;
+  storageContainerSasKey?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerVulnerabilityAssessmentRecurringScansProperties = {
+  emailSubscriptionAdmins?: Maybe<Scalars['Boolean']>;
+  emails?: Maybe<Array<Maybe<Scalars['String']>>>;
+  isEnabled?: Maybe<Scalars['Boolean']>;
 };
 
 export type AzureSshConfiguration = {
