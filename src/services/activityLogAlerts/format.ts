@@ -1,6 +1,7 @@
 import cuid from 'cuid'
 import { RawAzureActivityLogAlert } from './data'
 import { AzureActivityLogAlert } from '../../types/generated'
+import { formatTagsFromMap } from '../../utils/format'
 
 export default ({
   service,
@@ -19,6 +20,7 @@ export default ({
     condition,
     actions,
     description,
+    Tags = {},
   } = service
   return {
     id: id || cuid(),
@@ -47,5 +49,6 @@ export default ({
       })),
     },
     description,
+    tags: formatTagsFromMap(Tags),
   }
 }

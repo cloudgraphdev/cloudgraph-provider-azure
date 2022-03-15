@@ -227,6 +227,7 @@ export type AzureActivityLogAlert = AzureBaseResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
   subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
 };
 
 export type AzureActivityLogAlertActionGroup = {

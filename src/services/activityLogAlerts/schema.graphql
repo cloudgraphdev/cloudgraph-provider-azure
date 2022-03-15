@@ -12,6 +12,7 @@ type azureActivityLogAlert implements azureBaseResource
   actions: azureActivityLogAlertActionList
   description: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: activityLogAlerts)
+  tags: [azureRawTag]
 }
 
 type azureActivityLogAlertAllOfCondition
