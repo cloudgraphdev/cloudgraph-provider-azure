@@ -174,6 +174,34 @@ type azureSqlServer implements azureResource
   serverSecurityAlertPolicies: [azureSqlServerSecurityAlertPolicy]
   adAdministrators: [azureSqlServerADAdministrator]
   encryptionProtectors: [azureSqlServerEncryptionProtector]
+  vulnerabilityAssessments: [azureSqlServerVulnerabilityAssessment]
   resourceGroup: [azureResourceGroup] @hasInverse(field: sqlServers)
   databaseSql: [azureDatabaseSql] @hasInverse(field: sqlServers)
+}
+
+type azureSqlServerVulnerabilityAssessment
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])      
+  storageContainerPath: String @search(by: [hash, regexp])
+  storageContainerSasKey: String @search(by: [hash, regexp])
+  storageAccountAccessKey: String @search(by: [hash, regexp])
+  recurringScans: azureSqlServerVulnerabilityAssessmentRecurringScansProperties
+}
+
+type azureSqlServerVulnerabilityAssessmentRecurringScansProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  isEnabled: Boolean @search
+  emailSubscriptionAdmins: Boolean @search
+  emails: [String] @search(by: [hash, regexp])
 }

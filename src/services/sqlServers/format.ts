@@ -37,6 +37,7 @@ export default ({
     serverSecurityAlertPolicies = [],
     adAdministrators = [],
     encryptionProtectors = [],
+    vulnerabilityAssessments = [],
     Tags,
   } = service
 
@@ -92,6 +93,10 @@ export default ({
       adAdministrators?.map(a => ({ id: a.id || cuid(), ...a })) || [],
     encryptionProtectors:
       encryptionProtectors?.map(e => ({ id: e.id || cuid(), ...e })) || [],
+    vulnerabilityAssessments: vulnerabilityAssessments?.map(va => ({
+      ...va,
+      id: va.id || cuid(),
+    })),
     tags: formatTagsFromMap(Tags),
   }
 }

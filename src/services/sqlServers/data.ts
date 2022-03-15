@@ -5,6 +5,7 @@ import {
   ServerSecurityAlertPolicy,
   ServerAzureADAdministrator,
   EncryptionProtector,
+  ServerVulnerabilityAssessment,
 } from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
@@ -26,6 +27,7 @@ export interface RawAzureServer extends Omit<Server, 'tags' | 'location'> {
   serverSecurityAlertPolicies: ServerSecurityAlertPolicy[]
   adAdministrators: ServerAzureADAdministrator[]
   encryptionProtectors: EncryptionProtector[]
+  vulnerabilityAssessments: ServerVulnerabilityAssessment[]
 }
 
 const listFirewallRules = async (
@@ -138,6 +140,34 @@ const listEncryptionProtectors = async (
   return encryptionProtectors
 }
 
+const listServerVulnerabilityAssessments = async (
+  client: SqlManagementClient, 
+  resourceGroup: string, 
+  serverName: string,
+): Promise<ServerVulnerabilityAssessment[]> => {
+  const databaseVulnerabilityAssessments: ServerVulnerabilityAssessment[] = []
+  const vulnerabilityAssessmentIterable = client.serverVulnerabilityAssessments.listByServer(
+    resourceGroup,
+    serverName,
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const vulnerabilityAssessment of vulnerabilityAssessmentIterable) {
+        if (vulnerabilityAssessment) {
+          databaseVulnerabilityAssessments.push(vulnerabilityAssessment)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'serverVulnerabilityAssessments',
+      operation: 'listByServer',
+    }
+  )
+  return databaseVulnerabilityAssessments
+}
+
 export default async ({
   regions,
   config,
@@ -193,6 +223,11 @@ export default async ({
           encryptionProtectors: await listEncryptionProtectors(
             client,
             resourceGroupId,
+            name
+          ),
+          vulnerabilityAssessments: await listServerVulnerabilityAssessments(
+            client, 
+            resourceGroupId, 
             name
           ),
         })
