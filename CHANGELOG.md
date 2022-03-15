@@ -1,3 +1,15 @@
+# [0.41.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.40.1...0.41.0) (2022-03-15)
+
+
+### Bug Fixes
+
+* **sqlServers:** filter id override if empty ([011a46b](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/011a46b11bd95c50fac742b2f706f2b00bda2da2))
+
+
+### Features
+
+* **sqlServers:** add vulnerabilityAssessments ([7f3f346](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/7f3f346046a211854c40fa9be7e1062b087fc0ee))
+
 ## [0.40.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.40.0...0.40.1) (2022-03-11)
 
 
