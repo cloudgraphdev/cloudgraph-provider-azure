@@ -60,6 +60,7 @@ export default ({
     isInfraEncryptionEnabled,
     federatedClientId,
     primaryDelegatedIdentityClientId,
+    transparentDataEncryptions,
     Tags,
   } = service
 
@@ -125,6 +126,10 @@ export default ({
     isInfraEncryptionEnabled,
     federatedClientId,
     primaryDelegatedIdentityClientId,
+    transparentDataEncryptions: transparentDataEncryptions?.map(tde => ({
+      ...tde,
+      id: tde.id || cuid(),
+    })),
     tags: formatTagsFromMap(Tags),
   }
 }
