@@ -1,33 +1,31 @@
 import {
   PostgreSQLManagementClient,
-  Database,
   Server,
 } from '@azure/arm-postgresql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
-
 import azureLoggerText from '../../properties/logger'
-import { AzureServiceInput } from '../../types'
+import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils/index'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'PostgreSQL Database'
+const serviceName = 'PostgreSQL Server'
 
-export interface RawAzureDatabasePostgreSql
-  extends Omit<Database, 'tags' | 'location'> {
+export interface RawAzurePostgreSqlServer
+  extends Omit<Server, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
-  serverName: string
+  Tags: TagMap
 }
 
 export default async ({
   regions,
   config,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzureDatabasePostgreSql[]
+  [property: string]: RawAzurePostgreSqlServer[]
 }> => {
   try {
     const { tokenCredentials, subscriptionId } = config
@@ -51,39 +49,11 @@ export default async ({
         operation: 'list',
       }
     )
+    logger.debug(lt.foundPostgreSqlServers(sqlServers.length))
 
-    const databases: RawAzureDatabasePostgreSql[] = []
-    await Promise.all(
-      (sqlServers || []).map(async ({ name, location, ...rest }) => {
-        const resourceGroupId = getResourceGroupFromEntity(rest)
-        const databaseIterable = client.databases.listByServer(
-          resourceGroupId,
-          name
-        )
-        await tryCatchWrapper(
-          async () => {
-            for await (const database of databaseIterable) {
-              databases.push({
-                region: lowerCaseLocation(location),
-                ...database,
-                resourceGroupId,
-                serverName: name,
-              })
-            }
-          },
-          {
-            service: serviceName,
-            client,
-            scope: 'databases',
-            operation: 'listByServer',
-          }
-        )
-      })
-    )
-    logger.debug(lt.foundDatabasePostgreSql(databases.length))
-
-    const result: { [property: string]: RawAzureDatabasePostgreSql[] } = {}
-    databases.map(({ region, ...rest }) => {
+    const result: { [property: string]: RawAzurePostgreSqlServer[] } = {}
+    sqlServers.map(({ location, tags, ...rest }) => {
+      const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []
@@ -93,6 +63,7 @@ export default async ({
           region,
           ...rest,
           resourceGroupId,
+          Tags: tags || {},
         })
       }
     })

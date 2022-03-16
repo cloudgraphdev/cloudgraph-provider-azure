@@ -32,6 +32,7 @@ type azureResourceGroup implements azureResource
   loadBalancers: [azureLoadBalancer] @hasInverse(field: resourceGroup)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: resourceGroup)
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
+  postgreSqlServer: [azurePostgreSqlServer] @hasInverse(field: resourceGroup)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroup)
   securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: resourceGroup)
   sqlServers: [azureSqlServer] @hasInverse(field: resourceGroup)
