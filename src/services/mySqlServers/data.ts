@@ -1,29 +1,28 @@
-import { MySQLManagementClient, Database, Server } from '@azure/arm-mysql'
+import { MySQLManagementClient, Server } from '@azure/arm-mysql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
-
 import azureLoggerText from '../../properties/logger'
-import { AzureServiceInput } from '../../types'
+import { AzureServiceInput, TagMap } from '../../types'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils/index'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'MySQL Database'
+const serviceName = 'MySQL Server'
 
-export interface RawAzureDatabaseMySql
-  extends Omit<Database, 'tags' | 'location'> {
+export interface RawAzureMySqlServer
+  extends Omit<Server, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
-  serverName: string
+  Tags: TagMap
 }
 
 export default async ({
   regions,
   config,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzureDatabaseMySql[]
+  [property: string]: RawAzureMySqlServer[]
 }> => {
   try {
     const { tokenCredentials, subscriptionId } = config
@@ -47,40 +46,11 @@ export default async ({
         operation: 'list',
       }
     )
+    logger.debug(lt.foundMySqlServers(sqlServers.length))
 
-    const databases: RawAzureDatabaseMySql[] = []
-    await Promise.all(
-      (sqlServers || []).map(async ({ name, location, ...rest }) => {
-        const resourceGroup = getResourceGroupFromEntity(rest)
-        const databaseIterable = client.databases.listByServer(
-          resourceGroup,
-          name
-        )
-        await tryCatchWrapper(
-          async () => {
-            for await (const database of databaseIterable) {
-              const resourceGroupId = getResourceGroupFromEntity(rest)
-              databases.push({
-                region: lowerCaseLocation(location),
-                ...database,
-                resourceGroupId,
-                serverName: name,
-              })
-            }
-          },
-          {
-            service: serviceName,
-            client,
-            scope: 'databases',
-            operation: 'listByServer',
-          }
-        )
-      })
-    )
-    logger.debug(lt.foundDatabaseMySql(databases.length))
-
-    const result: { [property: string]: RawAzureDatabaseMySql[] } = {}
-    databases.map(({ region, ...rest }) => {
+    const result: { [property: string]: RawAzureMySqlServer[] } = {}
+    sqlServers.map(({ location, tags, ...rest }) => {
+      const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
           result[region] = []
@@ -90,6 +60,7 @@ export default async ({
           region,
           ...rest,
           resourceGroupId,
+          Tags: tags || {},
         })
       }
     })

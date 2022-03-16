@@ -698,6 +698,30 @@ export default ({
           })
         }
       }
+    }   
+    /**
+     * Find related MySQL Servers
+     */
+    const mySqlServers: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.mySqlServers)
+    if (mySqlServers?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        mySqlServers.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const sqlServer of dataAtRegion) {
+          const { id } = sqlServer
+          connections.push({
+            id,
+            resourceType: services.mySqlServers,
+            relation: 'child',
+            field: 'mySqlServers',
+          })
+        }
+      }
     }
     /**
      * Find related ActivityLogAlerts

@@ -126,6 +126,7 @@ export default {
   // SQL Servers
   foundPostgreSqlServers: (num: number): string => `Found ${num} PostgreSQL servers`,
   foundSqlServers: (num: number): string => `Found ${num} SQL servers`,
+  foundMySqlServers: (num: number): string => `Found ${num} MySQL servers`,
   // Storage Account
   foundStorageAccounts: (num: number): string =>
     `Found ${num} storage accounts`,

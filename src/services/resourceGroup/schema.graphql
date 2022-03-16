@@ -30,6 +30,7 @@ type azureResourceGroup implements azureResource
   functionApps: [azureFunctionApp] @hasInverse(field: resourceGroup)
   keyVaults: [azureKeyVault] @hasInverse(field: resourceGroup)
   loadBalancers: [azureLoadBalancer] @hasInverse(field: resourceGroup)
+  mySqlServer: [azureMySqlServer] @hasInverse(field: resourceGroup)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: resourceGroup)
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
   postgreSqlServer: [azurePostgreSqlServer] @hasInverse(field: resourceGroup)
