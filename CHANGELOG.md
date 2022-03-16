@@ -1,3 +1,15 @@
+# [0.42.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.41.1...0.42.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* **postgreSqlServers:** tags ([5a48f7f](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/5a48f7f0bb5302b048ec5b06bd16b2e1d88538f2))
+
+
+### Features
+
+* **postgreSqlServers:** add postgreSqlServers service ([73981c1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/73981c182a0fa16b909242b8eb5c4a079edd5160))
+
 ## [0.41.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.41.0...0.41.1) (2022-03-16)
 
 
