@@ -1,4 +1,4 @@
-import { SqlManagementClient, Database, Server } from '@azure/arm-sql'
+import { SqlManagementClient, Database, Server, LogicalDatabaseTransparentDataEncryption } from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -20,7 +20,38 @@ export interface RawAzureDatabaseSql
   region: string
   resourceGroupId: string
   Tags: TagMap
-  serverName: string
+  serverName?: string
+  transparentDataEncryptions: LogicalDatabaseTransparentDataEncryption[]
+}
+
+const listTransparentDataEncryptions = async (
+  client: SqlManagementClient, 
+  resourceGroup: string, 
+  serverName: string,
+  databaseName: string,
+): Promise<LogicalDatabaseTransparentDataEncryption[]> => {
+  const transparentDataEncryptions: LogicalDatabaseTransparentDataEncryption[] = []
+  const tdeIterable = client.transparentDataEncryptions.listByDatabase(
+    resourceGroup,
+    serverName,
+    databaseName,
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const tde of tdeIterable) {
+        if (tde) {
+          transparentDataEncryptions.push(tde)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'transparentDataEncryptions',
+      operation: 'listByDatabase',
+    }
+  )
+  return transparentDataEncryptions
 }
 
 export default async ({
@@ -81,7 +112,7 @@ export default async ({
     logger.debug(lt.foundDatabaseSql(databases.length))
 
     const result: { [property: string]: RawAzureDatabaseSql[] } = {}
-    databases.map(({ tags, location, ...rest }) => {
+    await Promise.all(databases.map(async ({ tags, location, name, serverName, ...rest }) => {
       const region = lowerCaseLocation(location)
       if (regions.includes(region)) {
         if (!result[region]) {
@@ -92,10 +123,16 @@ export default async ({
           ...rest,
           resourceGroupId,
           region,
+          transparentDataEncryptions: await listTransparentDataEncryptions(
+            client, 
+            resourceGroupId, 
+            serverName, 
+            name
+          ),
           Tags: tags || {},
         })
       }
-    })
+    }))
     return result
   } catch (e) {
     logger.error(e)

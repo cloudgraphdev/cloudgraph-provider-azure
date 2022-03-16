@@ -1230,6 +1230,7 @@ export type AzureDatabaseSql = AzureResource & {
   sourceDatabaseId?: Maybe<Scalars['String']>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   status?: Maybe<Scalars['String']>;
+  transparentDataEncryptions?: Maybe<Array<Maybe<AzureDatabaseSqlLogicalDatabaseTransparentDataEncryption>>>;
   zoneRedundant?: Maybe<Scalars['Boolean']>;
 };
 
@@ -1256,6 +1257,10 @@ export type AzureDatabaseSqlDiskSku = {
   name?: Maybe<Scalars['String']>;
   size?: Maybe<Scalars['String']>;
   tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureDatabaseSqlLogicalDatabaseTransparentDataEncryption = AzureResource & {
+  state?: Maybe<Scalars['String']>;
 };
 
 export type AzureDatabaseSqlSku = {
