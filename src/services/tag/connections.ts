@@ -675,6 +675,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related PostgreSQL Servers
+     */
+    const postgreSqlServers: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.postgreSqlServers)
+    if (postgreSqlServers?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        postgreSqlServers.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const sqlServer of dataAtRegion) {
+          const { id } = sqlServer
+          connections.push({
+            id,
+            resourceType: services.postgreSqlServers,
+            relation: 'child',
+            field: 'postgreSqlServers',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

@@ -2735,6 +2735,7 @@ export type AzureTag = {
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
+  postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
