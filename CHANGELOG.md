@@ -1,3 +1,10 @@
+## [0.41.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.41.0...0.41.1) (2022-03-16)
+
+
+### Bug Fixes
+
+* **databaseSql:** add transparentDataEncryptions ([bff24dd](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/bff24dd96561b72402cc52b025329be7fd20649d))
+
 # [0.41.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.40.1...0.41.0) (2022-03-15)
 
 
