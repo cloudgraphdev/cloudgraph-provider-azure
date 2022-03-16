@@ -36,6 +36,7 @@ import AzureMonitorInsightsActivityLogAlertRule from '../services/monitorInsight
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
 import AzurePolicyAssignment from '../services/policyAssignment'
+import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
 import AzureResourceGroup from '../services/resourceGroup'
@@ -97,6 +98,7 @@ export default {
   [services.monitorInsightsActivityLogAlertRule]:AzureMonitorInsightsActivityLogAlertRule,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,
+  [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
   [services.resourceGroup]: AzureResourceGroup,

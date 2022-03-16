@@ -122,6 +122,7 @@ export default {
   foundSecuritySettings: (num: number): string =>
     `Found ${num} security settings`,
   // SQL Servers
+  foundPostgreSqlServers: (num: number): string => `Found ${num} PostgreSQL servers`,
   foundSqlServers: (num: number): string => `Found ${num} SQL servers`,
   // Storage Account
   foundStorageAccounts: (num: number): string =>

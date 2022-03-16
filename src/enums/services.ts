@@ -35,6 +35,7 @@ export default {
   monitorInsightsActivityLogAlertRule: 'monitorInsightsActivityLogAlertRule',
   networkInterface: 'networkInterface',
   policyAssignment: 'policyAssignment',
+  postgreSqlServers: 'postgreSqlServers',
   privateDns: 'privateDns',
   publicIp: 'publicIp',
   resourceGroup: 'resourceGroup',

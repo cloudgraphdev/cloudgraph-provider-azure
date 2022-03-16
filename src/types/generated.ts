@@ -1182,6 +1182,7 @@ export type AzureDatabaseMySql = AzureResource & {
 export type AzureDatabasePostgreSql = AzureResource & {
   charset?: Maybe<Scalars['String']>;
   collation?: Maybe<Scalars['String']>;
+  postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
@@ -2084,6 +2085,61 @@ export type AzurePolicyAssignmentParameters = {
   value?: Maybe<Array<Maybe<AzurePolicyAssignmentParameterValue>>>;
 };
 
+export type AzurePostgreSqlServer = AzureResource & {
+  administratorLogin?: Maybe<Scalars['String']>;
+  byokEnforcement?: Maybe<Scalars['String']>;
+  databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
+  earliestRestoreDate?: Maybe<Scalars['String']>;
+  fullyQualifiedDomainName?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzurePostgreSqlServerResourceIdentity>;
+  infrastructureEncryption?: Maybe<Scalars['String']>;
+  masterServerId?: Maybe<Scalars['String']>;
+  minimalTlsVersion?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzurePostgreSqlServerPrivateEndpointConnection>>>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  replicaCapacity?: Maybe<Scalars['Int']>;
+  replicationRole?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sslEnforcement?: Maybe<Scalars['String']>;
+  storageProfile?: Maybe<AzurePostgreSqlServerStorageProfile>;
+  userVisibleState?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerPrivateEndpointConnection = {
+  id: Scalars['String'];
+  properties?: Maybe<AzurePostgreSqlServerServerPrivateEndpointConnectionProperties>;
+};
+
+export type AzurePostgreSqlServerPrivateEndpointProperty = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerPrivateLinkServiceConnectionStateProperty = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerResourceIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerServerPrivateEndpointConnectionProperties = {
+  privateEndpoint?: Maybe<AzurePostgreSqlServerPrivateEndpointProperty>;
+  privateLinkServiceConnectionState?: Maybe<AzurePostgreSqlServerPrivateLinkServiceConnectionStateProperty>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerStorageProfile = {
+  backupRetentionDays?: Maybe<Scalars['Int']>;
+  geoRedundantBackup?: Maybe<Scalars['String']>;
+  storageAutogrow?: Maybe<Scalars['String']>;
+  storageMB?: Maybe<Scalars['Int']>;
+};
+
 export type AzurePrivateDnsZone = AzureResource & {
   etag?: Maybe<Scalars['String']>;
   internalId?: Maybe<Scalars['String']>;
@@ -2169,6 +2225,7 @@ export type AzureResourceGroup = AzureResource & {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   managedBy?: Maybe<Scalars['String']>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
+  postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;

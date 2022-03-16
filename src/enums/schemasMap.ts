@@ -44,6 +44,7 @@ export default {
     'azureMonitorInsightsActivityLogAlertRule',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.policyAssignment]: 'azurePolicyAssignment',
+  [services.postgreSqlServers]: 'azurePostgreSqlServer',
   [services.privateDns]: 'azurePrivateDnsZone',
   [services.publicIp]: 'azurePublicIp',
   [services.resourceGroup]: 'azureResourceGroup',
