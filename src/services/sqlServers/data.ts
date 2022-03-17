@@ -5,6 +5,7 @@ import {
   ServerSecurityAlertPolicy,
   ServerAzureADAdministrator,
   EncryptionProtector,
+  ServerBlobAuditingPolicy,
   ServerVulnerabilityAssessment,
 } from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
@@ -27,6 +28,7 @@ export interface RawAzureServer extends Omit<Server, 'tags' | 'location'> {
   serverSecurityAlertPolicies: ServerSecurityAlertPolicy[]
   adAdministrators: ServerAzureADAdministrator[]
   encryptionProtectors: EncryptionProtector[]
+  serverBlobAuditingPolicies: ServerBlobAuditingPolicy[]
   vulnerabilityAssessments: ServerVulnerabilityAssessment[]
 }
 
@@ -168,6 +170,34 @@ const listServerVulnerabilityAssessments = async (
   return databaseVulnerabilityAssessments
 }
 
+const listServerBlobAuditingPolicies = async (
+  client: SqlManagementClient, 
+  resourceGroup: string, 
+  serverName: string,
+): Promise<ServerBlobAuditingPolicy[]> => {
+  const serverBlobAuditingPolicies: ServerBlobAuditingPolicy[] = []
+  const serverBlobAuditingPolicyIterable = client.serverBlobAuditingPolicies.listByServer(
+    resourceGroup,
+    serverName,
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const policy of serverBlobAuditingPolicyIterable) {
+        if (policy) {
+          serverBlobAuditingPolicies.push(policy)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'serverBlobAuditingPolicies',
+      operation: 'listByServer',
+    }
+  )
+  return serverBlobAuditingPolicies
+}
+
 export default async ({
   regions,
   config,
@@ -221,6 +251,11 @@ export default async ({
             name
           ),
           encryptionProtectors: await listEncryptionProtectors(
+            client,
+            resourceGroupId,
+            name
+          ),
+          serverBlobAuditingPolicies: await listServerBlobAuditingPolicies(
             client,
             resourceGroupId,
             name
