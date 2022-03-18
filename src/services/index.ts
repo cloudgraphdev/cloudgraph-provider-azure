@@ -119,28 +119,28 @@ export default class Provider extends CloudGraph.Client {
     credentials: ClientSecretCredential
     tokenCredentials: TokenCredential
   }> {
-    try {
-      const credentials = getClientSecretCredentials(creds)
-      if (isEmpty(credentials)) {
-        throw new Error(
-          `❌ Unable to authenticate with Azure for tenant: ${creds.tenantId}`
-        )
-      }
+    const credentials = getClientSecretCredentials(creds)
+    const tokenCredentials = await getTokenCredentials(credentials, creds)
+    const subList = await getSubscriptions(credentials)
+    const subscription = subList.find(({ id }) => id === creds.subscriptionId)
+    if (isEmpty(subList) && !subscription) {
+      this.logger.debug(
+        `${chalk.red('AUTH ERROR')}: clientId ${chalk.green(
+          creds.clientId
+        )} doesn't have enough permission to fetch resources from ${chalk.green(
+          creds.subscriptionId
+        )} subscription`
+      )
+      throw Error()
+    }
+    const subscriptions = subscription
+      ? [subscription.subscriptionId]
+      : subList.map(s => s.subscriptionId)
 
-      const tokenCredentials = await getTokenCredentials(credentials, creds)
-      const subList = await getSubscriptions(credentials)
-      const subscription = subList.find(({ id }) => id === creds.subscriptionId)
-      const subscriptions = subscription
-        ? [subscription.subscriptionId]
-        : subList.map(s => s.subscriptionId)
-
-      return {
-        subscriptions,
-        credentials,
-        tokenCredentials,
-      }
-    } catch (e) {
-      this.logger.error(e)
+    return {
+      subscriptions,
+      credentials,
+      tokenCredentials,
     }
   }
 
@@ -434,10 +434,15 @@ export default class Provider extends CloudGraph.Client {
       configuredResources = Object.values(restOfServices).join(',')
     }
     const { subscriptionId } = account
-    const { tokenCredentials, credentials } =
-      await this.getFullCredentialsAndSubscriptions(account)
-    const config = { ...account, tokenCredentials, credentials, subscriptionId }
     try {
+      const { tokenCredentials, credentials } =
+        await this.getFullCredentialsAndSubscriptions(account)
+      const config = {
+        ...account,
+        tokenCredentials,
+        credentials,
+        subscriptionId,
+      }
       // Get essential services first and push them
       result.push(
         ...(await this.getResourcesData({
@@ -458,8 +463,12 @@ export default class Provider extends CloudGraph.Client {
       )
       this.logger.success(`Subscription: ${subscriptionId} scan completed`)
     } catch (error: any) {
-      this.logger.error('There was an error scanning Azure sdk data')
       this.logger.debug(error)
+      this.logger.error(
+        `There was an error scanning Azure sdk data for subscription ${chalk.green(
+          subscriptionId
+        )}`
+      )
     }
     return result
   }
@@ -510,10 +519,12 @@ export default class Provider extends CloudGraph.Client {
     let rawData: rawDataInterface[] = []
     const tagRegion = GLOBAL_REGION
     const tags = { name: 'tag', data: { [tagRegion]: [] } }
+
     for (const account of configuredAccounts) {
       const newRawData = await this.getRawData(account, opts)
       rawData = [...rawData, ...newRawData]
     }
+
     // Handle global tag entities
     try {
       for (const { data: entityData } of rawData) {

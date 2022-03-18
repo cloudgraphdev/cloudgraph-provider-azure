@@ -1,5 +1,8 @@
 import { SqlVirtualMachineManagementClient } from '@azure/arm-sqlvirtualmachine'
-import { SqlVirtualMachine, SqlVirtualMachinesListResponse } from '@azure/arm-sqlvirtualmachine/src/models'
+import {
+  SqlVirtualMachine,
+  SqlVirtualMachinesListResponse,
+} from '@azure/arm-sqlvirtualmachine/src/models'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
@@ -32,9 +35,10 @@ export default async ({
       subscriptionId
     )
     const sqlVms: SqlVirtualMachine[] = []
-    const sqlVmIterable: SqlVirtualMachinesListResponse = await client.sqlVirtualMachines.list()
     await tryCatchWrapper(
       async () => {
+        const sqlVmIterable: SqlVirtualMachinesListResponse =
+          await client.sqlVirtualMachines.list()
         for await (const vm of sqlVmIterable) {
           sqlVms.push(vm)
         }

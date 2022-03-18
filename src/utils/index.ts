@@ -2,7 +2,11 @@ import CloudGraph from '@cloudgraph/sdk'
 import camelCase from 'lodash/camelCase'
 import isEmpty from 'lodash/isEmpty'
 import relations from '../enums/relations'
-import { AzureDebugScope, AzureDebugScopeInitialData } from '../types'
+import {
+  AzureDebugScope,
+  AzureDebugScopeInitialData,
+  AzureError,
+} from '../types'
 
 const { logger } = CloudGraph
 
@@ -62,25 +66,26 @@ export function initTestConfig(): void {
 export function generateAzureErrorLog(
   service: string,
   functionName: string,
-  err?: any
+  err?: AzureError
 ): void {
   logger.warn(
     `There was a problem getting data for service ${service}, CG encountered an error calling ${functionName}`
   )
   if (typeof err === 'undefined') {
-    logger.debug(
-      `Unknown error on ${service} calling ${functionName}. Error object is undefined?`
-    )
-  } else if (err.statusCode !== 429) {
-    if (err.statusCode !== 401 || err.statusCode !== 403) {
-      logger.warn(err.message)
-    }
-    logger.debug(err)
-  } else if (err?.statusCode === 429) {
+    logger.debug(`Unknown error on ${service} calling ${functionName}`)
+  } else if (
+    err.statusCode !== 401 ||
+    err.statusCode !== 403 ||
+    err.statusCode !== 404 ||
+    err.statusCode !== 503
+  ) {
+    logger.warn(err.message)
+  } else if (err.statusCode === 429) {
     logger.debug(`Rate exceeded for ${service}:${functionName}`)
   } else {
-    logger.debug(err)
+    logger.debug(err.message)
   }
+  throw new Error()
 }
 
 export const settleAllPromises = async (
@@ -122,7 +127,7 @@ export const generateAzureDebugScope = (
 }
 
 export const tryCatchWrapper = async (
-  func: () => void,
+  func: () => Promise<void>,
   { service, client, scope, operation }: AzureDebugScopeInitialData
 ): Promise<void> => {
   const debugScope = generateAzureDebugScope(service, client, scope)
@@ -131,9 +136,9 @@ export const tryCatchWrapper = async (
   } catch (error) {
     generateAzureErrorLog(
       debugScope.service,
-      `${debugScope.fullScope}:${operation}`
+      `${debugScope.fullScope}:${operation}`,
+      error
     )
-    throw error
   }
 }
 
