@@ -2125,8 +2125,10 @@ export type AzurePolicyAssignmentParameters = {
 export type AzurePostgreSqlServer = AzureResource & {
   administratorLogin?: Maybe<Scalars['String']>;
   byokEnforcement?: Maybe<Scalars['String']>;
+  configurations?: Maybe<Array<Maybe<AzurePostgreSqlServerConfiguration>>>;
   databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
   earliestRestoreDate?: Maybe<Scalars['String']>;
+  firewallRules?: Maybe<Array<Maybe<AzurePostgreSqlServerFirewallRule>>>;
   fullyQualifiedDomainName?: Maybe<Scalars['String']>;
   identity?: Maybe<AzurePostgreSqlServerResourceIdentity>;
   infrastructureEncryption?: Maybe<Scalars['String']>;
@@ -2141,6 +2143,26 @@ export type AzurePostgreSqlServer = AzureResource & {
   storageProfile?: Maybe<AzurePostgreSqlServerStorageProfile>;
   userVisibleState?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerConfiguration = {
+  allowedValues?: Maybe<Scalars['String']>;
+  dataType?: Maybe<Scalars['String']>;
+  defaultValue?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  source?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzurePostgreSqlServerFirewallRule = {
+  endIpAddress?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  startIpAddress?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzurePostgreSqlServerPrivateEndpointConnection = {

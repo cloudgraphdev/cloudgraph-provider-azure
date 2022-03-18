@@ -1,4 +1,6 @@
 import {
+  Configuration,
+  FirewallRule,
   PostgreSQLManagementClient,
   Server,
 } from '@azure/arm-postgresql'
@@ -19,6 +21,8 @@ export interface RawAzurePostgreSqlServer
   region: string
   resourceGroupId: string
   Tags: TagMap
+  configurations: Configuration[]
+  firewallRules: FirewallRule[]
 }
 
 export default async ({
@@ -52,21 +56,58 @@ export default async ({
     logger.debug(lt.foundPostgreSqlServers(sqlServers.length))
 
     const result: { [property: string]: RawAzurePostgreSqlServer[] } = {}
-    sqlServers.map(({ location, tags, ...rest }) => {
-      const region = lowerCaseLocation(location)
-      if (regions.includes(region)) {
-        if (!result[region]) {
-          result[region] = []
+    await Promise.all(
+      sqlServers.map(async ({ name, location, tags, ...rest }) => {
+        const region = lowerCaseLocation(location)
+        if (regions.includes(region)) {
+          if (!result[region]) {
+            result[region] = []
+          }
+          const resourceGroupId = getResourceGroupFromEntity(rest)
+          const configurations: Configuration[] = []
+          const sqlServerConfigurationsIterable: PagedAsyncIterableIterator<Configuration> =
+            client.configurations.listByServer(resourceGroupId, name)
+          await tryCatchWrapper(
+            async () => {
+              for await (const configObj of sqlServerConfigurationsIterable) {
+                configurations.push(configObj)
+              }
+            },
+            {
+              service: serviceName,
+              client,
+              scope: 'configurations',
+              operation: `listByServer for ${name}`,
+            }
+          )
+          const firewallRules: FirewallRule[] = []
+          const sqlServerFirewallRulesIterable: PagedAsyncIterableIterator<FirewallRule> =
+            client.firewallRules.listByServer(resourceGroupId, name)
+          await tryCatchWrapper(
+            async () => {
+              for await (const firewallRule of sqlServerFirewallRulesIterable) {
+                firewallRules.push(firewallRule)
+              }
+            },
+            {
+              service: serviceName,
+              client,
+              scope: 'firewallRules',
+              operation: `listByServer for ${name}`,
+            }
+          )
+          result[region].push({
+            name,
+            region,
+            ...rest,
+            resourceGroupId,
+            configurations,
+            firewallRules,
+            Tags: tags || {},
+          })
         }
-        const resourceGroupId = getResourceGroupFromEntity(rest)
-        result[region].push({
-          region,
-          ...rest,
-          resourceGroupId,
-          Tags: tags || {},
-        })
-      }
-    })
+      })
+    )
     return result
   } catch (e) {
     logger.error(e)
