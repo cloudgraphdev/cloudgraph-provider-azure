@@ -218,6 +218,38 @@ export type AzureAdUser = {
   userType?: Maybe<Scalars['String']>;
 };
 
+export type AzureActivityLogAlert = AzureBaseResource & {
+  actions?: Maybe<AzureActivityLogAlertActionList>;
+  condition?: Maybe<AzureActivityLogAlertAllOfCondition>;
+  description?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureActivityLogAlertActionGroup = {
+  actionGroupId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  webhookProperties?: Maybe<Array<Maybe<AzureKeyValueProperty>>>;
+};
+
+export type AzureActivityLogAlertActionList = {
+  actionGroups?: Maybe<Array<Maybe<AzureActivityLogAlertActionGroup>>>;
+};
+
+export type AzureActivityLogAlertAllOfCondition = {
+  allOf?: Maybe<Array<Maybe<AzureActivityLogAlertLeafCondition>>>;
+};
+
+export type AzureActivityLogAlertLeafCondition = {
+  equals?: Maybe<Scalars['String']>;
+  field?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+};
+
 export type AzureAdIdentitySecurityDefaultsEnforcementPolicy = {
   description?: Maybe<Scalars['String']>;
   displayName?: Maybe<Scalars['String']>;
@@ -2204,6 +2236,7 @@ export type AzureResource = {
 };
 
 export type AzureResourceGroup = AzureResource & {
+  activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
@@ -2720,6 +2753,7 @@ export type AzureSubResource = {
 };
 
 export type AzureTag = {
+  activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   adApplications?: Maybe<Array<Maybe<AzureAdApplication>>>;
   adServicePrincipals?: Maybe<Array<Maybe<AzureAdServicePrincipal>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;

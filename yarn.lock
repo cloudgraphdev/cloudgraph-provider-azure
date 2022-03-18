@@ -175,6 +175,19 @@
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
 
+"@azure/arm-monitor@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-monitor/-/arm-monitor-7.0.0.tgz#f649fda2c65468c12a057dc2819d37053d94a7b9"
+  integrity sha512-RtCLRc/29bqaaf5iuUOmJvc5XDolN/icFhlKC/rXXKTtmwB3sKymaOZbNHnOM4P0nJYpS5QIo7Nzvh4M3Wj+FA==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-mysql@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-mysql/-/arm-mysql-5.0.0.tgz#9afcfbc136e80f54771d8d433d9a62ca96bdb78a"

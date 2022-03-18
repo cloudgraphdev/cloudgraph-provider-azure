@@ -1,4 +1,5 @@
 export default {
+  activityLogAlerts: 'activityLogAlerts',
   adApplication: 'adApplication',
   adGroup: 'adGroup',
   adIdentitySecurityDefaultsEnforcementPolicy: 'adIdentitySecurityDefaultsEnforcementPolicy',

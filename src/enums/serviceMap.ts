@@ -1,4 +1,5 @@
 import services from './services'
+import AzureActivityLogAlerts from '../services/activityLogAlerts'
 import AzureADApplication from '../services/adApplication'
 import AzureADGroup from '../services/adGroup'
 import AzureADIdentitySecurityDefaultsEnforcementPolicy from '../services/adIdentitySecurityDefaultsEnforcementPolicy'
@@ -59,6 +60,7 @@ import AzureSqlServers from '../services/sqlServers'
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
+  [services.activityLogAlerts]: AzureActivityLogAlerts,
   [services.adApplication]: AzureADApplication,
   [services.adGroup]: AzureADGroup,
   [services.adIdentitySecurityDefaultsEnforcementPolicy]:

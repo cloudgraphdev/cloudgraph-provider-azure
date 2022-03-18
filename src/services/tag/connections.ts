@@ -699,6 +699,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related ActivityLogAlerts
+     */
+    const activityLogAlerts: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.activityLogAlerts)
+    if (activityLogAlerts?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        activityLogAlerts.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const activityLogAlert of dataAtRegion) {
+          const { id } = activityLogAlert
+          connections.push({
+            id,
+            resourceType: services.activityLogAlerts,
+            relation: 'child',
+            field: 'activityLogAlerts',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {
