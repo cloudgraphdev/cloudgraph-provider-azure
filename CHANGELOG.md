@@ -1,3 +1,10 @@
+# [0.44.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.43.0...0.44.0) (2022-03-18)
+
+
+### Features
+
+* **postgreSqlServer:** add configurations and firewallRules ([b884bae](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b884bae44375afb560bfea9442b42dca725d68b9))
+
 # [0.43.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.42.0...0.43.0) (2022-03-18)
 
 
