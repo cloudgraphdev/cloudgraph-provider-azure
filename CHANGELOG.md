@@ -1,3 +1,10 @@
+## [0.45.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.45.0...0.45.1) (2022-03-18)
+
+
+### Bug Fixes
+
+* refactor error handling for insufficient permissions ([08bcbef](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/08bcbef871a4e72ecc05353c6046e39b37a720a3))
+
 # [0.45.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.44.0...0.45.0) (2022-03-18)
 
 
