@@ -1,3 +1,19 @@
+# [0.43.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.42.0...0.43.0) (2022-03-18)
+
+
+### Bug Fixes
+
+* **activityLogAlerts:** add tag connection ([daec8cb](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/daec8cb8b42507a073f45b287aa3009410d72f50))
+* **activityLogAlerts:** add tag format ([13094b8](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/13094b8218a717f282b2922ebe10c63d873f7312))
+* **activityLogAlerts:** get by resource group, add rg connection ([063f579](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/063f5792d1ee87cb98e4704304217600bf0c6f42))
+* **activityLogAlerts:** naming ([87dd9b9](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/87dd9b9845799e7a11afce51617daf51b22fb537))
+* **sqlServers:** add serverBlobAuditingPolicies ([9a5b5ff](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/9a5b5ff486ca47025327f4674a089c53cbb5c902))
+
+
+### Features
+
+* **activityLogAlerts:** add activity Log Alerts service ([84f990d](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/84f990d05b59a2216c1753c32895a60bc46f0a60))
+
 # [0.42.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.41.1...0.42.0) (2022-03-16)
 
 
