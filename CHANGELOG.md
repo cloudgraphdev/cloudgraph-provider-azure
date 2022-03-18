@@ -1,3 +1,10 @@
+# [0.45.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.44.0...0.45.0) (2022-03-18)
+
+
+### Features
+
+* **mySqlServers:** add mySqlServers service ([0bfcfaf](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/0bfcfafccdc6655d995d5ea32e68ee92e5092bfb))
+
 # [0.44.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.43.0...0.44.0) (2022-03-18)
 
 
