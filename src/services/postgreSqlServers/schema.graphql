@@ -19,8 +19,11 @@ type azurePostgreSqlServer implements azureResource
   masterServerId: String @search(by: [hash, regexp])
   replicaCapacity: Int @search
   publicNetworkAccess: String @search(by: [hash, regexp])
+  configurations: [azurePostgreSqlServerConfiguration]
+  firewallRules: [azurePostgreSqlServerFirewallRule]
   privateEndpointConnections: [azurePostgreSqlServerPrivateEndpointConnection]
-  databasePostgreSql: [azureDatabasePostgreSql] @hasInverse(field: postgreSqlServer)
+  databasePostgreSql: [azureDatabasePostgreSql]
+    @hasInverse(field: postgreSqlServer)
   resourceGroup: [azureResourceGroup] @hasInverse(field: postgreSqlServer)
 }
 
@@ -83,4 +86,36 @@ type azurePostgreSqlServerPrivateLinkServiceConnectionStateProperty
   status: String @search(by: [hash, regexp])
   description: String @search(by: [hash, regexp])
   actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azurePostgreSqlServerConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  defaultValue: String @search(by: [hash, regexp])
+  dataType: String @search(by: [hash, regexp])
+  allowedValues: String @search(by: [hash, regexp])
+  source: String @search(by: [hash, regexp])
+}
+
+type azurePostgreSqlServerFirewallRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  startIpAddress: String @search(by: [hash, regexp])
+  endIpAddress: String @search(by: [hash, regexp])
 }

@@ -31,9 +31,11 @@ export default ({
     masterServerId,
     replicaCapacity,
     publicNetworkAccess,
-    privateEndpointConnections,  
+    privateEndpointConnections,
     resourceGroupId,
     Tags,
+    configurations,
+    firewallRules
   } = service
 
   return {
@@ -61,7 +63,45 @@ export default ({
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
       ...connection,
       id: connection.id || cuid(),
-    })), 
+    })),
     tags: formatTagsFromMap(Tags),
+    configurations: configurations.map(
+      ({
+        id: confId,
+        name: confName,
+        type: confType,
+        value,
+        description,
+        defaultValue,
+        dataType,
+        allowedValues,
+        source,
+      }) => ({
+        id: confId || cuid(),
+        name: confName,
+        type: confType,
+        value,
+        description,
+        defaultValue,
+        dataType,
+        allowedValues,
+        source,
+      })
+    ),
+    firewallRules: firewallRules.map(
+      ({
+        id: confId,
+        name: confName,
+        type: confType,
+        startIpAddress,
+        endIpAddress
+      }) => ({
+        id: confId || cuid(),
+        name: confName,
+        type: confType,
+        startIpAddress,
+        endIpAddress
+      })
+    ),
   }
 }
