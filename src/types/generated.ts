@@ -2380,6 +2380,7 @@ export type AzureSqlServer = AzureResource & {
   publicNetworkAccess?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   restrictOutboundNetworkAccess?: Maybe<Scalars['String']>;
+  serverBlobAuditingPolicies?: Maybe<Array<Maybe<AzureSqlServerBlobAuditingPolicy>>>;
   serverSecurityAlertPolicies?: Maybe<Array<Maybe<AzureSqlServerSecurityAlertPolicy>>>;
   state?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
@@ -2394,6 +2395,22 @@ export type AzureSqlServerAdAdministrator = {
   name?: Maybe<Scalars['String']>;
   sid?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerBlobAuditingPolicy = {
+  auditActionsAndGroups?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  isAzureMonitorTargetEnabled?: Maybe<Scalars['Boolean']>;
+  isDevopsAuditEnabled?: Maybe<Scalars['Boolean']>;
+  isStorageSecondaryKeyInUse?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  queueDelayMs?: Maybe<Scalars['Int']>;
+  retentionDays?: Maybe<Scalars['Int']>;
+  state?: Maybe<Scalars['String']>;
+  storageAccountAccessKey?: Maybe<Scalars['String']>;
+  storageAccountSubscriptionId?: Maybe<Scalars['String']>;
+  storageEndpoint?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
