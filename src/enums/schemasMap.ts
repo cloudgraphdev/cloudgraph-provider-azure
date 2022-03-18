@@ -43,6 +43,7 @@ export default {
   [services.loadBalancer]: 'azureLoadBalancer',
   [services.monitorInsightsActivityLogAlertRule]:
     'azureMonitorInsightsActivityLogAlertRule',
+  [services.mySqlServers]: 'azureMySqlServer',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.policyAssignment]: 'azurePolicyAssignment',
   [services.postgreSqlServers]: 'azurePostgreSqlServer',

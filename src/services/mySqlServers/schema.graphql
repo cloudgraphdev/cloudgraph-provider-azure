@@ -1,0 +1,84 @@
+type azureMySqlServer implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  identity: azureMySqlServerResourceIdentity
+  administratorLogin: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  sslEnforcement: String @search(by: [hash, regexp])
+  minimalTlsVersion: String @search(by: [hash, regexp])
+  byokEnforcement: String @search(by: [hash, regexp])
+  infrastructureEncryption: String @search(by: [hash, regexp])
+  userVisibleState: String @search(by: [hash, regexp])
+  fullyQualifiedDomainName: String @search(by: [hash, regexp])
+  earliestRestoreDate: String @search(by: [hash, regexp])
+  storageProfile: azureMySqlServerStorageProfile
+  replicationRole: String @search(by: [hash, regexp])
+  masterServerId: String @search(by: [hash, regexp])
+  replicaCapacity: Int @search
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  privateEndpointConnections: [azureMySqlServerServerPrivateEndpointConnection]
+  databaseMySql: [azureDatabaseMySql] @hasInverse(field: mySqlServer)
+  resourceGroup: [azureResourceGroup] @hasInverse(field: mySqlServer)
+}
+
+type azureMySqlServerResourceIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureMySqlServerStorageProfile
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  backupRetentionDays: Int @search
+  geoRedundantBackup: String @search(by: [hash, regexp])
+  storageMB: Int @search
+  storageAutogrow: String @search(by: [hash, regexp])
+}
+
+type azureMySqlServerServerPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  properties: azureMySqlServerServerPrivateEndpointConnectionProperties
+}
+
+type azureMySqlServerServerPrivateEndpointConnectionProperties
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  privateEndpoint: azureMySqlServerPrivateEndpointProperty
+  privateLinkServiceConnectionState: azureMySqlServerServerPrivateLinkServiceConnectionStateProperty
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureMySqlServerPrivateEndpointProperty
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
+type azureMySqlServerServerPrivateLinkServiceConnectionStateProperty
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  status: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}

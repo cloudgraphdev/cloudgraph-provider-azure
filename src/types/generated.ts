@@ -1208,6 +1208,7 @@ export type AzureDatabaseManagedSqlInstanceIdentity = {
 export type AzureDatabaseMySql = AzureResource & {
   charset?: Maybe<Scalars['String']>;
   collation?: Maybe<Scalars['String']>;
+  mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
@@ -1975,6 +1976,61 @@ export type AzureMonitorInsightsActivityLogAlertRuleWebhookProperty = {
   value?: Maybe<Scalars['String']>;
 };
 
+export type AzureMySqlServer = AzureResource & {
+  administratorLogin?: Maybe<Scalars['String']>;
+  byokEnforcement?: Maybe<Scalars['String']>;
+  databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
+  earliestRestoreDate?: Maybe<Scalars['String']>;
+  fullyQualifiedDomainName?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureMySqlServerResourceIdentity>;
+  infrastructureEncryption?: Maybe<Scalars['String']>;
+  masterServerId?: Maybe<Scalars['String']>;
+  minimalTlsVersion?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureMySqlServerServerPrivateEndpointConnection>>>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  replicaCapacity?: Maybe<Scalars['Int']>;
+  replicationRole?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sslEnforcement?: Maybe<Scalars['String']>;
+  storageProfile?: Maybe<AzureMySqlServerStorageProfile>;
+  userVisibleState?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerPrivateEndpointProperty = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerResourceIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerServerPrivateEndpointConnection = {
+  id: Scalars['String'];
+  properties?: Maybe<AzureMySqlServerServerPrivateEndpointConnectionProperties>;
+};
+
+export type AzureMySqlServerServerPrivateEndpointConnectionProperties = {
+  privateEndpoint?: Maybe<AzureMySqlServerPrivateEndpointProperty>;
+  privateLinkServiceConnectionState?: Maybe<AzureMySqlServerServerPrivateLinkServiceConnectionStateProperty>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerServerPrivateLinkServiceConnectionStateProperty = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerStorageProfile = {
+  backupRetentionDays?: Maybe<Scalars['Int']>;
+  geoRedundantBackup?: Maybe<Scalars['String']>;
+  storageAutogrow?: Maybe<Scalars['String']>;
+  storageMB?: Maybe<Scalars['Int']>;
+};
+
 export type AzureNetworkInterface = AzureResource & {
   appliedDnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
   dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -2284,6 +2340,7 @@ export type AzureResourceGroup = AzureResource & {
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   managedBy?: Maybe<Scalars['String']>;
+  mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
@@ -2812,6 +2869,7 @@ export type AzureTag = {
   key: Scalars['String'];
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;

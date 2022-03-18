@@ -34,6 +34,7 @@ export default {
   keyVault: 'keyVault',
   loadBalancer: 'loadBalancer',
   monitorInsightsActivityLogAlertRule: 'monitorInsightsActivityLogAlertRule',
+  mySqlServers: 'mySqlServers',
   networkInterface: 'networkInterface',
   policyAssignment: 'policyAssignment',
   postgreSqlServers: 'postgreSqlServers',
