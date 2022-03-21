@@ -29,6 +29,7 @@ export default {
   dns: 'dns',
   eventGrid: 'eventGrid',
   eventHub: 'eventHub',
+  fileShare: 'fileShare',
   firewall: 'firewall',
   functionApp: 'functionApp',
   keyVault: 'keyVault',

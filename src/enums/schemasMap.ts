@@ -37,6 +37,7 @@ export default {
   [services.dns]: 'azureDnsZone',
   [services.eventGrid]: 'azureEventGrid',
   [services.eventHub]: 'azureEventHub',
+  [services.fileShare]: 'azureFileShare',
   [services.firewall]: 'azureFirewall',
   [services.functionApp]: 'azureFunctionApp',
   [services.keyVault]: 'azureKeyVault',

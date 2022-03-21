@@ -213,4 +213,5 @@ type azureStorageAccount implements azureResource
   storageContainers: [azureStorageContainer] @hasInverse(field: storageAccount)
   appServiceWebApp: [azureAppServiceWebApp] @hasInverse(field: storageAccounts)
   eventHubs: [azureEventHub] @hasInverse(field: storageAccount)
+  fileShares: [azureFileShare] @hasInverse(field: storageAccount)
 }

@@ -1,7 +1,8 @@
 /* eslint-disable max-len */
 export default {
   // Activity Log Alerts
-  foundActivityLogAlerts: (num: number): string => `Found ${num} Activity Log Alerts`,
+  foundActivityLogAlerts: (num: number): string =>
+    `Found ${num} Activity Log Alerts`,
   /* Active Directory */
   foundAdApplications: (num: number): string => `Found ${num} AD applications`,
   foundAdGroups: (num: number): string => `Found ${num} AD groups`,
@@ -11,9 +12,11 @@ export default {
     `Found ${num} AD service principals`,
   foundAdUsers: (num: number): string => `Found ${num} AD users`,
   // Arc Connected Clusters
-  foundArcConnectedClusters: (num: number): string => `Found ${num} Arc connected clusters`,
+  foundArcConnectedClusters: (num: number): string =>
+    `Found ${num} Arc connected clusters`,
   // AKS Managed Clusters
-  foundAKSManagedClusters: (num: number): string => `Found ${num} AKS managed clusters`,
+  foundAKSManagedClusters: (num: number): string =>
+    `Found ${num} AKS managed clusters`,
   /* App Service */
   foundKubesEnvs: (num: number): string => `Found ${num} kube environments`,
   foundAppServicePlans: (num: number): string =>
@@ -79,6 +82,8 @@ export default {
   foundEventHubNamespaces: (num: number): string =>
     `Found ${num} event hub namespaces`,
   foundEventHubs: (num: number): string => `Found ${num} event hubs`,
+  // File Share
+  foundFileShares: (num: number): string => `Found ${num} file shares`,
   // Firewall
   foundFirewalls: (num: number): string => `Found ${num} firewalls`,
   // Azure Functions
@@ -116,7 +121,8 @@ export default {
     `Found ${num} security contacts`,
   // Security Groups
   foundSecurityGroups: (num: number): string => `Found ${num} security groups`,
-  foundSecurityGroupFlowLogs: (num: number): string => `Found ${num} security group flow logs`,
+  foundSecurityGroupFlowLogs: (num: number): string =>
+    `Found ${num} security group flow logs`,
   // Security Pricings
   foundSecurityPricings: (num: number): string =>
     `Found ${num} security pricings`,
@@ -124,7 +130,8 @@ export default {
   foundSecuritySettings: (num: number): string =>
     `Found ${num} security settings`,
   // SQL Servers
-  foundPostgreSqlServers: (num: number): string => `Found ${num} PostgreSQL servers`,
+  foundPostgreSqlServers: (num: number): string =>
+    `Found ${num} PostgreSQL servers`,
   foundSqlServers: (num: number): string => `Found ${num} SQL servers`,
   foundMySqlServers: (num: number): string => `Found ${num} MySQL servers`,
   // Storage Account
