@@ -1,3 +1,10 @@
+# [0.46.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.45.1...0.46.0) (2022-03-22)
+
+
+### Features
+
+* add fileShare service ([e9bdaea](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/e9bdaea2a3d6a8d6c520d768af890c419b804a86))
+
 ## [0.45.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.45.0...0.45.1) (2022-03-18)
 
 
