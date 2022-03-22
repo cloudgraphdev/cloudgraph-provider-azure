@@ -26,6 +26,7 @@ type azureResourceGroup implements azureResource
   dns: [azureDnsZone] @hasInverse(field: resourceGroup)
   eventGrids: [azureEventGrid] @hasInverse(field: resourceGroup)
   eventHubs: [azureEventHub] @hasInverse(field: resourceGroup)
+  fileShares: [azureFileShare] @hasInverse(field: resourceGroup)
   firewalls: [azureFirewall] @hasInverse(field: resourceGroup)
   functionApps: [azureFunctionApp] @hasInverse(field: resourceGroup)
   keyVaults: [azureKeyVault] @hasInverse(field: resourceGroup)

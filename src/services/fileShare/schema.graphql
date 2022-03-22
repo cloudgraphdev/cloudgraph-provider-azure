@@ -1,0 +1,30 @@
+type azureFileShare implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+  storageAccountName: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  lastModifiedTime: DateTime @search(by: [day])
+  shareQuota: Int @search
+  enabledProtocols: String @search(by: [hash, regexp])
+  rootSquash: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  deleted: Boolean @search
+  deletedTime: DateTime @search(by: [day])
+  remainingRetentionDays: Int @search
+  accessTier: String @search(by: [hash, regexp])
+  accessTierChangeTime: DateTime @search(by: [day])
+  accessTierStatus: String @search(by: [hash, regexp])
+  shareUsageBytes: Int @search
+  leaseStatus: String @search(by: [hash, regexp])
+  leaseState: String @search(by: [hash, regexp])
+  leaseDuration: String @search(by: [hash, regexp])
+  snapshotTime: DateTime @search(by: [day])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: fileShares)
+  storageAccount: [azureStorageAccount] @hasInverse(field: fileShares)
+}

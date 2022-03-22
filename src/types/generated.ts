@@ -1561,6 +1561,32 @@ export type AzureExtendedLocation = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureFileShare = AzureBaseResource & {
+  accessTier?: Maybe<Scalars['String']>;
+  accessTierChangeTime?: Maybe<Scalars['DateTime']>;
+  accessTierStatus?: Maybe<Scalars['String']>;
+  deleted?: Maybe<Scalars['Boolean']>;
+  deletedTime?: Maybe<Scalars['DateTime']>;
+  enabledProtocols?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  lastModifiedTime?: Maybe<Scalars['DateTime']>;
+  leaseDuration?: Maybe<Scalars['String']>;
+  leaseState?: Maybe<Scalars['String']>;
+  leaseStatus?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  remainingRetentionDays?: Maybe<Scalars['Int']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+  rootSquash?: Maybe<Scalars['String']>;
+  shareQuota?: Maybe<Scalars['Int']>;
+  shareUsageBytes?: Maybe<Scalars['Int']>;
+  snapshotTime?: Maybe<Scalars['DateTime']>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageAccountName?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
+
 export type AzureFilesIdentityBasedAuthenticationAdProperties = {
   azureStorageSid?: Maybe<Scalars['String']>;
   domainGuid?: Maybe<Scalars['String']>;
@@ -2335,6 +2361,7 @@ export type AzureResourceGroup = AzureResource & {
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
   eventGrids?: Maybe<Array<Maybe<AzureEventGrid>>>;
   eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
+  fileShares?: Maybe<Array<Maybe<AzureFileShare>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
@@ -2626,6 +2653,7 @@ export type AzureStorageAccount = AzureResource & {
   extendedLocationName?: Maybe<Scalars['String']>;
   extendedLocationType?: Maybe<Scalars['String']>;
   failoverInProgress?: Maybe<Scalars['String']>;
+  fileShares?: Maybe<Array<Maybe<AzureFileShare>>>;
   geoReplicationStatsCanFailover?: Maybe<Scalars['String']>;
   geoReplicationStatsLastSyncTime?: Maybe<Scalars['String']>;
   geoReplicationStatsStatus?: Maybe<Scalars['String']>;
