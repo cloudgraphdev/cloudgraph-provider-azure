@@ -1,5 +1,6 @@
 import cuid from 'cuid'
 import { AzureEventHub } from '../../types/generated'
+import { transformSystemData } from '../../utils/format'
 import { RawAzureEventHub } from './data'
 
 export default ({
@@ -15,14 +16,7 @@ export default ({
     id,
     name,
     type,
-    systemData: {
-      createdBy,
-      createdByType,
-      createdAt: systemDataCreatedAt,
-      lastModifiedBy,
-      lastModifiedByType,
-      lastModifiedAt,
-    } = {},
+    systemData,
     partitionIds = [],
     createdAt,
     updatedAt,
@@ -38,12 +32,8 @@ export default ({
     name,
     type,
     region,
-    createdBy,
-    createdByType,
-    createdAt: createdAt?.toISOString() || systemDataCreatedAt?.toISOString(),
-    lastModifiedBy,
-    lastModifiedByType,
-    lastModifiedAt: lastModifiedAt?.toISOString(),
+    ...transformSystemData(systemData),
+    createdAt: createdAt?.toISOString(),
     partitionIds,
     updatedAt: updatedAt?.toISOString(),
     messageRetentionInDays,

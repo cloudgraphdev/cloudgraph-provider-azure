@@ -1,6 +1,7 @@
 import cuid from 'cuid'
 import { RawAzureCdnCustomDomain } from './data'
 import { AzureCdnCustomDomain } from '../../types/generated'
+import { transformSystemData } from '../../utils/format'
 
 export default ({
   service,
@@ -15,14 +16,7 @@ export default ({
     id,
     name,
     type,
-    systemData: {
-      createdBy,
-      createdByType,
-      createdAt,
-      lastModifiedBy,
-      lastModifiedByType,
-      lastModifiedAt,
-    } = {},
+    systemData,
     hostName,
     resourceState,
     customHttpsProvisioningState,
@@ -39,12 +33,7 @@ export default ({
     name,
     type,
     region,
-    createdBy,
-    createdByType,
-    createdAt: createdAt?.toISOString(),
-    lastModifiedBy,
-    lastModifiedByType,
-    lastModifiedAt: lastModifiedAt?.toISOString(),
+    ...transformSystemData(systemData),
     hostName,
     resourceState,
     customHttpsProvisioningState,

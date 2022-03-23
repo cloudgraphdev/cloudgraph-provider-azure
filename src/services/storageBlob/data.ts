@@ -63,25 +63,37 @@ export default async ({
       )
 
       const blobsIterable = client.listBlobsFlat()
-      await tryCatchWrapper(
-        async () => {
-          for await (const { tags, ...blob } of blobsIterable) {
-            storageBlobData.push({
-              ...blob,
-              storageContainerId,
-              resourceGroupId: storageContainer.resourceGroupId,
-              region: storageContainer.region,
-              Tags: tags,
-            })
+      // This patch is to prevent throwing an unnecessary exception
+      // if the registered app doesn't
+      // have the "Microsoft.Storage/storageAccounts/listKeys/action" permission
+      try {
+        await tryCatchWrapper(
+          async () => {
+            for await (const { tags, ...blob } of blobsIterable) {
+              storageBlobData.push({
+                ...blob,
+                storageContainerId,
+                resourceGroupId: storageContainer.resourceGroupId,
+                region: storageContainer.region,
+                Tags: tags,
+              })
+            }
+          },
+          {
+            service: serviceName,
+            client,
+            scope: 'storageBlobs',
+            operation: 'list',
           }
-        },
-        {
-          service: serviceName,
-          client,
-          scope: 'storageBlobs',
-          operation: 'list',
+        )
+      } catch (error) {
+        if (error.statusCode === 401) {
+          logger.debug(
+            "List blobs: 'Microsoft.Storage/storageAccounts/listKeys/action' API permission missing. We're working on a solution for this!"
+          )
         }
-      )
+        logger.debug(error)
+      }
     }
 
     const result: {

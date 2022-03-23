@@ -1,5 +1,6 @@
 import cuid from 'cuid'
 import { AzureEventGrid } from '../../types/generated'
+import { transformSystemData } from '../../utils/format'
 import { RawAzureEventGrid } from './data'
 
 export default ({
@@ -15,14 +16,7 @@ export default ({
     id,
     name,
     type,
-    systemData: {
-      createdBy,
-      createdByType,
-      createdAt,
-      lastModifiedBy,
-      lastModifiedByType,
-      lastModifiedAt,
-    } = {},
+    systemData,
     provisioningState,
     domainName,
     resourceGroupId
@@ -33,12 +27,7 @@ export default ({
     name,
     type,
     region,
-    createdBy,
-    createdByType,
-    createdAt: createdAt?.toISOString(),
-    lastModifiedBy,
-    lastModifiedByType,
-    lastModifiedAt: lastModifiedAt?.toISOString(),
+    ...transformSystemData(systemData),
     provisioningState,
     domainName,
     resourceGroupId

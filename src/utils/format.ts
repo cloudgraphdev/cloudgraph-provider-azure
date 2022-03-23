@@ -1,3 +1,4 @@
+import { SystemData } from '@azure/arm-eventhub'
 import { AzureRawTag } from '../types/generated'
 import { TagMap } from '../types'
 import { RawAzureResourceGroup } from '../services/resourceGroup/data'
@@ -25,3 +26,32 @@ export const getResourceGroupNames = (resourceGroups: {
   Object.values(resourceGroups)
     .flat()
     .map(({ name }) => name)
+
+export const transformSystemData = (systemData: SystemData): {
+  createdBy?: string
+  createdByType?: string
+  createdAt?: string
+  lastModifiedBy?: string
+  lastModifiedByType?: string
+  lastModifiedAt?: string
+} => {
+  if (systemData) {
+    const {
+      createdBy,
+      createdByType,
+      createdAt,
+      lastModifiedBy,
+      lastModifiedByType,
+      lastModifiedAt,
+    } = systemData
+    return {
+      createdBy,
+      createdByType,
+      createdAt: createdAt?.toISOString(),
+      lastModifiedBy,
+      lastModifiedByType,
+      lastModifiedAt: lastModifiedAt?.toISOString(),
+    }
+  }
+  return {}
+}
