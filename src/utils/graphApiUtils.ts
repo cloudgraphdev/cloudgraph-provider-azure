@@ -2,6 +2,7 @@ import { Client } from '@microsoft/microsoft-graph-client'
 import { ClientOptions } from '@microsoft/microsoft-graph-client/lib/src/IClientOptions'
 import { AzureServiceConfig } from '../types'
 import { getAuthProviderViaMsalForGraph } from './authUtils'
+import 'isomorphic-fetch'
 
 export const fetchFromMSGraphClient = async ({
   config,
