@@ -1,3 +1,10 @@
+## [0.46.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.0...0.46.1) (2022-03-23)
+
+
+### Bug Fixes
+
+* added missing service entry to README, systemData format fix ([4dac59c](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/4dac59c8d2fe865a8aa5892b7c6b113072d5f739))
+
 # [0.46.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.45.1...0.46.0) (2022-03-22)
 
 
