@@ -1,6 +1,7 @@
 import cuid from 'cuid'
 import { RawAzureCdnOriginGroup } from './data'
 import { AzureCdnOriginGroup } from '../../types/generated'
+import { transformSystemData } from '../../utils/format'
 
 export default ({
   service,
@@ -15,14 +16,7 @@ export default ({
     id,
     name,
     type,
-    systemData: {
-      createdBy,
-      createdByType,
-      createdAt,
-      lastModifiedBy,
-      lastModifiedByType,
-      lastModifiedAt,
-    } = {},
+    systemData,
     healthProbeSettings,
     trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
     responseBasedOriginErrorDetectionSettings: settings,
@@ -37,12 +31,7 @@ export default ({
     name,
     type,
     region,
-    createdBy,
-    createdByType,
-    createdAt: createdAt?.toISOString(),
-    lastModifiedBy,
-    lastModifiedByType,
-    lastModifiedAt: lastModifiedAt?.toISOString(),
+    ...transformSystemData(systemData),
     healthProbeSettings,
     trafficRestorationTimeToHealedOrNewEndpointsInMinutes,
     responseBasedOriginErrorDetectionSettings: {
