@@ -1,3 +1,10 @@
+## [0.46.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.1...0.46.2) (2022-03-23)
+
+
+### Bug Fixes
+
+* Remove deprecated import that causes an error on the scan ([67cfa4a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/67cfa4a8eccb6cf8ca9565b1a1844d724a5c22d0))
+
 ## [0.46.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.0...0.46.1) (2022-03-23)
 
 
