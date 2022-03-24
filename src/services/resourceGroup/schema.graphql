@@ -5,7 +5,8 @@ type azureResourceGroup implements azureResource
     mutation: { add: true, delete: false }
   ) {
   managedBy: String @search(by: [hash, regexp])
-  arcConnectedClusters: [azureArcConnectedCluster] @hasInverse(field: resourceGroup)
+  arcConnectedClusters: [azureArcConnectedCluster]
+    @hasInverse(field: resourceGroup)
   aksManagedClusters: [azureAksManagedCluster] @hasInverse(field: resourceGroup)
   # appServiceKubeEnvironments: [azureAppServiceKubeEnvironment] @hasInverse(field: resourceGroup)
   appServicePlans: [azureAppServicePlan] @hasInverse(field: resourceGroup)
@@ -15,11 +16,14 @@ type azureResourceGroup implements azureResource
   cdnOriginGroups: [azureCdnOriginGroup] @hasInverse(field: resourceGroup)
   cdnOrigins: [azureCdnOrigin] @hasInverse(field: resourceGroup)
   cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroup)
-  containerRegistries: [azureContainerRegistry] @hasInverse(field: resourceGroup)
+  containerRegistries: [azureContainerRegistry]
+    @hasInverse(field: resourceGroup)
   dataFactories: [azureDataFactory] @hasInverse(field: resourceGroup)
-  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance] @hasInverse(field: resourceGroup)
+  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
+    @hasInverse(field: resourceGroup)
   databaseMySql: [azureDatabaseMySql] @hasInverse(field: resourceGroup)
-  databasePostgreSql: [azureDatabasePostgreSql] @hasInverse(field: resourceGroup)
+  databasePostgreSql: [azureDatabasePostgreSql]
+    @hasInverse(field: resourceGroup)
   databaseSql: [azureDatabaseSql] @hasInverse(field: resourceGroup)
   databaseSqlVm: [azureDatabaseSqlVm] @hasInverse(field: resourceGroup)
   disks: [azureDisk] @hasInverse(field: resourceGroup)
@@ -41,9 +45,13 @@ type azureResourceGroup implements azureResource
   storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroup)
   storageBlobs: [azureStorageBlob] @hasInverse(field: resourceGroup)
   storageContainers: [azureStorageContainer] @hasInverse(field: resourceGroup)
-  trafficManagerProfiles: [azureTrafficManagerProfile] @hasInverse(field: resourceGroup)
-  virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: resourceGroup)
+  trafficManagerProfiles: [azureTrafficManagerProfile]
+    @hasInverse(field: resourceGroup)
+  virtualMachineScaleSets: [azureVirtualMachineScaleSet]
+    @hasInverse(field: resourceGroup)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroup)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroup)
   activityLogAlerts: [azureActivityLogAlert] @hasInverse(field: resourceGroup)
+  logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace]
+    @hasInverse(field: resourceGroup)
 }
