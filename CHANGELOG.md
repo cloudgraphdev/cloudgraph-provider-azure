@@ -1,3 +1,10 @@
+## [0.46.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.2...0.46.3) (2022-03-24)
+
+
+### Bug Fixes
+
+* restore isomorphic-fetch import and add dependency ([b2804ec](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b2804ec9ac542e8d6bd2f4eab4d909cc236130dd))
+
 ## [0.46.2](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.1...0.46.2) (2022-03-23)
 
 
