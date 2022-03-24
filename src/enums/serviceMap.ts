@@ -24,6 +24,7 @@ import AzureDatabaseMySql from '../services/databaseMySql'
 import AzureDatabasePostgreSql from '../services/databasePostgreSql'
 import AzureDatabaseSql from '../services/databaseSql'
 import AzureDatabaseSqlVm from '../services/databaseSqlVm'
+import AzureDiagnosticSettings from '../services/diagnosticSettings'
 import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
 import AzureEventGrid from '../services/eventGrid'
@@ -94,6 +95,7 @@ export default {
   [services.databasePostgreSql]: AzureDatabasePostgreSql,
   [services.databaseSqlVm]: AzureDatabaseSqlVm,
   [services.databaseSql]: AzureDatabaseSql,
+  [services.diagnosticSettings]: AzureDiagnosticSettings,
   [services.disk]: AzureDisk,
   [services.dns]: AzureDns,
   [services.eventGrid]: AzureEventGrid,
