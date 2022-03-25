@@ -5,14 +5,15 @@ import {
 } from '@azure/arm-operationalinsights'
 import azureLoggerText from '../../properties/logger'
 
-import { AzureServiceInput } from '../../types'
+import { AzureServiceInput, TagMap } from '../../types'
 import { tryCatchWrapper } from '../../utils'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 
 export interface RawAzureLogAnalyticsWorkspace
   extends Omit<Workspace, 'tags' | 'location'> {
   resourceGroupId: string
-  region?: string
+  region: string
+  Tags: TagMap
 }
 
 const { logger } = CloudGraph
@@ -57,7 +58,7 @@ export default async ({
       [property: string]: RawAzureLogAnalyticsWorkspace[]
     } = {}
     let numOfGroups = 0
-    workspaceData.map(({ location: region, ...rest }) => {
+    workspaceData.map(({ location: region, tags, ...rest }) => {
       const resourceGroupId = getResourceGroupFromEntity({
         id: rest.id,
       })
@@ -70,6 +71,7 @@ export default async ({
           ...rest,
           resourceGroupId,
           region,
+          Tags: tags || {},
         })
         numOfGroups += 1
       }

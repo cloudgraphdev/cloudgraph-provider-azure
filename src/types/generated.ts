@@ -1977,6 +1977,7 @@ export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
   retentionInDays?: Maybe<Scalars['Int']>;
   sku?: Maybe<AzureLogAnalyticsWorkspaceSku>;
   subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   workspaceCapping?: Maybe<AzureLogAnalyticsWorkspaceCapping>;
 };
 
@@ -2932,6 +2933,7 @@ export type AzureTag = {
   key: Scalars['String'];
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;

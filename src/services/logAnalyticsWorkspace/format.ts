@@ -1,6 +1,7 @@
 import cuid from 'cuid'
 
 import { AzureLogAnalyticsWorkspace } from '../../types/generated'
+import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureLogAnalyticsWorkspace } from './data'
 
 export default ({
@@ -26,6 +27,7 @@ export default ({
     publicNetworkAccessForIngestion,
     publicNetworkAccessForQuery,
     type,
+    Tags = {},
   } = service
 
   return {
@@ -44,5 +46,6 @@ export default ({
     modifiedDate,
     publicNetworkAccessForIngestion,
     publicNetworkAccessForQuery,
+    tags: formatTagsFromMap(Tags),
   }
 }

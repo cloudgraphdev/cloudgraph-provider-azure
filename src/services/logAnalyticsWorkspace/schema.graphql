@@ -50,4 +50,5 @@ type azureLogAnalyticsWorkspace implements azureBaseResource
   publicNetworkAccessForQuery: String @search(by: [hash, regexp])
   resourceGroupId: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: logAnalyticsWorkspaces)
+  tags: [azureRawTag]
 }

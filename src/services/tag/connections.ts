@@ -698,7 +698,7 @@ export default ({
           })
         }
       }
-    }   
+    }
     /**
      * Find related MySQL Servers
      */
@@ -743,6 +743,31 @@ export default ({
             resourceType: services.activityLogAlerts,
             relation: 'child',
             field: 'activityLogAlerts',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related LogAnalyticsWorkspaces
+     */
+    const logAnalyticsWorkspaces: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.logAnalyticsWorkspace)
+    if (logAnalyticsWorkspaces?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        logAnalyticsWorkspaces.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const logAnalyticsWorkspace of dataAtRegion) {
+          const { id } = logAnalyticsWorkspace
+          connections.push({
+            id,
+            resourceType: services.logAnalyticsWorkspace,
+            relation: 'child',
+            field: 'logAnalyticsWorkspaces',
           })
         }
       }
