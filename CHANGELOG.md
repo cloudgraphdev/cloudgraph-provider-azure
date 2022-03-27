@@ -1,3 +1,11 @@
+# [0.47.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.3...0.47.0) (2022-03-27)
+
+
+### Features
+
+* Added missing tags ([6099543](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/6099543de882b28a04cd1e17936ae0d71e31b944))
+* Created log Analytics Workspace service ([d40325a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/d40325a310a32a79aa9f0e80b839942135d47207))
+
 ## [0.46.3](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.2...0.46.3) (2022-03-24)
 
 
