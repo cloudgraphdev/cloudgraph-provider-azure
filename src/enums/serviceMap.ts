@@ -56,6 +56,7 @@ import AzureVirtualMachine from '../services/virtualMachine'
 import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
 import AzureVirtualNetwork from '../services/virtualNetwork'
 import AzureSqlServers from '../services/sqlServers'
+import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -100,7 +101,9 @@ export default {
   [services.functionApp]: AzureFunctionApp,
   [services.keyVault]: AzureKeyVault,
   [services.loadBalancer]: AzureLoadBalancer,
-  [services.monitorInsightsActivityLogAlertRule]:AzureMonitorInsightsActivityLogAlertRule,
+  [services.logAnalyticsWorkspace]: AzureLogAnalyticsWorkspaces,
+  [services.monitorInsightsActivityLogAlertRule]:
+    AzureMonitorInsightsActivityLogAlertRule,
   [services.mySqlServers]: AzureMySqlServer,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,

@@ -1963,6 +1963,41 @@ export type AzureLoadBalancer = AzureResource & {
   skuTier?: Maybe<Scalars['String']>;
 };
 
+export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
+  createdDate?: Maybe<Scalars['String']>;
+  customerId?: Maybe<Scalars['String']>;
+  features?: Maybe<AzureLogAnalyticsWorkspaceFeature>;
+  modifiedDate?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccessForIngestion?: Maybe<Scalars['String']>;
+  publicNetworkAccessForQuery?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+  retentionInDays?: Maybe<Scalars['Int']>;
+  sku?: Maybe<AzureLogAnalyticsWorkspaceSku>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  workspaceCapping?: Maybe<AzureLogAnalyticsWorkspaceCapping>;
+};
+
+export type AzureLogAnalyticsWorkspaceCapping = {
+  dailyQuotaGb?: Maybe<Scalars['Int']>;
+  dataIngestionStatus?: Maybe<Scalars['String']>;
+  quotaNextResetTime?: Maybe<Scalars['String']>;
+};
+
+export type AzureLogAnalyticsWorkspaceFeature = {
+  enableLogAccessUsingOnlyResourcePermissions?: Maybe<Scalars['Boolean']>;
+  legacy?: Maybe<Scalars['Int']>;
+  searchVersion?: Maybe<Scalars['Int']>;
+};
+
+export type AzureLogAnalyticsWorkspaceSku = {
+  lastSkuUpdate?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
 export type AzureMonitorInsightsActivityLogAlertRule = AzureBaseResource & {
   actionGroups?: Maybe<Array<Maybe<AzureMonitorInsightsActivityLogAlertRuleActionGroup>>>;
   condition?: Maybe<AzureMonitorInsightsActivityLogAlertRuleCondition>;
@@ -2366,6 +2401,7 @@ export type AzureResourceGroup = AzureResource & {
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   managedBy?: Maybe<Scalars['String']>;
   mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
@@ -2897,6 +2933,7 @@ export type AzureTag = {
   key: Scalars['String'];
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;

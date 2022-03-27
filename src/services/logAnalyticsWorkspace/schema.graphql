@@ -1,0 +1,54 @@
+type azureLogAnalyticsWorkspaceFeature
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  enableLogAccessUsingOnlyResourcePermissions: Boolean @search
+  legacy: Int @search
+  searchVersion: Int @search
+}
+
+type azureLogAnalyticsWorkspaceCapping
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  dailyQuotaGb: Int @search
+  quotaNextResetTime: String @search(by: [hash, regexp])
+  dataIngestionStatus: String @search(by: [hash, regexp])
+}
+
+type azureLogAnalyticsWorkspaceSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String! @search(by: [hash, regexp])
+  lastSkuUpdate: String @search(by: [hash, regexp])
+}
+
+type azureLogAnalyticsWorkspace implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  customerId: String @search(by: [hash, regexp])
+  sku: azureLogAnalyticsWorkspaceSku
+  features: azureLogAnalyticsWorkspaceFeature
+  workspaceCapping: azureLogAnalyticsWorkspaceCapping
+  retentionInDays: Int @search
+  createdDate: String @search(by: [hash, regexp])
+  modifiedDate: String @search(by: [hash, regexp])
+  publicNetworkAccessForIngestion: String @search(by: [hash, regexp])
+  publicNetworkAccessForQuery: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: logAnalyticsWorkspaces)
+  tags: [azureRawTag]
+}

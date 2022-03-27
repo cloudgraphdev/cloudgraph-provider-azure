@@ -154,6 +154,9 @@ export default {
   // Virtual Networks
   foundvirtualNetworks: (num: number): string =>
     `Found ${num} virtual networks`,
+  // Log Analytics Workspaces
+  foundLogAnalyticsWorkspaces: (num: number): string =>
+    `Found ${num} log analytics workspaces`,
   // Generic Rest API
   fetchedDataFromRestApi: (url: string): string =>
     `Fetched data from Azure REST API: ${url}`,
