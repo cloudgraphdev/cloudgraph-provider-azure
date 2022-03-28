@@ -120,6 +120,8 @@ export default {
     `Found ${num} private dns zones`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
+  // RedisCache
+  foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Assesments

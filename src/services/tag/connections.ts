@@ -897,6 +897,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related RedisCaches
+     */
+    const redisCaches: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.redisCaches)
+    if (redisCaches?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        redisCaches.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const redisCache of dataAtRegion) {
+          const { id } = redisCache
+          connections.push({
+            id,
+            resourceType: services.redisCaches,
+            relation: 'child',
+            field: 'redisCaches',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

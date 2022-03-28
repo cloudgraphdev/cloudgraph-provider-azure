@@ -48,6 +48,7 @@ export default {
   postgreSqlServers: 'postgreSqlServers',
   privateDns: 'privateDns',
   publicIp: 'publicIp',
+  redisCaches: 'redisCaches',
   resourceGroup: 'resourceGroup',
   securityAssesments: 'securityAssesments',
   securityContacts: 'securityContacts',

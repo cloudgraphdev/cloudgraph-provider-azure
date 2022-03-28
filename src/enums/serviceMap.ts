@@ -44,6 +44,7 @@ import AzurePolicyAssignment from '../services/policyAssignment'
 import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
+import AzureRedisCache from '../services/redisCache'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureSecurityAssesments from '../services/securityAssesments'
 import AzureSecurityContacts from '../services/securityContacts'
@@ -119,6 +120,7 @@ export default {
   [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
+  [services.redisCaches]: AzureRedisCache,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityAssesments]: AzureSecurityAssesments,
   [services.securityContacts]: AzureSecurityContacts,

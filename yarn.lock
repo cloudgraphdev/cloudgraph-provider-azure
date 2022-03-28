@@ -297,6 +297,19 @@
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
 
+"@azure/arm-rediscache@^6.1.0":
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-rediscache/-/arm-rediscache-6.1.0.tgz#03239a5f7cfb725f726f40adcf056bff17ffce06"
+  integrity sha512-rtbG4s0kBSGayslZAe/nwwq4A2W/1GgEAicC85VMHk3eJiSqSzau5Wa1J6CbmJiEOB0RB++3vNNb1oEXnaoRIw==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-resources@^5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-resources/-/arm-resources-5.0.0.tgz#61ffee09786613b905fa7e1a2ddca56aece24c52"
