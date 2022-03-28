@@ -774,7 +774,7 @@ export default ({
     }
 
     /**
-     * Find related LogAnalyticsWorkspaces
+     * Find related LogAnalyticsSolutions
      */
     const logAnalyticsSolutions: {
       name: string

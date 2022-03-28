@@ -19,7 +19,7 @@ export interface RawAzureLogAnalyticsSolution
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'LogAnalyticsWorkspace'
+const serviceName = 'LogAnalyticsSolution'
 
 export default async ({
   regions,
