@@ -43,8 +43,6 @@ export default {
   [services.keyVault]: 'azureKeyVault',
   [services.loadBalancer]: 'azureLoadBalancer',
   [services.logAnalyticsWorkspace]: 'azureLogAnalyticsWorkspace',
-  [services.monitorInsightsActivityLogAlertRule]:
-    'azureMonitorInsightsActivityLogAlertRule',
   [services.mySqlServers]: 'azureMySqlServer',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.policyAssignment]: 'azurePolicyAssignment',
