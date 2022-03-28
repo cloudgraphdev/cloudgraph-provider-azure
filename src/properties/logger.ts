@@ -96,6 +96,8 @@ export default {
   foundEventHubNamespaces: (num: number): string =>
     `Found ${num} event hub namespaces`,
   foundEventHubs: (num: number): string => `Found ${num} event hubs`,
+  // ExpressRouteGateways
+  foundExpressRouteGateways: (num: number): string => `Found ${num} ExpressRoute Gateways`,
   // File Share
   foundFileShares: (num: number): string => `Found ${num} file shares`,
   // Firewall

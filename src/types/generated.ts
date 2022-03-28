@@ -1966,6 +1966,67 @@ export type AzureEventHubCaptureDestination = {
   storageAccountResourceId?: Maybe<Scalars['String']>;
 };
 
+export type AzureExpressRouteGateway = AzureResource & {
+  autoScaleConfiguration?: Maybe<AzureExpressRouteGatewayPropertiesAutoScaleConfiguration>;
+  etag?: Maybe<Scalars['String']>;
+  expressRouteConnections?: Maybe<Array<Maybe<AzureExpressRouteGatewayConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  virtualHub?: Maybe<AzureExpressRouteGatewayVirtualHubId>;
+};
+
+export type AzureExpressRouteGatewayCircuitPeeringId = {
+  id: Scalars['String'];
+};
+
+export type AzureExpressRouteGatewayConnection = {
+  authorizationKey?: Maybe<Scalars['String']>;
+  enableInternetSecurity?: Maybe<Scalars['Boolean']>;
+  expressRouteCircuitPeering?: Maybe<AzureExpressRouteGatewayCircuitPeeringId>;
+  expressRouteGatewayBypass?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  routingConfiguration?: Maybe<AzureExpressRouteGatewayRoutingConfiguration>;
+  routingWeight?: Maybe<Scalars['Int']>;
+};
+
+export type AzureExpressRouteGatewayPropagatedRouteTable = {
+  ids?: Maybe<Array<Maybe<AzureSubResource>>>;
+  labels?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureExpressRouteGatewayPropertiesAutoScaleConfiguration = {
+  bounds?: Maybe<AzureExpressRouteGatewayPropertiesAutoScaleConfigurationBounds>;
+};
+
+export type AzureExpressRouteGatewayPropertiesAutoScaleConfigurationBounds = {
+  max?: Maybe<Scalars['Int']>;
+  min?: Maybe<Scalars['Int']>;
+};
+
+export type AzureExpressRouteGatewayRoutingConfiguration = {
+  associatedRouteTable?: Maybe<AzureSubResource>;
+  propagatedRouteTables?: Maybe<AzureExpressRouteGatewayPropagatedRouteTable>;
+  vnetRoutes?: Maybe<AzureExpressRouteGatewayVnetRoute>;
+};
+
+export type AzureExpressRouteGatewayStaticRoute = {
+  addressPrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  nextHopIpAddress?: Maybe<Scalars['String']>;
+};
+
+export type AzureExpressRouteGatewayVirtualHubId = {
+  id: Scalars['String'];
+};
+
+export type AzureExpressRouteGatewayVnetRoute = {
+  bgpConnections?: Maybe<Array<Maybe<AzureSubResource>>>;
+  staticRoutes?: Maybe<Array<Maybe<AzureExpressRouteGatewayStaticRoute>>>;
+};
+
 export type AzureExtendedLocation = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -3214,6 +3275,7 @@ export type AzureResourceGroup = AzureResource & {
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
   eventGrids?: Maybe<Array<Maybe<AzureEventGrid>>>;
   eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
+  expressRouteGateways?: Maybe<Array<Maybe<AzureExpressRouteGateway>>>;
   fileShares?: Maybe<Array<Maybe<AzureFileShare>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;

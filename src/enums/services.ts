@@ -38,6 +38,7 @@ export default {
   dns: 'dns',
   eventGrid: 'eventGrid',
   eventHub: 'eventHub',
+  expressRouteGateways: 'expressRouteGateways',
   fileShare: 'fileShare',
   firewall: 'firewall',
   functionApp: 'functionApp',

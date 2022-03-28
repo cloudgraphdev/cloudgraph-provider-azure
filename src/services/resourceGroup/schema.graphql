@@ -9,6 +9,7 @@ type azureResourceGroup implements azureResource
   arcConnectedClusters: [azureArcConnectedCluster]
     @hasInverse(field: resourceGroup)
   aksManagedClusters: [azureAksManagedCluster] @hasInverse(field: resourceGroup)
+  appInsights: [azureAppInsights] @hasInverse(field: resourceGroup)
   appServiceEnvironments: [azureAppServiceEnvironment] @hasInverse(field: resourceGroup)
   # appServiceKubeEnvironments: [azureAppServiceKubeEnvironment] @hasInverse(field: resourceGroup)
   appServicePlans: [azureAppServicePlan] @hasInverse(field: resourceGroup)
@@ -20,6 +21,7 @@ type azureResourceGroup implements azureResource
   cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroup)
   containerRegistries: [azureContainerRegistry]
     @hasInverse(field: resourceGroup)
+  cosmosDb: [azureCosmosDb] @hasInverse(field: resourceGroup)
   dataCollectionRules: [azureDataCollectionRule]
     @hasInverse(field: resourceGroup)
   dataFactories: [azureDataFactory] @hasInverse(field: resourceGroup)
@@ -36,6 +38,7 @@ type azureResourceGroup implements azureResource
   dns: [azureDnsZone] @hasInverse(field: resourceGroup)
   eventGrids: [azureEventGrid] @hasInverse(field: resourceGroup)
   eventHubs: [azureEventHub] @hasInverse(field: resourceGroup)
+  expressRouteGateways: [azureExpressRouteGateway] @hasInverse(field: resourceGroup)
   fileShares: [azureFileShare] @hasInverse(field: resourceGroup)
   firewalls: [azureFirewall] @hasInverse(field: resourceGroup)
   functionApps: [azureFunctionApp] @hasInverse(field: resourceGroup)
@@ -65,7 +68,5 @@ type azureResourceGroup implements azureResource
     @hasInverse(field: resourceGroup)
   logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace]
     @hasInverse(field: resourceGroup)
-  cosmosDb: [azureCosmosDb] @hasInverse(field: resourceGroup)
-  appInsights: [azureAppInsights] @hasInverse(field: resourceGroup)
   integrationRuntimes: [azureIntegrationRuntime] @hasInverse(field: resourceGroup)
 }

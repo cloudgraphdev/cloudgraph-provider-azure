@@ -35,6 +35,7 @@ import AzureDisk from '../services/disk'
 import AzureDns from '../services/dns'
 import AzureEventGrid from '../services/eventGrid'
 import AzureEventHub from '../services/eventHub'
+import AzureExpressRouteGateway from '../services/expressRouteGateways'
 import AzureFileShare from '../services/fileShare'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
@@ -116,6 +117,7 @@ export default {
   [services.dns]: AzureDns,
   [services.eventGrid]: AzureEventGrid,
   [services.eventHub]: AzureEventHub,
+  [services.expressRouteGateways]: AzureExpressRouteGateway,
   [services.fileShare]: AzureFileShare,
   [services.firewall]: AzureFirewall,
   [services.functionApp]: AzureFunctionApp,
