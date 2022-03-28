@@ -1,3 +1,15 @@
+# [0.48.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.47.0...0.48.0) (2022-03-28)
+
+
+### Bug Fixes
+
+* remove monitorInsightsActivityLogAlertRule service, tweaks to activityLogAlerts service ([b061ab0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/b061ab0fdc6cc18dc743e3ce724029e9f20d3839))
+
+
+### Features
+
+* Created Log Analytics Solution service ([103a363](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/103a36307edc099f63314e3be8fdd4911fcff851))
+
 # [0.47.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.46.3...0.47.0) (2022-03-27)
 
 
