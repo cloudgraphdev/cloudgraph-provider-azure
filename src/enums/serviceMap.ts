@@ -56,6 +56,7 @@ import AzureVirtualMachine from '../services/virtualMachine'
 import AzureVirtualMachineScaleSet from '../services/virtualMachineScaleSet'
 import AzureVirtualNetwork from '../services/virtualNetwork'
 import AzureSqlServers from '../services/sqlServers'
+import AzureLogAnalyticsSolutions from '../services/logAnalyticsSolution'
 import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
 
 /**
@@ -101,6 +102,7 @@ export default {
   [services.functionApp]: AzureFunctionApp,
   [services.keyVault]: AzureKeyVault,
   [services.loadBalancer]: AzureLoadBalancer,
+  [services.logAnalyticsSolution]: AzureLogAnalyticsSolutions,
   [services.logAnalyticsWorkspace]: AzureLogAnalyticsWorkspaces,
   [services.monitorInsightsActivityLogAlertRule]:
     AzureMonitorInsightsActivityLogAlertRule,

@@ -154,6 +154,9 @@ export default {
   // Virtual Networks
   foundvirtualNetworks: (num: number): string =>
     `Found ${num} virtual networks`,
+  // Log Analytics Solutions
+  foundLogAnalyticsSolutions: (num: number): string =>
+    `Found ${num} log analytics solutions`,
   // Log Analytics Workspaces
   foundLogAnalyticsWorkspaces: (num: number): string =>
     `Found ${num} log analytics workspaces`,

@@ -35,6 +35,7 @@ export default {
   functionApp: 'functionApp',
   keyVault: 'keyVault',
   loadBalancer: 'loadBalancer',
+  logAnalyticsSolution: 'logAnalyticsSolution',
   logAnalyticsWorkspace: 'logAnalyticsWorkspace',
   monitorInsightsActivityLogAlertRule: 'monitorInsightsActivityLogAlertRule',
   mySqlServers: 'mySqlServers',

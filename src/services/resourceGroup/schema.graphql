@@ -52,6 +52,8 @@ type azureResourceGroup implements azureResource
   virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroup)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroup)
   activityLogAlerts: [azureActivityLogAlert] @hasInverse(field: resourceGroup)
+  logAnalyticsSolutions: [azureLogAnalyticsSolution]
+    @hasInverse(field: resourceGroup)
   logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace]
     @hasInverse(field: resourceGroup)
 }

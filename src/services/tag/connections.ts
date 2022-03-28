@@ -772,6 +772,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related LogAnalyticsWorkspaces
+     */
+    const logAnalyticsSolutions: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.logAnalyticsSolution)
+    if (logAnalyticsSolutions?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        logAnalyticsSolutions.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const logAnalyticsSolution of dataAtRegion) {
+          const { id } = logAnalyticsSolution
+          connections.push({
+            id,
+            resourceType: services.logAnalyticsSolution,
+            relation: 'child',
+            field: 'logAnalyticsSolutions',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

@@ -48,6 +48,7 @@
     "@azure/arm-mysql": "^5.0.0",
     "@azure/arm-network": "^26.0.0",
     "@azure/arm-operationalinsights": "^8.0.0",
+    "@azure/arm-operations": "^3.0.0",
     "@azure/arm-policy": "^5.0.0",
     "@azure/arm-postgresql": "^6.0.0",
     "@azure/arm-privatedns": "^3.0.0",
