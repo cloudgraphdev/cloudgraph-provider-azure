@@ -42,6 +42,7 @@ export default {
   [services.functionApp]: 'azureFunctionApp',
   [services.keyVault]: 'azureKeyVault',
   [services.loadBalancer]: 'azureLoadBalancer',
+  [services.logAnalyticsSolution]: 'azureLogAnalyticsSolution',
   [services.logAnalyticsWorkspace]: 'azureLogAnalyticsWorkspace',
   [services.mySqlServers]: 'azureMySqlServer',
   [services.networkInterface]: 'azureNetworkInterface',

@@ -1,0 +1,40 @@
+type azureLogAnalyticsSolutionProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  workspaceResourceId: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  containedResources: [String] @search(by: [hash, regexp])
+  referencedResources: [String] @search(by: [hash, regexp])
+  creationTime: String @search(by: [hash, regexp])
+  lastModifiedTime: String @search(by: [hash, regexp])
+}
+
+type azureLogAnalyticsSolutionPlan
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  publisher: String @search(by: [hash, regexp])
+  promotionCode: String @search(by: [hash, regexp])
+  product: String @search(by: [hash, regexp])
+}
+
+type azureLogAnalyticsSolution implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  plan: azureLogAnalyticsSolutionPlan
+  properties: azureLogAnalyticsSolutionProperties
+  resourceGroupId: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: logAnalyticsSolutions)
+  tags: [azureRawTag]
+}

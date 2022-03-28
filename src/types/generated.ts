@@ -1963,6 +1963,32 @@ export type AzureLoadBalancer = AzureResource & {
   skuTier?: Maybe<Scalars['String']>;
 };
 
+export type AzureLogAnalyticsSolution = AzureBaseResource & {
+  plan?: Maybe<AzureLogAnalyticsSolutionPlan>;
+  properties?: Maybe<AzureLogAnalyticsSolutionProperties>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureLogAnalyticsSolutionPlan = {
+  name?: Maybe<Scalars['String']>;
+  product?: Maybe<Scalars['String']>;
+  promotionCode?: Maybe<Scalars['String']>;
+  publisher?: Maybe<Scalars['String']>;
+};
+
+export type AzureLogAnalyticsSolutionProperties = {
+  containedResources?: Maybe<Array<Maybe<Scalars['String']>>>;
+  creationTime?: Maybe<Scalars['String']>;
+  lastModifiedTime?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  referencedResources?: Maybe<Array<Maybe<Scalars['String']>>>;
+  workspaceResourceId?: Maybe<Scalars['String']>;
+};
+
 export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
   createdDate?: Maybe<Scalars['String']>;
   customerId?: Maybe<Scalars['String']>;
@@ -2362,6 +2388,7 @@ export type AzureResourceGroup = AzureResource & {
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   managedBy?: Maybe<Scalars['String']>;
   mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
@@ -2894,6 +2921,7 @@ export type AzureTag = {
   key: Scalars['String'];
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
