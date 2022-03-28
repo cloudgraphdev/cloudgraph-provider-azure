@@ -34,7 +34,6 @@ import AzureFunctionApp from '../services/functionApp'
 // import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureKeyVault from '../services/keyVault'
 import AzureLoadBalancer from '../services/loadBalancer'
-import AzureMonitorInsightsActivityLogAlertRule from '../services/monitorInsightsActivityLogAlertRule'
 import AzureMySqlServer from '../services/mySqlServers'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
@@ -102,8 +101,6 @@ export default {
   [services.keyVault]: AzureKeyVault,
   [services.loadBalancer]: AzureLoadBalancer,
   [services.logAnalyticsWorkspace]: AzureLogAnalyticsWorkspaces,
-  [services.monitorInsightsActivityLogAlertRule]:
-    AzureMonitorInsightsActivityLogAlertRule,
   [services.mySqlServers]: AzureMySqlServer,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,
