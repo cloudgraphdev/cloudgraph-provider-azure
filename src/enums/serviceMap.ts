@@ -59,6 +59,7 @@ import AzureSqlServers from '../services/sqlServers'
 import AzureLogAnalyticsSolutions from '../services/logAnalyticsSolution'
 import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
 import AzureCosmosDb from '../services/cosmosDb'
+import AzureAppInsights from '../services/appInsights'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -75,6 +76,7 @@ export default {
   [services.aksManagedCluster]: AzureAksManagedCluster,
   [services.metricAlert]: AzureMetricAlert,
   // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
+  [services.appInsights]: AzureAppInsights,
   [services.appServicePlan]: AzureAppServicePlan,
   [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.arcConnectedCluster]: AzureArcConnectedCluster,

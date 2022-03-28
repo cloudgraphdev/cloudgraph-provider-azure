@@ -414,6 +414,26 @@ export type AzureAksManagedClusterPropertiesAutoScalerProfile = {
   skipNodesWithSystemPods?: Maybe<Scalars['String']>;
 };
 
+export type AzureAppInsights = AzureResource & {
+  appId?: Maybe<Scalars['String']>;
+  applicationId?: Maybe<Scalars['String']>;
+  applicationType?: Maybe<Scalars['String']>;
+  connectionString?: Maybe<Scalars['String']>;
+  creationDate?: Maybe<Scalars['DateTime']>;
+  etag?: Maybe<Scalars['String']>;
+  flowType?: Maybe<Scalars['String']>;
+  ingestionMode?: Maybe<Scalars['String']>;
+  instrumentationKey?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccessForIngestion?: Maybe<Scalars['String']>;
+  publicNetworkAccessForQuery?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  retentionInDays?: Maybe<Scalars['Int']>;
+  samplingPercentage?: Maybe<Scalars['Int']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+  tenantId?: Maybe<Scalars['String']>;
+};
+
 export type AzureAppServicePlan = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   elasticScaleEnabled?: Maybe<Scalars['Boolean']>;
@@ -2609,6 +2629,7 @@ export type AzureResource = {
 export type AzureResourceGroup = AzureResource & {
   activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
+  appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
@@ -3152,6 +3173,7 @@ export type AzureTag = {
   adApplications?: Maybe<Array<Maybe<AzureAdApplication>>>;
   adServicePrincipals?: Maybe<Array<Maybe<AzureAdServicePrincipal>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
+  appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;

@@ -1,0 +1,24 @@
+type azureAppInsights implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  retentionInDays: Int @search
+  samplingPercentage: Int @search
+  applicationId: String @search(by: [hash, regexp])
+  appId: String @search(by: [hash, regexp])
+  applicationType: String @search(by: [hash, regexp])
+  flowType: String @search(by: [hash, regexp])
+  instrumentationKey: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  connectionString: String @search(by: [hash, regexp])
+  ingestionMode: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  publicNetworkAccessForIngestion: String @search(by: [hash, regexp])
+  publicNetworkAccessForQuery: String @search(by: [hash, regexp])
+  creationDate: DateTime @search(by: [day])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: appInsights)
+  tags: [azureRawTag]
+}

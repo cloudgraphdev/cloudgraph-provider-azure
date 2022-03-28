@@ -58,4 +58,5 @@ type azureResourceGroup implements azureResource
   logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace]
     @hasInverse(field: resourceGroup)
   cosmosDb: [azureCosmosDb] @hasInverse(field: resourceGroup)
+  appInsights: [azureAppInsights] @hasInverse(field: resourceGroup)
 }

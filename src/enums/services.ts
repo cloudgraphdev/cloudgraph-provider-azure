@@ -8,6 +8,7 @@ export default {
   adUser: 'adUser',
   aksManagedCluster: 'aksManagedCluster',
   // appServiceKubeEnvironment: 'appServiceKubeEnvironment',
+  appInsights: 'appInsights',
   appServicePlan: 'appServicePlan',
   appServiceWebApp: 'appServiceWebApp',
   arcConnectedCluster: 'arcConnectedCluster',

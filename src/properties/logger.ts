@@ -164,6 +164,9 @@ export default {
   // Log Analytics Workspaces
   foundLogAnalyticsWorkspaces: (num: number): string =>
     `Found ${num} log analytics workspaces`,
+  // Application Insights
+  foundAppInsights: (num: number): string =>
+    `Found ${num} application insights`,
   // Generic Rest API
   fetchedDataFromRestApi: (url: string): string =>
     `Fetched data from Azure REST API: ${url}`,

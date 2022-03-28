@@ -13,6 +13,7 @@ export default {
   [services.adUser]: 'azureADUser',
   [services.aksManagedCluster]: 'azureAksManagedCluster',
   // [services.appServiceKubeEnvironment]: 'azureAppServiceKubeEnvironment',
+  [services.appInsights]: 'azureAppInsights',
   [services.appServicePlan]: 'azureAppServicePlan',
   [services.appServiceWebApp]: 'azureAppServiceWebApp',
   [services.arcConnectedCluster]: 'azureArcConnectedCluster',
