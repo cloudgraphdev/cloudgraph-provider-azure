@@ -1,3 +1,10 @@
+# [0.49.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.48.0...0.49.0) (2022-03-29)
+
+
+### Features
+
+* **service:** Create CosmosDB service ([bc3499c](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/bc3499c0b6124c40e074104ec817aeac3c0fcb89))
+
 # [0.48.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.47.0...0.48.0) (2022-03-28)
 
 
