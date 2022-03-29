@@ -1152,6 +1152,193 @@ export type AzureContainerRegistryStatus = {
   timestamp?: Maybe<Scalars['String']>;
 };
 
+export type AzureCosmosDb = AzureResource & {
+  analyticalStorageConfigurationSchemaType?: Maybe<Scalars['String']>;
+  apiServerVersion?: Maybe<Scalars['String']>;
+  azureTables?: Maybe<Array<Maybe<AzureCosmosDbTable>>>;
+  backupPolicy?: Maybe<AzureCosmosDbBackupPolicy>;
+  capabilities?: Maybe<Array<Maybe<AzureCosmosDbCapability>>>;
+  capacityTotalThroughputLimit?: Maybe<Scalars['Int']>;
+  connectorOffer?: Maybe<Scalars['String']>;
+  consistencyPolicy?: Maybe<AzureCosmosDbConsistencyPolicy>;
+  cors?: Maybe<Array<Maybe<AzureCosmosDbCorsPolicy>>>;
+  createMode?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  databaseAccountOfferType?: Maybe<Scalars['String']>;
+  databases?: Maybe<Array<Maybe<AzureCosmosDbDatabase>>>;
+  defaultIdentity?: Maybe<Scalars['String']>;
+  disableKeyBasedMetadataWriteAccess?: Maybe<Scalars['Boolean']>;
+  disableLocalAuth?: Maybe<Scalars['Boolean']>;
+  documentEndpoint?: Maybe<Scalars['String']>;
+  enableAnalyticalStorage?: Maybe<Scalars['Boolean']>;
+  enableAutomaticFailover?: Maybe<Scalars['Boolean']>;
+  enableCassandraConnector?: Maybe<Scalars['Boolean']>;
+  enableFreeTier?: Maybe<Scalars['Boolean']>;
+  enableMultipleWriteLocations?: Maybe<Scalars['Boolean']>;
+  failoverPolicies?: Maybe<Array<Maybe<AzureCosmosDbFailoverPolicy>>>;
+  identity?: Maybe<AzureSqlServerIdentity>;
+  instanceId?: Maybe<Scalars['String']>;
+  ipRules?: Maybe<Array<Maybe<AzureCosmosDbIpAddressOrRange>>>;
+  isVirtualNetworkFilterEnabled?: Maybe<Scalars['Boolean']>;
+  keyVaultKeyUri?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  locations?: Maybe<Array<Maybe<AzureCosmosDbLocation>>>;
+  networkAclBypass?: Maybe<Scalars['String']>;
+  networkAclBypassResourceIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureCosmosDbPrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  readLocations?: Maybe<Array<Maybe<AzureCosmosDbLocation>>>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  restoreParameters?: Maybe<AzureCosmosDbRestoreParameters>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureCosmosDbVirtualNetworkRule>>>;
+  writeLocations?: Maybe<Array<Maybe<AzureCosmosDbLocation>>>;
+};
+
+export type AzureCosmosDbBackupPolicy = {
+  migrationState?: Maybe<AzureCosmosDbMigrationState>;
+  periodicModeProperties?: Maybe<AzureCosmosDbPeriodicModeBackupPolicy>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbCapability = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbConsistencyPolicy = {
+  defaultConsistencyLevel?: Maybe<Scalars['String']>;
+  maxIntervalInSeconds?: Maybe<Scalars['Int']>;
+  maxStalenessPrefix?: Maybe<Scalars['Int']>;
+};
+
+export type AzureCosmosDbCorsPolicy = {
+  allowedHeaders?: Maybe<Scalars['String']>;
+  allowedMethods?: Maybe<Scalars['String']>;
+  allowedOrigins?: Maybe<Scalars['String']>;
+  exposedHeaders?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  maxAgeInSeconds?: Maybe<Scalars['Int']>;
+};
+
+export type AzureCosmosDbData = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbDatabase = {
+  data?: Maybe<Array<Maybe<AzureCosmosDbData>>>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  options?: Maybe<AzureCosmosDbDatabaseOptionsResource>;
+  resource?: Maybe<AzureCosmosDbDatabaseResource>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbDatabaseOptionsResource = {
+  maxThroughput?: Maybe<Scalars['Int']>;
+  throughput?: Maybe<Scalars['Int']>;
+};
+
+export type AzureCosmosDbDatabaseResource = {
+  etag?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  rid?: Maybe<Scalars['String']>;
+  ts?: Maybe<Scalars['Int']>;
+};
+
+export type AzureCosmosDbDatabaseRestoreResource = {
+  collectionNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  databaseName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+};
+
+export type AzureCosmosDbFailoverPolicy = {
+  failoverPriority?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  locationName?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureCosmosDbUserAssignedIdentity>>>;
+};
+
+export type AzureCosmosDbIpAddressOrRange = {
+  id: Scalars['String'];
+  ipAddressOrRange?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbLocation = {
+  documentEndpoint?: Maybe<Scalars['String']>;
+  failoverPriority?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  isZoneRedundant?: Maybe<Scalars['Boolean']>;
+  locationName?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbMigrationState = {
+  startTime?: Maybe<Scalars['DateTime']>;
+  status?: Maybe<Scalars['String']>;
+  targetType?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbPeriodicModeBackupPolicy = {
+  backupIntervalInMinutes?: Maybe<Scalars['Int']>;
+  backupRetentionIntervalInHours?: Maybe<Scalars['Int']>;
+  backupStorageRedundancy?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbPrivateEndpointConnection = {
+  groupId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionState?: Maybe<AzureCosmosDbPrivateLinkServiceConnectionStateProperty>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbPrivateLinkServiceConnectionStateProperty = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbRestoreParameters = {
+  databasesToRestore?: Maybe<Array<Maybe<AzureCosmosDbDatabaseRestoreResource>>>;
+  restoreMode?: Maybe<Scalars['String']>;
+  restoreSource?: Maybe<Scalars['String']>;
+  restoreTimestampInUtc?: Maybe<Scalars['DateTime']>;
+};
+
+export type AzureCosmosDbTable = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  options?: Maybe<AzureCosmosDbDatabaseOptionsResource>;
+  resource?: Maybe<AzureCosmosDbDatabaseResource>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCosmosDbUserAssignedIdentity = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureSqlServerUserIdentity>;
+};
+
+export type AzureCosmosDbVirtualNetworkRule = {
+  id: Scalars['String'];
+  ignoreMissingVNetServiceEndpoint?: Maybe<Scalars['Boolean']>;
+};
+
 export type AzureDataFactory = AzureResource & {
   createTime?: Maybe<Scalars['String']>;
   eTag?: Maybe<Scalars['String']>;
@@ -2373,6 +2560,7 @@ export type AzureResourceGroup = AzureResource & {
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
+  cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
@@ -2911,6 +3099,7 @@ export type AzureTag = {
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
+  cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;

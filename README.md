@@ -48,12 +48,13 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
 | authRoleDefinition                          | authRoleAssignment                                                        |
 | autoProvisioningSettings                    |                                                                           |
-| containerRegistry                           | keyVault, resourceGroup                                                   |
 | cdnCustomDomains                            | cdnEndpoints, resourceGroup                                               |
 | cdnEndpoints                                | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |
 | cdnProfiles                                 | cdnEndpoints, resourceGroup                                               |
 | cdnOrigins                                  | cdnEndpoints, cdnOriginGroups, resourceGroup                              |
 | cdnOriginGroups                             | cdnEndpoints, cdnOrigins, resourceGroup                                   |
+| containerRegistry                           | keyVault, resourceGroup                                                   |
+| cosmosDb                                    | resourceGroup                                                             |
 | dataFactory                                 | resourceGroup                                                             |
 | databaseManagedSqlInstance                  | resourceGroup                                                             |
 | databaseMySql                               | resourceGroup, mySqlServers                                               |

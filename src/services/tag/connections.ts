@@ -797,6 +797,31 @@ export default ({
         }
       }
     }
+    
+    /**
+     * Find related cosmos db accounts
+     */
+    const cosmosDbAccounts: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.cosmosDb)
+    if (cosmosDbAccounts?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        cosmosDbAccounts.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const cosmosDbAccount of dataAtRegion) {
+          const { id } = cosmosDbAccount
+          connections.push({
+            id,
+            resourceType: services.cosmosDb,
+            relation: 'child',
+            field: 'cosmosDb',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {
