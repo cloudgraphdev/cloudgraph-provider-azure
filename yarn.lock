@@ -97,6 +97,19 @@
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
 
+"@azure/arm-cosmosdb@^15.0.0":
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-cosmosdb/-/arm-cosmosdb-15.0.0.tgz#5195b1b301d8c489df35805cc24934fd2ea77f79"
+  integrity sha512-F0lrY+11XRBwMZgXUkGMh8EaSmeHCWjRgblRp+PKlce3UUmC4lgbrZYrJdhE2rxDkOS4sz+zL1lnN2qMuejSNg==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-datafactory@^10.2.0":
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-datafactory/-/arm-datafactory-10.2.0.tgz#345520225fb0f7fd9d7fcbc7d51dbd49d9825ded"

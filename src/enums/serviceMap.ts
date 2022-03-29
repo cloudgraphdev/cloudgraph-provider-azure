@@ -57,6 +57,7 @@ import AzureVirtualNetwork from '../services/virtualNetwork'
 import AzureSqlServers from '../services/sqlServers'
 import AzureLogAnalyticsSolutions from '../services/logAnalyticsSolution'
 import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
+import AzureCosmosDb from '../services/cosmosDb'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -86,6 +87,7 @@ export default {
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnProfiles]: AzureCdnProfiles,
   [services.containerRegistry]: AzureContainerRegistry,
+  [services.cosmosDb]: AzureCosmosDb,
   [services.dataFactory]: AzureDataFactory,
   [services.databaseManagedSqlInstance]: AzureDatabaseManagedSqlInstance,
   [services.databaseMySql]: AzureDatabaseMySql,

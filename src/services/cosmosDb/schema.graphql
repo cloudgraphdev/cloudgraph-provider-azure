@@ -1,0 +1,296 @@
+
+type azureCosmosDbUserAssignedIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: azureSqlServerUserIdentity
+}
+
+type azureCosmosDbIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureCosmosDbUserAssignedIdentity]
+}
+
+type azureCosmosDbIpAddressOrRange
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  ipAddressOrRange: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbConsistencyPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  defaultConsistencyLevel: String @search(by: [hash, regexp])
+  maxStalenessPrefix: Int @search
+  maxIntervalInSeconds: Int @search
+}
+
+type azureCosmosDbCapability
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbLocation
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  locationName: String @search(by: [hash, regexp])
+  documentEndpoint: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  failoverPriority: Int @search
+  isZoneRedundant: Boolean @search
+}
+
+type azureCosmosDbFailoverPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  locationName: String @search(by: [hash, regexp])
+  failoverPriority: Int @search
+}
+
+type azureCosmosDbVirtualNetworkRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  ignoreMissingVNetServiceEndpoint: Boolean @search
+}
+
+type azureCosmosDbPrivateLinkServiceConnectionStateProperty
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  privateEndpointId: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionState: azureCosmosDbPrivateLinkServiceConnectionStateProperty
+  groupId: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbCorsPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  allowedOrigins: String @search(by: [hash, regexp])
+  allowedMethods: String @search(by: [hash, regexp])
+  allowedHeaders: String @search(by: [hash, regexp])
+  exposedHeaders: String @search(by: [hash, regexp])
+  maxAgeInSeconds: Int @search
+}
+
+type azureCosmosDbMigrationState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  targetType: String @search(by: [hash, regexp])
+  startTime: DateTime @search(by: [day])
+}
+
+type azureCosmosDbPeriodicModeBackupPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  backupIntervalInMinutes: Int @search
+  backupRetentionIntervalInHours: Int @search
+  backupStorageRedundancy: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbBackupPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  migrationState: azureCosmosDbMigrationState
+  periodicModeProperties: azureCosmosDbPeriodicModeBackupPolicy
+}
+
+type azureCosmosDbDatabaseOptionsResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  throughput: Int @search
+  maxThroughput: Int @search
+}
+
+type azureCosmosDbDatabaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash])
+  rid: String @search(by: [hash, regexp])
+  ts: Int @search
+  etag: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbData
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureCosmosDbTable
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  options: azureCosmosDbDatabaseOptionsResource
+  resource: azureCosmosDbDatabaseResource
+}
+
+type azureCosmosDbDatabase
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  options: azureCosmosDbDatabaseOptionsResource
+  resource: azureCosmosDbDatabaseResource
+  data: [azureCosmosDbData]
+}
+
+type azureCosmosDbDatabaseRestoreResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  databaseName: String @search(by: [hash, regexp])
+  collectionNames: [String] @search(by: [hash, regexp])
+}
+
+type azureCosmosDbRestoreParameters
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  restoreMode: String @search(by: [hash, regexp])
+  restoreSource: String @search(by: [hash, regexp])
+  restoreTimestampInUtc: DateTime @search(by: [day])
+  databasesToRestore: [azureCosmosDbDatabaseRestoreResource]
+}
+
+type azureCosmosDb implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  documentEndpoint: String @search(by: [hash, regexp])
+  databaseAccountOfferType: String @search(by: [hash, regexp])
+  identity: azureSqlServerIdentity
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  ipRules: [azureCosmosDbIpAddressOrRange]
+  isVirtualNetworkFilterEnabled: Boolean @search
+  enableAutomaticFailover: Boolean @search
+  consistencyPolicy: azureCosmosDbConsistencyPolicy
+  capabilities: [azureCosmosDbCapability]
+  writeLocations: [azureCosmosDbLocation]
+  readLocations: [azureCosmosDbLocation]
+  locations: [azureCosmosDbLocation]
+  failoverPolicies: [azureCosmosDbFailoverPolicy]
+  virtualNetworkRules: [azureCosmosDbVirtualNetworkRule]
+  privateEndpointConnections: [azureCosmosDbPrivateEndpointConnection]
+  enableMultipleWriteLocations: Boolean @search
+  enableCassandraConnector: Boolean @search
+  connectorOffer: String @search(by: [hash, regexp])
+  disableKeyBasedMetadataWriteAccess: Boolean @search
+  keyVaultKeyUri: String @search(by: [hash, regexp])
+  defaultIdentity: String @search(by: [hash, regexp])
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  enableFreeTier: Boolean @search
+  apiServerVersion: String @search(by: [hash, regexp])
+  enableAnalyticalStorage: Boolean @search
+  analyticalStorageConfigurationSchemaType: String @search(by: [hash, regexp])
+  instanceId: String @search(by: [hash, regexp])
+  createMode: String @search(by: [hash, regexp])
+  restoreParameters: azureCosmosDbRestoreParameters
+  backupPolicy: azureCosmosDbBackupPolicy
+  cors: [azureCosmosDbCorsPolicy]
+  networkAclBypass: String @search(by: [hash, regexp])
+  networkAclBypassResourceIds: [String] @search(by: [hash, regexp])
+  disableLocalAuth: Boolean @search
+  capacityTotalThroughputLimit: Int @search
+  databases: [azureCosmosDbDatabase]
+  azureTables: [azureCosmosDbTable]
+  resourceGroup: [azureResourceGroup] @hasInverse(field: cosmosDb)
+}

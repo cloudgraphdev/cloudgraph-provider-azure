@@ -20,6 +20,7 @@ export default {
   cdnOrigins: 'cdnOrigins',
   cdnProfiles: 'cdnProfiles',
   containerRegistry: 'containerRegistry',
+  cosmosDb:'cosmosDb',
   dataFactory: 'dataFactory',
   databaseManagedSqlInstance: 'databaseManagedSqlInstance',
   databaseMySql: 'databaseMySql',

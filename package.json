@@ -38,6 +38,7 @@
     "@azure/arm-compute": "^17.3.0",
     "@azure/arm-containerregistry": "^10.0.0",
     "@azure/arm-containerservice": "^15.1.0",
+    "@azure/arm-cosmosdb": "^15.0.0",
     "@azure/arm-datafactory": "^10.2.0",
     "@azure/arm-dns": "^5.0.0",
     "@azure/arm-eventgrid": "^13.0.0",
