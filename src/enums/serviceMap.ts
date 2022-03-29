@@ -6,6 +6,7 @@ import AzureADIdentitySecurityDefaultsEnforcementPolicy from '../services/adIden
 import AzureADServicePrincipal from '../services/adServicePrincipal'
 import AzureADUser from '../services/adUser'
 import AzureAksManagedCluster from '../services/aksManagedCluster'
+import AzureMetricAlert from '../services/metricAlert'
 import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureArcConnectedCluster from '../services/arcConnectedCluster'
@@ -72,6 +73,7 @@ export default {
   [services.adServicePrincipal]: AzureADServicePrincipal,
   [services.adUser]: AzureADUser,
   [services.aksManagedCluster]: AzureAksManagedCluster,
+  [services.metricAlert]: AzureMetricAlert,
   // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appServicePlan]: AzureAppServicePlan,
   [services.appServiceWebApp]: AzureAppServiceWebApp,

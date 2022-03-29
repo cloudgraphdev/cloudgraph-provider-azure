@@ -822,6 +822,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related metric alerts
+     */
+    const metricAlerts: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.metricAlert)
+    if (metricAlerts?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        metricAlerts.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const metricAlert of dataAtRegion) {
+          const { id } = metricAlert
+          connections.push({
+            id,
+            resourceType: services.metricAlert,
+            relation: 'child',
+            field: 'metricAlerts',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

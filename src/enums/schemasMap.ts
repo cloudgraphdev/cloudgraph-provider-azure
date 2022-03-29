@@ -45,6 +45,7 @@ export default {
   [services.loadBalancer]: 'azureLoadBalancer',
   [services.logAnalyticsSolution]: 'azureLogAnalyticsSolution',
   [services.logAnalyticsWorkspace]: 'azureLogAnalyticsWorkspace',
+  [services.metricAlert]:'azureMetricAlert',
   [services.mySqlServers]: 'azureMySqlServer',
   [services.networkInterface]: 'azureNetworkInterface',
   [services.policyAssignment]: 'azurePolicyAssignment',

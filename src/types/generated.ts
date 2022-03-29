@@ -2211,6 +2211,64 @@ export type AzureLogAnalyticsWorkspaceSku = {
   name: Scalars['String'];
 };
 
+export type AzureMetricAlert = AzureResource & {
+  actions?: Maybe<Array<Maybe<AzureMetricAlertAction>>>;
+  autoMitigate?: Maybe<Scalars['Boolean']>;
+  criteria?: Maybe<AzureMetricAlertCriteria>;
+  description?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  evaluationFrequency?: Maybe<Scalars['String']>;
+  isMigrated?: Maybe<Scalars['Boolean']>;
+  lastUpdatedTime?: Maybe<Scalars['DateTime']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  scopes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  severity?: Maybe<Scalars['Int']>;
+  targetResourceRegion?: Maybe<Scalars['String']>;
+  targetResourceType?: Maybe<Scalars['String']>;
+  windowSize?: Maybe<Scalars['String']>;
+};
+
+export type AzureMetricAlertAction = {
+  actionGroupId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+};
+
+export type AzureMetricAlertCriteria = {
+  allOf?: Maybe<Array<Maybe<AzureMetricAlertMultiMetricCriteria>>>;
+  componentId?: Maybe<Scalars['String']>;
+  failedLocationCount?: Maybe<Scalars['Int']>;
+  odataType?: Maybe<Scalars['String']>;
+  webTestId?: Maybe<Scalars['String']>;
+};
+
+export type AzureMetricAlertDynamicThresholdFailingPeriods = {
+  minFailingPeriodsToAlert?: Maybe<Scalars['Int']>;
+  numberOfEvaluationPeriods?: Maybe<Scalars['Int']>;
+};
+
+export type AzureMetricAlertMetricDimension = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  operator?: Maybe<Scalars['String']>;
+  values?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureMetricAlertMultiMetricCriteria = {
+  alertSensitivity?: Maybe<Scalars['String']>;
+  criterionType?: Maybe<Scalars['String']>;
+  dimensions?: Maybe<Array<Maybe<AzureMetricAlertMetricDimension>>>;
+  failingPeriods?: Maybe<AzureMetricAlertDynamicThresholdFailingPeriods>;
+  id: Scalars['String'];
+  ignoreDataBefore?: Maybe<Scalars['DateTime']>;
+  metricName?: Maybe<Scalars['String']>;
+  metricNamespace?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  operator?: Maybe<Scalars['String']>;
+  skipMetricValidation?: Maybe<Scalars['Boolean']>;
+  threshold?: Maybe<Scalars['Int']>;
+  timeAggregation?: Maybe<Scalars['String']>;
+};
+
 export type AzureMySqlServer = AzureResource & {
   administratorLogin?: Maybe<Scalars['String']>;
   byokEnforcement?: Maybe<Scalars['String']>;
@@ -2579,6 +2637,7 @@ export type AzureResourceGroup = AzureResource & {
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   managedBy?: Maybe<Scalars['String']>;
+  metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
@@ -3112,6 +3171,7 @@ export type AzureTag = {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;

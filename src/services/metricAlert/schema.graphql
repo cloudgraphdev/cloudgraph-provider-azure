@@ -1,0 +1,85 @@
+type azureMetricAlertCriteria
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  odataType: String @search(by: [hash, regexp])
+  allOf: [azureMetricAlertMultiMetricCriteria]
+  webTestId: String @search(by: [hash, regexp])
+  componentId: String @search(by: [hash, regexp])
+  failedLocationCount: Int @search
+}
+
+type azureMetricAlertMultiMetricCriteria
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  criterionType: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  metricName: String @search(by: [hash, regexp])
+  metricNamespace: String @search(by: [hash, regexp])
+  timeAggregation: String @search(by: [hash, regexp])
+  dimensions: [azureMetricAlertMetricDimension]
+  skipMetricValidation: Boolean @search
+  operator: String @search(by: [hash, regexp])
+  threshold: Int @search
+  alertSensitivity: String @search(by: [hash, regexp])
+  failingPeriods: azureMetricAlertDynamicThresholdFailingPeriods
+  ignoreDataBefore: DateTime @search(by: [day])
+}
+
+type azureMetricAlertDynamicThresholdFailingPeriods
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  ) {
+  numberOfEvaluationPeriods: Int @search
+  minFailingPeriodsToAlert: Int @search
+}
+
+type azureMetricAlertMetricDimension
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  operator: String @search(by: [hash, regexp])
+  values: [String] @search(by: [hash, regexp])
+}
+
+type azureMetricAlertAction
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  actionGroupId: String @search(by: [hash, regexp])
+}
+
+type azureMetricAlert implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  description: String @search(by: [hash, regexp])
+  severity: Int @search
+  enabled: Boolean @search
+  scopes: [String] @search(by: [hash, regexp])
+  evaluationFrequency: String @search(by: [hash, regexp])
+  windowSize: String @search(by: [hash, regexp])
+  targetResourceType: String @search(by: [hash, regexp])
+  targetResourceRegion: String @search(by: [hash, regexp])
+  criteria: azureMetricAlertCriteria
+  autoMitigate: Boolean @search
+  actions: [azureMetricAlertAction]
+  lastUpdatedTime: DateTime @search(by: [day])
+  isMigrated: Boolean @search
+  resourceGroup: [azureResourceGroup] @hasInverse(field: metricAlerts)
+}

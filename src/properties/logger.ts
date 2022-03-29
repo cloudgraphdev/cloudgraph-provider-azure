@@ -100,6 +100,8 @@ export default {
     `Found ${num} Key Vault secrets`,
   // Load balancer
   foundLoadBalancers: (num: number): string => `Found ${num} load balancers`,
+  // Metric Alert
+  foundMetricAlerts: (num: number): string => `Found ${num} metric alerts`,
   // Monitor Alert Rules
   foundMonitorAlertRules: (num: number): string => `Found ${num} monitor rules`,
   // Network Interface
