@@ -1415,6 +1415,11 @@ export type AzureDataFactoryIdentity = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureDataLakeStorageAccount = AzureResource & {
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  suffix?: Maybe<Scalars['String']>;
+};
+
 export type AzureDatabaseManagedSqlInstance = AzureResource & {
   collation?: Maybe<Scalars['String']>;
   currentBackupStorageRedundancy?: Maybe<Scalars['String']>;
@@ -2826,6 +2831,7 @@ export type AzureResourceGroup = AzureResource & {
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
+  dataLakeStorageAccount?: Maybe<Array<Maybe<AzureDataLakeStorageAccount>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
   databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;

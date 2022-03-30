@@ -36,6 +36,7 @@ export default {
   [services.databasePostgreSql]: 'azureDatabasePostgreSql',
   [services.databaseSqlVm]: 'azureDatabaseSqlVm',
   [services.databaseSql]: 'azureDatabaseSql',
+  [services.dataLakeStorageAccounts]: 'azureDataLakeStorageAccount',
   [services.diagnosticSettings]: 'azureDiagnosticSetting',
   [services.disk]: 'azureDisk',
   [services.dns]: 'azureDnsZone',

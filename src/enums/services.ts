@@ -29,6 +29,7 @@ export default {
   databasePostgreSql: 'databasePostgreSql',
   databaseSql: 'databaseSql',
   databaseSqlVm: 'databaseSqlVm',
+  dataLakeStorageAccounts: 'dataLakeStorageAccounts',
   diagnosticSettings: 'diagnosticSettings',
   disk: 'disk',
   dns: 'dns',
