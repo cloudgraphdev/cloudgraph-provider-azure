@@ -1,3 +1,10 @@
+# [0.50.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.49.0...0.50.0) (2022-03-30)
+
+
+### Features
+
+* add metricAlert service ([9b55466](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/9b55466c61c778777a043133f030d9b87efc7d98))
+
 # [0.49.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.48.0...0.49.0) (2022-03-29)
 
 
