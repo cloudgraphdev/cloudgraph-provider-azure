@@ -3826,6 +3826,7 @@ export type AzureTag = {
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
+  expressRouteGateways?: Maybe<Array<Maybe<AzureExpressRouteGateway>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
   id: Scalars['String'];

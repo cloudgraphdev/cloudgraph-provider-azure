@@ -947,6 +947,7 @@ export default ({
         }
       }
     }
+
     /**
      * Find related app service environments
      */
@@ -992,6 +993,31 @@ export default ({
             resourceType: services.dataCollectionRule,
             relation: 'child',
             field: 'dataCollectionRules',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related expressRouteGateways
+     */
+    const expressRouteGateways: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.expressRouteGateways)
+    if (expressRouteGateways?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        expressRouteGateways.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const gateway of dataAtRegion) {
+          const { id } = gateway
+          connections.push({
+            id,
+            resourceType: services.expressRouteGateways,
+            relation: 'child',
+            field: 'expressRouteGateways',
           })
         }
       }
