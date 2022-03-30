@@ -37,6 +37,7 @@ import AzureFunctionApp from '../services/functionApp'
 // import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureKeyVault from '../services/keyVault'
 import AzureLoadBalancer from '../services/loadBalancer'
+import AzureMachineLearningWorkspace from '../services/machineLearningWorkspaces'
 import AzureMySqlServer from '../services/mySqlServers'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
@@ -114,6 +115,7 @@ export default {
   [services.loadBalancer]: AzureLoadBalancer,
   [services.logAnalyticsSolution]: AzureLogAnalyticsSolutions,
   [services.logAnalyticsWorkspace]: AzureLogAnalyticsWorkspaces,
+  [services.machineLearningWorkspaces]: AzureMachineLearningWorkspace,
   [services.mySqlServers]: AzureMySqlServer,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,
