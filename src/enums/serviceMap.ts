@@ -69,6 +69,7 @@ import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
 import AzureCosmosDb from '../services/cosmosDb'
 import AzureAppInsights from '../services/appInsights'
 import AzureIntegrationRuntime from '../services/integrationRuntimes' 
+import AzureServiceBus from '../services/serviceBus'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -139,6 +140,7 @@ export default {
   [services.securityGroup]: AzureNetworkSecurityGroup,
   [services.securityPricings]: AzureSecurityPricings,
   [services.securitySettings]: AzureSecuritySettings,
+  [services.serviceBus]: AzureServiceBus,
   [services.sqlServers]: AzureSqlServers,
   [services.storageAccount]: AzureStorageAccount,
   [services.storageBlob]: AzureStorageBlob,

@@ -922,7 +922,7 @@ export default ({
         }
       }
     }
-    
+
     /*
      * Find related machine learning workspaces
      */
@@ -951,7 +951,7 @@ export default ({
     /**
      * Find related app service environments
      */
-     const appServiceEnvironments: {
+    const appServiceEnvironments: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.appServiceEnvironment)
@@ -976,7 +976,7 @@ export default ({
     /**
      * Find related data collection rules
      */
-     const dataCollectionRules: {
+    const dataCollectionRules: {
       name: string
       data: { [property: string]: any[] }
     } = data.find(({ name }) => name === services.dataCollectionRule)
@@ -1018,6 +1018,31 @@ export default ({
             resourceType: services.expressRouteGateways,
             relation: 'child',
             field: 'expressRouteGateways',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related service bus
+     */
+    const serviceBusList: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.serviceBus)
+    if (serviceBusList?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        serviceBusList.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const serviceBus of dataAtRegion) {
+          const { id } = serviceBus
+          connections.push({
+            id,
+            resourceType: services.serviceBus,
+            relation: 'child',
+            field: 'serviceBus',
           })
         }
       }

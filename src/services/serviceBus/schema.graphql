@@ -1,0 +1,107 @@
+
+type azureServiceBusSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+}
+
+type azureServiceBusUserAssignedIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: azureSqlServerUserIdentity
+}
+
+type azureServiceBusIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureServiceBusUserAssignedIdentity]
+}
+
+type azureServiceBusKeyVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  keyName: String @search(by: [hash, regexp])
+  keyVaultUri: String @search(by: [hash, regexp])
+  keyVersion: String @search(by: [hash, regexp])
+  userAssignedIdentity: String @search(by: [hash, regexp])
+}
+
+type azureServiceBusEncryption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyVaultProperties: [azureServiceBusKeyVaultProperties]
+  keySource: String @search(by: [hash, regexp])
+  requireInfrastructureEncryption: Boolean @search
+}
+
+type azureServiceBusConnectionState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status:  String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+}
+
+type azureServiceBusPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  privateEndpointId: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionState: azureServiceBusConnectionState
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureServiceBus implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  sku: azureServiceBusSku
+  identity: azureServiceBusIdentity
+  provisioningState: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+  createdAt: DateTime @search(by: [day])
+  updatedAt: DateTime @search(by: [day])
+  serviceBusEndpoint: String @search(by: [hash, regexp])
+  metricId: String @search(by: [hash, regexp])
+  zoneRedundant: Boolean @search
+  encryption: azureServiceBusEncryption
+  privateEndpointConnections: [azureServiceBusPrivateEndpointConnection]
+  disableLocalAuth: Boolean @search
+  resourceGroup: [azureResourceGroup] @hasInverse(field: serviceBus)
+}

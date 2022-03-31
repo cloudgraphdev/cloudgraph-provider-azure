@@ -61,6 +61,7 @@ export default {
   securityGroup: 'securityGroup',
   securityPricings: 'securityPricings',
   securitySettings: 'securitySettings',
+  serviceBus: 'serviceBus',
   sqlServers: 'sqlServers',
   storageAccount: 'storageAccount',
   storageBlob: 'storageBlob',
