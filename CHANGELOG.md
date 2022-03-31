@@ -1,3 +1,10 @@
+## [0.51.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.51.0...0.51.1) (2022-03-31)
+
+
+### Bug Fixes
+
+* **keyVault,diagnosticSettings:** tags default values added, removed debug string ([618ce10](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/618ce10570bb759bc00c1ac8b90fe14c09e96d34))
+
 # [0.51.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.50.0...0.51.0) (2022-03-31)
 
 
