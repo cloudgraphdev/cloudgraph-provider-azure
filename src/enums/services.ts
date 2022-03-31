@@ -27,6 +27,7 @@ export default {
   databasePostgreSql: 'databasePostgreSql',
   databaseSql: 'databaseSql',
   databaseSqlVm: 'databaseSqlVm',
+  diagnosticSettings: 'diagnosticSettings',
   disk: 'disk',
   dns: 'dns',
   eventGrid: 'eventGrid',

@@ -1605,6 +1605,39 @@ export type AzureDatabaseSqldelegatedResource = {
   value?: Maybe<AzureDatabaseSqlDelegation>;
 };
 
+export type AzureDiagnosticSetting = AzureBaseResource & {
+  appropiateCategories?: Maybe<Scalars['Boolean']>;
+  eventHubAuthorizationRuleId?: Maybe<Scalars['String']>;
+  eventHubName?: Maybe<Scalars['String']>;
+  logAnalyticsDestinationType?: Maybe<Scalars['String']>;
+  logs?: Maybe<Array<Maybe<AzureDiagnosticSettingLogs>>>;
+  metrics?: Maybe<Array<Maybe<AzureDiagnosticSettingMetricSettings>>>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  serviceBusRuleId?: Maybe<Scalars['String']>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageAccountId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  workspaceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureDiagnosticSettingLogs = {
+  category?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  retentionPolicyDays?: Maybe<Scalars['Int']>;
+  retentionPolicyEnabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureDiagnosticSettingMetricSettings = {
+  category?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  id: Scalars['String'];
+  retentionPolicyDays?: Maybe<Scalars['Int']>;
+  retentionPolicyEnabled?: Maybe<Scalars['Boolean']>;
+  timeGrain?: Maybe<Scalars['String']>;
+};
+
 export type AzureDisk = AzureResource & {
   createOption?: Maybe<Scalars['String']>;
   diskIopsReadWrite?: Maybe<Scalars['Int']>;
@@ -2625,6 +2658,7 @@ export type AzureResourceGroup = AzureResource & {
   databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
   databaseSqlVm?: Maybe<Array<Maybe<AzureDatabaseSqlVm>>>;
+  diagnosticSettings?: Maybe<Array<Maybe<AzureDiagnosticSetting>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   dns?: Maybe<Array<Maybe<AzureDnsZone>>>;
   eventGrids?: Maybe<Array<Maybe<AzureEventGrid>>>;
@@ -2906,6 +2940,7 @@ export type AzureStorageAccount = AzureResource & {
   blobServiceProperties?: Maybe<AzureStorageAccountServiceProperties>;
   customDomainName?: Maybe<Scalars['String']>;
   customDomainUseSubDomainName?: Maybe<Scalars['String']>;
+  diagnosticSettings?: Maybe<Array<Maybe<AzureDiagnosticSetting>>>;
   enableHttpsTrafficOnly?: Maybe<Scalars['String']>;
   enableNfsV3?: Maybe<Scalars['String']>;
   encryptionKeySource?: Maybe<Scalars['String']>;

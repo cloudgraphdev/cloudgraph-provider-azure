@@ -68,6 +68,8 @@ export default {
   foundDatabaseSql: (num: number): string => `Found ${num} SQL databases`,
   foundDatabaseSqlVm: (num: number): string =>
     `Found ${num} SQL virtual machines`,
+  // Diagnostic Settings
+  foundDiagnosticSettingsResources: (num: number): string => `Found ${num} diagnostic settings`,
   // Disk
   foundDisks: (num: number): string => `Found ${num} disks`,
   // DNS Zone
