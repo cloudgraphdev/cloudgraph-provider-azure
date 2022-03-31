@@ -1,3 +1,11 @@
+# [0.51.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.50.0...0.51.0) (2022-03-31)
+
+
+### Features
+
+* add diagnosticSettings service ([90f62af](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/90f62af326a0e3dd1e266e233c2014f91f0c566d))
+* Created App Insights service ([0ab7b73](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/0ab7b73495a3e181076ecc46c60b888735b8646c))
+
 # [0.50.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.49.0...0.50.0) (2022-03-30)
 
 
