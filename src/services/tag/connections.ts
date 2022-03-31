@@ -797,7 +797,7 @@ export default ({
         }
       }
     }
-    
+
     /**
      * Find related cosmos db accounts
      */
@@ -843,6 +843,31 @@ export default ({
             resourceType: services.metricAlert,
             relation: 'child',
             field: 'metricAlerts',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related AppInsights
+     */
+    const appInsights: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.appInsights)
+    if (appInsights?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        appInsights.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const appInsight of dataAtRegion) {
+          const { id } = appInsight
+          connections.push({
+            id,
+            resourceType: services.appInsights,
+            relation: 'child',
+            field: 'appInsights',
           })
         }
       }

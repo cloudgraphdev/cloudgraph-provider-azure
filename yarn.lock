@@ -22,6 +22,16 @@
   dependencies:
     tslib "^2.0.0"
 
+"@azure/arm-appinsights@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-appinsights/-/arm-appinsights-4.0.0.tgz#f59f561c966655af1ffdb488bfab6678f21fbb9a"
+  integrity sha512-P36NpLn49raSh4xtsHUSBCUJ9SRiH2FJXENBQYZhD+MILObRKQYYU8izPxkqMR0oMROQFU2dL/G/sAp+SeSpYQ==
+  dependencies:
+    "@azure/core-auth" "^1.1.4"
+    "@azure/ms-rest-azure-js" "^2.1.0"
+    "@azure/ms-rest-js" "^2.2.0"
+    tslib "^1.10.0"
+
 "@azure/arm-appservice@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-appservice/-/arm-appservice-11.0.0.tgz#7a19bcf6e637dfeb5521105158c3c0d3b99e6183"
