@@ -37,7 +37,6 @@ export default async ({
               `/subscriptions/${subscriptionId}`
             )
           )?.value || []
-        logger.debug(diagnosticSettings)
         numOfGroups = diagnosticSettings.length
         diagnosticSettings.map(d => {
           const region = lowerCaseLocation('')

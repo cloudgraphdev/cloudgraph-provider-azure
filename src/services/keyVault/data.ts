@@ -104,8 +104,9 @@ export default async ({
               const vaultKeys: PagedAsyncIterableIterator<Key> =
                 client.keys.list(resourceGroup, vaultName)
               if (vaultKeys) {
-                for await (const vaultKey of vaultKeys) {
+                for await (const { tags = {}, ...vaultKey } of vaultKeys) {
                   keys.push({
+                    tags,
                     ...vaultKey,
                     keyVaultName: vaultName,
                   })
@@ -133,8 +134,12 @@ export default async ({
               const vaultSecrets: PagedAsyncIterableIterator<Secret> =
                 client.secrets.list(resourceGroup, vaultName)
               if (vaultSecrets) {
-                for await (const vaultSecret of vaultSecrets) {
+                for await (const {
+                  tags = {},
+                  ...vaultSecret
+                } of vaultSecrets) {
                   secrets.push({
+                    tags,
                     ...vaultSecret,
                     keyVaultName: vaultName,
                   })
