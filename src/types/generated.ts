@@ -473,6 +473,37 @@ export type AzureAppInsights = AzureResource & {
   tenantId?: Maybe<Scalars['String']>;
 };
 
+export type AzureAppServiceEnvironment = AzureResource & {
+  clusterSettings?: Maybe<Array<Maybe<AzureAppServiceEnvironmentClusterSettingValue>>>;
+  dedicatedHostCount?: Maybe<Scalars['Int']>;
+  dnsSuffix?: Maybe<Scalars['String']>;
+  frontEndScaleFactor?: Maybe<Scalars['Int']>;
+  hasLinuxWorkers?: Maybe<Scalars['Boolean']>;
+  internalLoadBalancingMode?: Maybe<Scalars['String']>;
+  ipsslAddressCount?: Maybe<Scalars['Int']>;
+  maximumNumberOfMachines?: Maybe<Scalars['Int']>;
+  multiRoleCount?: Maybe<Scalars['Int']>;
+  multiSize?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  status?: Maybe<Scalars['String']>;
+  suspended?: Maybe<Scalars['Boolean']>;
+  userWhitelistedIpRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
+  virtualNetwork?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+  virtualNetworkProfile?: Maybe<AzureAppServiceEnvironmentVirtualNetworkProfile>;
+  zoneRedundant?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureAppServiceEnvironmentClusterSettingValue = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceEnvironmentVirtualNetworkProfile = AzureBaseResource & {
+  subnet?: Maybe<Scalars['String']>;
+};
+
 export type AzureAppServicePlan = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   elasticScaleEnabled?: Maybe<Scalars['Boolean']>;
@@ -2926,6 +2957,7 @@ export type AzureResourceGroup = AzureResource & {
   activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
+  appServiceEnvironments?: Maybe<Array<Maybe<AzureAppServiceEnvironment>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
@@ -3475,6 +3507,7 @@ export type AzureTag = {
   adServicePrincipals?: Maybe<Array<Maybe<AzureAdServicePrincipal>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
+  appServiceEnvironments?: Maybe<Array<Maybe<AzureAppServiceEnvironment>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
@@ -3788,6 +3821,7 @@ export type AzureVirtualMachineStorageImageReference = {
 
 export type AzureVirtualNetwork = AzureResource & {
   addressSpacePrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  appServiceEnvironments?: Maybe<Array<Maybe<AzureAppServiceEnvironment>>>;
   ddosProtectionPlans?: Maybe<Array<Maybe<AzureVirtualNetworkDdosProtectionPlan>>>;
   dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
   enableDdosProtection?: Maybe<Scalars['Boolean']>;

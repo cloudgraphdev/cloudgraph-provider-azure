@@ -7,6 +7,7 @@ type azureTag @key(fields: "id") {
   adApplications: [azureADApplication]
   adServicePrincipals: [azureADServicePrincipal]
   aksManagedClusters: [azureAksManagedCluster]
+  appServiceEnvironments: [azureAppServiceEnvironment]
   # appServiceKubeEnvironment: [azureAppServiceKubeEnvironment]
   appInsights: [azureAppInsights]
   appServicePlans: [azureAppServicePlan]

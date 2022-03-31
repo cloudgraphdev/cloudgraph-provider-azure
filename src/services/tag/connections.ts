@@ -947,6 +947,30 @@ export default ({
         }
       }
     }
+    /**
+     * Find related app service environments
+     */
+     const appServiceEnvironments: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.appServiceEnvironment)
+    if (appServiceEnvironments?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        appServiceEnvironments.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const appServiceEnv of dataAtRegion) {
+          const { id } = appServiceEnv
+          connections.push({
+            id,
+            resourceType: services.appServiceEnvironment,
+            relation: 'child',
+            field: 'appServiceEnvironments',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

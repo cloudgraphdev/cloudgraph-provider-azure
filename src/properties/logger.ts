@@ -21,6 +21,8 @@ export default {
   foundAKSManagedClusters: (num: number): string =>
     `Found ${num} AKS managed clusters`,
   /* App Service */
+  foundAppServiceEnvironments: (num: number): string =>
+    `Found ${num} app service environments`,
   foundKubesEnvs: (num: number): string => `Found ${num} kube environments`,
   foundAppServicePlans: (num: number): string =>
     `Found ${num} app service plans`,
