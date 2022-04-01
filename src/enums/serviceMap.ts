@@ -1,4 +1,5 @@
 import services from './services'
+import AzureActionGroup from '../services/actionGroup'
 import AzureActivityLogAlerts from '../services/activityLogAlerts'
 import AzureADApplication from '../services/adApplication'
 import AzureADGroup from '../services/adGroup'
@@ -67,6 +68,7 @@ import AzureAppInsights from '../services/appInsights'
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
+  [services.actionGroup]: AzureActionGroup,
   [services.activityLogAlerts]: AzureActivityLogAlerts,
   [services.adApplication]: AzureADApplication,
   [services.adGroup]: AzureADGroup,

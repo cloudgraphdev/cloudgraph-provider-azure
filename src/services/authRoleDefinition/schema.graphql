@@ -25,5 +25,6 @@ type azureAuthRoleDefinition implements azureBaseResource
   roleType: String @search(by: [hash, regexp])
   permissions: [azureAuthRoleDefinitionPermission]
   assignableScopes: [String] @search(by: [hash, regexp])
+  actionGroups: [azureActionGroup] @hasInverse(field: roleDefinitions)
   authRoleAssignments: [azureAuthRoleAssignment] @hasInverse(field: roleDefinition)
 }

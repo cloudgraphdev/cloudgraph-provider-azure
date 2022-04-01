@@ -4,6 +4,7 @@ import services from './services'
  * schemasMap is an object that contains schemas name by resource
  */
 export default {
+  [services.actionGroup]: 'azureActionGroup',
   [services.activityLogAlerts]: 'azureActivityLogAlert',
   [services.adApplication]: 'azureADApplication',
   [services.adGroup]: 'azureADGroup',

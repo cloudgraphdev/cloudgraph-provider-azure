@@ -1,4 +1,5 @@
 export default {
+  actionGroup: 'actionGroup',
   activityLogAlerts: 'activityLogAlerts',
   adApplication: 'adApplication',
   adGroup: 'adGroup',

@@ -35,6 +35,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 | Service                                     | Relations                                                                 |
 | ------------------------------------------- | ------------------------------------------------------------------------- |
+| actionGroup                                 | resourceGroup, authRoleDefinition, eventHub, functionApp                  |
 | activityLogAlerts                           | resourceGroup                                                             |
 | adApplication                               | authRoleAssignment, adGroup, adServicePrincipal, adUser                   |
 | adGroup                                     | adApplication, authRoleAssignment                                         |
@@ -47,7 +48,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | appServiceWebApp                            | resourceGroup, appServicePlan, storageAccount                             |
 | arcConnectedCluster                         | resourceGroup                                                             |
 | authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
-| authRoleDefinition                          | authRoleAssignment                                                        |
+| authRoleDefinition                          | actionGroup, authRoleAssignment                                           |
 | autoProvisioningSettings                    |                                                                           |
 | cdnCustomDomains                            | cdnEndpoints, resourceGroup                                               |
 | cdnEndpoints                                | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |
@@ -66,10 +67,10 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | disk                                        | resourceGroup, virtualMachine                                             |
 | dns                                         | resourceGroup                                                             |
 | eventGrid                                   | resourceGroup                                                             |
-| eventHub                                    | resourceGroup, storageAccount                                             |
+| eventHub                                    | resourceGroup, actionGroup, storageAccount                                |
 | fileShare                                   | resourceGroup, storageAccount                                             |
 | firewall                                    | publicIp, virtualNetwork                                                  |
-| functionApp                                 | resourceGroup                                                             |
+| functionApp                                 | resourceGroup, actionGroup                                                |
 | keyVault                                    | resourceGroup                                                             |
 | metricAlert                                 | resourceGroup                                                             |
 | mySqlServers                                | resourceGroup, databaseMySql                                              |

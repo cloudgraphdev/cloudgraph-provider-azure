@@ -1,0 +1,61 @@
+type azureActionGroupEmailReceiver
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  emailAddress: String @search(by: [hash, regexp])
+  useCommonAlertSchema: Boolean @search
+  status: String @search(by: [hash, regexp])
+}
+
+type azureActionGroupWebhookReceiver
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  serviceUri: String @search(by: [hash, regexp])
+  useCommonAlertSchema: Boolean @search
+  useAadAuth: Boolean @search
+  objectId: String @search(by: [hash, regexp])
+  identifierUri: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureActionGroupSmsReceiver
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  countryCode: String @search(by: [hash, regexp])
+  phoneNumber: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+}
+
+type azureActionGroup implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  enabled: Boolean @search
+  groupShortName: String @search(by: [hash, regexp])
+  emailReceivers: [azureActionGroupEmailReceiver]
+  smsReceivers: [azureActionGroupSmsReceiver]
+  webhookReceivers: [azureActionGroupWebhookReceiver]
+  eventHubs: [azureEventHub] @hasInverse(field: actionGroups)
+  functionApps: [azureFunctionApp] @hasInverse(field: actionGroups)
+  roleDefinitions: [azureAuthRoleDefinition] @hasInverse(field: actionGroups)
+  resourceGroup: [azureResourceGroup] @hasInverse(field: actionGroups)
+}
