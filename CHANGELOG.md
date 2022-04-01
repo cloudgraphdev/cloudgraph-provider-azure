@@ -1,3 +1,10 @@
+# [0.53.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.52.0...0.53.0) (2022-04-01)
+
+
+### Features
+
+* **redisCaches:** add redisCaches service ([fdb14f5](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/fdb14f5089e17abe76882ef670bb56c82bb7abdc))
+
 # [0.52.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.51.1...0.52.0) (2022-04-01)
 
 
