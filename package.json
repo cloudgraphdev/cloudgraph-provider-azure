@@ -54,6 +54,7 @@
     "@azure/arm-policy": "^5.0.0",
     "@azure/arm-postgresql": "^6.0.0",
     "@azure/arm-privatedns": "^3.0.0",
+    "@azure/arm-rediscache": "^6.1.0",
     "@azure/arm-resources": "^5.0.0",
     "@azure/arm-security": "^4.0.0",
     "@azure/arm-sql": "^9.0.0",

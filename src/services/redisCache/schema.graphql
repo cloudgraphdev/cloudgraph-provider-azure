@@ -1,0 +1,180 @@
+type azureRedisCache implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  zones: [String] @search(by: [hash, regexp])
+  identity: azureRedisCacheManagedServiceIdentity
+  redisConfiguration: azureRedisCacheCommonPropertiesRedisConfiguration
+  redisVersion: String @search(by: [hash, regexp])
+  enableNonSslPort: Boolean @search
+  replicasPerMaster: Int @search
+  replicasPerPrimary: Int @search
+  tenantSettings: [azureRedisCacheTenantSettings]
+  shardCount: Int @search
+  minimumTlsVersion: String @search(by: [hash, regexp])
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  sku: azureRedisCacheSku
+  subnetId: String @search(by: [hash, regexp])
+  staticIP: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  hostName: String @search(by: [hash, regexp])
+  port: Int @search
+  sslPort: Int @search
+  accessKeys: azureRedisCacheAccessKeys
+  linkedServers: [azureRedisCacheLinkedServer]
+  instances: [azureRedisCacheInstanceDetails]
+  privateEndpointConnections: [azureRedisCachePrivateEndpointConnection]
+  resourceGroup: [azureResourceGroup] @hasInverse(field: redisCaches)
+}
+
+type azureRedisCacheManagedServiceIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureRedisCacheUserAssignedIdentities]
+}
+
+type azureRedisCacheCommonPropertiesRedisConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  rdbBackupEnabled: String @search(by: [hash, regexp])
+  rdbBackupFrequency: String @search(by: [hash, regexp])
+  rdbBackupMaxSnapshotCount: String @search(by: [hash, regexp])
+  rdbStorageConnectionString: String @search(by: [hash, regexp])
+  aofStorageConnectionString0: String @search(by: [hash, regexp])
+  aofStorageConnectionString1: String @search(by: [hash, regexp])
+  maxfragmentationmemoryReserved: String @search(by: [hash, regexp])
+  maxmemoryPolicy: String @search(by: [hash, regexp])
+  maxmemoryReserved: String @search(by: [hash, regexp])
+  maxmemoryDelta: String @search(by: [hash, regexp])
+  maxclients: String @search(by: [hash, regexp])
+  preferredDataArchiveAuthMethod: String @search(by: [hash, regexp])
+  preferredDataPersistenceAuthMethod: String @search(by: [hash, regexp])
+  zonalConfiguration: String @search(by: [hash, regexp])
+}
+
+type azureRedisCacheAccessKeys
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  primaryKey: String @search(by: [hash, regexp])
+  secondaryKey: String @search(by: [hash, regexp])
+}
+
+type azureRedisCacheLinkedServer
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+}
+
+type azureRedisCacheInstanceDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  sslPort: Int @search
+  nonSslPort: Int @search
+  zone: String @search(by: [hash, regexp])
+  shardId: Int @search
+  isMaster: Boolean @search
+  isPrimary: Boolean @search
+}
+
+type azureRedisCachePrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  privateEndpoint: azureRedisCachePrivateEndpoint
+  privateLinkServiceConnectionState: azureRedisCachePrivateLinkServiceConnectionState
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureRedisCachePrivateEndpoint   
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
+type azureRedisCachePrivateLinkServiceConnectionState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azureRedisCacheTenantSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureRedisCacheSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  capacity: Int @search
+}
+
+type azureRedisCacheUserAssignedIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  clientId: String @search(by: [hash, regexp])
+}
+
+type azureRedisCacheUserAssignedIdentities
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: azureRedisCacheUserAssignedIdentity
+}
+
+  

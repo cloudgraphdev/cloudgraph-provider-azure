@@ -82,6 +82,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | postgreSqlServers                           | resourceGroup, databasePostgreSql                                         |
 | privateDns                                  | resourceGroup                                                             |
 | publicIp                                    | networkInterface, resourceGroup                                           |
+| redisCaches                                 | resourceGroup                                                             |
 | resourceGroup                               | **all services**                                                          |
 | securityAssessments                         |                                                                           |
 | securityContacts                            |                                                                           |

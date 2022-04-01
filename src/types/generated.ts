@@ -2690,6 +2690,115 @@ export type AzureRawTag = {
   value?: Maybe<Scalars['String']>;
 };
 
+export type AzureRedisCache = AzureResource & {
+  accessKeys?: Maybe<AzureRedisCacheAccessKeys>;
+  enableNonSslPort?: Maybe<Scalars['Boolean']>;
+  hostName?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureRedisCacheManagedServiceIdentity>;
+  instances?: Maybe<Array<Maybe<AzureRedisCacheInstanceDetails>>>;
+  linkedServers?: Maybe<Array<Maybe<AzureRedisCacheLinkedServer>>>;
+  minimumTlsVersion?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['Int']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureRedisCachePrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  redisConfiguration?: Maybe<AzureRedisCacheCommonPropertiesRedisConfiguration>;
+  redisVersion?: Maybe<Scalars['String']>;
+  replicasPerMaster?: Maybe<Scalars['Int']>;
+  replicasPerPrimary?: Maybe<Scalars['Int']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  shardCount?: Maybe<Scalars['Int']>;
+  sku?: Maybe<AzureRedisCacheSku>;
+  sslPort?: Maybe<Scalars['Int']>;
+  staticIP?: Maybe<Scalars['String']>;
+  subnetId?: Maybe<Scalars['String']>;
+  tenantSettings?: Maybe<Array<Maybe<AzureRedisCacheTenantSettings>>>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureRedisCacheAccessKeys = {
+  primaryKey?: Maybe<Scalars['String']>;
+  secondaryKey?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCacheCommonPropertiesRedisConfiguration = {
+  aofStorageConnectionString0?: Maybe<Scalars['String']>;
+  aofStorageConnectionString1?: Maybe<Scalars['String']>;
+  maxclients?: Maybe<Scalars['String']>;
+  maxfragmentationmemoryReserved?: Maybe<Scalars['String']>;
+  maxmemoryDelta?: Maybe<Scalars['String']>;
+  maxmemoryPolicy?: Maybe<Scalars['String']>;
+  maxmemoryReserved?: Maybe<Scalars['String']>;
+  preferredDataArchiveAuthMethod?: Maybe<Scalars['String']>;
+  preferredDataPersistenceAuthMethod?: Maybe<Scalars['String']>;
+  rdbBackupEnabled?: Maybe<Scalars['String']>;
+  rdbBackupFrequency?: Maybe<Scalars['String']>;
+  rdbBackupMaxSnapshotCount?: Maybe<Scalars['String']>;
+  rdbStorageConnectionString?: Maybe<Scalars['String']>;
+  zonalConfiguration?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCacheInstanceDetails = {
+  id: Scalars['String'];
+  isMaster?: Maybe<Scalars['Boolean']>;
+  isPrimary?: Maybe<Scalars['Boolean']>;
+  nonSslPort?: Maybe<Scalars['Int']>;
+  shardId?: Maybe<Scalars['Int']>;
+  sslPort?: Maybe<Scalars['Int']>;
+  zone?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCacheLinkedServer = {
+  id: Scalars['String'];
+};
+
+export type AzureRedisCacheManagedServiceIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureRedisCacheUserAssignedIdentities>>>;
+};
+
+export type AzureRedisCachePrivateEndpoint = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCachePrivateEndpointConnection = {
+  id: Scalars['String'];
+  privateEndpoint?: Maybe<AzureRedisCachePrivateEndpoint>;
+  privateLinkServiceConnectionState?: Maybe<AzureRedisCachePrivateLinkServiceConnectionState>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCachePrivateLinkServiceConnectionState = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCacheSku = {
+  capacity?: Maybe<Scalars['Int']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCacheTenantSettings = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureRedisCacheUserAssignedIdentities = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureRedisCacheUserAssignedIdentity>;
+};
+
+export type AzureRedisCacheUserAssignedIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
+};
+
 export type AzureResource = {
   id: Scalars['String'];
   kind?: Maybe<Scalars['String']>;
@@ -2741,6 +2850,7 @@ export type AzureResourceGroup = AzureResource & {
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
@@ -3277,6 +3387,7 @@ export type AzureTag = {
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;

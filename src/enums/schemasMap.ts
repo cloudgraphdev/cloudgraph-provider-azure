@@ -55,6 +55,7 @@ export default {
   [services.postgreSqlServers]: 'azurePostgreSqlServer',
   [services.privateDns]: 'azurePrivateDnsZone',
   [services.publicIp]: 'azurePublicIp',
+  [services.redisCaches]: 'azureRedisCache',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityAssesments]: 'azureSecurityAssesment',
   [services.securityContacts]: 'azureSecurityContact',

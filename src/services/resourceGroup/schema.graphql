@@ -43,6 +43,7 @@ type azureResourceGroup implements azureResource
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
   postgreSqlServer: [azurePostgreSqlServer] @hasInverse(field: resourceGroup)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroup)
+  redisCaches: [azureRedisCache] @hasInverse(field: resourceGroup)
   securityGroups: [azureNetworkSecurityGroup] @hasInverse(field: resourceGroup)
   sqlServers: [azureSqlServer] @hasInverse(field: resourceGroup)
   storageAccounts: [azureStorageAccount] @hasInverse(field: resourceGroup)
