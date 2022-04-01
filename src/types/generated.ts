@@ -218,6 +218,45 @@ export type AzureAdUser = {
   userType?: Maybe<Scalars['String']>;
 };
 
+export type AzureActionGroup = AzureResource & {
+  emailReceivers?: Maybe<Array<Maybe<AzureActionGroupEmailReceiver>>>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
+  functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
+  groupShortName?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  roleDefinitions?: Maybe<Array<Maybe<AzureAuthRoleDefinition>>>;
+  smsReceivers?: Maybe<Array<Maybe<AzureActionGroupSmsReceiver>>>;
+  webhookReceivers?: Maybe<Array<Maybe<AzureActionGroupWebhookReceiver>>>;
+};
+
+export type AzureActionGroupEmailReceiver = {
+  emailAddress?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  useCommonAlertSchema?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureActionGroupSmsReceiver = {
+  countryCode?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureActionGroupWebhookReceiver = {
+  id: Scalars['String'];
+  identifierUri?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  objectId?: Maybe<Scalars['String']>;
+  serviceUri?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  useAadAuth?: Maybe<Scalars['Boolean']>;
+  useCommonAlertSchema?: Maybe<Scalars['Boolean']>;
+};
+
 export type AzureActivityLogAlert = AzureBaseResource & {
   actions?: Maybe<AzureActivityLogAlertActionList>;
   condition?: Maybe<AzureActivityLogAlertAllOfCondition>;
@@ -828,6 +867,7 @@ export type AzureAuthRoleAssignment = AzureBaseResource & {
 };
 
 export type AzureAuthRoleDefinition = AzureBaseResource & {
+  actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
   assignableScopes?: Maybe<Array<Maybe<Scalars['String']>>>;
   authRoleAssignments?: Maybe<Array<Maybe<AzureAuthRoleAssignment>>>;
   description?: Maybe<Scalars['String']>;
@@ -1758,6 +1798,7 @@ export type AzureEventGrid = AzureBaseResource & {
 };
 
 export type AzureEventHub = AzureBaseResource & {
+  actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
   captureDescription?: Maybe<AzureEventHubCaptureDescription>;
   createdAt?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
@@ -1964,6 +2005,7 @@ export type AzureFirewallNetworkRuleCollection = {
 };
 
 export type AzureFunctionApp = AzureResource & {
+  actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
   availabilityState?: Maybe<Scalars['String']>;
   clientAffinityEnabled?: Maybe<Scalars['Boolean']>;
   clientCertEnabled?: Maybe<Scalars['Boolean']>;
@@ -2660,6 +2702,7 @@ export type AzureResource = {
 };
 
 export type AzureResourceGroup = AzureResource & {
+  actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
   activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
@@ -3204,6 +3247,7 @@ export type AzureSubResource = {
 };
 
 export type AzureTag = {
+  actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
   activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
   adApplications?: Maybe<Array<Maybe<AzureAdApplication>>>;
   adServicePrincipals?: Maybe<Array<Maybe<AzureAdServicePrincipal>>>;

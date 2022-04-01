@@ -872,6 +872,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related action groups
+     */
+    const actionGroups: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.actionGroup)
+    if (actionGroups?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        actionGroups.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const actionGroup of dataAtRegion) {
+          const { id } = actionGroup
+          connections.push({
+            id,
+            resourceType: services.actionGroup,
+            relation: 'child',
+            field: 'actionGroups',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

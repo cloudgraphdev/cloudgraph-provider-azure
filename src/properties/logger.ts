@@ -1,5 +1,8 @@
 /* eslint-disable max-len */
 export default {
+  // Action Group
+  foundActionGroups: (num: number): string =>
+  `Found ${num} action groups`,
   // Activity Log Alerts
   foundActivityLogAlerts: (num: number): string =>
     `Found ${num} Activity Log Alerts`,

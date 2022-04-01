@@ -38,6 +38,7 @@ type azureEventHub implements azureBaseResource
   partitionCount: Int @search
   status: String @search(by: [hash, regexp])
   captureDescription: azureEventHubCaptureDescription
+  actionGroups: [azureActionGroup] @hasInverse(field: eventHubs)
   resourceGroup: [azureResourceGroup] @hasInverse(field: eventHubs)
   storageAccount: [azureStorageAccount] @hasInverse(field: eventHubs)
   # connection to data lake?

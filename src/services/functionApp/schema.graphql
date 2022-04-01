@@ -93,5 +93,6 @@ type azureFunctionApp implements azureResource
   configuration: azureFunctionAppConfiguration
   functions: [azureWebSiteFunction]
   siteConfig: azureAppServiceWebAppSiteConfig
+  actionGroups: [azureActionGroup] @hasInverse(field: functionApps)
   resourceGroup: [azureResourceGroup] @hasInverse(field: functionApps)
 }
