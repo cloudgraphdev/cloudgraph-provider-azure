@@ -1,3 +1,10 @@
+# [0.52.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.51.1...0.52.0) (2022-04-01)
+
+
+### Features
+
+* add actionGroup service ([fc8b8ad](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/fc8b8ad2066de6828d81b7e77d1f27dfef2e563b))
+
 ## [0.51.1](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.51.0...0.51.1) (2022-03-31)
 
 
