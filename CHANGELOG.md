@@ -1,3 +1,10 @@
+# [0.55.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.54.0...0.55.0) (2022-04-04)
+
+
+### Features
+
+* add appServiceEnvironment service ([28a30d6](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/28a30d65b730b38ba14a038bebec664ef4a621ec))
+
 # [0.54.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.53.0...0.54.0) (2022-04-04)
 
 
