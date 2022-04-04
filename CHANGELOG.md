@@ -1,3 +1,10 @@
+# [0.54.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.53.0...0.54.0) (2022-04-04)
+
+
+### Features
+
+* **machineLearningWorkspaces:** add machineLearningWorkspaces service ([bfa3355](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/bfa33553524263d8a5964530c2dbbeccff46483f))
+
 # [0.53.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.52.0...0.53.0) (2022-04-01)
 
 
