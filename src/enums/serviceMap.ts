@@ -8,6 +8,8 @@ import AzureADServicePrincipal from '../services/adServicePrincipal'
 import AzureADUser from '../services/adUser'
 import AzureAksManagedCluster from '../services/aksManagedCluster'
 import AzureMetricAlert from '../services/metricAlert'
+import AzureAppServiceEnvironment from '../services/appServiceEnvironment'
+// import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureAppServicePlan from '../services/appServicePlan'
 import AzureAppServiceWebApp from '../services/appServiceWebApp'
 import AzureArcConnectedCluster from '../services/arcConnectedCluster'
@@ -34,7 +36,6 @@ import AzureEventHub from '../services/eventHub'
 import AzureFileShare from '../services/fileShare'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
-// import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureKeyVault from '../services/keyVault'
 import AzureLoadBalancer from '../services/loadBalancer'
 import AzureMachineLearningWorkspace from '../services/machineLearningWorkspaces'
@@ -80,6 +81,7 @@ export default {
   [services.adUser]: AzureADUser,
   [services.aksManagedCluster]: AzureAksManagedCluster,
   [services.metricAlert]: AzureMetricAlert,
+  [services.appServiceEnvironment]: AzureAppServiceEnvironment,
   // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appInsights]: AzureAppInsights,
   [services.appServicePlan]: AzureAppServicePlan,

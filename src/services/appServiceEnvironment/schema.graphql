@@ -1,0 +1,46 @@
+type azureAppServiceEnvironmentVirtualNetworkProfile implements azureBaseResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  subnet: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceEnvironmentClusterSettingValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceEnvironment implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+  virtualNetworkProfile: azureAppServiceEnvironmentVirtualNetworkProfile
+  internalLoadBalancingMode: String @search(by: [hash, regexp])
+  multiSize: String @search(by: [hash, regexp])
+  multiRoleCount: Int @search
+  ipsslAddressCount: Int @search
+  dnsSuffix: String @search(by: [hash, regexp])
+  maximumNumberOfMachines: Int @search
+  frontEndScaleFactor: Int @search
+  suspended: Boolean @search
+  clusterSettings: [azureAppServiceEnvironmentClusterSettingValue]
+  userWhitelistedIpRanges: [String] @search(by: [hash, regexp])
+  hasLinuxWorkers: Boolean @search
+  dedicatedHostCount: Int @search
+  zoneRedundant: Boolean @search
+  resourceGroup: [azureResourceGroup] @hasInverse(field: appServiceEnvironments)
+  virtualNetwork: [azureVirtualNetwork] @hasInverse(field: appServiceEnvironments)
+}

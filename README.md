@@ -44,6 +44,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | adUser                                      | adApplication, authRoleAssignment                                         |
 | aksManagedCluster                           | resourceGroup                                                             |
 | appInsights                                 | resourceGroup                                                             |
+| appServiceEnvironment                       | resourceGroup, virtualNetwork                                             |
 | appServicePlan                              | resourceGroup, appServiceWebApp                                           |
 | appServiceWebApp                            | resourceGroup, appServicePlan, storageAccount                             |
 | arcConnectedCluster                         | resourceGroup                                                             |
@@ -97,7 +98,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | trafficManager                              | resourceGroup                                                             |
 | virtualMachine                              | disk, networkInterface, resourceGroup, virtualNetwork                     |
 | virtualMachineScaleSet                      | resourceGroup                                                             |
-| virtualNetwork                              | networkInterface, resourceGroup virtualMachine                            |
+| virtualNetwork                              | appServiceEnvironment,networkInterface, resourceGroup virtualMachine      |
 
 ## Development
 
