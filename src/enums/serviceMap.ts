@@ -22,6 +22,7 @@ import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnProfiles from '../services/cdnProfiles'
 import AzureContainerRegistry from '../services/containerRegistry'
+import AzureDataCollectionRule from '../services/dataCollectionRule'
 import AzureDataFactory from '../services/dataFactory'
 import AzureDatabaseManagedSqlInstance from '../services/databaseManagedSqlInstance'
 import AzureDatabaseMySql from '../services/databaseMySql'
@@ -99,6 +100,7 @@ export default {
   [services.cdnProfiles]: AzureCdnProfiles,
   [services.containerRegistry]: AzureContainerRegistry,
   [services.cosmosDb]: AzureCosmosDb,
+  [services.dataCollectionRule]: AzureDataCollectionRule,
   [services.dataFactory]: AzureDataFactory,
   [services.databaseManagedSqlInstance]: AzureDatabaseManagedSqlInstance,
   [services.databaseMySql]: AzureDatabaseMySql,

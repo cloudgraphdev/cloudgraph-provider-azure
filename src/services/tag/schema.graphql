@@ -17,6 +17,7 @@ type azureTag @key(fields: "id") {
   cdnProfiles: [azureCdnProfile]
   containerRegistries: [azureContainerRegistry]
   cosmosDb: [azureCosmosDb]
+  dataCollectionRules: [azureDataCollectionRule]
   dataFactories: [azureDataFactory]
   databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
   disks: [azureDisk]

@@ -62,6 +62,8 @@ export default {
     `Found ${num} container registries`,
   /* Cosmos DB */
   foundCosmosDbAccounts: (num: number): string => `Found ${num} cosmos DB accounts`,
+  /* Data Collection Rule */
+  foundDataCollectionRules: (num: number): string => `Found ${num} data collection rules`,
   /* Data Factory */
   foundDataFactory: (num: number): string => `Found ${num} data factories`,
   /* Database */

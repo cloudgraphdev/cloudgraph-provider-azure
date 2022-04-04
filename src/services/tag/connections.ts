@@ -971,6 +971,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related data collection rules
+     */
+     const dataCollectionRules: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.dataCollectionRule)
+    if (dataCollectionRules?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        dataCollectionRules.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const dataCollectionRule of dataAtRegion) {
+          const { id } = dataCollectionRule
+          connections.push({
+            id,
+            resourceType: services.dataCollectionRule,
+            relation: 'child',
+            field: 'dataCollectionRules',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

@@ -1430,6 +1430,80 @@ export type AzureCosmosDbVirtualNetworkRule = {
   ignoreMissingVNetServiceEndpoint?: Maybe<Scalars['Boolean']>;
 };
 
+export type AzureDataCollectionRule = AzureResource & {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  dataFlows?: Maybe<Array<Maybe<AzureDataCollectionRuleDataFlow>>>;
+  dataSources?: Maybe<AzureDataCollectionRuleDataSourcesSpec>;
+  description?: Maybe<Scalars['String']>;
+  destinations?: Maybe<AzureDataCollectionRuleDestinationsSpec>;
+  etag?: Maybe<Scalars['String']>;
+  immutableId?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureDataCollectionRuleDataFlow = {
+  destinations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  streams?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureDataCollectionRuleDataSourcesSpec = {
+  extensions?: Maybe<Array<Maybe<AzureDataCollectionRuleExtensionDataSource>>>;
+  performanceCounters?: Maybe<Array<Maybe<AzureDataCollectionRulePerfCounterDataSource>>>;
+  syslog?: Maybe<Array<Maybe<AzureDataCollectionRuleSyslogDataSource>>>;
+  windowsEventLogs?: Maybe<Array<Maybe<AzureDataCollectionRuleWindowsEventLogDataSource>>>;
+};
+
+export type AzureDataCollectionRuleDestinationsSpec = {
+  azureMonitorMetricsName?: Maybe<Scalars['String']>;
+  logAnalyticsDestinations?: Maybe<Array<Maybe<AzureDataCollectionRuleLogAnalyticsDestination>>>;
+};
+
+export type AzureDataCollectionRuleExtensionDataSource = {
+  extensionName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  inputDataSources?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name?: Maybe<Scalars['String']>;
+  streams?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureDataCollectionRuleLogAnalyticsDestination = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  workspaceId?: Maybe<Scalars['String']>;
+  workspaceResourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataCollectionRulePerfCounterDataSource = {
+  counterSpecifiers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  samplingFrequencyInSeconds?: Maybe<Scalars['Int']>;
+  streams?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureDataCollectionRuleSyslogDataSource = {
+  facilityNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  logLevels?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name?: Maybe<Scalars['String']>;
+  streams?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureDataCollectionRuleWindowsEventLogDataSource = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  streams?: Maybe<Array<Maybe<Scalars['String']>>>;
+  xPathQueries?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
 export type AzureDataFactory = AzureResource & {
   createTime?: Maybe<Scalars['String']>;
   eTag?: Maybe<Scalars['String']>;
@@ -2305,6 +2379,7 @@ export type AzureLogAnalyticsSolutionProperties = {
 export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
   createdDate?: Maybe<Scalars['String']>;
   customerId?: Maybe<Scalars['String']>;
+  dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
   features?: Maybe<AzureLogAnalyticsWorkspaceFeature>;
   modifiedDate?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
@@ -2968,6 +3043,7 @@ export type AzureResourceGroup = AzureResource & {
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
+  dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
   dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
@@ -3515,6 +3591,7 @@ export type AzureTag = {
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
+  dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
   dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
   databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;

@@ -31,6 +31,7 @@ export default {
   [services.cdnProfiles]: 'azureCdnProfile',
   [services.containerRegistry]: 'azureContainerRegistry',
   [services.cosmosDb]: 'azureCosmosDb',
+  [services.dataCollectionRule]: 'azureDataCollectionRule',
   [services.dataFactory]: 'azureDataFactory',
   [services.databaseManagedSqlInstance]: 'azureDatabaseManagedSqlInstance',
   [services.databaseMySql]: 'azureDatabaseMySql',

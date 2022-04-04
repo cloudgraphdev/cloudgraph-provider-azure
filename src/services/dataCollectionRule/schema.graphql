@@ -1,0 +1,108 @@
+type azureDataCollectionRuleDataSourcesSpec {
+  performanceCounters: [azureDataCollectionRulePerfCounterDataSource]
+  windowsEventLogs: [azureDataCollectionRuleWindowsEventLogDataSource]
+  syslog: [azureDataCollectionRuleSyslogDataSource]
+  extensions: [azureDataCollectionRuleExtensionDataSource]
+}
+type azureDataCollectionRulePerfCounterDataSource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  streams: [String] @search(by: [hash, regexp])
+  samplingFrequencyInSeconds: Int @search
+  counterSpecifiers: [String] @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRuleWindowsEventLogDataSource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  streams: [String] @search(by: [hash, regexp])
+  xPathQueries: [String] @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRuleSyslogDataSource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  streams: [String] @search(by: [hash, regexp])
+  facilityNames: [String] @search(by: [hash, regexp])
+  logLevels: [String] @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRuleExtensionDataSource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  streams: [String] @search(by: [hash, regexp])
+  extensionName: String @search(by: [hash, regexp])
+  # extensionSettings?: Record<string, unknown>; ?? Should we add this?
+  inputDataSources: [String] @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRuleDestinationsSpec {
+  logAnalyticsDestinations: [azureDataCollectionRuleLogAnalyticsDestination]
+  azureMonitorMetricsName: String @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRuleLogAnalyticsDestination
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  workspaceResourceId: String @search(by: [hash, regexp])
+  workspaceId: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRuleDataFlow
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  streams: [String] @search(by: [hash, regexp])
+  destinations: [String] @search(by: [hash, regexp])
+}
+
+type azureDataCollectionRule implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  immutableId: String @search(by: [hash, regexp])
+  dataSources: azureDataCollectionRuleDataSourcesSpec
+  destinations: azureDataCollectionRuleDestinationsSpec
+  dataFlows: [azureDataCollectionRuleDataFlow]
+  provisioningState: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: dataCollectionRules)
+  logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace] @hasInverse(field: dataCollectionRules)
+}

@@ -20,6 +20,8 @@ type azureResourceGroup implements azureResource
   cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroup)
   containerRegistries: [azureContainerRegistry]
     @hasInverse(field: resourceGroup)
+  dataCollectionRules: [azureDataCollectionRule]
+    @hasInverse(field: resourceGroup)
   dataFactories: [azureDataFactory] @hasInverse(field: resourceGroup)
   databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
     @hasInverse(field: resourceGroup)
