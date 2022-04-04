@@ -1,3 +1,11 @@
+# [0.56.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.55.0...0.56.0) (2022-04-04)
+
+
+### Features
+
+* add dataCollectionRule service ([60382fe](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/60382fe8fd7097f4d9afc61e94c648b356260aa4))
+* **dataLakeStorageAccounts:** add dataLakeStorageAccounts service ([d789e35](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/d789e35f771dbecd0db5ae7aab18e161739a6a96))
+
 # [0.55.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.54.0...0.55.0) (2022-04-04)
 
 
