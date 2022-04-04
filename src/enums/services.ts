@@ -24,6 +24,7 @@ export default {
   cdnProfiles: 'cdnProfiles',
   containerRegistry: 'containerRegistry',
   cosmosDb: 'cosmosDb',
+  dataCollectionRule: 'dataCollectionRule',
   dataFactory: 'dataFactory',
   databaseManagedSqlInstance: 'databaseManagedSqlInstance',
   databaseMySql: 'databaseMySql',
