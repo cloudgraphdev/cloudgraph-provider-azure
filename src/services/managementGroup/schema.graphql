@@ -1,0 +1,42 @@
+interface azureManagementGroupBaseInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+}
+
+type azureManagementGroupDetails {
+  version: Int @search
+  updatedTime: DateTime @search(by: [day])
+  updatedBy: String @search(by: [hash, regexp])
+  parent: azureManagementGroupBaseInfo
+  path: [azureManagementGroupBaseInfo]
+  managementGroupAncestors: [String] @search(by: [hash, regexp])
+  managementGroupAncestorsChain: [azureManagementGroupBaseInfo]
+}
+
+type azureManagementGroupChildrenInfo implements azureBaseResource {
+  displayName: String @search(by: [hash, regexp])
+  children: [azureManagementGroupChildrenInfo]
+}
+
+type azureManagementGroup implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  region: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  displayName: String @search(by: [hash, regexp])
+  details: azureManagementGroupDetails
+  children: [azureManagementGroupChildrenInfo]
+  parentManagementGroup: [azureManagementGroup]
+  rootManagementGroup: [azureManagementGroup]
+  childrenManagementGroups: [azureManagementGroup]
+}

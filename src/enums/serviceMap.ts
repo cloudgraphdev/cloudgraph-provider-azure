@@ -43,6 +43,7 @@ import AzureFunctionApp from '../services/functionApp'
 import AzureKeyVault from '../services/keyVault'
 import AzureLoadBalancer from '../services/loadBalancer'
 import AzureMachineLearningWorkspace from '../services/machineLearningWorkspaces'
+import AzureManagementGroup from '../services/managementGroup'
 import AzureMySqlServer from '../services/mySqlServers'
 import AzureNetworkInterface from '../services/networkInterface'
 import AzureNetworkSecurityGroup from '../services/securityGroup'
@@ -143,6 +144,7 @@ export default {
   [services.logAnalyticsSolution]: AzureLogAnalyticsSolutions,
   [services.logAnalyticsWorkspace]: AzureLogAnalyticsWorkspaces,
   [services.machineLearningWorkspaces]: AzureMachineLearningWorkspace,
+  [services.managementGroup]:AzureManagementGroup,
   [services.mySqlServers]: AzureMySqlServer,
   [services.networkInterface]: AzureNetworkInterface,
   [services.policyAssignment]: AzurePolicyAssignment,

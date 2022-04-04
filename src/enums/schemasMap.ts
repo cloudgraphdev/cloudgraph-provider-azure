@@ -58,6 +58,7 @@ export default {
   [services.logAnalyticsSolution]: 'azureLogAnalyticsSolution',
   [services.logAnalyticsWorkspace]: 'azureLogAnalyticsWorkspace',
   [services.machineLearningWorkspaces]: 'azureMachineLearningWorkspace',  
+  [services.managementGroup]: 'azureManagementGroup',
   [services.metricAlert]:'azureMetricAlert',
   [services.mySqlServers]: 'azureMySqlServer',
   [services.networkInterface]: 'azureNetworkInterface',

@@ -122,6 +122,8 @@ export default {
   foundLoadBalancers: (num: number): string => `Found ${num} load balancers`,
   // Machine Learning Workspaces
   foundMachineLearningWorkspaces: (num: number): string => `Found ${num} machine learning workspaces`,  
+  // Management Groups
+  foundManagementGroups: (num: number): string => `Found ${num} management groups`,
   // Metric Alert
   foundMetricAlerts: (num: number): string => `Found ${num} metric alerts`,
   // Monitor Alert Rules

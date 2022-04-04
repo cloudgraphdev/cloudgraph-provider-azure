@@ -48,6 +48,7 @@
     "@azure/arm-hybridkubernetes": "^2.0.0",
     "@azure/arm-keyvault": "^2.0.0",
     "@azure/arm-machinelearningservices": "^5.0.0",
+    "@azure/arm-managementgroups": "^2.0.0",
     "@azure/arm-monitor": "^7.0.0",
     "@azure/arm-mysql": "^5.0.0",
     "@azure/arm-network": "^26.0.0",

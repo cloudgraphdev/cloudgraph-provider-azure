@@ -51,6 +51,7 @@ export default {
   logAnalyticsSolution: 'logAnalyticsSolution',
   logAnalyticsWorkspace: 'logAnalyticsWorkspace',
   machineLearningWorkspaces: 'machineLearningWorkspaces',
+  managementGroup: 'managementGroup',
   metricAlert: 'metricAlert',
   mySqlServers: 'mySqlServers',
   networkInterface: 'networkInterface',

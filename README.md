@@ -82,6 +82,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | integrationRuntime                          | dataFactory, resourceGroup                                                |
 | keyVault                                    | resourceGroup                                                             |
 | machineLearningWorkspaces                   | resourceGroup                                                             |
+| managementGroup                             | managementGroup                                                           |
 | metricAlert                                 | resourceGroup                                                             |
 | mySqlServers                                | resourceGroup, databaseMySql                                              |
 | loadBalancer                                | loadBalancer, publicIp, resourceGroup, virtualNetwork                     |

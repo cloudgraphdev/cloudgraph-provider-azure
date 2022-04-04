@@ -3237,6 +3237,38 @@ export type AzureManagedVirtualNetworkReference = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureManagementGroup = AzureBaseResource & {
+  children?: Maybe<Array<Maybe<AzureManagementGroupChildrenInfo>>>;
+  childrenManagementGroups?: Maybe<Array<Maybe<AzureManagementGroup>>>;
+  details?: Maybe<AzureManagementGroupDetails>;
+  displayName?: Maybe<Scalars['String']>;
+  parentManagementGroup?: Maybe<Array<Maybe<AzureManagementGroup>>>;
+  region?: Maybe<Scalars['String']>;
+  rootManagementGroup?: Maybe<Array<Maybe<AzureManagementGroup>>>;
+  tenantId?: Maybe<Scalars['String']>;
+};
+
+export type AzureManagementGroupBaseInfo = {
+  displayName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureManagementGroupChildrenInfo = AzureBaseResource & {
+  children?: Maybe<Array<Maybe<AzureManagementGroupChildrenInfo>>>;
+  displayName?: Maybe<Scalars['String']>;
+};
+
+export type AzureManagementGroupDetails = {
+  managementGroupAncestors?: Maybe<Array<Maybe<Scalars['String']>>>;
+  managementGroupAncestorsChain?: Maybe<Array<Maybe<AzureManagementGroupBaseInfo>>>;
+  parent?: Maybe<AzureManagementGroupBaseInfo>;
+  path?: Maybe<Array<Maybe<AzureManagementGroupBaseInfo>>>;
+  updatedBy?: Maybe<Scalars['String']>;
+  updatedTime?: Maybe<Scalars['DateTime']>;
+  version?: Maybe<Scalars['Int']>;
+};
+
 export type AzureMetricAlert = AzureResource & {
   actions?: Maybe<Array<Maybe<AzureMetricAlertAction>>>;
   autoMitigate?: Maybe<Scalars['Boolean']>;
