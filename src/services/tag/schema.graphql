@@ -26,6 +26,7 @@ type azureTag @key(fields: "id") {
   loadBalancers: [azureLoadBalancer]
   logAnalyticsSolutions: [azureLogAnalyticsSolution]
   logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace]
+  machineLearningWorkspaces: [azureMachineLearningWorkspace]
   metricAlerts: [azureMetricAlert]
   mySqlServers: [azureMySqlServer]
   networkInterfaces: [azureNetworkInterface]

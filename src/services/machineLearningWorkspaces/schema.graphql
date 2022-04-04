@@ -1,0 +1,174 @@
+type azureMachineLearningWorkspace implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) @key(fields: "id") {
+  sku: azureMachineLearningWorkspaceSku
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  workspaceId: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  friendlyName: String @search(by: [hash, regexp])
+  keyVault: String @search(by: [hash, regexp])
+  applicationInsights: String @search(by: [hash, regexp])
+  containerRegistry: String @search(by: [hash, regexp])
+  storageAccount: String @search(by: [hash, regexp])
+  discoveryUrl: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  encryption: azureMachineLearningWorkspaceEncryptionProperty
+  hbiWorkspace: Boolean @search
+  serviceProvisionedResourceGroup: String @search(by: [hash, regexp])
+  privateLinkCount: Int @search
+  imageBuildCompute: String @search(by: [hash, regexp])
+  allowPublicAccessWhenBehindVnet: Boolean @search
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  privateEndpointConnections: [azureMachineLearningWorkspacePrivateEndpointConnection]
+  sharedPrivateLinkResources: [azureMachineLearningWorkspaceSharedPrivateLinkResource]
+  notebookInfo: azureMachineLearningWorkspaceNotebookResourceInfo
+  serviceManagedResourcesSettings: azureMachineLearningWorkspaceServiceManagedResourcesSettings
+  primaryUserAssignedIdentity: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  storageHnsEnabled: Boolean @search
+  mlFlowTrackingUri: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: machineLearningWorkspace)
+}
+
+type azureMachineLearningWorkspaceSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspaceEncryptionProperty
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  identity: azureMachineLearningWorkspaceIdentityForCmk
+  keyVaultProperties: azureMachineLearningWorkspaceKeyVaultProperties
+}
+
+type azureMachineLearningWorkspaceIdentityForCmk
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  userAssignedIdentity: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspaceKeyVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyVaultArmId: String @search(by: [hash, regexp])
+  keyIdentifier: String @search(by: [hash, regexp])
+  identityClientId: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspacePrivateEndpointConnection   
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  sku: azureMachineLearningWorkspaceSku
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  privateEndpoint: azureMachineLearningWorkspacePrivateEndpoint
+  privateLinkServiceConnectionState: azureMachineLearningWorkspacePrivateLinkServiceConnectionState
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspacePrivateEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+  subnetArmId: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspacePrivateLinkServiceConnectionState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspaceSharedPrivateLinkResource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  privateLinkResourceId: String @search(by: [hash, regexp])
+  groupId: String @search(by: [hash, regexp])
+  requestMessage: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+}
+
+type azureMachineLearningWorkspaceNotebookResourceInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  fqdn: String @search(by: [hash, regexp])
+  resourceId: String @search(by: [hash, regexp])
+  notebookPreparationError: azureMachineLearningWorkspaceNotebookPreparationError
+}
+
+type azureMachineLearningWorkspaceNotebookPreparationError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  errorMessage: String @search(by: [hash, regexp])
+  statusCode: Int @search
+}
+
+type azureMachineLearningWorkspaceServiceManagedResourcesSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  cosmosDb: azureMachineLearningWorkspaceCosmosDbSettings
+}
+
+type azureMachineLearningWorkspaceCosmosDbSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  collectionsThroughput: Int @search
+}

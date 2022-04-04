@@ -2306,6 +2306,117 @@ export type AzureLogAnalyticsWorkspaceSku = {
   name: Scalars['String'];
 };
 
+export type AzureMachineLearningWorkspace = AzureResource & {
+  allowPublicAccessWhenBehindVnet?: Maybe<Scalars['Boolean']>;
+  applicationInsights?: Maybe<Scalars['String']>;
+  containerRegistry?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  discoveryUrl?: Maybe<Scalars['String']>;
+  encryption?: Maybe<AzureMachineLearningWorkspaceEncryptionProperty>;
+  friendlyName?: Maybe<Scalars['String']>;
+  hbiWorkspace?: Maybe<Scalars['Boolean']>;
+  imageBuildCompute?: Maybe<Scalars['String']>;
+  keyVault?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  mlFlowTrackingUri?: Maybe<Scalars['String']>;
+  notebookInfo?: Maybe<AzureMachineLearningWorkspaceNotebookResourceInfo>;
+  primaryUserAssignedIdentity?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureMachineLearningWorkspacePrivateEndpointConnection>>>;
+  privateLinkCount?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  serviceManagedResourcesSettings?: Maybe<AzureMachineLearningWorkspaceServiceManagedResourcesSettings>;
+  serviceProvisionedResourceGroup?: Maybe<Scalars['String']>;
+  sharedPrivateLinkResources?: Maybe<Array<Maybe<AzureMachineLearningWorkspaceSharedPrivateLinkResource>>>;
+  sku?: Maybe<AzureMachineLearningWorkspaceSku>;
+  storageAccount?: Maybe<Scalars['String']>;
+  storageHnsEnabled?: Maybe<Scalars['Boolean']>;
+  tenantId?: Maybe<Scalars['String']>;
+  workspaceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspaceCosmosDbSettings = {
+  collectionsThroughput?: Maybe<Scalars['Int']>;
+};
+
+export type AzureMachineLearningWorkspaceEncryptionProperty = {
+  identity?: Maybe<AzureMachineLearningWorkspaceIdentityForCmk>;
+  keyVaultProperties?: Maybe<AzureMachineLearningWorkspaceKeyVaultProperties>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspaceIdentityForCmk = {
+  userAssignedIdentity?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspaceKeyVaultProperties = {
+  identityClientId?: Maybe<Scalars['String']>;
+  keyIdentifier?: Maybe<Scalars['String']>;
+  keyVaultArmId?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspaceNotebookPreparationError = {
+  errorMessage?: Maybe<Scalars['String']>;
+  statusCode?: Maybe<Scalars['Int']>;
+};
+
+export type AzureMachineLearningWorkspaceNotebookResourceInfo = {
+  fqdn?: Maybe<Scalars['String']>;
+  notebookPreparationError?: Maybe<AzureMachineLearningWorkspaceNotebookPreparationError>;
+  resourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspacePrivateEndpoint = {
+  id?: Maybe<Scalars['String']>;
+  subnetArmId?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspacePrivateEndpointConnection = {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateEndpoint?: Maybe<AzureMachineLearningWorkspacePrivateEndpoint>;
+  privateLinkServiceConnectionState?: Maybe<AzureMachineLearningWorkspacePrivateLinkServiceConnectionState>;
+  provisioningState?: Maybe<Scalars['String']>;
+  sku?: Maybe<AzureMachineLearningWorkspaceSku>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspacePrivateLinkServiceConnectionState = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspaceServiceManagedResourcesSettings = {
+  cosmosDb?: Maybe<AzureMachineLearningWorkspaceCosmosDbSettings>;
+};
+
+export type AzureMachineLearningWorkspaceSharedPrivateLinkResource = {
+  groupId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  privateLinkResourceId?: Maybe<Scalars['String']>;
+  requestMessage?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureMachineLearningWorkspaceSku = {
+  name?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
 export type AzureMetricAlert = AzureResource & {
   actions?: Maybe<Array<Maybe<AzureMetricAlertAction>>>;
   autoMitigate?: Maybe<Scalars['Boolean']>;
@@ -2843,6 +2954,7 @@ export type AzureResourceGroup = AzureResource & {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  machineLearningWorkspace?: Maybe<Array<Maybe<AzureMachineLearningWorkspace>>>;
   managedBy?: Maybe<Scalars['String']>;
   metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
@@ -3382,6 +3494,7 @@ export type AzureTag = {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  machineLearningWorkspaces?: Maybe<Array<Maybe<AzureMachineLearningWorkspace>>>;
   metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;

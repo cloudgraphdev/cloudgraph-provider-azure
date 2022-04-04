@@ -41,6 +41,7 @@ export default {
   loadBalancer: 'loadBalancer',
   logAnalyticsSolution: 'logAnalyticsSolution',
   logAnalyticsWorkspace: 'logAnalyticsWorkspace',
+  machineLearningWorkspaces: 'machineLearningWorkspaces',
   metricAlert: 'metricAlert',
   mySqlServers: 'mySqlServers',
   networkInterface: 'networkInterface',

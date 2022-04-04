@@ -922,6 +922,31 @@ export default ({
         }
       }
     }
+    
+    /*
+     * Find related machine learning workspaces
+     */
+    const machineLearningWorkspaces: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.machineLearningWorkspaces)
+    if (machineLearningWorkspaces?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        machineLearningWorkspaces.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const workspace of dataAtRegion) {
+          const { id } = workspace
+          connections.push({
+            id,
+            resourceType: services.machineLearningWorkspaces,
+            relation: 'child',
+            field: 'machineLearningWorkspaces',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

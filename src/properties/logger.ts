@@ -105,6 +105,8 @@ export default {
     `Found ${num} Key Vault secrets`,
   // Load balancer
   foundLoadBalancers: (num: number): string => `Found ${num} load balancers`,
+  // Machine Learning Workspaces
+  foundMachineLearningWorkspaces: (num: number): string => `Found ${num} machine learning workspaces`,  
   // Metric Alert
   foundMetricAlerts: (num: number): string => `Found ${num} metric alerts`,
   // Monitor Alert Rules
