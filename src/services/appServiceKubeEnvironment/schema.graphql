@@ -1,0 +1,54 @@
+type azureAppServiceKubeEnvironmentArcConfig
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  artifactsStorageType: String @search(by: [hash, regexp])
+  artifactStorageClassName: String @search(by: [hash, regexp])
+  artifactStorageMountPath: String @search(by: [hash, regexp])
+  artifactStorageNodeName: String @search(by: [hash, regexp])
+  artifactStorageAccessMode: String @search(by: [hash, regexp])
+  frontEndServiceConfigurationKind: String @search(by: [hash, regexp])
+  kubeConfig: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceKubeEnvironmentAppLogsConfig
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  destination: String @search(by: [hash, regexp])
+  logAnalyticsCustomerId: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceKubeEnvironmentContainerAppsConfig
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  ) {
+  platformReservedCidr: String @search(by: [hash, regexp])
+  platformReservedDnsIP: String @search(by: [hash, regexp])
+  controlPlaneSubnetResourceId: String @search(by: [hash, regexp])
+  appSubnetResourceId: String @search(by: [hash, regexp])
+  dockerBridgeCidr: String @search(by: [hash, regexp])
+}
+
+type azureAppServiceKubeEnvironment implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  deploymentErrors: String @search(by: [hash, regexp])
+  internalLoadBalancerEnabled: Boolean @search
+  defaultDomain: String @search(by: [hash, regexp])
+  staticIp: String @search(by: [hash, regexp])
+  environmentType: String @search(by: [hash, regexp])
+  arcConfiguration: azureAppServiceKubeEnvironmentArcConfig
+  appLogsConfiguration: azureAppServiceKubeEnvironmentAppLogsConfig
+  containerAppsConfiguration: azureAppServiceKubeEnvironmentContainerAppsConfig
+  aksResourceID: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup]
+    @hasInverse(field: appServiceKubeEnvironments)
+}

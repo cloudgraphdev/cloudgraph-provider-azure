@@ -579,30 +579,30 @@ export default ({
         }
       }
     }
-    // /**
-    //  * Find related App Service Kube Environment
-    //  */
-    // const kubeEnvironments: {
-    //   name: string
-    //   data: { [property: string]: any[] }
-    // } = data.find(({ name }) => name === services.appServiceKubeEnvironment)
-    // if (kubeEnvironments?.data?.[region]) {
-    //   const dataAtRegion: any = findServiceInstancesWithTag(
-    //     tag,
-    //     kubeEnvironments.data[region]
-    //   )
-    //   if (!isEmpty(dataAtRegion)) {
-    //     for (const appServiceKubeEnvironment of dataAtRegion) {
-    //       const { id } = appServiceKubeEnvironment
-    //       connections.push({
-    //         id,
-    //         resourceType: services.appServiceKubeEnvironment,
-    //         relation: 'child',
-    //         field: 'appServiceKubeEnvironments',
-    //       })
-    //     }
-    //   }
-    // }
+    /**
+     * Find related App Service Kube Environment
+     */
+    const kubeEnvironments: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.appServiceKubeEnvironment)
+    if (kubeEnvironments?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        kubeEnvironments.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const appServiceKubeEnvironment of dataAtRegion) {
+          const { id } = appServiceKubeEnvironment
+          connections.push({
+            id,
+            resourceType: services.appServiceKubeEnvironment,
+            relation: 'child',
+            field: 'appServiceKubeEnvironments',
+          })
+        }
+      }
+    }
     /**
      * Find related Aks Managed Clusters
      */

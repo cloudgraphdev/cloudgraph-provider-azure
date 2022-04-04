@@ -10,6 +10,7 @@ type azureResourceGroup implements azureResource
   aksManagedClusters: [azureAksManagedCluster] @hasInverse(field: resourceGroup)
   appInsights: [azureAppInsights] @hasInverse(field: resourceGroup)
   appServiceEnvironments: [azureAppServiceEnvironment] @hasInverse(field: resourceGroup)
+  appServiceKubeEnvironments: [azureAppServiceKubeEnvironment] @hasInverse(field: resourceGroup)
   appServicePlans: [azureAppServicePlan] @hasInverse(field: resourceGroup)
   appServiceWebApps: [azureAppServiceWebApp] @hasInverse(field: resourceGroup)
   arcConnectedClusters: [azureArcConnectedCluster] @hasInverse(field: resourceGroup)

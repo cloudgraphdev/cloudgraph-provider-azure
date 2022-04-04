@@ -40,6 +40,7 @@ import AzureExpressRouteGateway from '../services/expressRouteGateways'
 import AzureFileShare from '../services/fileShare'
 import AzureFirewall from '../services/firewall'
 import AzureFunctionApp from '../services/functionApp'
+import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureKeyVault from '../services/keyVault'
 import AzureLoadBalancer from '../services/loadBalancer'
 import AzureMachineLearningWorkspace from '../services/machineLearningWorkspaces'
@@ -99,8 +100,8 @@ export default {
   [services.aksManagedCluster]: AzureAksManagedCluster,
   [services.metricAlert]: AzureMetricAlert,
   [services.appServiceEnvironment]: AzureAppServiceEnvironment,
-  // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appInsights]: AzureAppInsights,
+  [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appServicePlan]: AzureAppServicePlan,
   [services.appServiceWebApp]: AzureAppServiceWebApp,
   [services.arcConnectedCluster]: AzureArcConnectedCluster,

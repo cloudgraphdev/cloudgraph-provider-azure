@@ -505,6 +505,43 @@ export type AzureAppServiceEnvironmentVirtualNetworkProfile = AzureBaseResource 
   subnet?: Maybe<Scalars['String']>;
 };
 
+export type AzureAppServiceKubeEnvironment = AzureResource & {
+  aksResourceID?: Maybe<Scalars['String']>;
+  appLogsConfiguration?: Maybe<AzureAppServiceKubeEnvironmentAppLogsConfig>;
+  arcConfiguration?: Maybe<AzureAppServiceKubeEnvironmentArcConfig>;
+  containerAppsConfiguration?: Maybe<AzureAppServiceKubeEnvironmentContainerAppsConfig>;
+  defaultDomain?: Maybe<Scalars['String']>;
+  deploymentErrors?: Maybe<Scalars['String']>;
+  environmentType?: Maybe<Scalars['String']>;
+  internalLoadBalancerEnabled?: Maybe<Scalars['Boolean']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  staticIp?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceKubeEnvironmentAppLogsConfig = {
+  destination?: Maybe<Scalars['String']>;
+  logAnalyticsCustomerId?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceKubeEnvironmentArcConfig = {
+  artifactStorageAccessMode?: Maybe<Scalars['String']>;
+  artifactStorageClassName?: Maybe<Scalars['String']>;
+  artifactStorageMountPath?: Maybe<Scalars['String']>;
+  artifactStorageNodeName?: Maybe<Scalars['String']>;
+  artifactsStorageType?: Maybe<Scalars['String']>;
+  frontEndServiceConfigurationKind?: Maybe<Scalars['String']>;
+  kubeConfig?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppServiceKubeEnvironmentContainerAppsConfig = {
+  appSubnetResourceId?: Maybe<Scalars['String']>;
+  controlPlaneSubnetResourceId?: Maybe<Scalars['String']>;
+  dockerBridgeCidr?: Maybe<Scalars['String']>;
+  platformReservedCidr?: Maybe<Scalars['String']>;
+  platformReservedDnsIP?: Maybe<Scalars['String']>;
+};
+
 export type AzureAppServicePlan = AzureResource & {
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   elasticScaleEnabled?: Maybe<Scalars['Boolean']>;
@@ -3971,6 +4008,7 @@ export type AzureResourceGroup = AzureResource & {
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
   appServiceEnvironments?: Maybe<Array<Maybe<AzureAppServiceEnvironment>>>;
+  appServiceKubeEnvironments?: Maybe<Array<Maybe<AzureAppServiceKubeEnvironment>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
@@ -4819,6 +4857,7 @@ export type AzureTag = {
   aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
   appServiceEnvironments?: Maybe<Array<Maybe<AzureAppServiceEnvironment>>>;
+  appServiceKubeEnvironment?: Maybe<Array<Maybe<AzureAppServiceKubeEnvironment>>>;
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
