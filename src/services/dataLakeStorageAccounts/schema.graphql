@@ -1,0 +1,9 @@
+type azureDataLakeStorageAccount implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  suffix: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: dataLakeStorageAccount)
+}

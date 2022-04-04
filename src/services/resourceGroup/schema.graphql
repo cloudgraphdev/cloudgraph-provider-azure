@@ -28,6 +28,7 @@ type azureResourceGroup implements azureResource
     @hasInverse(field: resourceGroup)
   databaseSql: [azureDatabaseSql] @hasInverse(field: resourceGroup)
   databaseSqlVm: [azureDatabaseSqlVm] @hasInverse(field: resourceGroup)
+  dataLakeStorageAccount: [azureDataLakeStorageAccount] @hasInverse(field: resourceGroup)
   diagnosticSettings: [azureDiagnosticSetting] @hasInverse(field: resourceGroup)
   disks: [azureDisk] @hasInverse(field: resourceGroup)
   dns: [azureDnsZone] @hasInverse(field: resourceGroup)
