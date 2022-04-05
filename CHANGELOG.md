@@ -1,3 +1,10 @@
+# [0.59.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.58.0...0.59.0) (2022-04-05)
+
+
+### Features
+
+* **service:** Create Service Bus service ([56d027a](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/56d027a3c1eb1f98b82456c00857c95661baba04))
+
 # [0.58.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.57.0...0.58.0) (2022-04-05)
 
 
