@@ -22,6 +22,7 @@ export default {
   [services.authRoleAssignment]: 'azureAuthRoleAssignment',
   [services.authRoleDefinition]: 'azureAuthRoleDefinition',
   [services.autoProvisioningSettings]: 'azureAutoProvisioningSetting',
+  [services.integrationRuntime]: 'azureIntegrationRuntime',
   [services.cdnCustomDomains]: 'azureCdnCustomDomain',
   [services.cdnEndpoints]: 'azureCdnEndpoint',
   [services.cdnOriginGroups]: 'azureCdnOriginGroup',

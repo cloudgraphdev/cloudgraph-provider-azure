@@ -66,6 +66,7 @@ export default {
   foundDataCollectionRules: (num: number): string => `Found ${num} data collection rules`,
   /* Data Factory */
   foundDataFactory: (num: number): string => `Found ${num} data factories`,
+  foundIntegrationRuntimes: (num: number): string => `Found ${num} integration runtimes`,
   /* Database */
   foundManagedSqlInstance: (num: number): string =>
     `Found ${num} managed SQL instances`,

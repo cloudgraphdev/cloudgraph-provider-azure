@@ -67,6 +67,7 @@ import AzureLogAnalyticsSolutions from '../services/logAnalyticsSolution'
 import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
 import AzureCosmosDb from '../services/cosmosDb'
 import AzureAppInsights from '../services/appInsights'
+import AzureIntegrationRuntime from '../services/integrationRuntimes' 
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -92,6 +93,7 @@ export default {
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.autoProvisioningSettings]: AzureAutoProvisioningSettings,
+  [services.integrationRuntime]: AzureIntegrationRuntime,
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
