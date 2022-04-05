@@ -1047,8 +1047,32 @@ export default ({
         }
       }
     }
+  
+    /**
+     * Find related backup vaults
+     */
+    const backupVaults: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.backupVault)
+    if (backupVaults?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        backupVaults.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const backupVault of dataAtRegion) {
+          const { id } = backupVault
+          connections.push({
+            id,
+            resourceType: services.backupVault,
+            relation: 'child',
+            field: 'backupVault',
+          })
+        }
+      }
+    }
   }
-
   const tagResult = {
     [tag.id]: connections,
   }

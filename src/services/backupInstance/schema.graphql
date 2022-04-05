@@ -1,0 +1,158 @@
+type azureBackupInstanceItemExtendedInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  oldestRecoveryPoint: DateTime @search(by: [day])
+  recoveryPointCount: Int @search
+  policyState: String @search(by: [hash, regexp])
+  resourceState: String @search(by: [hash, regexp])
+  resourceStateSyncTime: DateTime @search(by: [day])
+  policyInconsistent: Boolean @search
+  lastRefreshedAt: DateTime @search(by: [day])
+}
+
+type azureBackupInstanceResourceHealthDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  code: Int @search
+  title: String @search(by: [hash, regexp])
+  message: String @search(by: [hash, regexp])
+  recommendations: [String] @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceDiskExclusionProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  diskLunList: [Int] @search
+  isInclusionList: Boolean @search
+}
+
+type azureBackupInstanceExtendedProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  diskExclusionProperties: azureBackupInstanceDiskExclusionProperties
+  linuxVmApplicationName: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceKPIResourceHealthDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  resourceHealthStatus: String @search(by: [hash, regexp])
+  resourceHealthDetails: [azureBackupInstanceResourceHealthDetails]
+}
+
+type azureBackupInstanceKpisHealths
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: azureBackupInstanceKPIResourceHealthDetails
+}
+
+type azureBackupInstanceErrorDetail
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  code: String @search(by: [hash, regexp])
+  message: String @search(by: [hash, regexp])
+  recommendations: [String] @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceKeyValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  protectedItemType: String @search(by: [hash, regexp])
+  backupManagementType: String @search(by: [hash, regexp])
+  workloadType: String @search(by: [hash, regexp])
+  containerName: String @search(by: [hash, regexp])
+  sourceResourceId: String @search(by: [hash, regexp])
+  policyId: String @search(by: [hash, regexp])
+  lastRecoveryPoint: DateTime @search(by: [day])
+  backupSetName: String @search(by: [hash, regexp])
+  createMode: String @search(by: [hash, regexp])
+  deferredDeleteTimeInUTC: DateTime @search(by: [day])
+  isScheduledForDeferredDelete: Boolean @search
+  deferredDeleteTimeRemaining: String @search(by: [hash, regexp])
+  isDeferredDeleteScheduleUpcoming: Boolean @search
+  isRehydrate: Boolean @search
+  resourceGuardOperationRequests: [String] @search(by: [hash, regexp])
+  isArchiveEnabled: Boolean @search
+  policyName: String @search(by: [hash, regexp])
+  friendlyName: String @search(by: [hash, regexp])
+  protectionStatus: String @search(by: [hash, regexp])
+  protectionState: String @search(by: [hash, regexp])
+  lastBackupStatus: String @search(by: [hash, regexp])
+  lastBackupTime: DateTime @search(by: [day])
+  kpisHealths: [azureBackupInstanceKpisHealths]
+  extendedInfo: azureBackupInstanceItemExtendedInfo
+  virtualMachineId: String @search(by: [hash, regexp])
+  healthStatus: String @search(by: [hash, regexp])
+  healthDetails: [azureBackupInstanceResourceHealthDetails]
+  protectedItemDataId: String @search(by: [hash, regexp])
+  extendedProperties: azureBackupInstanceExtendedProperties
+  serverName: String @search(by: [hash, regexp])
+  parentName: String @search(by: [hash, regexp])
+  parentType: String @search(by: [hash, regexp])
+  lastBackupErrorDetail: azureBackupInstanceErrorDetail
+  protectedItemDataSourceId: String @search(by: [hash, regexp])
+  protectedItemHealthStatus: String @search(by: [hash, regexp])
+  backupEngineName: String @search(by: [hash, regexp])
+  policyState: String @search(by: [hash, regexp])
+  protectedItemId: Int @search
+  sourceAssociations: [azureBackupInstanceKeyValue]
+  fabricName: String @search(by: [hash, regexp])
+  computerName: String @search(by: [hash, regexp])
+  deferredDeleteSyncTimeInUTC: Int @search
+}
+
+type azureBackupInstance implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+  eTag: String @search(by: [hash, regexp])
+  properties: azureBackupInstanceProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: backupInstances)
+  backupVault: [azureBackupVault] @hasInverse(field: backupInstances)
+}

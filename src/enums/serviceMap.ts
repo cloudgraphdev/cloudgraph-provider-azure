@@ -70,6 +70,9 @@ import AzureCosmosDb from '../services/cosmosDb'
 import AzureAppInsights from '../services/appInsights'
 import AzureIntegrationRuntime from '../services/integrationRuntimes' 
 import AzureServiceBus from '../services/serviceBus'
+import AzureBackupVault from '../services/backupVault'
+import AzureBackupInstance from '../services/backupInstance'
+import AzureBackupPolicy from '../services/backupPolicy'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -95,7 +98,9 @@ export default {
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.autoProvisioningSettings]: AzureAutoProvisioningSettings,
-  [services.integrationRuntime]: AzureIntegrationRuntime,
+  [services.backupVault]: AzureBackupVault,
+  [services.backupInstance]: AzureBackupInstance,
+  [services.backupPolicy]: AzureBackupPolicy,
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
@@ -122,6 +127,7 @@ export default {
   [services.fileShare]: AzureFileShare,
   [services.firewall]: AzureFirewall,
   [services.functionApp]: AzureFunctionApp,
+  [services.integrationRuntime]: AzureIntegrationRuntime,
   [services.keyVault]: AzureKeyVault,
   [services.loadBalancer]: AzureLoadBalancer,
   [services.logAnalyticsSolution]: AzureLogAnalyticsSolutions,
