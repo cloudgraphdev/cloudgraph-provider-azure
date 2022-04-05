@@ -1,3 +1,10 @@
+# [0.57.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.56.0...0.57.0) (2022-04-05)
+
+
+### Features
+
+* **service:** Create azure integration runtime service ([3a75ecb](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/3a75ecb96e4a7d21f1ba7e1e67d23343ecb50916))
+
 # [0.56.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.55.0...0.56.0) (2022-04-04)
 
 
