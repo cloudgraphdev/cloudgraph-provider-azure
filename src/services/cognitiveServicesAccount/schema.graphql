@@ -1,0 +1,252 @@
+type azureCognitiveServicesAccountSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  capacity: Int @search
+}
+
+type azureCognitiveServicesAccountIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  principalId: String @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountNetworkAcls
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  defaultAction: String @search(by: [hash, regexp])
+  ipRules: [String] @search(by: [hash, regexp])
+  virtualNetworkRules: [azureCognitiveServicesAccountVirtualNetworkRules]
+}
+
+type azureCognitiveServicesAccountVirtualNetworkRules
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  ignoreMissingVnetServiceEndpoint: Boolean @search
+}
+
+type azureCognitiveServicesAccountEncryption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyVaultProperties: azureCognitiveServicesAccountKeyVaultProperties
+  keySource: String @search(by: [hash, regexp])
+}
+type azureCognitiveServicesAccountKeyVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyName: String @search(by: [hash, regexp])
+  keyVersion: String @search(by: [hash, regexp])
+  keyVaultUri: String @search(by: [hash, regexp])
+  identityClientId: String @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountSkuChangeInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  countOfDowngrades: Int @search
+  countOfUpgradesAfterDowngrades: Int @search
+  lastChangeDate: DateTime @search(by: [day])
+}
+
+type azureCognitiveServicesAccountUserOwnedStorage
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  resourceId: String @search(by: [hash, regexp])
+  identityClientId: String @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: DateTime @search(by: [day])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: DateTime @search(by: [day])
+  privateEndpointId: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionState: azureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus
+  provisioningState: String @search(by: [hash, regexp])
+  groupIds: [String] @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountApiProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  qnaRuntimeEndpoint: String @search(by: [hash, regexp])
+  qnaAzureSearchEndpointKey: String @search(by: [hash, regexp])
+  qnaAzureSearchEndpointId: String @search(by: [hash, regexp])
+  statisticsEnabled: Boolean @search
+  eventHubConnectionString: String @search(by: [hash, regexp])
+  storageAccountConnectionString: String @search(by: [hash, regexp])
+  aadClientId: String @search(by: [hash, regexp])
+  aadTenantId: String @search(by: [hash, regexp])
+  superUser: String @search(by: [hash, regexp])
+  websiteName: String @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountCallRateLimit
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  count: Int @search
+  renewalPeriod: Int @search
+  rules: [azureCognitiveServicesAccountThrottlingRule]
+}
+
+type azureCognitiveServicesAccountQuotaLimit
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  count: Int @search
+  renewalPeriod: Int @search
+  rules: [azureCognitiveServicesAccountThrottlingRule]
+}
+
+type azureCognitiveServicesAccountThrottlingRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  key: String @search(by: [hash, regexp])
+  renewalPeriod: Int @search
+  count: Int @search
+  minCount: Int @search
+  dynamicThrottlingEnabled: Boolean @search
+  matchPatterns: [azureCognitiveServicesAccountThrottlingRuleMatchPattern]
+}
+
+type azureCognitiveServicesAccountThrottlingRuleMatchPattern
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+  method: String @search(by: [hash, regexp])
+}
+
+type azureCognitiveServicesAccountCapability implements azureNameValueProperty
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+}
+
+type azureCognitiveServicesAccountEndpoint implements azureKeyValueProperty
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+}
+
+type azureCognitiveServicesAccount implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  sku: azureCognitiveServicesAccountSku
+  identity: azureCognitiveServicesAccountIdentity
+  etag: String @search(by: [hash, regexp])
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: DateTime @search(by: [day])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: DateTime @search(by: [day])
+  provisioningState: String @search(by: [hash, regexp])
+  endpoint: String @search(by: [hash, regexp])
+  internalId: String @search(by: [hash, regexp])
+  capabilities: [azureCognitiveServicesAccountCapability]
+  isMigrated: Boolean @search
+  migrationToken: String @search(by: [hash, regexp])
+  skuChangeInfo: azureCognitiveServicesAccountSkuChangeInfo
+  customSubDomainName: String @search(by: [hash, regexp])
+  networkAcls: azureCognitiveServicesAccountNetworkAcls
+  encryption: azureCognitiveServicesAccountEncryption
+  userOwnedStorage: [azureCognitiveServicesAccountUserOwnedStorage]
+  privateEndpointConnections: [azureCognitiveServicesAccountPrivateEndpointConnection]
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  apiProperties: azureCognitiveServicesAccountApiProperties
+  dateCreated: DateTime @search(by: [day])
+  callRateLimit: azureCognitiveServicesAccountCallRateLimit
+  quotaLimit: azureCognitiveServicesAccountQuotaLimit
+  restrictOutboundNetworkAccess: Boolean @search
+  allowedFqdnList: [String] @search(by: [hash, regexp])
+  disableLocalAuth: Boolean @search
+  endpoints: [azureCognitiveServicesAccountEndpoint]
+  restore: Boolean @search
+  resourceGroup: [azureResourceGroup]
+    @hasInverse(field: cognitiveServicesAccounts)
+}

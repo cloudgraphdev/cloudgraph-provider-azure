@@ -1072,6 +1072,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related cognitive services account
+     */
+    const cognitiveServicesAccountList: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.cognitiveServicesAccount)
+    if (cognitiveServicesAccountList?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        cognitiveServicesAccountList.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const cognitiveServicesAccount of dataAtRegion) {
+          const { id } = cognitiveServicesAccount
+          connections.push({
+            id,
+            resourceType: services.cognitiveServicesAccount,
+            relation: 'child',
+            field: 'cognitiveServicesAccounts',
+          })
+        }
+      }
+    }
   }
   const tagResult = {
     [tag.id]: connections,
