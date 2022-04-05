@@ -1,3 +1,10 @@
+# [0.60.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.59.0...0.60.0) (2022-04-05)
+
+
+### Features
+
+* **service:** Create Azure Backup service ([840e750](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/840e750a6464464f6c0e440113e1215de4558249))
+
 # [0.59.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.58.0...0.59.0) (2022-04-05)
 
 
