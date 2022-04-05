@@ -46,6 +46,10 @@ export default {
   // AutoProvisioningSetting
   foundAutoProvisioningSettings: (num: number): string =>
     `Found ${num} auto provisioning settings`,
+  // Azure Backup
+  foundBackupVaults: (num: number): string => `Found ${num} Backup Vaults`,
+  foundBackupInstances: (num: number): string => `Found ${num} Backup Instances`,
+  foundBackupPolicies: (num: number): string => `Found ${num} Backup Policies`,
   /* CDN Profiles */
   foundCdnProfiles: (num: number): string => `Found ${num} CDN profiles`,
   /* CDN Endpoints */

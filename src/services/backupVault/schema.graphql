@@ -1,0 +1,170 @@
+type azureBackupVaultUpgradeDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  operationId: String @search(by: [hash, regexp])
+  startTimeUtc: DateTime @search(by: [day])
+  lastUpdatedTimeUtc: DateTime @search(by: [day])
+  endTimeUtc: DateTime @search(by: [day])
+  status: String @search(by: [hash, regexp])
+  message: String @search(by: [hash, regexp])
+  triggerType: String @search(by: [hash, regexp])
+  upgradedResourceId: String @search(by: [hash, regexp])
+  previousResourceId: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultPrivateLinkServiceConnectionState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  privateEndpointId: String @search(by: [hash, regexp])
+  privateLinkServiceConnectionState: azureBackupVaultPrivateLinkServiceConnectionState
+}
+
+type azureBackupVaultPrivateEndpointConnectionVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  properties: azureBackupVaultPrivateEndpointConnection
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultCmkKekIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  useSystemAssignedIdentity: Boolean @search
+  userAssignedIdentity: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultVaultPropertiesEncryption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyUri: String @search(by: [hash, regexp])
+  kekIdentity: azureBackupVaultCmkKekIdentity
+  infrastructureEncryption: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultVaultPropertiesMoveDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  operationId: String @search(by: [hash, regexp])
+  startTimeUtc: DateTime @search(by: [day])
+  completionTimeUtc: DateTime @search(by: [day])
+  sourceResourceId: String @search(by: [hash, regexp])
+  targetResourceId: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  upgradeDetails: azureBackupVaultUpgradeDetails
+  privateEndpointConnections: [azureBackupVaultPrivateEndpointConnectionVaultProperties]
+  privateEndpointStateForBackup: String @search(by: [hash, regexp])
+  privateEndpointStateForSiteRecovery: String @search(by: [hash, regexp])
+  encryption: azureBackupVaultVaultPropertiesEncryption
+  moveDetails: azureBackupVaultVaultPropertiesMoveDetails
+  moveState: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  capacity: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultUserIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  clientId: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultUserAssignedIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: azureBackupVaultUserIdentity
+}
+
+type azureBackupVaultIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureBackupVaultUserAssignedIdentity]
+}
+
+type azureBackupVault implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  properties: azureBackupVaultVaultProperties
+  sku: azureBackupVaultSku
+  identity: azureBackupVaultIdentity
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: backupVaults)
+  backupInstances: [azureBackupInstance] @hasInverse(field: backupVault)
+  backupPolicies: [azureBackupPolicy] @hasInverse(field: backupVault)
+}

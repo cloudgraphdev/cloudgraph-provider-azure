@@ -1,4 +1,14 @@
 
+type azureCosmosDbUserIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  clientId: String @search(by: [hash, regexp])
+}
+
 type azureCosmosDbUserAssignedIdentity
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -7,7 +17,7 @@ type azureCosmosDbUserAssignedIdentity
   ) @key(fields: "id") {
   id: String! @id @search(by: [hash])
   key: String @search(by: [hash, regexp])
-  value: azureSqlServerUserIdentity
+  value: azureCosmosDbUserIdentity
 }
 
 type azureCosmosDbIdentity
@@ -252,7 +262,7 @@ type azureCosmosDb implements azureResource
   provisioningState: String @search(by: [hash, regexp])
   documentEndpoint: String @search(by: [hash, regexp])
   databaseAccountOfferType: String @search(by: [hash, regexp])
-  identity: azureSqlServerIdentity
+  identity: azureCosmosDbIdentity
   createdBy: String @search(by: [hash, regexp])
   createdByType: String @search(by: [hash, regexp])
   createdAt: String @search(by: [hash, regexp])

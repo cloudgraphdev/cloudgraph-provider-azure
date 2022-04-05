@@ -11,4 +11,5 @@ export default {
   [services.cdnProfiles]: [services.cdnEndpoints],
   [services.cdnEndpoints]: [services.cdnCustomDomains, services.cdnOrigins, services.cdnOriginGroups],
   [services.dataFactory]: [services.integrationRuntime],
+  [services.backupVault]: [services.backupInstance, services.backupPolicy],
 }

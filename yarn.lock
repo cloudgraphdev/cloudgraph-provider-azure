@@ -320,6 +320,32 @@
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
 
+"@azure/arm-recoveryservices@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-recoveryservices/-/arm-recoveryservices-5.0.0.tgz#7416483405b6b70c21b1837524e593b0342de50d"
+  integrity sha512-c6y/UDjT2acqIeESJfqItaRvTnoyJs3pIZnZSBL43qtzD0hYF1vlfS+tfUBwXnKIDIQIWwV1FhHQ4f9/IHV+JA==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
+"@azure/arm-recoveryservicesbackup@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-recoveryservicesbackup/-/arm-recoveryservicesbackup-8.1.0.tgz#31f696d7f82f8807480631158fff7a899eca94b9"
+  integrity sha512-j0+O7pR0LRHx7ed5F24QbVPH+aYmrSDJS+DGk5W3zI9BnMAxvM5NCB1RMAUCOJITapoMad6u1zqBiteFk1VqYQ==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-rediscache@^6.1.0":
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-rediscache/-/arm-rediscache-6.1.0.tgz#03239a5f7cfb725f726f40adcf056bff17ffce06"
