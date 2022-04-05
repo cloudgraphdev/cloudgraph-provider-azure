@@ -1,3 +1,15 @@
+# [0.58.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.57.0...0.58.0) (2022-04-05)
+
+
+### Bug Fixes
+
+* **expressRouteGateways:** add tags connection ([1b93468](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/1b93468f588b85cae47b50f226bb26d096f9201b))
+
+
+### Features
+
+* **expressRouteGateways:** add ExpressRoute gateways service ([6af9759](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/commit/6af9759400daedcc9d14dcd9b26b58cb3983e72c))
+
 # [0.57.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.56.0...0.57.0) (2022-04-05)
 
 
