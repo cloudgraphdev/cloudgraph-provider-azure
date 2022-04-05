@@ -3294,6 +3294,7 @@ export type AzureResourceGroup = AzureResource & {
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
+  serviceBus?: Maybe<Array<Maybe<AzureServiceBus>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
@@ -3395,6 +3396,74 @@ export type AzureSecuritySetting = AzureBaseResource & {
   kind?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
+};
+
+export type AzureServiceBus = AzureResource & {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  disableLocalAuth?: Maybe<Scalars['Boolean']>;
+  encryption?: Maybe<AzureServiceBusEncryption>;
+  identity?: Maybe<AzureServiceBusIdentity>;
+  metricId?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureServiceBusPrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  serviceBusEndpoint?: Maybe<Scalars['String']>;
+  sku?: Maybe<AzureServiceBusSku>;
+  status?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  zoneRedundant?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureServiceBusConnectionState = {
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureServiceBusEncryption = {
+  keySource?: Maybe<Scalars['String']>;
+  keyVaultProperties?: Maybe<Array<Maybe<AzureServiceBusKeyVaultProperties>>>;
+  requireInfrastructureEncryption?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureServiceBusIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureServiceBusUserAssignedIdentity>>>;
+};
+
+export type AzureServiceBusKeyVaultProperties = {
+  id: Scalars['String'];
+  keyName?: Maybe<Scalars['String']>;
+  keyVaultUri?: Maybe<Scalars['String']>;
+  keyVersion?: Maybe<Scalars['String']>;
+  userAssignedIdentity?: Maybe<Scalars['String']>;
+};
+
+export type AzureServiceBusPrivateEndpointConnection = {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionState?: Maybe<AzureServiceBusConnectionState>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureServiceBusSku = {
+  name?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureServiceBusUserAssignedIdentity = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureSqlServerUserIdentity>;
 };
 
 export type AzureSqlServer = AzureResource & {
@@ -3844,6 +3913,7 @@ export type AzureTag = {
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
+  serviceBus?: Maybe<Array<Maybe<AzureServiceBus>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;

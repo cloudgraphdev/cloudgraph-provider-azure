@@ -151,6 +151,8 @@ export default {
   // Security Settings
   foundSecuritySettings: (num: number): string =>
     `Found ${num} security settings`,
+  // Service Bus
+  foundServiceBus: (num: number): string => `Found ${num} service bus`,
   // SQL Servers
   foundPostgreSqlServers: (num: number): string =>
     `Found ${num} PostgreSQL servers`,
