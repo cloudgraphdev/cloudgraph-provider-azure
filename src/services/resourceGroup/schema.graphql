@@ -67,4 +67,5 @@ type azureResourceGroup implements azureResource
     @hasInverse(field: resourceGroup)
   cosmosDb: [azureCosmosDb] @hasInverse(field: resourceGroup)
   appInsights: [azureAppInsights] @hasInverse(field: resourceGroup)
+  integrationRuntimes: [azureIntegrationRuntime] @hasInverse(field: resourceGroup)
 }

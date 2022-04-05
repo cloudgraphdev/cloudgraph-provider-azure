@@ -17,4 +17,5 @@ type azureDataFactory implements azureResource
   version: String @search(by: [hash, regexp])
   publicNetworkAccess: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: dataFactories)
+  integrationRuntimes: [azureIntegrationRuntime] @hasInverse(field: dataFactory)
 }

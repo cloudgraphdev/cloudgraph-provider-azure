@@ -59,7 +59,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | containerRegistry                           | keyVault, resourceGroup                                                   |
 | cosmosDb                                    | resourceGroup                                                             |
 | dataCollectionRule                          | resourceGroup, logAnalyticsWorkspace                                      |
-| dataFactory                                 | resourceGroup                                                             |
+| dataFactory                                 | integrationRuntime, resourceGroup                                         |
 | databaseManagedSqlInstance                  | resourceGroup                                                             |
 | databaseMySql                               | resourceGroup, mySqlServers                                               |
 | databasePostgreSql                          | resourceGroup, postgreSqlServers                                          |
@@ -74,6 +74,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | fileShare                                   | resourceGroup, storageAccount                                             |
 | firewall                                    | publicIp, virtualNetwork                                                  |
 | functionApp                                 | resourceGroup, actionGroup                                                |
+| integrationRuntime                          | dataFactory, resourceGroup                                                |
 | keyVault                                    | resourceGroup                                                             |
 | machineLearningWorkspaces                   | resourceGroup                                                             |
 | metricAlert                                 | resourceGroup                                                             |

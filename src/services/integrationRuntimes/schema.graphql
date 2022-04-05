@@ -1,0 +1,259 @@
+type azureIntegrationRuntimeKeyValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: [String] @search(by: [hash, regexp])
+}
+
+type azureManagedVirtualNetworkReference
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  referenceName: String @search(by: [hash, regexp])
+}
+
+type azureIntegrationRuntimeDataFlowProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  computeType: String @search(by: [hash, regexp])
+  coreCount: Int @search
+  timeToLive: Int @search
+  cleanup: Boolean @search
+}
+
+type azureIntegrationRuntimeVNetProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  vNetId: String @search(by: [hash, regexp])
+  subnet: String @search(by: [hash, regexp])
+  publicIPs: [String] @search(by: [hash, regexp])
+  subnetId: String @search(by: [hash, regexp])
+}
+
+type azureIntegrationRuntimeComputeProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  location: String @search(by: [hash, regexp])
+  nodeSize: String @search(by: [hash, regexp])
+  numberOfNodes: Int @search
+  maxParallelExecutionsPerNode: Int @search
+  dataFlowProperties: azureIntegrationRuntimeDataFlowProperties
+  vNetProperties: azureIntegrationRuntimeVNetProperties
+}
+
+type azureIntegrationRuntimeSsisCatalogInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  catalogServerEndpoint: String @search(by: [hash, regexp])
+  catalogAdminUserName: String @search(by: [hash, regexp])
+  catalogAdminPasswordType: String @search(by: [hash, regexp])
+  catalogAdminPasswordValue: String @search(by: [hash, regexp])
+  catalogPricingTier: String @search(by: [hash, regexp])
+  dualStandbyPairName: String @search(by: [hash, regexp])
+}
+
+type azureIntegrationRuntimeCustomSetupScriptProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  blobContainerUri: String @search(by: [hash, regexp])
+  sasTokenType: String @search(by: [hash, regexp])
+  sasTokenValue: String @search(by: [hash, regexp])
+}
+
+type azureIntegrationRuntimeDataProxyProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  connectViaType: String @search(by: [hash, regexp])
+  connectViaReferenceName: String @search(by: [hash, regexp])
+  stagingLinkedServiceType: String @search(by: [hash, regexp])
+  stagingLinkedServiceReferenceName: String @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+}
+
+type azureLinkedServiceReferencePatametersValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureLinkedServiceReferencePatameters
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  key: String @search(by: [hash, regexp])
+  value: [azureLinkedServiceReferencePatametersValue]
+}
+
+type azureLinkedServiceReference
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  referenceName: String @search(by: [hash, regexp])
+  parameters: [azureLinkedServiceReferencePatameters]
+}
+
+type azureSecretBaseUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+  store: azureLinkedServiceReference
+  secretName: String @search(by: [hash, regexp])
+  secretVersion: String @search(by: [hash, regexp])
+}
+
+type azureCustomSetupBaseUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) 
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  type: String @search(by: [hash, regexp])
+  targetName: String @search(by: [hash, regexp])
+  userName: String @search(by: [hash, regexp])
+  password: azureSecretBaseUnion
+  variableName: String @search(by: [hash, regexp])
+  variableValue: String @search(by: [hash, regexp])
+  componentName: String @search(by: [hash, regexp])
+  licenseKey: azureSecretBaseUnion
+  version: String @search(by: [hash, regexp])
+}
+
+type azurePackageStore
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) 
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  packageStoreLinkedServiceType: String @search(by: [hash, regexp])
+  packageStoreLinkedServiceReferenceName: String @search(by: [hash, regexp]) 
+}
+
+type azureCredentialReference
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  referenceName: String @search(by: [hash, regexp]) 
+}
+
+type azureIntegrationRuntimeSsisProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  catalogInfo: azureIntegrationRuntimeSsisCatalogInfo
+  licenseType: String @search(by: [hash, regexp])
+  customSetupScriptProperties: azureIntegrationRuntimeCustomSetupScriptProperties
+  dataProxyProperties: azureIntegrationRuntimeDataProxyProperties
+  edition: String @search(by: [hash, regexp])
+  expressCustomSetupProperties: [azureCustomSetupBaseUnion]
+  packageStores: [azurePackageStore]
+  credentialType: String @search(by: [hash, regexp])
+  credentialReferenceName: String @search(by: [hash, regexp])
+}
+
+type azureLinkedIntegrationRuntimeTypeUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  authorizationType: String @search(by: [hash, regexp])
+  keyType: String @search(by: [hash, regexp])
+  keyValue: String @search(by: [hash, regexp])
+  resourceId: String @search(by: [hash, regexp])
+  credentialType: String @search(by: [hash, regexp])
+  credentialReferenceName: String @search(by: [hash, regexp])
+}
+
+type azureIntegrationRuntimeProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  integrationRuntimeType: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  managedVirtualNetwork: azureManagedVirtualNetworkReference
+  computeProperties: azureIntegrationRuntimeComputeProperties
+  ssisProperties: azureIntegrationRuntimeSsisProperties
+  customerVirtualNetworkSubnetId: String @search(by: [hash, regexp])
+  linkedInfo: azureLinkedIntegrationRuntimeTypeUnion
+  referenceName: String @search(by: [hash, regexp])
+}
+
+type azureIntegrationRuntime implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+  etag: String @search(by: [hash, regexp])
+  integrationRuntimeType: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  state: String @search(by: [hash, regexp])
+  managedVirtualNetwork: azureManagedVirtualNetworkReference
+  computeProperties: azureIntegrationRuntimeComputeProperties
+  ssisProperties: azureIntegrationRuntimeSsisProperties
+  customerVirtualNetworkSubnetId: String @search(by: [hash, regexp])
+  linkedInfo: azureLinkedIntegrationRuntimeTypeUnion
+  referenceName: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: integrationRuntimes)
+  dataFactory: [azureDataFactory] @hasInverse(field: integrationRuntimes)
+}

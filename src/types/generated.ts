@@ -1430,6 +1430,24 @@ export type AzureCosmosDbVirtualNetworkRule = {
   ignoreMissingVNetServiceEndpoint?: Maybe<Scalars['Boolean']>;
 };
 
+export type AzureCredentialReference = {
+  referenceName?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCustomSetupBaseUnion = {
+  componentName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  licenseKey?: Maybe<AzureSecretBaseUnion>;
+  password?: Maybe<AzureSecretBaseUnion>;
+  targetName?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userName?: Maybe<Scalars['String']>;
+  variableName?: Maybe<Scalars['String']>;
+  variableValue?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
+
 export type AzureDataCollectionRule = AzureResource & {
   createdAt?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
@@ -1508,6 +1526,7 @@ export type AzureDataFactory = AzureResource & {
   createTime?: Maybe<Scalars['String']>;
   eTag?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureDataFactoryIdentity>;
+  integrationRuntimes?: Maybe<Array<Maybe<AzureIntegrationRuntime>>>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccess?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -2170,6 +2189,100 @@ export type AzureHostingEnvironmentProfile = {
   id?: Maybe<Scalars['String']>;
 };
 
+export type AzureIntegrationRuntime = AzureBaseResource & {
+  computeProperties?: Maybe<AzureIntegrationRuntimeComputeProperties>;
+  customerVirtualNetworkSubnetId?: Maybe<Scalars['String']>;
+  dataFactory?: Maybe<Array<Maybe<AzureDataFactory>>>;
+  description?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  integrationRuntimeType?: Maybe<Scalars['String']>;
+  linkedInfo?: Maybe<AzureLinkedIntegrationRuntimeTypeUnion>;
+  managedVirtualNetwork?: Maybe<AzureManagedVirtualNetworkReference>;
+  referenceName?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+  ssisProperties?: Maybe<AzureIntegrationRuntimeSsisProperties>;
+  state?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+};
+
+export type AzureIntegrationRuntimeComputeProperties = {
+  dataFlowProperties?: Maybe<AzureIntegrationRuntimeDataFlowProperties>;
+  location?: Maybe<Scalars['String']>;
+  maxParallelExecutionsPerNode?: Maybe<Scalars['Int']>;
+  nodeSize?: Maybe<Scalars['String']>;
+  numberOfNodes?: Maybe<Scalars['Int']>;
+  vNetProperties?: Maybe<AzureIntegrationRuntimeVNetProperties>;
+};
+
+export type AzureIntegrationRuntimeCustomSetupScriptProperties = {
+  blobContainerUri?: Maybe<Scalars['String']>;
+  sasTokenType?: Maybe<Scalars['String']>;
+  sasTokenValue?: Maybe<Scalars['String']>;
+};
+
+export type AzureIntegrationRuntimeDataFlowProperties = {
+  cleanup?: Maybe<Scalars['Boolean']>;
+  computeType?: Maybe<Scalars['String']>;
+  coreCount?: Maybe<Scalars['Int']>;
+  timeToLive?: Maybe<Scalars['Int']>;
+};
+
+export type AzureIntegrationRuntimeDataProxyProperties = {
+  connectViaReferenceName?: Maybe<Scalars['String']>;
+  connectViaType?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  stagingLinkedServiceReferenceName?: Maybe<Scalars['String']>;
+  stagingLinkedServiceType?: Maybe<Scalars['String']>;
+};
+
+export type AzureIntegrationRuntimeKeyValue = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureIntegrationRuntimeProperties = {
+  computeProperties?: Maybe<AzureIntegrationRuntimeComputeProperties>;
+  customerVirtualNetworkSubnetId?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  integrationRuntimeType?: Maybe<Scalars['String']>;
+  linkedInfo?: Maybe<AzureLinkedIntegrationRuntimeTypeUnion>;
+  managedVirtualNetwork?: Maybe<AzureManagedVirtualNetworkReference>;
+  referenceName?: Maybe<Scalars['String']>;
+  ssisProperties?: Maybe<AzureIntegrationRuntimeSsisProperties>;
+  state?: Maybe<Scalars['String']>;
+};
+
+export type AzureIntegrationRuntimeSsisCatalogInfo = {
+  catalogAdminPasswordType?: Maybe<Scalars['String']>;
+  catalogAdminPasswordValue?: Maybe<Scalars['String']>;
+  catalogAdminUserName?: Maybe<Scalars['String']>;
+  catalogPricingTier?: Maybe<Scalars['String']>;
+  catalogServerEndpoint?: Maybe<Scalars['String']>;
+  dualStandbyPairName?: Maybe<Scalars['String']>;
+};
+
+export type AzureIntegrationRuntimeSsisProperties = {
+  catalogInfo?: Maybe<AzureIntegrationRuntimeSsisCatalogInfo>;
+  credentialReferenceName?: Maybe<Scalars['String']>;
+  credentialType?: Maybe<Scalars['String']>;
+  customSetupScriptProperties?: Maybe<AzureIntegrationRuntimeCustomSetupScriptProperties>;
+  dataProxyProperties?: Maybe<AzureIntegrationRuntimeDataProxyProperties>;
+  edition?: Maybe<Scalars['String']>;
+  expressCustomSetupProperties?: Maybe<Array<Maybe<AzureCustomSetupBaseUnion>>>;
+  licenseType?: Maybe<Scalars['String']>;
+  packageStores?: Maybe<Array<Maybe<AzurePackageStore>>>;
+};
+
+export type AzureIntegrationRuntimeVNetProperties = {
+  publicIPs?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subnet?: Maybe<Scalars['String']>;
+  subnetId?: Maybe<Scalars['String']>;
+  vNetId?: Maybe<Scalars['String']>;
+};
+
 export type AzureKeyValueProperty = {
   id: Scalars['String'];
   key?: Maybe<Scalars['String']>;
@@ -2333,6 +2446,33 @@ export type AzureLbProbe = AzureBaseResource & {
   protocol?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
   requestPath?: Maybe<Scalars['String']>;
+};
+
+export type AzureLinkedIntegrationRuntimeTypeUnion = {
+  authorizationType?: Maybe<Scalars['String']>;
+  credentialReferenceName?: Maybe<Scalars['String']>;
+  credentialType?: Maybe<Scalars['String']>;
+  keyType?: Maybe<Scalars['String']>;
+  keyValue?: Maybe<Scalars['String']>;
+  resourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureLinkedServiceReference = {
+  parameters?: Maybe<Array<Maybe<AzureLinkedServiceReferencePatameters>>>;
+  referenceName?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureLinkedServiceReferencePatameters = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Array<Maybe<AzureLinkedServiceReferencePatametersValue>>>;
+};
+
+export type AzureLinkedServiceReferencePatametersValue = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type AzureLoadBalancer = AzureResource & {
@@ -2526,6 +2666,12 @@ export type AzureMachineLearningWorkspaceSharedPrivateLinkResource = {
 export type AzureMachineLearningWorkspaceSku = {
   name?: Maybe<Scalars['String']>;
   tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureManagedVirtualNetworkReference = {
+  id?: Maybe<Scalars['String']>;
+  referenceName?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureMetricAlert = AzureResource & {
@@ -2744,6 +2890,13 @@ export type AzureOptionalResource = {
   id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzurePackageStore = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  packageStoreLinkedServiceReferenceName?: Maybe<Scalars['String']>;
+  packageStoreLinkedServiceType?: Maybe<Scalars['String']>;
 };
 
 export type AzurePolicyAssignment = AzureBaseResource & {
@@ -3064,6 +3217,7 @@ export type AzureResourceGroup = AzureResource & {
   fileShares?: Maybe<Array<Maybe<AzureFileShare>>>;
   firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
   functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
+  integrationRuntimes?: Maybe<Array<Maybe<AzureIntegrationRuntime>>>;
   keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
@@ -3095,6 +3249,14 @@ export type AzureResourceSystemData = {
   lastModifiedAt?: Maybe<Scalars['String']>;
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
+};
+
+export type AzureSecretBaseUnion = {
+  secretName?: Maybe<Scalars['String']>;
+  secretVersion?: Maybe<Scalars['String']>;
+  store?: Maybe<AzureLinkedServiceReference>;
+  type?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type AzureSecurityAssesment = AzureBaseResource & {

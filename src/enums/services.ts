@@ -17,6 +17,7 @@ export default {
   authRoleAssignment: 'authRoleAssignment',
   authRoleDefinition: 'authRoleDefinition',
   autoProvisioningSettings: 'autoProvisioningSettings',
+  integrationRuntime: 'integrationRuntime',
   cdnCustomDomains: 'cdnCustomDomains',
   cdnEndpoints: 'cdnEndpoints',
   cdnOriginGroups: 'cdnOriginGroups',
