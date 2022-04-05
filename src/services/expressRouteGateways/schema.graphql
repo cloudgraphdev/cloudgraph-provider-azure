@@ -1,0 +1,112 @@
+type azureExpressRouteGateway implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  etag: String @search(by: [hash, regexp])
+  autoScaleConfiguration: azureExpressRouteGatewayPropertiesAutoScaleConfiguration
+  expressRouteConnections: [azureExpressRouteGatewayConnection]
+  provisioningState: String @search(by: [hash, regexp])
+  virtualHub: azureExpressRouteGatewayVirtualHubId
+  resourceGroup: [azureResourceGroup] @hasInverse(field: expressRouteGateways)
+}
+
+type azureExpressRouteGatewayPropertiesAutoScaleConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  bounds: azureExpressRouteGatewayPropertiesAutoScaleConfigurationBounds
+}
+
+type azureExpressRouteGatewayPropertiesAutoScaleConfigurationBounds
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  min: Int @search
+  max: Int @search
+}
+
+type azureExpressRouteGatewayConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) 
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  expressRouteCircuitPeering: azureExpressRouteGatewayCircuitPeeringId
+  authorizationKey: String @search(by: [hash, regexp])
+  routingWeight: Int @search
+  enableInternetSecurity: Boolean @search
+  expressRouteGatewayBypass: Boolean @search
+  routingConfiguration: azureExpressRouteGatewayRoutingConfiguration
+}
+
+type azureExpressRouteGatewayCircuitPeeringId
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+}
+
+type azureExpressRouteGatewayVirtualHubId   
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String! @id @search(by: [hash, regexp])
+}
+
+type azureExpressRouteGatewayRoutingConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  associatedRouteTable: azureSubResource
+  propagatedRouteTables: azureExpressRouteGatewayPropagatedRouteTable
+  vnetRoutes: azureExpressRouteGatewayVnetRoute
+}
+
+type azureExpressRouteGatewayPropagatedRouteTable
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  labels: [String] @search(by: [hash, regexp])
+  ids: [azureSubResource]
+}
+
+type azureExpressRouteGatewayVnetRoute
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  staticRoutes: [azureExpressRouteGatewayStaticRoute]
+  bgpConnections: [azureSubResource]
+}
+
+type azureExpressRouteGatewayStaticRoute
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) 
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  addressPrefixes: [String] @search(by: [hash, regexp])
+  nextHopIpAddress: String @search(by: [hash, regexp])
+}

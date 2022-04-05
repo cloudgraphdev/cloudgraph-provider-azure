@@ -22,6 +22,7 @@ type azureTag @key(fields: "id") {
   databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
   disks: [azureDisk]
   dns: [azureDnsZone]
+  expressRouteGateways: [azureExpressRouteGateway]
   firewalls: [azureFirewall]
   functionApps: [azureFunctionApp]
   keyVaults: [azureKeyVault]
