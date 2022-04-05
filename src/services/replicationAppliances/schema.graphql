@@ -1,0 +1,267 @@
+type azureReplicationAppliance implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  properties: azureReplicationApplianceProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: replicationAppliances)
+}
+
+type azureReplicationApplianceProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  providerSpecificDetails: azureReplicationApplianceSpecificDetailsUnion
+}
+
+type azureReplicationApplianceSpecificDetailsUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  instanceType: String @search(by: [hash, regexp])
+  #appliances: [azureReplicationApplianceInMageRcmApplianceDetails]
+}
+
+type azureReplicationApplianceInMageRcmApplianceDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  fabricArmId: String @search(by: [hash, regexp])
+  processServer: azureReplicationApplianceProcessServerDetails
+  rcmProxy: azureReplicationApplianceRcmProxyDetails
+  pushInstaller: azureReplicationAppliancePushInstallerDetails
+  replicationAgent: azureReplicationApplianceReplicationAgentDetails
+  reprotectAgent: azureReplicationApplianceReprotectAgentDetails
+  marsAgent: azureReplicationApplianceMarsAgentDetails
+  dra: azureReplicationApplianceDraDetails
+  switchProviderBlockingErrorDetails: [azureReplicationApplianceInMageRcmFabricSwitchProviderBlockingErrorDetails]
+}
+
+type azureReplicationApplianceProcessServerDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  fabricObjectId: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  ipAddresses: [String] @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  totalMemoryInBytes: Int @search
+  availableMemoryInBytes: Int @search
+  usedMemoryInBytes: Int @search
+  memoryUsagePercentage: Int @search
+  totalSpaceInBytes: Int @search
+  availableSpaceInBytes: Int @search
+  usedSpaceInBytes: Int @search
+  freeSpacePercentage: Int @search
+  throughputUploadPendingDataInBytes: Int @search
+  throughputInBytes: Int @search
+  processorUsagePercentage: Int @search
+  throughputStatus: String @search(by: [hash, regexp])
+  systemLoad: Int @search
+  systemLoadStatus: String @search(by: [hash, regexp])
+  diskUsageStatus: String @search(by: [hash, regexp])
+  memoryUsageStatus: String @search(by: [hash, regexp])
+  processorUsageStatus: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+  protectedItemCount: Int @search
+  historicHealth: String @search(by: [hash, regexp])
+}
+
+type azureReplicationApplianceRcmProxyDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  fabricObjectId: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  clientAuthenticationType: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+}
+
+type azureReplicationAppliancePushInstallerDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  fabricObjectId: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+}
+
+type azureReplicationApplianceReplicationAgentDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  fabricObjectId: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+}
+
+type azureReplicationApplianceReprotectAgentDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  fabricObjectId: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+  protectedItemCount: Int @search
+  accessibleDatastores: [String] @search(by: [hash, regexp])
+  vcenterId: String @search(by: [hash, regexp])
+  lastDiscoveryInUtc: String @search(by: [hash, regexp])
+}
+
+type azureReplicationApplianceMarsAgentDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  fabricObjectId: String @search(by: [hash, regexp])
+  fqdn: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+}
+
+type azureReplicationApplianceHealthError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  innerHealthErrors: [azureReplicationApplianceInnerHealthError]
+  errorSource: String @search(by: [hash, regexp])
+  errorType: String @search(by: [hash, regexp])
+  errorLevel: String @search(by: [hash, regexp])
+  errorCategory: String @search(by: [hash, regexp])
+  errorCode: String @search(by: [hash, regexp])
+  summaryMessage: String @search(by: [hash, regexp])
+  errorMessage: String @search(by: [hash, regexp])
+  possibleCauses: String @search(by: [hash, regexp])
+  recommendedAction: String @search(by: [hash, regexp])
+  creationTimeUtc: String @search(by: [hash, regexp])
+  recoveryProviderErrorMessage: String @search(by: [hash, regexp])
+  entityId: String @search(by: [hash, regexp])
+  errorId: String @search(by: [hash, regexp])
+  customerResolvability: String @search(by: [hash, regexp])
+}
+
+type azureReplicationApplianceDraDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  biosId: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
+  lastHeartbeatUtc: String @search(by: [hash, regexp])
+  health: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationApplianceHealthError]
+  forwardProtectedItemCount: Int @search
+  reverseProtectedItemCount: Int @search
+}
+
+type azureReplicationApplianceInMageRcmFabricSwitchProviderBlockingErrorDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  errorCode: String @search(by: [hash, regexp])
+  errorMessage: String @search(by: [hash, regexp])
+  possibleCauses: String @search(by: [hash, regexp])
+  recommendedAction: String @search(by: [hash, regexp])
+  errorMessageParameters: [azureKeyValueProperty]
+  errorTags: [azureKeyValueProperty]
+}
+
+type azureReplicationApplianceInnerHealthError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  errorSource: String @search(by: [hash, regexp])
+  errorType: String @search(by: [hash, regexp])
+  errorLevel: String @search(by: [hash, regexp])
+  errorCategory: String @search(by: [hash, regexp])
+  errorCode: String @search(by: [hash, regexp])
+  summaryMessage: String @search(by: [hash, regexp])
+  errorMessage: String @search(by: [hash, regexp])
+  possibleCauses: String @search(by: [hash, regexp])
+  recommendedAction: String @search(by: [hash, regexp])
+  creationTimeUtc: String @search(by: [hash, regexp])
+  recoveryProviderErrorMessage: String @search(by: [hash, regexp])
+  entityId: String @search(by: [hash, regexp])
+  errorId: String @search(by: [hash, regexp])
+  customerResolvability: String @search(by: [hash, regexp])
+}
+
+
+
