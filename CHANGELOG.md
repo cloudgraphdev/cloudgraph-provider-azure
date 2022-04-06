@@ -1,3 +1,10 @@
+## [0.60.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.0...0.60.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* remove duplicate fields from resourceGroup schema ([abe8fc3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/abe8fc34f137643014837053f69a222e2ee5bc84))
+
 # [0.60.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.59.0...0.60.0) (2022-04-05)
 
 
