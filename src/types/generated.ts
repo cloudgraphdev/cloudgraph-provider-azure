@@ -2898,6 +2898,7 @@ export type AzureLoadBalancer = AzureResource & {
 };
 
 export type AzureLogAnalyticsSolution = AzureBaseResource & {
+  logAnalyticsWorkspace?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   plan?: Maybe<AzureLogAnalyticsSolutionPlan>;
   properties?: Maybe<AzureLogAnalyticsSolutionProperties>;
   region?: Maybe<Scalars['String']>;
@@ -2928,6 +2929,7 @@ export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
   customerId?: Maybe<Scalars['String']>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
   features?: Maybe<AzureLogAnalyticsWorkspaceFeature>;
+  logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   modifiedDate?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccessForIngestion?: Maybe<Scalars['String']>;
