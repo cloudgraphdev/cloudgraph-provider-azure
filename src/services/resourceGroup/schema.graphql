@@ -69,8 +69,6 @@ type azureResourceGroup implements azureResource
   logAnalyticsWorkspaces: [azureLogAnalyticsWorkspace]
     @hasInverse(field: resourceGroup)
   integrationRuntimes: [azureIntegrationRuntime] @hasInverse(field: resourceGroup)
-  cosmosDb: [azureCosmosDb] @hasInverse(field: resourceGroup)
-  appInsights: [azureAppInsights] @hasInverse(field: resourceGroup)
   serviceBus: [azureServiceBus] @hasInverse(field: resourceGroup)
   backupInstances: [azureBackupInstance] @hasInverse(field: resourceGroup) 
   backupPolicies: [azureBackupPolicy] @hasInverse(field: resourceGroup)
