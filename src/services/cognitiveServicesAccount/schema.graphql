@@ -249,4 +249,5 @@ type azureCognitiveServicesAccount implements azureResource
   restore: Boolean @search
   resourceGroup: [azureResourceGroup]
     @hasInverse(field: cognitiveServicesAccounts)
+  application: [azureADApplication] @hasInverse(field: cognitiveServicesAccounts)
 }

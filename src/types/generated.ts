@@ -1490,6 +1490,7 @@ export type AzureCdnUrlSigningKey = {
 export type AzureCognitiveServicesAccount = AzureResource & {
   allowedFqdnList?: Maybe<Array<Maybe<Scalars['String']>>>;
   apiProperties?: Maybe<AzureCognitiveServicesAccountApiProperties>;
+  application?: Maybe<Array<Maybe<AzureAdApplication>>>;
   callRateLimit?: Maybe<AzureCognitiveServicesAccountCallRateLimit>;
   capabilities?: Maybe<Array<Maybe<AzureCognitiveServicesAccountCapability>>>;
   createdAt?: Maybe<Scalars['DateTime']>;
