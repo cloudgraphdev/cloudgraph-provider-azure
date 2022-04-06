@@ -1097,7 +1097,83 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related synapse workspaces
+     */
+    const synapseWorkspaces: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.synapseWorkspaces)
+    if (synapseWorkspaces?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        synapseWorkspaces.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const workspace of dataAtRegion) {
+          const { id } = workspace
+          connections.push({
+            id,
+            resourceType: services.synapseWorkspaces,
+            relation: 'child',
+            field: 'synapseWorkspaces',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related synapse sql pools
+     */
+    const synapseSqlPools: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.synapseSqlPools)
+    if (synapseSqlPools?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        synapseSqlPools.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const sqlPool of dataAtRegion) {
+          const { id } = sqlPool
+          connections.push({
+            id,
+            resourceType: services.synapseSqlPools,
+            relation: 'child',
+            field: 'synapseSqlPools',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related synapse big data pools
+     */
+    const synapseBigDataPools: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.synapseBigDataPools)
+    if (synapseBigDataPools?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        synapseBigDataPools.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const bigDataPool of dataAtRegion) {
+          const { id } = bigDataPool
+          connections.push({
+            id,
+            resourceType: services.synapseBigDataPools,
+            relation: 'child',
+            field: 'synapseBigDataPools',
+          })
+        }
+      }
+    }
   }
+  
   const tagResult = {
     [tag.id]: connections,
   }

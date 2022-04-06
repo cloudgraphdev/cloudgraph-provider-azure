@@ -176,6 +176,12 @@ export default {
     `Found ${num} storage containers`,
   // Storage Blobs
   foundStorageBlobs: (num: number): string => `Found ${num} storage blobs`,
+  // SynapseBigDataPools
+  foundSynapseBigDataPools: (num: number): string => `Found ${num} synapse big data pools`,
+  // SynapseSqlPools
+  foundSynapseSqlPools: (num: number): string => `Found ${num} synapse SQL pools`,
+  // SynapseWorkspace
+  foundSynapseWorkspaces: (num: number): string => `Found ${num} synapse workspaces`,
   // Traffic Manager
   foundTrafficManagerProfile: (num: number): string =>
     `Found ${num} traffic manager profiles`,

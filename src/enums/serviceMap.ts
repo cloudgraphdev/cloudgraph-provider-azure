@@ -61,6 +61,9 @@ import AzureSecuritySettings from '../services/securitySettings'
 import AzureStorageAccount from '../services/storageAccount'
 import AzureStorageBlob from '../services/storageBlob'
 import AzureStorageContainer from '../services/storageContainer'
+import AzureSynapseBigDataPool from '../services/synapseBigDataPools'
+import AzureSynapseSqlPool from '../services/synapseSqlPools'
+import AzureSynapseWorkspace from '../services/synapseWorkspaces'
 import AzureTag from '../services/tag'
 import AzureTrafficManagerProfile from '../services/trafficManagerProfile'
 import AzureVirtualMachine from '../services/virtualMachine'
@@ -157,6 +160,9 @@ export default {
   [services.storageAccount]: AzureStorageAccount,
   [services.storageBlob]: AzureStorageBlob,
   [services.storageContainer]: AzureStorageContainer,
+  [services.synapseBigDataPools]: AzureSynapseBigDataPool,
+  [services.synapseSqlPools]: AzureSynapseSqlPool,
+  [services.synapseWorkspaces]: AzureSynapseWorkspace,
   [services.trafficManagerProfile]: AzureTrafficManagerProfile,
   [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
   [services.virtualMachine]: AzureVirtualMachine,

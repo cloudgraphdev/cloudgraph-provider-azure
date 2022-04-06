@@ -12,4 +12,5 @@ export default {
   [services.cdnEndpoints]: [services.cdnCustomDomains, services.cdnOrigins, services.cdnOriginGroups],
   [services.dataFactory]: [services.integrationRuntime],
   [services.backupVault]: [services.backupInstance, services.backupPolicy],
+  [services.synapseWorkspaces]: [services.synapseBigDataPools, services.synapseSqlPools]
 }
