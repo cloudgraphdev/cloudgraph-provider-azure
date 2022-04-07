@@ -1,3 +1,10 @@
+# [0.61.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.2-alpha.1...0.61.0-alpha.1) (2022-04-07)
+
+
+### Features
+
+* **recoveryServices:** add recovery services ([172d537](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/172d537006de83a48ef0f329a73c1b1bcc800cde))
+
 ## [0.60.2-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.1...0.60.2-alpha.1) (2022-04-07)
 
 
