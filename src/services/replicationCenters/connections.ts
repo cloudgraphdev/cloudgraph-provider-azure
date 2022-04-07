@@ -21,7 +21,7 @@ export default ({
   const { id, resourceGroupId: rgName } = service
 
   /**
-   * Find resource group related to this replication network
+   * Find resource group related to this replication center
    */
   const resourceGroups: {
     name: string
