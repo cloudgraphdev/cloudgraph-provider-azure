@@ -67,6 +67,7 @@ export default {
   [services.recoveryVaults]: 'azureRecoveryVault',
   [services.redisCaches]: 'azureRedisCache',
   [services.replicationAppliances]: 'azureReplicationAppliance',
+  [services.replicationCenters]: 'azureReplicationCenter',
   [services.replicationNetworks]: 'azureReplicationNetwork',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityAssesments]: 'azureSecurityAssesment',
