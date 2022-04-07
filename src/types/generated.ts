@@ -3469,6 +3469,110 @@ export type AzureRawTag = {
   value?: Maybe<Scalars['String']>;
 };
 
+export type AzureRecoveryVault = AzureResource & {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureRecoveryVaultIdentityData>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureRecoveryVaultProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sku?: Maybe<AzureRecoveryVaultSku>;
+};
+
+export type AzureRecoveryVaultCmkKekIdentity = {
+  useSystemAssignedIdentity?: Maybe<Scalars['Boolean']>;
+  userAssignedIdentity?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultCmkKeyVaultProperties = {
+  keyUri?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultIdentityData = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureRecoveryVaultUserIdentity>>>;
+};
+
+export type AzureRecoveryVaultPrivateEndpoint = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPrivateEndpointConnection = {
+  privateEndpoint?: Maybe<AzureRecoveryVaultPrivateEndpoint>;
+  privateLinkServiceConnectionState?: Maybe<AzureRecoveryVaultPrivateLinkServiceConnectionState>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPrivateEndpointConnectionVaultProperties = {
+  id: Scalars['String'];
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureRecoveryVaultPrivateEndpointConnection>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPrivateLinkServiceConnectionState = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultProperties = {
+  encryption?: Maybe<AzureRecoveryVaultPropertiesEncryption>;
+  moveDetails?: Maybe<AzureRecoveryVaultVaultPropertiesMoveDetails>;
+  moveState?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureRecoveryVaultPrivateEndpointConnectionVaultProperties>>>;
+  privateEndpointStateForBackup?: Maybe<Scalars['String']>;
+  privateEndpointStateForSiteRecovery?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  upgradeDetails?: Maybe<AzureRecoveryVaultUpgradeDetails>;
+};
+
+export type AzureRecoveryVaultPropertiesEncryption = {
+  infrastructureEncryption?: Maybe<Scalars['String']>;
+  kekIdentity?: Maybe<AzureRecoveryVaultCmkKekIdentity>;
+  keyVaultProperties?: Maybe<AzureRecoveryVaultCmkKeyVaultProperties>;
+};
+
+export type AzureRecoveryVaultSku = {
+  capacity?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultUpgradeDetails = {
+  endTimeUtc?: Maybe<Scalars['String']>;
+  lastUpdatedTimeUtc?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+  operationId?: Maybe<Scalars['String']>;
+  previousResourceId?: Maybe<Scalars['String']>;
+  startTimeUtc?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  triggerType?: Maybe<Scalars['String']>;
+  upgradedResourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultUserIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultVaultPropertiesMoveDetails = {
+  completionTimeUtc?: Maybe<Scalars['String']>;
+  operationId?: Maybe<Scalars['String']>;
+  sourceResourceId?: Maybe<Scalars['String']>;
+  startTimeUtc?: Maybe<Scalars['String']>;
+  targetResourceId?: Maybe<Scalars['String']>;
+};
+
 export type AzureRedisCache = AzureResource & {
   accessKeys?: Maybe<AzureRedisCacheAccessKeys>;
   enableNonSslPort?: Maybe<Scalars['Boolean']>;
@@ -3578,6 +3682,38 @@ export type AzureRedisCacheUserAssignedIdentity = {
   principalId?: Maybe<Scalars['String']>;
 };
 
+export type AzureReplicationAppliance = AzureResource & {
+  properties?: Maybe<AzureReplicationApplianceProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationApplianceProperties = {
+  providerSpecificDetails?: Maybe<AzureReplicationApplianceSpecificDetailsUnion>;
+};
+
+export type AzureReplicationApplianceSpecificDetailsUnion = {
+  instanceType?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationNetwork = AzureResource & {
+  properties?: Maybe<AzureReplicationNetworkProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationNetworkProperties = {
+  fabricType?: Maybe<Scalars['String']>;
+  friendlyName?: Maybe<Scalars['String']>;
+  networkType?: Maybe<Scalars['String']>;
+  subnets?: Maybe<Array<Maybe<AzureReplicationNetworkSubnet>>>;
+};
+
+export type AzureReplicationNetworkSubnet = {
+  addressList?: Maybe<Array<Maybe<Scalars['String']>>>;
+  friendlyName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+};
+
 export type AzureResource = {
   id: Scalars['String'];
   kind?: Maybe<Scalars['String']>;
@@ -3638,7 +3774,10 @@ export type AzureResourceGroup = AzureResource & {
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
+  replicationAppliances?: Maybe<Array<Maybe<AzureReplicationAppliance>>>;
+  replicationNetworks?: Maybe<Array<Maybe<AzureReplicationNetwork>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   serviceBus?: Maybe<Array<Maybe<AzureServiceBus>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
@@ -4257,6 +4396,7 @@ export type AzureTag = {
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;

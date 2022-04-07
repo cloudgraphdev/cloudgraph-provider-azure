@@ -135,8 +135,14 @@ export default {
     `Found ${num} private dns zones`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
+  // Recovery Vaults
+  foundRecoveryVaults: (num: number): string => `Found ${num} recovery vaults`,
   // RedisCache
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
+  // Replication Appliances
+  foundReplicationAppliances: (num: number): string => `Found ${num} replication appliances`,
+  // Replication Networks
+  foundReplicationNetworks: (num: number): string => `Found ${num} replication networks`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Assesments
