@@ -1,3 +1,10 @@
+## [0.60.2-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.1...0.60.2-alpha.1) (2022-04-07)
+
+
+### Bug Fixes
+
+* add missing connection between logAnalytics services ([2e342dd](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/2e342dd701b729c16dfa42e73f64b522c38ee5b2))
+
 ## [0.60.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.0...0.60.1) (2022-04-06)
 
 
