@@ -1,3 +1,22 @@
+# [0.61.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-alpha.2...0.61.0-alpha.3) (2022-04-08)
+
+
+### Bug Fixes
+
+* added AD application connection ([a00b6b2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/a00b6b277818f6d79edc4424a34c19232834cd4e))
+
+
+### Features
+
+* add cognitiveServicesAccount service ([c1de2d5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c1de2d5ba1259e5a457fc88495824a62d624cce3))
+
+# [0.61.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-alpha.1...0.61.0-alpha.2) (2022-04-08)
+
+
+### Features
+
+* **siteRecovery:** add replication centers/policies services ([f7a560b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f7a560bcef50680d10ddd5868c804f5b19459ec7))
+
 # [0.61.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.2-alpha.1...0.61.0-alpha.1) (2022-04-07)
 
 

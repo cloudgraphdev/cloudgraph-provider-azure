@@ -21,6 +21,7 @@ import AzureCdnEndpoints from '../services/cdnEndpoints'
 import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnProfiles from '../services/cdnProfiles'
+import AzureCognitiveServicesAccount from '../services/cognitiveServicesAccount'
 import AzureContainerRegistry from '../services/containerRegistry'
 import AzureDataCollectionRule from '../services/dataCollectionRule'
 import AzureDataFactory from '../services/dataFactory'
@@ -52,7 +53,9 @@ import AzurePublicIp from '../services/publicIp'
 import AzureRecoveryVault from '../services/recoveryVaults'
 import AzureRedisCache from '../services/redisCache'
 import AzureReplicationAppliance from '../services/replicationAppliances'
+import AzureReplicationCenter from '../services/replicationCenters'
 import AzureReplicationNetwork from '../services/replicationNetworks'
+import AzureReplicationPolicy from '../services/replicationPolicies'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureSecurityAssesments from '../services/securityAssesments'
 import AzureSecurityContacts from '../services/securityContacts'
@@ -114,6 +117,7 @@ export default {
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnProfiles]: AzureCdnProfiles,
+  [services.cognitiveServicesAccount]: AzureCognitiveServicesAccount,
   [services.containerRegistry]: AzureContainerRegistry,
   [services.cosmosDb]: AzureCosmosDb,
   [services.dataCollectionRule]: AzureDataCollectionRule,
@@ -148,7 +152,9 @@ export default {
   [services.recoveryVaults]: AzureRecoveryVault,
   [services.redisCaches]: AzureRedisCache,
   [services.replicationAppliances]: AzureReplicationAppliance,
+  [services.replicationCenters]: AzureReplicationCenter,
   [services.replicationNetworks]: AzureReplicationNetwork,
+  [services.replicationPolicies]: AzureReplicationPolicy,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityAssesments]: AzureSecurityAssesments,
   [services.securityContacts]: AzureSecurityContacts,

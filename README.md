@@ -59,6 +59,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | cdnProfiles                                 | cdnEndpoints, resourceGroup                                               |
 | cdnOrigins                                  | cdnEndpoints, cdnOriginGroups, resourceGroup                              |
 | cdnOriginGroups                             | cdnEndpoints, cdnOrigins, resourceGroup                                   |
+| cognitiveServicesAccount                    | resourceGroup                                                             |
 | containerRegistry                           | keyVault, resourceGroup                                                   |
 | cosmosDb                                    | resourceGroup                                                             |
 | dataCollectionRule                          | resourceGroup, logAnalyticsWorkspace                                      |
@@ -94,7 +95,9 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | recoveryVaults                              | resourceGroup                                                             |
 | redisCaches                                 | resourceGroup                                                             |
 | replicationAppliances                       | resourceGroup                                                             |
+| replicationCenters                          | resourceGroup                                                             |
 | replicationNetworks                         | resourceGroup                                                             |
+| replicationPolicies                         | resourceGroup                                                             |
 | resourceGroup                               | **all services**                                                          |
 | securityAssessments                         |                                                                           |
 | securityContacts                            |                                                                           |
