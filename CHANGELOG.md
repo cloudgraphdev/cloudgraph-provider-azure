@@ -1,3 +1,10 @@
+# [0.61.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-alpha.3...0.61.0-alpha.4) (2022-04-08)
+
+
+### Features
+
+* **synapse:** add synapse services ([fd8e9f4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/fd8e9f47f6ad573e3f9b9258d2244693073432a1))
+
 # [0.61.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-alpha.2...0.61.0-alpha.3) (2022-04-08)
 
 
