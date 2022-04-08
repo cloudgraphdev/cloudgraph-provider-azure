@@ -32,6 +32,7 @@ export default {
   [services.cdnOrigins]: 'azureCdnOrigin',
   [services.cdnOrigins]: 'azureCdnOrigin',
   [services.cdnProfiles]: 'azureCdnProfile',
+  [services.cognitiveServicesAccount]: 'azureCognitiveServicesAccount',
   [services.containerRegistry]: 'azureContainerRegistry',
   [services.cosmosDb]: 'azureCosmosDb',
   [services.dataCollectionRule]: 'azureDataCollectionRule',

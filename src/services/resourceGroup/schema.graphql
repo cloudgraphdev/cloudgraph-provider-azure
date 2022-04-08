@@ -21,6 +21,7 @@ type azureResourceGroup implements azureResource
   cdnOriginGroups: [azureCdnOriginGroup] @hasInverse(field: resourceGroup)
   cdnOrigins: [azureCdnOrigin] @hasInverse(field: resourceGroup)
   cdnProfiles: [azureCdnProfile] @hasInverse(field: resourceGroup)
+  cognitiveServicesAccounts: [azureCognitiveServicesAccount] @hasInverse(field: resourceGroup)
   containerRegistries: [azureContainerRegistry] @hasInverse(field: resourceGroup)
   cosmosDb: [azureCosmosDb] @hasInverse(field: resourceGroup)
   dataCollectionRules: [azureDataCollectionRule] @hasInverse(field: resourceGroup)

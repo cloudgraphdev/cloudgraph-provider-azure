@@ -36,6 +36,7 @@
     "@azure/arm-appservice": "^11.0.0",
     "@azure/arm-authorization": "^8.4.1",
     "@azure/arm-cdn": "^6.0.0",
+    "@azure/arm-cognitiveservices": "^7.0.0",
     "@azure/arm-compute": "^17.3.0",
     "@azure/arm-containerregistry": "^10.0.0",
     "@azure/arm-containerservice": "^15.1.0",

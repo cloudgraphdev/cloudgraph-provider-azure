@@ -68,6 +68,19 @@
     "@azure/core-rest-pipeline" "^1.1.0"
     tslib "^2.2.0"
 
+"@azure/arm-cognitiveservices@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@azure/arm-cognitiveservices/-/arm-cognitiveservices-7.0.0.tgz#908ea090d82b4283ed451041cea7edf2c53f69f5"
+  integrity sha512-EvyJf4MsR1j+Q1q8/MhMUlnCQaHNAhpNxCxfhYImMI+P5l38eI5+2KSqIILq2NYZte2ZrzuZ4jqeyYLPk2dFRA==
+  dependencies:
+    "@azure/abort-controller" "^1.0.0"
+    "@azure/core-auth" "^1.3.0"
+    "@azure/core-client" "^1.0.0"
+    "@azure/core-lro" "^2.2.0"
+    "@azure/core-paging" "^1.2.0"
+    "@azure/core-rest-pipeline" "^1.1.0"
+    tslib "^2.2.0"
+
 "@azure/arm-compute@^17.3.0":
   version "17.3.0"
   resolved "https://registry.yarnpkg.com/@azure/arm-compute/-/arm-compute-17.3.0.tgz#5503a170e088c898b35cf6b03c7dfbece81d7074"

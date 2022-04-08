@@ -1487,6 +1487,164 @@ export type AzureCdnUrlSigningKey = {
   keySourceParameters?: Maybe<AzureCdnKeyVaultSigningKeyParameters>;
 };
 
+export type AzureCognitiveServicesAccount = AzureResource & {
+  allowedFqdnList?: Maybe<Array<Maybe<Scalars['String']>>>;
+  apiProperties?: Maybe<AzureCognitiveServicesAccountApiProperties>;
+  application?: Maybe<Array<Maybe<AzureAdApplication>>>;
+  callRateLimit?: Maybe<AzureCognitiveServicesAccountCallRateLimit>;
+  capabilities?: Maybe<Array<Maybe<AzureCognitiveServicesAccountCapability>>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  customSubDomainName?: Maybe<Scalars['String']>;
+  dateCreated?: Maybe<Scalars['DateTime']>;
+  disableLocalAuth?: Maybe<Scalars['Boolean']>;
+  encryption?: Maybe<AzureCognitiveServicesAccountEncryption>;
+  endpoint?: Maybe<Scalars['String']>;
+  endpoints?: Maybe<Array<Maybe<AzureCognitiveServicesAccountEndpoint>>>;
+  etag?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureCognitiveServicesAccountIdentity>;
+  internalId?: Maybe<Scalars['String']>;
+  isMigrated?: Maybe<Scalars['Boolean']>;
+  lastModifiedAt?: Maybe<Scalars['DateTime']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  migrationToken?: Maybe<Scalars['String']>;
+  networkAcls?: Maybe<AzureCognitiveServicesAccountNetworkAcls>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureCognitiveServicesAccountPrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  quotaLimit?: Maybe<AzureCognitiveServicesAccountQuotaLimit>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  restore?: Maybe<Scalars['Boolean']>;
+  restrictOutboundNetworkAccess?: Maybe<Scalars['Boolean']>;
+  sku?: Maybe<AzureCognitiveServicesAccountSku>;
+  skuChangeInfo?: Maybe<AzureCognitiveServicesAccountSkuChangeInfo>;
+  userOwnedStorage?: Maybe<Array<Maybe<AzureCognitiveServicesAccountUserOwnedStorage>>>;
+};
+
+export type AzureCognitiveServicesAccountApiProperties = {
+  aadClientId?: Maybe<Scalars['String']>;
+  aadTenantId?: Maybe<Scalars['String']>;
+  eventHubConnectionString?: Maybe<Scalars['String']>;
+  qnaAzureSearchEndpointId?: Maybe<Scalars['String']>;
+  qnaAzureSearchEndpointKey?: Maybe<Scalars['String']>;
+  qnaRuntimeEndpoint?: Maybe<Scalars['String']>;
+  statisticsEnabled?: Maybe<Scalars['Boolean']>;
+  storageAccountConnectionString?: Maybe<Scalars['String']>;
+  superUser?: Maybe<Scalars['String']>;
+  websiteName?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountCallRateLimit = {
+  count?: Maybe<Scalars['Int']>;
+  renewalPeriod?: Maybe<Scalars['Int']>;
+  rules?: Maybe<Array<Maybe<AzureCognitiveServicesAccountThrottlingRule>>>;
+};
+
+export type AzureCognitiveServicesAccountCapability = AzureNameValueProperty & {
+  id: Scalars['String'];
+};
+
+export type AzureCognitiveServicesAccountEncryption = {
+  keySource?: Maybe<Scalars['String']>;
+  keyVaultProperties?: Maybe<AzureCognitiveServicesAccountKeyVaultProperties>;
+};
+
+export type AzureCognitiveServicesAccountEndpoint = AzureKeyValueProperty & {
+  id: Scalars['String'];
+};
+
+export type AzureCognitiveServicesAccountIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountKeyVaultProperties = {
+  identityClientId?: Maybe<Scalars['String']>;
+  keyName?: Maybe<Scalars['String']>;
+  keyVaultUri?: Maybe<Scalars['String']>;
+  keyVersion?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountNetworkAcls = {
+  defaultAction?: Maybe<Scalars['String']>;
+  ipRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureCognitiveServicesAccountVirtualNetworkRules>>>;
+};
+
+export type AzureCognitiveServicesAccountPrivateEndpointConnection = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  groupIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  lastModifiedAt?: Maybe<Scalars['DateTime']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionState?: Maybe<AzureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountQuotaLimit = {
+  count?: Maybe<Scalars['Int']>;
+  renewalPeriod?: Maybe<Scalars['Int']>;
+  rules?: Maybe<Array<Maybe<AzureCognitiveServicesAccountThrottlingRule>>>;
+};
+
+export type AzureCognitiveServicesAccountSku = {
+  capacity?: Maybe<Scalars['Int']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountSkuChangeInfo = {
+  countOfDowngrades?: Maybe<Scalars['Int']>;
+  countOfUpgradesAfterDowngrades?: Maybe<Scalars['Int']>;
+  lastChangeDate?: Maybe<Scalars['DateTime']>;
+};
+
+export type AzureCognitiveServicesAccountThrottlingRule = {
+  count?: Maybe<Scalars['Int']>;
+  dynamicThrottlingEnabled?: Maybe<Scalars['Boolean']>;
+  key?: Maybe<Scalars['String']>;
+  matchPatterns?: Maybe<Array<Maybe<AzureCognitiveServicesAccountThrottlingRuleMatchPattern>>>;
+  minCount?: Maybe<Scalars['Int']>;
+  renewalPeriod?: Maybe<Scalars['Int']>;
+};
+
+export type AzureCognitiveServicesAccountThrottlingRuleMatchPattern = {
+  id: Scalars['String'];
+  method?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountUserOwnedStorage = {
+  id: Scalars['String'];
+  identityClientId?: Maybe<Scalars['String']>;
+  resourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountVirtualNetworkRules = {
+  id: Scalars['String'];
+  ignoreMissingVnetServiceEndpoint?: Maybe<Scalars['Boolean']>;
+  state?: Maybe<Scalars['String']>;
+};
+
 export type AzureContainerRegistry = AzureResource & {
   adminUserEnabled?: Maybe<Scalars['Boolean']>;
   creationDate?: Maybe<Scalars['String']>;
@@ -3191,6 +3349,12 @@ export type AzureMySqlServerStorageProfile = {
   storageMB?: Maybe<Scalars['Int']>;
 };
 
+export type AzureNameValueProperty = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
 export type AzureNetworkInterface = AzureResource & {
   appliedDnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
   dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -3817,6 +3981,7 @@ export type AzureResourceGroup = AzureResource & {
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
@@ -4451,6 +4616,7 @@ export type AzureTag = {
   backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;

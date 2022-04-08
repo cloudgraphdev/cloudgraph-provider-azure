@@ -25,6 +25,7 @@ export default {
   cdnOriginGroups: 'cdnOriginGroups',
   cdnOrigins: 'cdnOrigins',
   cdnProfiles: 'cdnProfiles',
+  cognitiveServicesAccount: 'cognitiveServicesAccount',
   containerRegistry: 'containerRegistry',
   cosmosDb: 'cosmosDb',
   dataCollectionRule: 'dataCollectionRule',

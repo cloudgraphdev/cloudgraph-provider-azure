@@ -21,6 +21,7 @@ import AzureCdnEndpoints from '../services/cdnEndpoints'
 import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnProfiles from '../services/cdnProfiles'
+import AzureCognitiveServicesAccount from '../services/cognitiveServicesAccount'
 import AzureContainerRegistry from '../services/containerRegistry'
 import AzureDataCollectionRule from '../services/dataCollectionRule'
 import AzureDataFactory from '../services/dataFactory'
@@ -113,6 +114,7 @@ export default {
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnProfiles]: AzureCdnProfiles,
+  [services.cognitiveServicesAccount]: AzureCognitiveServicesAccount,
   [services.containerRegistry]: AzureContainerRegistry,
   [services.cosmosDb]: AzureCosmosDb,
   [services.dataCollectionRule]: AzureDataCollectionRule,
