@@ -3695,6 +3695,62 @@ export type AzureReplicationApplianceSpecificDetailsUnion = {
   instanceType?: Maybe<Scalars['String']>;
 };
 
+export type AzureReplicationCenter = AzureResource & {
+  properties?: Maybe<AzureReplicationCenterProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationCenterHealthError = {
+  creationTimeUtc?: Maybe<Scalars['String']>;
+  customerResolvability?: Maybe<Scalars['String']>;
+  entityId?: Maybe<Scalars['String']>;
+  errorCategory?: Maybe<Scalars['String']>;
+  errorCode?: Maybe<Scalars['String']>;
+  errorId?: Maybe<Scalars['String']>;
+  errorLevel?: Maybe<Scalars['String']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  errorSource?: Maybe<Scalars['String']>;
+  errorType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  innerHealthErrors?: Maybe<Array<Maybe<AzureReplicationCenterInnerHealthError>>>;
+  possibleCauses?: Maybe<Scalars['String']>;
+  recommendedAction?: Maybe<Scalars['String']>;
+  recoveryProviderErrorMessage?: Maybe<Scalars['String']>;
+  summaryMessage?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationCenterInnerHealthError = {
+  creationTimeUtc?: Maybe<Scalars['String']>;
+  customerResolvability?: Maybe<Scalars['String']>;
+  entityId?: Maybe<Scalars['String']>;
+  errorCategory?: Maybe<Scalars['String']>;
+  errorCode?: Maybe<Scalars['String']>;
+  errorId?: Maybe<Scalars['String']>;
+  errorLevel?: Maybe<Scalars['String']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  errorSource?: Maybe<Scalars['String']>;
+  errorType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  possibleCauses?: Maybe<Scalars['String']>;
+  recommendedAction?: Maybe<Scalars['String']>;
+  recoveryProviderErrorMessage?: Maybe<Scalars['String']>;
+  summaryMessage?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationCenterProperties = {
+  discoveryStatus?: Maybe<Scalars['String']>;
+  fabricArmResourceName?: Maybe<Scalars['String']>;
+  friendlyName?: Maybe<Scalars['String']>;
+  healthErrors?: Maybe<Array<Maybe<AzureReplicationCenterHealthError>>>;
+  infrastructureId?: Maybe<Scalars['String']>;
+  internalId?: Maybe<Scalars['String']>;
+  ipAddress?: Maybe<Scalars['String']>;
+  lastHeartbeat?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['String']>;
+  processServerId?: Maybe<Scalars['String']>;
+  runAsAccountId?: Maybe<Scalars['String']>;
+};
+
 export type AzureReplicationNetwork = AzureResource & {
   properties?: Maybe<AzureReplicationNetworkProperties>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -3712,6 +3768,25 @@ export type AzureReplicationNetworkSubnet = {
   friendlyName?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationPolicy = AzureResource & {
+  properties?: Maybe<AzureReplicationPolicyProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationPolicyProperties = {
+  friendlyName?: Maybe<Scalars['String']>;
+  providerSpecificDetails?: Maybe<AzureReplicationPolicyProviderSpecificDetailsUnion>;
+};
+
+export type AzureReplicationPolicyProviderSpecificDetailsUnion = {
+  appConsistentFrequencyInMinutes?: Maybe<Scalars['Int']>;
+  crashConsistentFrequencyInMinutes?: Maybe<Scalars['Int']>;
+  instanceType?: Maybe<Scalars['String']>;
+  multiVmSyncStatus?: Maybe<Scalars['String']>;
+  recoveryPointHistory?: Maybe<Scalars['Int']>;
+  recoveryPointThresholdInMinutes?: Maybe<Scalars['Int']>;
 };
 
 export type AzureResource = {
@@ -3777,7 +3852,9 @@ export type AzureResourceGroup = AzureResource & {
   recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   replicationAppliances?: Maybe<Array<Maybe<AzureReplicationAppliance>>>;
+  replicationCenters?: Maybe<Array<Maybe<AzureReplicationCenter>>>;
   replicationNetworks?: Maybe<Array<Maybe<AzureReplicationNetwork>>>;
+  replicationPolicies?: Maybe<Array<Maybe<AzureReplicationPolicy>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   serviceBus?: Maybe<Array<Maybe<AzureServiceBus>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;

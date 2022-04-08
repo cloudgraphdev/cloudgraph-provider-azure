@@ -1,0 +1,77 @@
+type azureReplicationCenter implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  properties: azureReplicationCenterProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: replicationCenters)
+}
+
+type azureReplicationCenterProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  friendlyName: String @search(by: [hash, regexp])
+  internalId: String @search(by: [hash, regexp])
+  lastHeartbeat: String @search(by: [hash, regexp])
+  discoveryStatus: String @search(by: [hash, regexp])
+  processServerId: String @search(by: [hash, regexp])
+  ipAddress: String @search(by: [hash, regexp])
+  infrastructureId: String @search(by: [hash, regexp])
+  port: String @search(by: [hash, regexp])
+  runAsAccountId: String @search(by: [hash, regexp])
+  fabricArmResourceName: String @search(by: [hash, regexp])
+  healthErrors: [azureReplicationCenterHealthError]
+}
+
+type azureReplicationCenterHealthError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  innerHealthErrors: [azureReplicationCenterInnerHealthError]
+  errorSource: String @search(by: [hash, regexp])
+  errorType: String @search(by: [hash, regexp])
+  errorLevel: String @search(by: [hash, regexp])
+  errorCategory: String @search(by: [hash, regexp])
+  errorCode: String @search(by: [hash, regexp])
+  summaryMessage: String @search(by: [hash, regexp])
+  errorMessage: String @search(by: [hash, regexp])
+  possibleCauses: String @search(by: [hash, regexp])
+  recommendedAction: String @search(by: [hash, regexp])
+  creationTimeUtc: String @search(by: [hash, regexp])
+  recoveryProviderErrorMessage: String @search(by: [hash, regexp])
+  entityId: String @search(by: [hash, regexp])
+  errorId: String @search(by: [hash, regexp])
+  customerResolvability: String @search(by: [hash, regexp])
+}
+
+type azureReplicationCenterInnerHealthError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  errorSource: String @search(by: [hash, regexp])
+  errorType: String @search(by: [hash, regexp])
+  errorLevel: String @search(by: [hash, regexp])
+  errorCategory: String @search(by: [hash, regexp])
+  errorCode: String @search(by: [hash, regexp])
+  summaryMessage: String @search(by: [hash, regexp])
+  errorMessage: String @search(by: [hash, regexp])
+  possibleCauses: String @search(by: [hash, regexp])
+  recommendedAction: String @search(by: [hash, regexp])
+  creationTimeUtc: String @search(by: [hash, regexp])
+  recoveryProviderErrorMessage: String @search(by: [hash, regexp])
+  entityId: String @search(by: [hash, regexp])
+  errorId: String @search(by: [hash, regexp])
+  customerResolvability: String @search(by: [hash, regexp])
+}

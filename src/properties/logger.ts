@@ -141,8 +141,12 @@ export default {
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
   // Replication Appliances
   foundReplicationAppliances: (num: number): string => `Found ${num} replication appliances`,
+  // Replication Centers
+  foundReplicationCenters: (num: number): string => `Found ${num} replication centers`,
   // Replication Networks
   foundReplicationNetworks: (num: number): string => `Found ${num} replication networks`,
+  // Replication Policies
+  foundReplicationPolicies: (num: number): string => `Found ${num} replication policies`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Assesments
