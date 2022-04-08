@@ -39,8 +39,8 @@ export default ({
     },
     actions: {
       actionGroups: actions?.actionGroups?.map(group => ({
-        id: cuid(),
-        ...group,
+        id: group.actionGroupId,
+        actionGroupId: group.actionGroupId,
         webhookProperties: Object.entries(group?.webhookProperties || {}).map(([key, value]) => ({
           id: cuid(),
           key,
