@@ -1,0 +1,33 @@
+type azureReplicationPolicy implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  properties: azureReplicationPolicyProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: replicationPolicies)
+}
+
+type azureReplicationPolicyProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    friendlyName: String @search(by: [hash, regexp])
+    providerSpecificDetails: azureReplicationPolicyProviderSpecificDetailsUnion
+}
+
+type azureReplicationPolicyProviderSpecificDetailsUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  instanceType: String @search(by: [hash, regexp])
+  recoveryPointThresholdInMinutes: Int @search
+  recoveryPointHistory: Int @search
+  appConsistentFrequencyInMinutes: Int @search
+  multiVmSyncStatus: String @search(by: [hash, regexp])
+  crashConsistentFrequencyInMinutes: Int @search
+}

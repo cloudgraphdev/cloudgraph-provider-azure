@@ -1047,7 +1047,7 @@ export default ({
         }
       }
     }
-  
+
     /**
      * Find related backup vaults
      */
@@ -1068,6 +1068,31 @@ export default ({
             resourceType: services.backupVault,
             relation: 'child',
             field: 'backupVault',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related RecoveryVaults
+     */
+    const recoveryVaults: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.recoveryVaults)
+    if (recoveryVaults?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        recoveryVaults.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const recoveryVault of dataAtRegion) {
+          const { id } = recoveryVault
+          connections.push({
+            id,
+            resourceType: services.recoveryVaults,
+            relation: 'child',
+            field: 'recoveryVaults',
           })
         }
       }

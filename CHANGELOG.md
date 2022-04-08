@@ -1,3 +1,38 @@
+# [0.61.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-alpha.1...0.61.0-alpha.2) (2022-04-08)
+
+
+### Features
+
+* **siteRecovery:** add replication centers/policies services ([f7a560b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f7a560bcef50680d10ddd5868c804f5b19459ec7))
+
+# [0.61.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.2-alpha.1...0.61.0-alpha.1) (2022-04-07)
+
+
+### Features
+
+* **recoveryServices:** add recovery services ([172d537](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/172d537006de83a48ef0f329a73c1b1bcc800cde))
+
+## [0.60.2-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.1...0.60.2-alpha.1) (2022-04-07)
+
+
+### Bug Fixes
+
+* add missing connection between logAnalytics services ([2e342dd](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/2e342dd701b729c16dfa42e73f64b522c38ee5b2))
+
+## [0.60.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.0...0.60.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* remove duplicate fields from resourceGroup schema ([abe8fc3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/abe8fc34f137643014837053f69a222e2ee5bc84))
+
+## [0.60.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.0...0.60.1-alpha.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* add missing connection between logAnalytics services ([2e342dd](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/2e342dd701b729c16dfa42e73f64b522c38ee5b2))
+
 # [0.60.0](https://gitlab.com/auto-cloud/cloudgraph/provider/cloudgraph-provider-azure/compare/0.59.0...0.60.0) (2022-04-05)
 
 

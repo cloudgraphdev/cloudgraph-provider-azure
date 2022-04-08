@@ -37,6 +37,7 @@ type azureTag @key(fields: "id") {
   networkInterfaces: [azureNetworkInterface]
   postgreSqlServers: [azurePostgreSqlServer]
   publicIps: [azurePublicIp]
+  recoveryVaults: [azureRecoveryVault]
   redisCaches: [azureRedisCache]
   resourceGroups: [azureResourceGroup]
   securityGroups: [azureNetworkSecurityGroup]

@@ -50,7 +50,12 @@ import AzurePolicyAssignment from '../services/policyAssignment'
 import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
+import AzureRecoveryVault from '../services/recoveryVaults'
 import AzureRedisCache from '../services/redisCache'
+import AzureReplicationAppliance from '../services/replicationAppliances'
+import AzureReplicationCenter from '../services/replicationCenters'
+import AzureReplicationNetwork from '../services/replicationNetworks'
+import AzureReplicationPolicy from '../services/replicationPolicies'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureSecurityAssesments from '../services/securityAssesments'
 import AzureSecurityContacts from '../services/securityContacts'
@@ -141,7 +146,12 @@ export default {
   [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
+  [services.recoveryVaults]: AzureRecoveryVault,
   [services.redisCaches]: AzureRedisCache,
+  [services.replicationAppliances]: AzureReplicationAppliance,
+  [services.replicationCenters]: AzureReplicationCenter,
+  [services.replicationNetworks]: AzureReplicationNetwork,
+  [services.replicationPolicies]: AzureReplicationPolicy,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityAssesments]: AzureSecurityAssesments,
   [services.securityContacts]: AzureSecurityContacts,
