@@ -1,0 +1,98 @@
+type azureSynapseBigDataPool implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  autoScale: azureSynapseBigDataPoolAutoScaleProperties
+  creationDate: String @search(by: [hash, regexp])
+  autoPause: azureSynapseBigDataPoolAutoPauseProperties
+  isComputeIsolationEnabled: Boolean @search
+  sessionLevelPackagesEnabled: Boolean @search
+  cacheSize: Int @search
+  dynamicExecutorAllocation: azureSynapseBigDataPoolDynamicExecutorAllocation
+  sparkEventsFolder: String @search(by: [hash, regexp])
+  nodeCount: Int @search
+  libraryRequirements: azureSynapseBigDataPoolLibraryRequirements
+  customLibraries: [azureSynapseBigDataPoolLibraryInfo]
+  sparkConfigProperties: azureSynapseBigDataPoolSparkConfigProperties
+  sparkVersion: String @search(by: [hash, regexp])
+  defaultSparkLogFolder: String @search(by: [hash, regexp])
+  nodeSize: String @search(by: [hash, regexp])
+  nodeSizeFamily: String @search(by: [hash, regexp])
+  lastSucceededTimestamp: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: synapseBigDataPools)
+  synapseWorkspace: [azureSynapseWorkspace] @hasInverse(field: synapseBigDataPools)
+}
+
+type azureSynapseBigDataPoolAutoScaleProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  minNodeCount: Int @search
+  enabled: Boolean @search
+  maxNodeCount: Int @search
+}
+
+type azureSynapseBigDataPoolAutoPauseProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  delayInMinutes: Int @search
+  enabled: Boolean @search
+}
+
+type azureSynapseBigDataPoolDynamicExecutorAllocation
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  enabled: Boolean @search
+  minExecutors: Int @search
+  maxExecutors: Int @search
+}
+
+type azureSynapseBigDataPoolLibraryRequirements
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  time: String @search(by: [hash, regexp])
+  content: String @search(by: [hash, regexp])
+  filename: String @search(by: [hash, regexp])
+}
+
+type azureSynapseBigDataPoolLibraryInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  path: String @search(by: [hash, regexp])
+  containerName: String @search(by: [hash, regexp])
+  uploadedTimestamp: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  provisioningStatus: String @search(by: [hash, regexp])
+  creatorId: String @search(by: [hash, regexp])
+}
+
+type azureSynapseBigDataPoolSparkConfigProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  time: String @search(by: [hash, regexp])
+  content: String @search(by: [hash, regexp])
+  filename: String @search(by: [hash, regexp])
+  configurationType: String @search(by: [hash, regexp])
+}
