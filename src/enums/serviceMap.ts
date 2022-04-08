@@ -21,6 +21,7 @@ import AzureCdnEndpoints from '../services/cdnEndpoints'
 import AzureCdnOriginGroups from '../services/cdnOriginGroups'
 import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnProfiles from '../services/cdnProfiles'
+import AzureCognitiveServicesAccount from '../services/cognitiveServicesAccount'
 import AzureContainerRegistry from '../services/containerRegistry'
 import AzureDataCollectionRule from '../services/dataCollectionRule'
 import AzureDataFactory from '../services/dataFactory'
@@ -49,7 +50,12 @@ import AzurePolicyAssignment from '../services/policyAssignment'
 import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
+import AzureRecoveryVault from '../services/recoveryVaults'
 import AzureRedisCache from '../services/redisCache'
+import AzureReplicationAppliance from '../services/replicationAppliances'
+import AzureReplicationCenter from '../services/replicationCenters'
+import AzureReplicationNetwork from '../services/replicationNetworks'
+import AzureReplicationPolicy from '../services/replicationPolicies'
 import AzureResourceGroup from '../services/resourceGroup'
 import AzureSecurityAssesments from '../services/securityAssesments'
 import AzureSecurityContacts from '../services/securityContacts'
@@ -58,6 +64,9 @@ import AzureSecuritySettings from '../services/securitySettings'
 import AzureStorageAccount from '../services/storageAccount'
 import AzureStorageBlob from '../services/storageBlob'
 import AzureStorageContainer from '../services/storageContainer'
+import AzureSynapseBigDataPool from '../services/synapseBigDataPools'
+import AzureSynapseSqlPool from '../services/synapseSqlPools'
+import AzureSynapseWorkspace from '../services/synapseWorkspaces'
 import AzureTag from '../services/tag'
 import AzureTrafficManagerProfile from '../services/trafficManagerProfile'
 import AzureVirtualMachine from '../services/virtualMachine'
@@ -108,6 +117,7 @@ export default {
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnProfiles]: AzureCdnProfiles,
+  [services.cognitiveServicesAccount]: AzureCognitiveServicesAccount,
   [services.containerRegistry]: AzureContainerRegistry,
   [services.cosmosDb]: AzureCosmosDb,
   [services.dataCollectionRule]: AzureDataCollectionRule,
@@ -139,7 +149,12 @@ export default {
   [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
+  [services.recoveryVaults]: AzureRecoveryVault,
   [services.redisCaches]: AzureRedisCache,
+  [services.replicationAppliances]: AzureReplicationAppliance,
+  [services.replicationCenters]: AzureReplicationCenter,
+  [services.replicationNetworks]: AzureReplicationNetwork,
+  [services.replicationPolicies]: AzureReplicationPolicy,
   [services.resourceGroup]: AzureResourceGroup,
   [services.securityAssesments]: AzureSecurityAssesments,
   [services.securityContacts]: AzureSecurityContacts,
@@ -151,6 +166,9 @@ export default {
   [services.storageAccount]: AzureStorageAccount,
   [services.storageBlob]: AzureStorageBlob,
   [services.storageContainer]: AzureStorageContainer,
+  [services.synapseBigDataPools]: AzureSynapseBigDataPool,
+  [services.synapseSqlPools]: AzureSynapseSqlPool,
+  [services.synapseWorkspaces]: AzureSynapseWorkspace,
   [services.trafficManagerProfile]: AzureTrafficManagerProfile,
   [services.virtualMachineScaleSet]: AzureVirtualMachineScaleSet,
   [services.virtualMachine]: AzureVirtualMachine,

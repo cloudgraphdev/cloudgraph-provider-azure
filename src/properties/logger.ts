@@ -50,6 +50,8 @@ export default {
   foundBackupVaults: (num: number): string => `Found ${num} Backup Vaults`,
   foundBackupInstances: (num: number): string => `Found ${num} Backup Instances`,
   foundBackupPolicies: (num: number): string => `Found ${num} Backup Policies`,
+  /* Cognitive services account */
+  foundCognitiveServicesAccounts: (num: number): string => `Found ${num} cognitive services accounts`,
   /* CDN Profiles */
   foundCdnProfiles: (num: number): string => `Found ${num} CDN profiles`,
   /* CDN Endpoints */
@@ -135,8 +137,18 @@ export default {
     `Found ${num} private dns zones`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
+  // Recovery Vaults
+  foundRecoveryVaults: (num: number): string => `Found ${num} recovery vaults`,
   // RedisCache
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
+  // Replication Appliances
+  foundReplicationAppliances: (num: number): string => `Found ${num} replication appliances`,
+  // Replication Centers
+  foundReplicationCenters: (num: number): string => `Found ${num} replication centers`,
+  // Replication Networks
+  foundReplicationNetworks: (num: number): string => `Found ${num} replication networks`,
+  // Replication Policies
+  foundReplicationPolicies: (num: number): string => `Found ${num} replication policies`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Assesments
@@ -170,6 +182,12 @@ export default {
     `Found ${num} storage containers`,
   // Storage Blobs
   foundStorageBlobs: (num: number): string => `Found ${num} storage blobs`,
+  // SynapseBigDataPools
+  foundSynapseBigDataPools: (num: number): string => `Found ${num} synapse big data pools`,
+  // SynapseSqlPools
+  foundSynapseSqlPools: (num: number): string => `Found ${num} synapse SQL pools`,
+  // SynapseWorkspace
+  foundSynapseWorkspaces: (num: number): string => `Found ${num} synapse workspaces`,
   // Traffic Manager
   foundTrafficManagerProfile: (num: number): string =>
     `Found ${num} traffic manager profiles`,

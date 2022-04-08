@@ -3,6 +3,7 @@ import { isEmpty } from 'lodash'
 
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
+import { RawAzureLogAnalyticsWorkspace } from '../logAnalyticsWorkspace/data'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
 import { RawAzureLogAnalyticsSolution } from './data'
 
@@ -18,7 +19,11 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, resourceGroupId: rgName } = service
+  const {
+    id,
+    resourceGroupId: rgName,
+    properties: { workspaceResourceId } = {},
+  } = service
 
   /**
    * Find resource group related to this log analytics solutions instance
@@ -42,6 +47,33 @@ export default ({
           resourceType: services.resourceGroup,
           relation: 'child',
           field: 'resourceGroup',
+        })
+      }
+    }
+  }
+
+  /**
+   * Find log analytics workspace related to this log analytics solutions instance
+   */
+  const workspaces: {
+    name: string
+    data: { [property: string]: RawAzureLogAnalyticsWorkspace[] }
+  } = data.find(({ name }) => name === services.logAnalyticsWorkspace)
+
+  if (workspaces?.data?.[region]) {
+    const workspacesInRegion: RawAzureLogAnalyticsWorkspace[] = workspaces.data[
+      region
+    ].filter(({ id: logAnalyticsWorkspaceId }: RawAzureLogAnalyticsWorkspace) =>
+      caseInsensitiveEqual(logAnalyticsWorkspaceId, workspaceResourceId)
+    )
+
+    if (!isEmpty(workspacesInRegion)) {
+      for (const rg of workspacesInRegion) {
+        connections.push({
+          id: rg.id,
+          resourceType: services.logAnalyticsWorkspace,
+          relation: 'child',
+          field: 'logAnalyticsWorkspace',
         })
       }
     }

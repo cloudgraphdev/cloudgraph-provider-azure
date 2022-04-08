@@ -1487,6 +1487,164 @@ export type AzureCdnUrlSigningKey = {
   keySourceParameters?: Maybe<AzureCdnKeyVaultSigningKeyParameters>;
 };
 
+export type AzureCognitiveServicesAccount = AzureResource & {
+  allowedFqdnList?: Maybe<Array<Maybe<Scalars['String']>>>;
+  apiProperties?: Maybe<AzureCognitiveServicesAccountApiProperties>;
+  application?: Maybe<Array<Maybe<AzureAdApplication>>>;
+  callRateLimit?: Maybe<AzureCognitiveServicesAccountCallRateLimit>;
+  capabilities?: Maybe<Array<Maybe<AzureCognitiveServicesAccountCapability>>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  customSubDomainName?: Maybe<Scalars['String']>;
+  dateCreated?: Maybe<Scalars['DateTime']>;
+  disableLocalAuth?: Maybe<Scalars['Boolean']>;
+  encryption?: Maybe<AzureCognitiveServicesAccountEncryption>;
+  endpoint?: Maybe<Scalars['String']>;
+  endpoints?: Maybe<Array<Maybe<AzureCognitiveServicesAccountEndpoint>>>;
+  etag?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureCognitiveServicesAccountIdentity>;
+  internalId?: Maybe<Scalars['String']>;
+  isMigrated?: Maybe<Scalars['Boolean']>;
+  lastModifiedAt?: Maybe<Scalars['DateTime']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  migrationToken?: Maybe<Scalars['String']>;
+  networkAcls?: Maybe<AzureCognitiveServicesAccountNetworkAcls>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureCognitiveServicesAccountPrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  quotaLimit?: Maybe<AzureCognitiveServicesAccountQuotaLimit>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  restore?: Maybe<Scalars['Boolean']>;
+  restrictOutboundNetworkAccess?: Maybe<Scalars['Boolean']>;
+  sku?: Maybe<AzureCognitiveServicesAccountSku>;
+  skuChangeInfo?: Maybe<AzureCognitiveServicesAccountSkuChangeInfo>;
+  userOwnedStorage?: Maybe<Array<Maybe<AzureCognitiveServicesAccountUserOwnedStorage>>>;
+};
+
+export type AzureCognitiveServicesAccountApiProperties = {
+  aadClientId?: Maybe<Scalars['String']>;
+  aadTenantId?: Maybe<Scalars['String']>;
+  eventHubConnectionString?: Maybe<Scalars['String']>;
+  qnaAzureSearchEndpointId?: Maybe<Scalars['String']>;
+  qnaAzureSearchEndpointKey?: Maybe<Scalars['String']>;
+  qnaRuntimeEndpoint?: Maybe<Scalars['String']>;
+  statisticsEnabled?: Maybe<Scalars['Boolean']>;
+  storageAccountConnectionString?: Maybe<Scalars['String']>;
+  superUser?: Maybe<Scalars['String']>;
+  websiteName?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountCallRateLimit = {
+  count?: Maybe<Scalars['Int']>;
+  renewalPeriod?: Maybe<Scalars['Int']>;
+  rules?: Maybe<Array<Maybe<AzureCognitiveServicesAccountThrottlingRule>>>;
+};
+
+export type AzureCognitiveServicesAccountCapability = AzureNameValueProperty & {
+  id: Scalars['String'];
+};
+
+export type AzureCognitiveServicesAccountEncryption = {
+  keySource?: Maybe<Scalars['String']>;
+  keyVaultProperties?: Maybe<AzureCognitiveServicesAccountKeyVaultProperties>;
+};
+
+export type AzureCognitiveServicesAccountEndpoint = AzureKeyValueProperty & {
+  id: Scalars['String'];
+};
+
+export type AzureCognitiveServicesAccountIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountKeyVaultProperties = {
+  identityClientId?: Maybe<Scalars['String']>;
+  keyName?: Maybe<Scalars['String']>;
+  keyVaultUri?: Maybe<Scalars['String']>;
+  keyVersion?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountNetworkAcls = {
+  defaultAction?: Maybe<Scalars['String']>;
+  ipRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureCognitiveServicesAccountVirtualNetworkRules>>>;
+};
+
+export type AzureCognitiveServicesAccountPrivateEndpointConnection = {
+  createdAt?: Maybe<Scalars['DateTime']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  etag?: Maybe<Scalars['String']>;
+  groupIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  lastModifiedAt?: Maybe<Scalars['DateTime']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateEndpointId?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionState?: Maybe<AzureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountQuotaLimit = {
+  count?: Maybe<Scalars['Int']>;
+  renewalPeriod?: Maybe<Scalars['Int']>;
+  rules?: Maybe<Array<Maybe<AzureCognitiveServicesAccountThrottlingRule>>>;
+};
+
+export type AzureCognitiveServicesAccountSku = {
+  capacity?: Maybe<Scalars['Int']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountSkuChangeInfo = {
+  countOfDowngrades?: Maybe<Scalars['Int']>;
+  countOfUpgradesAfterDowngrades?: Maybe<Scalars['Int']>;
+  lastChangeDate?: Maybe<Scalars['DateTime']>;
+};
+
+export type AzureCognitiveServicesAccountThrottlingRule = {
+  count?: Maybe<Scalars['Int']>;
+  dynamicThrottlingEnabled?: Maybe<Scalars['Boolean']>;
+  key?: Maybe<Scalars['String']>;
+  matchPatterns?: Maybe<Array<Maybe<AzureCognitiveServicesAccountThrottlingRuleMatchPattern>>>;
+  minCount?: Maybe<Scalars['Int']>;
+  renewalPeriod?: Maybe<Scalars['Int']>;
+};
+
+export type AzureCognitiveServicesAccountThrottlingRuleMatchPattern = {
+  id: Scalars['String'];
+  method?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountUserOwnedStorage = {
+  id: Scalars['String'];
+  identityClientId?: Maybe<Scalars['String']>;
+  resourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureCognitiveServicesAccountVirtualNetworkRules = {
+  id: Scalars['String'];
+  ignoreMissingVnetServiceEndpoint?: Maybe<Scalars['Boolean']>;
+  state?: Maybe<Scalars['String']>;
+};
+
 export type AzureContainerRegistry = AzureResource & {
   adminUserEnabled?: Maybe<Scalars['Boolean']>;
   creationDate?: Maybe<Scalars['String']>;
@@ -2898,6 +3056,7 @@ export type AzureLoadBalancer = AzureResource & {
 };
 
 export type AzureLogAnalyticsSolution = AzureBaseResource & {
+  logAnalyticsWorkspace?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
   plan?: Maybe<AzureLogAnalyticsSolutionPlan>;
   properties?: Maybe<AzureLogAnalyticsSolutionProperties>;
   region?: Maybe<Scalars['String']>;
@@ -2928,6 +3087,7 @@ export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
   customerId?: Maybe<Scalars['String']>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
   features?: Maybe<AzureLogAnalyticsWorkspaceFeature>;
+  logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   modifiedDate?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccessForIngestion?: Maybe<Scalars['String']>;
@@ -3187,6 +3347,12 @@ export type AzureMySqlServerStorageProfile = {
   geoRedundantBackup?: Maybe<Scalars['String']>;
   storageAutogrow?: Maybe<Scalars['String']>;
   storageMB?: Maybe<Scalars['Int']>;
+};
+
+export type AzureNameValueProperty = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type AzureNetworkInterface = AzureResource & {
@@ -3467,6 +3633,110 @@ export type AzureRawTag = {
   value?: Maybe<Scalars['String']>;
 };
 
+export type AzureRecoveryVault = AzureResource & {
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureRecoveryVaultIdentityData>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureRecoveryVaultProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sku?: Maybe<AzureRecoveryVaultSku>;
+};
+
+export type AzureRecoveryVaultCmkKekIdentity = {
+  useSystemAssignedIdentity?: Maybe<Scalars['Boolean']>;
+  userAssignedIdentity?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultCmkKeyVaultProperties = {
+  keyUri?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultIdentityData = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureRecoveryVaultUserIdentity>>>;
+};
+
+export type AzureRecoveryVaultPrivateEndpoint = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPrivateEndpointConnection = {
+  privateEndpoint?: Maybe<AzureRecoveryVaultPrivateEndpoint>;
+  privateLinkServiceConnectionState?: Maybe<AzureRecoveryVaultPrivateLinkServiceConnectionState>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPrivateEndpointConnectionVaultProperties = {
+  id: Scalars['String'];
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureRecoveryVaultPrivateEndpointConnection>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPrivateLinkServiceConnectionState = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultProperties = {
+  encryption?: Maybe<AzureRecoveryVaultPropertiesEncryption>;
+  moveDetails?: Maybe<AzureRecoveryVaultVaultPropertiesMoveDetails>;
+  moveState?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureRecoveryVaultPrivateEndpointConnectionVaultProperties>>>;
+  privateEndpointStateForBackup?: Maybe<Scalars['String']>;
+  privateEndpointStateForSiteRecovery?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  upgradeDetails?: Maybe<AzureRecoveryVaultUpgradeDetails>;
+};
+
+export type AzureRecoveryVaultPropertiesEncryption = {
+  infrastructureEncryption?: Maybe<Scalars['String']>;
+  kekIdentity?: Maybe<AzureRecoveryVaultCmkKekIdentity>;
+  keyVaultProperties?: Maybe<AzureRecoveryVaultCmkKeyVaultProperties>;
+};
+
+export type AzureRecoveryVaultSku = {
+  capacity?: Maybe<Scalars['String']>;
+  family?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  size?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultUpgradeDetails = {
+  endTimeUtc?: Maybe<Scalars['String']>;
+  lastUpdatedTimeUtc?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+  operationId?: Maybe<Scalars['String']>;
+  previousResourceId?: Maybe<Scalars['String']>;
+  startTimeUtc?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  triggerType?: Maybe<Scalars['String']>;
+  upgradedResourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultUserIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultVaultPropertiesMoveDetails = {
+  completionTimeUtc?: Maybe<Scalars['String']>;
+  operationId?: Maybe<Scalars['String']>;
+  sourceResourceId?: Maybe<Scalars['String']>;
+  startTimeUtc?: Maybe<Scalars['String']>;
+  targetResourceId?: Maybe<Scalars['String']>;
+};
+
 export type AzureRedisCache = AzureResource & {
   accessKeys?: Maybe<AzureRedisCacheAccessKeys>;
   enableNonSslPort?: Maybe<Scalars['Boolean']>;
@@ -3576,6 +3846,113 @@ export type AzureRedisCacheUserAssignedIdentity = {
   principalId?: Maybe<Scalars['String']>;
 };
 
+export type AzureReplicationAppliance = AzureResource & {
+  properties?: Maybe<AzureReplicationApplianceProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationApplianceProperties = {
+  providerSpecificDetails?: Maybe<AzureReplicationApplianceSpecificDetailsUnion>;
+};
+
+export type AzureReplicationApplianceSpecificDetailsUnion = {
+  instanceType?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationCenter = AzureResource & {
+  properties?: Maybe<AzureReplicationCenterProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationCenterHealthError = {
+  creationTimeUtc?: Maybe<Scalars['String']>;
+  customerResolvability?: Maybe<Scalars['String']>;
+  entityId?: Maybe<Scalars['String']>;
+  errorCategory?: Maybe<Scalars['String']>;
+  errorCode?: Maybe<Scalars['String']>;
+  errorId?: Maybe<Scalars['String']>;
+  errorLevel?: Maybe<Scalars['String']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  errorSource?: Maybe<Scalars['String']>;
+  errorType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  innerHealthErrors?: Maybe<Array<Maybe<AzureReplicationCenterInnerHealthError>>>;
+  possibleCauses?: Maybe<Scalars['String']>;
+  recommendedAction?: Maybe<Scalars['String']>;
+  recoveryProviderErrorMessage?: Maybe<Scalars['String']>;
+  summaryMessage?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationCenterInnerHealthError = {
+  creationTimeUtc?: Maybe<Scalars['String']>;
+  customerResolvability?: Maybe<Scalars['String']>;
+  entityId?: Maybe<Scalars['String']>;
+  errorCategory?: Maybe<Scalars['String']>;
+  errorCode?: Maybe<Scalars['String']>;
+  errorId?: Maybe<Scalars['String']>;
+  errorLevel?: Maybe<Scalars['String']>;
+  errorMessage?: Maybe<Scalars['String']>;
+  errorSource?: Maybe<Scalars['String']>;
+  errorType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  possibleCauses?: Maybe<Scalars['String']>;
+  recommendedAction?: Maybe<Scalars['String']>;
+  recoveryProviderErrorMessage?: Maybe<Scalars['String']>;
+  summaryMessage?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationCenterProperties = {
+  discoveryStatus?: Maybe<Scalars['String']>;
+  fabricArmResourceName?: Maybe<Scalars['String']>;
+  friendlyName?: Maybe<Scalars['String']>;
+  healthErrors?: Maybe<Array<Maybe<AzureReplicationCenterHealthError>>>;
+  infrastructureId?: Maybe<Scalars['String']>;
+  internalId?: Maybe<Scalars['String']>;
+  ipAddress?: Maybe<Scalars['String']>;
+  lastHeartbeat?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['String']>;
+  processServerId?: Maybe<Scalars['String']>;
+  runAsAccountId?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationNetwork = AzureResource & {
+  properties?: Maybe<AzureReplicationNetworkProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationNetworkProperties = {
+  fabricType?: Maybe<Scalars['String']>;
+  friendlyName?: Maybe<Scalars['String']>;
+  networkType?: Maybe<Scalars['String']>;
+  subnets?: Maybe<Array<Maybe<AzureReplicationNetworkSubnet>>>;
+};
+
+export type AzureReplicationNetworkSubnet = {
+  addressList?: Maybe<Array<Maybe<Scalars['String']>>>;
+  friendlyName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureReplicationPolicy = AzureResource & {
+  properties?: Maybe<AzureReplicationPolicyProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
+export type AzureReplicationPolicyProperties = {
+  friendlyName?: Maybe<Scalars['String']>;
+  providerSpecificDetails?: Maybe<AzureReplicationPolicyProviderSpecificDetailsUnion>;
+};
+
+export type AzureReplicationPolicyProviderSpecificDetailsUnion = {
+  appConsistentFrequencyInMinutes?: Maybe<Scalars['Int']>;
+  crashConsistentFrequencyInMinutes?: Maybe<Scalars['Int']>;
+  instanceType?: Maybe<Scalars['String']>;
+  multiVmSyncStatus?: Maybe<Scalars['String']>;
+  recoveryPointHistory?: Maybe<Scalars['Int']>;
+  recoveryPointThresholdInMinutes?: Maybe<Scalars['Int']>;
+};
+
 export type AzureResource = {
   id: Scalars['String'];
   kind?: Maybe<Scalars['String']>;
@@ -3604,6 +3981,7 @@ export type AzureResourceGroup = AzureResource & {
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
@@ -3636,13 +4014,21 @@ export type AzureResourceGroup = AzureResource & {
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
+  replicationAppliances?: Maybe<Array<Maybe<AzureReplicationAppliance>>>;
+  replicationCenters?: Maybe<Array<Maybe<AzureReplicationCenter>>>;
+  replicationNetworks?: Maybe<Array<Maybe<AzureReplicationNetwork>>>;
+  replicationPolicies?: Maybe<Array<Maybe<AzureReplicationPolicy>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   serviceBus?: Maybe<Array<Maybe<AzureServiceBus>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
   storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+  synapseBigDataPools?: Maybe<Array<Maybe<AzureSynapseBigDataPool>>>;
+  synapseSqlPools?: Maybe<Array<Maybe<AzureSynapseSqlPool>>>;
+  synapseWorkspaces?: Maybe<Array<Maybe<AzureSynapseWorkspace>>>;
   trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
@@ -4219,6 +4605,211 @@ export type AzureSubResource = {
   id: Scalars['String'];
 };
 
+export type AzureSynapseBigDataPool = AzureResource & {
+  autoPause?: Maybe<AzureSynapseBigDataPoolAutoPauseProperties>;
+  autoScale?: Maybe<AzureSynapseBigDataPoolAutoScaleProperties>;
+  cacheSize?: Maybe<Scalars['Int']>;
+  creationDate?: Maybe<Scalars['String']>;
+  customLibraries?: Maybe<Array<Maybe<AzureSynapseBigDataPoolLibraryInfo>>>;
+  defaultSparkLogFolder?: Maybe<Scalars['String']>;
+  dynamicExecutorAllocation?: Maybe<AzureSynapseBigDataPoolDynamicExecutorAllocation>;
+  isComputeIsolationEnabled?: Maybe<Scalars['Boolean']>;
+  lastSucceededTimestamp?: Maybe<Scalars['String']>;
+  libraryRequirements?: Maybe<AzureSynapseBigDataPoolLibraryRequirements>;
+  nodeCount?: Maybe<Scalars['Int']>;
+  nodeSize?: Maybe<Scalars['String']>;
+  nodeSizeFamily?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sessionLevelPackagesEnabled?: Maybe<Scalars['Boolean']>;
+  sparkConfigProperties?: Maybe<AzureSynapseBigDataPoolSparkConfigProperties>;
+  sparkEventsFolder?: Maybe<Scalars['String']>;
+  sparkVersion?: Maybe<Scalars['String']>;
+  synapseWorkspace?: Maybe<Array<Maybe<AzureSynapseWorkspace>>>;
+};
+
+export type AzureSynapseBigDataPoolAutoPauseProperties = {
+  delayInMinutes?: Maybe<Scalars['Int']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureSynapseBigDataPoolAutoScaleProperties = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  maxNodeCount?: Maybe<Scalars['Int']>;
+  minNodeCount?: Maybe<Scalars['Int']>;
+};
+
+export type AzureSynapseBigDataPoolDynamicExecutorAllocation = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  maxExecutors?: Maybe<Scalars['Int']>;
+  minExecutors?: Maybe<Scalars['Int']>;
+};
+
+export type AzureSynapseBigDataPoolLibraryInfo = {
+  containerName?: Maybe<Scalars['String']>;
+  creatorId?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  provisioningStatus?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  uploadedTimestamp?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseBigDataPoolLibraryRequirements = {
+  content?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  time?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseBigDataPoolSparkConfigProperties = {
+  configurationType?: Maybe<Scalars['String']>;
+  content?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  time?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseSqlPool = AzureResource & {
+  collation?: Maybe<Scalars['String']>;
+  createMode?: Maybe<Scalars['String']>;
+  creationDate?: Maybe<Scalars['String']>;
+  maxSizeBytes?: Maybe<Scalars['Float']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  recoverableDatabaseId?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  restorePointInTime?: Maybe<Scalars['String']>;
+  sku?: Maybe<AzureSynapseSqlPoolSku>;
+  sourceDatabaseDeletionDate?: Maybe<Scalars['String']>;
+  sourceDatabaseId?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  storageAccountType?: Maybe<Scalars['String']>;
+  synapseWorkspace?: Maybe<Array<Maybe<AzureSynapseWorkspace>>>;
+};
+
+export type AzureSynapseSqlPoolSku = {
+  capacity?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  tier?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspace = AzureResource & {
+  adlaResourceId?: Maybe<Scalars['String']>;
+  azureADOnlyAuthentication?: Maybe<Scalars['Boolean']>;
+  cspWorkspaceAdminProperties?: Maybe<AzureSynapseWorkspaceCspWorkspaceAdminProperties>;
+  defaultDataLakeStorage?: Maybe<AzureSynapseWorkspaceDataLakeStorageAccountDetails>;
+  encryption?: Maybe<AzureSynapseWorkspaceEncryptionDetails>;
+  identity?: Maybe<AzureSynapseWorkspaceManagedIdentity>;
+  managedResourceGroupName?: Maybe<Scalars['String']>;
+  managedVirtualNetwork?: Maybe<Scalars['String']>;
+  managedVirtualNetworkSettings?: Maybe<AzureSynapseWorkspaceManagedVirtualNetworkSettings>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureSynapseWorkspacePrivateEndpointConnection>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicNetworkAccess?: Maybe<Scalars['String']>;
+  purviewConfiguration?: Maybe<AzureSynapseWorkspacePurviewConfiguration>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  sqlAdministratorLogin?: Maybe<Scalars['String']>;
+  sqlAdministratorLoginPassword?: Maybe<Scalars['String']>;
+  synapseBigDataPools?: Maybe<Array<Maybe<AzureSynapseBigDataPool>>>;
+  synapseSqlPools?: Maybe<Array<Maybe<AzureSynapseSqlPool>>>;
+  trustedServiceBypassEnabled?: Maybe<Scalars['Boolean']>;
+  virtualNetworkProfile?: Maybe<AzureSynapseWorkspaceVirtualNetworkProfile>;
+  workspaceRepositoryConfiguration?: Maybe<AzureSynapseWorkspaceWorkspaceRepositoryConfiguration>;
+  workspaceUID?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceCspWorkspaceAdminProperties = {
+  initialWorkspaceAdminObjectId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceCustomerManagedKeyDetails = {
+  kekIdentity?: Maybe<AzureSynapseWorkspaceKekIdentityProperties>;
+  key?: Maybe<AzureSynapseWorkspaceWorkspaceKeyDetails>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceDataLakeStorageAccountDetails = {
+  accountUrl?: Maybe<Scalars['String']>;
+  createManagedPrivateEndpoint?: Maybe<Scalars['Boolean']>;
+  filesystem?: Maybe<Scalars['String']>;
+  resourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceEncryptionDetails = {
+  cmk?: Maybe<AzureSynapseWorkspaceCustomerManagedKeyDetails>;
+  doubleEncryptionEnabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureSynapseWorkspaceKekIdentityProperties = {
+  useSystemAssignedIdentity?: Maybe<Scalars['Boolean']>;
+  userAssignedIdentity?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceManagedIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureSynapseWorkspaceUserAssignedIdentities>>>;
+};
+
+export type AzureSynapseWorkspaceManagedVirtualNetworkSettings = {
+  allowedAadTenantIdsForLinking?: Maybe<Array<Maybe<Scalars['String']>>>;
+  linkedAccessCheckOnTargetResource?: Maybe<Scalars['Boolean']>;
+  preventDataExfiltration?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureSynapseWorkspacePrivateEndpoint = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspacePrivateEndpointConnection = {
+  id: Scalars['String'];
+  privateEndpoint?: Maybe<AzureSynapseWorkspacePrivateEndpoint>;
+  privateLinkServiceConnectionState?: Maybe<AzureSynapseWorkspacePrivateLinkServiceConnectionState>;
+  provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspacePrivateLinkServiceConnectionState = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspacePurviewConfiguration = {
+  purviewResourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceUserAssignedIdentities = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureSynapseWorkspaceUserAssignedManagedIdentity>;
+};
+
+export type AzureSynapseWorkspaceUserAssignedManagedIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceVirtualNetworkProfile = {
+  computeSubnetId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceWorkspaceKeyDetails = {
+  keyVaultUrl?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureSynapseWorkspaceWorkspaceRepositoryConfiguration = {
+  accountName?: Maybe<Scalars['String']>;
+  collaborationBranch?: Maybe<Scalars['String']>;
+  hostName?: Maybe<Scalars['String']>;
+  lastCommitId?: Maybe<Scalars['String']>;
+  projectName?: Maybe<Scalars['String']>;
+  repositoryName?: Maybe<Scalars['String']>;
+  rootFolder?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureTag = {
   actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
   activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
@@ -4233,6 +4824,7 @@ export type AzureTag = {
   backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   cosmosDb?: Maybe<Array<Maybe<AzureCosmosDb>>>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
@@ -4255,12 +4847,16 @@ export type AzureTag = {
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
   serviceBus?: Maybe<Array<Maybe<AzureServiceBus>>>;
   sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
   storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  synapseBigDataPools?: Maybe<Array<Maybe<AzureSynapseBigDataPool>>>;
+  synapseSqlPools?: Maybe<Array<Maybe<AzureSynapseSqlPool>>>;
+  synapseWorkspaces?: Maybe<Array<Maybe<AzureSynapseWorkspace>>>;
   trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
   value: Scalars['String'];
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;

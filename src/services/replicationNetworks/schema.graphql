@@ -1,0 +1,34 @@
+type azureReplicationNetwork implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  properties: azureReplicationNetworkProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: replicationNetworks)
+}
+
+type azureReplicationNetworkProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  fabricType: String @search(by: [hash, regexp])
+  subnets: [azureReplicationNetworkSubnet]
+  friendlyName: String @search(by: [hash, regexp])
+  networkType: String @search(by: [hash, regexp])
+}
+
+type azureReplicationNetworkSubnet
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  friendlyName: String @search(by: [hash, regexp])
+  addressList: [String] @search(by: [hash, regexp])
+}

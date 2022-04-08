@@ -1,0 +1,203 @@
+type azureSynapseWorkspace implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  identity: azureSynapseWorkspaceManagedIdentity
+  defaultDataLakeStorage: azureSynapseWorkspaceDataLakeStorageAccountDetails
+  sqlAdministratorLoginPassword: String @search(by: [hash, regexp])
+  managedResourceGroupName: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  sqlAdministratorLogin: String @search(by: [hash, regexp])
+  virtualNetworkProfile: azureSynapseWorkspaceVirtualNetworkProfile
+  managedVirtualNetwork: String @search(by: [hash, regexp])
+  privateEndpointConnections: [azureSynapseWorkspacePrivateEndpointConnection]
+  encryption: azureSynapseWorkspaceEncryptionDetails
+  workspaceUID: String @search(by: [hash, regexp])
+  managedVirtualNetworkSettings: azureSynapseWorkspaceManagedVirtualNetworkSettings
+  workspaceRepositoryConfiguration: azureSynapseWorkspaceWorkspaceRepositoryConfiguration
+  purviewConfiguration: azureSynapseWorkspacePurviewConfiguration
+  adlaResourceId: String @search(by: [hash, regexp])
+  publicNetworkAccess: String @search(by: [hash, regexp])
+  cspWorkspaceAdminProperties: azureSynapseWorkspaceCspWorkspaceAdminProperties
+  azureADOnlyAuthentication: Boolean @search
+  trustedServiceBypassEnabled: Boolean @search
+  resourceGroup: [azureResourceGroup] @hasInverse(field: synapseWorkspaces)
+  synapseBigDataPools: [azureSynapseBigDataPool] @hasInverse(field: synapseWorkspace)
+  synapseSqlPools: [azureSynapseSqlPool] @hasInverse(field: synapseWorkspace)
+}
+
+type azureSynapseWorkspaceManagedIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureSynapseWorkspaceUserAssignedIdentities]
+}
+
+type azureSynapseWorkspaceDataLakeStorageAccountDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  accountUrl: String @search(by: [hash, regexp])
+  filesystem: String @search(by: [hash, regexp])
+  resourceId: String @search(by: [hash, regexp])
+  createManagedPrivateEndpoint: Boolean @search
+}
+
+type azureSynapseWorkspaceVirtualNetworkProfile
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  computeSubnetId: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspacePrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  privateEndpoint: azureSynapseWorkspacePrivateEndpoint
+  privateLinkServiceConnectionState: azureSynapseWorkspacePrivateLinkServiceConnectionState
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspacePrivateEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspaceEncryptionDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  doubleEncryptionEnabled: Boolean @search
+  cmk: azureSynapseWorkspaceCustomerManagedKeyDetails
+}
+
+type azureSynapseWorkspaceManagedVirtualNetworkSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  preventDataExfiltration: Boolean @search
+  linkedAccessCheckOnTargetResource: Boolean @search
+  allowedAadTenantIdsForLinking: [String] @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspaceWorkspaceRepositoryConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  type: String @search(by: [hash, regexp])
+  hostName: String @search(by: [hash, regexp])
+  accountName: String @search(by: [hash, regexp])
+  projectName: String @search(by: [hash, regexp])
+  repositoryName: String @search(by: [hash, regexp])
+  collaborationBranch: String @search(by: [hash, regexp])
+  rootFolder: String @search(by: [hash, regexp])
+  lastCommitId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspacePurviewConfiguration
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  purviewResourceId: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspaceCspWorkspaceAdminProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  initialWorkspaceAdminObjectId: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspacePrivateLinkServiceConnectionState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+    status: String @search(by: [hash, regexp])
+    description: String @search(by: [hash, regexp])
+    actionsRequired: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspaceCustomerManagedKeyDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  key: azureSynapseWorkspaceWorkspaceKeyDetails
+  kekIdentity: azureSynapseWorkspaceKekIdentityProperties
+}
+
+type azureSynapseWorkspaceWorkspaceKeyDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  keyVaultUrl: String @search(by: [hash, regexp])
+}
+
+type azureSynapseWorkspaceKekIdentityProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  userAssignedIdentity: String @search(by: [hash, regexp])
+  useSystemAssignedIdentity: Boolean @search
+}
+
+type azureSynapseWorkspaceUserAssignedIdentities
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: azureSynapseWorkspaceUserAssignedManagedIdentity
+}
+
+type azureSynapseWorkspaceUserAssignedManagedIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  clientId: String @search(by: [hash, regexp])
+  principalId: String @search(by: [hash, regexp])
+}

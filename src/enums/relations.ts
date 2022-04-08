@@ -9,7 +9,21 @@ export default {
   [services.storageAccount]: [services.storageContainer],
   [services.storageContainer]: [services.storageBlob],
   [services.cdnProfiles]: [services.cdnEndpoints],
-  [services.cdnEndpoints]: [services.cdnCustomDomains, services.cdnOrigins, services.cdnOriginGroups],
+  [services.cdnEndpoints]: [
+    services.cdnCustomDomains,
+    services.cdnOrigins,
+    services.cdnOriginGroups,
+  ],
   [services.dataFactory]: [services.integrationRuntime],
   [services.backupVault]: [services.backupInstance, services.backupPolicy],
+  [services.synapseWorkspaces]: [
+    services.synapseBigDataPools,
+    services.synapseSqlPools,
+  ],
+  [services.recoveryVaults]: [
+    services.replicationAppliances,
+    services.replicationCenters,
+    services.replicationNetworks,
+    services.replicationPolicies,
+  ],
 }
