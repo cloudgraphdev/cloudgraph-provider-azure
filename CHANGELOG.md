@@ -1,3 +1,10 @@
+# [0.61.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-alpha.1...0.61.0-alpha.2) (2022-04-08)
+
+
+### Features
+
+* **siteRecovery:** add replication centers/policies services ([f7a560b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f7a560bcef50680d10ddd5868c804f5b19459ec7))
+
 # [0.61.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.2-alpha.1...0.61.0-alpha.1) (2022-04-07)
 
 
