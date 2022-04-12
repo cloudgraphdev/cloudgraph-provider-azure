@@ -22,6 +22,7 @@ export type AzureAdApplication = {
   appRoles?: Maybe<Array<Maybe<AzureAdApplicationRole>>>;
   applicationTemplateId?: Maybe<Scalars['String']>;
   authRoleAssignments?: Maybe<Array<Maybe<AzureAuthRoleAssignment>>>;
+  cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
   createdDateTime?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   disabledByMicrosoftStatus?: Maybe<Scalars['String']>;
