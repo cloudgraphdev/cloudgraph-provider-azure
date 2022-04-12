@@ -1,3 +1,11 @@
+# [0.61.0-beta.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-beta.1...0.61.0-beta.2) (2022-04-12)
+
+
+### Bug Fixes
+
+* add missing inverse field for ADApplication -> cognitiveServicesAccount connection ([e5ce1d0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/e5ce1d0a2e1ecbf4122bf1a33b6d01721aec60a9))
+* bugfixes for activityLogAlert and storageBlob services ([57bdc08](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/57bdc0827128b1171d54f17ccef15c8fe30917ae))
+
 # [0.61.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.1...0.61.0-beta.1) (2022-04-08)
 
 
