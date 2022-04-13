@@ -1,0 +1,177 @@
+type azureRecoveryVault implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  identity: azureRecoveryVaultIdentityData
+  properties: azureRecoveryVaultProperties
+  sku: azureRecoveryVaultSku
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: recoveryVaults)
+}
+
+type azureRecoveryVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  upgradeDetails: azureRecoveryVaultUpgradeDetails
+  privateEndpointConnections: [azureRecoveryVaultPrivateEndpointConnectionVaultProperties]
+  privateEndpointStateForBackup: String @search(by: [hash, regexp])
+  privateEndpointStateForSiteRecovery: String @search(by: [hash, regexp])
+  encryption: azureRecoveryVaultPropertiesEncryption
+  moveDetails: azureRecoveryVaultVaultPropertiesMoveDetails
+  moveState: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  name: String @search(by: [hash, regexp])
+  tier: String @search(by: [hash, regexp])
+  family: String @search(by: [hash, regexp])
+  size: String @search(by: [hash, regexp])
+  capacity: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultIdentityData
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  userAssignedIdentities: [azureRecoveryVaultUserIdentity]
+}
+
+type azureRecoveryVaultUserIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  principalId: String @search(by: [hash, regexp])
+  clientId: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultUpgradeDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  operationId: String @search(by: [hash, regexp])
+  startTimeUtc: String @search(by: [hash, regexp])
+  lastUpdatedTimeUtc: String @search(by: [hash, regexp])
+  endTimeUtc: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+  message: String @search(by: [hash, regexp])
+  triggerType: String @search(by: [hash, regexp])
+  upgradedResourceId: String @search(by: [hash, regexp])
+  previousResourceId: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultPrivateEndpointConnectionVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  properties: azureRecoveryVaultPrivateEndpointConnection
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultPrivateEndpointConnection
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  privateEndpoint: azureRecoveryVaultPrivateEndpoint
+  privateLinkServiceConnectionState: azureRecoveryVaultPrivateLinkServiceConnectionState
+}
+
+type azureRecoveryVaultPropertiesEncryption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyVaultProperties: azureRecoveryVaultCmkKeyVaultProperties
+  kekIdentity: azureRecoveryVaultCmkKekIdentity
+  infrastructureEncryption: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultCmkKeyVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyUri: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultCmkKekIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  useSystemAssignedIdentity: Boolean @search
+  userAssignedIdentity: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultVaultPropertiesMoveDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  operationId: String @search(by: [hash, regexp])
+  startTimeUtc: String @search(by: [hash, regexp])
+  completionTimeUtc: String @search(by: [hash, regexp])
+  sourceResourceId: String @search(by: [hash, regexp])
+  targetResourceId: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultPrivateEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultPrivateLinkServiceConnectionState
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  status: String @search(by: [hash, regexp])
+  description: String @search(by: [hash, regexp])
+  actionsRequired: String @search(by: [hash, regexp])
+}
+
+

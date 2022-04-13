@@ -8,3 +8,4 @@ yalc.lock
 .terraform*
 *.tfstate*
 tfplan
+*.orig

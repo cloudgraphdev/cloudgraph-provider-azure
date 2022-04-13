@@ -1,0 +1,32 @@
+type azureSynapseSqlPool implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  sku: azureSynapseSqlPoolSku
+  maxSizeBytes: Float @search
+  collation: String @search(by: [hash, regexp])
+  sourceDatabaseId: String @search(by: [hash, regexp])
+  recoverableDatabaseId: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  status: String @search(by: [hash, regexp])
+  restorePointInTime: String @search(by: [hash, regexp])
+  createMode: String @search(by: [hash, regexp])
+  creationDate: String @search(by: [hash, regexp])
+  storageAccountType: String @search(by: [hash, regexp])
+  sourceDatabaseDeletionDate: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: synapseSqlPools)
+  synapseWorkspace: [azureSynapseWorkspace] @hasInverse(field: synapseSqlPools)
+}
+
+type azureSynapseSqlPoolSku
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  tier: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  capacity: Int @search
+}

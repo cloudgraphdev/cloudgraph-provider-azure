@@ -1,10 +1,9 @@
 {
   "name": "@cloudgraph/cg-provider-azure",
-  "version": "0.60.1",
+  "version": "0.61.0-beta.2",
   "description": "CloudGraph provider plugin for Azure used to fetch Azure cloud data.",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
-    "tag": "latest",
     "access": "public"
   },
   "homepage": "https://www.cloudgraph.dev/",
@@ -36,6 +35,7 @@
     "@azure/arm-appservice": "^11.0.0",
     "@azure/arm-authorization": "^8.4.1",
     "@azure/arm-cdn": "^6.0.0",
+    "@azure/arm-cognitiveservices": "^7.0.0",
     "@azure/arm-compute": "^17.3.0",
     "@azure/arm-containerregistry": "^10.0.0",
     "@azure/arm-containerservice": "^15.1.0",
@@ -56,8 +56,9 @@
     "@azure/arm-policy": "^5.0.0",
     "@azure/arm-postgresql": "^6.0.0",
     "@azure/arm-privatedns": "^3.0.0",
-    "@azure/arm-rediscache": "^6.1.0",
     "@azure/arm-recoveryservices": "^5.0.0",
+    "@azure/arm-recoveryservices-siterecovery": "^4.0.0",
+    "@azure/arm-rediscache": "^6.1.0",
     "@azure/arm-recoveryservicesbackup": "^8.1.0",
     "@azure/arm-resources": "^5.0.0",
     "@azure/arm-security": "^4.0.0",
@@ -66,6 +67,7 @@
     "@azure/arm-sqlvirtualmachine": "^4.1.1",
     "@azure/arm-storage": "^17.1.0",
     "@azure/arm-subscriptions": "^5.0.0",
+    "@azure/arm-synapse": "^8.0.0",
     "@azure/arm-trafficmanager": "^6.0.0",
     "@azure/core-http": "^2.2.4",
     "@azure/identity": "^2.0.4",

@@ -36,5 +36,6 @@ type azureLogAnalyticsSolution implements azureBaseResource
   properties: azureLogAnalyticsSolutionProperties
   resourceGroupId: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: logAnalyticsSolutions)
+  logAnalyticsWorkspace: [azureLogAnalyticsWorkspace] @hasInverse(field: logAnalyticsSolutions)
   tags: [azureRawTag]
 }

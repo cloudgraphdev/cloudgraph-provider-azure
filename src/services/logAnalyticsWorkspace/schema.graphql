@@ -52,5 +52,7 @@ type azureLogAnalyticsWorkspace implements azureBaseResource
   resourceGroup: [azureResourceGroup] @hasInverse(field: logAnalyticsWorkspaces)
   dataCollectionRules: [azureDataCollectionRule]
     @hasInverse(field: logAnalyticsWorkspaces)
+  logAnalyticsSolutions: [azureLogAnalyticsSolution]
+    @hasInverse(field: logAnalyticsWorkspace)
   tags: [azureRawTag]
 }

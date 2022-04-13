@@ -1,0 +1,27 @@
+type azureReplicationAppliance implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  properties: azureReplicationApplianceProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: replicationAppliances)
+}
+
+type azureReplicationApplianceProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  providerSpecificDetails: azureReplicationApplianceSpecificDetailsUnion
+}
+
+type azureReplicationApplianceSpecificDetailsUnion
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  instanceType: String @search(by: [hash, regexp])
+}

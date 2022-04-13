@@ -69,4 +69,5 @@ type azureADApplication
   ownerServicePrincipals: [azureADServicePrincipal]
     @hasInverse(field: appOwnerOf)
   ownerUsers: [azureADUser] @hasInverse(field: appOwnerOf)
+  cognitiveServicesAccounts: [azureCognitiveServicesAccount] @hasInverse(field: application)
 }
