@@ -18,7 +18,12 @@ export default ({
     name,
     resourceGroupId,
     plan,
-    properties,
+    properties: {
+      workspaceResourceId,
+      provisioningState,
+      containedResources,
+      referencedResources,
+    } = {},
     type,
     Tags = {},
   } = service
@@ -31,7 +36,12 @@ export default ({
     subscriptionId: account,
     region,
     plan,
-    properties,
+    properties: {
+      workspaceResourceId,
+      provisioningState,
+      containedResources,
+      referencedResources,
+    },
     tags: formatTagsFromMap(Tags),
   }
 }

@@ -3076,8 +3076,6 @@ export type AzureLogAnalyticsSolutionPlan = {
 
 export type AzureLogAnalyticsSolutionProperties = {
   containedResources?: Maybe<Array<Maybe<Scalars['String']>>>;
-  creationTime?: Maybe<Scalars['String']>;
-  lastModifiedTime?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
   referencedResources?: Maybe<Array<Maybe<Scalars['String']>>>;
   workspaceResourceId?: Maybe<Scalars['String']>;
@@ -3087,7 +3085,7 @@ export type AzureLogAnalyticsWorkspace = AzureBaseResource & {
   createdDate?: Maybe<Scalars['String']>;
   customerId?: Maybe<Scalars['String']>;
   dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
-  features?: Maybe<AzureLogAnalyticsWorkspaceFeature>;
+  features?: Maybe<AzureLogAnalyticsWorkspaceFeatures>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   modifiedDate?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
@@ -3109,10 +3107,12 @@ export type AzureLogAnalyticsWorkspaceCapping = {
   quotaNextResetTime?: Maybe<Scalars['String']>;
 };
 
-export type AzureLogAnalyticsWorkspaceFeature = {
+export type AzureLogAnalyticsWorkspaceFeatures = {
+  clusterResourceId?: Maybe<Scalars['String']>;
+  disableLocalAuth?: Maybe<Scalars['Boolean']>;
+  enableDataExport?: Maybe<Scalars['Boolean']>;
   enableLogAccessUsingOnlyResourcePermissions?: Maybe<Scalars['Boolean']>;
-  legacy?: Maybe<Scalars['Int']>;
-  searchVersion?: Maybe<Scalars['Int']>;
+  immediatePurgeDataOn30Days?: Maybe<Scalars['Boolean']>;
 };
 
 export type AzureLogAnalyticsWorkspaceSku = {
@@ -4200,7 +4200,6 @@ export type AzureServiceBusUserAssignedIdentity = {
 export type AzureSqlServer = AzureResource & {
   adAdministrators?: Maybe<Array<Maybe<AzureSqlServerAdAdministrator>>>;
   administratorLogin?: Maybe<Scalars['String']>;
-  administratorLoginPassword?: Maybe<Scalars['String']>;
   administrators?: Maybe<AzureSqlServerExternalAdministrator>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
   encryptionProtectors?: Maybe<Array<Maybe<AzureSqlServerEncryptionProtector>>>;

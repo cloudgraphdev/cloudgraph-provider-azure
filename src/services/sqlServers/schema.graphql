@@ -157,7 +157,6 @@ type azureSqlServer implements azureResource
   @key(fields: "id") {
   identity: azureSqlServerIdentity
   administratorLogin: String @search(by: [hash, regexp])
-  administratorLoginPassword: String @search(by: [hash, regexp])
   version: String @search(by: [hash, regexp])
   state: String @search(by: [hash, regexp])
   fullyQualifiedDomainName: String @search(by: [hash, regexp])

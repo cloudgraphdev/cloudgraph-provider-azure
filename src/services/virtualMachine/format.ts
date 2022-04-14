@@ -21,21 +21,25 @@ export default ({
     diagnosticsProfile: {
       bootDiagnostics: { enabled: bootDiagnostics = false } = {},
     } = {},
-    osProfile: { adminUsername, adminPassword, secrets, ...restOsProfile } = {},
+    osProfile: {
+      computerName,
+      windowsConfiguration: {
+        provisionVMAgent: wProvisionVMAgent,
+        enableAutomaticUpdates,
+        timeZone,
+      } = {},
+      linuxConfiguration: {
+        disablePasswordAuthentication,
+        provisionVMAgent: lProvisionVMAgent,
+      } = {},
+      allowExtensionOperations,
+      requireGuestProvisionSignal,
+    } = {},
     storageProfile: { imageReference } = {},
     licenseType,
     resourceGroupId,
     Tags,
   } = service
-  const {
-    linuxConfiguration: {
-      patchSettings: lps,
-      ssh: lssh,
-      ...linuxConfiguration
-    } = {},
-    windowsConfiguration: { patchSettings: wps, ...windowsConfiguration } = {},
-    ...osProfile
-  } = restOsProfile
   const storageImageReference: AzureVirtualMachineStorageImageReference =
     imageReference || {}
   return {
@@ -44,7 +48,20 @@ export default ({
     name,
     type,
     region,
-    osProfile: { linuxConfiguration, windowsConfiguration, ...osProfile },
+    osProfile: {
+      computerName,
+      windowsConfiguration: {
+        provisionVMAgent: wProvisionVMAgent,
+        enableAutomaticUpdates,
+        timeZone,
+      },
+      linuxConfiguration: {
+        disablePasswordAuthentication,
+        provisionVMAgent: lProvisionVMAgent,
+      },
+      allowExtensionOperations,
+      requireGuestProvisionSignal,
+    },
     storageImageReference,
     bootDiagnostics,
     licenseType,
