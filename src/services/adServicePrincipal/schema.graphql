@@ -21,6 +21,7 @@ type azureADServicePrincipal
     mutation: { add: true, delete: false }
   ) {
   id: String! @id @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
   deletedDateTime: String @search(by: [hash, regexp])
   accountEnabled: Boolean @search
   alternativeNames: [String] @search(by: [hash, regexp])

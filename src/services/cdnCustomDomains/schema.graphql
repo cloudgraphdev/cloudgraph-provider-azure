@@ -27,12 +27,15 @@ type azureCdnCustomDomainHttpsParametersUnion
   certificateSourceParameters: azureCdnCertificateSourceParameters
 }
 
-type azureCdnCustomDomain implements azureResource
+type azureCdnCustomDomain implements azureBaseResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   createdBy: String @search(by: [hash, regexp])
   createdByType: String @search(by: [hash, regexp])
   createdAt: String @search(by: [hash, regexp])
