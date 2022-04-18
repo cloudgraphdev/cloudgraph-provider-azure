@@ -11,6 +11,7 @@ export default ({
 }): AzureAdServicePrincipal => {
   const {
     id,
+    region,
     deletedDateTime,
     accountEnabled,
     alternativeNames,
@@ -42,6 +43,7 @@ export default ({
   } = service
   return {
     id: id || cuid(),
+    region,
     deletedDateTime,
     accountEnabled,
     alternativeNames,
