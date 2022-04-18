@@ -1,3 +1,10 @@
+## [0.61.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.61.1-alpha.1) (2022-04-18)
+
+
+### Bug Fixes
+
+* Ensure that all currently supported Azure services allow queryazureTag ([25ed119](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/25ed119e0bca18716322b0dcfbc40a9837b89e4d))
+
 # [0.61.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.1...0.61.0) (2022-04-13)
 
 
