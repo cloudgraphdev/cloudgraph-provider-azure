@@ -1,3 +1,10 @@
+## [0.61.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.1-alpha.1...0.61.1-alpha.2) (2022-05-18)
+
+
+### Bug Fixes
+
+* Review and fix scan errors (virtualMachineScaleSet) ([09770cb](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/09770cb7e044d9c78e666ea5b736d2e8c8aa5b0a))
+
 ## [0.61.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.61.1-alpha.1) (2022-04-18)
 
 
