@@ -19,7 +19,6 @@ type azureVirtualMachineScaleSetExtension
   name: String @search(by: [hash, regexp])
   forceUpdateTag: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  type1: String @search(by: [hash, regexp])
   typeHandlerVersion: String @search(by: [hash, regexp])
   typePropertiesType: String @search(by: [hash, regexp])
   publisher: String @search(by: [hash, regexp])
@@ -197,7 +196,9 @@ type azureSshPublicKey
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
   path: String @search(by: [hash, regexp])
   keyData: String @search(by: [hash, regexp])
 }
@@ -239,7 +240,9 @@ type azureVaultCertificate
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
   certificateUrl: String @search(by: [hash, regexp])
   certificateStore: String @search(by: [hash, regexp])
 }
@@ -249,7 +252,9 @@ type azureVaultSecretGroup
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
-  ) {
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
   sourceVault: azureSubResource
   vaultCertificates: [azureVaultCertificate]
 }
@@ -263,7 +268,6 @@ type azureVirtualMachineScaleSetOsProfile
   computerNamePrefix: String @search(by: [hash, regexp])
   adminUsername: String @search(by: [hash, regexp])
   allowExtensionOperations: Boolean @search
-  requireGuestProvisionSignal: Boolean @search
   linuxConfiguration: azureVirtualMachineScaleSetOsProfileLinuxConfiguration
   windowsConfiguration: azureVirtualMachineScaleSetOsProfileWindowsConfiguration
   secrets: [azureVaultSecretGroup]

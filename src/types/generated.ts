@@ -4360,6 +4360,7 @@ export type AzureSshConfiguration = {
 };
 
 export type AzureSshPublicKey = {
+  id: Scalars['String'];
   keyData?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
 };
@@ -4945,9 +4946,11 @@ export type AzureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem 
 export type AzureVaultCertificate = {
   certificateStore?: Maybe<Scalars['String']>;
   certificateUrl?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export type AzureVaultSecretGroup = {
+  id: Scalars['String'];
   sourceVault?: Maybe<AzureSubResource>;
   vaultCertificates?: Maybe<Array<Maybe<AzureVaultCertificate>>>;
 };
@@ -5016,7 +5019,6 @@ export type AzureVirtualMachineScaleSetExtension = {
   publisher?: Maybe<Scalars['String']>;
   settings?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  type1?: Maybe<Scalars['String']>;
   typeHandlerVersion?: Maybe<Scalars['String']>;
   typePropertiesType?: Maybe<Scalars['String']>;
 };
@@ -5078,7 +5080,6 @@ export type AzureVirtualMachineScaleSetOsProfile = {
   allowExtensionOperations?: Maybe<Scalars['Boolean']>;
   computerNamePrefix?: Maybe<Scalars['String']>;
   linuxConfiguration?: Maybe<AzureVirtualMachineScaleSetOsProfileLinuxConfiguration>;
-  requireGuestProvisionSignal?: Maybe<Scalars['Boolean']>;
   secrets?: Maybe<Array<Maybe<AzureVaultSecretGroup>>>;
   windowsConfiguration?: Maybe<AzureVirtualMachineScaleSetOsProfileWindowsConfiguration>;
 };
