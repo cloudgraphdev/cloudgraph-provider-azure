@@ -1,8 +1,216 @@
 import cuid from 'cuid'
 import { isEmpty } from 'lodash'
-import { AzureVirtualMachineScaleSet } from '../../types/generated'
+import {
+  VirtualMachineScaleSetOSProfile,
+  VirtualMachineScaleSetStorageProfile,
+  VirtualMachineScaleSetNetworkProfile,
+  VirtualMachineScaleSetExtensionProfile,
+} from '@azure/arm-compute'
+import {
+  AzureVirtualMachineScaleSet,
+  AzureVirtualMachineScaleSetOsProfile,
+  AzureVirtualMachineScaleSetStorageProfile,
+  AzureVirtualMachineScaleSetNetworkProfile,
+  AzureVirtualMachineScaleSetExtension,
+} from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureVirtualMachineScaleSet } from './data'
+
+const formatOsProfile = (
+  osProfile?: VirtualMachineScaleSetOSProfile
+): AzureVirtualMachineScaleSetOsProfile => {
+  if (isEmpty(osProfile)) {
+    return {}
+  }
+
+  const {
+    computerNamePrefix,
+    adminUsername,
+    allowExtensionOperations,
+    windowsConfiguration,
+    linuxConfiguration,
+    secrets,
+  } = osProfile
+
+  return {
+    computerNamePrefix,
+    adminUsername,
+    allowExtensionOperations,
+    windowsConfiguration: windowsConfiguration
+      ? {
+          additionalUnattendContent:
+            windowsConfiguration.additionalUnattendContent?.map(auc => ({
+              id: cuid(),
+              ...auc,
+            })) || [],
+          winRM: windowsConfiguration.winRM
+            ? {
+                listeners:
+                  windowsConfiguration.winRM.listeners?.map(l => ({
+                    id: cuid(),
+                    ...l,
+                  })) || [],
+              }
+            : {},
+          ...windowsConfiguration,
+        }
+      : {},
+    linuxConfiguration: linuxConfiguration
+      ? {
+          ssh: linuxConfiguration.ssh
+            ? {
+                publicKeys:
+                  linuxConfiguration.ssh.publicKeys?.map(pk => ({
+                    id: cuid(),
+                    ...pk,
+                  })) || [],
+              }
+            : {},
+        }
+      : {},
+    secrets:
+      secrets?.map(s => ({
+        id: cuid(),
+        sourceVault: {
+          id: s.sourceVault?.id || cuid(),
+        },
+        vaultCertificates:
+          s.vaultCertificates?.map(vc => ({
+            id: cuid(),
+            ...vc,
+          })) || [],
+      })) || [],
+  }
+}
+
+const formatStorageProfile = (
+  storageProfile?: VirtualMachineScaleSetStorageProfile
+): AzureVirtualMachineScaleSetStorageProfile => {
+  if (isEmpty(storageProfile)) {
+    return {}
+  }
+
+  const { imageReference, osDisk } = storageProfile
+
+  return {
+    imageReference: imageReference
+      ? {
+          id: imageReference.id || cuid(),
+          publisher: imageReference.publisher,
+          offer: imageReference.offer,
+          sku: imageReference.sku,
+          version: imageReference.version,
+        }
+      : {},
+    osDisk: osDisk
+      ? {
+          caching: osDisk.caching,
+          createOption: osDisk.createOption,
+          osType: osDisk.osType,
+          diskSizeGB: osDisk.diskSizeGB,
+          writeAcceleratorEnabled: osDisk.writeAcceleratorEnabled,
+          managedDisk: osDisk.managedDisk
+            ? {
+                storageAccountType: osDisk.managedDisk.storageAccountType,
+              }
+            : {},
+        }
+      : {},
+  }
+}
+
+const formatNetworkProfile = (
+  networkProfile?: VirtualMachineScaleSetNetworkProfile
+): AzureVirtualMachineScaleSetNetworkProfile => {
+  if (isEmpty(networkProfile)) {
+    return {}
+  }
+
+  const { networkInterfaceConfigurations = [] } = networkProfile
+
+  return {
+    networkInterfaceConfigurations:
+      networkInterfaceConfigurations?.map(
+        ({
+          id,
+          ipConfigurations = [],
+          networkSecurityGroup,
+          ...networkInterface
+        }) => {
+          return {
+            id: id || cuid(),
+            ...networkInterface,
+            networkSecurityGroup: {
+              id: networkSecurityGroup?.id || cuid(),
+            },
+            ipConfigurations:
+              ipConfigurations?.map(
+                ({
+                  subnet,
+                  publicIPAddressConfiguration,
+                  applicationGatewayBackendAddressPools,
+                  applicationSecurityGroups,
+                  loadBalancerBackendAddressPools,
+                  loadBalancerInboundNatPools,
+                  ...ipConfiguration
+                }) => ({
+                  id: cuid(),
+                  ...ipConfiguration,
+                  subnetId: subnet?.id,
+                  applicationGatewayBackendAddressPools:
+                    applicationGatewayBackendAddressPools?.map(agb => ({
+                      id: agb.id || cuid(),
+                      ...agb,
+                    })) || [],
+                  applicationSecurityGroups:
+                    applicationSecurityGroups?.map(asg => ({
+                      id: asg.id || cuid(),
+                      ...asg,
+                    })) || [],
+                  loadBalancerBackendAddressPools:
+                    loadBalancerBackendAddressPools?.map(lbb => ({
+                      id: lbb.id || cuid(),
+                      ...lbb,
+                    })) || [],
+                  loadBalancerInboundNatPools:
+                    loadBalancerInboundNatPools?.map(lbi => ({
+                      id: lbi.id || cuid(),
+                      ...lbi,
+                    })) || [],
+                })
+              ) || [],
+          }
+        }
+      ) || [],
+  }
+}
+
+const formatExtensionProfile = (
+  extensionProfile?: VirtualMachineScaleSetExtensionProfile
+): AzureVirtualMachineScaleSetExtension[] => {
+  if (isEmpty(extensionProfile)) {
+    return []
+  }
+
+  const { extensions: extensionsList = [] } = extensionProfile
+
+  return (
+    extensionsList?.map(e => ({
+      id: e.id || cuid(),
+      name: e.name,
+      forceUpdateTag: e.forceUpdateTag,
+      type: e.type,
+      typeHandlerVersion: e.typeHandlerVersion,
+      typePropertiesType: e.typePropertiesType,
+      publisher: e.publisher,
+      provisioningState: e.provisioningState,
+      provisionAfterExtensions: e.provisionAfterExtensions,
+      autoUpgradeMinorVersion: e.autoUpgradeMinorVersion,
+      enableAutomaticUpgrade: e.enableAutomaticUpgrade,
+      settings: e.settings ? JSON.stringify(e.settings) : '',
+    })) || []
+  )
+}
 
 export default ({
   service,
@@ -46,64 +254,27 @@ export default ({
   }
 
   // Setting Extension Profile
-  let extensions = []
+  let extensions: AzureVirtualMachineScaleSetExtension[] = []
   if (!isEmpty(extensionProfile)) {
-    const { extensions: extensionsList = [] } = extensionProfile
-    extensions = extensionsList.map(({ settings, ...extension }) => ({
-      id: cuid(),
-      ...extension,
-      settings: JSON.stringify(settings),
-    }))
+    extensions = formatExtensionProfile(extensionProfile)
   }
 
   // Setting OS Profile
   let os = {}
   if (!isEmpty(osProfile)) {
-    const {
-      computerNamePrefix,
-      adminUsername,
-      linuxConfiguration = {},
-      windowsConfiguration = {},
-      secrets = [],
-    } = osProfile
-    os = {
-      computerNamePrefix,
-      adminUsername,
-      linuxConfiguration,
-      windowsConfiguration,
-      secrets,
-    }
+    os = formatOsProfile(osProfile)
   }
 
   // Setting Network Profile
   let network = {}
   if (!isEmpty(networkProfile)) {
-    const { networkInterfaceConfigurations = [] } = networkProfile
-
-    const networkInterfaces = networkInterfaceConfigurations.map(
-      ({ ipConfigurations = [], ...networkInterface }) => {
-        return {
-          id: cuid(),
-          ...networkInterface,
-          ipConfigurations: ipConfigurations.map(
-            ({ subnet, ...ipConfiguration }) => ({
-              id: cuid(),
-              ...ipConfiguration,
-              subnetId: subnet?.id,
-            })
-          ),
-        }
-      }
-    )
-
-    network = { networkInterfaceConfigurations: networkInterfaces }
+    network = formatNetworkProfile(networkProfile)
   }
 
   // Setting Storage Profile
   let storage = {}
   if (!isEmpty(storageProfile)) {
-    const { imageReference = {}, osDisk = {} } = storageProfile
-    storage = { imageReference, osDisk }
+    storage = formatStorageProfile(storageProfile)
   }
 
   return {
