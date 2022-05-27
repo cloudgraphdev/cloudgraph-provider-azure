@@ -2328,6 +2328,7 @@ export type AzureDiagnosticSettingMetricSettings = {
 };
 
 export type AzureDisk = AzureResource & {
+  azureDiskEncryptionEnabled?: Maybe<Scalars['Boolean']>;
   createOption?: Maybe<Scalars['String']>;
   diskIopsReadWrite?: Maybe<Scalars['Int']>;
   diskMbpsReadWrite?: Maybe<Scalars['Int']>;

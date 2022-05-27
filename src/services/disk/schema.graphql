@@ -20,6 +20,7 @@ type azureDisk implements azureResource
   networkAccessPolicy: String @search(by: [hash, regexp])
   tier: String @search(by: [hash, regexp])
   encryptionSettings: String @search(by: [hash, regexp])
+  azureDiskEncryptionEnabled: Boolean @search
   resourceGroup: [azureResourceGroup] @hasInverse(field: disks)
   virtualMachine: [azureVirtualMachine] @hasInverse(field: disks)
 }

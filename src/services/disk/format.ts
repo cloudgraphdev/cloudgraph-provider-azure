@@ -33,6 +33,7 @@ export default ({
     networkAccessPolicy,
     tier,
     encryption: { type: encryptionSettings = null } = {},
+    encryptionSettingsCollection: { enabled: encryptionEnabled } = {},
     resourceGroupId,
     Tags,
   } = service
@@ -61,6 +62,7 @@ export default ({
     networkAccessPolicy,
     tier,
     encryptionSettings,
+    azureDiskEncryptionEnabled: encryptionEnabled ?? false,
     resourceGroupId,
     tags: formatTagsFromMap(Tags),
   }
