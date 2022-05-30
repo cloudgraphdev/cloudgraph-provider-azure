@@ -4406,6 +4406,7 @@ export type AzureStorageAccount = AzureResource & {
   primaryMicrosoftEndpoints?: Maybe<AzureStorageAccountPrimaryMicrosoftEndpoints>;
   privateEndpointConnections?: Maybe<Array<Maybe<AzureStorageAccountPrivateEndpointConnection>>>;
   provisioningState?: Maybe<Scalars['String']>;
+  queueServiceProperties?: Maybe<AzureStorageAccountQueueServiceProperties>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   routingPreferenceChoice?: Maybe<Scalars['String']>;
   routingPreferencePublishInternetEndpoints?: Maybe<Scalars['String']>;
@@ -4461,6 +4462,19 @@ export type AzureStorageAccountPrivateEndpointConnection = {
   privateLinkServiceConnectionStateDescription?: Maybe<Scalars['String']>;
   privateLinkServiceConnectionStateStatus?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountQueueServiceProperties = {
+  logging?: Maybe<AzureStorageAccountQueueServicePropertiesLogging>;
+};
+
+export type AzureStorageAccountQueueServicePropertiesLogging = {
+  delete?: Maybe<Scalars['Boolean']>;
+  read?: Maybe<Scalars['Boolean']>;
+  retentionPolicyDays?: Maybe<Scalars['Int']>;
+  retentionPolicyEnabled?: Maybe<Scalars['Boolean']>;
+  version?: Maybe<Scalars['String']>;
+  write?: Maybe<Scalars['Boolean']>;
 };
 
 export type AzureStorageAccountResourceAccessRule = {
