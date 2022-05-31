@@ -36,6 +36,7 @@ type azureTag @key(fields: "id") {
   mySqlServers: [azureMySqlServer]
   networkInterfaces: [azureNetworkInterface]
   postgreSqlServers: [azurePostgreSqlServer]
+  privateDns: [azurePrivateDnsZone]
   publicIps: [azurePublicIp]
   recoveryVaults: [azureRecoveryVault]
   redisCaches: [azureRedisCache]
@@ -49,6 +50,7 @@ type azureTag @key(fields: "id") {
   synapseWorkspaces: [azureSynapseWorkspace]
   trafficManagerProfiles: [azureTrafficManagerProfile]
   virtualMachines: [azureVirtualMachine]
+  virtualMachineScaleSets: [azureVirtualMachineScaleSet]
   virtualNetworks: [azureVirtualNetwork]
 }
 

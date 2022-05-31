@@ -1,3 +1,43 @@
+# [0.62.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.1-alpha.2...0.62.0-alpha.1) (2022-05-31)
+
+
+### Features
+
+* **services:** Added ADE flag for CIS rule 7.7 ([0e038f3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/0e038f34741167b331ae56bd47a4fe47cef75c4d))
+* **services:** Added queueServiceProperties logging ([deb0854](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/deb08547e9349d45777d0f369038890d089b6d17))
+
+## [0.61.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.1-alpha.1...0.61.1-alpha.2) (2022-05-18)
+
+
+### Bug Fixes
+
+* Review and fix scan errors (virtualMachineScaleSet) ([09770cb](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/09770cb7e044d9c78e666ea5b736d2e8c8aa5b0a))
+
+## [0.61.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.61.1-alpha.1) (2022-04-18)
+
+
+### Bug Fixes
+
+* Ensure that all currently supported Azure services allow queryazureTag ([25ed119](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/25ed119e0bca18716322b0dcfbc40a9837b89e4d))
+
+# [0.61.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.60.1...0.61.0) (2022-04-13)
+
+
+### Bug Fixes
+
+* add missing connection between logAnalytics services ([2e342dd](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/2e342dd701b729c16dfa42e73f64b522c38ee5b2))
+* add missing inverse field for ADApplication -> cognitiveServicesAccount connection ([e5ce1d0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/e5ce1d0a2e1ecbf4122bf1a33b6d01721aec60a9))
+* added AD application connection ([a00b6b2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/a00b6b277818f6d79edc4424a34c19232834cd4e))
+* bugfixes for activityLogAlert and storageBlob services ([57bdc08](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/57bdc0827128b1171d54f17ccef15c8fe30917ae))
+
+
+### Features
+
+* add cognitiveServicesAccount service ([c1de2d5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c1de2d5ba1259e5a457fc88495824a62d624cce3))
+* **recoveryServices:** add recovery services ([172d537](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/172d537006de83a48ef0f329a73c1b1bcc800cde))
+* **siteRecovery:** add replication centers/policies services ([f7a560b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f7a560bcef50680d10ddd5868c804f5b19459ec7))
+* **synapse:** add synapse services ([fd8e9f4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/fd8e9f47f6ad573e3f9b9258d2244693073432a1))
+
 # [0.61.0-beta.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0-beta.1...0.61.0-beta.2) (2022-04-12)
 
 

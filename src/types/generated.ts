@@ -150,6 +150,7 @@ export type AzureAdServicePrincipal = {
   notes?: Maybe<Scalars['String']>;
   notificationEmailAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
   preferredSingleSignOnMode?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
   replyUrls?: Maybe<Array<Maybe<Scalars['String']>>>;
   servicePrincipalNames?: Maybe<Array<Maybe<Scalars['String']>>>;
   servicePrincipalType?: Maybe<Scalars['String']>;
@@ -1278,7 +1279,7 @@ export type AzureCdnCertificateSourceParameters = {
   vaultName?: Maybe<Scalars['String']>;
 };
 
-export type AzureCdnCustomDomain = AzureResource & {
+export type AzureCdnCustomDomain = AzureBaseResource & {
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   createdAt?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
@@ -1291,8 +1292,11 @@ export type AzureCdnCustomDomain = AzureResource & {
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   resourceState?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
   validationData?: Maybe<Scalars['String']>;
 };
 
@@ -1415,7 +1419,7 @@ export type AzureCdnKeyVaultSigningKeyParameters = {
   vaultName?: Maybe<Scalars['String']>;
 };
 
-export type AzureCdnOrigin = AzureResource & {
+export type AzureCdnOrigin = AzureBaseResource & {
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
   createdAt?: Maybe<Scalars['String']>;
@@ -1436,12 +1440,15 @@ export type AzureCdnOrigin = AzureResource & {
   privateLinkLocation?: Maybe<Scalars['String']>;
   privateLinkResourceId?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   resourceState?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
   weight?: Maybe<Scalars['Int']>;
 };
 
-export type AzureCdnOriginGroup = AzureResource & {
+export type AzureCdnOriginGroup = AzureBaseResource & {
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   createdAt?: Maybe<Scalars['String']>;
@@ -1452,9 +1459,12 @@ export type AzureCdnOriginGroup = AzureResource & {
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   resourceState?: Maybe<Scalars['String']>;
   responseBasedOriginErrorDetectionSettings?: Maybe<AzureCdnResponseBasedOriginErrorDetectionParameters>;
+  subscriptionId?: Maybe<Scalars['String']>;
   trafficRestorationTimeToHealedOrNewEndpointsInMinutes?: Maybe<Scalars['Int']>;
 };
 
@@ -2328,6 +2338,7 @@ export type AzureDiagnosticSettingMetricSettings = {
 };
 
 export type AzureDisk = AzureResource & {
+  azureDiskEncryptionEnabled?: Maybe<Scalars['Boolean']>;
   createOption?: Maybe<Scalars['String']>;
   diskIopsReadWrite?: Maybe<Scalars['Int']>;
   diskMbpsReadWrite?: Maybe<Scalars['Int']>;
@@ -4350,6 +4361,7 @@ export type AzureSshConfiguration = {
 };
 
 export type AzureSshPublicKey = {
+  id: Scalars['String'];
   keyData?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
 };
@@ -4405,6 +4417,7 @@ export type AzureStorageAccount = AzureResource & {
   primaryMicrosoftEndpoints?: Maybe<AzureStorageAccountPrimaryMicrosoftEndpoints>;
   privateEndpointConnections?: Maybe<Array<Maybe<AzureStorageAccountPrivateEndpointConnection>>>;
   provisioningState?: Maybe<Scalars['String']>;
+  queueServiceProperties?: Maybe<AzureStorageAccountQueueServiceProperties>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   routingPreferenceChoice?: Maybe<Scalars['String']>;
   routingPreferencePublishInternetEndpoints?: Maybe<Scalars['String']>;
@@ -4460,6 +4473,19 @@ export type AzureStorageAccountPrivateEndpointConnection = {
   privateLinkServiceConnectionStateDescription?: Maybe<Scalars['String']>;
   privateLinkServiceConnectionStateStatus?: Maybe<Scalars['String']>;
   provisioningState?: Maybe<Scalars['String']>;
+};
+
+export type AzureStorageAccountQueueServiceProperties = {
+  logging?: Maybe<AzureStorageAccountQueueServicePropertiesLogging>;
+};
+
+export type AzureStorageAccountQueueServicePropertiesLogging = {
+  delete?: Maybe<Scalars['Boolean']>;
+  read?: Maybe<Scalars['Boolean']>;
+  retentionPolicyDays?: Maybe<Scalars['Int']>;
+  retentionPolicyEnabled?: Maybe<Scalars['Boolean']>;
+  version?: Maybe<Scalars['String']>;
+  write?: Maybe<Scalars['Boolean']>;
 };
 
 export type AzureStorageAccountResourceAccessRule = {
@@ -4847,6 +4873,7 @@ export type AzureTag = {
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
+  privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
   recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
@@ -4860,6 +4887,7 @@ export type AzureTag = {
   synapseWorkspaces?: Maybe<Array<Maybe<AzureSynapseWorkspace>>>;
   trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
   value: Scalars['String'];
+  virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
 };
@@ -4933,9 +4961,11 @@ export type AzureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem 
 export type AzureVaultCertificate = {
   certificateStore?: Maybe<Scalars['String']>;
   certificateUrl?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
 };
 
 export type AzureVaultSecretGroup = {
+  id: Scalars['String'];
   sourceVault?: Maybe<AzureSubResource>;
   vaultCertificates?: Maybe<Array<Maybe<AzureVaultCertificate>>>;
 };
@@ -5004,7 +5034,6 @@ export type AzureVirtualMachineScaleSetExtension = {
   publisher?: Maybe<Scalars['String']>;
   settings?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  type1?: Maybe<Scalars['String']>;
   typeHandlerVersion?: Maybe<Scalars['String']>;
   typePropertiesType?: Maybe<Scalars['String']>;
 };
@@ -5066,7 +5095,6 @@ export type AzureVirtualMachineScaleSetOsProfile = {
   allowExtensionOperations?: Maybe<Scalars['Boolean']>;
   computerNamePrefix?: Maybe<Scalars['String']>;
   linuxConfiguration?: Maybe<AzureVirtualMachineScaleSetOsProfileLinuxConfiguration>;
-  requireGuestProvisionSignal?: Maybe<Scalars['Boolean']>;
   secrets?: Maybe<Array<Maybe<AzureVaultSecretGroup>>>;
   windowsConfiguration?: Maybe<AzureVirtualMachineScaleSetOsProfileWindowsConfiguration>;
 };

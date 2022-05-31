@@ -5,6 +5,11 @@ import {
   StorageAccountKey,
   StorageManagementClient,
 } from '@azure/arm-storage'
+import {
+  QueueServiceClient,
+  StorageSharedKeyCredential,
+  QueueServiceProperties,
+} from '@azure/storage-queue'
 import { isEmpty } from 'lodash'
 import azureLoggerText from '../../properties/logger'
 
@@ -21,11 +26,34 @@ export interface RawAzureStorageAccount
   keys: StorageAccountKey[]
   Tags: TagMap
   blobServiceProperties: BlobServiceProperties
+  queueServiceProperties: QueueServiceProperties
 }
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'StorageAccount'
+
+const getQueueServiceProperties = async (
+  accountName: string,
+  accountKey: string
+): Promise<QueueServiceProperties> => {
+  try {
+    const sharedKeyCredential = new StorageSharedKeyCredential(
+      accountName,
+      accountKey
+    )
+
+    const queueClient = new QueueServiceClient(
+      `https://${accountName}.queue.core.windows.net`,
+      sharedKeyCredential
+    )
+
+    return await queueClient.getProperties()
+  } catch (e) {
+    logger.error(e)
+    return {}
+  }
+}
 
 export default async ({
   regions,
@@ -88,6 +116,13 @@ export default async ({
               rest.name
             )
 
+          // Fetch Storage Account Queue Service Properties
+          const [mainKey] = keys
+          const queueServiceProperties = await getQueueServiceProperties(
+            rest.name,
+            mainKey.value
+          )
+
           result[region].push({
             id,
             ...rest,
@@ -96,13 +131,14 @@ export default async ({
             keys,
             Tags: tags || {},
             blobServiceProperties,
+            queueServiceProperties,
           })
           numOfAccounts += 1
         }
       }
 
       logger.debug(lt.foundStorageAccounts(numOfAccounts))
-
+      
       return result
     }
     return existingData

@@ -147,6 +147,29 @@ type azureStorageAccountServiceProperties
   skuTier: String @search(by: [hash, regexp])
 }
 
+type azureStorageAccountQueueServicePropertiesLogging
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  version: String @search(by: [hash, regexp])
+  read: Boolean @search
+  write: Boolean @search
+  delete: Boolean @search
+  retentionPolicyEnabled: Boolean @search
+  retentionPolicyDays: Int @search
+}
+
+type azureStorageAccountQueueServiceProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  logging: azureStorageAccountQueueServicePropertiesLogging
+}
+
 type azureStorageAccount implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -209,6 +232,7 @@ type azureStorageAccount implements azureResource
   allowSharedKeyAccess: String @search(by: [hash, regexp])
   enableNfsV3: String @search(by: [hash, regexp])
   blobServiceProperties: azureStorageAccountServiceProperties
+  queueServiceProperties: azureStorageAccountQueueServiceProperties
   resourceGroup: [azureResourceGroup] @hasInverse(field: storageAccounts)
   storageContainers: [azureStorageContainer] @hasInverse(field: storageAccount)
   appServiceWebApp: [azureAppServiceWebApp] @hasInverse(field: storageAccounts)
