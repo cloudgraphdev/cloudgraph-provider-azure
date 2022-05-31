@@ -111,6 +111,7 @@ export default ({
     resourceGroupId,
     Tags,
     blobServiceProperties,
+    queueServiceProperties = {},
   } = service
 
   return {
@@ -269,6 +270,16 @@ export default ({
         blobServiceProperties?.deleteRetentionPolicy?.days,
       skuName: blobServiceProperties?.sku?.name,
       skuTier: blobServiceProperties?.sku?.tier,
+    },
+    queueServiceProperties: {
+      logging: queueServiceProperties ? {
+        version: queueServiceProperties.queueAnalyticsLogging?.version,
+        read : queueServiceProperties.queueAnalyticsLogging?.read ?? false,
+        write : queueServiceProperties.queueAnalyticsLogging?.write ?? false,
+        delete : queueServiceProperties.queueAnalyticsLogging?.deleteProperty ?? false,
+        retentionPolicyEnabled : queueServiceProperties.queueAnalyticsLogging?.retentionPolicy?.enabled ?? false,
+        retentionPolicyDays: queueServiceProperties.queueAnalyticsLogging?.retentionPolicy?.days
+      } : {},
     },
   }
 }
