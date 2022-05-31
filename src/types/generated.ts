@@ -3120,6 +3120,23 @@ export type AzureLogAnalyticsWorkspaceSku = {
   name: Scalars['String'];
 };
 
+export type AzureLogProfile = AzureBaseResource & {
+  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  locations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  region?: Maybe<Scalars['String']>;
+  retentionPolicy?: Maybe<AzureLogProfileRetentionPolicy>;
+  serviceBusRuleId?: Maybe<Scalars['String']>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageAccountId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureLogProfileRetentionPolicy = {
+  days?: Maybe<Scalars['Int']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+};
+
 export type AzureMachineLearningWorkspace = AzureResource & {
   allowPublicAccessWhenBehindVnet?: Maybe<Scalars['Boolean']>;
   applicationInsights?: Maybe<Scalars['String']>;
@@ -4393,6 +4410,7 @@ export type AzureStorageAccount = AzureResource & {
   keyPolicyExpirationPeriodInDays?: Maybe<Scalars['Int']>;
   largeFileSharesState?: Maybe<Scalars['String']>;
   lastGeoFailoverTime?: Maybe<Scalars['String']>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
   minimumTlsVersion?: Maybe<Scalars['String']>;
   networkRuleIpRules?: Maybe<Array<Maybe<AzureStorageAccountIpRule>>>;
   networkRuleResourceAccessRules?: Maybe<Array<Maybe<AzureStorageAccountResourceAccessRule>>>;
@@ -4842,6 +4860,7 @@ export type AzureTag = {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
   machineLearningWorkspaces?: Maybe<Array<Maybe<AzureMachineLearningWorkspace>>>;
   metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
