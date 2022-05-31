@@ -1,3 +1,17 @@
+# [0.62.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.62.0) (2022-05-31)
+
+
+### Bug Fixes
+
+* Ensure that all currently supported Azure services allow queryazureTag ([25ed119](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/25ed119e0bca18716322b0dcfbc40a9837b89e4d))
+* Review and fix scan errors (virtualMachineScaleSet) ([09770cb](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/09770cb7e044d9c78e666ea5b736d2e8c8aa5b0a))
+
+
+### Features
+
+* **services:** Added ADE flag for CIS rule 7.7 ([0e038f3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/0e038f34741167b331ae56bd47a4fe47cef75c4d))
+* **services:** Added queueServiceProperties logging ([deb0854](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/deb08547e9349d45777d0f369038890d089b6d17))
+
 # [0.62.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.62.0-beta.1) (2022-05-31)
 
 
