@@ -107,7 +107,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | securitySettings                            |                                                                           |
 | serviceBus                                  | resourceGroup                                                             |
 | sqlServers                                  | databaseSql, resourceGroup                                                |
-| storageAccount                              | diagnosticSetting, logProfile, resourceGroup, storageContainer            |
+| storageAccount                              | diagnosticSetting, logProfiles, resourceGroup, storageContainer           |
 | storageBlob                                 | resourceGroup, storageContainer                                           |
 | storageContainer                            | resourceGroup, storageAccount                                             |
 | synapseBigDataPools                         | resourceGroup, synapseWorkspaces                                          |
