@@ -1,3 +1,11 @@
+# [0.62.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.1-alpha.2...0.62.0-alpha.1) (2022-05-31)
+
+
+### Features
+
+* **services:** Added ADE flag for CIS rule 7.7 ([0e038f3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/0e038f34741167b331ae56bd47a4fe47cef75c4d))
+* **services:** Added queueServiceProperties logging ([deb0854](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/deb08547e9349d45777d0f369038890d089b6d17))
+
 ## [0.61.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.1-alpha.1...0.61.1-alpha.2) (2022-05-18)
 
 
