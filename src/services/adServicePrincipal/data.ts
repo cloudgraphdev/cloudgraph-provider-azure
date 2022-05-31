@@ -13,6 +13,7 @@ const serviceName = 'ADServicePrincipal'
 
 export interface RawAzureADServicePrincipal
   extends Omit<ServicePrincipal, 'tags' | 'location'> {
+  region: string
   Tags: TagMap
 }
 
