@@ -82,6 +82,7 @@ import AzureServiceBus from '../services/serviceBus'
 import AzureBackupVault from '../services/backupVault'
 import AzureBackupInstance from '../services/backupInstance'
 import AzureBackupPolicy from '../services/backupPolicy'
+import AzureLogProfiles from '../services/logProfiles'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -142,6 +143,7 @@ export default {
   [services.loadBalancer]: AzureLoadBalancer,
   [services.logAnalyticsSolution]: AzureLogAnalyticsSolutions,
   [services.logAnalyticsWorkspace]: AzureLogAnalyticsWorkspaces,
+  [services.logProfiles]: AzureLogProfiles,
   [services.machineLearningWorkspaces]: AzureMachineLearningWorkspace,
   [services.mySqlServers]: AzureMySqlServer,
   [services.networkInterface]: AzureNetworkInterface,

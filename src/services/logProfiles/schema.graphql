@@ -1,0 +1,26 @@
+type azureLogProfileRetentionPolicy
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  enabled: Boolean @search
+  days: Int @search
+}
+
+type azureLogProfile implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  region: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  storageAccountId: String @search(by: [hash, regexp])
+  serviceBusRuleId: String @search(by: [hash, regexp])
+  locations: [String] @search(by: [hash, regexp])
+  categories: [String] @search(by: [hash, regexp])
+  retentionPolicy: azureLogProfileRetentionPolicy
+  tags: [azureRawTag]
+  storageAccount: [azureStorageAccount] @hasInverse(field: logProfiles)
+}
