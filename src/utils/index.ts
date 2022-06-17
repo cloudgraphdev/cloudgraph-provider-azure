@@ -148,3 +148,21 @@ export const caseInsensitiveEqual = (s1: string, s2: string): boolean =>
 export const caseInsensitiveIncludes = (arr: string[], s1: string): boolean =>
   !isEmpty(arr) &&
   arr.filter(str => str.toLowerCase().includes(s1.toLowerCase())).length > 0
+
+/**
+ * Helper function with generic types that helps solve the problem 
+ * of checking if an object matches one of the types specified in a type union
+ *
+ * @param TypeUnion - Specifies the type union
+ * @param Type - The specific type you want to match
+ * @param input - The object you want to check
+ * @param stringPath - Name of the unique attribute that helps identify the type you want to match 
+ * @returns True if the object matches the type
+ * 
+ */
+export function isType<TypeUnion, Type extends TypeUnion>(
+  input: TypeUnion,
+  stringPath: string
+): input is Type {
+  return (input as Type)[stringPath] !== undefined
+}

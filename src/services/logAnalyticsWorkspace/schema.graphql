@@ -1,12 +1,14 @@
-type azureLogAnalyticsWorkspaceFeature
+type azureLogAnalyticsWorkspaceFeatures
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
+  enableDataExport: Boolean @search
+  immediatePurgeDataOn30Days: Boolean @search
+  clusterResourceId: String @search(by: [hash, regexp])
+  disableLocalAuth: Boolean @search
   enableLogAccessUsingOnlyResourcePermissions: Boolean @search
-  legacy: Int @search
-  searchVersion: Int @search
 }
 
 type azureLogAnalyticsWorkspaceCapping
@@ -41,7 +43,7 @@ type azureLogAnalyticsWorkspace implements azureBaseResource
   provisioningState: String @search(by: [hash, regexp])
   customerId: String @search(by: [hash, regexp])
   sku: azureLogAnalyticsWorkspaceSku
-  features: azureLogAnalyticsWorkspaceFeature
+  features: azureLogAnalyticsWorkspaceFeatures
   workspaceCapping: azureLogAnalyticsWorkspaceCapping
   retentionInDays: Int @search
   createdDate: String @search(by: [hash, regexp])

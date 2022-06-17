@@ -8,8 +8,6 @@ type azureLogAnalyticsSolutionProperties
   provisioningState: String @search(by: [hash, regexp])
   containedResources: [String] @search(by: [hash, regexp])
   referencedResources: [String] @search(by: [hash, regexp])
-  creationTime: String @search(by: [hash, regexp])
-  lastModifiedTime: String @search(by: [hash, regexp])
 }
 
 type azureLogAnalyticsSolutionPlan

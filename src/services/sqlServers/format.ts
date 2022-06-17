@@ -16,10 +16,14 @@ export default ({
     id,
     name,
     type,
-    identity,
+    identity: {
+      principalId,
+      type: iType,
+      tenantId: iTenantId,
+      userAssignedIdentities,
+    } = {},
     kind,
     administratorLogin,
-    administratorLoginPassword,
     version,
     state,
     fullyQualifiedDomainName,
@@ -29,7 +33,14 @@ export default ({
     primaryUserAssignedIdentityId,
     federatedClientId,
     keyId,
-    administrators,
+    administrators: {
+      administratorType,
+      principalType,
+      login,
+      sid,
+      tenantId,
+      azureADOnlyAuthentication,
+    } = {},
     workspaceFeature,
     restrictOutboundNetworkAccess,
     resourceGroupId,
@@ -49,59 +60,128 @@ export default ({
     subscriptionId: account,
     type,
     identity: {
-      ...identity,
-      userAssignedIdentities: Object.keys(
-        identity?.userAssignedIdentities ?? {}
-      ).map(key => ({
-        id: cuid(),
-        key,
-        value: identity?.userAssignedIdentities[key],
-      })),
+      principalId,
+      type: iType,
+      tenantId: iTenantId,
+      ...(userAssignedIdentities
+        ? {
+            userAssignedIdentities: Object.keys(
+              userAssignedIdentities ?? {}
+            ).map(key => ({
+              id: cuid(),
+              key,
+              value: userAssignedIdentities[key],
+            })),
+          }
+        : {}),
     },
     kind,
     administratorLogin,
-    administratorLoginPassword,
     version,
     state,
     fullyQualifiedDomainName,
     privateEndpointConnections:
-      privateEndpointConnections?.map(c => ({
-        id: c.id || cuid(),
-        properties: {
-          privateEndpointId: c.properties?.privateEndpoint?.id,
-          privateLinkServiceConnectionState:
-            c.properties?.privateLinkServiceConnectionState,
-          provisioningState: c.properties?.provisioningState,
-        },
-      })) || [],
+      privateEndpointConnections?.map(
+        ({ id: cId, properties: cProperties }) => ({
+          id: cId || cuid(),
+          ...(cProperties
+            ? {
+                properties: {
+                  privateEndpointId: cProperties.privateEndpoint?.id,
+                  privateLinkServiceConnectionState:
+                    cProperties.privateLinkServiceConnectionState,
+                  provisioningState: cProperties.provisioningState,
+                },
+              }
+            : {}),
+        })
+      ) || [],
     minimalTlsVersion,
     publicNetworkAccess,
     primaryUserAssignedIdentityId,
     federatedClientId,
     keyId,
-    administrators,
+    administrators: {
+      administratorType,
+      principalType,
+      login,
+      sid,
+      tenantId,
+      azureADOnlyAuthentication,
+    },
     workspaceFeature,
     restrictOutboundNetworkAccess,
     resourceGroupId,
     firewallRules:
       firewallRules?.map(r => ({ id: r.id || cuid(), ...r })) || [],
-    serverSecurityAlertPolicies: serverSecurityAlertPolicies?.map(alertPolicy => ({
-      ...alertPolicy,
-      id: alertPolicy.id || cuid(),
-      creationTime: alertPolicy?.creationTime?.toISOString(),
-    })),
+    serverSecurityAlertPolicies:
+      serverSecurityAlertPolicies?.map(
+        ({
+          id: aId,
+          creationTime,
+          name: aName,
+          type: aType,
+          state: aState,
+          disabledAlerts,
+          emailAddresses,
+          emailAccountAdmins,
+          storageEndpoint,
+          storageAccountAccessKey,
+          retentionDays,
+        }) => ({
+          id: aId || cuid(),
+          name: aName,
+          type: aType,
+          state: aState,
+          disabledAlerts,
+          emailAddresses,
+          emailAccountAdmins,
+          storageEndpoint,
+          storageAccountAccessKey,
+          retentionDays,
+          creationTime: creationTime?.toISOString(),
+        })
+      ) || [],
     adAdministrators:
       adAdministrators?.map(a => ({ id: a.id || cuid(), ...a })) || [],
     encryptionProtectors:
       encryptionProtectors?.map(e => ({ id: e.id || cuid(), ...e })) || [],
-    serverBlobAuditingPolicies: serverBlobAuditingPolicies?.map(policy => ({
-      ...policy,
-      id: policy.id || cuid(),
-    })),
-    vulnerabilityAssessments: vulnerabilityAssessments?.map(va => ({
-      ...va,
-      id: va.id || cuid(),
-    })),
+    serverBlobAuditingPolicies:
+      serverBlobAuditingPolicies?.map(
+        ({
+          id: sbapId,
+          name: sbapName,
+          type: sbapType,
+          isDevopsAuditEnabled,
+          retentionDays,
+        }) => ({
+          id: sbapId || cuid(),
+          name: sbapName,
+          type: sbapType,
+          isDevopsAuditEnabled,
+          retentionDays,
+        })
+      ) || [],
+    vulnerabilityAssessments:
+      vulnerabilityAssessments?.map(
+        ({
+          id: vaId,
+          name: vAName,
+          recurringScans,
+          storageAccountAccessKey,
+          storageContainerPath,
+          storageContainerSasKey,
+          type: vAType,
+        }) => ({
+          id: vaId || cuid(),
+          name: vAName,
+          recurringScans,
+          storageAccountAccessKey,
+          storageContainerPath,
+          storageContainerSasKey,
+          type: vAType,
+        })
+      ) || [],
     tags: formatTagsFromMap(Tags),
   }
 }
