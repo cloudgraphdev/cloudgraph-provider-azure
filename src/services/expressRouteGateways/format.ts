@@ -30,16 +30,22 @@ export default ({
     name,
     type,
     region,
+    subscriptionId: account,
     etag,
     autoScaleConfiguration,
     expressRouteConnections: expressRouteConnections?.map(connection => ({
       ...connection,
       id: id || cuid(),
+      name: connection?.name,
+      provisioningState: connection?.provisioningState,
+      authorizationKey: connection?.authorizationKey,
+      routingWeight: connection?.routingWeight,
+      enableInternetSecurity: connection?.enableInternetSecurity,
+      expressRouteGatewayBypass: connection?.expressRouteGatewayBypass,
       expressRouteCircuitPeering: {
         id: connection?.expressRouteCircuitPeering?.id,
       },
       routingConfiguration: {
-        ...connection?.routingConfiguration,
         associatedRouteTable: {
           id: connection?.routingConfiguration?.associatedRouteTable?.id || cuid(),
         },
