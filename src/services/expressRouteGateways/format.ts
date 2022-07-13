@@ -34,7 +34,6 @@ export default ({
     etag,
     autoScaleConfiguration,
     expressRouteConnections: expressRouteConnections?.map(connection => ({
-      ...connection,
       id: id || cuid(),
       name: connection?.name,
       provisioningState: connection?.provisioningState,
