@@ -25,6 +25,7 @@ export default {
   [services.backupVault]: 'azureBackupVault',
   [services.backupInstance]: 'azureBackupInstance',
   [services.backupPolicy]: 'azureBackupPolicy',
+  [services.billing]: 'azureBilling',
   [services.cdnCustomDomains]: 'azureCdnCustomDomain',
   [services.cdnEndpoints]: 'azureCdnEndpoint',
   [services.cdnOriginGroups]: 'azureCdnOriginGroup',

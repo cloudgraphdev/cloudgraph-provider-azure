@@ -1,8 +1,7 @@
 /* eslint-disable max-len */
 export default {
   // Action Group
-  foundActionGroups: (num: number): string =>
-  `Found ${num} action groups`,
+  foundActionGroups: (num: number): string => `Found ${num} action groups`,
   // Activity Log Alerts
   foundActivityLogAlerts: (num: number): string =>
     `Found ${num} Activity Log Alerts`,
@@ -48,10 +47,12 @@ export default {
     `Found ${num} auto provisioning settings`,
   // Azure Backup
   foundBackupVaults: (num: number): string => `Found ${num} Backup Vaults`,
-  foundBackupInstances: (num: number): string => `Found ${num} Backup Instances`,
+  foundBackupInstances: (num: number): string =>
+    `Found ${num} Backup Instances`,
   foundBackupPolicies: (num: number): string => `Found ${num} Backup Policies`,
   /* Cognitive services account */
-  foundCognitiveServicesAccounts: (num: number): string => `Found ${num} cognitive services accounts`,
+  foundCognitiveServicesAccounts: (num: number): string =>
+    `Found ${num} cognitive services accounts`,
   /* CDN Profiles */
   foundCdnProfiles: (num: number): string => `Found ${num} CDN profiles`,
   /* CDN Endpoints */
@@ -67,12 +68,15 @@ export default {
   foundContainerRegistries: (num: number): string =>
     `Found ${num} container registries`,
   /* Cosmos DB */
-  foundCosmosDbAccounts: (num: number): string => `Found ${num} cosmos DB accounts`,
+  foundCosmosDbAccounts: (num: number): string =>
+    `Found ${num} cosmos DB accounts`,
   /* Data Collection Rule */
-  foundDataCollectionRules: (num: number): string => `Found ${num} data collection rules`,
+  foundDataCollectionRules: (num: number): string =>
+    `Found ${num} data collection rules`,
   /* Data Factory */
   foundDataFactory: (num: number): string => `Found ${num} data factories`,
-  foundIntegrationRuntimes: (num: number): string => `Found ${num} integration runtimes`,
+  foundIntegrationRuntimes: (num: number): string =>
+    `Found ${num} integration runtimes`,
   /* Database */
   foundManagedSqlInstance: (num: number): string =>
     `Found ${num} managed SQL instances`,
@@ -83,9 +87,11 @@ export default {
   foundDatabaseSqlVm: (num: number): string =>
     `Found ${num} SQL virtual machines`,
   // Data Lake
-  foundDataLakeStorageAccounts: (num: number): string => `Found ${num} Data Lake storage accounts`,
+  foundDataLakeStorageAccounts: (num: number): string =>
+    `Found ${num} Data Lake storage accounts`,
   // Diagnostic Settings
-  foundDiagnosticSettingsResources: (num: number): string => `Found ${num} diagnostic settings`,
+  foundDiagnosticSettingsResources: (num: number): string =>
+    `Found ${num} diagnostic settings`,
   // Disk
   foundDisks: (num: number): string => `Found ${num} disks`,
   // DNS Zone
@@ -103,7 +109,8 @@ export default {
     `Found ${num} event hub namespaces`,
   foundEventHubs: (num: number): string => `Found ${num} event hubs`,
   // ExpressRouteGateways
-  foundExpressRouteGateways: (num: number): string => `Found ${num} ExpressRoute Gateways`,
+  foundExpressRouteGateways: (num: number): string =>
+    `Found ${num} ExpressRoute Gateways`,
   // File Share
   foundFileShares: (num: number): string => `Found ${num} file shares`,
   // Firewall
@@ -121,7 +128,8 @@ export default {
   // Load balancer
   foundLoadBalancers: (num: number): string => `Found ${num} load balancers`,
   // Machine Learning Workspaces
-  foundMachineLearningWorkspaces: (num: number): string => `Found ${num} machine learning workspaces`,  
+  foundMachineLearningWorkspaces: (num: number): string =>
+    `Found ${num} machine learning workspaces`,
   // Metric Alert
   foundMetricAlerts: (num: number): string => `Found ${num} metric alerts`,
   // Monitor Alert Rules
@@ -142,13 +150,17 @@ export default {
   // RedisCache
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
   // Replication Appliances
-  foundReplicationAppliances: (num: number): string => `Found ${num} replication appliances`,
+  foundReplicationAppliances: (num: number): string =>
+    `Found ${num} replication appliances`,
   // Replication Centers
-  foundReplicationCenters: (num: number): string => `Found ${num} replication centers`,
+  foundReplicationCenters: (num: number): string =>
+    `Found ${num} replication centers`,
   // Replication Networks
-  foundReplicationNetworks: (num: number): string => `Found ${num} replication networks`,
+  foundReplicationNetworks: (num: number): string =>
+    `Found ${num} replication networks`,
   // Replication Policies
-  foundReplicationPolicies: (num: number): string => `Found ${num} replication policies`,
+  foundReplicationPolicies: (num: number): string =>
+    `Found ${num} replication policies`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
   // Security Assesments
@@ -183,11 +195,14 @@ export default {
   // Storage Blobs
   foundStorageBlobs: (num: number): string => `Found ${num} storage blobs`,
   // SynapseBigDataPools
-  foundSynapseBigDataPools: (num: number): string => `Found ${num} synapse big data pools`,
+  foundSynapseBigDataPools: (num: number): string =>
+    `Found ${num} synapse big data pools`,
   // SynapseSqlPools
-  foundSynapseSqlPools: (num: number): string => `Found ${num} synapse SQL pools`,
+  foundSynapseSqlPools: (num: number): string =>
+    `Found ${num} synapse SQL pools`,
   // SynapseWorkspace
-  foundSynapseWorkspaces: (num: number): string => `Found ${num} synapse workspaces`,
+  foundSynapseWorkspaces: (num: number): string =>
+    `Found ${num} synapse workspaces`,
   // Traffic Manager
   foundTrafficManagerProfile: (num: number): string =>
     `Found ${num} traffic manager profiles`,
@@ -214,4 +229,18 @@ export default {
     `Fetched data from Azure REST API: ${url}`,
   /* Other */
   fetchingMoreRestApiData: 'Found more REST API data, fetching more data...',
+  /**
+   * Billing
+   */
+  fetchingAggregateFinOpsData:
+    'Fetching aggregate FinOps data for this Azure account via the Azure REST API...',
+  unableToFindFinOpsAggregateData:
+    '❌ Unable to getUsageDetails data for this Azure account, consumption usageDetails was missing. ❌',
+  queryingAggregateFinOpsDataForRegion: (
+    region: string,
+    type: string
+  ): string =>
+    `Querying aggregate FinOps data for the ${region} region using the ${type} method...`,
+  doneFetchingAggregateFinOpsData: (num: number): string =>
+    `🕒 Done fetching aggregate FinOps data in ${num} 🕘`,
 }

@@ -14,6 +14,19 @@ export type Scalars = {
   Int64: number;
 };
 
+export type AwsServiceBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type AwsTotalBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+};
+
 export type AzureAdApplication = {
   apiAcceptMappedClaims?: Maybe<Scalars['Boolean']>;
   apiKnownClientApplications?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1265,6 +1278,17 @@ export type AzureBaseResource = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzureBilling = AzureBaseResource & {
+  last30Days?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  last30DaysDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  monthToDate?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  monthToDateDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  totalCostLast30Days?: Maybe<AwsTotalBillingInfo>;
+  totalCostMonthToDate?: Maybe<AwsTotalBillingInfo>;
 };
 
 export type AzureCdnCertificateSourceParameters = {

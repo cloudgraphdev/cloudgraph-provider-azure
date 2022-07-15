@@ -82,6 +82,7 @@ import AzureServiceBus from '../services/serviceBus'
 import AzureBackupVault from '../services/backupVault'
 import AzureBackupInstance from '../services/backupInstance'
 import AzureBackupPolicy from '../services/backupPolicy'
+import AzureBilling from '../services/billing'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -110,6 +111,7 @@ export default {
   [services.backupVault]: AzureBackupVault,
   [services.backupInstance]: AzureBackupInstance,
   [services.backupPolicy]: AzureBackupPolicy,
+  [services.billing]: AzureBilling,
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
