@@ -20,6 +20,7 @@ export default {
   backupVault: 'backupVault',
   backupInstance: 'backupInstance',
   backupPolicy: 'backupPolicy',
+  billing: 'billing',
   cdnCustomDomains: 'cdnCustomDomains',
   cdnEndpoints: 'cdnEndpoints',
   cdnOriginGroups: 'cdnOriginGroups',
