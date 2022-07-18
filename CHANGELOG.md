@@ -1,3 +1,16 @@
+# [0.63.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.1...0.63.0-alpha.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* expressRouteGateways unknown field ([43f1af9](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/43f1af958066c4cccfaf8967a1dca30269dc7c3c))
+* expressRouteGateways unknown field ([91ce15e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/91ce15e210701b19c24b5178c4209796d4235110))
+
+
+### Features
+
+* Add azure billing service ([c57c3b3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c57c3b38af06f6f649ade3afd524866205cec650))
+
 # [0.63.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.62.0...0.63.0-alpha.1) (2022-06-02)
 
 
