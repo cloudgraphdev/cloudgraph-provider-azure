@@ -1,3 +1,44 @@
+# [0.63.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.2...0.63.0-alpha.3) (2022-07-20)
+
+
+### Bug Fixes
+
+* Fixed schema name for logs profile service ([3a6c068](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/3a6c068603fcb754eb44c913f75a61c5fdf68d9d))
+
+# [0.63.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.1...0.63.0-alpha.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* expressRouteGateways unknown field ([43f1af9](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/43f1af958066c4cccfaf8967a1dca30269dc7c3c))
+* expressRouteGateways unknown field ([91ce15e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/91ce15e210701b19c24b5178c4209796d4235110))
+
+
+### Features
+
+* Add azure billing service ([c57c3b3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c57c3b38af06f6f649ade3afd524866205cec650))
+
+# [0.63.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.62.0...0.63.0-alpha.1) (2022-06-02)
+
+
+### Features
+
+* **services:** Update readme file ([c049a36](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c049a3628bc80d3091fbe6e16d7a48152ccb1316))
+
+# [0.62.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.62.0) (2022-05-31)
+
+
+### Bug Fixes
+
+* Ensure that all currently supported Azure services allow queryazureTag ([25ed119](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/25ed119e0bca18716322b0dcfbc40a9837b89e4d))
+* Review and fix scan errors (virtualMachineScaleSet) ([09770cb](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/09770cb7e044d9c78e666ea5b736d2e8c8aa5b0a))
+
+
+### Features
+
+* **services:** Added ADE flag for CIS rule 7.7 ([0e038f3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/0e038f34741167b331ae56bd47a4fe47cef75c4d))
+* **services:** Added queueServiceProperties logging ([deb0854](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/deb08547e9349d45777d0f369038890d089b6d17))
+
 # [0.62.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.62.0-beta.1) (2022-05-31)
 
 

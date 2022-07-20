@@ -14,6 +14,19 @@ export type Scalars = {
   Int64: number;
 };
 
+export type AwsServiceBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type AwsTotalBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+};
+
 export type AzureAdApplication = {
   apiAcceptMappedClaims?: Maybe<Scalars['Boolean']>;
   apiKnownClientApplications?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1265,6 +1278,17 @@ export type AzureBaseResource = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzureBilling = AzureBaseResource & {
+  last30Days?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  last30DaysDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  monthToDate?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  monthToDateDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  totalCostLast30Days?: Maybe<AwsTotalBillingInfo>;
+  totalCostMonthToDate?: Maybe<AwsTotalBillingInfo>;
 };
 
 export type AzureCdnCertificateSourceParameters = {
@@ -3131,6 +3155,23 @@ export type AzureLogAnalyticsWorkspaceSku = {
   name: Scalars['String'];
 };
 
+export type AzureLogProfile = AzureBaseResource & {
+  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  locations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  region?: Maybe<Scalars['String']>;
+  retentionPolicy?: Maybe<AzureLogProfileRetentionPolicy>;
+  serviceBusRuleId?: Maybe<Scalars['String']>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageAccountId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureLogProfileRetentionPolicy = {
+  days?: Maybe<Scalars['Int']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+};
+
 export type AzureMachineLearningWorkspace = AzureResource & {
   allowPublicAccessWhenBehindVnet?: Maybe<Scalars['Boolean']>;
   applicationInsights?: Maybe<Scalars['String']>;
@@ -4405,6 +4446,7 @@ export type AzureStorageAccount = AzureResource & {
   keyPolicyExpirationPeriodInDays?: Maybe<Scalars['Int']>;
   largeFileSharesState?: Maybe<Scalars['String']>;
   lastGeoFailoverTime?: Maybe<Scalars['String']>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
   minimumTlsVersion?: Maybe<Scalars['String']>;
   networkRuleIpRules?: Maybe<Array<Maybe<AzureStorageAccountIpRule>>>;
   networkRuleResourceAccessRules?: Maybe<Array<Maybe<AzureStorageAccountResourceAccessRule>>>;
@@ -4868,6 +4910,7 @@ export type AzureTag = {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
   machineLearningWorkspaces?: Maybe<Array<Maybe<AzureMachineLearningWorkspace>>>;
   metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
