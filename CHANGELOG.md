@@ -1,3 +1,10 @@
+# [0.63.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.2...0.63.0-alpha.3) (2022-07-20)
+
+
+### Bug Fixes
+
+* Fixed schema name for logs profile service ([3a6c068](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/3a6c068603fcb754eb44c913f75a61c5fdf68d9d))
+
 # [0.63.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.1...0.63.0-alpha.2) (2022-07-18)
 
 
