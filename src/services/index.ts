@@ -32,6 +32,7 @@ import {
   getClientSecretCredentials,
   getTokenCredentials,
 } from '../utils/authUtils'
+import enhancers, { EnhancerConfig } from './base/enhancers'
 
 export const enums = {
   services,
@@ -473,6 +474,26 @@ export default class Provider extends CloudGraph.Client {
     return result
   }
 
+  private enhanceData({ data, ...config }: EnhancerConfig): ProviderData {
+    let enhanceData = {
+      entities: data.entities,
+      connections: data.connections,
+    }
+    for (const { name, enhancer } of enhancers) {
+      try {
+        enhanceData = enhancer({ ...config, data: enhanceData })
+      } catch (error: any) {
+        this.logger.error(
+          `There was an error enriching Azure data with ${name} data`
+        )
+        this.logger.debug(error)
+        return enhanceData
+      }
+    }
+
+    return enhanceData
+  }
+
   /**
    * getData is used to fetch all provider data specified in the config for the provider
    * @param opts: A set of optional values to configure how getData works
@@ -519,10 +540,18 @@ export default class Provider extends CloudGraph.Client {
     let rawData: rawDataInterface[] = []
     const tagRegion = GLOBAL_REGION
     const tags = { name: 'tag', data: { [tagRegion]: [] } }
-
+    const subscriptions = {
+      className: 'AzureSubscription',
+      name: 'subscription',
+      data: { [GLOBAL_REGION]: [] },
+    }
     for (const account of configuredAccounts) {
       const newRawData = await this.getRawData(account, opts)
       rawData = [...rawData, ...newRawData]
+      subscriptions.data[GLOBAL_REGION].push({
+        id: account.subscriptionId,
+        regions: configuredRegions.split(','),
+      })
     }
 
     // Handle global tag entities
@@ -670,6 +699,12 @@ export default class Provider extends CloudGraph.Client {
       )
       this.logger.debug(error)
     }
-    return result
+
+    return this.enhanceData({
+      subscriptions: subscriptions.data[GLOBAL_REGION],
+      configuredRegions,
+      rawData,
+      data: result,
+    })
   }
 }
