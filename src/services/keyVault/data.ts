@@ -8,11 +8,13 @@ import {
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
+import { DiagnosticSettingsResource } from '@azure/arm-monitor'
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { tryCatchWrapper } from '../../utils'
+import { getDiagnosticSettings } from '../diagnosticSettings/data'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -31,12 +33,14 @@ export interface RawKeyResource extends Key {
 export interface RawSecretResource extends Secret {
   keyVaultName: string
 }
+
 export interface RawAzureKeyVault extends Omit<Vault, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
   Tags: TagMap
   keys?: Key[]
   secrets?: Secret[]
+  diagnosticSettings?: DiagnosticSettingsResource[]
 }
 
 export default async ({
@@ -158,6 +162,24 @@ export default async ({
       }
     )
 
+    // const diagnosticSettings: RawDiagnosticSettingsResource[] = []
+    const diagnosticSettings: {
+      [property: string]: DiagnosticSettingsResource[]
+    } = {}
+    await Promise.all(
+      keyValueData.map(async ({ id: vaultId, name: vaultName }) => {
+        const settings = await getDiagnosticSettings(config, vaultId)
+        if (settings) {
+          settings.map(s => {
+            if (!diagnosticSettings[vaultName]) {
+              diagnosticSettings[vaultName] = []
+            }
+            diagnosticSettings[vaultName].push({ ...s })
+          })
+        }
+      })
+    )
+
     const result: {
       [property: string]: RawAzureKeyVault[]
     } = {}
@@ -177,6 +199,7 @@ export default async ({
           Tags: tags || {},
           keys: keys?.filter(i => i.keyVaultName === name) || [],
           secrets: secrets?.filter(i => i.keyVaultName === name) || [],
+          diagnosticSettings: diagnosticSettings?.[name] || [],
         })
         numOfGroups += 1
       }
