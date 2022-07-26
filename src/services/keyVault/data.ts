@@ -162,7 +162,6 @@ export default async ({
       }
     )
 
-    // const diagnosticSettings: RawDiagnosticSettingsResource[] = []
     const diagnosticSettings: {
       [property: string]: DiagnosticSettingsResource[]
     } = {}
