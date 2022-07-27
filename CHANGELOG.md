@@ -1,3 +1,10 @@
+# [0.63.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.3...0.63.0-alpha.4) (2022-07-27)
+
+
+### Features
+
+* Create azureSubscription service to contain all the data under one subscription ([8b66479](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8b66479df7d8f92bedee968b00053856b5cd617f))
+
 # [0.63.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.2...0.63.0-alpha.3) (2022-07-20)
 
 
