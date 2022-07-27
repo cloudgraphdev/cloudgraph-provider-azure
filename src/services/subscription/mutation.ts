@@ -1,5 +1,5 @@
-export default `mutation($input: [AddazureSubsriptionInput!]!) {
-  addazureSubsription(input: $input, upsert: true) {
+export default `mutation($input: [AddazureSubscriptionInput!]!) {
+  addazureSubscription(input: $input, upsert: true) {
     numUids
   }
 }`

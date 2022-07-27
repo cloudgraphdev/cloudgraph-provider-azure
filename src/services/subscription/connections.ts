@@ -1,19 +1,7 @@
 import { Entity, ServiceConnection } from '@cloudgraph/sdk'
 import { flatMap } from 'lodash'
 import services from '../../enums/services'
-
-// to avoid boilerplate, all aliases are generated from the type azureXxxx <=> xxxx
-const aliases = Object.keys(services).reduce(
-  (acc: { [k: string]: string }, key: string) => {
-    const serviceName = services[key]
-    const formattedName =
-      serviceName.charAt(0).toUpperCase() + serviceName.slice(1)
-    const serivceAlias = `azure${formattedName}`
-    acc[serviceName] = serivceAlias
-    return acc
-  },
-  {}
-)
+import aliases from '../../enums/serviceAliases'
 
 export default ({
   service,

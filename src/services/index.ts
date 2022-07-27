@@ -578,6 +578,7 @@ export default class Provider extends CloudGraph.Client {
           })
         }
       }
+      rawData.push(subscriptions)
       const existingTagsIdx = rawData.findIndex(({ name }) => {
         return name === 'tag'
       })

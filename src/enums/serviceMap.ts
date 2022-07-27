@@ -84,12 +84,14 @@ import AzureBackupInstance from '../services/backupInstance'
 import AzureBackupPolicy from '../services/backupPolicy'
 import AzureBilling from '../services/billing'
 import AzureLogProfiles from '../services/logProfiles'
+import Subscription from '../services/subscription'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
+  subscription: Subscription,
   [services.actionGroup]: AzureActionGroup,
   [services.activityLogAlerts]: AzureActivityLogAlerts,
   [services.adApplication]: AzureADApplication,
