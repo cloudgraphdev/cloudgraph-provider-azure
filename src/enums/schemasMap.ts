@@ -4,6 +4,7 @@ import services from './services'
  * schemasMap is an object that contains schemas name by resource
  */
 export default {
+  subscription: 'azureSubscription',
   [services.actionGroup]: 'azureActionGroup',
   [services.activityLogAlerts]: 'azureActivityLogAlert',
   [services.adApplication]: 'azureADApplication',
@@ -29,8 +30,6 @@ export default {
   [services.cdnCustomDomains]: 'azureCdnCustomDomain',
   [services.cdnEndpoints]: 'azureCdnEndpoint',
   [services.cdnOriginGroups]: 'azureCdnOriginGroup',
-  [services.cdnOriginGroups]: 'azureCdnOriginGroup',
-  [services.cdnOrigins]: 'azureCdnOrigin',
   [services.cdnOrigins]: 'azureCdnOrigin',
   [services.cdnProfiles]: 'azureCdnProfile',
   [services.cognitiveServicesAccount]: 'azureCognitiveServicesAccount',
@@ -72,6 +71,7 @@ export default {
   [services.replicationAppliances]: 'azureReplicationAppliance',
   [services.replicationCenters]: 'azureReplicationCenter',
   [services.replicationNetworks]: 'azureReplicationNetwork',
+  [services.replicationPolicies]: 'azureReplicationPolicies',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityAssesments]: 'azureSecurityAssesment',
   [services.securityContacts]: 'azureSecurityContact',
