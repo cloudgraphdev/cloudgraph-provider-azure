@@ -1,3 +1,10 @@
+# [0.63.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.5...0.63.0-alpha.6) (2022-07-27)
+
+
+### Bug Fixes
+
+* added missing services on subscription schema ([5c362b7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/5c362b7c713042204354542e4a1fac2733846076))
+
 # [0.63.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.4...0.63.0-alpha.5) (2022-07-27)
 
 
