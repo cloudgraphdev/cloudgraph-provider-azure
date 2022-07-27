@@ -4707,6 +4707,8 @@ export type AzureSubscription = AzureBaseResource & {
   billing?: Maybe<Array<Maybe<AzureBilling>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
+  cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
+  cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
