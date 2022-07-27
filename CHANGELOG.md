@@ -1,3 +1,11 @@
+# [0.63.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.4...0.63.0-alpha.5) (2022-07-27)
+
+
+### Features
+
+* **services:** Add diagnosticSettings to keyVault service ([8066885](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/80668853b08f16ad66da2fcd54f19133cae83900))
+* **services:** remove commented line ([64fd035](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/64fd0353204ed55b82a95437747df1a05300c872))
+
 # [0.63.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.3...0.63.0-alpha.4) (2022-07-27)
 
 
