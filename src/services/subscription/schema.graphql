@@ -17,6 +17,8 @@ type azureSubscription implements azureBaseResource @key(fields: "id") {
   billing: [azureBilling]
   cdnCustomDomains: [azureCdnCustomDomain]
   cdnEndpoints: [azureCdnEndpoint]
+  cdnOriginGroups: [azureCdnOriginGroup]
+  cdnOrigins: [azureCdnOrigin]
   cdnProfiles: [azureCdnProfile]
   cognitiveServicesAccounts: [azureCognitiveServicesAccount]
   containerRegistries: [azureContainerRegistry]

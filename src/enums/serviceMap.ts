@@ -118,7 +118,6 @@ export default {
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
   [services.cdnOriginGroups]: AzureCdnOriginGroups,
-  [services.cdnOriginGroups]: AzureCdnOriginGroups,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnOrigins]: AzureCdnOrigins,
   [services.cdnProfiles]: AzureCdnProfiles,
