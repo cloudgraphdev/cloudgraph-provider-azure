@@ -79,6 +79,25 @@ type azureKeyVaultAccessPolicy
   permissionStorage: [String] @search(by: [hash, regexp])
 }
 
+type azureKeyVaultDiagnosticSetting
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  storageAccountId: String @search(by: [hash, regexp])
+  serviceBusRuleId: String @search(by: [hash, regexp])
+  eventHubAuthorizationRuleId: String @search(by: [hash, regexp])
+  eventHubName: String @search(by: [hash, regexp])
+  metrics: [azureDiagnosticSettingMetricSettings]
+  logs: [azureDiagnosticSettingLogs]
+  workspaceId: String @search(by: [hash, regexp])
+  logAnalyticsDestinationType: String @search(by: [hash, regexp])
+}
+
 type azureKeyVault implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
@@ -105,6 +124,7 @@ type azureKeyVault implements azureResource
     publicNetworkAccess: String @search(by: [hash, regexp])
     keys: [azureKeyVaultKey]
     secrets: [azureKeyVaultSecret]
+    diagnosticSettings: [azureKeyVaultDiagnosticSetting]
     resourceGroup: [azureResourceGroup] @hasInverse (field: keyVaults)
     containerRegistries: [azureContainerRegistry] @hasInverse(field: keyVault)
 }

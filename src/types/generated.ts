@@ -2889,6 +2889,7 @@ export type AzureKeyVault = AzureResource & {
   accessPolicies?: Maybe<Array<Maybe<AzureKeyVaultAccessPolicy>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   createMode?: Maybe<Scalars['String']>;
+  diagnosticSettings?: Maybe<Array<Maybe<AzureKeyVaultDiagnosticSetting>>>;
   enablePurgeProtection?: Maybe<Scalars['Boolean']>;
   enableRbacAuthorization?: Maybe<Scalars['Boolean']>;
   enableSoftDelete?: Maybe<Scalars['Boolean']>;
@@ -2917,6 +2918,20 @@ export type AzureKeyVaultAccessPolicy = {
   permissionKeys?: Maybe<Array<Maybe<Scalars['String']>>>;
   permissionSecrets?: Maybe<Array<Maybe<Scalars['String']>>>;
   permissionStorage?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureKeyVaultDiagnosticSetting = {
+  eventHubAuthorizationRuleId?: Maybe<Scalars['String']>;
+  eventHubName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  logAnalyticsDestinationType?: Maybe<Scalars['String']>;
+  logs?: Maybe<Array<Maybe<AzureDiagnosticSettingLogs>>>;
+  metrics?: Maybe<Array<Maybe<AzureDiagnosticSettingMetricSettings>>>;
+  name?: Maybe<Scalars['String']>;
+  serviceBusRuleId?: Maybe<Scalars['String']>;
+  storageAccountId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  workspaceId?: Maybe<Scalars['String']>;
 };
 
 export type AzureKeyVaultKey = {
