@@ -1197,6 +1197,31 @@ export default ({
         }
       }
     }
+
+    /**
+     * Find related Log Profiles
+     */
+    const logProfiles: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.logProfiles)
+    if (logProfiles?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        logProfiles.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const logProfile of dataAtRegion) {
+          const { id } = logProfile
+          connections.push({
+            id,
+            resourceType: services.logProfiles,
+            relation: 'child',
+            field: 'logProfiles',
+          })
+        }
+      }
+    }
   }
 
   const tagResult = {

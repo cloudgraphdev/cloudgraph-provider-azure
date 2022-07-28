@@ -239,4 +239,5 @@ type azureStorageAccount implements azureResource
   eventHubs: [azureEventHub] @hasInverse(field: storageAccount)
   diagnosticSettings: [azureDiagnosticSetting] @hasInverse(field: storageAccount)
   fileShares: [azureFileShare] @hasInverse(field: storageAccount)
+  logProfiles: [azureLogProfile] @hasInverse(field: storageAccount)
 }

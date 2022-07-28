@@ -285,4 +285,27 @@ export class RestApiClient {
       logger.debug(error)
     }
   }
+
+  async listData({
+    scope,
+    path,
+    filters,
+  }:{
+    scope?: string,
+    path: string,
+    filters?: string
+  }): Promise<any> {
+    const authToken = await getAadTokenViaAxios(this.config)
+    try {
+      const queryScope = scope || `subscriptions/${this.config.subscriptionId}`
+      const initialUrl = `${queryScope}/${path}?api-version=${this.version}&${filters}`
+      this.debug && logger.debug(initialUrl)
+      return await getDataFromMsRestApi({
+        authToken,
+        initialUrl,
+      })
+    } catch (error) {
+      logger.debug(error)
+    }
+  }
 }

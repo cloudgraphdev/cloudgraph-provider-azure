@@ -14,6 +14,19 @@ export type Scalars = {
   Int64: number;
 };
 
+export type AwsServiceBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
+export type AwsTotalBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+};
+
 export type AzureAdApplication = {
   apiAcceptMappedClaims?: Maybe<Scalars['Boolean']>;
   apiKnownClientApplications?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -1265,6 +1278,17 @@ export type AzureBaseResource = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzureBilling = AzureBaseResource & {
+  last30Days?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  last30DaysDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  monthToDate?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  monthToDateDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  region?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  totalCostLast30Days?: Maybe<AwsTotalBillingInfo>;
+  totalCostMonthToDate?: Maybe<AwsTotalBillingInfo>;
 };
 
 export type AzureCdnCertificateSourceParameters = {
@@ -2865,6 +2889,7 @@ export type AzureKeyVault = AzureResource & {
   accessPolicies?: Maybe<Array<Maybe<AzureKeyVaultAccessPolicy>>>;
   containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
   createMode?: Maybe<Scalars['String']>;
+  diagnosticSettings?: Maybe<Array<Maybe<AzureKeyVaultDiagnosticSetting>>>;
   enablePurgeProtection?: Maybe<Scalars['Boolean']>;
   enableRbacAuthorization?: Maybe<Scalars['Boolean']>;
   enableSoftDelete?: Maybe<Scalars['Boolean']>;
@@ -2893,6 +2918,20 @@ export type AzureKeyVaultAccessPolicy = {
   permissionKeys?: Maybe<Array<Maybe<Scalars['String']>>>;
   permissionSecrets?: Maybe<Array<Maybe<Scalars['String']>>>;
   permissionStorage?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureKeyVaultDiagnosticSetting = {
+  eventHubAuthorizationRuleId?: Maybe<Scalars['String']>;
+  eventHubName?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  logAnalyticsDestinationType?: Maybe<Scalars['String']>;
+  logs?: Maybe<Array<Maybe<AzureDiagnosticSettingLogs>>>;
+  metrics?: Maybe<Array<Maybe<AzureDiagnosticSettingMetricSettings>>>;
+  name?: Maybe<Scalars['String']>;
+  serviceBusRuleId?: Maybe<Scalars['String']>;
+  storageAccountId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  workspaceId?: Maybe<Scalars['String']>;
 };
 
 export type AzureKeyVaultKey = {
@@ -3129,6 +3168,23 @@ export type AzureLogAnalyticsWorkspaceFeature = {
 export type AzureLogAnalyticsWorkspaceSku = {
   lastSkuUpdate?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+};
+
+export type AzureLogProfile = AzureBaseResource & {
+  categories?: Maybe<Array<Maybe<Scalars['String']>>>;
+  locations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  region?: Maybe<Scalars['String']>;
+  retentionPolicy?: Maybe<AzureLogProfileRetentionPolicy>;
+  serviceBusRuleId?: Maybe<Scalars['String']>;
+  storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageAccountId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
+};
+
+export type AzureLogProfileRetentionPolicy = {
+  days?: Maybe<Scalars['Int']>;
+  enabled?: Maybe<Scalars['Boolean']>;
 };
 
 export type AzureMachineLearningWorkspace = AzureResource & {
@@ -4405,6 +4461,7 @@ export type AzureStorageAccount = AzureResource & {
   keyPolicyExpirationPeriodInDays?: Maybe<Scalars['Int']>;
   largeFileSharesState?: Maybe<Scalars['String']>;
   lastGeoFailoverTime?: Maybe<Scalars['String']>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
   minimumTlsVersion?: Maybe<Scalars['String']>;
   networkRuleIpRules?: Maybe<Array<Maybe<AzureStorageAccountIpRule>>>;
   networkRuleResourceAccessRules?: Maybe<Array<Maybe<AzureStorageAccountResourceAccessRule>>>;
@@ -4630,6 +4687,90 @@ export type AzureStorageContainerLegalHoldTag = {
 
 export type AzureSubResource = {
   id: Scalars['String'];
+};
+
+export type AzureSubscription = AzureBaseResource & {
+  actionGroups?: Maybe<Array<Maybe<AzureActionGroup>>>;
+  activityLogAlerts?: Maybe<Array<Maybe<AzureActivityLogAlert>>>;
+  aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
+  appInsights?: Maybe<Array<Maybe<AzureAppInsights>>>;
+  appServiceEnvironments?: Maybe<Array<Maybe<AzureAppServiceEnvironment>>>;
+  appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
+  appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
+  arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
+  authRoleAssignments?: Maybe<Array<Maybe<AzureAuthRoleAssignment>>>;
+  authRoleDefinitions?: Maybe<Array<Maybe<AzureAuthRoleDefinition>>>;
+  autoProvisioningSettings?: Maybe<Array<Maybe<AzureAutoProvisioningSetting>>>;
+  backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
+  backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
+  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
+  billing?: Maybe<Array<Maybe<AzureBilling>>>;
+  cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
+  cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
+  cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
+  cdnOrigins?: Maybe<Array<Maybe<AzureCdnOrigin>>>;
+  cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
+  cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
+  containerRegistries?: Maybe<Array<Maybe<AzureContainerRegistry>>>;
+  cosmosDbs?: Maybe<Array<Maybe<AzureCosmosDb>>>;
+  dataCollectionRules?: Maybe<Array<Maybe<AzureDataCollectionRule>>>;
+  dataFactories?: Maybe<Array<Maybe<AzureDataFactory>>>;
+  dataLakeStorageAccounts?: Maybe<Array<Maybe<AzureDataLakeStorageAccount>>>;
+  databaseManagedSqlInstances?: Maybe<Array<Maybe<AzureDatabaseManagedSqlInstance>>>;
+  databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
+  databasePostgreSql?: Maybe<Array<Maybe<AzureDatabasePostgreSql>>>;
+  databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
+  databaseSqlVm?: Maybe<Array<Maybe<AzureDatabaseSqlVm>>>;
+  diagnosticSettings?: Maybe<Array<Maybe<AzureDiagnosticSetting>>>;
+  disks?: Maybe<Array<Maybe<AzureDisk>>>;
+  dnsZoneRecordSets?: Maybe<Array<Maybe<AzureDnsZoneRecordSet>>>;
+  dnsZones?: Maybe<Array<Maybe<AzureDnsZone>>>;
+  eventGrids?: Maybe<Array<Maybe<AzureEventGrid>>>;
+  eventHubs?: Maybe<Array<Maybe<AzureEventHub>>>;
+  expressRouteGateways?: Maybe<Array<Maybe<AzureExpressRouteGateway>>>;
+  fileShares?: Maybe<Array<Maybe<AzureFileShare>>>;
+  firewalls?: Maybe<Array<Maybe<AzureFirewall>>>;
+  functionApps?: Maybe<Array<Maybe<AzureFunctionApp>>>;
+  integrationRuntimes?: Maybe<Array<Maybe<AzureIntegrationRuntime>>>;
+  keyVaults?: Maybe<Array<Maybe<AzureKeyVault>>>;
+  loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
+  logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
+  logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
+  machineLearningWorkspaces?: Maybe<Array<Maybe<AzureMachineLearningWorkspace>>>;
+  metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
+  mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
+  networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
+  networkSecurityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
+  policyAssignments?: Maybe<Array<Maybe<AzurePolicyAssignment>>>;
+  postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
+  privateDnsZones?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
+  publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
+  redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
+  regions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  replicationAppliances?: Maybe<Array<Maybe<AzureReplicationAppliance>>>;
+  replicationCenters?: Maybe<Array<Maybe<AzureReplicationCenter>>>;
+  replicationNetworks?: Maybe<Array<Maybe<AzureReplicationNetwork>>>;
+  replicationPolicies?: Maybe<Array<Maybe<AzureReplicationPolicy>>>;
+  resourceGroups?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  securityAssesments?: Maybe<Array<Maybe<AzureSecurityAssesment>>>;
+  securityContacts?: Maybe<Array<Maybe<AzureSecurityContact>>>;
+  securityGroups?: Maybe<Array<Maybe<AzureNetworkSecurityGroup>>>;
+  securityPricings?: Maybe<Array<Maybe<AzureSecurityPricing>>>;
+  securitySettings?: Maybe<Array<Maybe<AzureSecuritySetting>>>;
+  serviceBuses?: Maybe<Array<Maybe<AzureServiceBus>>>;
+  sqlServers?: Maybe<Array<Maybe<AzureSqlServer>>>;
+  storageAccounts?: Maybe<Array<Maybe<AzureStorageAccount>>>;
+  storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
+  storageContainers?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+  synapseBigDataPools?: Maybe<Array<Maybe<AzureSynapseBigDataPool>>>;
+  synapseSqlPools?: Maybe<Array<Maybe<AzureSynapseSqlPool>>>;
+  synapseWorkspaces?: Maybe<Array<Maybe<AzureSynapseWorkspace>>>;
+  trafficManagerProfiles?: Maybe<Array<Maybe<AzureTrafficManagerProfile>>>;
+  virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
+  virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
+  virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
 };
 
 export type AzureSynapseBigDataPool = AzureResource & {
@@ -4868,6 +5009,7 @@ export type AzureTag = {
   loadBalancers?: Maybe<Array<Maybe<AzureLoadBalancer>>>;
   logAnalyticsSolutions?: Maybe<Array<Maybe<AzureLogAnalyticsSolution>>>;
   logAnalyticsWorkspaces?: Maybe<Array<Maybe<AzureLogAnalyticsWorkspace>>>;
+  logProfiles?: Maybe<Array<Maybe<AzureLogProfile>>>;
   machineLearningWorkspaces?: Maybe<Array<Maybe<AzureMachineLearningWorkspace>>>;
   metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServers?: Maybe<Array<Maybe<AzureMySqlServer>>>;
