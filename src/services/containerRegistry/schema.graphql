@@ -14,6 +14,7 @@ type azureContainerRegistryPrivateEndpointConnection
   lastModifiedBy: String @search(by: [hash, regexp])
   lastModifiedByType: String @search(by: [hash, regexp])
   lastModifiedAt: String @search(by: [hash, regexp])
+  privateEndpoint: azureContainerRegistryPrivateEndpoint
   privateEndpointId: String @search(by: [hash, regexp])
   privateLinkServiceConnectionStateStatus: String @search(by: [hash, regexp])
   privateLinkServiceConnectionStateDescription: String
@@ -21,6 +22,10 @@ type azureContainerRegistryPrivateEndpointConnection
   privateLinkServiceConnectionStateActionsRequired: String
     @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureContainerRegistryPrivateEndpoint {
+  id: String @search(by: [hash, regexp])
 }
 
 type azureContainerRegistryKeyVaultProperties

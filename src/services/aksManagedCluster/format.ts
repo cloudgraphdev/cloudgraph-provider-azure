@@ -40,7 +40,7 @@ const formatNetworkProfile = ({
   ...rest
 }: ContainerServiceNetworkProfile): AzureAksManagedClusterNetworkProfile => rest
 
-interface ExtendedAadProfile extends ManagedClusterAADProfile{
+interface ExtendedAadProfile extends ManagedClusterAADProfile {
   adminUsers?: any
 }
 
@@ -88,7 +88,13 @@ export default ({
     aadProfile = {},
     autoUpgradeProfile: { upgradeChannel: autoUpgradeChannel } = {},
     autoScalerProfile = {},
-    apiServerAccessProfile,
+    apiServerAccessProfile: {
+      authorizedIPRanges,
+      enablePrivateCluster,
+      privateDNSZone,
+      enablePrivateClusterPublicFqdn,
+      disableRunCommand,
+    } = {},
     diskEncryptionSetID,
     disableLocalAccounts,
     httpProxyConfig: { trustedCa, ...restOfhttpProxyConfig } = {},
@@ -116,7 +122,13 @@ export default ({
     tags: formatTagsFromMap(Tags),
     aadProfile: formatAadProfile(aadProfile),
     agentPoolProfiles: formatAgentPoolProfiles(agentPoolProfiles),
-    apiServerAccessProfile,
+    apiServerAccessProfile: {
+      authorizedIPRanges,
+      enablePrivateCluster,
+      privateDNSZone,
+      enablePrivateClusterPublicFqdn,
+      disableRunCommand,
+    },
     autoScalerProfile,
     autoUpgradeChannel,
     azureDefenderEnabled,

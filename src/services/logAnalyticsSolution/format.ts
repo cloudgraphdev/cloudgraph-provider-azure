@@ -23,6 +23,20 @@ export default ({
     Tags = {},
   } = service
 
+  const {
+    workspaceResourceId,
+    provisioningState,
+    containedResources,
+    referencedResources,
+    // TODO: these are valid properties but arent on the ts type from azure so we have to ignore the linting
+    // eslint-disable-next-line
+    // @ts-ignore
+    creationTime,
+    // eslint-disable-next-line
+    // @ts-ignore
+    lastModifiedTime // eslint-disable-line
+  } = properties
+
   return {
     id: id || cuid(),
     name,
@@ -31,7 +45,14 @@ export default ({
     subscriptionId: account,
     region,
     plan,
-    properties,
+    properties: {
+      workspaceResourceId,
+      provisioningState,
+      containedResources,
+      referencedResources,
+      creationTime,
+      lastModifiedTime
+    },
     tags: formatTagsFromMap(Tags),
   }
 }
