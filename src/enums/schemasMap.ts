@@ -23,7 +23,7 @@ export default {
   [services.authRoleAssignment]: 'azureAuthRoleAssignment',
   [services.authRoleDefinition]: 'azureAuthRoleDefinition',
   [services.autoProvisioningSettings]: 'azureAutoProvisioningSetting',
-  [services.backupVault]: 'azureBackupVault',
+  // [services.backupVault]: 'azureBackupVault',
   [services.backupInstance]: 'azureBackupInstance',
   [services.backupPolicy]: 'azureBackupPolicy',
   [services.billing]: 'azureBilling',

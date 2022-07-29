@@ -24,7 +24,6 @@ export default ({
     virtualHub,
     Tags = {},
   } = service
-
   return {
     id: id || cuid(),
     name,
@@ -34,7 +33,8 @@ export default ({
     etag,
     autoScaleConfiguration,
     expressRouteConnections: expressRouteConnections?.map(connection => ({
-      id: id || cuid(),
+      id: cuid(),
+      connectionId: id,
       name: connection?.name,
       provisioningState: connection?.provisioningState,
       authorizationKey: connection?.authorizationKey,

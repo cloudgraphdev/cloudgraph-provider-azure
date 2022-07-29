@@ -939,7 +939,6 @@ export type AzureAutoProvisioningSetting = AzureBaseResource & {
 };
 
 export type AzureBackupInstance = AzureBaseResource & {
-  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   eTag?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupInstanceProperties>;
   region?: Maybe<Scalars['String']>;
@@ -1045,7 +1044,6 @@ export type AzureBackupInstanceResourceHealthDetails = {
 };
 
 export type AzureBackupPolicy = AzureBaseResource & {
-  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   eTag?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupPolicyProperties>;
   region?: Maybe<Scalars['String']>;
@@ -1744,6 +1742,10 @@ export type AzureContainerRegistryPolicyInfo = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureContainerRegistryPrivateEndpoint = {
+  id?: Maybe<Scalars['String']>;
+};
+
 export type AzureContainerRegistryPrivateEndpointConnection = {
   createdAt?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
@@ -1753,6 +1755,7 @@ export type AzureContainerRegistryPrivateEndpointConnection = {
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  privateEndpoint?: Maybe<AzureContainerRegistryPrivateEndpoint>;
   privateEndpointId?: Maybe<Scalars['String']>;
   privateLinkServiceConnectionStateActionsRequired?: Maybe<Scalars['String']>;
   privateLinkServiceConnectionStateDescription?: Maybe<Scalars['String']>;
@@ -2516,6 +2519,7 @@ export type AzureExpressRouteGatewayCircuitPeeringId = {
 
 export type AzureExpressRouteGatewayConnection = {
   authorizationKey?: Maybe<Scalars['String']>;
+  connectionId: Scalars['String'];
   enableInternetSecurity?: Maybe<Scalars['Boolean']>;
   expressRouteCircuitPeering?: Maybe<AzureExpressRouteGatewayCircuitPeeringId>;
   expressRouteGatewayBypass?: Maybe<Scalars['Boolean']>;
@@ -3122,6 +3126,7 @@ export type AzureLogAnalyticsSolutionPlan = {
   product?: Maybe<Scalars['String']>;
   promotionCode?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
 };
 
 export type AzureLogAnalyticsSolutionProperties = {

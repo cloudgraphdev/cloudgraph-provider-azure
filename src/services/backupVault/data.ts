@@ -8,7 +8,7 @@ import { AzureServiceInput, TagMap } from '../../types'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { tryCatchWrapper } from '../../utils'
-import services from '../../enums/services'
+// import services from '../../enums/services'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
@@ -31,7 +31,7 @@ export default async ({
     const { tokenCredentials, subscriptionId } = config
 
     const existingData: { [property: string]: RawAzureVault[] } =
-      rawData.find(({ name }) => name === services.backupVault)?.data || {}
+      rawData.find(({ name }) => name === 'backupVault')?.data || {}
 
     if (isEmpty(existingData)) {
       const client = new RecoveryServicesClient(
