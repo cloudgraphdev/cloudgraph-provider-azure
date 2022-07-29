@@ -1,3 +1,10 @@
+# [0.63.0-alpha.7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.6...0.63.0-alpha.7) (2022-07-29)
+
+
+### Bug Fixes
+
+* Disable backupVault service ([bd8a937](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/bd8a937b716d5b239cf524c1b677799a6338db6d))
+
 # [0.63.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.5...0.63.0-alpha.6) (2022-07-27)
 
 
