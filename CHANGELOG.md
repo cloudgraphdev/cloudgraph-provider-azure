@@ -1,3 +1,10 @@
+# [0.63.0-alpha.8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.7...0.63.0-alpha.8) (2022-07-29)
+
+
+### Bug Fixes
+
+* **services:** fix several azure service format functions ([f3086b8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f3086b89a4d6ab4a201b25260b0c650f57b56817))
+
 # [0.63.0-alpha.7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.6...0.63.0-alpha.7) (2022-07-29)
 
 
