@@ -79,7 +79,7 @@ import AzureCosmosDb from '../services/cosmosDb'
 import AzureAppInsights from '../services/appInsights'
 import AzureIntegrationRuntime from '../services/integrationRuntimes' 
 import AzureServiceBus from '../services/serviceBus'
-import AzureBackupVault from '../services/backupVault'
+// import AzureBackupVault from '../services/backupVault'
 import AzureBackupInstance from '../services/backupInstance'
 import AzureBackupPolicy from '../services/backupPolicy'
 import AzureBilling from '../services/billing'
@@ -111,7 +111,7 @@ export default {
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.autoProvisioningSettings]: AzureAutoProvisioningSettings,
-  [services.backupVault]: AzureBackupVault,
+  // [services.backupVault]: AzureBackupVault,
   [services.backupInstance]: AzureBackupInstance,
   [services.backupPolicy]: AzureBackupPolicy,
   [services.billing]: AzureBilling,

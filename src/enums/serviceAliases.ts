@@ -12,7 +12,7 @@ export default {
   [services.authRoleAssignment]: 'authRoleAssignments',
   [services.authRoleDefinition]: 'authRoleDefinitions',
   [services.autoProvisioningSettings]: 'autoProvisioningSettings',
-  [services.backupVault]: 'backupVaults',
+  // [services.backupVault]: 'backupVaults',
   [services.backupInstance]: 'backupInstances',
   [services.backupPolicy]: 'backupPolicies',
   [services.cdnCustomDomains]: 'cdnCustomDomains',
