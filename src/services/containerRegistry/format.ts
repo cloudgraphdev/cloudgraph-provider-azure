@@ -84,8 +84,11 @@ export default ({
     dataEndpointEnabled,
     dataEndpointHostNames,
     privateEndpointConnections:
-      privateEndpointConnections.map(({ id: privateEndpointId, ...rest }) => ({
+      privateEndpointConnections.map(({ id: privateEndpointId, privateLinkServiceConnectionState, ...rest }) => ({
         id: privateEndpointId || cuid(),
+        privateLinkServiceConnectionStateStatus: privateLinkServiceConnectionState?.status,
+        privateLinkServiceConnectionStateActionsRequired: privateLinkServiceConnectionState?.actionsRequired,
+        privateLinkServiceConnectionStateDescription: privateLinkServiceConnectionState?.description,
         ...rest,
       })) || [],
     publicNetworkAccess,

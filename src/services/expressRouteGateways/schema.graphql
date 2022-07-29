@@ -39,6 +39,7 @@ type azureExpressRouteGatewayConnection
   ) 
   @key(fields: "id") {
   id: String! @id @search(by: [hash, regexp])
+  connectionId: String! @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   expressRouteCircuitPeering: azureExpressRouteGatewayCircuitPeeringId

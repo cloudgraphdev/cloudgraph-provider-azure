@@ -22,6 +22,7 @@ type azureLogAnalyticsSolutionPlan
   publisher: String @search(by: [hash, regexp])
   promotionCode: String @search(by: [hash, regexp])
   product: String @search(by: [hash, regexp])
+  version: String @search(by: [hash, regexp])
 }
 
 type azureLogAnalyticsSolution implements azureBaseResource
