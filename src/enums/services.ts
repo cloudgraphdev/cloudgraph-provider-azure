@@ -17,7 +17,7 @@ export default {
   authRoleAssignment: 'authRoleAssignment',
   authRoleDefinition: 'authRoleDefinition',
   autoProvisioningSettings: 'autoProvisioningSettings',
-  backupVault: 'backupVault',
+  // backupVault: 'backupVault',
   backupInstance: 'backupInstance',
   backupPolicy: 'backupPolicy',
   billing: 'billing',

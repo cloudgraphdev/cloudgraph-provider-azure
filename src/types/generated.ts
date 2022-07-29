@@ -939,7 +939,6 @@ export type AzureAutoProvisioningSetting = AzureBaseResource & {
 };
 
 export type AzureBackupInstance = AzureBaseResource & {
-  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   eTag?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupInstanceProperties>;
   region?: Maybe<Scalars['String']>;
@@ -1045,7 +1044,6 @@ export type AzureBackupInstanceResourceHealthDetails = {
 };
 
 export type AzureBackupPolicy = AzureBaseResource & {
-  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   eTag?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupPolicyProperties>;
   region?: Maybe<Scalars['String']>;

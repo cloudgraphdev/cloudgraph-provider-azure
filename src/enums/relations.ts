@@ -15,7 +15,7 @@ export default {
     services.cdnOriginGroups,
   ],
   [services.dataFactory]: [services.integrationRuntime],
-  [services.backupVault]: [services.backupInstance, services.backupPolicy],
+  // [services.backupVault]: [services.backupInstance, services.backupPolicy],
   [services.synapseWorkspaces]: [
     services.synapseBigDataPools,
     services.synapseSqlPools,
