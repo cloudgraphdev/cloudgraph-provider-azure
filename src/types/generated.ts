@@ -1169,8 +1169,6 @@ export type AzureBackupPolicyYearlyRetentionSchedule = {
 };
 
 export type AzureBackupVault = AzureResource & {
-  backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
-  backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
   createdAt?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
   createdByType?: Maybe<Scalars['String']>;
@@ -1180,7 +1178,6 @@ export type AzureBackupVault = AzureResource & {
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupVaultVaultProperties>;
-  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   sku?: Maybe<AzureBackupVaultSku>;
 };
 
@@ -2787,6 +2784,8 @@ export type AzureFunctionAppConfiguration = {
 
 export type AzureHostingEnvironmentProfile = {
   id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureIntegrationRuntime = AzureBaseResource & {
@@ -4048,7 +4047,6 @@ export type AzureResourceGroup = AzureResource & {
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
   backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
   backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
-  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
@@ -4708,7 +4706,6 @@ export type AzureSubscription = AzureBaseResource & {
   autoProvisioningSettings?: Maybe<Array<Maybe<AzureAutoProvisioningSetting>>>;
   backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
   backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
-  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
   billing?: Maybe<Array<Maybe<AzureBilling>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
@@ -4994,7 +4991,6 @@ export type AzureTag = {
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
-  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
