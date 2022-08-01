@@ -38,7 +38,8 @@ export default ({
     Tags,
     resourceGroupId,
     keys,
-    secrets
+    secrets,
+    diagnosticSettings,
   } = service
 
   return {
@@ -100,20 +101,70 @@ export default ({
         type: s.type,
         location: s.location,
         tags: formatTagsFromMap(s.tags),
-        properties: {
-          value: s.properties?.value,
-          contentType: s.properties?.contentType,
-          attributes:
-            {
-              enabled: s.properties?.attributes?.enabled,
-              notBefore: s.properties?.attributes?.notBefore?.toISOString() || '',
-              expires: s.properties?.attributes?.expires?.toISOString() || '',
-              created: s.properties?.attributes?.created?.toISOString() || '',
-              updated: s.properties?.attributes?.updated?.toISOString() || '',
-            } || {},
-          secretUri: s.properties?.secretUri,
-          secretUriWithVersion: s.properties?.secretUriWithVersion,
-        } || {},
+        properties:
+          {
+            value: s.properties?.value,
+            contentType: s.properties?.contentType,
+            attributes:
+              {
+                enabled: s.properties?.attributes?.enabled,
+                notBefore:
+                  s.properties?.attributes?.notBefore?.toISOString() || '',
+                expires: s.properties?.attributes?.expires?.toISOString() || '',
+                created: s.properties?.attributes?.created?.toISOString() || '',
+                updated: s.properties?.attributes?.updated?.toISOString() || '',
+              } || {},
+            secretUri: s.properties?.secretUri,
+            secretUriWithVersion: s.properties?.secretUriWithVersion,
+          } || {},
+      })) || [],
+    diagnosticSettings:
+      diagnosticSettings?.map(ds => ({
+        id: ds.id || cuid(),
+        name: ds.name,
+        type: ds.type,
+        storageAccountId: ds.storageAccountId,
+        serviceBusRuleId: ds.serviceBusRuleId,
+        eventHubAuthorizationRuleId: ds.eventHubAuthorizationRuleId,
+        eventHubName: ds.eventHubName,
+        workspaceId: ds.workspaceId,
+        logAnalyticsDestinationType: ds.logAnalyticsDestinationType,
+        metrics: ds.metrics?.map(
+          ({
+            retentionPolicy: {
+              enabled: retentionPolicyEnabled,
+              days: retentionPolicyDays,
+            } = {},
+            timeGrain,
+            category,
+            enabled,
+          }) =>
+            ({
+              id: cuid(),
+              retentionPolicyEnabled,
+              retentionPolicyDays,
+              timeGrain,
+              category,
+              enabled,
+            })
+        ) || [],
+        logs:
+          ds.logs?.map(
+            ({
+              retentionPolicy: {
+                enabled: retentionPolicyEnabled,
+                days: retentionPolicyDays,
+              } = {},
+              category,
+              enabled,
+            }) => ({
+              id: cuid(),
+              retentionPolicyEnabled,
+              retentionPolicyDays,
+              category,
+              enabled,
+            })
+          ) || [],
       })) || [],
   }
 }

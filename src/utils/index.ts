@@ -1,6 +1,8 @@
 import CloudGraph from '@cloudgraph/sdk'
 import camelCase from 'lodash/camelCase'
 import isEmpty from 'lodash/isEmpty'
+import unionWith from 'lodash/unionWith'
+import isEqual from 'lodash/isEqual'
 import relations from '../enums/relations'
 import {
   AzureDebugScope,
@@ -148,3 +150,36 @@ export const caseInsensitiveEqual = (s1: string, s2: string): boolean =>
 export const caseInsensitiveIncludes = (arr: string[], s1: string): boolean =>
   !isEmpty(arr) &&
   arr.filter(str => str.toLowerCase().includes(s1.toLowerCase())).length > 0
+
+export const checkAndMergeConnections = (
+  serviceConnections: any,
+  connectionsToMerge: any
+): any => {
+  const connections = serviceConnections
+  // IF we have no pre existing connections for this service, use new connections
+  // IF we have pre existing connections, check if its for the same serivce id, if so
+  // check if the connections list for that id is empty, use new connections for that id if so.
+  // otherwise, merge connections by unioning on id of the connections
+  if (!isEmpty(connections)) {
+    const entries: [string, any][] = Object.entries(connectionsToMerge)
+    for (const [key] of entries) {
+      // If there are no service connections for this entity i.e. { [serviceId]: [] }
+      // use new connections for that key
+      if (connections[key]) {
+        if (isEmpty(connections[key])) {
+          connections[key] = connectionsToMerge[key] ?? []
+        } else {
+          connections[key] = unionWith(
+            connections[key],
+            connectionsToMerge[key] ?? [],
+            isEqual
+          )
+        }
+      } else {
+        Object.assign(connections, connectionsToMerge)
+      }
+    }
+    return connections
+  }
+  return connectionsToMerge
+}

@@ -1,3 +1,74 @@
+# [0.63.0-beta.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-beta.1...0.63.0-beta.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* Disable backupVault service ([bd8a937](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/bd8a937b716d5b239cf524c1b677799a6338db6d))
+* **services:** fix several azure service format functions ([f3086b8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f3086b89a4d6ab4a201b25260b0c650f57b56817))
+
+# [0.63.0-alpha.8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.7...0.63.0-alpha.8) (2022-07-29)
+
+
+### Bug Fixes
+
+* **services:** fix several azure service format functions ([f3086b8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/f3086b89a4d6ab4a201b25260b0c650f57b56817))
+
+# [0.63.0-alpha.7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.6...0.63.0-alpha.7) (2022-07-29)
+
+
+### Bug Fixes
+
+* Disable backupVault service ([bd8a937](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/bd8a937b716d5b239cf524c1b677799a6338db6d))
+
+# [0.63.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.5...0.63.0-alpha.6) (2022-07-27)
+
+
+### Bug Fixes
+
+* added missing services on subscription schema ([5c362b7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/5c362b7c713042204354542e4a1fac2733846076))
+
+# [0.63.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.4...0.63.0-alpha.5) (2022-07-27)
+
+
+### Features
+
+* **services:** Add diagnosticSettings to keyVault service ([8066885](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/80668853b08f16ad66da2fcd54f19133cae83900))
+* **services:** remove commented line ([64fd035](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/64fd0353204ed55b82a95437747df1a05300c872))
+
+# [0.63.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.3...0.63.0-alpha.4) (2022-07-27)
+
+
+### Features
+
+* Create azureSubscription service to contain all the data under one subscription ([8b66479](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8b66479df7d8f92bedee968b00053856b5cd617f))
+
+# [0.63.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.2...0.63.0-alpha.3) (2022-07-20)
+
+
+### Bug Fixes
+
+* Fixed schema name for logs profile service ([3a6c068](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/3a6c068603fcb754eb44c913f75a61c5fdf68d9d))
+
+# [0.63.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0-alpha.1...0.63.0-alpha.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* expressRouteGateways unknown field ([43f1af9](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/43f1af958066c4cccfaf8967a1dca30269dc7c3c))
+* expressRouteGateways unknown field ([91ce15e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/91ce15e210701b19c24b5178c4209796d4235110))
+
+
+### Features
+
+* Add azure billing service ([c57c3b3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c57c3b38af06f6f649ade3afd524866205cec650))
+
+# [0.63.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.62.0...0.63.0-alpha.1) (2022-06-02)
+
+
+### Features
+
+* **services:** Update readme file ([c049a36](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c049a3628bc80d3091fbe6e16d7a48152ccb1316))
+
 # [0.62.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.61.0...0.62.0) (2022-05-31)
 
 

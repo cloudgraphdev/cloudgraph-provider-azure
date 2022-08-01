@@ -1051,27 +1051,27 @@ export default ({
     /**
      * Find related backup vaults
      */
-    const backupVaults: {
-      name: string
-      data: { [property: string]: any[] }
-    } = data.find(({ name }) => name === services.backupVault)
-    if (backupVaults?.data?.[region]) {
-      const dataAtRegion: any = findServiceInstancesWithTag(
-        tag,
-        backupVaults.data[region]
-      )
-      if (!isEmpty(dataAtRegion)) {
-        for (const backupVault of dataAtRegion) {
-          const { id } = backupVault
-          connections.push({
-            id,
-            resourceType: services.backupVault,
-            relation: 'child',
-            field: 'backupVault',
-          })
-        }
-      }
-    }
+    // const backupVaults: {
+    //   name: string
+    //   data: { [property: string]: any[] }
+    // } = data.find(({ name }) => name === services.backupVault)
+    // if (backupVaults?.data?.[region]) {
+    //   const dataAtRegion: any = findServiceInstancesWithTag(
+    //     tag,
+    //     backupVaults.data[region]
+    //   )
+    //   if (!isEmpty(dataAtRegion)) {
+    //     for (const backupVault of dataAtRegion) {
+    //       const { id } = backupVault
+    //       connections.push({
+    //         id,
+    //         resourceType: services.backupVault,
+    //         relation: 'child',
+    //         field: 'backupVault',
+    //       })
+    //     }
+    //   }
+    // }
 
     /**
      * Find related RecoveryVaults
@@ -1193,6 +1193,31 @@ export default ({
             resourceType: services.synapseBigDataPools,
             relation: 'child',
             field: 'synapseBigDataPools',
+          })
+        }
+      }
+    }
+
+    /**
+     * Find related Log Profiles
+     */
+    const logProfiles: {
+      name: string
+      data: { [property: string]: any[] }
+    } = data.find(({ name }) => name === services.logProfiles)
+    if (logProfiles?.data?.[region]) {
+      const dataAtRegion: any = findServiceInstancesWithTag(
+        tag,
+        logProfiles.data[region]
+      )
+      if (!isEmpty(dataAtRegion)) {
+        for (const logProfile of dataAtRegion) {
+          const { id } = logProfile
+          connections.push({
+            id,
+            resourceType: services.logProfiles,
+            relation: 'child',
+            field: 'logProfiles',
           })
         }
       }
