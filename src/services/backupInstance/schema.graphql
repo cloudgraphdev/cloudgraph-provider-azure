@@ -154,5 +154,4 @@ type azureBackupInstance implements azureBaseResource
   eTag: String @search(by: [hash, regexp])
   properties: azureBackupInstanceProperties
   resourceGroup: [azureResourceGroup] @hasInverse(field: backupInstances)
-  # backupVault: [azureBackupVault] @hasInverse(field: backupInstances)
 }

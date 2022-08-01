@@ -203,5 +203,4 @@ type azureBackupPolicy implements azureBaseResource
   eTag: String @search(by: [hash, regexp])
   properties: azureBackupPolicyProperties
   resourceGroup: [azureResourceGroup] @hasInverse(field: backupPolicies)
-  # backupVault: [azureBackupVault] @hasInverse(field: backupPolicies)
 }

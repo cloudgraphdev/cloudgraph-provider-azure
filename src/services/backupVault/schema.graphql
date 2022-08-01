@@ -164,7 +164,7 @@ type azureBackupVault implements azureResource
   lastModifiedBy: String @search(by: [hash, regexp])
   lastModifiedByType: String @search(by: [hash, regexp])
   lastModifiedAt: String @search(by: [hash, regexp])
-  resourceGroup: [azureResourceGroup] @hasInverse(field: backupVaults)
-  backupInstances: [azureBackupInstance] @hasInverse(field: backupVault)
-  backupPolicies: [azureBackupPolicy] @hasInverse(field: backupVault)
+  # resourceGroup: [azureResourceGroup] @hasInverse(field: backupVaults)
+  # backupInstances: [azureBackupInstance] @hasInverse(field: backupVault)
+  # backupPolicies: [azureBackupPolicy] @hasInverse(field: backupVault)
 }
