@@ -71,7 +71,7 @@ export default {
   [services.replicationAppliances]: 'azureReplicationAppliance',
   [services.replicationCenters]: 'azureReplicationCenter',
   [services.replicationNetworks]: 'azureReplicationNetwork',
-  [services.replicationPolicies]: 'azureReplicationPolicies',
+  [services.replicationPolicies]: 'azureReplicationPolicy',
   [services.resourceGroup]: 'azureResourceGroup',
   [services.securityAssesments]: 'azureSecurityAssesment',
   [services.securityContacts]: 'azureSecurityContact',
