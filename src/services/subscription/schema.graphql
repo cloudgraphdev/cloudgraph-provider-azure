@@ -13,6 +13,7 @@ type azureSubscription implements azureBaseResource @key(fields: "id") {
   autoProvisioningSettings: [azureAutoProvisioningSetting]
   backupInstances: [azureBackupInstance]
   backupPolicies: [azureBackupPolicy]
+  backupVaults: [azureBackupVault]
   billing: [azureBilling]
   cdnCustomDomains: [azureCdnCustomDomain]
   cdnEndpoints: [azureCdnEndpoint]

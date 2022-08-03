@@ -4168,6 +4168,7 @@ export type AzureResourceGroup = AzureResource & {
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
   backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
   backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
+  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
@@ -4829,6 +4830,7 @@ export type AzureSubscription = AzureBaseResource & {
   autoProvisioningSettings?: Maybe<Array<Maybe<AzureAutoProvisioningSetting>>>;
   backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
   backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
+  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
   billing?: Maybe<Array<Maybe<AzureBilling>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
