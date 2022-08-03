@@ -57,6 +57,8 @@ type azureSubscription implements azureBaseResource @key(fields: "id") {
   privateDnsZones: [azurePrivateDnsZone]
   publicIps: [azurePublicIp]
   recoveryVaults: [azureRecoveryVault]
+  recoveryInstances: [azureRecoveryInstance]
+  recoveryPolicies: [azureRecoveryPolicy]
   redisCaches: [azureRedisCache]
   replicationAppliances: [azureReplicationAppliance]
   replicationCenters: [azureReplicationCenter]

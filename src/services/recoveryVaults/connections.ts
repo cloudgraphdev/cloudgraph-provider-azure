@@ -3,6 +3,8 @@ import { isEmpty } from 'lodash'
 
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
+import { RawAzureProtectedItemResource } from '../recoveryInstances/data'
+import { RawAzureProtectionPolicyResource } from '../recoveryPolicies/data'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
 import { RawAzureRecoveryVault } from './data'
 
@@ -18,7 +20,7 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, resourceGroupId: rgName } = service
+  const { id, name: vaultName, resourceGroupId: rgName } = service
 
   /**
    * Find resource group related to this recovery vault
@@ -47,8 +49,62 @@ export default ({
     }
   }
 
-  const rgResult = {
+  /**
+   * Find backup instances related to this recovery vault
+   */
+  const backupInstances: {
+    name: string
+    data: { [property: string]: RawAzureProtectedItemResource[] }
+  } = data.find(({ name }) => name === services.recoveryInstances)
+
+  if (backupInstances?.data?.[region]) {
+    const backupInstancesInRegion: RawAzureProtectedItemResource[] =
+      backupInstances.data[region].filter(
+        ({ vaultName: instanceVaultName }: RawAzureProtectedItemResource) =>
+          caseInsensitiveEqual(instanceVaultName, vaultName)
+      )
+
+    if (!isEmpty(backupInstancesInRegion)) {
+      for (const backupInstance of backupInstancesInRegion) {
+        connections.push({
+          id: backupInstance.id,
+          resourceType: services.recoveryInstances,
+          relation: 'child',
+          field: 'recoveryInstances',
+        })
+      }
+    }
+  }
+
+  /**
+   * Find backup policies related to this recovery vault
+   */
+  const backupPolicies: {
+    name: string
+    data: { [property: string]: RawAzureProtectionPolicyResource[] }
+  } = data.find(({ name }) => name === services.recoveryPolicies)
+
+  if (backupPolicies?.data?.[region]) {
+    const backupPoliciesInRegion: RawAzureProtectionPolicyResource[] =
+      backupPolicies.data[region].filter(
+        ({ vaultName: policyVaultName }: RawAzureProtectionPolicyResource) =>
+          caseInsensitiveEqual(policyVaultName, vaultName)
+      )
+
+    if (!isEmpty(backupPoliciesInRegion)) {
+      for (const backupPolicy of backupPoliciesInRegion) {
+        connections.push({
+          id: backupPolicy.id,
+          resourceType: services.recoveryPolicies,
+          relation: 'child',
+          field: 'recoveryPolicies',
+        })
+      }
+    }
+  }
+
+  const result = {
     [id]: connections,
   }
-  return rgResult
+  return result
 }

@@ -51,9 +51,9 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
 | authRoleDefinition                          | actionGroup, authRoleAssignment                                           |
 | autoProvisioningSettings                    |                                                                           |
-| backupInstance                              | backupVault, resourceGroup                                                |
-| backupPolicy                                | backupVault, resourceGroup                                                |
-| backupVault                                 | backupInstance, backupPolicy, resourceGroup                               |
+| backupInstances                             | backupVaults, resourceGroup                                               |
+| backupPolicies                              | backupVaults, resourceGroup                                               |
+| backupVaults                                | backupInstances, backupPolicies, resourceGroup                            |
 | cdnCustomDomains                            | cdnEndpoints, resourceGroup                                               |
 | cdnEndpoints                                | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |
 | cdnProfiles                                 | cdnEndpoints, resourceGroup                                               |
@@ -93,7 +93,9 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | postgreSqlServers                           | resourceGroup, databasePostgreSql                                         |
 | privateDns                                  | resourceGroup                                                             |
 | publicIp                                    | networkInterface, resourceGroup                                           |
-| recoveryVaults                              | resourceGroup                                                             |
+| recoveryInstances                           | recoveryVaults, resourceGroup                                             |
+| recoveryPolicies                            | recoveryVaults, resourceGroup                                             |
+| recoveryVaults                              | recoveryInstances, recoveryPolicies, resourceGroup                        |
 | redisCaches                                 | resourceGroup                                                             |
 | replicationAppliances                       | resourceGroup                                                             |
 | replicationCenters                          | resourceGroup                                                             |

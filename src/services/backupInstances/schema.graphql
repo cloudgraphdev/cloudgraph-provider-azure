@@ -1,0 +1,147 @@
+type azureBackupInstanceKeyValue
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceDatasource
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  datasourceType: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  resourceID: String @search(by: [hash, regexp])
+  resourceLocation: String @search(by: [hash, regexp])
+  resourceName: String @search(by: [hash, regexp])
+  resourceType: String @search(by: [hash, regexp])
+  resourceUri: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceDatasourceSet
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  datasourceType: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  resourceID: String @search(by: [hash, regexp])
+  resourceLocation: String @search(by: [hash, regexp])
+  resourceName: String @search(by: [hash, regexp])
+  resourceType: String @search(by: [hash, regexp])
+  resourceUri: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceOperationalStoreParameters
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  dataStoreType: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstancePolicyParameters
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  dataStoreParametersList: [azureBackupInstanceOperationalStoreParameters]
+}
+
+type azureBackupInstancePolicyInfo
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  policyId: String @search(by: [hash, regexp])
+  policyParameters: azureBackupInstancePolicyParameters
+  policyVersion: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceInnerError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  additionalInfo: [azureBackupInstanceKeyValue]
+  code: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceUserFacingError
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  code: String @search(by: [hash, regexp])
+  innerError: azureBackupInstanceInnerError
+  isRetryable: Boolean @search
+  isUserError: Boolean @search
+  message: String @search(by: [hash, regexp])
+  properties: [azureBackupInstanceKeyValue]
+  recommendedAction: [String] @search(by: [hash, regexp])
+  target: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceProtectionStatusDetails
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  errorDetails: azureBackupInstanceUserFacingError
+  status: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstanceProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  currentProtectionState: String @search(by: [hash, regexp])
+  dataSourceInfo: azureBackupInstanceDatasource
+  dataSourceSetInfo: azureBackupInstanceDatasourceSet
+  friendlyName: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  policyInfo: azureBackupInstancePolicyInfo
+  protectionErrorDetails: azureBackupInstanceUserFacingError
+  protectionStatus: azureBackupInstanceProtectionStatusDetails
+  provisioningState: String @search(by: [hash, regexp])
+}
+
+type azureBackupInstance implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+  properties: azureBackupInstanceProperties
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: backupInstances)
+  backupVault: [azureBackupVault] @hasInverse(field: backupInstances)
+}

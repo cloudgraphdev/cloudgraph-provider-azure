@@ -1,23 +1,22 @@
-import cuid from 'cuid'
 import {
-  ProtectedItem,
-  ProtectionState,
   AzureFileshareProtectedItemExtendedInfo,
-  HealthStatus,
   AzureIaaSVMHealthDetails,
-  ExtendedProperties,
   ErrorDetail,
+  ExtendedProperties,
+  HealthStatus,
+  ProtectedItem,
   ProtectedItemHealthStatus,
+  ProtectionState,
 } from '@azure/arm-recoveryservicesbackup'
+import cuid from 'cuid'
 import { isEmpty } from 'lodash'
-import { RawAzureProtectedItemResource } from './data'
 import {
-  AzureBackupInstance,
-  AzureBackupInstanceProperties,
-  AzureBackupInstanceKpisHealths,
-  AzureBackupInstanceKeyValue,
+  AzureRecoveryInstance,
+  AzureRecoveryInstanceKeyValue,
+  AzureRecoveryInstanceKpisHealths,
+  AzureRecoveryInstanceProperties,
 } from '../../types/generated'
-import { formatTagsFromMap } from '../../utils/format'
+import { RawAzureProtectedItemResource } from './data'
 
 export interface RawAzureAzureFileshareProtectedItemExtendedInfo
   extends AzureFileshareProtectedItemExtendedInfo {
@@ -31,7 +30,7 @@ export interface RawAzureProtectedItem extends ProtectedItem {
   protectionState?: ProtectionState
   lastBackupStatus?: string
   lastBackupTime?: Date
-  kpisHealths?: AzureBackupInstanceKpisHealths
+  kpisHealths?: AzureRecoveryInstanceKpisHealths
   extendedInfo?: RawAzureAzureFileshareProtectedItemExtendedInfo
   virtualMachineId?: string
   healthStatus?: HealthStatus
@@ -47,7 +46,7 @@ export interface RawAzureProtectedItem extends ProtectedItem {
   backupEngineName?: string
   policyState?: string
   protectedItemId?: number
-  sourceAssociations?: AzureBackupInstanceKeyValue[]
+  sourceAssociations?: AzureRecoveryInstanceKeyValue[]
   fabricName?: string
   computerName?: string
   deferredDeleteSyncTimeInUTC?: number
@@ -55,7 +54,7 @@ export interface RawAzureProtectedItem extends ProtectedItem {
 
 const formatProperties = (
   properties?: RawAzureProtectedItem
-): AzureBackupInstanceProperties => {
+): AzureRecoveryInstanceProperties => {
   if (isEmpty(properties)) {
     return {}
   }
@@ -114,9 +113,8 @@ export default ({
 }: {
   service: RawAzureProtectedItemResource
   account: string
-}): AzureBackupInstance => {
-  const { id, name, type, region, eTag, properties, resourceGroupId } =
-    service
+}): AzureRecoveryInstance => {
+  const { id, name, type, region, eTag, properties, resourceGroupId } = service
   return {
     id: id || cuid(),
     name,

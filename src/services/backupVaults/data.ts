@@ -1,20 +1,24 @@
-import { RecoveryServicesClient, Vault } from '@azure/arm-recoveryservices'
-import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
 import { isEmpty } from 'lodash'
+import services from '../../enums/services'
 import azureLoggerText from '../../properties/logger'
-import { AzureServiceInput, TagMap } from '../../types'
+import {
+  AzureRestApiNewClientParams,
+  AzureServiceInput,
+  TagMap
+} from '../../types'
+import { tryCatchWrapper } from '../../utils'
+import { RestApiClient } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
-import { tryCatchWrapper } from '../../utils'
-// import services from '../../enums/services'
+import { BackupVaultResource } from './utils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'BackupVault'
+const serviceName = 'Backup Vaults'
 
-export interface RawAzureVault extends Omit<Vault, 'tags' | 'location'> {
+export interface RawAzureBackupVault extends Omit<BackupVaultResource, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
   Tags: TagMap
@@ -25,40 +29,39 @@ export default async ({
   config,
   rawData,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzureVault[]
+  [property: string]: RawAzureBackupVault[]
 }> => {
   try {
-    const { tokenCredentials, subscriptionId } = config
-
-    const existingData: { [property: string]: RawAzureVault[] } =
-      rawData.find(({ name }) => name === 'backupVault')?.data || {}
+    const existingData: { [property: string]: RawAzureBackupVault[] } =
+      rawData.find(({ name }) => name === services.backupVaults)?.data || {}
 
     if (isEmpty(existingData)) {
-      const client = new RecoveryServicesClient(
-        tokenCredentials,
-        subscriptionId
-      )
+      const client = new RestApiClient({
+        config,
+        options: { version: '2021-01-01' },
+      } as AzureRestApiNewClientParams)
 
-      const vaults: Vault[] = []
-      const vaultsIterable: PagedAsyncIterableIterator<Vault> =
-        client.vaults.listBySubscriptionId()
+      const vaults: BackupVaultResource[] = []
       await tryCatchWrapper(
         async () => {
-          for await (const vault of vaultsIterable) {
-            vaults.push(vault)
+          const backupVaults = await client.listData({
+            path: '/providers/Microsoft.DataProtection/backupVaults',
+          })
+          if (backupVaults) {
+            vaults.push(...backupVaults)
           }
         },
         {
           service: serviceName,
           client,
-          scope: 'vaults',
-          operation: 'listBySubscriptionId',
+          scope: 'backupVaults',
+          operation: 'getInSubscription',
         }
       )
       logger.debug(lt.foundBackupVaults(vaults.length))
 
       const result: {
-        [property: string]: RawAzureVault[]
+        [property: string]: RawAzureBackupVault[]
       } = {}
       await Promise.all(
         vaults.map(async ({ tags, location, ...rest }) => {
@@ -77,6 +80,7 @@ export default async ({
           }
         })
       )
+
       return result
     }
     return existingData

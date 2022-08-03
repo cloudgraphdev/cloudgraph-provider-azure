@@ -54,6 +54,8 @@ type azureResourceGroup implements azureResource
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroup)
   recoveryVaults: [azureRecoveryVault] @hasInverse(field: resourceGroup)
+  recoveryInstances: [azureRecoveryInstance] @hasInverse(field: resourceGroup) 
+  recoveryPolicies: [azureRecoveryPolicy] @hasInverse(field: resourceGroup)
   redisCaches: [azureRedisCache] @hasInverse(field: resourceGroup)
   replicationAppliances: [azureReplicationAppliance] @hasInverse(field: resourceGroup)
   replicationCenters: [azureReplicationCenter] @hasInverse(field: resourceGroup)

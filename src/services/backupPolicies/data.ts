@@ -1,25 +1,20 @@
-import {
-  RecoveryServicesBackupClient,
-  ProtectionPolicyResource,
-} from '@azure/arm-recoveryservicesbackup'
-import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
-import { AzureServiceInput, TagMap } from '../../types'
-import { lowerCaseLocation } from '../../utils/format'
+import { AzureRestApiNewClientParams, AzureServiceInput } from '../../types'
 import { tryCatchWrapper } from '../../utils'
-import getAzureVaults, { RawAzureVault } from '../backupVault/data'
+import { RestApiClient } from '../../utils/apiUtils'
+import { lowerCaseLocation } from '../../utils/format'
+import getAzureVaults, { RawAzureBackupVault } from '../backupVaults/data'
+import { BackupPolicyResource } from './utils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'Backup Policy'
+const serviceName = 'Backup Policies'
 
-export interface RawAzureProtectionPolicyResource
-  extends Omit<ProtectionPolicyResource, 'tags' | 'location'> {
+export interface RawAzureBackupPolicyResource extends BackupPolicyResource {
   region: string
   resourceGroupId: string
-  Tags: TagMap
   vaultName: string
 }
 
@@ -29,16 +24,15 @@ export default async ({
   rawData,
   opts,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzureProtectionPolicyResource[]
+  [property: string]: RawAzureBackupPolicyResource[]
 }> => {
   try {
-    const { tokenCredentials, subscriptionId } = config
-    const client = new RecoveryServicesBackupClient(
-      tokenCredentials,
-      subscriptionId
-    )
+    const client = new RestApiClient({
+      config,
+      options: { version: '2021-01-01' },
+    } as AzureRestApiNewClientParams)
 
-    const vaults: RawAzureVault[] =
+    const vaults: RawAzureBackupVault[] =
       Object.values(
         await getAzureVaults({
           regions,
@@ -48,23 +42,23 @@ export default async ({
         })
       )?.reduce((acc, val) => acc.concat(val), []) || []
 
-    const items: RawAzureProtectionPolicyResource[] = []
+    const items: RawAzureBackupPolicyResource[] = []
     await tryCatchWrapper(
       async () => {
         await Promise.all(
           (vaults || []).map(async ({ name: vaultName, resourceGroupId }) => {
-            const itemsIterable: PagedAsyncIterableIterator<ProtectionPolicyResource> =
-              client.backupPolicies.list(vaultName, resourceGroupId)
-            for await (const item of itemsIterable) {
+            const backupPolicies = await client.listData({
+              path: `/resourceGroups/${resourceGroupId}/providers/Microsoft.DataProtection/backupVaults/${vaultName}/backupPolicies`,
+            })
+            for (const item of backupPolicies) {
               if (item) {
-                const { location, tags, ...rest } = item
+                const { location, ...rest } = item
                 const region =
                   (location && lowerCaseLocation(location)) || 'global'
                 items.push({
                   ...rest,
                   region,
                   resourceGroupId,
-                  Tags: tags || {},
                   vaultName,
                 })
               }
@@ -81,8 +75,7 @@ export default async ({
       }
     )
 
-    const result: { [property: string]: RawAzureProtectionPolicyResource[] } =
-      {}
+    const result: { [property: string]: RawAzureBackupPolicyResource[] } = {}
     await Promise.all(
       items
         .filter(i => i)
@@ -98,6 +91,7 @@ export default async ({
           }
         })
     )
+
     return result
   } catch (e) {
     logger.error(e)
