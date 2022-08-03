@@ -1,3 +1,17 @@
+## [0.63.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.1...0.63.1-alpha.2) (2022-08-02)
+
+
+### Bug Fixes
+
+* **services:** fix schema map ([641b454](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/641b4547dd642611e0764ee3f3b2fe1b034559e5))
+
+## [0.63.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0...0.63.1-alpha.1) (2022-08-01)
+
+
+### Bug Fixes
+
+* **services:** deprecate backup vault and fix an issue with function app schema ([7b10fa4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/7b10fa417ff13f780a680a4cdf1683525de62649))
+
 # [0.63.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.62.0...0.63.0) (2022-08-01)
 
 
