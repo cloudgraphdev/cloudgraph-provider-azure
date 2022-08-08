@@ -1,12 +1,12 @@
 import cuid from 'cuid'
 import { isEmpty } from 'lodash'
+import { BackupInstance } from '../../types'
 import {
   AzureBackupInstance,
-  AzureBackupInstanceProperties
+  AzureBackupInstanceProperties,
 } from '../../types/generated'
 import { transformSystemData } from '../../utils/format'
 import { RawAzureBackupInstanceResource } from './data'
-import { BackupInstance } from './utils'
 
 const formatProperties = (
   properties?: BackupInstance
@@ -18,23 +18,61 @@ const formatProperties = (
     policyInfo = {},
     protectionErrorDetails = {},
     protectionStatus = {},
-    ...rest
+    currentProtectionState,
+    dataSourceInfo = {},
+    dataSourceSetInfo = {},
+    friendlyName,
+    objectType,
+    provisioningState,
   } = properties
 
   return {
+    currentProtectionState,
+    dataSourceInfo: dataSourceInfo
+      ? {
+          datasourceType: dataSourceInfo.datasourceType,
+          objectType: dataSourceInfo.objectType,
+          resourceID: dataSourceInfo.resourceID,
+          resourceLocation: dataSourceInfo.resourceLocation,
+          resourceName: dataSourceInfo.resourceName,
+          resourceType: dataSourceInfo.resourceType,
+          resourceUri: dataSourceInfo.resourceUri,
+        }
+      : {},
+    dataSourceSetInfo: dataSourceSetInfo
+      ? {
+          datasourceType: dataSourceSetInfo.datasourceType,
+          objectType: dataSourceSetInfo.objectType,
+          resourceID: dataSourceSetInfo.resourceID,
+          resourceLocation: dataSourceSetInfo.resourceLocation,
+          resourceName: dataSourceSetInfo.resourceName,
+          resourceType: dataSourceSetInfo.resourceType,
+          resourceUri: dataSourceSetInfo.resourceUri,
+        }
+      : {},
+    friendlyName,
+    objectType,
+    provisioningState,
     policyInfo: {
       policyId: policyInfo?.policyId,
       policyParameters: {
         dataStoreParametersList:
           policyInfo?.policyParameters?.dataStoreParametersList?.map(p => ({
             id: cuid(),
-            ...p,
+            dataStoreType: p.dataStoreType,
+            objectType: p.objectType,
+            resourceGroupId: p.resourceGroupId,
           })) || [],
       },
       policyVersion: policyInfo?.policyVersion,
     },
     protectionErrorDetails: {
-      ...protectionErrorDetails,
+      code: protectionErrorDetails?.code,
+      isRetryable: protectionErrorDetails?.isRetryable,
+      isUserError: protectionErrorDetails?.isUserError,
+      message: protectionErrorDetails?.message,
+      recommendedAction: protectionErrorDetails?.recommendedAction,
+      target: protectionErrorDetails?.target,
       innerError: {
         additionalInfo:
           Object.keys(
@@ -54,9 +92,14 @@ const formatProperties = (
         })) || [],
     },
     protectionStatus: {
-      ...protectionStatus,
+      status: protectionStatus?.status,
       errorDetails: {
-        ...protectionStatus?.errorDetails,
+        code: protectionStatus?.errorDetails?.code,
+        isRetryable: protectionStatus?.errorDetails?.isRetryable,
+        isUserError: protectionStatus?.errorDetails?.isUserError,
+        message: protectionStatus?.errorDetails?.message,
+        recommendedAction: protectionStatus?.errorDetails?.recommendedAction,
+        target: protectionStatus?.errorDetails?.target,
         innerError: {
           additionalInfo:
             Object.keys(
@@ -81,7 +124,6 @@ const formatProperties = (
           ) || [],
       },
     },
-    ...rest,
   }
 }
 

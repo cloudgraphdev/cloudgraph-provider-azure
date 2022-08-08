@@ -1,12 +1,11 @@
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
-import { AzureRestApiNewClientParams, AzureServiceInput } from '../../types'
+import { AzureRestApiNewClientParams, AzureServiceInput, BackupInstanceResource } from '../../types'
 import { tryCatchWrapper } from '../../utils'
 import { RestApiClient } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import getAzureVaults, { RawAzureBackupVault } from '../backupVaults/data'
-import { BackupInstanceResource } from './utils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }

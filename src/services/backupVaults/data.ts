@@ -6,13 +6,13 @@ import azureLoggerText from '../../properties/logger'
 import {
   AzureRestApiNewClientParams,
   AzureServiceInput,
+  BackupVaultResource,
   TagMap
 } from '../../types'
 import { tryCatchWrapper } from '../../utils'
 import { RestApiClient } from '../../utils/apiUtils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
-import { BackupVaultResource } from './utils'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
