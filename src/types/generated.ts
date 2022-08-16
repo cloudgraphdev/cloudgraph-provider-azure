@@ -5113,18 +5113,20 @@ export type AzureVaultSecretGroup = {
   vaultCertificates?: Maybe<Array<Maybe<AzureVaultCertificate>>>;
 };
 
-export type AzureVirtualMachine = AzureResource & {
+export type AzureVirtualMachine = AzureBaseResource & {
   bootDiagnostics?: Maybe<Scalars['Boolean']>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   licenseType?: Maybe<Scalars['String']>;
-  managedBy?: Maybe<Scalars['String']>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   osProfile?: Maybe<AzureVirtualMachineOsProfile>;
-  osType?: Maybe<Scalars['String']>;
+  region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
   storageImageReference?: Maybe<AzureVirtualMachineStorageImageReference>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<AzureRawTag>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
-  vmSize?: Maybe<Scalars['String']>;
+  vmId?: Maybe<Scalars['String']>;
 };
 
 export type AzureVirtualMachineOsProfile = {
