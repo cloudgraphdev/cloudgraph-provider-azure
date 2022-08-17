@@ -5123,12 +5123,9 @@ export type AzureVirtualMachine = AzureBaseResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGroupId?: Maybe<Scalars['String']>;
   storageImageReference?: Maybe<AzureVirtualMachineStorageImageReference>;
-<<<<<<< refs/remotes/origin/alpha
   subscriptionId?: Maybe<Scalars['String']>;
   tags?: Maybe<Array<Maybe<AzureRawTag>>>;
-=======
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
->>>>>>> feat(VMSS): add VM connections
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   vmId?: Maybe<Scalars['String']>;
 };
