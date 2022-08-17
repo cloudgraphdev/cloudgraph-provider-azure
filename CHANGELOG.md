@@ -1,3 +1,12 @@
+# [0.64.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.1...0.64.0-alpha.2) (2022-08-17)
+
+
+### Features
+
+* Add backupVaults, backupInstances and backupPolicies services ([fcb0560](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/fcb05608e8c983f23fd7f62057ccd51cc0bbbee5))
+* Add backupVaults, backupInstances and buackupPolicies services ([8dd4326](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8dd4326562dc1d2179dbe8534718608d41fd04ba))
+* Add backupVaults, backupInstances and buackupPolicies services ([10e9918](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/10e991825760c8fd02de46b98279a68371413869))
+
 # [0.64.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.3...0.64.0-alpha.1) (2022-08-17)
 
 
