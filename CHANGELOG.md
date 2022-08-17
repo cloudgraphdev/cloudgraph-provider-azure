@@ -1,3 +1,10 @@
+## [0.63.1-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.2...0.63.1-alpha.3) (2022-08-17)
+
+
+### Bug Fixes
+
+* virtualMachine null fields ([648b51e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/648b51ec38fd7465fbaacae979a440325f7811f4))
+
 ## [0.63.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.1...0.63.1-alpha.2) (2022-08-02)
 
 
