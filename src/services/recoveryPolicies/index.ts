@@ -1,11 +1,11 @@
 import { Service } from '@cloudgraph/sdk'
 import BaseService from '../base'
 import getConnections from './connections'
+import getData from './data'
 import format from './format'
 import mutation from './mutation'
-import getData from './data'
 
-export default class AzureBackupPolicy
+export default class AzureRecoveryPolicy
   extends BaseService
   implements Service
 {

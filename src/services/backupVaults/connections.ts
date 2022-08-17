@@ -3,17 +3,17 @@ import { isEmpty } from 'lodash'
 
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
-import { RawAzureVault } from './data'
-import { RawAzureProtectedItemResource } from '../backupInstance/data'
-import { RawAzureProtectionPolicyResource } from '../backupPolicy/data'
+import { RawAzureBackupInstanceResource } from '../backupInstances/data'
+import { RawAzureBackupPolicyResource } from '../backupPolicies/data'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
+import { RawAzureBackupVault } from './data'
 
 export default ({
   service,
   data,
   region,
 }: {
-  service: RawAzureVault
+  service: RawAzureBackupVault
   data: Array<{ name: string; data: { [property: string]: any[] } }>
   region: string
 }): {
@@ -54,13 +54,13 @@ export default ({
    */
   const backupInstances: {
     name: string
-    data: { [property: string]: RawAzureProtectedItemResource[] }
-  } = data.find(({ name }) => name === services.backupInstance)
+    data: { [property: string]: RawAzureBackupInstanceResource[] }
+  } = data.find(({ name }) => name === services.backupInstances)
 
   if (backupInstances?.data?.[region]) {
-    const backupInstancesInRegion: RawAzureProtectedItemResource[] =
+    const backupInstancesInRegion: RawAzureBackupInstanceResource[] =
       backupInstances.data[region].filter(
-        ({ vaultName: instanceVaultName }: RawAzureProtectedItemResource) =>
+        ({ vaultName: instanceVaultName }: RawAzureBackupInstanceResource) =>
           caseInsensitiveEqual(instanceVaultName, vaultName)
       )
 
@@ -68,7 +68,7 @@ export default ({
       for (const backupInstance of backupInstancesInRegion) {
         connections.push({
           id: backupInstance.id,
-          resourceType: services.backupInstance,
+          resourceType: services.backupInstances,
           relation: 'child',
           field: 'backupInstances',
         })
@@ -81,13 +81,13 @@ export default ({
    */
   const backupPolicies: {
     name: string
-    data: { [property: string]: RawAzureProtectionPolicyResource[] }
-  } = data.find(({ name }) => name === services.backupPolicy)
+    data: { [property: string]: RawAzureBackupPolicyResource[] }
+  } = data.find(({ name }) => name === services.backupPolicies)
 
   if (backupPolicies?.data?.[region]) {
-    const backupPoliciesInRegion: RawAzureProtectionPolicyResource[] =
+    const backupPoliciesInRegion: RawAzureBackupPolicyResource[] =
       backupPolicies.data[region].filter(
-        ({ vaultName: policyVaultName }: RawAzureProtectionPolicyResource) =>
+        ({ vaultName: policyVaultName }: RawAzureBackupPolicyResource) =>
           caseInsensitiveEqual(policyVaultName, vaultName)
       )
 
@@ -95,7 +95,7 @@ export default ({
       for (const backupPolicy of backupPoliciesInRegion) {
         connections.push({
           id: backupPolicy.id,
-          resourceType: services.backupPolicy,
+          resourceType: services.backupPolicies,
           relation: 'child',
           field: 'backupPolicies',
         })

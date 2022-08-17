@@ -1,4 +1,4 @@
-type azureBackupInstanceItemExtendedInfo
+type azureRecoveryInstanceItemExtendedInfo
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -13,7 +13,7 @@ type azureBackupInstanceItemExtendedInfo
   lastRefreshedAt: DateTime @search(by: [day])
 }
 
-type azureBackupInstanceResourceHealthDetails
+type azureRecoveryInstanceResourceHealthDetails
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -27,7 +27,7 @@ type azureBackupInstanceResourceHealthDetails
   recommendations: [String] @search(by: [hash, regexp])
 }
 
-type azureBackupInstanceDiskExclusionProperties
+type azureRecoveryInstanceDiskExclusionProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -37,27 +37,27 @@ type azureBackupInstanceDiskExclusionProperties
   isInclusionList: Boolean @search
 }
 
-type azureBackupInstanceExtendedProperties
+type azureRecoveryInstanceExtendedProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  diskExclusionProperties: azureBackupInstanceDiskExclusionProperties
+  diskExclusionProperties: azureRecoveryInstanceDiskExclusionProperties
   linuxVmApplicationName: String @search(by: [hash, regexp])
 }
 
-type azureBackupInstanceKPIResourceHealthDetails
+type azureRecoveryInstanceKPIResourceHealthDetails
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   resourceHealthStatus: String @search(by: [hash, regexp])
-  resourceHealthDetails: [azureBackupInstanceResourceHealthDetails]
+  resourceHealthDetails: [azureRecoveryInstanceResourceHealthDetails]
 }
 
-type azureBackupInstanceKpisHealths
+type azureRecoveryInstanceKpisHealths
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -66,10 +66,10 @@ type azureBackupInstanceKpisHealths
   @key(fields: "id") {
   id: String! @id
   key: String @search(by: [hash, regexp])
-  value: azureBackupInstanceKPIResourceHealthDetails
+  value: azureRecoveryInstanceKPIResourceHealthDetails
 }
 
-type azureBackupInstanceErrorDetail
+type azureRecoveryInstanceErrorDetail
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -80,7 +80,7 @@ type azureBackupInstanceErrorDetail
   recommendations: [String] @search(by: [hash, regexp])
 }
 
-type azureBackupInstanceKeyValue
+type azureRecoveryInstanceKeyValue
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -92,7 +92,7 @@ type azureBackupInstanceKeyValue
   value: String @search(by: [hash, regexp])
 }
 
-type azureBackupInstanceProperties
+type azureRecoveryInstanceProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -120,29 +120,29 @@ type azureBackupInstanceProperties
   protectionState: String @search(by: [hash, regexp])
   lastBackupStatus: String @search(by: [hash, regexp])
   lastBackupTime: DateTime @search(by: [day])
-  kpisHealths: [azureBackupInstanceKpisHealths]
-  extendedInfo: azureBackupInstanceItemExtendedInfo
+  kpisHealths: [azureRecoveryInstanceKpisHealths]
+  extendedInfo: azureRecoveryInstanceItemExtendedInfo
   virtualMachineId: String @search(by: [hash, regexp])
   healthStatus: String @search(by: [hash, regexp])
-  healthDetails: [azureBackupInstanceResourceHealthDetails]
+  healthDetails: [azureRecoveryInstanceResourceHealthDetails]
   protectedItemDataId: String @search(by: [hash, regexp])
-  extendedProperties: azureBackupInstanceExtendedProperties
+  extendedProperties: azureRecoveryInstanceExtendedProperties
   serverName: String @search(by: [hash, regexp])
   parentName: String @search(by: [hash, regexp])
   parentType: String @search(by: [hash, regexp])
-  lastBackupErrorDetail: azureBackupInstanceErrorDetail
+  lastBackupErrorDetail: azureRecoveryInstanceErrorDetail
   protectedItemDataSourceId: String @search(by: [hash, regexp])
   protectedItemHealthStatus: String @search(by: [hash, regexp])
   backupEngineName: String @search(by: [hash, regexp])
   policyState: String @search(by: [hash, regexp])
   protectedItemId: Int @search
-  sourceAssociations: [azureBackupInstanceKeyValue]
+  sourceAssociations: [azureRecoveryInstanceKeyValue]
   fabricName: String @search(by: [hash, regexp])
   computerName: String @search(by: [hash, regexp])
   deferredDeleteSyncTimeInUTC: Int @search
 }
 
-type azureBackupInstance implements azureBaseResource
+type azureRecoveryInstance implements azureBaseResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
@@ -152,6 +152,7 @@ type azureBackupInstance implements azureBaseResource
   region: String @search(by: [hash, regexp])
   resourceGroupId: String @search(by: [hash, regexp])
   eTag: String @search(by: [hash, regexp])
-  properties: azureBackupInstanceProperties
-  resourceGroup: [azureResourceGroup] @hasInverse(field: backupInstances)
+  properties: azureRecoveryInstanceProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: recoveryInstances)
+  recoveryVault: [azureRecoveryVault] @hasInverse(field: recoveryInstances)
 }

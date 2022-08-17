@@ -149,6 +149,9 @@ export default {
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Recovery Vaults
   foundRecoveryVaults: (num: number): string => `Found ${num} recovery vaults`,
+  foundRecoveryInstances: (num: number): string =>
+  `Found ${num} recovery instances`,
+  foundRecoveryPolicies: (num: number): string => `Found ${num} recovery policies`,
   // RedisCache
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
   // Replication Appliances

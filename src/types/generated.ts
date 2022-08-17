@@ -939,7 +939,13 @@ export type AzureAutoProvisioningSetting = AzureBaseResource & {
 };
 
 export type AzureBackupInstance = AzureBaseResource & {
-  eTag?: Maybe<Scalars['String']>;
+  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupInstanceProperties>;
   region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -947,35 +953,29 @@ export type AzureBackupInstance = AzureBaseResource & {
   subscriptionId?: Maybe<Scalars['String']>;
 };
 
-export type AzureBackupInstanceDiskExclusionProperties = {
-  diskLunList?: Maybe<Array<Maybe<Scalars['Int']>>>;
-  isInclusionList?: Maybe<Scalars['Boolean']>;
+export type AzureBackupInstanceDatasource = {
+  datasourceType?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+  resourceID?: Maybe<Scalars['String']>;
+  resourceLocation?: Maybe<Scalars['String']>;
+  resourceName?: Maybe<Scalars['String']>;
+  resourceType?: Maybe<Scalars['String']>;
+  resourceUri?: Maybe<Scalars['String']>;
 };
 
-export type AzureBackupInstanceErrorDetail = {
+export type AzureBackupInstanceDatasourceSet = {
+  datasourceType?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+  resourceID?: Maybe<Scalars['String']>;
+  resourceLocation?: Maybe<Scalars['String']>;
+  resourceName?: Maybe<Scalars['String']>;
+  resourceType?: Maybe<Scalars['String']>;
+  resourceUri?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupInstanceInnerError = {
+  additionalInfo?: Maybe<Array<Maybe<AzureBackupInstanceKeyValue>>>;
   code?: Maybe<Scalars['String']>;
-  message?: Maybe<Scalars['String']>;
-  recommendations?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-export type AzureBackupInstanceExtendedProperties = {
-  diskExclusionProperties?: Maybe<AzureBackupInstanceDiskExclusionProperties>;
-  linuxVmApplicationName?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupInstanceItemExtendedInfo = {
-  lastRefreshedAt?: Maybe<Scalars['DateTime']>;
-  oldestRecoveryPoint?: Maybe<Scalars['DateTime']>;
-  policyInconsistent?: Maybe<Scalars['Boolean']>;
-  policyState?: Maybe<Scalars['String']>;
-  recoveryPointCount?: Maybe<Scalars['Int']>;
-  resourceState?: Maybe<Scalars['String']>;
-  resourceStateSyncTime?: Maybe<Scalars['DateTime']>;
-};
-
-export type AzureBackupInstanceKpiResourceHealthDetails = {
-  resourceHealthDetails?: Maybe<Array<Maybe<AzureBackupInstanceResourceHealthDetails>>>;
-  resourceHealthStatus?: Maybe<Scalars['String']>;
 };
 
 export type AzureBackupInstanceKeyValue = {
@@ -984,67 +984,59 @@ export type AzureBackupInstanceKeyValue = {
   value?: Maybe<Scalars['String']>;
 };
 
-export type AzureBackupInstanceKpisHealths = {
+export type AzureBackupInstanceOperationalStoreParameters = {
+  dataStoreType?: Maybe<Scalars['String']>;
   id: Scalars['String'];
-  key?: Maybe<Scalars['String']>;
-  value?: Maybe<AzureBackupInstanceKpiResourceHealthDetails>;
+  objectType?: Maybe<Scalars['String']>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupInstancePolicyInfo = {
+  policyId?: Maybe<Scalars['String']>;
+  policyParameters?: Maybe<AzureBackupInstancePolicyParameters>;
+  policyVersion?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupInstancePolicyParameters = {
+  dataStoreParametersList?: Maybe<Array<Maybe<AzureBackupInstanceOperationalStoreParameters>>>;
 };
 
 export type AzureBackupInstanceProperties = {
-  backupEngineName?: Maybe<Scalars['String']>;
-  backupManagementType?: Maybe<Scalars['String']>;
-  backupSetName?: Maybe<Scalars['String']>;
-  computerName?: Maybe<Scalars['String']>;
-  containerName?: Maybe<Scalars['String']>;
-  createMode?: Maybe<Scalars['String']>;
-  deferredDeleteSyncTimeInUTC?: Maybe<Scalars['Int']>;
-  deferredDeleteTimeInUTC?: Maybe<Scalars['DateTime']>;
-  deferredDeleteTimeRemaining?: Maybe<Scalars['String']>;
-  extendedInfo?: Maybe<AzureBackupInstanceItemExtendedInfo>;
-  extendedProperties?: Maybe<AzureBackupInstanceExtendedProperties>;
-  fabricName?: Maybe<Scalars['String']>;
+  currentProtectionState?: Maybe<Scalars['String']>;
+  dataSourceInfo?: Maybe<AzureBackupInstanceDatasource>;
+  dataSourceSetInfo?: Maybe<AzureBackupInstanceDatasourceSet>;
   friendlyName?: Maybe<Scalars['String']>;
-  healthDetails?: Maybe<Array<Maybe<AzureBackupInstanceResourceHealthDetails>>>;
-  healthStatus?: Maybe<Scalars['String']>;
-  isArchiveEnabled?: Maybe<Scalars['Boolean']>;
-  isDeferredDeleteScheduleUpcoming?: Maybe<Scalars['Boolean']>;
-  isRehydrate?: Maybe<Scalars['Boolean']>;
-  isScheduledForDeferredDelete?: Maybe<Scalars['Boolean']>;
-  kpisHealths?: Maybe<Array<Maybe<AzureBackupInstanceKpisHealths>>>;
-  lastBackupErrorDetail?: Maybe<AzureBackupInstanceErrorDetail>;
-  lastBackupStatus?: Maybe<Scalars['String']>;
-  lastBackupTime?: Maybe<Scalars['DateTime']>;
-  lastRecoveryPoint?: Maybe<Scalars['DateTime']>;
-  parentName?: Maybe<Scalars['String']>;
-  parentType?: Maybe<Scalars['String']>;
-  policyId?: Maybe<Scalars['String']>;
-  policyName?: Maybe<Scalars['String']>;
-  policyState?: Maybe<Scalars['String']>;
-  protectedItemDataId?: Maybe<Scalars['String']>;
-  protectedItemDataSourceId?: Maybe<Scalars['String']>;
-  protectedItemHealthStatus?: Maybe<Scalars['String']>;
-  protectedItemId?: Maybe<Scalars['Int']>;
-  protectedItemType?: Maybe<Scalars['String']>;
-  protectionState?: Maybe<Scalars['String']>;
-  protectionStatus?: Maybe<Scalars['String']>;
-  resourceGuardOperationRequests?: Maybe<Array<Maybe<Scalars['String']>>>;
-  serverName?: Maybe<Scalars['String']>;
-  sourceAssociations?: Maybe<Array<Maybe<AzureBackupInstanceKeyValue>>>;
-  sourceResourceId?: Maybe<Scalars['String']>;
-  virtualMachineId?: Maybe<Scalars['String']>;
-  workloadType?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+  policyInfo?: Maybe<AzureBackupInstancePolicyInfo>;
+  protectionErrorDetails?: Maybe<AzureBackupInstanceUserFacingError>;
+  protectionStatus?: Maybe<AzureBackupInstanceProtectionStatusDetails>;
+  provisioningState?: Maybe<Scalars['String']>;
 };
 
-export type AzureBackupInstanceResourceHealthDetails = {
-  code?: Maybe<Scalars['Int']>;
-  id: Scalars['String'];
+export type AzureBackupInstanceProtectionStatusDetails = {
+  errorDetails?: Maybe<AzureBackupInstanceUserFacingError>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupInstanceUserFacingError = {
+  code?: Maybe<Scalars['String']>;
+  innerError?: Maybe<AzureBackupInstanceInnerError>;
+  isRetryable?: Maybe<Scalars['Boolean']>;
+  isUserError?: Maybe<Scalars['Boolean']>;
   message?: Maybe<Scalars['String']>;
-  recommendations?: Maybe<Array<Maybe<Scalars['String']>>>;
-  title?: Maybe<Scalars['String']>;
+  properties?: Maybe<Array<Maybe<AzureBackupInstanceKeyValue>>>;
+  recommendedAction?: Maybe<Array<Maybe<Scalars['String']>>>;
+  target?: Maybe<Scalars['String']>;
 };
 
 export type AzureBackupPolicy = AzureBaseResource & {
-  eTag?: Maybe<Scalars['String']>;
+  backupVault?: Maybe<Array<Maybe<AzureBackupVault>>>;
+  createdAt?: Maybe<Scalars['String']>;
+  createdBy?: Maybe<Scalars['String']>;
+  createdByType?: Maybe<Scalars['String']>;
+  lastModifiedAt?: Maybe<Scalars['String']>;
+  lastModifiedBy?: Maybe<Scalars['String']>;
+  lastModifiedByType?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureBackupPolicyProperties>;
   region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -1052,221 +1044,118 @@ export type AzureBackupPolicy = AzureBaseResource & {
   subscriptionId?: Maybe<Scalars['String']>;
 };
 
-export type AzureBackupPolicyDailyRetentionFormat = {
-  date?: Maybe<Scalars['Int']>;
+export type AzureBackupPolicyAbsoluteOption = {
+  duration?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupPolicyBackupParams = {
+  backupType?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupPolicyBackupRule = {
+  backupParameters?: Maybe<AzureBackupPolicyBackupParams>;
+  dataStore?: Maybe<AzureBackupPolicyDataStoreInfoBase>;
   id: Scalars['String'];
+  isDefault?: Maybe<Scalars['Boolean']>;
+  lifecycles?: Maybe<Array<Maybe<AzureBackupPolicySourceLifeCycle>>>;
+  name?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+  trigger?: Maybe<AzureBackupPolicyTriggerContext>;
+};
+
+export type AzureBackupPolicyBackupSchedule = {
+  repeatingTimeIntervals?: Maybe<Array<Maybe<Scalars['String']>>>;
+  timeZone?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupPolicyDataStoreInfoBase = {
+  dataStoreType?: Maybe<Scalars['String']>;
+  objectType?: Maybe<Scalars['String']>;
+};
+
+export type AzureBackupPolicyDay = {
+  date?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
   isLast?: Maybe<Scalars['Boolean']>;
 };
 
-export type AzureBackupPolicyDailyRetentionSchedule = {
-  retentionDurationCount?: Maybe<Scalars['Int']>;
-  retentionDurationType?: Maybe<Scalars['String']>;
-  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-};
-
-export type AzureBackupPolicyHourlySchedule = {
-  interval?: Maybe<Scalars['Int']>;
-  scheduleWindowDuration?: Maybe<Scalars['Int']>;
-  scheduleWindowStartTime?: Maybe<Scalars['DateTime']>;
-};
-
-export type AzureBackupPolicyInstantRpAdditionalDetails = {
-  azureBackupRGNamePrefix?: Maybe<Scalars['String']>;
-  azureBackupRGNameSuffix?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupPolicyMonthlyRetentionSchedule = {
-  retentionDurationCount?: Maybe<Scalars['Int']>;
-  retentionDurationType?: Maybe<Scalars['String']>;
-  retentionScheduleDaily?: Maybe<Array<Maybe<AzureBackupPolicyDailyRetentionFormat>>>;
-  retentionScheduleFormatType?: Maybe<Scalars['String']>;
-  retentionScheduleWeekly?: Maybe<AzureBackupPolicyWeeklyRetentionFormat>;
-  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-};
-
 export type AzureBackupPolicyProperties = {
-  backupManagementType?: Maybe<Scalars['String']>;
-  fabricName?: Maybe<Scalars['String']>;
-  instantRPDetails?: Maybe<AzureBackupPolicyInstantRpAdditionalDetails>;
-  instantRpRetentionRangeInDays?: Maybe<Scalars['Int']>;
-  makePolicyConsistent?: Maybe<Scalars['Boolean']>;
-  policyType?: Maybe<Scalars['String']>;
-  protectedItemsCount?: Maybe<Scalars['Int']>;
-  resourceGuardOperationRequests?: Maybe<Array<Maybe<Scalars['String']>>>;
-  retentionPolicy?: Maybe<AzureBackupPolicyRetentionPolicyUnion>;
-  schedulePolicy?: Maybe<AzureBackupPolicySchedulePolicyUnion>;
-  settings?: Maybe<AzureBackupPolicySettings>;
-  subProtectionPolicy?: Maybe<Array<Maybe<AzureBackupPolicySubProtectionPolicy>>>;
-  timeZone?: Maybe<Scalars['String']>;
-  workLoadType?: Maybe<Scalars['String']>;
+  datasourceTypes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  objectType?: Maybe<Scalars['String']>;
+  policyRules?: Maybe<Array<Maybe<AzureBackupPolicyBackupRule>>>;
 };
 
-export type AzureBackupPolicyRetentionDuration = {
-  count?: Maybe<Scalars['Int']>;
-  durationType?: Maybe<Scalars['String']>;
+export type AzureBackupPolicyRetentionTag = {
+  eTag?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  tagName?: Maybe<Scalars['String']>;
 };
 
-export type AzureBackupPolicyRetentionPolicyUnion = {
-  dailySchedule?: Maybe<AzureBackupPolicyDailyRetentionSchedule>;
-  monthlySchedule?: Maybe<AzureBackupPolicyMonthlyRetentionSchedule>;
-  retentionDurationCount?: Maybe<Scalars['Int']>;
-  retentionDurationType?: Maybe<Scalars['String']>;
-  retentionPolicyType?: Maybe<Scalars['String']>;
-  weeklySchedule?: Maybe<AzureBackupPolicyWeeklyRetentionSchedule>;
-  yearlySchedule?: Maybe<AzureBackupPolicyYearlyRetentionSchedule>;
-};
-
-export type AzureBackupPolicySchedulePolicyUnion = {
-  dailySchedule?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  hourlySchedule?: Maybe<AzureBackupPolicyHourlySchedule>;
-  scheduleFrequencyInMins?: Maybe<Scalars['Int']>;
-  schedulePolicyType?: Maybe<Scalars['String']>;
-  scheduleRunDays?: Maybe<Array<Maybe<Scalars['String']>>>;
-  scheduleRunFrequency?: Maybe<Scalars['String']>;
-  scheduleRunTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
-  scheduleWeeklyFrequency?: Maybe<Scalars['Int']>;
-  weeklySchedule?: Maybe<AzureBackupPolicyWeeklySchedule>;
-};
-
-export type AzureBackupPolicySettings = {
-  isCompression?: Maybe<Scalars['Boolean']>;
-  issqlcompression?: Maybe<Scalars['Boolean']>;
-  timeZone?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupPolicySubProtectionPolicy = {
-  id: Scalars['String'];
-  policyType?: Maybe<Scalars['String']>;
-  retentionPolicy?: Maybe<AzureBackupPolicyRetentionPolicyUnion>;
-  schedulePolicy?: Maybe<AzureBackupPolicySchedulePolicyUnion>;
-};
-
-export type AzureBackupPolicyWeeklyRetentionFormat = {
+export type AzureBackupPolicyScheduleBasedBackupCriteria = {
+  absoluteCriteria?: Maybe<Array<Maybe<Scalars['String']>>>;
+  daysOfMonth?: Maybe<Array<Maybe<AzureBackupPolicyDay>>>;
   daysOfTheWeek?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id: Scalars['String'];
+  monthsOfYear?: Maybe<Array<Maybe<Scalars['String']>>>;
+  objectType?: Maybe<Scalars['String']>;
+  scheduleTimes?: Maybe<Array<Maybe<Scalars['String']>>>;
   weeksOfTheMonth?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-export type AzureBackupPolicyWeeklyRetentionSchedule = {
-  daysOfTheWeek?: Maybe<Array<Maybe<Scalars['String']>>>;
-  retentionDurationCount?: Maybe<Scalars['Int']>;
-  retentionDurationType?: Maybe<Scalars['String']>;
-  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+export type AzureBackupPolicySourceLifeCycle = {
+  deleteAfter?: Maybe<AzureBackupPolicyAbsoluteOption>;
+  id: Scalars['String'];
+  sourceDataStore?: Maybe<AzureBackupPolicyDataStoreInfoBase>;
+  targetDataStoreCopySettings?: Maybe<Array<Maybe<AzureBackupPolicyTargetCopySetting>>>;
 };
 
-export type AzureBackupPolicyWeeklySchedule = {
-  scheduleRunDays?: Maybe<Array<Maybe<Scalars['String']>>>;
-  scheduleRunTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+export type AzureBackupPolicyTaggingCriteria = {
+  criteria?: Maybe<Array<Maybe<AzureBackupPolicyScheduleBasedBackupCriteria>>>;
+  id: Scalars['String'];
+  isDefault?: Maybe<Scalars['Boolean']>;
+  tagInfo?: Maybe<AzureBackupPolicyRetentionTag>;
+  taggingPriority?: Maybe<Scalars['Int']>;
 };
 
-export type AzureBackupPolicyYearlyRetentionSchedule = {
-  monthsOfYear?: Maybe<Array<Maybe<Scalars['String']>>>;
-  retentionDurationCount?: Maybe<Scalars['Int']>;
-  retentionDurationType?: Maybe<Scalars['String']>;
-  retentionScheduleDaily?: Maybe<Array<Maybe<AzureBackupPolicyDailyRetentionFormat>>>;
-  retentionScheduleFormatType?: Maybe<Scalars['String']>;
-  retentionScheduleWeekly?: Maybe<AzureBackupPolicyWeeklyRetentionFormat>;
-  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+export type AzureBackupPolicyTargetCopySetting = {
+  copyAfter?: Maybe<AzureBackupPolicyAbsoluteOption>;
+  dataStore?: Maybe<AzureBackupPolicyDataStoreInfoBase>;
+  id: Scalars['String'];
+};
+
+export type AzureBackupPolicyTriggerContext = {
+  objectType?: Maybe<Scalars['String']>;
+  schedule?: Maybe<AzureBackupPolicyBackupSchedule>;
+  taggingCriteria?: Maybe<Array<Maybe<AzureBackupPolicyTaggingCriteria>>>;
 };
 
 export type AzureBackupVault = AzureResource & {
-  createdAt?: Maybe<Scalars['String']>;
-  createdBy?: Maybe<Scalars['String']>;
-  createdByType?: Maybe<Scalars['String']>;
-  etag?: Maybe<Scalars['String']>;
+  backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
+  backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
+  eTag?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureBackupVaultIdentity>;
-  lastModifiedAt?: Maybe<Scalars['String']>;
-  lastModifiedBy?: Maybe<Scalars['String']>;
-  lastModifiedByType?: Maybe<Scalars['String']>;
-  properties?: Maybe<AzureBackupVaultVaultProperties>;
-  sku?: Maybe<AzureBackupVaultSku>;
-};
-
-export type AzureBackupVaultCmkKekIdentity = {
-  useSystemAssignedIdentity?: Maybe<Scalars['Boolean']>;
-  userAssignedIdentity?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureBackupVaultProperties>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
 };
 
 export type AzureBackupVaultIdentity = {
   principalId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  userAssignedIdentities?: Maybe<Array<Maybe<AzureBackupVaultUserAssignedIdentity>>>;
 };
 
-export type AzureBackupVaultPrivateEndpointConnection = {
-  privateEndpointId?: Maybe<Scalars['String']>;
-  privateLinkServiceConnectionState?: Maybe<AzureBackupVaultPrivateLinkServiceConnectionState>;
+export type AzureBackupVaultProperties = {
+  isVaultProtectedByResourceGuard?: Maybe<Scalars['Boolean']>;
   provisioningState?: Maybe<Scalars['String']>;
+  storageSettings?: Maybe<Array<Maybe<AzureBackupVaultStorageSettings>>>;
 };
 
-export type AzureBackupVaultPrivateEndpointConnectionVaultProperties = {
+export type AzureBackupVaultStorageSettings = {
+  datastoreType?: Maybe<Scalars['String']>;
   id: Scalars['String'];
-  location?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  properties?: Maybe<AzureBackupVaultPrivateEndpointConnection>;
   type?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupVaultPrivateLinkServiceConnectionState = {
-  actionsRequired?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupVaultSku = {
-  capacity?: Maybe<Scalars['String']>;
-  family?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  size?: Maybe<Scalars['String']>;
-  tier?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupVaultUpgradeDetails = {
-  endTimeUtc?: Maybe<Scalars['DateTime']>;
-  lastUpdatedTimeUtc?: Maybe<Scalars['DateTime']>;
-  message?: Maybe<Scalars['String']>;
-  operationId?: Maybe<Scalars['String']>;
-  previousResourceId?: Maybe<Scalars['String']>;
-  startTimeUtc?: Maybe<Scalars['DateTime']>;
-  status?: Maybe<Scalars['String']>;
-  triggerType?: Maybe<Scalars['String']>;
-  upgradedResourceId?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupVaultUserAssignedIdentity = {
-  id: Scalars['String'];
-  key?: Maybe<Scalars['String']>;
-  value?: Maybe<AzureBackupVaultUserIdentity>;
-};
-
-export type AzureBackupVaultUserIdentity = {
-  clientId?: Maybe<Scalars['String']>;
-  principalId?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupVaultVaultProperties = {
-  encryption?: Maybe<AzureBackupVaultVaultPropertiesEncryption>;
-  moveDetails?: Maybe<AzureBackupVaultVaultPropertiesMoveDetails>;
-  moveState?: Maybe<Scalars['String']>;
-  privateEndpointConnections?: Maybe<Array<Maybe<AzureBackupVaultPrivateEndpointConnectionVaultProperties>>>;
-  privateEndpointStateForBackup?: Maybe<Scalars['String']>;
-  privateEndpointStateForSiteRecovery?: Maybe<Scalars['String']>;
-  provisioningState?: Maybe<Scalars['String']>;
-  upgradeDetails?: Maybe<AzureBackupVaultUpgradeDetails>;
-};
-
-export type AzureBackupVaultVaultPropertiesEncryption = {
-  infrastructureEncryption?: Maybe<Scalars['String']>;
-  kekIdentity?: Maybe<AzureBackupVaultCmkKekIdentity>;
-  keyUri?: Maybe<Scalars['String']>;
-};
-
-export type AzureBackupVaultVaultPropertiesMoveDetails = {
-  completionTimeUtc?: Maybe<Scalars['DateTime']>;
-  operationId?: Maybe<Scalars['String']>;
-  sourceResourceId?: Maybe<Scalars['String']>;
-  startTimeUtc?: Maybe<Scalars['DateTime']>;
-  targetResourceId?: Maybe<Scalars['String']>;
 };
 
 export type AzureBaseResource = {
@@ -3705,15 +3594,250 @@ export type AzureRawTag = {
   value?: Maybe<Scalars['String']>;
 };
 
+export type AzureRecoveryInstance = AzureBaseResource & {
+  eTag?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureRecoveryInstanceProperties>;
+  recoveryVault?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryInstanceDiskExclusionProperties = {
+  diskLunList?: Maybe<Array<Maybe<Scalars['Int']>>>;
+  isInclusionList?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureRecoveryInstanceErrorDetail = {
+  code?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+  recommendations?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureRecoveryInstanceExtendedProperties = {
+  diskExclusionProperties?: Maybe<AzureRecoveryInstanceDiskExclusionProperties>;
+  linuxVmApplicationName?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryInstanceItemExtendedInfo = {
+  lastRefreshedAt?: Maybe<Scalars['DateTime']>;
+  oldestRecoveryPoint?: Maybe<Scalars['DateTime']>;
+  policyInconsistent?: Maybe<Scalars['Boolean']>;
+  policyState?: Maybe<Scalars['String']>;
+  recoveryPointCount?: Maybe<Scalars['Int']>;
+  resourceState?: Maybe<Scalars['String']>;
+  resourceStateSyncTime?: Maybe<Scalars['DateTime']>;
+};
+
+export type AzureRecoveryInstanceKpiResourceHealthDetails = {
+  resourceHealthDetails?: Maybe<Array<Maybe<AzureRecoveryInstanceResourceHealthDetails>>>;
+  resourceHealthStatus?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryInstanceKeyValue = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryInstanceKpisHealths = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureRecoveryInstanceKpiResourceHealthDetails>;
+};
+
+export type AzureRecoveryInstanceProperties = {
+  backupEngineName?: Maybe<Scalars['String']>;
+  backupManagementType?: Maybe<Scalars['String']>;
+  backupSetName?: Maybe<Scalars['String']>;
+  computerName?: Maybe<Scalars['String']>;
+  containerName?: Maybe<Scalars['String']>;
+  createMode?: Maybe<Scalars['String']>;
+  deferredDeleteSyncTimeInUTC?: Maybe<Scalars['Int']>;
+  deferredDeleteTimeInUTC?: Maybe<Scalars['DateTime']>;
+  deferredDeleteTimeRemaining?: Maybe<Scalars['String']>;
+  extendedInfo?: Maybe<AzureRecoveryInstanceItemExtendedInfo>;
+  extendedProperties?: Maybe<AzureRecoveryInstanceExtendedProperties>;
+  fabricName?: Maybe<Scalars['String']>;
+  friendlyName?: Maybe<Scalars['String']>;
+  healthDetails?: Maybe<Array<Maybe<AzureRecoveryInstanceResourceHealthDetails>>>;
+  healthStatus?: Maybe<Scalars['String']>;
+  isArchiveEnabled?: Maybe<Scalars['Boolean']>;
+  isDeferredDeleteScheduleUpcoming?: Maybe<Scalars['Boolean']>;
+  isRehydrate?: Maybe<Scalars['Boolean']>;
+  isScheduledForDeferredDelete?: Maybe<Scalars['Boolean']>;
+  kpisHealths?: Maybe<Array<Maybe<AzureRecoveryInstanceKpisHealths>>>;
+  lastBackupErrorDetail?: Maybe<AzureRecoveryInstanceErrorDetail>;
+  lastBackupStatus?: Maybe<Scalars['String']>;
+  lastBackupTime?: Maybe<Scalars['DateTime']>;
+  lastRecoveryPoint?: Maybe<Scalars['DateTime']>;
+  parentName?: Maybe<Scalars['String']>;
+  parentType?: Maybe<Scalars['String']>;
+  policyId?: Maybe<Scalars['String']>;
+  policyName?: Maybe<Scalars['String']>;
+  policyState?: Maybe<Scalars['String']>;
+  protectedItemDataId?: Maybe<Scalars['String']>;
+  protectedItemDataSourceId?: Maybe<Scalars['String']>;
+  protectedItemHealthStatus?: Maybe<Scalars['String']>;
+  protectedItemId?: Maybe<Scalars['Int']>;
+  protectedItemType?: Maybe<Scalars['String']>;
+  protectionState?: Maybe<Scalars['String']>;
+  protectionStatus?: Maybe<Scalars['String']>;
+  resourceGuardOperationRequests?: Maybe<Array<Maybe<Scalars['String']>>>;
+  serverName?: Maybe<Scalars['String']>;
+  sourceAssociations?: Maybe<Array<Maybe<AzureRecoveryInstanceKeyValue>>>;
+  sourceResourceId?: Maybe<Scalars['String']>;
+  virtualMachineId?: Maybe<Scalars['String']>;
+  workloadType?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryInstanceResourceHealthDetails = {
+  code?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  message?: Maybe<Scalars['String']>;
+  recommendations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  title?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryPolicy = AzureBaseResource & {
+  eTag?: Maybe<Scalars['String']>;
+  properties?: Maybe<AzureRecoveryPolicyProperties>;
+  recoveryVault?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
+  region?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  resourceGroupId?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryPolicyDailyRetentionFormat = {
+  date?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  isLast?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureRecoveryPolicyDailyRetentionSchedule = {
+  retentionDurationCount?: Maybe<Scalars['Int']>;
+  retentionDurationType?: Maybe<Scalars['String']>;
+  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
+export type AzureRecoveryPolicyHourlySchedule = {
+  interval?: Maybe<Scalars['Int']>;
+  scheduleWindowDuration?: Maybe<Scalars['Int']>;
+  scheduleWindowStartTime?: Maybe<Scalars['DateTime']>;
+};
+
+export type AzureRecoveryPolicyInstantRpAdditionalDetails = {
+  azureBackupRGNamePrefix?: Maybe<Scalars['String']>;
+  azureBackupRGNameSuffix?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryPolicyMonthlyRetentionSchedule = {
+  retentionDurationCount?: Maybe<Scalars['Int']>;
+  retentionDurationType?: Maybe<Scalars['String']>;
+  retentionScheduleDaily?: Maybe<Array<Maybe<AzureRecoveryPolicyDailyRetentionFormat>>>;
+  retentionScheduleFormatType?: Maybe<Scalars['String']>;
+  retentionScheduleWeekly?: Maybe<AzureRecoveryPolicyWeeklyRetentionFormat>;
+  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
+export type AzureRecoveryPolicyProperties = {
+  backupManagementType?: Maybe<Scalars['String']>;
+  fabricName?: Maybe<Scalars['String']>;
+  instantRPDetails?: Maybe<AzureRecoveryPolicyInstantRpAdditionalDetails>;
+  instantRpRetentionRangeInDays?: Maybe<Scalars['Int']>;
+  makePolicyConsistent?: Maybe<Scalars['Boolean']>;
+  policyType?: Maybe<Scalars['String']>;
+  protectedItemsCount?: Maybe<Scalars['Int']>;
+  resourceGuardOperationRequests?: Maybe<Array<Maybe<Scalars['String']>>>;
+  retentionPolicy?: Maybe<AzureRecoveryPolicyRetentionPolicyUnion>;
+  schedulePolicy?: Maybe<AzureRecoveryPolicySchedulePolicyUnion>;
+  settings?: Maybe<AzureRecoveryPolicySettings>;
+  subProtectionPolicy?: Maybe<Array<Maybe<AzureRecoveryPolicySubProtectionPolicy>>>;
+  timeZone?: Maybe<Scalars['String']>;
+  workLoadType?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryPolicyRetentionDuration = {
+  count?: Maybe<Scalars['Int']>;
+  durationType?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryPolicyRetentionPolicyUnion = {
+  dailySchedule?: Maybe<AzureRecoveryPolicyDailyRetentionSchedule>;
+  monthlySchedule?: Maybe<AzureRecoveryPolicyMonthlyRetentionSchedule>;
+  retentionDurationCount?: Maybe<Scalars['Int']>;
+  retentionDurationType?: Maybe<Scalars['String']>;
+  retentionPolicyType?: Maybe<Scalars['String']>;
+  weeklySchedule?: Maybe<AzureRecoveryPolicyWeeklyRetentionSchedule>;
+  yearlySchedule?: Maybe<AzureRecoveryPolicyYearlyRetentionSchedule>;
+};
+
+export type AzureRecoveryPolicySchedulePolicyUnion = {
+  dailySchedule?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  hourlySchedule?: Maybe<AzureRecoveryPolicyHourlySchedule>;
+  scheduleFrequencyInMins?: Maybe<Scalars['Int']>;
+  schedulePolicyType?: Maybe<Scalars['String']>;
+  scheduleRunDays?: Maybe<Array<Maybe<Scalars['String']>>>;
+  scheduleRunFrequency?: Maybe<Scalars['String']>;
+  scheduleRunTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+  scheduleWeeklyFrequency?: Maybe<Scalars['Int']>;
+  weeklySchedule?: Maybe<AzureRecoveryPolicyWeeklySchedule>;
+};
+
+export type AzureRecoveryPolicySettings = {
+  isCompression?: Maybe<Scalars['Boolean']>;
+  issqlcompression?: Maybe<Scalars['Boolean']>;
+  timeZone?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryPolicySubProtectionPolicy = {
+  id: Scalars['String'];
+  policyType?: Maybe<Scalars['String']>;
+  retentionPolicy?: Maybe<AzureRecoveryPolicyRetentionPolicyUnion>;
+  schedulePolicy?: Maybe<AzureRecoveryPolicySchedulePolicyUnion>;
+};
+
+export type AzureRecoveryPolicyWeeklyRetentionFormat = {
+  daysOfTheWeek?: Maybe<Array<Maybe<Scalars['String']>>>;
+  weeksOfTheMonth?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureRecoveryPolicyWeeklyRetentionSchedule = {
+  daysOfTheWeek?: Maybe<Array<Maybe<Scalars['String']>>>;
+  retentionDurationCount?: Maybe<Scalars['Int']>;
+  retentionDurationType?: Maybe<Scalars['String']>;
+  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
+export type AzureRecoveryPolicyWeeklySchedule = {
+  scheduleRunDays?: Maybe<Array<Maybe<Scalars['String']>>>;
+  scheduleRunTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
+export type AzureRecoveryPolicyYearlyRetentionSchedule = {
+  monthsOfYear?: Maybe<Array<Maybe<Scalars['String']>>>;
+  retentionDurationCount?: Maybe<Scalars['Int']>;
+  retentionDurationType?: Maybe<Scalars['String']>;
+  retentionScheduleDaily?: Maybe<Array<Maybe<AzureRecoveryPolicyDailyRetentionFormat>>>;
+  retentionScheduleFormatType?: Maybe<Scalars['String']>;
+  retentionScheduleWeekly?: Maybe<AzureRecoveryPolicyWeeklyRetentionFormat>;
+  retentionTimes?: Maybe<Array<Maybe<Scalars['DateTime']>>>;
+};
+
 export type AzureRecoveryVault = AzureResource & {
   createdAt?: Maybe<Scalars['String']>;
   createdBy?: Maybe<Scalars['String']>;
   createdByType?: Maybe<Scalars['String']>;
-  identity?: Maybe<AzureRecoveryVaultIdentityData>;
+  etag?: Maybe<Scalars['String']>;
+  identity?: Maybe<AzureRecoveryVaultIdentity>;
   lastModifiedAt?: Maybe<Scalars['String']>;
   lastModifiedBy?: Maybe<Scalars['String']>;
   lastModifiedByType?: Maybe<Scalars['String']>;
   properties?: Maybe<AzureRecoveryVaultProperties>;
+  recoveryInstances?: Maybe<Array<Maybe<AzureRecoveryInstance>>>;
+  recoveryPolicies?: Maybe<Array<Maybe<AzureRecoveryPolicy>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   sku?: Maybe<AzureRecoveryVaultSku>;
 };
@@ -3723,23 +3847,15 @@ export type AzureRecoveryVaultCmkKekIdentity = {
   userAssignedIdentity?: Maybe<Scalars['String']>;
 };
 
-export type AzureRecoveryVaultCmkKeyVaultProperties = {
-  keyUri?: Maybe<Scalars['String']>;
-};
-
-export type AzureRecoveryVaultIdentityData = {
+export type AzureRecoveryVaultIdentity = {
   principalId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  userAssignedIdentities?: Maybe<Array<Maybe<AzureRecoveryVaultUserIdentity>>>;
-};
-
-export type AzureRecoveryVaultPrivateEndpoint = {
-  id?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureRecoveryVaultUserAssignedIdentity>>>;
 };
 
 export type AzureRecoveryVaultPrivateEndpointConnection = {
-  privateEndpoint?: Maybe<AzureRecoveryVaultPrivateEndpoint>;
+  privateEndpointId?: Maybe<Scalars['String']>;
   privateLinkServiceConnectionState?: Maybe<AzureRecoveryVaultPrivateLinkServiceConnectionState>;
   provisioningState?: Maybe<Scalars['String']>;
 };
@@ -3760,7 +3876,7 @@ export type AzureRecoveryVaultPrivateLinkServiceConnectionState = {
 
 export type AzureRecoveryVaultProperties = {
   encryption?: Maybe<AzureRecoveryVaultPropertiesEncryption>;
-  moveDetails?: Maybe<AzureRecoveryVaultVaultPropertiesMoveDetails>;
+  moveDetails?: Maybe<AzureRecoveryVaultPropertiesMoveDetails>;
   moveState?: Maybe<Scalars['String']>;
   privateEndpointConnections?: Maybe<Array<Maybe<AzureRecoveryVaultPrivateEndpointConnectionVaultProperties>>>;
   privateEndpointStateForBackup?: Maybe<Scalars['String']>;
@@ -3772,7 +3888,15 @@ export type AzureRecoveryVaultProperties = {
 export type AzureRecoveryVaultPropertiesEncryption = {
   infrastructureEncryption?: Maybe<Scalars['String']>;
   kekIdentity?: Maybe<AzureRecoveryVaultCmkKekIdentity>;
-  keyVaultProperties?: Maybe<AzureRecoveryVaultCmkKeyVaultProperties>;
+  keyUri?: Maybe<Scalars['String']>;
+};
+
+export type AzureRecoveryVaultPropertiesMoveDetails = {
+  completionTimeUtc?: Maybe<Scalars['DateTime']>;
+  operationId?: Maybe<Scalars['String']>;
+  sourceResourceId?: Maybe<Scalars['String']>;
+  startTimeUtc?: Maybe<Scalars['DateTime']>;
+  targetResourceId?: Maybe<Scalars['String']>;
 };
 
 export type AzureRecoveryVaultSku = {
@@ -3784,29 +3908,26 @@ export type AzureRecoveryVaultSku = {
 };
 
 export type AzureRecoveryVaultUpgradeDetails = {
-  endTimeUtc?: Maybe<Scalars['String']>;
-  lastUpdatedTimeUtc?: Maybe<Scalars['String']>;
+  endTimeUtc?: Maybe<Scalars['DateTime']>;
+  lastUpdatedTimeUtc?: Maybe<Scalars['DateTime']>;
   message?: Maybe<Scalars['String']>;
   operationId?: Maybe<Scalars['String']>;
   previousResourceId?: Maybe<Scalars['String']>;
-  startTimeUtc?: Maybe<Scalars['String']>;
+  startTimeUtc?: Maybe<Scalars['DateTime']>;
   status?: Maybe<Scalars['String']>;
   triggerType?: Maybe<Scalars['String']>;
   upgradedResourceId?: Maybe<Scalars['String']>;
 };
 
-export type AzureRecoveryVaultUserIdentity = {
-  clientId?: Maybe<Scalars['String']>;
+export type AzureRecoveryVaultUserAssignedIdentity = {
   id: Scalars['String'];
-  principalId?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<AzureRecoveryVaultUserIdentity>;
 };
 
-export type AzureRecoveryVaultVaultPropertiesMoveDetails = {
-  completionTimeUtc?: Maybe<Scalars['String']>;
-  operationId?: Maybe<Scalars['String']>;
-  sourceResourceId?: Maybe<Scalars['String']>;
-  startTimeUtc?: Maybe<Scalars['String']>;
-  targetResourceId?: Maybe<Scalars['String']>;
+export type AzureRecoveryVaultUserIdentity = {
+  clientId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
 };
 
 export type AzureRedisCache = AzureResource & {
@@ -4047,6 +4168,7 @@ export type AzureResourceGroup = AzureResource & {
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
   backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
   backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
+  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnOriginGroups?: Maybe<Array<Maybe<AzureCdnOriginGroup>>>;
@@ -4085,6 +4207,8 @@ export type AzureResourceGroup = AzureResource & {
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryInstances?: Maybe<Array<Maybe<AzureRecoveryInstance>>>;
+  recoveryPolicies?: Maybe<Array<Maybe<AzureRecoveryPolicy>>>;
   recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   replicationAppliances?: Maybe<Array<Maybe<AzureReplicationAppliance>>>;
@@ -4706,6 +4830,7 @@ export type AzureSubscription = AzureBaseResource & {
   autoProvisioningSettings?: Maybe<Array<Maybe<AzureAutoProvisioningSetting>>>;
   backupInstances?: Maybe<Array<Maybe<AzureBackupInstance>>>;
   backupPolicies?: Maybe<Array<Maybe<AzureBackupPolicy>>>;
+  backupVaults?: Maybe<Array<Maybe<AzureBackupVault>>>;
   billing?: Maybe<Array<Maybe<AzureBilling>>>;
   cdnCustomDomains?: Maybe<Array<Maybe<AzureCdnCustomDomain>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
@@ -4748,6 +4873,8 @@ export type AzureSubscription = AzureBaseResource & {
   postgreSqlServers?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDnsZones?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;
+  recoveryInstances?: Maybe<Array<Maybe<AzureRecoveryInstance>>>;
+  recoveryPolicies?: Maybe<Array<Maybe<AzureRecoveryPolicy>>>;
   recoveryVaults?: Maybe<Array<Maybe<AzureRecoveryVault>>>;
   redisCaches?: Maybe<Array<Maybe<AzureRedisCache>>>;
   regions?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -4991,6 +5118,7 @@ export type AzureTag = {
   appServicePlans?: Maybe<Array<Maybe<AzureAppServicePlan>>>;
   appServiceWebApps?: Maybe<Array<Maybe<AzureAppServiceWebApp>>>;
   arcConnectedClusters?: Maybe<Array<Maybe<AzureArcConnectedCluster>>>;
+  backupVauls?: Maybe<Array<Maybe<AzureBackupVault>>>;
   cdnEndpoints?: Maybe<Array<Maybe<AzureCdnEndpoint>>>;
   cdnProfiles?: Maybe<Array<Maybe<AzureCdnProfile>>>;
   cognitiveServicesAccounts?: Maybe<Array<Maybe<AzureCognitiveServicesAccount>>>;
