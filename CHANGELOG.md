@@ -1,3 +1,17 @@
+# [0.64.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.3...0.64.0-alpha.1) (2022-08-17)
+
+
+### Features
+
+* **VMSS:** add VM connections ([277bb2c](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/277bb2cbb9c1825a72b67ed31cc5551e1b5773c1))
+
+## [0.63.1-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.2...0.63.1-alpha.3) (2022-08-17)
+
+
+### Bug Fixes
+
+* virtualMachine null fields ([648b51e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/648b51ec38fd7465fbaacae979a440325f7811f4))
+
 ## [0.63.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.1...0.63.1-alpha.2) (2022-08-02)
 
 

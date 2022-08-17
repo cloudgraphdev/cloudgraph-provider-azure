@@ -46,21 +46,24 @@ type azureVirtualMachineStorageImageReference
   sharedGalleryImageId: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachine implements azureResource
+type azureVirtualMachine implements azureBaseResource
   @key(fields: "id")
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   ) {
-  managedBy: String @search(by: [hash, regexp])
-  vmSize: String @search(by: [hash, regexp])
+  vmId: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   osProfile: azureVirtualMachineOSProfile
-  osType: String @search(by: [hash, regexp])
   storageImageReference: azureVirtualMachineStorageImageReference
   bootDiagnostics: Boolean @search
   licenseType: String @search(by: [hash, regexp])
+  tags: [azureRawTag]
   disks: [azureDisk] @hasInverse(field: virtualMachine)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualMachines)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: virtualMachines)
   resourceGroup: [azureResourceGroup] @hasInverse(field: virtualMachines)
+  virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: virtualMachines)
 }

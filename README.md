@@ -33,92 +33,89 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 
 ## Supported Services
 
-| Service                                     | Relations                                                                 |
-| ------------------------------------------- | ------------------------------------------------------------------------- |
-| actionGroup                                 | resourceGroup, authRoleDefinition, eventHub, functionApp                  |
-| activityLogAlerts                           | resourceGroup                                                             |
-| adApplication                               | authRoleAssignment, adGroup, adServicePrincipal, adUser                   |
-| adGroup                                     | adApplication, authRoleAssignment                                         |
-| adIdentitySecurityDefaultsEnforcementPolicy |                                                                           |
-| adServicePrincipal                          | adApplication, authRoleAssignment                                         |
-| adUser                                      | adApplication, authRoleAssignment                                         |
-| aksManagedCluster                           | resourceGroup                                                             |
-| appInsights                                 | resourceGroup                                                             |
-| appServiceEnvironment                       | resourceGroup, virtualNetwork                                             |
-| appServicePlan                              | resourceGroup, appServiceWebApp                                           |
-| appServiceWebApp                            | resourceGroup, appServicePlan, storageAccount                             |
-| arcConnectedCluster                         | resourceGroup                                                             |
-| authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition    |
-| authRoleDefinition                          | actionGroup, authRoleAssignment                                           |
-| autoProvisioningSettings                    |                                                                           |
-| backupInstances                             | backupVaults, resourceGroup                                               |
-| backupPolicies                              | backupVaults, resourceGroup                                               |
-| backupVaults                                | backupInstances, backupPolicies, resourceGroup                            |
-| cdnCustomDomains                            | cdnEndpoints, resourceGroup                                               |
-| cdnEndpoints                                | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup |
-| cdnProfiles                                 | cdnEndpoints, resourceGroup                                               |
-| cdnOrigins                                  | cdnEndpoints, cdnOriginGroups, resourceGroup                              |
-| cdnOriginGroups                             | cdnEndpoints, cdnOrigins, resourceGroup                                   |
-| cognitiveServicesAccount                    | resourceGroup                                                             |
-| containerRegistry                           | keyVault, resourceGroup                                                   |
-| cosmosDb                                    | resourceGroup                                                             |
-| dataCollectionRule                          | resourceGroup, logAnalyticsWorkspace                                      |
-| dataFactory                                 | integrationRuntime, resourceGroup                                         |
-| databaseManagedSqlInstance                  | resourceGroup                                                             |
-| databaseMySql                               | resourceGroup, mySqlServers                                               |
-| databasePostgreSql                          | resourceGroup, postgreSqlServers                                          |
-| databaseSql                                 | resourceGroup, sqlServers                                                 |
-| databaseSqlVm                               | resourceGroup                                                             |
-| dataLakeStorageAccounts                     | resourceGroup                                                             |
-| diagnosticSettings                          | resourceGroup, storageAccount                                             |
-| disk                                        | resourceGroup, virtualMachine                                             |
-| dns                                         | resourceGroup                                                             |
-| eventGrid                                   | resourceGroup                                                             |
-| eventHub                                    | resourceGroup, actionGroup, storageAccount                                |
-| expressRouteGateways                        | resourceGroup                                                             |
-| fileShare                                   | resourceGroup, storageAccount                                             |
-| firewall                                    | publicIp, virtualNetwork                                                  |
-| functionApp                                 | resourceGroup, actionGroup                                                |
-| integrationRuntime                          | dataFactory, resourceGroup                                                |
-| keyVault                                    | resourceGroup                                                             |
-| machineLearningWorkspaces                   | resourceGroup                                                             |
-| metricAlert                                 | resourceGroup                                                             |
-| mySqlServers                                | resourceGroup, databaseMySql                                              |
-| loadBalancer                                | loadBalancer, publicIp, resourceGroup, virtualNetwork                     |
-| logAnalyticsSolution                        | resourceGroup, logAnalyticsWorkspace                                      |
-| logAnalyticsWorkspace                       | resourceGroup, dataCollectionRule, logAnalyticsSolution                   |
-| logProfiles                                 | storageAccount                                                            |
-| networkInterface                            | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork    |
-| policyAssignment                            |                                                                           |
-| postgreSqlServers                           | resourceGroup, databasePostgreSql                                         |
-| privateDns                                  | resourceGroup                                                             |
-| publicIp                                    | networkInterface, resourceGroup                                           |
-| recoveryInstances                           | recoveryVaults, resourceGroup                                             |
-| recoveryPolicies                            | recoveryVaults, resourceGroup                                             |
-| recoveryVaults                              | recoveryInstances, recoveryPolicies, resourceGroup                        |
-| redisCaches                                 | resourceGroup                                                             |
-| replicationAppliances                       | resourceGroup                                                             |
-| replicationCenters                          | resourceGroup                                                             |
-| replicationNetworks                         | resourceGroup                                                             |
-| replicationPolicies                         | resourceGroup                                                             |
-| resourceGroup                               | **all services**                                                          |
-| securityAssessments                         |                                                                           |
-| securityContacts                            |                                                                           |
-| securityGroup                               | networkInterface, resourceGroup                                           |
-| securityPricings                            |                                                                           |
-| securitySettings                            |                                                                           |
-| serviceBus                                  | resourceGroup                                                             |
-| sqlServers                                  | databaseSql, resourceGroup                                                |
-| storageAccount                              | diagnosticSetting, logProfiles, resourceGroup, storageContainer           |
-| storageBlob                                 | resourceGroup, storageContainer                                           |
-| storageContainer                            | resourceGroup, storageAccount                                             |
-| synapseBigDataPools                         | resourceGroup, synapseWorkspaces                                          |
-| synapseSqlPools                             | resourceGroup, synapseWorkspaces                                          |
-| synapseWorkspaces                           | resourceGroup, synapseBigDataPools, synapseSqlPools                       |
-| trafficManager                              | resourceGroup                                                             |
-| virtualMachine                              | disk, networkInterface, resourceGroup, virtualNetwork                     |
-| virtualMachineScaleSet                      | resourceGroup                                                             |
-| virtualNetwork                              | appServiceEnvironment,networkInterface, resourceGroup virtualMachine      |
+| Service                                     | Relations                                                                     |
+| ------------------------------------------- | ----------------------------------------------------------------------------- |
+| actionGroup                                 | resourceGroup, authRoleDefinition, eventHub, functionApp                      |
+| activityLogAlerts                           | resourceGroup                                                                 |
+| adApplication                               | authRoleAssignment, adGroup, adServicePrincipal, adUser                       |
+| adGroup                                     | adApplication, authRoleAssignment                                             |
+| adIdentitySecurityDefaultsEnforcementPolicy |                                                                               |
+| adServicePrincipal                          | adApplication, authRoleAssignment                                             |
+| adUser                                      | adApplication, authRoleAssignment                                             |
+| aksManagedCluster                           | resourceGroup                                                                 |
+| appInsights                                 | resourceGroup                                                                 |
+| appServiceEnvironment                       | resourceGroup, virtualNetwork                                                 |
+| appServicePlan                              | resourceGroup, appServiceWebApp                                               |
+| appServiceWebApp                            | resourceGroup, appServicePlan, storageAccount                                 |
+| arcConnectedCluster                         | resourceGroup                                                                 |
+| authRoleAssignment                          | adApplication, adGroup, adServicePrincipal, adUser, authRoleDefinition        |
+| authRoleDefinition                          | actionGroup, authRoleAssignment                                               |
+| autoProvisioningSettings                    |                                                                               |
+| backupInstance                              | resourceGroup                                                                 |
+| backupPolicy                                | resourceGroup                                                                 |
+| cdnCustomDomains                            | cdnEndpoints, resourceGroup                                                   |
+| cdnEndpoints                                | cdnCustomDomains, cdnOrigins, cdnOriginGroups, cdnProfiles, resourceGroup     |
+| cdnProfiles                                 | cdnEndpoints, resourceGroup                                                   |
+| cdnOrigins                                  | cdnEndpoints, cdnOriginGroups, resourceGroup                                  |
+| cdnOriginGroups                             | cdnEndpoints, cdnOrigins, resourceGroup                                       |
+| cognitiveServicesAccount                    | resourceGroup                                                                 |
+| containerRegistry                           | keyVault, resourceGroup                                                       |
+| cosmosDb                                    | resourceGroup                                                                 |
+| dataCollectionRule                          | resourceGroup, logAnalyticsWorkspace                                          |
+| dataFactory                                 | integrationRuntime, resourceGroup                                             |
+| databaseManagedSqlInstance                  | resourceGroup                                                                 |
+| databaseMySql                               | resourceGroup, mySqlServers                                                   |
+| databasePostgreSql                          | resourceGroup, postgreSqlServers                                              |
+| databaseSql                                 | resourceGroup, sqlServers                                                     |
+| databaseSqlVm                               | resourceGroup                                                                 |
+| dataLakeStorageAccounts                     | resourceGroup                                                                 |
+| diagnosticSettings                          | resourceGroup, storageAccount                                                 |
+| disk                                        | resourceGroup, virtualMachine                                                 |
+| dns                                         | resourceGroup                                                                 |
+| eventGrid                                   | resourceGroup                                                                 |
+| eventHub                                    | resourceGroup, actionGroup, storageAccount                                    |
+| expressRouteGateways                        | resourceGroup                                                                 |
+| fileShare                                   | resourceGroup, storageAccount                                                 |
+| firewall                                    | publicIp, virtualNetwork                                                      |
+| functionApp                                 | resourceGroup, actionGroup                                                    |
+| integrationRuntime                          | dataFactory, resourceGroup                                                    |
+| keyVault                                    | resourceGroup                                                                 |
+| machineLearningWorkspaces                   | resourceGroup                                                                 |
+| metricAlert                                 | resourceGroup                                                                 |
+| mySqlServers                                | resourceGroup, databaseMySql                                                  |
+| loadBalancer                                | loadBalancer, publicIp, resourceGroup, virtualNetwork                         |
+| logAnalyticsSolution                        | resourceGroup, logAnalyticsWorkspace                                          |
+| logAnalyticsWorkspace                       | resourceGroup, dataCollectionRule, logAnalyticsSolution                       |
+| logProfiles                                 | storageAccount                                                                |
+| networkInterface                            | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork        |
+| policyAssignment                            |                                                                               |
+| postgreSqlServers                           | resourceGroup, databasePostgreSql                                             |
+| privateDns                                  | resourceGroup                                                                 |
+| publicIp                                    | networkInterface, resourceGroup                                               |
+| recoveryVaults                              | resourceGroup                                                                 |
+| redisCaches                                 | resourceGroup                                                                 |
+| replicationAppliances                       | resourceGroup                                                                 |
+| replicationCenters                          | resourceGroup                                                                 |
+| replicationNetworks                         | resourceGroup                                                                 |
+| replicationPolicies                         | resourceGroup                                                                 |
+| resourceGroup                               | **all services**                                                              |
+| securityAssessments                         |                                                                               |
+| securityContacts                            |                                                                               |
+| securityGroup                               | networkInterface, resourceGroup                                               |
+| securityPricings                            |                                                                               |
+| securitySettings                            |                                                                               |
+| serviceBus                                  | resourceGroup                                                                 |
+| sqlServers                                  | databaseSql, resourceGroup                                                    |
+| storageAccount                              | diagnosticSetting, logProfiles, resourceGroup, storageContainer               |
+| storageBlob                                 | resourceGroup, storageContainer                                               |
+| storageContainer                            | resourceGroup, storageAccount                                                 |
+| synapseBigDataPools                         | resourceGroup, synapseWorkspaces                                              |
+| synapseSqlPools                             | resourceGroup, synapseWorkspaces                                              |
+| synapseWorkspaces                           | resourceGroup, synapseBigDataPools, synapseSqlPools                           |
+| trafficManager                              | resourceGroup                                                                 |
+| virtualMachine                              | disk, networkInterface, resourceGroup, virtualNetwork, virtualMachineScaleSet |
+| virtualMachineScaleSet                      | resourceGroup, virtualMachine                                                 |
+| virtualNetwork                              | appServiceEnvironment,networkInterface, resourceGroup virtualMachine          |
 
 ## Development
 

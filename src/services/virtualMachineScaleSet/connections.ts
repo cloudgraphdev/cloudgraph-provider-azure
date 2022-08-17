@@ -4,6 +4,7 @@ import { isEmpty } from 'lodash'
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
+import { RawAzureVirtualMachine } from '../virtualMachine/data'
 import { RawAzureVirtualMachineScaleSet } from './data'
 
 export default ({
@@ -42,6 +43,33 @@ export default ({
           resourceType: services.resourceGroup,
           relation: 'child',
           field: 'resourceGroup',
+        })
+      }
+    }
+  }
+
+  /**
+   * Find VMs related to this VM Scale set
+   */
+  const virtualMachines: {
+    name: string
+    data: { [property: string]: RawAzureVirtualMachine[] }
+  } = data.find(({ name }) => name === services.virtualMachine)
+
+  if (virtualMachines?.data?.[region]) {
+    const virtualMachineInRegion: RawAzureVirtualMachine[] = virtualMachines.data[
+      region
+    ].filter(({virtualMachineScaleSet}: RawAzureVirtualMachine) =>
+      virtualMachineScaleSet?.id && virtualMachineScaleSet.id === id
+    )
+
+    if (!isEmpty(virtualMachineInRegion)) {
+      for (const vm of virtualMachineInRegion) {
+        connections.push({
+          id: vm.id,
+          resourceType: services.virtualMachine,
+          relation: 'child',
+          field: 'virtualMachines',
         })
       }
     }
