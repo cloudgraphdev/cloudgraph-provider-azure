@@ -46,13 +46,39 @@ type azureVirtualMachineStorageImageReference
   sharedGalleryImageId: String @search(by: [hash, regexp])
 }
 
+type azureVirtualMachinePlan
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  publisher: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  product: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineAdditionalCapabilities
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  ultraSSDEnabled: Boolean @search
+  hibernationEnabled: Boolean @search
+}
+
 type azureVirtualMachine implements azureBaseResource
   @key(fields: "id")
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   ) {
+  plan: azureVirtualMachinePlan
+  additionalCapabilities: azureVirtualMachineAdditionalCapabilities
+  vmSize: String @search(by: [hash, regexp])
   vmId: String @search(by: [hash, regexp])
+  priority: String @search(by: [hash, regexp])
+  billingProfileMaxPrice: Int @search
   subscriptionId: String @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
   resourceGroupId: String @search(by: [hash, regexp])
