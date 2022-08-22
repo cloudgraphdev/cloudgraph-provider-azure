@@ -1,3 +1,10 @@
+# [0.64.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.2...0.64.0-alpha.3) (2022-08-22)
+
+
+### Bug Fixes
+
+* **virtualMachine:** add more fields to specify plan and size ([7cf2636](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/7cf26365af12fe390f780b214e9861d49364b96e))
+
 # [0.64.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.1...0.64.0-alpha.2) (2022-08-17)
 
 
