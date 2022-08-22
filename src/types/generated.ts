@@ -5242,11 +5242,15 @@ export type AzureVaultSecretGroup = {
 };
 
 export type AzureVirtualMachine = AzureBaseResource & {
+  additionalCapabilities?: Maybe<AzureVirtualMachineAdditionalCapabilities>;
+  billingProfileMaxPrice?: Maybe<Scalars['Int']>;
   bootDiagnostics?: Maybe<Scalars['Boolean']>;
   disks?: Maybe<Array<Maybe<AzureDisk>>>;
   licenseType?: Maybe<Scalars['String']>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
   osProfile?: Maybe<AzureVirtualMachineOsProfile>;
+  plan?: Maybe<AzureVirtualMachinePlan>;
+  priority?: Maybe<Scalars['String']>;
   region?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGroupId?: Maybe<Scalars['String']>;
@@ -5256,6 +5260,12 @@ export type AzureVirtualMachine = AzureBaseResource & {
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
   vmId?: Maybe<Scalars['String']>;
+  vmSize?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachineAdditionalCapabilities = {
+  hibernationEnabled?: Maybe<Scalars['Boolean']>;
+  ultraSSDEnabled?: Maybe<Scalars['Boolean']>;
 };
 
 export type AzureVirtualMachineOsProfile = {
@@ -5275,6 +5285,12 @@ export type AzureVirtualMachineOsProfileWindowsConfiguration = {
   enableAutomaticUpdates?: Maybe<Scalars['Boolean']>;
   provisionVMAgent?: Maybe<Scalars['Boolean']>;
   timeZone?: Maybe<Scalars['String']>;
+};
+
+export type AzureVirtualMachinePlan = {
+  name?: Maybe<Scalars['String']>;
+  product?: Maybe<Scalars['String']>;
+  publisher?: Maybe<Scalars['String']>;
 };
 
 export type AzureVirtualMachineScaleSet = AzureResource & {

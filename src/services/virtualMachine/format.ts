@@ -18,6 +18,15 @@ export default ({
     id,
     name,
     type,
+    plan: {
+      name: planName,
+      publisher: planPublisher,
+      product: planProduct,
+    } = {},
+    additionalCapabilities: { ultraSSDEnabled, hibernationEnabled } = {},
+    hardwareProfile: { vmSize } = {},
+    priority,
+    billingProfile: { maxPrice } = {},
     vmId,
     diagnosticsProfile: {
       bootDiagnostics: { enabled: bootDiagnostics = false } = {},
@@ -49,7 +58,12 @@ export default ({
     name,
     type,
     region,
+    plan: { name: planName, publisher: planPublisher, product: planProduct },
+    vmSize,
     vmId,
+    priority,
+    billingProfileMaxPrice: maxPrice,
+    additionalCapabilities: { ultraSSDEnabled, hibernationEnabled },
     osProfile: {
       computerName,
       windowsConfiguration: {
