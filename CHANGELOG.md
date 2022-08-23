@@ -1,3 +1,10 @@
+# [0.64.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.3...0.64.0-alpha.4) (2022-08-23)
+
+
+### Bug Fixes
+
+* **virtualMachine:** add missing id ([46e2f3e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/46e2f3e36cc9ecb83f8c56b02f53046f885154f2))
+
 # [0.64.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.2...0.64.0-alpha.3) (2022-08-22)
 
 
