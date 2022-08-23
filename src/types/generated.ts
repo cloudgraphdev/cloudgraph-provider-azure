@@ -5451,6 +5451,7 @@ export type AzureVirtualMachineScaleSetSubResource = {
 
 export type AzureVirtualMachineStorageImageReference = {
   exactVersion?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   offer?: Maybe<Scalars['String']>;
   publisher?: Maybe<Scalars['String']>;
   sharedGalleryImageId?: Maybe<Scalars['String']>;

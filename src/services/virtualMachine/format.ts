@@ -45,7 +45,7 @@ export default ({
       allowExtensionOperations,
       requireGuestProvisionSignal,
     } = {},
-    storageProfile: { imageReference } = {},
+    storageProfile: { imageReference = {} } = {},
     licenseType,
     resourceGroupId,
     Tags,

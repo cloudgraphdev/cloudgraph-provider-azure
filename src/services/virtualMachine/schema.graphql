@@ -38,6 +38,7 @@ type azureVirtualMachineStorageImageReference
     mutation: { add: false, delete: false }
     subscription: false
   ) {
+  id: String @search(by: [hash])
   publisher: String @search(by: [hash, regexp])
   offer: String @search(by: [hash, regexp])
   sku: String @search(by: [hash, regexp])
