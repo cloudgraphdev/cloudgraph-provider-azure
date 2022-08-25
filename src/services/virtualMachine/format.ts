@@ -50,8 +50,15 @@ export default ({
     resourceGroupId,
     Tags,
   } = service
-  const storageImageReference: AzureVirtualMachineStorageImageReference =
-    imageReference || {}
+  const {
+    id: imageReferenceId,
+    exactVersion,
+    offer,
+    sku,
+    publisher,
+    version,
+    sharedGalleryImageId,
+  }: AzureVirtualMachineStorageImageReference = imageReference
   return {
     id,
     subscriptionId: account,
@@ -78,7 +85,15 @@ export default ({
       allowExtensionOperations,
       requireGuestProvisionSignal,
     },
-    storageImageReference,
+    storageImageReference: {
+      id: imageReferenceId,
+      exactVersion,
+      offer,
+      sku,
+      publisher,
+      version,
+      sharedGalleryImageId,
+    },
     bootDiagnostics,
     licenseType,
     resourceGroupId,
