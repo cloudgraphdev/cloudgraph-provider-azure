@@ -1,3 +1,10 @@
+# [0.64.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.4...0.64.0-alpha.5) (2022-08-25)
+
+
+### Bug Fixes
+
+* **virtualMachine:** fixes to storageImageReference property ([e9cf808](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/e9cf8082389159491885a9da0eb7f15d9aacb5dd))
+
 # [0.64.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.3...0.64.0-alpha.4) (2022-08-23)
 
 
