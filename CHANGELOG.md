@@ -1,3 +1,10 @@
+# [0.64.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.5...0.64.0-alpha.6) (2022-08-26)
+
+
+### Features
+
+* **aksManagedCluster:** CG-1270 add VMSS connection ([6c2268b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/6c2268baa3ccf8ad40b873fcd13274019b22d2ea))
+
 # [0.64.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.4...0.64.0-alpha.5) (2022-08-25)
 
 
