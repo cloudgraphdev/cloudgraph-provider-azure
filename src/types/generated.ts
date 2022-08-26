@@ -342,6 +342,7 @@ export type AzureAksManagedCluster = AzureResource & {
   servicePrincipalProfileClientId?: Maybe<Scalars['String']>;
   skuName?: Maybe<Scalars['String']>;
   skuTier?: Maybe<Scalars['String']>;
+  virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
 };
 
 export type AzureAksManagedClusterAadProfile = {
@@ -5294,6 +5295,7 @@ export type AzureVirtualMachinePlan = {
 };
 
 export type AzureVirtualMachineScaleSet = AzureResource & {
+  aksManagedClusters?: Maybe<Array<Maybe<AzureAksManagedCluster>>>;
   doNotRunExtensionsOnOverprovisionedVMs?: Maybe<Scalars['Boolean']>;
   overprovision?: Maybe<Scalars['Boolean']>;
   platformFaultDomainCount?: Maybe<Scalars['Int']>;

@@ -4,6 +4,7 @@ import { isEmpty } from 'lodash'
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
+import { RawAzureVirtualMachineScaleSet } from '../virtualMachineScaleSet/data'
 import { RawAzureAksManagedCluster } from './data'
 
 export default ({
@@ -18,7 +19,7 @@ export default ({
   [property: string]: ServiceConnection[]
 } => {
   const connections: ServiceConnection[] = []
-  const { id, resourceGroupId: rgName } = service
+  const { id, resourceGroupId: rgName, nodeResourceGroup: nodeRgName } = service
 
   /**
    * Find resource group related to this kubernetes environment
@@ -42,6 +43,33 @@ export default ({
           resourceType: services.resourceGroup,
           relation: 'child',
           field: 'resourceGroup',
+        })
+      }
+    }
+  }
+
+  /**
+   * Find VMSS related to this kubernetes environment
+   */
+  const vmssList: {
+    name: string
+    data: { [property: string]: RawAzureVirtualMachineScaleSet[] }
+  } = data.find(({ name }) => name === services.virtualMachineScaleSet)
+
+  if (vmssList?.data?.[region]) {
+    const vmssInRegion: RawAzureVirtualMachineScaleSet[] = vmssList.data[
+      region
+    ].filter(({resourceGroupId: vmssRgName}: RawAzureVirtualMachineScaleSet) => 
+      caseInsensitiveEqual(vmssRgName, nodeRgName)
+    )
+
+    if (!isEmpty(vmssInRegion)) {
+      for (const vmss of vmssInRegion) {
+        connections.push({
+          id: vmss.id,
+          resourceType: services.virtualMachineScaleSet,
+          relation: 'child',
+          field: 'virtualMachineScaleSets',
         })
       }
     }
