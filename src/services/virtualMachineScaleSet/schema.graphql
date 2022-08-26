@@ -313,4 +313,6 @@ type azureVirtualMachineScaleSet implements azureResource
     @hasInverse(field: virtualMachineScaleSets)
   virtualMachines: [azureVirtualMachine]
     @hasInverse(field: virtualMachineScaleSets)
+  aksManagedClusters: [azureAksManagedCluster]
+    @hasInverse(field: virtualMachineScaleSets)
 }
