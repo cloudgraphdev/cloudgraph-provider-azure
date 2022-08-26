@@ -8,12 +8,12 @@ import {
   IntegrationRuntimeEdition,
   PackageStore,
 } from '@azure/arm-datafactory'
-import { isArray, isEmpty, isObject, isString } from 'lodash'
+import { isEmpty } from 'lodash'
 import {
   AzureIntegrationRuntime,
   AzureIntegrationRuntimeProperties,
-  AzureSecretBaseUnion,
-  AzureLinkedServiceReferencePatameters,
+  AzureCustomSetupBaseUnion,
+  AzurePackageStore,
 } from '../../types/generated'
 import { RawAzureIntegrationRuntimeResource } from './data'
 
@@ -44,12 +44,9 @@ export interface RawAzureSecretBaseUnion {
 
 export interface RawAzureCustomSetupBaseUnion extends CustomSetupBase {
   targetName?: Record<string, unknown>
-  userName?: Record<string, unknown>
-  password?: RawAzureSecretBaseUnion
   variableName?: string
   variableValue?: string
   componentName?: string
-  licenseKey?: RawAzureSecretBaseUnion
   version?: string
 }
 
@@ -113,47 +110,11 @@ export interface RawAzureIntegrationRuntimeUnion {
   referenceName?: string
 }
 
-const formatParameters = (
-  params: { [propertyName: string]: Record<string, unknown> }
-): AzureLinkedServiceReferencePatameters[] => {
-  if (isEmpty(params)) {
-    return []
-  }
-  return  Object.entries(params).map(([k, v]) => ({
-    id: cuid(),
-    key: k,
-    value: Object.entries(v.value).map(([k2, v2]) => ({
-      id: isObject(v) ? cuid() : `${k2}:${v2}`,
-      key: k,
-      value:
-        (isString(v2) && v2) ||
-        (isArray(v2) &&
-          (v2 as Array<any>)
-            .map(i => (isString(i) && i) || JSON.stringify(i))
-            .join(',')) ||
-        JSON.stringify(v2),
-    })),
-  })) || []
-}
-
-const formatAzureSecret = (
-  secret: RawAzureSecretBaseUnion
-): AzureSecretBaseUnion => {
-  if (isEmpty(secret)) {
-    return {}
-  }
-  return {
-    type: secret?.type,
-    value: secret?.value,
-    store: {
-      type: secret?.store?.type,
-      referenceName: secret?.store?.referenceName,
-      parameters: formatParameters(secret?.store?.parameters),
-    },
-    secretName: Object.values(secret?.secretName ?? {}).join(''),
-    secretVersion: Object.values(secret?.secretVersion ?? {}).join(''),
-  }
-}
+// function useInterfaceToExtractData<ExpectedDataType>(
+//   data: unknown
+// ): ExpectedDataType {
+//   return data as ExpectedDataType
+// }
 
 const formatProperties = (
   runtimeProperties?: RawAzureIntegrationRuntimeUnion
@@ -164,63 +125,151 @@ const formatProperties = (
 
   const {
     type,
-    ssisProperties = {},
-    customerVirtualNetwork = {},
-    managedVirtualNetwork = {},
-    computeProperties = {},
-    linkedInfo = {},
-    ...rest
+    ssisProperties: {
+      expressCustomSetupProperties = [],
+      packageStores = [],
+      catalogInfo: {
+        catalogServerEndpoint,
+        catalogPricingTier,
+        dualStandbyPairName,
+      } = {},
+      credential: {
+        type: credentialType,
+        referenceName: credentialReferenceName,
+      } = {},
+      licenseType,
+      customSetupScriptProperties: { blobContainerUri } = {},
+      dataProxyProperties: {
+        connectVia: {
+          type: connectViaType,
+          referenceName: connectViaReferenceName,
+        } = {},
+        stagingLinkedService: {
+          type: stagingLinkedServiceType,
+          referenceName: stagingLinkedServiceReferenceName,
+        } = {},
+        path,
+      } = {},
+      edition,
+    } = {},
+    customerVirtualNetwork: { subnetId } = {},
+    managedVirtualNetwork: {
+      id: mvId,
+      type: mvType,
+      referenceName: mvReferenceName,
+    } = {},
+    computeProperties: {
+      location,
+      nodeSize,
+      numberOfNodes,
+      maxParallelExecutionsPerNode,
+      dataFlowProperties: { computeType, coreCount, timeToLive, cleanup } = {},
+      vNetProperties: {
+        vNetId,
+        subnet,
+        publicIPs = [],
+        subnetId: vNetPropertiesSubnetId,
+      } = {},
+    } = {},
+    linkedInfo: {
+      key: { type: keyType, value: keyValue } = {},
+      credential: {
+        type: linkedInfoCredentialType,
+        referenceName: linkedInfoCredentialReferenceName,
+      } = {},
+      authorizationType,
+      resourceId,
+    } = {},
+    description,
+    state,
+    referenceName,
   } = runtimeProperties
-
-  const {
-    expressCustomSetupProperties = [],
-    packageStores = [],
-    catalogInfo = {},
-    credential = {},
-    ...restSsisProperties
-  } = ssisProperties
-  const { catalogAdminPassword = {}, ...restCatalogInfo } = catalogInfo
-  const {
-    key = {},
-    credential: linkedInfoCredential = {},
-    ...restLinkedInfo
-  } = linkedInfo
 
   return {
     integrationRuntimeType: type,
     ssisProperties: {
       expressCustomSetupProperties:
         expressCustomSetupProperties?.map(
-          ({ targetName, userName, password, licenseKey, ...sp }) => ({
+          ({
+            targetName,
+            variableName,
+            variableValue,
+            version,
+            type: expressCustomSetupPropertiesType,
+            componentName,
+          }): AzureCustomSetupBaseUnion => ({
             id: cuid(),
             targetName: Object.values(targetName ?? {}).join(''),
-            userName: Object.values(userName ?? {}).join(''),
-            password: formatAzureSecret(password),
-            licenseKey: formatAzureSecret(licenseKey),
-            ...sp,
+            variableName,
+            variableValue,
+            version,
+            type: expressCustomSetupPropertiesType,
+            componentName,
           })
         ) || [],
-      packageStores: packageStores?.map(ps => ({ id: cuid(), ...ps })) || [],
+      packageStores:
+        packageStores?.map(
+          ({
+            name,
+            packageStoreLinkedService: {
+              type: packageStoreLinkedServiceType,
+              referenceName: packageStoreLinkedServiceReferenceName,
+            },
+          }): AzurePackageStore => ({
+            id: cuid(),
+            name,
+            packageStoreLinkedServiceType,
+            packageStoreLinkedServiceReferenceName,
+          })
+        ) || [],
       catalogInfo: {
-        catalogAdminPasswordType: catalogAdminPassword?.type,
-        catalogAdminPasswordValue: catalogAdminPassword?.value,
-        ...restCatalogInfo,
+        catalogServerEndpoint,
+        catalogPricingTier,
+        dualStandbyPairName,
       },
-      credentialType: credential?.type,
-      credentialReferenceName: credential?.referenceName,
-      ...restSsisProperties,
+      credentialType,
+      credentialReferenceName,
+      licenseType,
+      customSetupScriptProperties: { blobContainerUri },
+      dataProxyProperties: {
+        connectViaType,
+        connectViaReferenceName,
+        stagingLinkedServiceType,
+        stagingLinkedServiceReferenceName,
+        path,
+      },
+      edition,
     },
-    customerVirtualNetworkSubnetId: customerVirtualNetwork?.subnetId,
-    managedVirtualNetwork,
-    computeProperties,
+    customerVirtualNetworkSubnetId: subnetId,
+    managedVirtualNetwork: {
+      id: mvId,
+      type: mvType,
+      referenceName: mvReferenceName,
+    },
+    computeProperties: {
+      location,
+      nodeSize,
+      numberOfNodes,
+      maxParallelExecutionsPerNode,
+      dataFlowProperties: { computeType, coreCount, timeToLive, cleanup },
+      vNetProperties: {
+        vNetId,
+        subnet,
+        publicIPs,
+        subnetId: vNetPropertiesSubnetId,
+      },
+    },
     linkedInfo: {
-      credentialType: linkedInfoCredential?.type,
-      credentialReferenceName: linkedInfoCredential?.referenceName,
-      keyType: key?.type,
-      keyValue: key?.value,
-      ...restLinkedInfo,
+      credentialType: linkedInfoCredentialType,
+      credentialReferenceName: linkedInfoCredentialReferenceName,
+      keyType,
+      keyValue,
+      authorizationType,
+      resourceId,
     },
-    ...rest,
+    description,
+    state,
+    referenceName,
   }
 }
 
