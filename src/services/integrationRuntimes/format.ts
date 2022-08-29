@@ -110,12 +110,6 @@ export interface RawAzureIntegrationRuntimeUnion {
   referenceName?: string
 }
 
-// function useInterfaceToExtractData<ExpectedDataType>(
-//   data: unknown
-// ): ExpectedDataType {
-//   return data as ExpectedDataType
-// }
-
 const formatProperties = (
   runtimeProperties?: RawAzureIntegrationRuntimeUnion
 ): AzureIntegrationRuntimeProperties => {
