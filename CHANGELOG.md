@@ -1,3 +1,10 @@
+# [0.64.0-alpha.7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.6...0.64.0-alpha.7) (2022-08-29)
+
+
+### Bug Fixes
+
+* **integrationRuntimes,logAnalyticsWorkspace,sqlServers:** several fixes ([8c19d90](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8c19d9065667dbba638b4932b1dea5628f0ff5bd))
+
 # [0.64.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.5...0.64.0-alpha.6) (2022-08-26)
 
 
