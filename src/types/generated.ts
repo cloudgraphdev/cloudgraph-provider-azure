@@ -1862,11 +1862,8 @@ export type AzureCredentialReference = {
 export type AzureCustomSetupBaseUnion = {
   componentName?: Maybe<Scalars['String']>;
   id: Scalars['String'];
-  licenseKey?: Maybe<AzureSecretBaseUnion>;
-  password?: Maybe<AzureSecretBaseUnion>;
   targetName?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
-  userName?: Maybe<Scalars['String']>;
   variableName?: Maybe<Scalars['String']>;
   variableValue?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
@@ -2707,8 +2704,6 @@ export type AzureIntegrationRuntimeComputeProperties = {
 
 export type AzureIntegrationRuntimeCustomSetupScriptProperties = {
   blobContainerUri?: Maybe<Scalars['String']>;
-  sasTokenType?: Maybe<Scalars['String']>;
-  sasTokenValue?: Maybe<Scalars['String']>;
 };
 
 export type AzureIntegrationRuntimeDataFlowProperties = {
@@ -2745,9 +2740,6 @@ export type AzureIntegrationRuntimeProperties = {
 };
 
 export type AzureIntegrationRuntimeSsisCatalogInfo = {
-  catalogAdminPasswordType?: Maybe<Scalars['String']>;
-  catalogAdminPasswordValue?: Maybe<Scalars['String']>;
-  catalogAdminUserName?: Maybe<Scalars['String']>;
   catalogPricingTier?: Maybe<Scalars['String']>;
   catalogServerEndpoint?: Maybe<Scalars['String']>;
   dualStandbyPairName?: Maybe<Scalars['String']>;
@@ -4394,8 +4386,6 @@ export type AzureServiceBusUserAssignedIdentity = {
 
 export type AzureSqlServer = AzureResource & {
   adAdministrators?: Maybe<Array<Maybe<AzureSqlServerAdAdministrator>>>;
-  administratorLogin?: Maybe<Scalars['String']>;
-  administratorLoginPassword?: Maybe<Scalars['String']>;
   administrators?: Maybe<AzureSqlServerExternalAdministrator>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
   encryptionProtectors?: Maybe<Array<Maybe<AzureSqlServerEncryptionProtector>>>;
@@ -4421,7 +4411,6 @@ export type AzureSqlServer = AzureResource & {
 export type AzureSqlServerAdAdministrator = {
   administratorType?: Maybe<Scalars['String']>;
   id: Scalars['String'];
-  login?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   sid?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
@@ -4438,7 +4427,6 @@ export type AzureSqlServerBlobAuditingPolicy = {
   queueDelayMs?: Maybe<Scalars['Int']>;
   retentionDays?: Maybe<Scalars['Int']>;
   state?: Maybe<Scalars['String']>;
-  storageAccountAccessKey?: Maybe<Scalars['String']>;
   storageAccountSubscriptionId?: Maybe<Scalars['String']>;
   storageEndpoint?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
@@ -4528,9 +4516,7 @@ export type AzureSqlServerVulnerabilityAssessment = {
   id: Scalars['String'];
   name?: Maybe<Scalars['String']>;
   recurringScans?: Maybe<AzureSqlServerVulnerabilityAssessmentRecurringScansProperties>;
-  storageAccountAccessKey?: Maybe<Scalars['String']>;
   storageContainerPath?: Maybe<Scalars['String']>;
-  storageContainerSasKey?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 

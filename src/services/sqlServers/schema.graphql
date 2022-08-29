@@ -124,7 +124,6 @@ type azureSqlServerADAdministrator
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
   administratorType: String @search(by: [hash, regexp])
-  login: String @search(by: [hash, regexp])
   sid: String @search(by: [hash, regexp])
   tenantId: String @search(by: [hash, regexp])
 }
@@ -156,8 +155,6 @@ type azureSqlServer implements azureResource
   )
   @key(fields: "id") {
   identity: azureSqlServerIdentity
-  administratorLogin: String @search(by: [hash, regexp])
-  administratorLoginPassword: String @search(by: [hash, regexp])
   version: String @search(by: [hash, regexp])
   state: String @search(by: [hash, regexp])
   fullyQualifiedDomainName: String @search(by: [hash, regexp])
@@ -191,8 +188,6 @@ type azureSqlServerVulnerabilityAssessment
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])      
   storageContainerPath: String @search(by: [hash, regexp])
-  storageContainerSasKey: String @search(by: [hash, regexp])
-  storageAccountAccessKey: String @search(by: [hash, regexp])
   recurringScans: azureSqlServerVulnerabilityAssessmentRecurringScansProperties
 }
 
@@ -225,6 +220,5 @@ type azureSqlServerBlobAuditingPolicy
   queueDelayMs: Int @search
   state: String @search(by: [hash, regexp])  
   storageEndpoint: String @search(by: [hash, regexp])  
-  storageAccountAccessKey: String @search(by: [hash, regexp])  
   storageAccountSubscriptionId: String @search(by: [hash, regexp])  
 }
