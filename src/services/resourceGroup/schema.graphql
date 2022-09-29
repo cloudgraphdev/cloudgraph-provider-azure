@@ -27,7 +27,7 @@ type azureResourceGroup implements azureResource
   dataCollectionRules: [azureDataCollectionRule] @hasInverse(field: resourceGroup)
   dataFactories: [azureDataFactory] @hasInverse(field: resourceGroup)
   dataLakeStorageAccount: [azureDataLakeStorageAccount] @hasInverse(field: resourceGroup)
-  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance] @hasInverse(field: resourceGroup)
+  databaseManagedSqlInstances: [azureDbManagedSqlInstance] @hasInverse(field: resourceGroup)
   databaseMySql: [azureDatabaseMySql] @hasInverse(field: resourceGroup)
   databasePostgreSql: [azureDatabasePostgreSql] @hasInverse(field: resourceGroup)
   databaseSql: [azureDatabaseSql] @hasInverse(field: resourceGroup)
@@ -71,7 +71,7 @@ type azureResourceGroup implements azureResource
   synapseSqlPools: [azureSynapseSqlPool] @hasInverse(field: resourceGroup)
   synapseWorkspaces: [azureSynapseWorkspace] @hasInverse(field: resourceGroup)
   trafficManagerProfiles: [azureTrafficManagerProfile] @hasInverse(field: resourceGroup)
-  virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: resourceGroup)
+  virtualMachineScaleSets: [azureVmScaleSet] @hasInverse(field: resourceGroup)
   virtualMachines: [azureVirtualMachine] @hasInverse(field: resourceGroup)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: resourceGroup)
 }

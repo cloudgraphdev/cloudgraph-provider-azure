@@ -9,7 +9,7 @@ type azureTrafficManagerProfileDnsConfig
   ttl: Int @search
 }
 
-type azureTrafficManagerProfileMonitorConfig
+type azureTrafficManagerProfileMonitor
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -23,7 +23,7 @@ type azureTrafficManagerProfileMonitorConfig
   timeoutInSeconds: Int @search
   toleratedNumberOfFailures: Int @search
   customHeaders: [azureTrafficManagerProfileCustomHeadersItem]
-  expectedStatusCodeRanges: [azureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem]
+  expectedStatusCodeRanges: [azureTrafficManagerProfileExpectedStatus]
 }
 
 type azureTrafficManagerProfileCustomHeadersItem
@@ -38,7 +38,7 @@ type azureTrafficManagerProfileCustomHeadersItem
   value: String @search(by: [hash, regexp])
 }
 
-type azureTrafficManagerProfileMonitorConfigExpectedStatusCodeRangesItem
+type azureTrafficManagerProfileExpectedStatus
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -95,7 +95,7 @@ type azureTrafficManagerProfile implements azureResource
   profileStatus: String @search(by: [hash, regexp])
   trafficRoutingMethod: String @search(by: [hash, regexp])
   dnsConfig: azureTrafficManagerProfileDnsConfig
-  monitorConfig: azureTrafficManagerProfileMonitorConfig
+  monitorConfig: azureTrafficManagerProfileMonitor
   endpoints: [azureTrafficManagerProfileEndpoint]
   trafficViewEnrollmentStatus: String @search(by: [hash, regexp])
   allowedEndpointRecordTypes: [String] @search(by: [hash, regexp])

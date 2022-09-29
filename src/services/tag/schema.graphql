@@ -21,7 +21,7 @@ type azureTag @key(fields: "id") {
   cosmosDb: [azureCosmosDb]
   dataCollectionRules: [azureDataCollectionRule]
   dataFactories: [azureDataFactory]
-  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
+  databaseManagedSqlInstances: [azureDbManagedSqlInstance]
   disks: [azureDisk]
   dns: [azureDnsZone]
   expressRouteGateways: [azureExpressRouteGateway]
@@ -51,7 +51,7 @@ type azureTag @key(fields: "id") {
   synapseWorkspaces: [azureSynapseWorkspace]
   trafficManagerProfiles: [azureTrafficManagerProfile]
   virtualMachines: [azureVirtualMachine]
-  virtualMachineScaleSets: [azureVirtualMachineScaleSet]
+  virtualMachineScaleSets: [azureVmScaleSet]
   virtualNetworks: [azureVirtualNetwork]
 }
 

@@ -179,7 +179,7 @@ type azureCredentialReference
   referenceName: String @search(by: [hash, regexp]) 
 }
 
-type azureIntegrationRuntimeSsisProperties
+type azureIntegrationRuntimeSsis
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -221,7 +221,7 @@ type azureIntegrationRuntimeProperties
   state: String @search(by: [hash, regexp])
   managedVirtualNetwork: azureManagedVirtualNetworkReference
   computeProperties: azureIntegrationRuntimeComputeProperties
-  ssisProperties: azureIntegrationRuntimeSsisProperties
+  ssisProperties: azureIntegrationRuntimeSsis
   customerVirtualNetworkSubnetId: String @search(by: [hash, regexp])
   linkedInfo: azureLinkedIntegrationRuntimeTypeUnion
   referenceName: String @search(by: [hash, regexp])
@@ -242,7 +242,7 @@ type azureIntegrationRuntime implements azureBaseResource
   state: String @search(by: [hash, regexp])
   managedVirtualNetwork: azureManagedVirtualNetworkReference
   computeProperties: azureIntegrationRuntimeComputeProperties
-  ssisProperties: azureIntegrationRuntimeSsisProperties
+  ssisProperties: azureIntegrationRuntimeSsis
   customerVirtualNetworkSubnetId: String @search(by: [hash, regexp])
   linkedInfo: azureLinkedIntegrationRuntimeTypeUnion
   referenceName: String @search(by: [hash, regexp])

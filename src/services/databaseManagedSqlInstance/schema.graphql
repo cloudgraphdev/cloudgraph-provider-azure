@@ -1,10 +1,10 @@
-type azureDatabaseManagedSqlInstance implements azureResource
+type azureDbManagedSqlInstance implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
-  identity: azureDatabaseManagedSqlInstanceIdentity
+  identity: azureDbManagedSqlInstanceIdentity
   skuName: String @search(by: [hash, regexp])
   skuTier: String @search(by: [hash, regexp])
   collation: String @search(by: [hash, regexp])
@@ -33,7 +33,7 @@ type azureDatabaseManagedSqlInstance implements azureResource
   resourceGroup: [azureResourceGroup] @hasInverse(field: databaseManagedSqlInstances)
 }
 
-type azureDatabaseManagedSqlInstanceIdentity
+type azureDbManagedSqlInstanceIdentity
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

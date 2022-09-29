@@ -1,4 +1,4 @@
-type azureContainerRegistryPrivateEndpointConnection
+type azureContainerRegistryPrivateEndpoint
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -145,7 +145,7 @@ type azureContainerRegistry implements azureResource
   encryption: azureContainerRegistryEncryption
   dataEndpointEnabled: Boolean @search
   dataEndpointHostNames: [String] @search(by: [hash, regexp])
-  privateEndpointConnections: [azureContainerRegistryPrivateEndpointConnection]
+  privateEndpointConnections: [azureContainerRegistryPrivateEndpoint]
   publicNetworkAccess: String @search(by: [hash, regexp])
   networkRuleBypassOptions: String @search(by: [hash, regexp])
   zoneRedundancy: String @search(by: [hash, regexp])

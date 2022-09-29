@@ -2,7 +2,7 @@ import { ApplicationSecurityGroup, SecurityRule } from '@azure/arm-network'
 import cuid from 'cuid'
 import {
   AzureNetworkSecurityGroup,
-  AzureNetworkSecurityGroupApplication,
+  AzureNetworkSecurityGroupApp,
   AzureNetworkSecurityGroupRule,
   AzureNetworkSecurityGroupFlowLog,
 } from '../../types/generated'
@@ -11,7 +11,7 @@ import { RawAzureNetworkSecurityGroup, RawAzureFlowLog } from './data'
 
 const normalizeApplicationSecurityGroups = (
   asgArr: Array<ApplicationSecurityGroup>
-): Array<AzureNetworkSecurityGroupApplication> =>
+): Array<AzureNetworkSecurityGroupApp> =>
   asgArr.map(({ id: asgId, ...restData }) => ({
     id: asgId || cuid(),
     ...restData,
@@ -29,9 +29,9 @@ const normalizeSecurityRules = (
     }) => ({
       id: sgId || cuid(),
       ...dataSR,
-      destinationApplicationSecurityGroups:
+      destinationAppSecurityGroups:
         normalizeApplicationSecurityGroups(dASG),
-      sourceApplicationSecurityGroups: normalizeApplicationSecurityGroups(sASG),
+      sourceAppSecurityGroups: normalizeApplicationSecurityGroups(sASG),
     })
   )
 

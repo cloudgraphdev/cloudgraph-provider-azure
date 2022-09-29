@@ -1,4 +1,4 @@
-type azureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties
+type azureNetworkInterfaceConnProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -22,7 +22,7 @@ type azureNetworkInterfaceIpConfiguration
   subnetId: String @search(by: [hash, regexp])
   primary: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
-  privateLinkConnectionProperties: azureNetworkInterfaceIpConfigurationPrivateLinkConnectionProperties
+  privateLinkConnectionProperties: azureNetworkInterfaceConnProperties
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   etag: String @search(by: [hash, regexp])

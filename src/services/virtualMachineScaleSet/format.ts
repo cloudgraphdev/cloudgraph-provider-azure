@@ -7,18 +7,18 @@ import {
   VirtualMachineScaleSetExtensionProfile,
 } from '@azure/arm-compute'
 import {
-  AzureVirtualMachineScaleSet,
-  AzureVirtualMachineScaleSetOsProfile,
-  AzureVirtualMachineScaleSetStorageProfile,
-  AzureVirtualMachineScaleSetNetworkProfile,
-  AzureVirtualMachineScaleSetExtension,
+  AzureVmScaleSet,
+  AzureVmScaleSetOsProfile,
+  AzureVmScaleSetStorageProfile,
+  AzureVmScaleSetNetworkProfile,
+  AzureVmScaleSetExtension,
 } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureVirtualMachineScaleSet } from './data'
 
 const formatOsProfile = (
   osProfile?: VirtualMachineScaleSetOSProfile
-): AzureVirtualMachineScaleSetOsProfile => {
+): AzureVmScaleSetOsProfile => {
   if (isEmpty(osProfile)) {
     return {}
   }
@@ -85,7 +85,7 @@ const formatOsProfile = (
 
 const formatStorageProfile = (
   storageProfile?: VirtualMachineScaleSetStorageProfile
-): AzureVirtualMachineScaleSetStorageProfile => {
+): AzureVmScaleSetStorageProfile => {
   if (isEmpty(storageProfile)) {
     return {}
   }
@@ -121,7 +121,7 @@ const formatStorageProfile = (
 
 const formatNetworkProfile = (
   networkProfile?: VirtualMachineScaleSetNetworkProfile
-): AzureVirtualMachineScaleSetNetworkProfile => {
+): AzureVmScaleSetNetworkProfile => {
   if (isEmpty(networkProfile)) {
     return {}
   }
@@ -157,7 +157,7 @@ const formatNetworkProfile = (
                   id: cuid(),
                   ...ipConfiguration,
                   subnetId: subnet?.id,
-                  applicationGatewayBackendAddressPools:
+                  appGatewayAddressPools:
                     applicationGatewayBackendAddressPools?.map(agb => ({
                       id: agb.id || cuid(),
                       ...agb,
@@ -167,7 +167,7 @@ const formatNetworkProfile = (
                       id: asg.id || cuid(),
                       ...asg,
                     })) || [],
-                  loadBalancerBackendAddressPools:
+                  loadBalancerAddressPools:
                     loadBalancerBackendAddressPools?.map(lbb => ({
                       id: lbb.id || cuid(),
                       ...lbb,
@@ -187,7 +187,7 @@ const formatNetworkProfile = (
 
 const formatExtensionProfile = (
   extensionProfile?: VirtualMachineScaleSetExtensionProfile
-): AzureVirtualMachineScaleSetExtension[] => {
+): AzureVmScaleSetExtension[] => {
   if (isEmpty(extensionProfile)) {
     return []
   }
@@ -220,7 +220,7 @@ export default ({
   service: RawAzureVirtualMachineScaleSet
   account: string
   region: string
-}): AzureVirtualMachineScaleSet => {
+}): AzureVmScaleSet => {
   const {
     id,
     name,
@@ -254,7 +254,7 @@ export default ({
   }
 
   // Setting Extension Profile
-  let extensions: AzureVirtualMachineScaleSetExtension[] = []
+  let extensions: AzureVmScaleSetExtension[] = []
   if (!isEmpty(extensionProfile)) {
     extensions = formatExtensionProfile(extensionProfile)
   }

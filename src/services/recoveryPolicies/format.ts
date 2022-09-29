@@ -23,7 +23,6 @@ import {
   AzureRecoveryPolicyRetentionPolicyUnion,
   AzureRecoveryPolicySchedulePolicyUnion,
 } from '../../types/generated'
-import { RawAzureProtectionPolicyResource } from './data'
 
 export interface RawAzureSchedulePolicy extends SchedulePolicy {
   scheduleFrequencyInMins?: number
@@ -80,7 +79,7 @@ const formatSchedulePolicy = (
   } = schedulePolicy
 
   return {
-    scheduleRunTimes: scheduleRunTimes?.map(t => t?.toISOString()) || [],
+    scheduleRunTimes: scheduleRunTimes?.map(t => t?.toISOString()),
     hourlySchedule: {
       interval: hourlySchedule?.interval,
       scheduleWindowStartTime:
@@ -88,10 +87,10 @@ const formatSchedulePolicy = (
       scheduleWindowDuration: hourlySchedule?.scheduleWindowDuration,
     },
     dailySchedule:
-      dailySchedule?.scheduleRunTimes?.map(t => t?.toISOString()) || [],
+      dailySchedule?.scheduleRunTimes?.map(t => t?.toISOString()),
     weeklySchedule: {
       scheduleRunDays: weeklySchedule?.scheduleRunDays,
-      scheduleRunTimes: scheduleRunTimes?.map(t => t?.toISOString()) || [],
+      scheduleRunTimes: scheduleRunTimes?.map(t => t?.toISOString()),
     },
     ...rest,
   }
@@ -116,8 +115,7 @@ const formatRetentionPolicy = (
   return {
     dailySchedule: {
       retentionTimes:
-        retentionDailySchedule?.retentionTimes?.map(t => t?.toISOString()) ||
-        [],
+        retentionDailySchedule?.retentionTimes?.map(t => t?.toISOString()),
       retentionDurationCount: retentionDailySchedule?.retentionDuration?.count,
       retentionDurationType:
         retentionDailySchedule?.retentionDuration?.durationType,
@@ -125,8 +123,7 @@ const formatRetentionPolicy = (
     weeklySchedule: {
       daysOfTheWeek: retentionWeeklySchedule?.daysOfTheWeek,
       retentionTimes:
-        retentionWeeklySchedule?.retentionTimes?.map(t => t?.toISOString()) ||
-        [],
+        retentionWeeklySchedule?.retentionTimes?.map(t => t?.toISOString()),
       retentionDurationCount: retentionWeeklySchedule?.retentionDuration?.count,
       retentionDurationType:
         retentionWeeklySchedule?.retentionDuration?.durationType,
@@ -139,10 +136,12 @@ const formatRetentionPolicy = (
           ({ date, isLast }) => ({ id: cuid(), date, isLast })
         ) || [],
       retentionScheduleWeekly:
-        retentionMonthlySchedule?.retentionScheduleWeekly,
+        retentionMonthlySchedule?.retentionScheduleWeekly ? {
+          daysOfTheWeek: retentionMonthlySchedule.retentionScheduleWeekly.daysOfTheWeek || [],
+          weeksOfTheMonth: retentionMonthlySchedule.retentionScheduleWeekly.weeksOfTheMonth || [],
+        } : {},
       retentionTimes:
-        retentionMonthlySchedule?.retentionTimes?.map(t => t?.toISOString()) ||
-        [],
+        retentionMonthlySchedule?.retentionTimes?.map(t => t?.toISOString()),
       retentionDurationCount:
         retentionMonthlySchedule?.retentionDuration?.count,
       retentionDurationType:
@@ -158,8 +157,7 @@ const formatRetentionPolicy = (
         ) || [],
       retentionScheduleWeekly: retentionYearlySchedule?.retentionScheduleWeekly,
       retentionTimes:
-        retentionYearlySchedule?.retentionTimes?.map(t => t?.toISOString()) ||
-        [],
+        retentionYearlySchedule?.retentionTimes?.map(t => t?.toISOString()),
       retentionDurationCount: retentionYearlySchedule?.retentionDuration?.count,
       retentionDurationType:
         retentionYearlySchedule?.retentionDuration?.durationType,

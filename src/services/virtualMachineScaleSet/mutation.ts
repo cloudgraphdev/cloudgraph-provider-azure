@@ -1,5 +1,5 @@
-export default `mutation($input: [AddazureVirtualMachineScaleSetInput!]!) {
-  addazureVirtualMachineScaleSet(input: $input, upsert: true) {
+export default `mutation($input: [AddazureVmScaleSetInput!]!) {
+  addazureVmScaleSet(input: $input, upsert: true) {
     numUids
   }
 }`

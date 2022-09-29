@@ -57,7 +57,7 @@ type azureRecoveryPolicyRetentionDuration
   durationType: String @search(by: [hash, regexp])
 }
 
-type azureRecoveryPolicyDailyRetentionSchedule
+type azureBackupPolicyDailySchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -68,7 +68,7 @@ type azureRecoveryPolicyDailyRetentionSchedule
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureRecoveryPolicyWeeklyRetentionSchedule
+type azureBackupPolicyWeeklySchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -102,7 +102,7 @@ type azureRecoveryPolicyWeeklyRetentionFormat
   weeksOfTheMonth: [String] @search(by: [hash, regexp])
 }
 
-type azureRecoveryPolicyMonthlyRetentionSchedule
+type azureBackupPolicyMonthlySchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -116,7 +116,7 @@ type azureRecoveryPolicyMonthlyRetentionSchedule
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureRecoveryPolicyYearlyRetentionSchedule
+type azureBackupPolicyYearlySchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -138,10 +138,10 @@ type azureRecoveryPolicyRetentionPolicyUnion
     subscription: false
   ) {
   retentionPolicyType: String @search(by: [hash, regexp])
-  dailySchedule: azureRecoveryPolicyDailyRetentionSchedule
-  weeklySchedule: azureRecoveryPolicyWeeklyRetentionSchedule
-  monthlySchedule: azureRecoveryPolicyMonthlyRetentionSchedule
-  yearlySchedule: azureRecoveryPolicyYearlyRetentionSchedule
+  dailySchedule: azureBackupPolicyDailySchedule
+  weeklySchedule: azureBackupPolicyWeeklySchedule
+  monthlySchedule: azureBackupPolicyMonthlySchedule
+  yearlySchedule: azureBackupPolicyYearlySchedule
   retentionDurationCount: Int @search
   retentionDurationType: String @search(by: [hash, regexp])
 }

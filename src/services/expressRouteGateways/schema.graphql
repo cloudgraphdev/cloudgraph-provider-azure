@@ -6,7 +6,7 @@ type azureExpressRouteGateway implements azureResource
   @key(fields: "id") {
   etag: String @search(by: [hash, regexp])
   autoScaleConfiguration: azureExpressRouteGatewayPropertiesAutoScaleConfiguration
-  expressRouteConnections: [azureExpressRouteGatewayConnection]
+  expressRouteConnections: [azureExpressRouteGatewayConn]
   provisioningState: String @search(by: [hash, regexp])
   virtualHub: azureExpressRouteGatewayVirtualHubId
   resourceGroup: [azureResourceGroup] @hasInverse(field: expressRouteGateways)
@@ -31,7 +31,7 @@ type azureExpressRouteGatewayPropertiesAutoScaleConfigurationBounds
   max: Int @search
 }
 
-type azureExpressRouteGatewayConnection
+type azureExpressRouteGatewayConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

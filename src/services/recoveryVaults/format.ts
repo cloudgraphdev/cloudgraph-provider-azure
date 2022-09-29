@@ -107,7 +107,42 @@ export default ({
         value: identity?.userAssignedIdentities[key],
       })),
     },
-    ...transformSystemData(systemData),
+    properties: {
+      ...properties,
+      moveDetails: {
+        ...properties?.moveDetails,
+        completionTimeUtc: properties?.moveDetails?.completionTimeUtc?.toISOString(),
+        startTimeUtc: properties?.moveDetails?.startTimeUtc?.toISOString(),
+      },
+      upgradeDetails: {
+        ...properties?.upgradeDetails,
+        endTimeUtc: properties?.upgradeDetails?.endTimeUtc?.toISOString(),
+        lastUpdatedTimeUtc: properties?.upgradeDetails?.lastUpdatedTimeUtc?.toISOString(),
+        startTimeUtc: properties?.upgradeDetails?.startTimeUtc?.toISOString(),
+      },
+      privateEndpointConnections: properties?.privateEndpointConnections?.map(connection => ({
+        id: connection?.id || cuid(),
+        properties: { 
+          provisioningState: connection.properties?.provisioningState, 
+          privateEndpoint: connection.properties?.privateEndpoint,
+          privateLinkServiceConnectionState: {
+            status: connection.properties?.privateLinkServiceConnectionState?.status,
+            description: connection.properties?.privateLinkServiceConnectionState?.description,
+            actionsRequired: connection.properties?.privateLinkServiceConnectionState?.actionsRequired,
+          }
+        },
+        name: connection.name,
+        type: connection.type,
+        location: connection.location
+      })),
+    },
+    sku,
+    createdBy: systemData?.createdBy,
+    createdByType: systemData?.createdByType,
+    createdAt: systemData?.createdAt?.toISOString(),
+    lastModifiedBy: systemData?.lastModifiedBy,
+    lastModifiedByType: systemData?.lastModifiedByType,
+    lastModifiedAt: systemData?.lastModifiedAt?.toISOString(),
     tags: formatTagsFromMap(Tags),
   }
 }

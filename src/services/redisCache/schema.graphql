@@ -25,7 +25,7 @@ type azureRedisCache implements azureResource
   accessKeys: azureRedisCacheAccessKeys
   linkedServers: [azureRedisCacheLinkedServer]
   instances: [azureRedisCacheInstanceDetails]
-  privateEndpointConnections: [azureRedisCachePrivateEndpointConnection]
+  privateEndpointConnections: [azureRedisCachePrivateEndpointConn]
   resourceGroup: [azureResourceGroup] @hasInverse(field: redisCaches)
 }
 
@@ -99,7 +99,7 @@ type azureRedisCacheInstanceDetails
   isPrimary: Boolean @search
 }
 
-type azureRedisCachePrivateEndpointConnection
+type azureRedisCachePrivateEndpointConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

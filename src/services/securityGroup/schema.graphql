@@ -1,4 +1,4 @@
-type azureNetworkSecurityGroupApplication implements azureBaseResource
+type azureNetworkSecurityGroupApp implements azureBaseResource
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -20,10 +20,10 @@ type azureNetworkSecurityGroupRule implements azureBaseResource
   destinationPortRange: String @search(by: [hash, regexp])
   sourceAddressPrefix: String @search(by: [hash, regexp])
   sourceAddressPrefixes: [String] @search(by: [hash, regexp])
-  sourceApplicationSecurityGroups: [azureNetworkSecurityGroupApplication]
+  sourceAppSecurityGroups: [azureNetworkSecurityGroupApp]
   destinationAddressPrefix: String @search(by: [hash, regexp])
   destinationAddressPrefixes: [String] @search(by: [hash, regexp])
-  destinationApplicationSecurityGroups: [azureNetworkSecurityGroupApplication]
+  destinationAppSecurityGroups: [azureNetworkSecurityGroupApp]
   sourcePortRanges: [String] @search(by: [hash, regexp])
   destinationPortRanges: [String] @search(by: [hash, regexp])
   access: String @search(by: [hash, regexp])

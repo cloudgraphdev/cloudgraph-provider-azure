@@ -1,4 +1,4 @@
-type azureVirtualMachineScaleSetSubResource
+type azureVmScaleSetSubResource
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -8,7 +8,7 @@ type azureVirtualMachineScaleSetSubResource
   id: String! @id @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetExtension
+type azureVmScaleSetExtension
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -29,16 +29,16 @@ type azureVirtualMachineScaleSetExtension
   settings: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetExtensionProfile
+type azureVmScaleSetExtensionProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  extensions: [azureVirtualMachineScaleSetExtension]
+  extensions: [azureVmScaleSetExtension]
 }
 
-type azureVirtualMachineScaleSetDiagnosticsProfileBoot
+type azureVmScaleSetDiagnosticsProfileBoot
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -47,16 +47,16 @@ type azureVirtualMachineScaleSetDiagnosticsProfileBoot
   enabled: Boolean @search
 }
 
-type azureVirtualMachineScaleSetDiagnosticsProfile
+type azureVmScaleSetDiagnosticsProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  bootDiagnostics: azureVirtualMachineScaleSetDiagnosticsProfileBoot
+  bootDiagnostics: azureVmScaleSetDiagnosticsProfileBoot
 }
 
-type azureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings
+type azureVmScaleSetDnsSettings
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -65,7 +65,7 @@ type azureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings
   dnsServers: [String] @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetIpTag
+type azureVmScaleSetIpTag
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -75,7 +75,7 @@ type azureVirtualMachineScaleSetIpTag
   tag: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
+type azureVmScaleSetPublicIPAddressConfigurationDnsSettings
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -84,7 +84,7 @@ type azureVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
   domainNameLabel: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetNetworkPublicIpAddresssConfiguration
+type azureVmScaleSetNetworkPublicIpAddresssConfiguration
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -92,14 +92,14 @@ type azureVirtualMachineScaleSetNetworkPublicIpAddresssConfiguration
   ) {
   name: String @search(by: [hash, regexp])
   idleTimeoutInMinutes: Int @search
-  ipTags: [azureVirtualMachineScaleSetIpTag]
+  ipTags: [azureVmScaleSetIpTag]
   publicIPPrefix: azureSubResource
   publicIPAddressVersion: String @search(by: [hash, regexp])
   deleteOption: String @search(by: [hash, regexp])
-  dnsSettings: azureVirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
+  dnsSettings: azureVmScaleSetPublicIPAddressConfigurationDnsSettings
 }
 
-type azureVirtualMachineScaleSetNetworkIpConfiguration
+type azureVmScaleSetNetworkIpConfig
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -111,13 +111,13 @@ type azureVirtualMachineScaleSetNetworkIpConfiguration
   privateIPAddressVersion: String @search(by: [hash, regexp])
   primary: Boolean @search
   subnetId: String @search(by: [hash, regexp])
-  applicationGatewayBackendAddressPools: [azureSubResource]
+  appGatewayAddressPools: [azureSubResource]
   applicationSecurityGroups: [azureSubResource]
-  loadBalancerBackendAddressPools: [azureSubResource]
+  loadBalancerAddressPools: [azureSubResource]
   loadBalancerInboundNatPools: [azureSubResource]
 }
 
-type azureVirtualMachineScaleSetNetworkProfileConfiguration
+type azureVmScaleSetNetworkProfileConfig
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -132,20 +132,20 @@ type azureVirtualMachineScaleSetNetworkProfileConfiguration
   enableIPForwarding: Boolean @search
   deleteOption: String @search(by: [hash, regexp])
   networkSecurityGroup: azureSubResource
-  dnsSettings: azureVirtualMachineScaleSetNetworkProfileConfigurationDnsSettings
-  ipConfigurations: [azureVirtualMachineScaleSetNetworkIpConfiguration]
+  dnsSettings: azureVmScaleSetDnsSettings
+  ipConfigurations: [azureVmScaleSetNetworkIpConfig]
 }
 
-type azureVirtualMachineScaleSetNetworkProfile
+type azureVmScaleSetNetworkProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  networkInterfaceConfigurations: [azureVirtualMachineScaleSetNetworkProfileConfiguration]
+  networkInterfaceConfigurations: [azureVmScaleSetNetworkProfileConfig]
 }
 
-type azureVirtualMachineScaleSetStorageProfileImageReference
+type azureVmScaleSetStorageProfileImageReference
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -158,7 +158,7 @@ type azureVirtualMachineScaleSetStorageProfileImageReference
   version: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetStorageProfileManagedDisk
+type azureVmScaleSetStorageProfileManagedDisk
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -167,7 +167,7 @@ type azureVirtualMachineScaleSetStorageProfileManagedDisk
   storageAccountType: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSetStorageProfileOsDisk
+type azureVmScaleSetStorageProfileOsDisk
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -178,17 +178,17 @@ type azureVirtualMachineScaleSetStorageProfileOsDisk
   osType: String @search(by: [hash, regexp])
   diskSizeGB: Int @search
   writeAcceleratorEnabled: Boolean @search
-  managedDisk: azureVirtualMachineScaleSetStorageProfileManagedDisk
+  managedDisk: azureVmScaleSetStorageProfileManagedDisk
 }
 
-type azureVirtualMachineScaleSetStorageProfile
+type azureVmScaleSetStorageProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  imageReference: azureVirtualMachineScaleSetStorageProfileImageReference
-  osDisk: azureVirtualMachineScaleSetStorageProfileOsDisk
+  imageReference: azureVmScaleSetStorageProfileImageReference
+  osDisk: azureVmScaleSetStorageProfileOsDisk
 }
 
 type azureSshPublicKey
@@ -212,7 +212,7 @@ type azureSshConfiguration
   publicKeys: [azureSshPublicKey]
 }
 
-type azureVirtualMachineScaleSetOsProfileLinuxConfiguration
+type azureVmScaleSetOsProfileLinuxConfiguration
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -223,7 +223,7 @@ type azureVirtualMachineScaleSetOsProfileLinuxConfiguration
   ssh: azureSshConfiguration
 }
 
-type azureVirtualMachineScaleSetOsProfileWindowsConfiguration
+type azureVmScaleSetOsProfileWindowsConfiguration
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -259,7 +259,7 @@ type azureVaultSecretGroup
   vaultCertificates: [azureVaultCertificate]
 }
 
-type azureVirtualMachineScaleSetOsProfile
+type azureVmScaleSetOsProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -268,25 +268,25 @@ type azureVirtualMachineScaleSetOsProfile
   computerNamePrefix: String @search(by: [hash, regexp])
   adminUsername: String @search(by: [hash, regexp])
   allowExtensionOperations: Boolean @search
-  linuxConfiguration: azureVirtualMachineScaleSetOsProfileLinuxConfiguration
-  windowsConfiguration: azureVirtualMachineScaleSetOsProfileWindowsConfiguration
+  linuxConfiguration: azureVmScaleSetOsProfileLinuxConfiguration
+  windowsConfiguration: azureVmScaleSetOsProfileWindowsConfiguration
   secrets: [azureVaultSecretGroup]
 }
 
-type azureVirtualMachineScaleSetProfile
+type azureVmScaleSetProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  osProfile: azureVirtualMachineScaleSetOsProfile
-  storageProfile: azureVirtualMachineScaleSetStorageProfile
-  networkProfile: azureVirtualMachineScaleSetNetworkProfile
-  diagnosticsProfile: azureVirtualMachineScaleSetDiagnosticsProfile
-  extensionProfile: azureVirtualMachineScaleSetExtensionProfile
+  osProfile: azureVmScaleSetOsProfile
+  storageProfile: azureVmScaleSetStorageProfile
+  networkProfile: azureVmScaleSetNetworkProfile
+  diagnosticsProfile: azureVmScaleSetDiagnosticsProfile
+  extensionProfile: azureVmScaleSetExtensionProfile
 }
 
-type azureVirtualMachineScaleSetScaleInPolicy
+type azureVmScaleSetScaleInPolicy
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -295,7 +295,7 @@ type azureVirtualMachineScaleSetScaleInPolicy
   rules: [String] @search(by: [hash, regexp])
 }
 
-type azureVirtualMachineScaleSet implements azureResource
+type azureVmScaleSet implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
@@ -307,8 +307,8 @@ type azureVirtualMachineScaleSet implements azureResource
   singlePlacementGroup: Boolean @search
   platformFaultDomainCount: Int @search
   uniqueId: String @search(by: [hash, regexp])
-  virtualMachineProfile: azureVirtualMachineScaleSetProfile
-  scaleInPolicy: azureVirtualMachineScaleSetScaleInPolicy
+  virtualMachineProfile: azureVmScaleSetProfile
+  scaleInPolicy: azureVmScaleSetScaleInPolicy
   resourceGroup: [azureResourceGroup]
     @hasInverse(field: virtualMachineScaleSets)
   virtualMachines: [azureVirtualMachine]
