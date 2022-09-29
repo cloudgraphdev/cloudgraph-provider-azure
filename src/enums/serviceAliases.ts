@@ -4,6 +4,7 @@ export default {
   [services.actionGroup]: 'actionGroups',
   [services.activityLogAlerts]: 'activityLogAlerts',
   [services.aksManagedCluster]: 'aksManagedClusters',
+  [services.applicationGateway]: 'applicationGateways',
   [services.appServiceEnvironment]: 'appServiceEnvironments',
   [services.appInsights]: 'appInsights',
   [services.appServicePlan]: 'appServicePlans',

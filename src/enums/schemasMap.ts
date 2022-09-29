@@ -14,6 +14,7 @@ export default {
   [services.adServicePrincipal]: 'azureADServicePrincipal',
   [services.adUser]: 'azureADUser',
   [services.aksManagedCluster]: 'azureAksManagedCluster',
+  [services.applicationGateway]: 'azureApplicationGateway',
   [services.appServiceEnvironment]: 'azureAppServiceEnvironment',
   // [services.appServiceKubeEnvironment]: 'azureAppServiceKubeEnvironment',
   [services.appInsights]: 'azureAppInsights',

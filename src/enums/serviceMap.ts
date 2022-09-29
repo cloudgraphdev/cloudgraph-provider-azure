@@ -8,6 +8,7 @@ import AzureADServicePrincipal from '../services/adServicePrincipal'
 import AzureADUser from '../services/adUser'
 import AzureAksManagedCluster from '../services/aksManagedCluster'
 import AzureMetricAlert from '../services/metricAlert'
+import AzureApplicationGateway from '../services/applicationGateway'
 import AzureAppServiceEnvironment from '../services/appServiceEnvironment'
 // import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureAppServicePlan from '../services/appServicePlan'
@@ -104,6 +105,7 @@ export default {
   [services.adUser]: AzureADUser,
   [services.aksManagedCluster]: AzureAksManagedCluster,
   [services.metricAlert]: AzureMetricAlert,
+  [services.applicationGateway]: AzureApplicationGateway,
   [services.appServiceEnvironment]: AzureAppServiceEnvironment,
   // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appInsights]: AzureAppInsights,

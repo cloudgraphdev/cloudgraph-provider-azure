@@ -19,6 +19,8 @@ export default {
   // AKS Managed Clusters
   foundAKSManagedClusters: (num: number): string =>
     `Found ${num} AKS managed clusters`,
+  /* App Gateway */
+  foundApplicationGateway: (num: number): string => `Found ${num} Application Gateways`,
   /* App Service */
   foundAppServiceEnvironments: (num: number): string =>
     `Found ${num} app service environments`,
