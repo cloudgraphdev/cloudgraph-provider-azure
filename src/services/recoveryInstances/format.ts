@@ -184,7 +184,7 @@ export default ({
 }: {
   service: RawAzureProtectedItemResource
   account: string
-}): AzureBackupInstance => {
+}): AzureRecoveryInstance => {
   const { id, name, type, region, eTag, properties, resourceGroupId } = service
   return {
     id: id || cuid(),

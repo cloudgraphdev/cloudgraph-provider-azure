@@ -8,6 +8,7 @@ import chalk from 'chalk'
 import { isEmpty, merge, unionBy } from 'lodash'
 import path from 'path'
 
+import { DocumentNode } from 'graphql'
 import {
   DEFAULT_REGION,
   DEFAULT_RESOURCES,
@@ -33,9 +34,9 @@ import {
   getClientSecretCredentials,
   getTokenCredentials
 } from '../utils/authUtils'
-import enhancers, { EnhancerConfig } from './base/enhancers'
 import { createDiffSecs } from '../utils/dateutils'
 import { obfuscateSensitiveString } from '../utils/format'
+import enhancers, { EnhancerConfig } from './base/enhancers'
 
 export const enums = {
   services,
@@ -344,7 +345,7 @@ export default class Provider extends CloudGraph.Client {
    * getSchema is used to get the schema for provider
    * @returns A string of graphql sub schemas
    */
-  getSchema(): any {
+  getSchema(): DocumentNode {
     const typesArray = loadFilesSync(path.join(__dirname), {
       recursive: true,
       extensions: ['graphql'],

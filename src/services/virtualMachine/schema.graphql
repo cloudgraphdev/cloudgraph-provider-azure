@@ -92,5 +92,5 @@ type azureVirtualMachine implements azureBaseResource
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualMachines)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: virtualMachines)
   resourceGroup: [azureResourceGroup] @hasInverse(field: virtualMachines)
-  virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: virtualMachines)
+  virtualMachineScaleSets: [azureVmScaleSet] @hasInverse(field: virtualMachines)
 }

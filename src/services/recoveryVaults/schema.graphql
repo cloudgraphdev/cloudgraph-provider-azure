@@ -15,6 +15,15 @@ type azureRecoveryVaultUpgradeDetails
   previousResourceId: String @search(by: [hash, regexp])
 }
 
+type azureRecoveryVaultPrivateEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
 type azureRecoveryVaultPrivateLinkServiceConnectionState
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -26,7 +35,7 @@ type azureRecoveryVaultPrivateLinkServiceConnectionState
   actionsRequired: String @search(by: [hash, regexp])
 }
 
-type azureRecoveryVaultPrivateEndpointConnection
+type azureRecoveryVaultPrivateEndpointConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

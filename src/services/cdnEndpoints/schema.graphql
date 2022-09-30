@@ -40,7 +40,7 @@ type azureCdnSigningParamIdentifier {
   paramName: String @search(by: [hash, regexp])
 }
 
-type azureCdnResourceRef {
+type azureCdnResourceReference {
   id: String! @id @search(by: [hash, regexp])
 }
 
@@ -54,7 +54,7 @@ type azureCdnDeliveryRuleActionParameter {
   customFragment: String @search(by: [hash, regexp])
   algorithm: String @search(by: [hash, regexp])
   parameterNameOverride: [azureCdnSigningParamIdentifier]
-  originGroup: azureCdnResourceRef
+  originGroup: azureCdnResourceReference
   sourcePattern: String @search(by: [hash, regexp])
   destination: String @search(by: [hash, regexp])
   preserveUnmatchedPath: Boolean @search

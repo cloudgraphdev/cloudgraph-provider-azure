@@ -51,27 +51,49 @@ export default ({
     Tags,
   } = service
   const {
-    linuxConfiguration: linuxConfig = {},
-    windowsConfiguration: { patchSettings: wps, ...windowsConfiguration } = {},
-    ...osProfile
-  } = restOsProfile
-  const storageImageReference: AzureVirtualMachineStorageImageReference =
-    imageReference || {}
+    id: imageReferenceId,
+    exactVersion,
+    offer,
+    sku,
+    publisher,
+    version,
+    sharedGalleryImageId,
+  }: AzureVirtualMachineStorageImageReference = imageReference
   return {
     id,
     subscriptionId: account,
     name,
     type,
     region,
+    plan: { name: planName, publisher: planPublisher, product: planProduct },
+    vmSize,
+    vmId,
+    priority,
+    billingProfileMaxPrice: maxPrice,
+    additionalCapabilities: { ultraSSDEnabled, hibernationEnabled },
     osProfile: {
-      linuxConfiguration: {
-        disablePasswordAuthentication: linuxConfig?.disablePasswordAuthentication,
-        provisionVMAgent: linuxConfig?.provisionVMAgent,
+      computerName,
+      windowsConfiguration: {
+        provisionVMAgent: wProvisionVMAgent,
+        enableAutomaticUpdates,
+        timeZone,
       },
-      windowsConfiguration,
-      ...osProfile,
+      linuxConfiguration: {
+        disablePasswordAuthentication,
+        provisionVMAgent: lProvisionVMAgent,
+      },
+      allowExtensionOperations,
+      requireGuestProvisionSignal,
     },
-    storageImageReference,
+    storageImageReference: {
+      id: imageReferenceId,
+      exactVersion,
+      offer,
+      sku,
+      publisher,
+      version,
+      sharedGalleryImageId,
+    },
     bootDiagnostics,
     licenseType,
     resourceGroupId,

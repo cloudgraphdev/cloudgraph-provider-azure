@@ -1,5 +1,5 @@
 import cuid from 'cuid'
-import { formatTagsFromMap } from '../../utils/format'
+import { formatTagsFromMap, transformSystemData } from '../../utils/format'
 import { RawAzureContainerRegistry } from './data'
 import { AzureContainerRegistry } from '../../types/generated'
 
@@ -84,13 +84,32 @@ export default ({
     dataEndpointEnabled,
     dataEndpointHostNames,
     privateEndpointConnections:
-      privateEndpointConnections.map(({ id: privateEndpointId, privateLinkServiceConnectionState, ...rest }) => ({
-        id: privateEndpointId || cuid(),
-        privateLinkServiceConnectionStateStatus: privateLinkServiceConnectionState?.status,
-        privateLinkServiceConnectionStateActionsRequired: privateLinkServiceConnectionState?.actionsRequired,
-        privateLinkServiceConnectionStateDescription: privateLinkServiceConnectionState?.description,
-        ...rest,
-      })) || [],
+      privateEndpointConnections.map(
+        ({
+          id: privateEndpointId,
+          privateLinkServiceConnectionState,
+          privateEndpoint,
+          systemData,
+          name: peName,
+          type: peType,
+          provisioningState: peProvisioningState,
+        }) => ({
+          id: privateEndpointId || cuid(),
+          name: peName,
+          type: peType,
+          provisioningState: peProvisioningState,
+          privateLinkServiceConnectionStateStatus:
+            privateLinkServiceConnectionState?.status,
+          privateLinkServiceConnectionStateActionsRequired:
+            privateLinkServiceConnectionState?.actionsRequired,
+          privateLinkServiceConnectionStateDescription:
+            privateLinkServiceConnectionState?.description,
+          privateEndpoint: {
+            id: privateEndpoint.id || cuid(),
+          },
+          ...transformSystemData(systemData),
+        })
+      ) || [],
     publicNetworkAccess,
     networkRuleBypassOptions,
     zoneRedundancy,

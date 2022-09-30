@@ -23,6 +23,7 @@ import {
   AzureRecoveryPolicyRetentionPolicyUnion,
   AzureRecoveryPolicySchedulePolicyUnion,
 } from '../../types/generated'
+import { RawAzureProtectionPolicyResource } from './data'
 
 export interface RawAzureSchedulePolicy extends SchedulePolicy {
   scheduleFrequencyInMins?: number
