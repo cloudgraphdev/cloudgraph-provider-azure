@@ -8,6 +8,7 @@ export default {
   adServicePrincipal: 'adServicePrincipal',
   adUser: 'adUser',
   aksManagedCluster: 'aksManagedCluster',
+  applicationGateway: 'applicationGateway',
   appServiceEnvironment: 'appServiceEnvironment',
   // appServiceKubeEnvironment: 'appServiceKubeEnvironment',
   appInsights: 'appInsights',
