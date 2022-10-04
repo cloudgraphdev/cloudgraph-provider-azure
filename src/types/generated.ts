@@ -456,6 +456,847 @@ export type AzureAksManagedClusterPropertiesAutoScalerProfile = {
   skipNodesWithSystemPods?: Maybe<Scalars['String']>;
 };
 
+export type AzureAppGateway = AzureResource & {
+  authenticationCert?: Maybe<Array<Maybe<AzureAppGatewayAuthenticationCertificate>>>;
+  autoscaleConfiguration?: Maybe<AzureAppGatewayAutoscaleConfig>;
+  backendAddressPools?: Maybe<Array<Maybe<AzureAppGatewayAppGatewayBackendAddressPool>>>;
+  backendHttpSettingsCollection?: Maybe<Array<Maybe<AzureAppGatewayBackendHttpSettings>>>;
+  customErrorConfigurations?: Maybe<Array<Maybe<AzureAppGatewayCustomError>>>;
+  enableFips?: Maybe<Scalars['Boolean']>;
+  enableHttp2?: Maybe<Scalars['Boolean']>;
+  firewallPolicy?: Maybe<AzureAppGatewaySubResource>;
+  forceFirewallPolicyAssociation?: Maybe<Scalars['Boolean']>;
+  frontendIPConfigurations?: Maybe<Array<Maybe<AzureAppGatewayAppGatewayFrontendIpConfig>>>;
+  frontendPorts?: Maybe<Array<Maybe<AzureAppGatewayFrontendPort>>>;
+  gatewayIPConfigurations?: Maybe<Array<Maybe<AzureAppGatewayIpConfig>>>;
+  globalConfiguration?: Maybe<AzureAppGatewayGlobalConfig>;
+  httpListeners?: Maybe<Array<Maybe<AzureAppGatewayHttpListener>>>;
+  identity?: Maybe<AzureAppGatewayManagedServiceIdentity>;
+  loadDistributionPolicies?: Maybe<Array<Maybe<AzureAppGatewayLoadDistribPolicy>>>;
+  operationalState?: Maybe<Scalars['String']>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureAppGatewayPrivateEndpointConn>>>;
+  privateLinkConfigurations?: Maybe<Array<Maybe<AzureAppGatewayPrivateLinkConfig>>>;
+  probes?: Maybe<Array<Maybe<AzureAppGatewayProbe>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  redirectConfigurations?: Maybe<Array<Maybe<AzureAppGatewayRedirectConfig>>>;
+  requestRoutingRules?: Maybe<Array<Maybe<AzureAppGatewayRequestRoutingRule>>>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  rewriteRuleSets?: Maybe<Array<Maybe<AzureAppGatewayRewriteRuleSet>>>;
+  sslCertificates?: Maybe<Array<Maybe<AzureAppGatewaySslCertificate>>>;
+  sslPolicy?: Maybe<AzureAppGatewaySslPolicy>;
+  sslProfiles?: Maybe<Array<Maybe<AzureAppGatewaySslProfile>>>;
+  trustedClientCertificates?: Maybe<Array<Maybe<AzureAppGatewayTrustedClientCertificate>>>;
+  trustedRootCertificates?: Maybe<Array<Maybe<AzureAppGatewayTrustedRootCertificate>>>;
+  urlPathMaps?: Maybe<Array<Maybe<AzureAppGatewayUrlPathMap>>>;
+  webApplicationFirewallConfiguration?: Maybe<AzureAppGatewayWebAppFirewallConfig>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppGatewayAppGatewayBackendAddressPool = {
+  backendAddresses?: Maybe<Array<Maybe<AzureAppGatewayBackendAddress>>>;
+  backendIPConfigs?: Maybe<Array<Maybe<AzureAppGatewayNetIntfIpConfig>>>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayAppGatewayFrontendIpConfig = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  privateLinkConfigurationId?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicIPAddressId?: Maybe<Scalars['String']>;
+  subnetId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayApplicationGatewayFirewallExclusion = {
+  id?: Maybe<Scalars['String']>;
+  matchVariable?: Maybe<Scalars['String']>;
+  selector?: Maybe<Scalars['String']>;
+  selectorMatchOperator?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayApplicationGatewayIpConfig = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayApplicationGatewayPathRule = {
+  backendAddressPool?: Maybe<AzureAppGatewaySubResource>;
+  backendHttpSettings?: Maybe<AzureAppGatewaySubResource>;
+  firewallPolicy?: Maybe<AzureAppGatewaySubResource>;
+  id?: Maybe<Scalars['String']>;
+  loadDistributionPolicy?: Maybe<AzureAppGatewaySubResource>;
+  name?: Maybe<Scalars['String']>;
+  paths?: Maybe<Array<Maybe<Scalars['String']>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  redirectConfiguration?: Maybe<AzureAppGatewaySubResource>;
+  rewriteRuleSet?: Maybe<AzureAppGatewaySubResource>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayAuthenticationCertificate = {
+  data?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayAutoscaleConfig = {
+  maxCapacity?: Maybe<Scalars['Int']>;
+  minCapacity?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppGatewayBackendAddrPool = {
+  backendIPConfigs?: Maybe<Array<Maybe<AzureAppGatewayNetIntfIpConfig>>>;
+  id?: Maybe<Scalars['String']>;
+  inboundNatRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  loadBalancerBackendAddresses?: Maybe<Array<Maybe<AzureAppGatewayLoadBalancerAddr>>>;
+  loadBalancingRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  outboundRule?: Maybe<Scalars['String']>;
+  outboundRules?: Maybe<Array<Maybe<Scalars['String']>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  tunnelInterfaces?: Maybe<Array<Maybe<AzureAppGatewayGatewayLoadBalancerTunnelInterface>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayBackendAddress = {
+  fqdn?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  ipAddress?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayBackendHttpSettings = {
+  affinityCookieName?: Maybe<Scalars['String']>;
+  authenticationCert?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  connectionDraining?: Maybe<AzureAppGatewayConnectionDraining>;
+  cookieBasedAffinity?: Maybe<Scalars['String']>;
+  hostName?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  pickHostNameFromBackendAddress?: Maybe<Scalars['Boolean']>;
+  port?: Maybe<Scalars['Int']>;
+  probe?: Maybe<AzureAppGatewaySubResource>;
+  probeEnabled?: Maybe<Scalars['Boolean']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  requestTimeout?: Maybe<Scalars['Int']>;
+  trustedRootCertificates?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayConnectionDraining = {
+  drainTimeoutInSec?: Maybe<Scalars['Int']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureAppGatewayCustomDnsConfigPropertiesFormat = {
+  fqdn?: Maybe<Scalars['String']>;
+  ipAddresses?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppGatewayCustomError = {
+  customErrorPageUrl?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  statusCode?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayDelegation = {
+  actions?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  serviceName?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayDnsSettings = {
+  appliedDnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  dnsServers?: Maybe<Array<Maybe<Scalars['String']>>>;
+  internalDnsNameLabel?: Maybe<Scalars['String']>;
+  internalDomainNameSuffix?: Maybe<Scalars['String']>;
+  internalFqdn?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayEndpointPolicy = {
+  contextualServiceEndpointPolicies?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+  kind?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  serviceAlias?: Maybe<Scalars['String']>;
+  serviceEndpointPolicyDef?: Maybe<Array<Maybe<AzureAppGatewayEndpointPolicyDefinition>>>;
+  subnets?: Maybe<Array<Maybe<AzureAppGatewaySubnet>>>;
+};
+
+export type AzureAppGatewayEndpointPolicyDefinition = {
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  service?: Maybe<Scalars['String']>;
+  serviceResources?: Maybe<Array<Maybe<Scalars['String']>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayExtendedLocation = {
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayFirewallDisabledRuleGroup = {
+  id?: Maybe<Scalars['String']>;
+  ruleGroupName?: Maybe<Scalars['String']>;
+  rules?: Maybe<Array<Maybe<Scalars['Int']>>>;
+};
+
+export type AzureAppGatewayFlowLog = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  flowAnalyticsConfiguration?: Maybe<AzureAppGatewayTrafficAnalyticsProperties>;
+  format?: Maybe<AzureAppGatewayFlowLogFormatParameters>;
+  id?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  retentionPolicy?: Maybe<AzureAppGatewayRetentionPolicyParameters>;
+  storageId?: Maybe<Scalars['String']>;
+  targetResourceGuid?: Maybe<Scalars['String']>;
+  targetResourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayFlowLogFormatParameters = {
+  type?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppGatewayFrontendIpConfig = {
+  gatewayLoadBalancer?: Maybe<AzureAppGatewaySubResource>;
+  id?: Maybe<Scalars['String']>;
+  inboundNatPools?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  inboundNatRuleIds?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  loadBalancingRules?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  name?: Maybe<Scalars['String']>;
+  outboundRules?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAddressVersion?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicIPAddress?: Maybe<AzureAppGatewayPublicIpAddress>;
+  publicIPPrefix?: Maybe<AzureAppGatewaySubResource>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+  type?: Maybe<Scalars['String']>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppGatewayFrontendPort = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  port?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayGatewayLoadBalancerTunnelInterface = {
+  id: Scalars['String'];
+  identifier?: Maybe<Scalars['Int']>;
+  port?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayGlobalConfig = {
+  enableRequestBuffering?: Maybe<Scalars['Boolean']>;
+  enableResponseBuffering?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureAppGatewayHttpListener = {
+  customErrorConfigurations?: Maybe<Array<Maybe<AzureAppGatewayCustomError>>>;
+  firewallPolicy?: Maybe<AzureAppGatewaySubResource>;
+  frontendIPConfiguration?: Maybe<AzureAppGatewaySubResource>;
+  frontendPort?: Maybe<AzureAppGatewaySubResource>;
+  hostName?: Maybe<Scalars['String']>;
+  hostNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  requireServerNameIndication?: Maybe<Scalars['Boolean']>;
+  sslCertificate?: Maybe<AzureAppGatewaySubResource>;
+  sslProfile?: Maybe<AzureAppGatewaySubResource>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayIpConfig = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicIPAddress?: Maybe<AzureAppGatewayPublicIpAddress>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayIpConfigurationProfile = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayInboundNatRule = {
+  backendAddressPool?: Maybe<AzureAppGatewaySubResource>;
+  backendIPConfiguration?: Maybe<AzureAppGatewayNetIntfIpConfig>;
+  backendPort?: Maybe<Scalars['Int']>;
+  enableFloatingIP?: Maybe<Scalars['Boolean']>;
+  enableTcpReset?: Maybe<Scalars['Boolean']>;
+  frontendIPConfiguration?: Maybe<AzureAppGatewaySubResource>;
+  frontendPort?: Maybe<Scalars['Int']>;
+  frontendPortRangeEnd?: Maybe<Scalars['Int']>;
+  frontendPortRangeStart?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayIpTag = {
+  id?: Maybe<Scalars['String']>;
+  ipTagType?: Maybe<Scalars['String']>;
+  tag?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayLoadBalancerAddr = {
+  id: Scalars['String'];
+  inboundNatRulesPortMapping?: Maybe<Array<Maybe<AzureAppGatewayNatRulePortMapping>>>;
+  ipAddress?: Maybe<Scalars['String']>;
+  loadBalancerFrontendIPConfiguration?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  networkInterfaceIPConfiguration?: Maybe<Scalars['String']>;
+  subnet?: Maybe<Scalars['String']>;
+  virtualNetwork?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayLoadDistribPolicy = {
+  id?: Maybe<Scalars['String']>;
+  loadDistributionAlgorithm?: Maybe<Scalars['String']>;
+  loadDistributionTargets?: Maybe<Array<Maybe<AzureAppGatewayLoadDistributionTarget>>>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayLoadDistributionTarget = {
+  backendAddressPool?: Maybe<AzureAppGatewaySubResource>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  weightPerServer?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppGatewayManagedServiceIdentity = {
+  principalId?: Maybe<Scalars['String']>;
+  tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  userAssignedIdentities?: Maybe<Array<Maybe<AzureAppGatewayUserAssignedIdentities>>>;
+};
+
+export type AzureAppGatewayNatGateway = {
+  id?: Maybe<Scalars['String']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicIpAddresses?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  publicIpPrefixes?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  subnets?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppGatewayNatRulePortMapping = {
+  backendPort?: Maybe<Scalars['Int']>;
+  frontendPort?: Maybe<Scalars['Int']>;
+  id: Scalars['String'];
+  inboundNatRuleName?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayNetIntfIpConfig = {
+  appGatewayBackendAddrPools?: Maybe<Array<Maybe<AzureAppGatewayAppGatewayBackendAddressPool>>>;
+  applicationSecurityGroups?: Maybe<Array<Maybe<AzureAppGatewaySecurityGroup>>>;
+  gatewayLoadBalancer?: Maybe<AzureAppGatewaySubResource>;
+  id?: Maybe<Scalars['String']>;
+  loadBalancerBackendAddrPools?: Maybe<Array<Maybe<AzureAppGatewayBackendAddrPool>>>;
+  loadBalancerInboundNatRules?: Maybe<Array<Maybe<AzureAppGatewayInboundNatRule>>>;
+  name?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAddressVersion?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  privateLinkConnectionProperties?: Maybe<AzureAppGatewayPrivateLinkConnProperties>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicIPAddress?: Maybe<AzureAppGatewayPublicIpAddress>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+  type?: Maybe<Scalars['String']>;
+  virtualNetworkTaps?: Maybe<Array<Maybe<AzureAppGatewayVirtualNetworkTap>>>;
+};
+
+export type AzureAppGatewayNetworkInterface = {
+  dnsSettings?: Maybe<AzureAppGatewayDnsSettings>;
+  dscpConfiguration?: Maybe<AzureAppGatewaySubResource>;
+  enableAcceleratedNetworking?: Maybe<Scalars['Boolean']>;
+  enableIPForwarding?: Maybe<Scalars['Boolean']>;
+  extendedLocation?: Maybe<AzureAppGatewayExtendedLocation>;
+  hostedWorkloads?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureAppGatewayNetIntfIpConfig>>>;
+  macAddress?: Maybe<Scalars['String']>;
+  migrationPhase?: Maybe<Scalars['String']>;
+  networkSecurityGroup?: Maybe<AzureAppGatewayNetworkSecurityGroup>;
+  nicType?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  privateEndpoint?: Maybe<AzureAppGatewayNetworkInterface>;
+  privateLinkService?: Maybe<AzureAppGatewayPrivateLinkSvc>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  tapConfigurations?: Maybe<Array<Maybe<AzureAppGatewayNetworkInterfaceTapConfig>>>;
+  virtualMachine?: Maybe<AzureAppGatewaySubResource>;
+  vnetEncryptionSupported?: Maybe<Scalars['Boolean']>;
+  workloadType?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayNetworkInterfaceTapConfig = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  virtualNetworkTap?: Maybe<AzureAppGatewayVirtualNetworkTap>;
+};
+
+export type AzureAppGatewayNetworkSecurityGroup = {
+  defaultSecurityRules?: Maybe<Array<Maybe<AzureAppGatewaySecurityRule>>>;
+  flowLogs?: Maybe<Array<Maybe<AzureAppGatewayFlowLog>>>;
+  id?: Maybe<Scalars['String']>;
+  networkInterfaces?: Maybe<Array<Maybe<AzureAppGatewayNetworkInterface>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  securityRules?: Maybe<Array<Maybe<AzureAppGatewaySecurityRule>>>;
+  subnets?: Maybe<Array<Maybe<AzureAppGatewaySubnet>>>;
+};
+
+export type AzureAppGatewayPrivateEndpoint = {
+  applicationSecurityGroups?: Maybe<Array<Maybe<AzureAppGatewaySecurityGroup>>>;
+  customDnsConfigs?: Maybe<Array<Maybe<AzureAppGatewayCustomDnsConfigPropertiesFormat>>>;
+  customNetworkInterfaceName?: Maybe<Scalars['String']>;
+  extendedLocation?: Maybe<AzureAppGatewayExtendedLocation>;
+  id?: Maybe<Scalars['String']>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureAppGatewayPrivateEndpointIpConfig>>>;
+  manualPrivateLinkServiceConn?: Maybe<Array<Maybe<AzureAppGatewayPrivateLinkServiceConn>>>;
+  networkInterfaces?: Maybe<Array<Maybe<AzureAppGatewayNetworkInterface>>>;
+  privateLinkServiceConn?: Maybe<Array<Maybe<AzureAppGatewayPrivateLinkServiceConn>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+};
+
+export type AzureAppGatewayPrivateEndpointConn = {
+  id?: Maybe<Scalars['String']>;
+  linkIdentifier?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateEndpoint?: Maybe<AzureAppGatewayPrivateEndpoint>;
+  privateLinkServiceConnectionState?: Maybe<AzureAppGatewayPrivateLinkServiceConnState>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateEndpointIpConfig = {
+  groupId?: Maybe<Scalars['String']>;
+  memberName?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkConfig = {
+  id?: Maybe<Scalars['String']>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureAppGatewayPrivateLinkIpConfig>>>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkConnProperties = {
+  fqdns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  groupId?: Maybe<Scalars['String']>;
+  requiredMemberName?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkIpConfig = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  subnet?: Maybe<AzureAppGatewaySubResource>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkServiceConn = {
+  groupIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  privateLinkServiceConnectionState?: Maybe<AzureAppGatewayPrivateLinkServiceConnState>;
+  privateLinkServiceId?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  requestMessage?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkServiceConnState = {
+  actionsRequired?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkServiceIpConfig = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  primary?: Maybe<Scalars['Boolean']>;
+  privateIPAddress?: Maybe<Scalars['String']>;
+  privateIPAddressVersion?: Maybe<Scalars['String']>;
+  privateIPAllocationMethod?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  subnet?: Maybe<AzureAppGatewaySubnet>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayPrivateLinkSvc = {
+  alias?: Maybe<Scalars['String']>;
+  autoApproval?: Maybe<AzureAppGatewayResourceSet>;
+  enableProxyProtocol?: Maybe<Scalars['Boolean']>;
+  extendedLocation?: Maybe<AzureAppGatewayExtendedLocation>;
+  fqdns?: Maybe<Array<Maybe<Scalars['String']>>>;
+  id?: Maybe<Scalars['String']>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureAppGatewayPrivateLinkServiceIpConfig>>>;
+  loadBalancerFrontendIpConfigs?: Maybe<Array<Maybe<AzureAppGatewayFrontendIpConfig>>>;
+  networkInterfaces?: Maybe<Array<Maybe<AzureAppGatewayNetworkInterface>>>;
+  privateEndpointConnections?: Maybe<Array<Maybe<AzureAppGatewayPrivateEndpointConn>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  visibility?: Maybe<AzureAppGatewayResourceSet>;
+};
+
+export type AzureAppGatewayProbe = {
+  host?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  interval?: Maybe<Scalars['Int']>;
+  matchBody?: Maybe<Scalars['String']>;
+  matchStatusCodes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  minServers?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  pickHostNameFromBackendHttpSettings?: Maybe<Scalars['Boolean']>;
+  port?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  timeout?: Maybe<Scalars['Int']>;
+  type?: Maybe<Scalars['String']>;
+  unhealthyThreshold?: Maybe<Scalars['Int']>;
+};
+
+export type AzureAppGatewayPublicIpAddress = {
+  deleteOption?: Maybe<Scalars['String']>;
+  dnsDomainNameLabel?: Maybe<Scalars['String']>;
+  dnsFqdn?: Maybe<Scalars['String']>;
+  dnsReverseFqdn?: Maybe<Scalars['String']>;
+  extendedLocation?: Maybe<AzureAppGatewayExtendedLocation>;
+  id?: Maybe<Scalars['String']>;
+  idleTimeoutInMinutes?: Maybe<Scalars['Int']>;
+  ipAddress?: Maybe<Scalars['String']>;
+  ipConfiguration?: Maybe<AzureAppGatewayIpConfig>;
+  ipTags?: Maybe<Array<Maybe<AzureAppGatewayIpTag>>>;
+  linkedPublicIPAddress?: Maybe<AzureAppGatewayPublicIpAddress>;
+  migrationPhase?: Maybe<Scalars['String']>;
+  natGateway?: Maybe<AzureAppGatewayNatGateway>;
+  natGatewayId?: Maybe<Scalars['String']>;
+  natGatewayZones?: Maybe<Array<Maybe<Scalars['String']>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicIPAddressVersion?: Maybe<Scalars['String']>;
+  publicIPAllocationMethod?: Maybe<Scalars['String']>;
+  publicIPPrefix?: Maybe<AzureAppGatewaySubResource>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  servicePublicIPAddress?: Maybe<AzureAppGatewayPublicIpAddress>;
+  zones?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppGatewayRedirectConfig = {
+  id?: Maybe<Scalars['String']>;
+  includePath?: Maybe<Scalars['Boolean']>;
+  includeQueryString?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  pathRules?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  redirectType?: Maybe<Scalars['String']>;
+  requestRoutingRules?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  targetListener?: Maybe<AzureAppGatewaySubResource>;
+  targetUrl?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  urlPathMaps?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+};
+
+export type AzureAppGatewayRequestRoutingRule = {
+  backendAddressPool?: Maybe<AzureAppGatewaySubResource>;
+  backendHttpSettings?: Maybe<AzureAppGatewaySubResource>;
+  httpListener?: Maybe<AzureAppGatewaySubResource>;
+  id?: Maybe<Scalars['String']>;
+  loadDistributionPolicy?: Maybe<AzureAppGatewaySubResource>;
+  name?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  redirectConfiguration?: Maybe<AzureAppGatewaySubResource>;
+  rewriteRuleSet?: Maybe<AzureAppGatewaySubResource>;
+  ruleType?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  urlPathMap?: Maybe<AzureAppGatewaySubResource>;
+};
+
+export type AzureAppGatewayResourceNavigationLink = {
+  id?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars['String']>;
+  linkedResourceType?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayResourceSet = {
+  subscriptions?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type AzureAppGatewayRetentionPolicyParameters = {
+  days?: Maybe<Scalars['Int']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureAppGatewayRewriteRuleSet = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  rewriteRules?: Maybe<Array<Maybe<AzureAppGatewayRequestRoutingRule>>>;
+};
+
+export type AzureAppGatewayRoute = {
+  addressPrefix?: Maybe<Scalars['String']>;
+  hasBgpOverride?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  nextHopIpAddress?: Maybe<Scalars['String']>;
+  nextHopType?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayRouteTable = {
+  disableBgpRoutePropagation?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  routes?: Maybe<Array<Maybe<AzureAppGatewayRoute>>>;
+  subnets?: Maybe<Array<Maybe<AzureAppGatewaySubnet>>>;
+};
+
+export type AzureAppGatewaySecurityGroup = {
+  id?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewaySecurityRule = {
+  access?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  destinationAddressPrefix?: Maybe<Scalars['String']>;
+  destinationAddressPrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  destinationAppSecurityGroups?: Maybe<Array<Maybe<AzureAppGatewaySecurityGroup>>>;
+  destinationPortRange?: Maybe<Scalars['String']>;
+  destinationPortRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
+  direction?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  priority?: Maybe<Scalars['Int']>;
+  protocol?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  sourceAddressPrefix?: Maybe<Scalars['String']>;
+  sourceAddressPrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  sourceApplicationSecurityGroups?: Maybe<Array<Maybe<AzureAppGatewaySecurityGroup>>>;
+  sourcePortRange?: Maybe<Scalars['String']>;
+  sourcePortRanges?: Maybe<Array<Maybe<Scalars['String']>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayServiceAssociationLink = {
+  allowDelete?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['String']>;
+  link?: Maybe<Scalars['String']>;
+  linkedResourceType?: Maybe<Scalars['String']>;
+  locations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayServiceEndpointPropertiesFormat = {
+  id?: Maybe<Scalars['String']>;
+  locations?: Maybe<Array<Maybe<Scalars['String']>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  service?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewaySslCertificate = {
+  data?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  keyVaultSecretId?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  publicCertData?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewaySslPolicy = {
+  cipherSuites?: Maybe<Array<Maybe<Scalars['String']>>>;
+  disabledSslProtocols?: Maybe<Array<Maybe<Scalars['String']>>>;
+  minProtocolVersion?: Maybe<Scalars['String']>;
+  policyName?: Maybe<Scalars['String']>;
+  policyType?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewaySslProfile = {
+  clientAuthConfiguration?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  sslPolicy?: Maybe<AzureAppGatewaySslPolicy>;
+  trustedClientCertificates?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewaySubResource = {
+  id?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewaySubnet = {
+  addressPrefix?: Maybe<Scalars['String']>;
+  addressPrefixes?: Maybe<Array<Maybe<Scalars['String']>>>;
+  applicationGatewayIpConfigurations?: Maybe<Array<Maybe<AzureAppGatewayApplicationGatewayIpConfig>>>;
+  delegations?: Maybe<Array<Maybe<AzureAppGatewayDelegation>>>;
+  id?: Maybe<Scalars['String']>;
+  ipAllocations?: Maybe<Array<Maybe<AzureAppGatewaySubResource>>>;
+  ipConfigurationProfiles?: Maybe<Array<Maybe<AzureAppGatewayIpConfigurationProfile>>>;
+  ipConfigurations?: Maybe<Array<Maybe<AzureAppGatewayIpConfig>>>;
+  name?: Maybe<Scalars['String']>;
+  natGateway?: Maybe<AzureAppGatewaySubResource>;
+  networkSecurityGroup?: Maybe<AzureAppGatewayNetworkSecurityGroup>;
+  privateEndpointNetworkPolicies?: Maybe<Scalars['String']>;
+  privateEndpoints?: Maybe<Array<Maybe<AzureAppGatewayPrivateEndpoint>>>;
+  privateLinkServiceNetworkPolicies?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  purpose?: Maybe<Scalars['String']>;
+  resourceNavigationLinks?: Maybe<Array<Maybe<AzureAppGatewayResourceNavigationLink>>>;
+  routeTable?: Maybe<AzureAppGatewayRouteTable>;
+  serviceAssociationLinks?: Maybe<Array<Maybe<AzureAppGatewayServiceAssociationLink>>>;
+  serviceEndpointPolicies?: Maybe<Array<Maybe<AzureAppGatewayEndpointPolicy>>>;
+  serviceEndpoints?: Maybe<Array<Maybe<AzureAppGatewayServiceEndpointPropertiesFormat>>>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayTrafficAnalyticsConfigProperties = {
+  enabled?: Maybe<Scalars['Boolean']>;
+  trafficAnalyticsInterval?: Maybe<Scalars['Int']>;
+  workspaceId?: Maybe<Scalars['String']>;
+  workspaceRegion?: Maybe<Scalars['String']>;
+  workspaceResourceId?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayTrafficAnalyticsProperties = {
+  networkWatcherFlowAnalyticsConfiguration?: Maybe<AzureAppGatewayTrafficAnalyticsConfigProperties>;
+};
+
+export type AzureAppGatewayTrustedClientCertificate = {
+  clientCertIssuerDN?: Maybe<Scalars['String']>;
+  data?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  validatedCertData?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayTrustedRootCertificate = {
+  data?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  keyVaultSecretId?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayUrlPathMap = {
+  defaultBackendAddressPool?: Maybe<AzureAppGatewaySubResource>;
+  defaultBackendHttpSettings?: Maybe<AzureAppGatewaySubResource>;
+  defaultLoadDistributionPolicy?: Maybe<AzureAppGatewaySubResource>;
+  defaultRedirectConfiguration?: Maybe<AzureAppGatewaySubResource>;
+  defaultRewriteRuleSet?: Maybe<AzureAppGatewaySubResource>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  pathRules?: Maybe<Array<Maybe<AzureAppGatewayApplicationGatewayPathRule>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayUserAssignedIdentities = {
+  id: Scalars['String'];
+  key?: Maybe<Scalars['String']>;
+  property?: Maybe<AzureAppGatewayUserAssignedIdentityAdditionalProperty>;
+};
+
+export type AzureAppGatewayUserAssignedIdentityAdditionalProperty = {
+  clientId?: Maybe<Scalars['String']>;
+  principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayVirtualNetworkTap = {
+  destinationLoadBalancerFrontEndIPConfiguration?: Maybe<AzureAppGatewayFrontendIpConfig>;
+  destinationNetworkInterfaceIPConfiguration?: Maybe<AzureAppGatewayNetIntfIpConfig>;
+  destinationPort?: Maybe<Scalars['Int']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  networkInterfaceTapConfigs?: Maybe<Array<Maybe<AzureAppGatewayNetworkInterfaceTapConfig>>>;
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGuid?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureAppGatewayWebAppFirewallConfig = {
+  disabledRuleGroups?: Maybe<Array<Maybe<AzureAppGatewayFirewallDisabledRuleGroup>>>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  exclusions?: Maybe<Array<Maybe<AzureAppGatewayApplicationGatewayFirewallExclusion>>>;
+  fileUploadLimitInMb?: Maybe<Scalars['Int']>;
+  firewallMode?: Maybe<Scalars['String']>;
+  maxRequestBodySize?: Maybe<Scalars['Int']>;
+  maxRequestBodySizeInKb?: Maybe<Scalars['Int']>;
+  requestBodyCheck?: Maybe<Scalars['Boolean']>;
+  ruleSetType?: Maybe<Scalars['String']>;
+  ruleSetVersion?: Maybe<Scalars['String']>;
+};
+
 export type AzureAppInsights = AzureResource & {
   appId?: Maybe<Scalars['String']>;
   applicationId?: Maybe<Scalars['String']>;

@@ -1,4 +1,4 @@
-type azureApplicationGatewaySubResource
+type azureAppGatewaySubResource
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -6,7 +6,7 @@ type azureApplicationGatewaySubResource
   ) {
   id: String @search(by: [hash, regexp])
 }
-type azureApplicationGatewayResourceSet
+type azureAppGatewayResourceSet
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -15,7 +15,7 @@ type azureApplicationGatewayResourceSet
   subscriptions: [String] @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayPrivateLinkServiceConnectionState
+type azureAppGatewayPrivateLinkServiceConnState
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -26,7 +26,7 @@ type azureApplicationGatewayPrivateLinkServiceConnectionState
   actionsRequired: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayPrivateLinkServiceConnection
+type azureAppGatewayPrivateLinkServiceConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -39,10 +39,10 @@ type azureApplicationGatewayPrivateLinkServiceConnection
   privateLinkServiceId: String @search(by: [hash, regexp])
   groupIds: [String] @search(by: [hash, regexp])
   requestMessage: String @search(by: [hash, regexp])
-  privateLinkServiceConnectionState: azureApplicationGatewayPrivateLinkServiceConnectionState
+  privateLinkServiceConnectionState: azureAppGatewayPrivateLinkServiceConnState
 }
 
-type azureApplicationGatewayCustomDnsConfigPropertiesFormat
+type azureAppGatewayCustomDnsConfigPropertiesFormat
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -52,7 +52,7 @@ type azureApplicationGatewayCustomDnsConfigPropertiesFormat
   ipAddresses: [String] @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayPrivateEndpointIPConfiguration
+type azureAppGatewayPrivateEndpointIPConfig
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -65,26 +65,26 @@ type azureApplicationGatewayPrivateEndpointIPConfiguration
   privateIPAddress: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayPrivateEndpoint
+type azureAppGatewayPrivateEndpoint
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   id: String @search(by: [hash, regexp])
-  extendedLocation: azureApplicationGatewayExtendedLocation
-  subnet: azureApplicationGatewaySubnet
-  networkInterfaces: [azureApplicationGatewayNetworkInterface]
+  extendedLocation: azureAppGatewayExtendedLocation
+  subnet: azureAppGatewaySubnet
+  networkInterfaces: [azureAppGatewayNetworkInterface]
   provisioningState: String @search(by: [hash, regexp])
-  privateLinkServiceConnections: [azureApplicationGatewayPrivateLinkServiceConnection]
-  manualPrivateLinkServiceConnections: [azureApplicationGatewayPrivateLinkServiceConnection]
-  customDnsConfigs: [azureApplicationGatewayCustomDnsConfigPropertiesFormat]
-  applicationSecurityGroups: [azureApplicationGatewayApplicationSecurityGroup]
-  ipConfigurations: [azureApplicationGatewayPrivateEndpointIPConfiguration]
+  privateLinkServiceConn: [azureAppGatewayPrivateLinkServiceConn]
+  manualPrivateLinkServiceConn: [azureAppGatewayPrivateLinkServiceConn]
+  customDnsConfigs: [azureAppGatewayCustomDnsConfigPropertiesFormat]
+  applicationSecurityGroups: [azureAppGatewaySecurityGroup]
+  ipConfigurations: [azureAppGatewayPrivateEndpointIPConfig]
   customNetworkInterfaceName: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationSecurityGroup
+type azureAppGatewaySecurityGroup
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -95,7 +95,7 @@ type azureApplicationGatewayApplicationSecurityGroup
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewaySecurityRule
+type azureAppGatewaySecurityRule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -110,10 +110,10 @@ type azureApplicationGatewaySecurityRule
   destinationPortRange: String @search(by: [hash, regexp])
   sourceAddressPrefix: String @search(by: [hash, regexp])
   sourceAddressPrefixes: [String] @search(by: [hash, regexp])
-  sourceApplicationSecurityGroups: [azureApplicationGatewayApplicationSecurityGroup]
+  sourceApplicationSecurityGroups: [azureAppGatewaySecurityGroup]
   destinationAddressPrefix: String @search(by: [hash, regexp])
   destinationAddressPrefixes: [String] @search(by: [hash, regexp])
-  destinationApplicationSecurityGroups: [azureApplicationGatewayApplicationSecurityGroup]
+  destinationAppSecurityGroups: [azureAppGatewaySecurityGroup]
   sourcePortRanges: [String] @search(by: [hash, regexp])
   destinationPortRanges: [String] @search(by: [hash, regexp])
   access: String @search(by: [hash, regexp])
@@ -122,7 +122,7 @@ type azureApplicationGatewaySecurityRule
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayNetworkInterfaceDnsSettings
+type azureAppGatewayDnsSettings
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -135,7 +135,7 @@ type azureApplicationGatewayNetworkInterfaceDnsSettings
   internalDomainNameSuffix: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayPrivateLinkServiceIpConfiguration
+type azureAppGatewayPrivateLinkServiceIpConfig
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -146,13 +146,13 @@ type azureApplicationGatewayPrivateLinkServiceIpConfiguration
   type: String @search(by: [hash, regexp])
   privateIPAddress: String @search(by: [hash, regexp])
   privateIPAllocationMethod: String @search(by: [hash, regexp])
-  subnet: azureApplicationGatewaySubnet
+  subnet: azureAppGatewaySubnet
   primary: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
   privateIPAddressVersion: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayPrivateEndpointConnection
+type azureAppGatewayPrivateEndpointConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -161,62 +161,62 @@ type azureApplicationGatewayApplicationGatewayPrivateEndpointConnection
       id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  privateEndpoint: azureApplicationGatewayPrivateEndpoint
-  privateLinkServiceConnectionState: azureApplicationGatewayPrivateLinkServiceConnectionState
+  privateEndpoint: azureAppGatewayPrivateEndpoint
+  privateLinkServiceConnectionState: azureAppGatewayPrivateLinkServiceConnState
   provisioningState: String @search(by: [hash, regexp])
   linkIdentifier: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayPrivateLinkService
+type azureAppGatewayPrivateLinkSvc
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
     id: String @search(by: [hash, regexp])
-    extendedLocation: azureApplicationGatewayExtendedLocation
-    loadBalancerFrontendIpConfigurations: [azureApplicationGatewayFrontendIPConfiguration]
-    ipConfigurations: [azureApplicationGatewayPrivateLinkServiceIpConfiguration]
-    networkInterfaces: [azureApplicationGatewayNetworkInterface]
+    extendedLocation: azureAppGatewayExtendedLocation
+    loadBalancerFrontendIpConfigs: [azureAppGatewayFrontendIPConfig]
+    ipConfigurations: [azureAppGatewayPrivateLinkServiceIpConfig]
+    networkInterfaces: [azureAppGatewayNetworkInterface]
     provisioningState: String @search(by: [hash, regexp])
-    privateEndpointConnections: [azureApplicationGatewayApplicationGatewayPrivateEndpointConnection]
-    visibility: azureApplicationGatewayResourceSet
-    autoApproval: azureApplicationGatewayResourceSet
+    privateEndpointConnections: [azureAppGatewayPrivateEndpointConn]
+    visibility: azureAppGatewayResourceSet
+    autoApproval: azureAppGatewayResourceSet
     fqdns: [String] @search(by: [hash, regexp])
     alias: String @search(by: [hash, regexp])
     enableProxyProtocol: Boolean @search
 }
 
-type azureApplicationGatewayNetworkInterface
+type azureAppGatewayNetworkInterface
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   id: String @search(by: [hash, regexp])
-  extendedLocation: azureApplicationGatewayExtendedLocation
-  virtualMachine: azureApplicationGatewaySubResource
-  networkSecurityGroup: azureApplicationGatewayNetworkSecurityGroup
-  privateEndpoint: azureApplicationGatewayNetworkInterface
-  ipConfigurations: [azureApplicationGatewayNetworkInterfaceIPConfiguration]
-  tapConfigurations: [azureApplicationGatewayNetworkInterfaceTapConfiguration]
-  dnsSettings: azureApplicationGatewayNetworkInterfaceDnsSettings
+  extendedLocation: azureAppGatewayExtendedLocation
+  virtualMachine: azureAppGatewaySubResource
+  networkSecurityGroup: azureAppGatewayNetworkSecurityGroup
+  privateEndpoint: azureAppGatewayNetworkInterface
+  ipConfigurations: [azureAppGatewayNetIntfIPConfig]
+  tapConfigurations: [azureAppGatewayNetworkInterfaceTapConfig]
+  dnsSettings: azureAppGatewayDnsSettings
   macAddress: String @search(by: [hash, regexp])
   primary: Boolean @search
   vnetEncryptionSupported: Boolean @search
   enableAcceleratedNetworking: Boolean @search
   enableIPForwarding: Boolean @search
   hostedWorkloads: [String] @search(by: [hash, regexp])
-  dscpConfiguration: azureApplicationGatewaySubResource
+  dscpConfiguration: azureAppGatewaySubResource
   resourceGuid: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   workloadType: String @search(by: [hash, regexp])
   nicType: String @search(by: [hash, regexp])
-  privateLinkService: azureApplicationGatewayPrivateLinkService
+  privateLinkService: azureAppGatewayPrivateLinkSvc
   migrationPhase: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayRetentionPolicyParameters
+type azureAppGatewayRetentionPolicyParameters
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -226,7 +226,7 @@ type azureApplicationGatewayRetentionPolicyParameters
   enabled: Boolean @search
 }
 
-type azureApplicationGatewayFlowLogFormatParameters
+type azureAppGatewayFlowLogFormatParameters
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -236,16 +236,16 @@ type azureApplicationGatewayFlowLogFormatParameters
   version: Int @search
 }
 
-type azureApplicationGatewayTrafficAnalyticsProperties
+type azureAppGatewayTrafficAnalyticsProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  networkWatcherFlowAnalyticsConfiguration: azureApplicationGatewayTrafficAnalyticsConfigurationProperties
+  networkWatcherFlowAnalyticsConfiguration: azureAppGatewayTrafficAnalyticsConfigProperties
 }
 
-type azureApplicationGatewayTrafficAnalyticsConfigurationProperties
+type azureAppGatewayTrafficAnalyticsConfigProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -258,7 +258,7 @@ type azureApplicationGatewayTrafficAnalyticsConfigurationProperties
   trafficAnalyticsInterval: Int @search
 }
 
-type azureApplicationGatewayFlowLog
+type azureAppGatewayFlowLog
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -269,29 +269,29 @@ type azureApplicationGatewayFlowLog
   targetResourceGuid: String @search(by: [hash, regexp])
   storageId: String @search(by: [hash, regexp])
   enabled: Boolean @search
-  retentionPolicy: azureApplicationGatewayRetentionPolicyParameters
-  format: azureApplicationGatewayFlowLogFormatParameters
-  flowAnalyticsConfiguration: azureApplicationGatewayTrafficAnalyticsProperties
+  retentionPolicy: azureAppGatewayRetentionPolicyParameters
+  format: azureAppGatewayFlowLogFormatParameters
+  flowAnalyticsConfiguration: azureAppGatewayTrafficAnalyticsProperties
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayNetworkSecurityGroup
+type azureAppGatewayNetworkSecurityGroup
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   id: String @search(by: [hash, regexp])
-  securityRules: [azureApplicationGatewaySecurityRule]
-  defaultSecurityRules: [azureApplicationGatewaySecurityRule]
-  networkInterfaces: [azureApplicationGatewayNetworkInterface]
-  subnets: [azureApplicationGatewaySubnet]
-  flowLogs: [azureApplicationGatewayFlowLog]
+  securityRules: [azureAppGatewaySecurityRule]
+  defaultSecurityRules: [azureAppGatewaySecurityRule]
+  networkInterfaces: [azureAppGatewayNetworkInterface]
+  subnets: [azureAppGatewaySubnet]
+  flowLogs: [azureAppGatewayFlowLog]
   resourceGuid: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayRoute
+type azureAppGatewayRoute
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -307,21 +307,21 @@ type azureApplicationGatewayRoute
   hasBgpOverride: Boolean @search
 }
 
-type azureApplicationGatewayRouteTable
+type azureAppGatewayRouteTable
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   id: String @search(by: [hash, regexp])
-  routes: [azureApplicationGatewayRoute]
-  subnets: [azureApplicationGatewaySubnet]
+  routes: [azureAppGatewayRoute]
+  subnets: [azureAppGatewaySubnet]
   disableBgpRoutePropagation: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
   resourceGuid: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayServiceEndpointPropertiesFormat
+type azureAppGatewayServiceEndpointPropertiesFormat
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -333,7 +333,7 @@ type azureApplicationGatewayServiceEndpointPropertiesFormat
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayServiceEndpointPolicyDefinition
+type azureAppGatewayEndpointPolicyDefinition
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -348,7 +348,7 @@ type azureApplicationGatewayServiceEndpointPolicyDefinition
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayServiceEndpointPolicy
+type azureAppGatewayEndpointPolicy
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -356,15 +356,15 @@ type azureApplicationGatewayServiceEndpointPolicy
   ) {
   id: String @search(by: [hash, regexp])
   kind: String @search(by: [hash, regexp])
-  serviceEndpointPolicyDefinitions: [azureApplicationGatewayServiceEndpointPolicyDefinition]
-  subnets: [azureApplicationGatewaySubnet]
+  serviceEndpointPolicyDef: [azureAppGatewayEndpointPolicyDefinition]
+  subnets: [azureAppGatewaySubnet]
   resourceGuid: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   serviceAlias: String @search(by: [hash, regexp])
   contextualServiceEndpointPolicies: [String] @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayIPConfigurationProfile
+type azureAppGatewayIPConfigurationProfile
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -373,11 +373,11 @@ type azureApplicationGatewayIPConfigurationProfile
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  subnet: azureApplicationGatewaySubnet
+  subnet: azureAppGatewaySubnet
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayResourceNavigationLink
+type azureAppGatewayResourceNavigationLink
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -391,7 +391,7 @@ type azureApplicationGatewayResourceNavigationLink
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayServiceAssociationLink
+type azureAppGatewayServiceAssociationLink
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -407,7 +407,7 @@ type azureApplicationGatewayServiceAssociationLink
   locations: [String] @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayDelegation
+type azureAppGatewayDelegation
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -421,7 +421,7 @@ type azureApplicationGatewayDelegation
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayIPConfiguration
+type azureAppGatewayApplicationGatewayIPConfig
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -430,11 +430,11 @@ type azureApplicationGatewayApplicationGatewayIPConfiguration
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  subnet: azureApplicationGatewaySubnet
+  subnet: azureAppGatewaySubnet
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewaySubnet
+type azureAppGatewaySubnet
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -445,26 +445,26 @@ type azureApplicationGatewaySubnet
   type: String @search(by: [hash, regexp])
   addressPrefix: String @search(by: [hash, regexp])
   addressPrefixes: [String] @search(by: [hash, regexp])
-  networkSecurityGroup: azureApplicationGatewayNetworkSecurityGroup
-  routeTable: azureApplicationGatewayRouteTable
-  natGateway: azureApplicationGatewaySubResource
-  serviceEndpoints: [azureApplicationGatewayServiceEndpointPropertiesFormat]
-  serviceEndpointPolicies: [azureApplicationGatewayServiceEndpointPolicy]
-  privateEndpoints: [azureApplicationGatewayPrivateEndpoint]
-  ipConfigurations: [azureApplicationGatewayIPConfiguration]
-  ipConfigurationProfiles: [azureApplicationGatewayIPConfigurationProfile]
-  ipAllocations: [azureApplicationGatewaySubResource]
-  resourceNavigationLinks: [azureApplicationGatewayResourceNavigationLink]
-  serviceAssociationLinks: [azureApplicationGatewayServiceAssociationLink]
-  delegations: [azureApplicationGatewayDelegation]
+  networkSecurityGroup: azureAppGatewayNetworkSecurityGroup
+  routeTable: azureAppGatewayRouteTable
+  natGateway: azureAppGatewaySubResource
+  serviceEndpoints: [azureAppGatewayServiceEndpointPropertiesFormat]
+  serviceEndpointPolicies: [azureAppGatewayEndpointPolicy]
+  privateEndpoints: [azureAppGatewayPrivateEndpoint]
+  ipConfigurations: [azureAppGatewayIPConfig]
+  ipConfigurationProfiles: [azureAppGatewayIPConfigurationProfile]
+  ipAllocations: [azureAppGatewaySubResource]
+  resourceNavigationLinks: [azureAppGatewayResourceNavigationLink]
+  serviceAssociationLinks: [azureAppGatewayServiceAssociationLink]
+  delegations: [azureAppGatewayDelegation]
   purpose: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
   privateEndpointNetworkPolicies: String @search(by: [hash, regexp])
   privateLinkServiceNetworkPolicies: String @search(by: [hash, regexp])
-  applicationGatewayIpConfigurations: [azureApplicationGatewayApplicationGatewayIPConfiguration]
+  applicationGatewayIpConfigurations: [azureAppGatewayApplicationGatewayIPConfig]
 }
 
-type azureApplicationGatewayUserAssignedIdentityAdditionalProperty
+type azureAppGatewayUserAssignedIdentityAdditionalProperty
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -474,7 +474,7 @@ type azureApplicationGatewayUserAssignedIdentityAdditionalProperty
   clientId: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayUserAssignedIdentities
+type azureAppGatewayUserAssignedIdentities
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -482,10 +482,10 @@ type azureApplicationGatewayUserAssignedIdentities
   ) {
   id: String! @id
   key: String
-  property: azureApplicationGatewayUserAssignedIdentityAdditionalProperty
+  property: azureAppGatewayUserAssignedIdentityAdditionalProperty
 }
 
-type azureApplicationGatewayManagedServiceIdentity
+type azureAppGatewayManagedServiceIdentity
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -494,10 +494,10 @@ type azureApplicationGatewayManagedServiceIdentity
   principalId: String @search(by: [hash, regexp])
   tenantId: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  userAssignedIdentities: [azureApplicationGatewayUserAssignedIdentities]
+  userAssignedIdentities: [azureAppGatewayUserAssignedIdentities]
 }
 
-type azureApplicationGatewayIPConfiguration
+type azureAppGatewayIPConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -508,12 +508,12 @@ type azureApplicationGatewayIPConfiguration
   type: String @search(by: [hash, regexp])
   privateIPAddress: String @search(by: [hash, regexp])
   privateIPAllocationMethod: String @search(by: [hash, regexp])
-  subnet: azureApplicationGatewaySubnet
-  publicIPAddress: azureApplicationGatewayPublicIPAddress
+  subnet: azureAppGatewaySubnet
+  publicIPAddress: azureAppGatewayPublicIPAddress
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayAuthenticationCertificate
+type azureAppGatewayAuthenticationCertificate
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -526,7 +526,7 @@ type azureApplicationGatewayAuthenticationCertificate
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayTrustedRootCertificate
+type azureAppGatewayTrustedRootCertificate
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -540,7 +540,7 @@ type azureApplicationGatewayTrustedRootCertificate
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayTrustedClientCertificate
+type azureAppGatewayTrustedClientCertificate
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -555,7 +555,7 @@ type azureApplicationGatewayTrustedClientCertificate
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewaySslCertificate
+type azureAppGatewaySslCertificate
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -571,7 +571,7 @@ type azureApplicationGatewaySslCertificate
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayFrontendIPConfiguration
+type azureAppGatewayAppGatewayFrontendIPConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -588,7 +588,7 @@ type azureApplicationGatewayFrontendIPConfiguration
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayFrontendPort
+type azureAppGatewayFrontendPort
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -601,7 +601,7 @@ type azureApplicationGatewayFrontendPort
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayProbe
+type azureAppGatewayProbe
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -624,7 +624,7 @@ type azureApplicationGatewayProbe
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayBackendAddressPool
+type azureAppGatewayAppGatewayBackendAddressPool
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -633,13 +633,12 @@ type azureApplicationGatewayApplicationGatewayBackendAddressPool
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  backendIPConfigurations: [azureApplicationGatewayNetworkInterfaceIPConfiguration]
-  
-  backendAddresses: [azureApplicationGatewayApplicationGatewayBackendAddress]
+  backendIPConfigs: [azureAppGatewayNetIntfIPConfig]
+  backendAddresses: [azureAppGatewayBackendAddress]
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayGatewayLoadBalancerTunnelInterface
+type azureAppGatewayGatewayLoadBalancerTunnelInterface
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -652,7 +651,7 @@ type azureApplicationGatewayGatewayLoadBalancerTunnelInterface
     type: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayBackendAddressPool
+type azureAppGatewayBackendAddrPool
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -662,9 +661,9 @@ type azureApplicationGatewayBackendAddressPool
     name: String @search(by: [hash, regexp])
     type: String @search(by: [hash, regexp])
     location: String @search(by: [hash, regexp])
-    tunnelInterfaces: [azureApplicationGatewayGatewayLoadBalancerTunnelInterface]
-    loadBalancerBackendAddresses: [azureApplicationGatewayLoadBalancerBackendAddress]
-    backendIPConfigurations: [azureApplicationGatewayNetworkInterfaceIPConfiguration]
+    tunnelInterfaces: [azureAppGatewayGatewayLoadBalancerTunnelInterface]
+    loadBalancerBackendAddresses: [azureAppGatewayLoadBalancerAddr]
+    backendIPConfigs: [azureAppGatewayNetIntfIPConfig]
     loadBalancingRules: [String] @search(by: [hash, regexp])
     outboundRule: String @search(by: [hash, regexp])
     outboundRules: [String] @search(by: [hash, regexp])
@@ -672,7 +671,7 @@ type azureApplicationGatewayBackendAddressPool
     provisioningState: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayNatRulePortMapping
+type azureAppGatewayNatRulePortMapping
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -684,7 +683,7 @@ type azureApplicationGatewayNatRulePortMapping
     backendPort: Int @search
   }
 
-type azureApplicationGatewayLoadBalancerBackendAddress
+type azureAppGatewayLoadBalancerAddr
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -697,10 +696,10 @@ type azureApplicationGatewayLoadBalancerBackendAddress
     ipAddress: String @search(by: [hash, regexp])
     networkInterfaceIPConfiguration: String @search(by: [hash, regexp])
     loadBalancerFrontendIPConfiguration: String @search(by: [hash, regexp])
-    inboundNatRulesPortMapping: [azureApplicationGatewayNatRulePortMapping]
+    inboundNatRulesPortMapping: [azureAppGatewayNatRulePortMapping]
   }
 
-type azureApplicationGatewayInboundNatRule
+type azureAppGatewayInboundNatRule
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -709,8 +708,8 @@ type azureApplicationGatewayInboundNatRule
     id: String @search(by: [hash, regexp])
     name: String @search(by: [hash, regexp])
     type: String @search(by: [hash, regexp])
-    frontendIPConfiguration: azureApplicationGatewaySubResource
-    backendIPConfiguration: azureApplicationGatewayNetworkInterfaceIPConfiguration
+    frontendIPConfiguration: azureAppGatewaySubResource
+    backendIPConfiguration: azureAppGatewayNetIntfIPConfig
     protocol: String @search(by: [hash, regexp])
     frontendPort: Int @search
     backendPort: Int @search
@@ -719,21 +718,11 @@ type azureApplicationGatewayInboundNatRule
     enableTcpReset: Boolean @search
     frontendPortRangeStart: Int @search
     frontendPortRangeEnd: Int @search
-    backendAddressPool: azureApplicationGatewaySubResource
-    provisioningState: String @search(by: [hash, regexp])
-  }
-type azureApplicationGatewayApplicationSecurityGroup
-  @generate(
-    query: { get: false, query: false, aggregate: false }
-    mutation: { add: false, delete: false }
-    subscription: false
-  ) {
-    id: String @search(by: [hash, regexp])
-    resourceGuid: String @search(by: [hash, regexp])
+    backendAddressPool: azureAppGatewaySubResource
     provisioningState: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+type azureAppGatewayPrivateLinkConnProperties
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -744,7 +733,7 @@ type azureApplicationGatewayNetworkInterfaceIPConfigurationPrivateLinkConnection
     fqdns: [String] @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayNetworkInterfaceIPConfiguration
+type azureAppGatewayNetIntfIPConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -753,23 +742,23 @@ type azureApplicationGatewayNetworkInterfaceIPConfiguration
     id: String @search(by: [hash, regexp])
     name: String @search(by: [hash, regexp])
     type: String @search(by: [hash, regexp])
-    gatewayLoadBalancer: azureApplicationGatewaySubResource
-    virtualNetworkTaps: [azureApplicationGatewayVirtualNetworkTap]
-    applicationGatewayBackendAddressPools: [azureApplicationGatewayApplicationGatewayBackendAddressPool]
-    loadBalancerBackendAddressPools: [azureApplicationGatewayBackendAddressPool]
-    loadBalancerInboundNatRules: [azureApplicationGatewayInboundNatRule]
+    gatewayLoadBalancer: azureAppGatewaySubResource
+    virtualNetworkTaps: [azureAppGatewayVirtualNetworkTap]
+    appGatewayBackendAddrPools: [azureAppGatewayAppGatewayBackendAddressPool]
+    loadBalancerBackendAddrPools: [azureAppGatewayBackendAddrPool]
+    loadBalancerInboundNatRules: [azureAppGatewayInboundNatRule]
     privateIPAddress: String @search(by: [hash, regexp])
     privateIPAllocationMethod: String @search(by: [hash, regexp])
     privateIPAddressVersion: String @search(by: [hash, regexp])
-    subnet: azureApplicationGatewaySubnet
+    subnet: azureAppGatewaySubnet
     primary: Boolean @search
-    publicIPAddress: azureApplicationGatewayPublicIPAddress
-    applicationSecurityGroups: [azureApplicationGatewayApplicationSecurityGroup]
+    publicIPAddress: azureAppGatewayPublicIPAddress
+    applicationSecurityGroups: [azureAppGatewaySecurityGroup]
     provisioningState: String @search(by: [hash, regexp])
-    privateLinkConnectionProperties: azureApplicationGatewayNetworkInterfaceIPConfigurationPrivateLinkConnectionProperties,
+    privateLinkConnectionProperties: azureAppGatewayPrivateLinkConnProperties,
   }
 
-type azureApplicationGatewayNetworkInterfaceTapConfiguration
+type azureAppGatewayNetworkInterfaceTapConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -778,12 +767,12 @@ type azureApplicationGatewayNetworkInterfaceTapConfiguration
     id: String @search(by: [hash, regexp])
     name: String @search(by: [hash, regexp])
     type: String @search(by: [hash, regexp])
-    virtualNetworkTap: azureApplicationGatewayVirtualNetworkTap
+    virtualNetworkTap: azureAppGatewayVirtualNetworkTap
     provisioningState: String @search(by: [hash, regexp])
   }
 
 
-type azureApplicationGatewayFrontendIPConfiguration
+type azureAppGatewayFrontendIPConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -793,21 +782,21 @@ type azureApplicationGatewayFrontendIPConfiguration
     name: String @search(by: [hash, regexp])
     type: String @search(by: [hash, regexp])
     zones: [String] @search(by: [hash, regexp])
-    inboundNatRuleIds: [azureApplicationGatewaySubResource]
-    inboundNatPools: [azureApplicationGatewaySubResource]
-    outboundRules: [azureApplicationGatewaySubResource]
-    loadBalancingRules: [azureApplicationGatewaySubResource]
+    inboundNatRuleIds: [azureAppGatewaySubResource]
+    inboundNatPools: [azureAppGatewaySubResource]
+    outboundRules: [azureAppGatewaySubResource]
+    loadBalancingRules: [azureAppGatewaySubResource]
     privateIPAddress: String @search(by: [hash, regexp])
     privateIPAllocationMethod: String @search(by: [hash, regexp])
     privateIPAddressVersion: String @search(by: [hash, regexp])
-    subnet: azureApplicationGatewaySubnet
-    publicIPAddress: azureApplicationGatewayPublicIPAddress
-    publicIPPrefix: azureApplicationGatewaySubResource
-    gatewayLoadBalancer: azureApplicationGatewaySubResource
+    subnet: azureAppGatewaySubnet
+    publicIPAddress: azureAppGatewayPublicIPAddress
+    publicIPPrefix: azureAppGatewaySubResource
+    gatewayLoadBalancer: azureAppGatewaySubResource
     provisioningState: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayIpTag
+type azureAppGatewayIpTag
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -818,7 +807,7 @@ type azureApplicationGatewayIpTag
     tag: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayExtendedLocation
+type azureAppGatewayExtendedLocation
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -828,7 +817,7 @@ type azureApplicationGatewayExtendedLocation
     type: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayNatGateway
+type azureAppGatewayNatGateway
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -837,44 +826,44 @@ type azureApplicationGatewayNatGateway
     id: String @search(by: [hash, regexp])
     zones: [String] @search(by: [hash, regexp])
     idleTimeoutInMinutes: Int @search
-    publicIpAddresses: [azureApplicationGatewaySubResource]
-    publicIpPrefixes: [azureApplicationGatewaySubResource]
-    subnets: [azureApplicationGatewaySubResource]
+    publicIpAddresses: [azureAppGatewaySubResource]
+    publicIpPrefixes: [azureAppGatewaySubResource]
+    subnets: [azureAppGatewaySubResource]
     resourceGuid: String @search(by: [hash, regexp])
     provisioningState: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayPublicIPAddress
+type azureAppGatewayPublicIPAddress
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
     id: String @search(by: [hash, regexp])
-    extendedLocation: azureApplicationGatewayExtendedLocation
+    extendedLocation: azureAppGatewayExtendedLocation
     zones: [String] @search(by: [hash, regexp])
     publicIPAllocationMethod: String @search(by: [hash, regexp])
     publicIPAddressVersion: String @search(by: [hash, regexp])
-    ipConfiguration: azureApplicationGatewayIPConfiguration
+    ipConfiguration: azureAppGatewayIPConfig
     dnsDomainNameLabel: String @search(by: [hash, regexp])
     dnsFqdn: String @search(by: [hash, regexp])
     dnsReverseFqdn: String @search(by: [hash, regexp])
-    ipTags: [azureApplicationGatewayIpTag]
+    ipTags: [azureAppGatewayIpTag]
     ipAddress: String @search(by: [hash, regexp])
-    publicIPPrefix: azureApplicationGatewaySubResource
+    publicIPPrefix: azureAppGatewaySubResource
     idleTimeoutInMinutes: Int @search
     resourceGuid: String @search(by: [hash, regexp])
     provisioningState: String @search(by: [hash, regexp])
-    servicePublicIPAddress: azureApplicationGatewayPublicIPAddress
+    servicePublicIPAddress: azureAppGatewayPublicIPAddress
     natGatewayId: String @search(by: [hash, regexp])
     natGatewayZones: [String] @search(by: [hash, regexp])
-    natGateway: azureApplicationGatewayNatGateway
+    natGateway: azureAppGatewayNatGateway
     migrationPhase: String @search(by: [hash, regexp])
-    linkedPublicIPAddress: azureApplicationGatewayPublicIPAddress
+    linkedPublicIPAddress: azureAppGatewayPublicIPAddress
     deleteOption: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayVirtualNetworkTap
+type azureAppGatewayVirtualNetworkTap
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -883,15 +872,15 @@ type azureApplicationGatewayVirtualNetworkTap
     id: String @search(by: [hash, regexp])
     name: String @search(by: [hash, regexp])
     type: String @search(by: [hash, regexp])
-    networkInterfaceTapConfigurations: [azureApplicationGatewayNetworkInterfaceTapConfiguration],
+    networkInterfaceTapConfigs: [azureAppGatewayNetworkInterfaceTapConfig],
     resourceGuid: String @search(by: [hash, regexp])
-    destinationNetworkInterfaceIPConfiguration: azureApplicationGatewayNetworkInterfaceIPConfiguration,
-    destinationLoadBalancerFrontEndIPConfiguration: azureApplicationGatewayFrontendIPConfiguration,
+    destinationNetworkInterfaceIPConfiguration: azureAppGatewayNetIntfIPConfig,
+    destinationLoadBalancerFrontEndIPConfiguration: azureAppGatewayFrontendIPConfig,
     destinationPort: Int @search
     provisioningState: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayApplicationGatewayBackendAddress
+type azureAppGatewayBackendAddress
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -902,7 +891,7 @@ type azureApplicationGatewayApplicationGatewayBackendAddress
     ipAddress: String @search(by: [hash, regexp])
   }
 
-type azureApplicationGatewayApplicationGatewayConnectionDraining
+type azureAppGatewayConnectionDraining
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -912,7 +901,7 @@ type azureApplicationGatewayApplicationGatewayConnectionDraining
   drainTimeoutInSec: Int @search
 }
 
-type azureApplicationGatewayApplicationGatewayBackendHttpSettings
+type azureAppGatewayBackendHttpSettings
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -925,10 +914,10 @@ type azureApplicationGatewayApplicationGatewayBackendHttpSettings
   protocol: String @search(by: [hash, regexp])
   cookieBasedAffinity: String @search(by: [hash, regexp])
   requestTimeout: Int @search
-  probe: azureApplicationGatewaySubResource
-  authenticationCertificates: [azureApplicationGatewaySubResource]
-  trustedRootCertificates: [azureApplicationGatewaySubResource]
-  connectionDraining: azureApplicationGatewayApplicationGatewayConnectionDraining
+  probe: azureAppGatewaySubResource
+  authenticationCert: [azureAppGatewaySubResource]
+  trustedRootCertificates: [azureAppGatewaySubResource]
+  connectionDraining: azureAppGatewayConnectionDraining
   hostName: String @search(by: [hash, regexp])
   pickHostNameFromBackendAddress: Boolean @search
   affinityCookieName: String @search(by: [hash, regexp])
@@ -937,7 +926,7 @@ type azureApplicationGatewayApplicationGatewayBackendHttpSettings
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayCustomError
+type azureAppGatewayCustomError
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -948,7 +937,7 @@ type azureApplicationGatewayApplicationGatewayCustomError
   customErrorPageUrl: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayHttpListener
+type azureAppGatewayHttpListener
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -957,20 +946,20 @@ type azureApplicationGatewayApplicationGatewayHttpListener
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  frontendIPConfiguration: azureApplicationGatewaySubResource
-  frontendPort: azureApplicationGatewaySubResource
+  frontendIPConfiguration: azureAppGatewaySubResource
+  frontendPort: azureAppGatewaySubResource
   protocol: String @search(by: [hash, regexp])
   hostName: String @search(by: [hash, regexp])
-  sslCertificate: azureApplicationGatewaySubResource
-  sslProfile: azureApplicationGatewaySubResource
+  sslCertificate: azureAppGatewaySubResource
+  sslProfile: azureAppGatewaySubResource
   requireServerNameIndication: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
-  customErrorConfigurations: [azureApplicationGatewayApplicationGatewayCustomError]
-  firewallPolicy: azureApplicationGatewaySubResource
+  customErrorConfigurations: [azureAppGatewayCustomError]
+  firewallPolicy: azureAppGatewaySubResource
   hostNames: [String] @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewaySslPolicy
+type azureAppGatewaySslPolicy
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -983,7 +972,7 @@ type azureApplicationGatewayApplicationGatewaySslPolicy
   minProtocolVersion: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewaySslPolicy
+type azureAppGatewaySslProfile
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -992,28 +981,13 @@ type azureApplicationGatewayApplicationGatewaySslPolicy
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  trustedClientCertificates: [azureApplicationGatewaySubResource]
-  sslPolicy: azureApplicationGatewayApplicationGatewaySslPolicy
+  trustedClientCertificates: [azureAppGatewaySubResource]
+  sslPolicy: azureAppGatewaySslPolicy
   clientAuthConfiguration: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewaySslProfile
-  @generate(
-    query: { get: false, query: false, aggregate: false }
-    mutation: { add: false, delete: false }
-    subscription: false
-  ) {
-  id: String @search(by: [hash, regexp])
-  name: String @search(by: [hash, regexp])
-  type: String @search(by: [hash, regexp])
-  trustedClientCertificates: [azureApplicationGatewaySubResource]
-  sslPolicy: azureApplicationGatewayApplicationGatewaySslPolicy
-  clientAuthConfiguration: Boolean @search
-  provisioningState: String @search(by: [hash, regexp])
-}
-
-type azureApplicationGatewayApplicationGatewayPathRule
+type azureAppGatewayApplicationGatewayPathRule
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1023,16 +997,16 @@ type azureApplicationGatewayApplicationGatewayPathRule
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
   paths: [String] @search(by: [hash, regexp])
-  backendAddressPool: azureApplicationGatewaySubResource
-  backendHttpSettings: azureApplicationGatewaySubResource
-  redirectConfiguration: azureApplicationGatewaySubResource
-  rewriteRuleSet: azureApplicationGatewaySubResource
-  loadDistributionPolicy: azureApplicationGatewaySubResource
+  backendAddressPool: azureAppGatewaySubResource
+  backendHttpSettings: azureAppGatewaySubResource
+  redirectConfiguration: azureAppGatewaySubResource
+  rewriteRuleSet: azureAppGatewaySubResource
+  loadDistributionPolicy: azureAppGatewaySubResource
   provisioningState: String @search(by: [hash, regexp])
-  firewallPolicy: azureApplicationGatewaySubResource
+  firewallPolicy: azureAppGatewaySubResource
 }
 
-type azureApplicationGatewayApplicationGatewayUrlPathMap
+type azureAppGatewayUrlPathMap
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1041,16 +1015,16 @@ type azureApplicationGatewayApplicationGatewayUrlPathMap
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  defaultBackendAddressPool: azureApplicationGatewaySubResource
-  defaultBackendHttpSettings: azureApplicationGatewaySubResource
-  defaultRewriteRuleSet: azureApplicationGatewaySubResource
-  defaultRedirectConfiguration: azureApplicationGatewaySubResource
-  defaultLoadDistributionPolicy: azureApplicationGatewaySubResource
-  pathRules: [azureApplicationGatewayApplicationGatewayPathRule]
+  defaultBackendAddressPool: azureAppGatewaySubResource
+  defaultBackendHttpSettings: azureAppGatewaySubResource
+  defaultRewriteRuleSet: azureAppGatewaySubResource
+  defaultRedirectConfiguration: azureAppGatewaySubResource
+  defaultLoadDistributionPolicy: azureAppGatewaySubResource
+  pathRules: [azureAppGatewayApplicationGatewayPathRule]
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayRequestRoutingRule
+type azureAppGatewayRequestRoutingRule
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1061,17 +1035,17 @@ type azureApplicationGatewayApplicationGatewayRequestRoutingRule
   type: String @search(by: [hash, regexp])
   ruleType: String @search(by: [hash, regexp])
   priority: Int @search
-  backendAddressPool: azureApplicationGatewaySubResource
-  backendHttpSettings: azureApplicationGatewaySubResource
-  httpListener: azureApplicationGatewaySubResource
-  urlPathMap: azureApplicationGatewaySubResource
-  rewriteRuleSet: azureApplicationGatewaySubResource
-  redirectConfiguration: azureApplicationGatewaySubResource
-  loadDistributionPolicy: azureApplicationGatewaySubResource
+  backendAddressPool: azureAppGatewaySubResource
+  backendHttpSettings: azureAppGatewaySubResource
+  httpListener: azureAppGatewaySubResource
+  urlPathMap: azureAppGatewaySubResource
+  rewriteRuleSet: azureAppGatewaySubResource
+  redirectConfiguration: azureAppGatewaySubResource
+  loadDistributionPolicy: azureAppGatewaySubResource
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayRewriteRuleSet
+type azureAppGatewayRewriteRuleSet
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1079,11 +1053,11 @@ type azureApplicationGatewayApplicationGatewayRewriteRuleSet
   ) {
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
-  rewriteRules: [azureApplicationGatewayApplicationGatewayRequestRoutingRule]
+  rewriteRules: [azureAppGatewayRequestRoutingRule]
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayRedirectConfiguration
+type azureAppGatewayRedirectConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1093,15 +1067,15 @@ type azureApplicationGatewayApplicationGatewayRedirectConfiguration
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
   redirectType: String @search(by: [hash, regexp])
-  targetListener: azureApplicationGatewaySubResource
+  targetListener: azureAppGatewaySubResource
   targetUrl: String @search(by: [hash, regexp])
   includePath: Boolean @search
   includeQueryString: Boolean @search
-  requestRoutingRules: [azureApplicationGatewaySubResource]
-  urlPathMaps: [azureApplicationGatewaySubResource]
-  pathRules: [azureApplicationGatewaySubResource]
+  requestRoutingRules: [azureAppGatewaySubResource]
+  urlPathMaps: [azureAppGatewaySubResource]
+  pathRules: [azureAppGatewaySubResource]
 }
-type azureApplicationGatewayApplicationGatewayFirewallDisabledRuleGroup
+type azureAppGatewayFirewallDisabledRuleGroup
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1112,7 +1086,7 @@ type azureApplicationGatewayApplicationGatewayFirewallDisabledRuleGroup
   rules: [Int] @search
 }
 
-type azureApplicationGatewayApplicationGatewayFirewallExclusion
+type azureAppGatewayApplicationGatewayFirewallExclusion
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1124,7 +1098,7 @@ type azureApplicationGatewayApplicationGatewayFirewallExclusion
   selector: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayWebApplicationFirewallConfiguration
+type azureAppGatewayWebAppFirewallConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1134,16 +1108,16 @@ type azureApplicationGatewayApplicationGatewayWebApplicationFirewallConfiguratio
   firewallMode: String @search(by: [hash, regexp])
   ruleSetType: String @search(by: [hash, regexp])
   ruleSetVersion: String @search(by: [hash, regexp])
-  disabledRuleGroups: [azureApplicationGatewayApplicationGatewayFirewallDisabledRuleGroup]
+  disabledRuleGroups: [azureAppGatewayFirewallDisabledRuleGroup]
   requestBodyCheck: Boolean @search
   maxRequestBodySize: Int @search
   maxRequestBodySizeInKb: Int @search
   fileUploadLimitInMb: Int @search
-  exclusions: [azureApplicationGatewayApplicationGatewayFirewallExclusion]
+  exclusions: [azureAppGatewayApplicationGatewayFirewallExclusion]
 }
 
 
-type azureApplicationGatewayApplicationGatewayAutoscaleConfiguration
+type azureAppGatewayAutoscaleConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1153,7 +1127,7 @@ type azureApplicationGatewayApplicationGatewayAutoscaleConfiguration
   maxCapacity: Int @search
 }
 
-type azureApplicationGatewayApplicationGatewayPrivateLinkIpConfiguration
+type azureAppGatewayPrivateLinkIpConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1164,12 +1138,12 @@ type azureApplicationGatewayApplicationGatewayPrivateLinkIpConfiguration
   type: String @search(by: [hash, regexp])
   privateIPAddress: String @search(by: [hash, regexp])
   privateIPAllocationMethod: String @search(by: [hash, regexp])
-  subnet: azureApplicationGatewaySubResource
+  subnet: azureAppGatewaySubResource
   primary: Boolean @search
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayPrivateLinkConfiguration
+type azureAppGatewayPrivateLinkConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1178,22 +1152,11 @@ type azureApplicationGatewayApplicationGatewayPrivateLinkConfiguration
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  ipConfigurations: [azureApplicationGatewayApplicationGatewayPrivateLinkIpConfiguration]
+  ipConfigurations: [azureAppGatewayPrivateLinkIpConfig]
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayCustomError
-  @generate(
-    query: { get: false, query: false, aggregate: false }
-    mutation: { add: false, delete: false }
-    subscription: false
-  ) {
-  id: String @search(by: [hash, regexp])
-  statusCode: String @search(by: [hash, regexp])
-  customErrorPageUrl: String @search(by: [hash, regexp])
-}
-
-type azureApplicationGatewayApplicationGatewayLoadDistributionTarget
+type azureAppGatewayLoadDistributionTarget
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1203,10 +1166,10 @@ type azureApplicationGatewayApplicationGatewayLoadDistributionTarget
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
   weightPerServer: Int @search
-  backendAddressPool: azureApplicationGatewaySubResource
+  backendAddressPool: azureAppGatewaySubResource
 }
 
-type azureApplicationGatewayApplicationGatewayLoadDistributionPolicy
+type azureAppGatewayLoadDistribPolicy
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1215,12 +1178,12 @@ type azureApplicationGatewayApplicationGatewayLoadDistributionPolicy
   id: String @search(by: [hash, regexp])
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
-  loadDistributionTargets: [azureApplicationGatewayApplicationGatewayLoadDistributionTarget]
+  loadDistributionTargets: [azureAppGatewayLoadDistributionTarget]
   loadDistributionAlgorithm: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureApplicationGatewayApplicationGatewayGlobalConfiguration
+type azureAppGatewayGlobalConfig
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -1230,7 +1193,7 @@ type azureApplicationGatewayApplicationGatewayGlobalConfiguration
   enableResponseBuffering: Boolean @search
 }
 
-type azureApplicationGateway implements azureResource
+type azureAppGateway implements azureResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
@@ -1238,36 +1201,36 @@ type azureApplicationGateway implements azureResource
   )
   @key(fields: "id") {
   zones: [String] @search(by: [hash, regexp])
-  identity: azureApplicationGatewayManagedServiceIdentity
-  sslPolicy: azureApplicationGatewayApplicationGatewaySslPolicy
+  identity: azureAppGatewayManagedServiceIdentity
+  sslPolicy: azureAppGatewaySslPolicy
   operationalState: String @search(by: [hash, regexp])
-  gatewayIPConfigurations: [azureApplicationGatewayIPConfiguration]
-  authenticationCertificates: [azureApplicationGatewayAuthenticationCertificate]
-  trustedRootCertificates: [azureApplicationGatewayTrustedRootCertificate]
-  trustedClientCertificates: [azureApplicationGatewayTrustedClientCertificate]
-  sslCertificates: [azureApplicationGatewaySslCertificate]
-  frontendIPConfigurations: [azureApplicationGatewayFrontendIPConfiguration]
-  frontendPorts: [azureApplicationGatewayFrontendPort]
-  probes: [azureApplicationGatewayProbe]
-  backendAddressPools: [azureApplicationGatewayApplicationGatewayBackendAddressPool]
-  backendHttpSettingsCollection: [azureApplicationGatewayApplicationGatewayBackendHttpSettings]
-  httpListeners: [azureApplicationGatewayApplicationGatewayHttpListener]
-  sslProfiles: [azureApplicationGatewayApplicationGatewaySslProfile]
-  urlPathMaps: [azureApplicationGatewayApplicationGatewayUrlPathMap]
-  requestRoutingRules: [azureApplicationGatewayApplicationGatewayRequestRoutingRule]
-  rewriteRuleSets: [azureApplicationGatewayApplicationGatewayRewriteRuleSet]
-  redirectConfigurations: [azureApplicationGatewayApplicationGatewayRedirectConfiguration]
-  webApplicationFirewallConfiguration: azureApplicationGatewayApplicationGatewayWebApplicationFirewallConfiguration
-  firewallPolicy: azureApplicationGatewaySubResource
+  gatewayIPConfigurations: [azureAppGatewayIPConfig]
+  authenticationCert: [azureAppGatewayAuthenticationCertificate]
+  trustedRootCertificates: [azureAppGatewayTrustedRootCertificate]
+  trustedClientCertificates: [azureAppGatewayTrustedClientCertificate]
+  sslCertificates: [azureAppGatewaySslCertificate]
+  frontendIPConfigurations: [azureAppGatewayAppGatewayFrontendIPConfig]
+  frontendPorts: [azureAppGatewayFrontendPort]
+  probes: [azureAppGatewayProbe]
+  backendAddressPools: [azureAppGatewayAppGatewayBackendAddressPool]
+  backendHttpSettingsCollection: [azureAppGatewayBackendHttpSettings]
+  httpListeners: [azureAppGatewayHttpListener]
+  sslProfiles: [azureAppGatewaySslProfile]
+  urlPathMaps: [azureAppGatewayUrlPathMap]
+  requestRoutingRules: [azureAppGatewayRequestRoutingRule]
+  rewriteRuleSets: [azureAppGatewayRewriteRuleSet]
+  redirectConfigurations: [azureAppGatewayRedirectConfig]
+  webApplicationFirewallConfiguration: azureAppGatewayWebAppFirewallConfig
+  firewallPolicy: azureAppGatewaySubResource
   enableHttp2: Boolean @search
   enableFips: Boolean @search
-  autoscaleConfiguration: azureApplicationGatewayApplicationGatewayAutoscaleConfiguration
-  privateLinkConfigurations: [azureApplicationGatewayApplicationGatewayPrivateLinkConfiguration]
-  privateEndpointConnections: [azureApplicationGatewayApplicationGatewayPrivateEndpointConnection]
+  autoscaleConfiguration: azureAppGatewayAutoscaleConfig
+  privateLinkConfigurations: [azureAppGatewayPrivateLinkConfig]
+  privateEndpointConnections: [azureAppGatewayPrivateEndpointConn]
   resourceGuid: String @search(by: [hash, regexp])
   provisioningState: String @search(by: [hash, regexp])
-  customErrorConfigurations: [azureApplicationGatewayApplicationGatewayCustomError]
+  customErrorConfigurations: [azureAppGatewayCustomError]
   forceFirewallPolicyAssociation: Boolean @search
-  loadDistributionPolicies: [azureApplicationGatewayApplicationGatewayLoadDistributionPolicy]
-  globalConfiguration: azureApplicationGatewayApplicationGatewayGlobalConfiguration
+  loadDistributionPolicies: [azureAppGatewayLoadDistribPolicy]
+  globalConfiguration: azureAppGatewayGlobalConfig
 }

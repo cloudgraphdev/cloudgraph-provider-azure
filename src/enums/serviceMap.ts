@@ -88,6 +88,7 @@ import AzureBackupPolicy from '../services/backupPolicies'
 import AzureBilling from '../services/billing'
 import AzureLogProfiles from '../services/logProfiles'
 import Subscription from '../services/subscription'
+import AzureApplicationGateway from '../services/applicationGateway'
 
 /**
  * serviceMap is an object that contains all currently supported services for AWS
@@ -104,6 +105,7 @@ export default {
   [services.adServicePrincipal]: AzureADServicePrincipal,
   [services.adUser]: AzureADUser,
   [services.aksManagedCluster]: AzureAksManagedCluster,
+  [services.appGateway]: AzureApplicationGateway,
   [services.metricAlert]: AzureMetricAlert,
   [services.applicationGateway]: AzureApplicationGateway,
   [services.appServiceEnvironment]: AzureAppServiceEnvironment,

@@ -47,51 +47,51 @@ import {
 } from '@azure/arm-network'
 import cuid from 'cuid'
 import {
-  AzureApplicationGateway,
-  AzureApplicationGatewayApplicationGatewayBackendAddressPool,
-  AzureApplicationGatewayUserAssignedIdentities,
-  AzureApplicationGatewayVirtualNetworkTap,
-  AzureApplicationGatewayNetworkInterfaceIpConfiguration,
-  AzureApplicationGatewayIpConfiguration,
-  AzureApplicationGatewayPublicIpAddress,
-  AzureApplicationGatewaySubnet,
-  AzureApplicationGatewayBackendAddressPool,
-  AzureApplicationGatewaySecurityRule,
-  AzureApplicationGatewayApplicationSecurityGroup,
-  AzureApplicationGatewayNetworkSecurityGroup,
-  AzureApplicationGatewayNetworkInterface,
-  AzureApplicationGatewayPrivateEndpoint,
-  AzureApplicationGatewayCustomDnsConfigPropertiesFormat,
-  AzureApplicationGatewayPrivateLinkServiceConnection,
-  AzureApplicationGatewayPrivateEndpointIpConfiguration,
-  AzureApplicationGatewayPrivateLinkService,
-  AzureApplicationGatewayPrivateLinkServiceIpConfiguration,
-  AzureApplicationGatewayFrontendIpConfiguration,
-  AzureApplicationGatewayFlowLog,
-  AzureApplicationGatewayServiceEndpointPropertiesFormat,
-  AzureApplicationGatewayServiceEndpointPolicy,
-  AzureApplicationGatewayServiceEndpointPolicyDefinition,
-  AzureApplicationGatewayIpConfigurationProfile,
-  AzureApplicationGatewayServiceAssociationLink,
-  AzureApplicationGatewayResourceNavigationLink,
-  AzureApplicationGatewayDelegation,
-  AzureApplicationGatewayApplicationGatewayConnectionDraining,
-  AzureApplicationGatewayApplicationGatewayBackendHttpSettings,
-  AzureApplicationGatewayApplicationGatewayHttpListener,
-  AzureApplicationGatewayApplicationGatewaySslProfile,
-  AzureApplicationGatewayApplicationGatewaySslPolicy,
-  AzureApplicationGatewayApplicationGatewayPathRule,
-  AzureApplicationGatewayApplicationGatewayUrlPathMap,
-  AzureApplicationGatewayApplicationGatewayRequestRoutingRule,
-  AzureApplicationGatewayApplicationGatewayRewriteRuleSet,
-  AzureApplicationGatewayApplicationGatewayRedirectConfiguration,
-  AzureApplicationGatewayApplicationGatewayFirewallDisabledRuleGroup,
-  AzureApplicationGatewayApplicationGatewayFirewallExclusion,
-  AzureApplicationGatewayApplicationGatewayWebApplicationFirewallConfiguration,
-  AzureApplicationGatewayApplicationGatewayPrivateEndpointConnection,
-  AzureApplicationGatewayApplicationGatewayPrivateLinkConfiguration,
-  AzureApplicationGatewayApplicationGatewayPrivateLinkIpConfiguration,
-  AzureApplicationGatewayApplicationGatewayLoadDistributionPolicy,
+  AzureAppGateway,
+  AzureAppGatewayAppGatewayBackendAddressPool,
+  AzureAppGatewayUserAssignedIdentities,
+  AzureAppGatewayVirtualNetworkTap,
+  AzureAppGatewayNetIntfIpConfig,
+  AzureAppGatewayIpConfig,
+  AzureAppGatewayPublicIpAddress,
+  AzureAppGatewaySubnet,
+  AzureAppGatewayBackendAddrPool,
+  AzureAppGatewaySecurityRule,
+  AzureAppGatewaySecurityGroup,
+  AzureAppGatewayNetworkSecurityGroup,
+  AzureAppGatewayNetworkInterface,
+  AzureAppGatewayPrivateEndpoint,
+  AzureAppGatewayCustomDnsConfigPropertiesFormat,
+  AzureAppGatewayPrivateLinkServiceConn,
+  AzureAppGatewayPrivateEndpointIpConfig,
+  AzureAppGatewayPrivateLinkSvc,
+  AzureAppGatewayPrivateLinkServiceIpConfig,
+  AzureAppGatewayFrontendIpConfig,
+  AzureAppGatewayFlowLog,
+  AzureAppGatewayServiceEndpointPropertiesFormat,
+  AzureAppGatewayEndpointPolicy,
+  AzureAppGatewayEndpointPolicyDefinition,
+  AzureAppGatewayIpConfigurationProfile,
+  AzureAppGatewayServiceAssociationLink,
+  AzureAppGatewayResourceNavigationLink,
+  AzureAppGatewayDelegation,
+  AzureAppGatewayConnectionDraining,
+  AzureAppGatewayBackendHttpSettings,
+  AzureAppGatewayHttpListener,
+  AzureAppGatewaySslProfile,
+  AzureAppGatewaySslPolicy,
+  AzureAppGatewayApplicationGatewayPathRule,
+  AzureAppGatewayUrlPathMap,
+  AzureAppGatewayRequestRoutingRule,
+  AzureAppGatewayRewriteRuleSet,
+  AzureAppGatewayRedirectConfig,
+  AzureAppGatewayFirewallDisabledRuleGroup,
+  AzureAppGatewayApplicationGatewayFirewallExclusion,
+  AzureAppGatewayWebAppFirewallConfig,
+  AzureAppGatewayPrivateEndpointConn,
+  AzureAppGatewayPrivateLinkConfig,
+  AzureAppGatewayPrivateLinkIpConfig,
+  AzureAppGatewayLoadDistribPolicy,
 } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureApplicationGateway } from './data'
@@ -100,8 +100,8 @@ export const formatUserAssignedIdentities = (
   userAssignedIdentities?: {
     [propertyName: string]: Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties
   }
-): AzureApplicationGatewayUserAssignedIdentities[] => {
-  const result: AzureApplicationGatewayUserAssignedIdentities[] = []
+): AzureAppGatewayUserAssignedIdentities[] => {
+  const result: AzureAppGatewayUserAssignedIdentities[] = []
   for (const [key, value] of Object.entries(userAssignedIdentities)) {
     result.push({ 
       id: `${key}:${value}`, 
@@ -117,7 +117,7 @@ export const formatUserAssignedIdentities = (
 
 export const formatApplicationGatewaySslPolicy = (
   sslPolicy: ApplicationGatewaySslPolicy
-): AzureApplicationGatewayApplicationGatewaySslPolicy => {
+): AzureAppGatewaySslPolicy => {
   return {
     disabledSslProtocols: sslPolicy?.disabledSslProtocols,
     policyType: sslPolicy?.policyType,
@@ -129,7 +129,7 @@ export const formatApplicationGatewaySslPolicy = (
 
 export const formatApplicationGatewaySslProfile = (
   profile: ApplicationGatewaySslProfile
-): AzureApplicationGatewayApplicationGatewaySslProfile=> {
+): AzureAppGatewaySslProfile => {
   return {
     id: profile.id,
     name: profile.name,
@@ -141,7 +141,7 @@ export const formatApplicationGatewaySslProfile = (
   }
 }
 
-export const formatBackendAddressPool = (pool: BackendAddressPool): AzureApplicationGatewayBackendAddressPool | undefined => {
+export const formatBackendAddressPool = (pool: BackendAddressPool): AzureAppGatewayBackendAddrPool | undefined => {
   return {
     id: pool.id,
     name: pool.name,
@@ -175,7 +175,7 @@ export const formatBackendAddressPool = (pool: BackendAddressPool): AzureApplica
         }) || []
       }
     }) || [],
-    backendIPConfigurations: pool.backendIPConfigurations?.map(config => config),
+    backendIPConfigs: pool.backendIPConfigurations?.map(config => config),
     loadBalancingRules: pool.loadBalancingRules.map(r => r.id) || [],
     outboundRule: pool.outboundRule?.id,
     outboundRules: pool.outboundRules.map(r => r.id) || [],
@@ -184,7 +184,7 @@ export const formatBackendAddressPool = (pool: BackendAddressPool): AzureApplica
   }
 }
 
-export const formatApplicationSecurityGroup = (group: ApplicationSecurityGroup): AzureApplicationGatewayApplicationSecurityGroup => {
+export const formatApplicationSecurityGroup = (group: ApplicationSecurityGroup): AzureAppGatewaySecurityGroup => {
   return {
     id: group.id,
     resourceGuid: group.resourceGuid,
@@ -192,7 +192,7 @@ export const formatApplicationSecurityGroup = (group: ApplicationSecurityGroup):
   }
 }
 
-export const formatSecurityRule = (securityRule: SecurityRule): AzureApplicationGatewaySecurityRule => {
+export const formatSecurityRule = (securityRule: SecurityRule): AzureAppGatewaySecurityRule => {
   return {
     id: securityRule.id,
     name: securityRule.name,
@@ -208,7 +208,7 @@ export const formatSecurityRule = (securityRule: SecurityRule): AzureApplication
     ) || [],
     destinationAddressPrefix: securityRule.destinationAddressPrefix,
     destinationAddressPrefixes: securityRule.destinationAddressPrefixes,
-    destinationApplicationSecurityGroups: securityRule.destinationApplicationSecurityGroups?.map(
+    destinationAppSecurityGroups: securityRule.destinationApplicationSecurityGroups?.map(
       group => formatApplicationSecurityGroup(group)
     ) || [],
     sourcePortRanges: securityRule.sourcePortRanges,
@@ -222,7 +222,7 @@ export const formatSecurityRule = (securityRule: SecurityRule): AzureApplication
 
 export const formatPrivateLinkServiceConnection = (
   plsc: PrivateLinkServiceConnection
-): AzureApplicationGatewayPrivateLinkServiceConnection => {
+): AzureAppGatewayPrivateLinkServiceConn => {
   return {
     id: plsc.id,
     name: plsc.name,
@@ -241,7 +241,7 @@ export const formatPrivateLinkServiceConnection = (
 
 export const formatCustomDnsConfigPropertiesFormat = (
   f: CustomDnsConfigPropertiesFormat
-): AzureApplicationGatewayCustomDnsConfigPropertiesFormat => {
+): AzureAppGatewayCustomDnsConfigPropertiesFormat => {
   return {
     fqdn: f.fqdn,
     ipAddresses: f.ipAddresses,
@@ -250,7 +250,7 @@ export const formatCustomDnsConfigPropertiesFormat = (
 
 export const formatPrivateEndpointIPConfiguration = (
   pe: PrivateEndpointIPConfiguration
-): AzureApplicationGatewayPrivateEndpointIpConfiguration => {
+): AzureAppGatewayPrivateEndpointIpConfig => {
   return {
     name: pe.name,
     type: pe.type,
@@ -260,7 +260,7 @@ export const formatPrivateEndpointIPConfiguration = (
   }
 }
 
-export const formatPrivateEndpoint = (pe: PrivateEndpoint): AzureApplicationGatewayPrivateEndpoint => {
+export const formatPrivateEndpoint = (pe: PrivateEndpoint): AzureAppGatewayPrivateEndpoint => {
   return {
     extendedLocation: {
       name: pe.extendedLocation?.name,
@@ -269,8 +269,8 @@ export const formatPrivateEndpoint = (pe: PrivateEndpoint): AzureApplicationGate
     subnet: pe.subnet,
     networkInterfaces: pe.networkInterfaces?.map(ni => ni) || [],
     provisioningState: pe.provisioningState,
-    privateLinkServiceConnections: pe.privateLinkServiceConnections?.map(c => formatPrivateLinkServiceConnection(c)) || [],
-    manualPrivateLinkServiceConnections: pe.manualPrivateLinkServiceConnections?.map(c => formatPrivateLinkServiceConnection(c)) || [],
+    privateLinkServiceConn: pe.privateLinkServiceConnections?.map(c => formatPrivateLinkServiceConnection(c)) || [],
+    manualPrivateLinkServiceConn: pe.manualPrivateLinkServiceConnections?.map(c => formatPrivateLinkServiceConnection(c)) || [],
     customDnsConfigs: pe.customDnsConfigs?.map(c => formatCustomDnsConfigPropertiesFormat(c)) || [],
     applicationSecurityGroups: pe.applicationSecurityGroups?.map(sg => formatApplicationSecurityGroup(sg)) || [],
     ipConfigurations: pe.ipConfigurations?.map(c => formatPrivateEndpointIPConfiguration(c)) || [],
@@ -279,7 +279,7 @@ export const formatPrivateEndpoint = (pe: PrivateEndpoint): AzureApplicationGate
 }
 export const formatFrontendIPConfiguration = (
   c: FrontendIPConfiguration
-): AzureApplicationGatewayFrontendIpConfiguration => {
+): AzureAppGatewayFrontendIpConfig => {
   return {
     id: c.id,
     name: c.name,
@@ -302,7 +302,7 @@ export const formatFrontendIPConfiguration = (
 
 export const formatPrivateLinkServiceIpConfiguration = (
   c: PrivateLinkServiceIpConfiguration
-): AzureApplicationGatewayPrivateLinkServiceIpConfiguration => {
+): AzureAppGatewayPrivateLinkServiceIpConfig => {
   return {
     id: c.id,
     name: c.name,
@@ -318,7 +318,7 @@ export const formatPrivateLinkServiceIpConfiguration = (
 
 export const formatApplicationGatewayPrivateEndpointConnection = (
   c: PrivateEndpointConnection
-): AzureApplicationGatewayApplicationGatewayPrivateEndpointConnection => {
+): AzureAppGatewayPrivateEndpointConn => {
   return {
     id: c.id,
     name: c.name,
@@ -330,14 +330,14 @@ export const formatApplicationGatewayPrivateEndpointConnection = (
   }
 }
 
-export const formatPrivateLinkService = (pls: PrivateLinkService): AzureApplicationGatewayPrivateLinkService => {
+export const formatPrivateLinkService = (pls: PrivateLinkService): AzureAppGatewayPrivateLinkSvc => {
   return {
     id: pls.id,
     extendedLocation: {
       name: pls.extendedLocation?.name,
       type: pls.extendedLocation?.type,
     },
-    loadBalancerFrontendIpConfigurations: pls.loadBalancerFrontendIpConfigurations?.map(c => formatFrontendIPConfiguration(c)) || [],
+    loadBalancerFrontendIpConfigs: pls.loadBalancerFrontendIpConfigurations?.map(c => formatFrontendIPConfiguration(c)) || [],
     ipConfigurations: pls.ipConfigurations?.map(c => formatPrivateLinkServiceIpConfiguration(c)) || [],
     networkInterfaces: pls.networkInterfaces?.map(ni => ni) || [],
     provisioningState: pls.provisioningState,
@@ -350,7 +350,7 @@ export const formatPrivateLinkService = (pls: PrivateLinkService): AzureApplicat
   }
 }
 
-export const formatNetworkInterface = (ni: NetworkInterface): AzureApplicationGatewayNetworkInterface => {
+export const formatNetworkInterface = (ni: NetworkInterface): AzureAppGatewayNetworkInterface => {
   return {
     id: ni.id,
     extendedLocation: {
@@ -386,7 +386,7 @@ export const formatNetworkInterface = (ni: NetworkInterface): AzureApplicationGa
 }
 
 
-export const formatFlowLog = (fl: FlowLog): AzureApplicationGatewayFlowLog => {
+export const formatFlowLog = (fl: FlowLog): AzureAppGatewayFlowLog => {
   return {
     id: fl.id,
     targetResourceId: fl.targetResourceId,
@@ -414,7 +414,7 @@ export const formatFlowLog = (fl: FlowLog): AzureApplicationGatewayFlowLog => {
   }
 }
 
-export const formatNetworkSecurityGroup = (sg: NetworkSecurityGroup): AzureApplicationGatewayNetworkSecurityGroup => {
+export const formatNetworkSecurityGroup = (sg: NetworkSecurityGroup): AzureAppGatewayNetworkSecurityGroup => {
   return {
     id: sg.id,
     securityRules: sg.securityRules?.map(rule => formatSecurityRule(rule)) || [],
@@ -429,7 +429,7 @@ export const formatNetworkSecurityGroup = (sg: NetworkSecurityGroup): AzureAppli
 
 export const formatServiceEndpointPropertiesFormat = (
   format: ServiceEndpointPropertiesFormat
-): AzureApplicationGatewayServiceEndpointPropertiesFormat => {
+): AzureAppGatewayServiceEndpointPropertiesFormat => {
   return {
     id: cuid(),
     service: format.service,
@@ -440,7 +440,7 @@ export const formatServiceEndpointPropertiesFormat = (
 
 export const formatServiceEndpointPolicyDefinition = (
   def: ServiceEndpointPolicyDefinition
-): AzureApplicationGatewayServiceEndpointPolicyDefinition => {
+): AzureAppGatewayEndpointPolicyDefinition => {
   return {
     id: def.id,
     name: def.name,
@@ -452,11 +452,11 @@ export const formatServiceEndpointPolicyDefinition = (
   }
 }
 
-export const formatServiceEndpointPolicy = (sep: ServiceEndpointPolicy): AzureApplicationGatewayServiceEndpointPolicy => {
+export const formatServiceEndpointPolicy = (sep: ServiceEndpointPolicy): AzureAppGatewayEndpointPolicy => {
   return {
     id: sep.id,
     kind: sep.kind,
-    serviceEndpointPolicyDefinitions: sep.serviceEndpointPolicyDefinitions?.map(def => formatServiceEndpointPolicyDefinition(def)) || [],
+    serviceEndpointPolicyDef: sep.serviceEndpointPolicyDefinitions?.map(def => formatServiceEndpointPolicyDefinition(def)) || [],
     subnets: sep.subnets?.map(subnet => subnet) || [],
     resourceGuid: sep.resourceGuid,
     provisioningState: sep.provisioningState,
@@ -465,7 +465,7 @@ export const formatServiceEndpointPolicy = (sep: ServiceEndpointPolicy): AzureAp
   }
 }
 
-export const formatIPConfigurationProfile = (profile: IPConfigurationProfile): AzureApplicationGatewayIpConfigurationProfile => {
+export const formatIPConfigurationProfile = (profile: IPConfigurationProfile): AzureAppGatewayIpConfigurationProfile => {
   return {
     id: profile.id,
     name: profile.name,
@@ -475,7 +475,7 @@ export const formatIPConfigurationProfile = (profile: IPConfigurationProfile): A
   }
 }
 
-export const formatResourceNavigationLink = (link: ResourceNavigationLink): AzureApplicationGatewayResourceNavigationLink => {
+export const formatResourceNavigationLink = (link: ResourceNavigationLink): AzureAppGatewayResourceNavigationLink => {
   return {
     id: link.id,
     name: link.name,
@@ -486,7 +486,7 @@ export const formatResourceNavigationLink = (link: ResourceNavigationLink): Azur
   }
 }
 
-export const formatServiceAssociationLink = (link: ServiceAssociationLink): AzureApplicationGatewayServiceAssociationLink => {
+export const formatServiceAssociationLink = (link: ServiceAssociationLink): AzureAppGatewayServiceAssociationLink => {
   return {
     id: link .id,
     name: link.name,
@@ -499,7 +499,7 @@ export const formatServiceAssociationLink = (link: ServiceAssociationLink): Azur
   }
 }
 
-export const formatDelegation = (delegation: Delegation): AzureApplicationGatewayDelegation => {
+export const formatDelegation = (delegation: Delegation): AzureAppGatewayDelegation => {
   return {
     id: delegation.id,
     name: delegation.name,
@@ -511,7 +511,7 @@ export const formatDelegation = (delegation: Delegation): AzureApplicationGatewa
 }
 export const formatApplicationGatewayIPConfiguration = (
   config: ApplicationGatewayIPConfiguration
-): AzureApplicationGatewayNetworkInterfaceIpConfiguration => {
+): AzureAppGatewayNetIntfIpConfig => {
   return {
     id: config.id,
     name: config.name,
@@ -521,7 +521,7 @@ export const formatApplicationGatewayIPConfiguration = (
   }
 }
 
-export const formatSubnet = (subnet: Subnet): AzureApplicationGatewaySubnet => {
+export const formatSubnet = (subnet: Subnet): AzureAppGatewaySubnet => {
   return {
     id: subnet.id,
     name: subnet.name,
@@ -572,7 +572,7 @@ export const formatSubnet = (subnet: Subnet): AzureApplicationGatewaySubnet => {
   }
 }
 
-export const formatIPConfiguration = (config: IPConfiguration): AzureApplicationGatewayIpConfiguration => {
+export const formatIPConfiguration = (config: IPConfiguration): AzureAppGatewayIpConfig => {
   return {
     id: config.id,
     name: config.id,
@@ -584,13 +584,13 @@ export const formatIPConfiguration = (config: IPConfiguration): AzureApplication
   }
 }
 
-const formatVirtualNetworkTap = (tap: VirtualNetworkTap): AzureApplicationGatewayVirtualNetworkTap | undefined => {
+const formatVirtualNetworkTap = (tap: VirtualNetworkTap): AzureAppGatewayVirtualNetworkTap | undefined => {
   return tap 
     ? {
       id: tap.id,
       name: tap.name,
       type: tap.type,
-      networkInterfaceTapConfigurations: tap.networkInterfaceTapConfigurations?.map(
+      networkInterfaceTapConfigs: tap.networkInterfaceTapConfigurations?.map(
         config => {
           return {
             id: config.id,
@@ -613,7 +613,7 @@ const formatVirtualNetworkTap = (tap: VirtualNetworkTap): AzureApplicationGatewa
     : undefined
 }
 
-const formatPublicIPAddress = (pIp: PublicIPAddress): AzureApplicationGatewayPublicIpAddress | undefined => {
+const formatPublicIPAddress = (pIp: PublicIPAddress): AzureAppGatewayPublicIpAddress | undefined => {
   return pIp
     ? {
       id: pIp.id,
@@ -660,7 +660,7 @@ const formatPublicIPAddress = (pIp: PublicIPAddress): AzureApplicationGatewayPub
 
 const formatNetworkInterfaceIPConfiguration = (
   config: NetworkInterfaceIPConfiguration
-): AzureApplicationGatewayNetworkInterfaceIpConfiguration | undefined => {
+): AzureAppGatewayNetIntfIpConfig | undefined => {
   return config 
   ? {
     id: config.id,
@@ -670,10 +670,10 @@ const formatNetworkInterfaceIPConfiguration = (
     virtualNetworkTaps: config.virtualNetworkTaps?.map(
       tap => formatVirtualNetworkTap(tap)
     ),
-    applicationGatewayBackendAddressPools: config.applicationGatewayBackendAddressPools?.map(
+    appGatewayBackendAddrPools: config.applicationGatewayBackendAddressPools?.map(
       p => p
     ) || [],
-    loadBalancerBackendAddressPools: config.loadBalancerBackendAddressPools?.map(
+    loadBalancerBackendAddrPools: config.loadBalancerBackendAddressPools?.map(
       p => formatBackendAddressPool(p)
     ) || [],
     loadBalancerInboundNatRules: config.loadBalancerInboundNatRules?.map(r => {
@@ -722,13 +722,13 @@ const formatNetworkInterfaceIPConfiguration = (
 
 const formatApplicationGatewayBackendAddressPool = (
   pool: ApplicationGatewayBackendAddressPool
-): AzureApplicationGatewayApplicationGatewayBackendAddressPool | undefined => {
+): AzureAppGatewayAppGatewayBackendAddressPool | undefined => {
   return pool
     ? {
       id: pool.id,
       name: pool.name,
       type: pool.type,
-      backendIPConfigurations: pool.backendIPConfigurations?.map(
+      backendIPConfigs: pool.backendIPConfigurations?.map(
         c => formatNetworkInterfaceIPConfiguration(c)
       ),
       backendAddresses: pool.backendAddresses?.map(
@@ -747,7 +747,7 @@ const formatApplicationGatewayBackendAddressPool = (
 
 const formatApplicationGatewayConnectionDraining = (
   agcd: ApplicationGatewayConnectionDraining
-): AzureApplicationGatewayApplicationGatewayConnectionDraining => {
+): AzureAppGatewayConnectionDraining => {
   return {
     enabled: agcd.enabled,
     drainTimeoutInSec: agcd.drainTimeoutInSec,
@@ -757,7 +757,7 @@ const formatApplicationGatewayConnectionDraining = (
 
 const formatApplicationGatewayBackendHttpSettings = (
   setting: ApplicationGatewayBackendHttpSettings
-): AzureApplicationGatewayApplicationGatewayBackendHttpSettings => {
+): AzureAppGatewayBackendHttpSettings => {
   return {
     id: setting.id,
     name: setting.name,
@@ -767,7 +767,7 @@ const formatApplicationGatewayBackendHttpSettings = (
     cookieBasedAffinity: setting.cookieBasedAffinity,
     requestTimeout: setting.requestTimeout,
     probe: {id: setting.probe?.id},
-    authenticationCertificates: setting.authenticationCertificates?.map(
+    authenticationCert: setting.authenticationCertificates?.map(
       certificate => {return {id: certificate.id}}
     ) || [],
     trustedRootCertificates: setting.trustedRootCertificates?.map(
@@ -785,7 +785,7 @@ const formatApplicationGatewayBackendHttpSettings = (
 
 const formatApplicationGatewayHttpListener = (
   listener: ApplicationGatewayHttpListener
-): AzureApplicationGatewayApplicationGatewayHttpListener => {
+): AzureAppGatewayHttpListener => {
   return {
     id: listener.id,
     name: listener.name,
@@ -812,7 +812,7 @@ const formatApplicationGatewayHttpListener = (
 
 const formatApplicationGatewayPathRule = (
   map: ApplicationGatewayPathRule
-): AzureApplicationGatewayApplicationGatewayPathRule => {
+): AzureAppGatewayApplicationGatewayPathRule => {
   return {
     id: map.id,
     name: map.name,
@@ -830,7 +830,7 @@ const formatApplicationGatewayPathRule = (
 
 const formatApplicationGatewayUrlPathMap = (
   map: ApplicationGatewayUrlPathMap
-): AzureApplicationGatewayApplicationGatewayUrlPathMap => {
+): AzureAppGatewayUrlPathMap => {
   return {
     id: map.id,
     name: map.name,
@@ -847,7 +847,7 @@ const formatApplicationGatewayUrlPathMap = (
 
 const formatApplicationGatewayRequestRoutingRule = (
   rule: ApplicationGatewayRequestRoutingRule
-): AzureApplicationGatewayApplicationGatewayRequestRoutingRule => {
+): AzureAppGatewayRequestRoutingRule => {
   return {
     id: rule.id,
     name: rule.name,
@@ -867,7 +867,7 @@ const formatApplicationGatewayRequestRoutingRule = (
 
 const formatApplicationGatewayRewriteRuleSet = (
   ruleSet: ApplicationGatewayRewriteRuleSet
-): AzureApplicationGatewayApplicationGatewayRewriteRuleSet => {
+): AzureAppGatewayRewriteRuleSet => {
   return {
     id: ruleSet.id,
     name: ruleSet.name,
@@ -878,7 +878,7 @@ const formatApplicationGatewayRewriteRuleSet = (
 
 const formatApplicationGatewayRedirectConfiguration = (
   config: ApplicationGatewayRedirectConfiguration
-): AzureApplicationGatewayApplicationGatewayRedirectConfiguration => {
+): AzureAppGatewayRedirectConfig => {
   return {
     id: config.id,
     name: config.name,
@@ -896,7 +896,7 @@ const formatApplicationGatewayRedirectConfiguration = (
 
 const formatApplicationGatewayFirewallDisabledRuleGroup = (
   ruleGroup: ApplicationGatewayFirewallDisabledRuleGroup
-): AzureApplicationGatewayApplicationGatewayFirewallDisabledRuleGroup => {
+): AzureAppGatewayFirewallDisabledRuleGroup => {
   return {
     id: cuid(),
     ruleGroupName: ruleGroup.ruleGroupName,
@@ -906,7 +906,7 @@ const formatApplicationGatewayFirewallDisabledRuleGroup = (
 
 const formatApplicationGatewayFirewallExclusion = (
   exclusion: ApplicationGatewayFirewallExclusion
-): AzureApplicationGatewayApplicationGatewayFirewallExclusion => {
+): AzureAppGatewayApplicationGatewayFirewallExclusion => {
   return {
     id: cuid(),
     matchVariable: exclusion.matchVariable,
@@ -917,7 +917,7 @@ const formatApplicationGatewayFirewallExclusion = (
 
 const formatApplicationGatewayWebApplicationFirewallConfiguration = (
   config: ApplicationGatewayWebApplicationFirewallConfiguration
-): AzureApplicationGatewayApplicationGatewayWebApplicationFirewallConfiguration => {
+): AzureAppGatewayWebAppFirewallConfig => {
   return {
     enabled: config.enabled,
     firewallMode: config.firewallMode,
@@ -934,7 +934,7 @@ const formatApplicationGatewayWebApplicationFirewallConfiguration = (
 
 const formatApplicationGatewayPrivateLinkIpConfiguration = (
   config: ApplicationGatewayPrivateLinkIpConfiguration
-): AzureApplicationGatewayApplicationGatewayPrivateLinkIpConfiguration => {
+): AzureAppGatewayPrivateLinkIpConfig => {
   return {
     id: config.id,
     name: config.name,
@@ -949,7 +949,7 @@ const formatApplicationGatewayPrivateLinkIpConfiguration = (
 
 const formatApplicationGatewayPrivateLinkConfiguration = (
   config: ApplicationGatewayPrivateLinkConfiguration
-): AzureApplicationGatewayApplicationGatewayPrivateLinkConfiguration => {
+): AzureAppGatewayPrivateLinkConfig => {
   return {
     id: config.id,
     name: config.name,
@@ -961,7 +961,7 @@ const formatApplicationGatewayPrivateLinkConfiguration = (
 
 const formatApplicationGatewayLoadDistributionPolicy = (
   config: ApplicationGatewayLoadDistributionPolicy
-): AzureApplicationGatewayApplicationGatewayLoadDistributionPolicy => {
+): AzureAppGatewayLoadDistribPolicy => {
   return {
     id: config.id,
     name: config.name,
@@ -988,7 +988,7 @@ export default ({
   service: RawAzureApplicationGateway
   account: string
   region: string
-}): AzureApplicationGateway => {
+}): AzureAppGateway => {
   const {
     id,
     Tags = {},
@@ -1052,7 +1052,7 @@ export default ({
         }
       }
     ),
-    authenticationCertificates: authenticationCertificates.map(
+    authenticationCert: authenticationCertificates.map(
       c => {
         return {
           id: c.id,
