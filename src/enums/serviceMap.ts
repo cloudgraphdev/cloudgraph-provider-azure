@@ -106,7 +106,7 @@ export default {
   [services.aksManagedCluster]: AzureAksManagedCluster,
   [services.appGateway]: AzureApplicationGateway,
   [services.metricAlert]: AzureMetricAlert,
-  [services.applicationGateway]: AzureApplicationGateway,
+  [services.appGateway]: AzureApplicationGateway,
   [services.appServiceEnvironment]: AzureAppServiceEnvironment,
   // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appInsights]: AzureAppInsights,

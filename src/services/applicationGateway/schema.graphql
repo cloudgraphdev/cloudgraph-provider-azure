@@ -624,7 +624,7 @@ type azureAppGatewayProbe
   provisioningState: String @search(by: [hash, regexp])
 }
 
-type azureAppGatewayAppGatewayBackendAddressPool
+type azureAppGatewayAppGatewayBackendAddrPool
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -744,7 +744,7 @@ type azureAppGatewayNetIntfIPConfig
     type: String @search(by: [hash, regexp])
     gatewayLoadBalancer: azureAppGatewaySubResource
     virtualNetworkTaps: [azureAppGatewayVirtualNetworkTap]
-    appGatewayBackendAddrPools: [azureAppGatewayAppGatewayBackendAddressPool]
+    appGatewayBackendAddrPools: [azureAppGatewayAppGatewayBackendAddrPool]
     loadBalancerBackendAddrPools: [azureAppGatewayBackendAddrPool]
     loadBalancerInboundNatRules: [azureAppGatewayInboundNatRule]
     privateIPAddress: String @search(by: [hash, regexp])
@@ -1212,7 +1212,7 @@ type azureAppGateway implements azureResource
   frontendIPConfigurations: [azureAppGatewayAppGatewayFrontendIPConfig]
   frontendPorts: [azureAppGatewayFrontendPort]
   probes: [azureAppGatewayProbe]
-  backendAddressPools: [azureAppGatewayAppGatewayBackendAddressPool]
+  backendAddressPools: [azureAppGatewayAppGatewayBackendAddrPool]
   backendHttpSettingsCollection: [azureAppGatewayBackendHttpSettings]
   httpListeners: [azureAppGatewayHttpListener]
   sslProfiles: [azureAppGatewaySslProfile]

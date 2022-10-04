@@ -48,7 +48,7 @@ import {
 import cuid from 'cuid'
 import {
   AzureAppGateway,
-  AzureAppGatewayAppGatewayBackendAddressPool,
+  AzureAppGatewayAppGatewayBackendAddrPool,
   AzureAppGatewayUserAssignedIdentities,
   AzureAppGatewayVirtualNetworkTap,
   AzureAppGatewayNetIntfIpConfig,
@@ -722,7 +722,7 @@ const formatNetworkInterfaceIPConfiguration = (
 
 const formatApplicationGatewayBackendAddressPool = (
   pool: ApplicationGatewayBackendAddressPool
-): AzureAppGatewayAppGatewayBackendAddressPool | undefined => {
+): AzureAppGatewayAppGatewayBackendAddrPool | undefined => {
   return pool
     ? {
       id: pool.id,
