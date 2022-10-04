@@ -1,3 +1,11 @@
+# [0.64.0-alpha.8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.7...0.64.0-alpha.8) (2022-10-04)
+
+
+### Features
+
+* **CG-901:** add application gateway support ([9367fe5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/9367fe5ec3303641c491f968eaf4d0a4d54b459c))
+* **CG-901:** update README ([4acc3ee](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/4acc3eea7dec788a6fd94689d659546eaba708fa))
+
 # [0.64.0-alpha.7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.6...0.64.0-alpha.7) (2022-08-29)
 
 
