@@ -18,7 +18,7 @@ export default ({
     type,
     Tags,
     sku = {},
-    identity: { userAssignedIdentities, ...restOfIdentity },
+    identity: { userAssignedIdentities, ...restOfIdentity } = {},
     loginServer,
     creationDate,
     provisioningState,
