@@ -38,6 +38,7 @@ type azureVirtualMachineStorageImageReference
     mutation: { add: false, delete: false }
     subscription: false
   ) {
+  id: String @search(by: [hash])
   publisher: String @search(by: [hash, regexp])
   offer: String @search(by: [hash, regexp])
   sku: String @search(by: [hash, regexp])
@@ -46,21 +47,50 @@ type azureVirtualMachineStorageImageReference
   sharedGalleryImageId: String @search(by: [hash, regexp])
 }
 
-type azureVirtualMachine implements azureResource
+type azureVirtualMachinePlan
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  publisher: String @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  product: String @search(by: [hash, regexp])
+}
+
+type azureVirtualMachineAdditionalCapabilities
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  ultraSSDEnabled: Boolean @search
+  hibernationEnabled: Boolean @search
+}
+
+type azureVirtualMachine implements azureBaseResource
   @key(fields: "id")
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
   ) {
-  managedBy: String @search(by: [hash, regexp])
+  plan: azureVirtualMachinePlan
+  additionalCapabilities: azureVirtualMachineAdditionalCapabilities
   vmSize: String @search(by: [hash, regexp])
+  vmId: String @search(by: [hash, regexp])
+  priority: String @search(by: [hash, regexp])
+  billingProfileMaxPrice: Int @search
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
   osProfile: azureVirtualMachineOSProfile
-  osType: String @search(by: [hash, regexp])
   storageImageReference: azureVirtualMachineStorageImageReference
   bootDiagnostics: Boolean @search
   licenseType: String @search(by: [hash, regexp])
+  tags: [azureRawTag]
   disks: [azureDisk] @hasInverse(field: virtualMachine)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: virtualMachines)
   virtualNetworks: [azureVirtualNetwork] @hasInverse(field: virtualMachines)
   resourceGroup: [azureResourceGroup] @hasInverse(field: virtualMachines)
+  virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: virtualMachines)
 }

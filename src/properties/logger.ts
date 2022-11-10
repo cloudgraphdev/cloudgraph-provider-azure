@@ -19,6 +19,8 @@ export default {
   // AKS Managed Clusters
   foundAKSManagedClusters: (num: number): string =>
     `Found ${num} AKS managed clusters`,
+  /* App Gateway */
+  foundApplicationGateway: (num: number): string => `Found ${num} Application Gateways`,
   /* App Service */
   foundAppServiceEnvironments: (num: number): string =>
     `Found ${num} app service environments`,
@@ -149,6 +151,9 @@ export default {
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
   // Recovery Vaults
   foundRecoveryVaults: (num: number): string => `Found ${num} recovery vaults`,
+  foundRecoveryInstances: (num: number): string =>
+  `Found ${num} recovery instances`,
+  foundRecoveryPolicies: (num: number): string => `Found ${num} recovery policies`,
   // RedisCache
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
   // Replication Appliances

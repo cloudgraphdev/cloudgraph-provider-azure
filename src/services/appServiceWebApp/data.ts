@@ -64,13 +64,8 @@ export default async ({
               client.appServicePlans.listWebApps(resourceGroupId, name)
             for await (const webApp of webAppsIterable) {
               if (webApp) {
-                const {
-                  location,
-                  extendedLocation,
-                  identity,
-                  tags,
-                  ...rest
-                } = webApp
+                const { location, extendedLocation, identity, tags, ...rest } =
+                  webApp
                 const region = lowerCaseLocation(location)
                 return {
                   ...rest,
@@ -102,12 +97,14 @@ export default async ({
               name: webAppName,
               resourceGroup: webAppResourceGroupName,
             }) => {
-              const siteAuthSetting = await client.webApps.getAuthSettings(
-                webAppResourceGroupName,
-                webAppName
-              )
-              if (siteAuthSetting) {
-                siteAuthSettings[webAppName] = siteAuthSetting
+              if (webAppResourceGroupName && webAppName) {
+                const siteAuthSetting = await client.webApps.getAuthSettings(
+                  webAppResourceGroupName,
+                  webAppName
+                )
+                if (siteAuthSetting) {
+                  siteAuthSettings[webAppName] = siteAuthSetting
+                }
               }
             }
           )

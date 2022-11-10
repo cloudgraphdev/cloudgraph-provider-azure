@@ -1,22 +1,21 @@
 import {
-  RecoveryServicesBackupClient,
-  ProtectionPolicyResource,
+  ProtectedItemResource, RecoveryServicesBackupClient
 } from '@azure/arm-recoveryservicesbackup'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { lowerCaseLocation } from '../../utils/format'
 import { tryCatchWrapper } from '../../utils'
-import getAzureVaults, { RawAzureVault } from '../backupVault/data'
+import { lowerCaseLocation } from '../../utils/format'
+import getAzureVaults, { RawAzureRecoveryVault } from '../recoveryVaults/data'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
-const serviceName = 'Backup Policy'
+const serviceName = 'Recovery Instances'
 
-export interface RawAzureProtectionPolicyResource
-  extends Omit<ProtectionPolicyResource, 'tags' | 'location'> {
+export interface RawAzureProtectedItemResource
+  extends Omit<ProtectedItemResource, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
   Tags: TagMap
@@ -29,7 +28,7 @@ export default async ({
   rawData,
   opts,
 }: AzureServiceInput): Promise<{
-  [property: string]: RawAzureProtectionPolicyResource[]
+  [property: string]: RawAzureProtectedItemResource[]
 }> => {
   try {
     const { tokenCredentials, subscriptionId } = config
@@ -38,7 +37,7 @@ export default async ({
       subscriptionId
     )
 
-    const vaults: RawAzureVault[] =
+    const vaults: RawAzureRecoveryVault[] =
       Object.values(
         await getAzureVaults({
           regions,
@@ -48,13 +47,13 @@ export default async ({
         })
       )?.reduce((acc, val) => acc.concat(val), []) || []
 
-    const items: RawAzureProtectionPolicyResource[] = []
+    const items: RawAzureProtectedItemResource[] = []
     await tryCatchWrapper(
       async () => {
         await Promise.all(
           (vaults || []).map(async ({ name: vaultName, resourceGroupId }) => {
-            const itemsIterable: PagedAsyncIterableIterator<ProtectionPolicyResource> =
-              client.backupPolicies.list(vaultName, resourceGroupId)
+            const itemsIterable: PagedAsyncIterableIterator<ProtectedItemResource> =
+              client.backupProtectedItems.list(vaultName, resourceGroupId)
             for await (const item of itemsIterable) {
               if (item) {
                 const { location, tags, ...rest } = item
@@ -71,18 +70,17 @@ export default async ({
             }
           })
         )
-        logger.debug(lt.foundBackupPolicies(items.length))
+        logger.debug(lt.foundRecoveryInstances(items.length))
       },
       {
         service: serviceName,
         client,
-        scope: 'backupPolicies',
+        scope: 'backupProtectedItems',
         operation: 'list',
       }
     )
 
-    const result: { [property: string]: RawAzureProtectionPolicyResource[] } =
-      {}
+    const result: { [property: string]: RawAzureProtectedItemResource[] } = {}
     await Promise.all(
       items
         .filter(i => i)

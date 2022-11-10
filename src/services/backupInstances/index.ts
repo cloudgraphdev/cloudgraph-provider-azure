@@ -5,7 +5,10 @@ import getData from './data'
 import format from './format'
 import mutation from './mutation'
 
-export default class AzureRecoveryVault extends BaseService implements Service {
+export default class AzureBackupInstance
+  extends BaseService
+  implements Service
+{
   getData = getData.bind(this)
 
   getConnections = getConnections.bind(this)

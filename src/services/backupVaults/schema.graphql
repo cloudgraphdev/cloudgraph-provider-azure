@@ -1,0 +1,47 @@
+type azureBackupVaultStorageSettings
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  datastoreType: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureBackupVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  storageSettings: [azureBackupVaultStorageSettings]
+  isVaultProtectedByResourceGuard: Boolean @search
+}
+
+type azureBackupVaultIdentity
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  principalId: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  tenantId: String @search(by: [hash, regexp])
+}
+
+type azureBackupVault implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  eTag: String @search(by: [hash, regexp])
+  properties: azureBackupVaultProperties
+  identity: azureBackupVaultIdentity
+  resourceGroup: [azureResourceGroup] @hasInverse(field: backupVaults)
+  backupInstances: [azureBackupInstance] @hasInverse(field: backupVault)
+  backupPolicies: [azureBackupPolicy] @hasInverse(field: backupVault)
+}

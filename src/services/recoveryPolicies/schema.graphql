@@ -1,4 +1,4 @@
-type azureBackupPolicySettings
+type azureRecoveryPolicySettings
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -9,7 +9,7 @@ type azureBackupPolicySettings
   isCompression: Boolean @search
 }
 
-type azureBackupPolicyHourlySchedule
+type azureRecoveryPolicyHourlySchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -20,7 +20,7 @@ type azureBackupPolicyHourlySchedule
   scheduleWindowDuration: Int @search
 }
 
-type azureBackupPolicyWeeklySchedule
+type azureRecoveryPolicyWeeklySchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -30,7 +30,7 @@ type azureBackupPolicyWeeklySchedule
   scheduleRunTimes: [DateTime] @search
 }
 
-type azureBackupPolicySchedulePolicyUnion
+type azureRecoveryPolicySchedulePolicyUnion
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -41,13 +41,13 @@ type azureBackupPolicySchedulePolicyUnion
   scheduleRunFrequency: String @search(by: [hash, regexp])
   scheduleRunDays: [String] @search(by: [hash, regexp])
   scheduleRunTimes: [DateTime] @search
-  hourlySchedule: azureBackupPolicyHourlySchedule
+  hourlySchedule: azureRecoveryPolicyHourlySchedule
   scheduleWeeklyFrequency: Int @search
   dailySchedule: [DateTime] @search
-  weeklySchedule: azureBackupPolicyWeeklySchedule
+  weeklySchedule: azureRecoveryPolicyWeeklySchedule
 }
 
-type azureBackupPolicyRetentionDuration
+type azureRecoveryPolicyRetentionDuration
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -57,7 +57,7 @@ type azureBackupPolicyRetentionDuration
   durationType: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyDailyRetentionSchedule
+type azureRecoveryPolicyDailyRetentionSchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -68,7 +68,7 @@ type azureBackupPolicyDailyRetentionSchedule
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyWeeklyRetentionSchedule
+type azureRecoveryPolicyWeeklyRetentionSchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -80,7 +80,7 @@ type azureBackupPolicyWeeklyRetentionSchedule
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyDailyRetentionFormat
+type azureRecoveryPolicyDailyRetentionFormat
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -92,7 +92,7 @@ type azureBackupPolicyDailyRetentionFormat
   isLast: Boolean @search
 }
 
-type azureBackupPolicyWeeklyRetentionFormat
+type azureRecoveryPolicyWeeklyRetentionFormat
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -102,21 +102,21 @@ type azureBackupPolicyWeeklyRetentionFormat
   weeksOfTheMonth: [String] @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyMonthlyRetentionSchedule
+type azureRecoveryPolicyMonthlyRetentionSchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   retentionScheduleFormatType: String @search(by: [hash, regexp])
-  retentionScheduleDaily: [azureBackupPolicyDailyRetentionFormat]
-  retentionScheduleWeekly: azureBackupPolicyWeeklyRetentionFormat
+  retentionScheduleDaily: [azureRecoveryPolicyDailyRetentionFormat]
+  retentionScheduleWeekly: azureRecoveryPolicyWeeklyRetentionFormat
   retentionTimes: [DateTime] @search
   retentionDurationCount: Int @search
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyYearlyRetentionSchedule
+type azureRecoveryPolicyYearlyRetentionSchedule
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -124,29 +124,29 @@ type azureBackupPolicyYearlyRetentionSchedule
   ) {
   retentionScheduleFormatType: String @search(by: [hash, regexp])
   monthsOfYear: [String] @search(by: [hash, regexp])
-  retentionScheduleDaily: [azureBackupPolicyDailyRetentionFormat]
-  retentionScheduleWeekly: azureBackupPolicyWeeklyRetentionFormat
+  retentionScheduleDaily: [azureRecoveryPolicyDailyRetentionFormat]
+  retentionScheduleWeekly: azureRecoveryPolicyWeeklyRetentionFormat
   retentionTimes: [DateTime] @search
   retentionDurationCount: Int @search
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyRetentionPolicyUnion
+type azureRecoveryPolicyRetentionPolicyUnion
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
     subscription: false
   ) {
   retentionPolicyType: String @search(by: [hash, regexp])
-  dailySchedule: azureBackupPolicyDailyRetentionSchedule
-  weeklySchedule: azureBackupPolicyWeeklyRetentionSchedule
-  monthlySchedule: azureBackupPolicyMonthlyRetentionSchedule
-  yearlySchedule: azureBackupPolicyYearlyRetentionSchedule
+  dailySchedule: azureRecoveryPolicyDailyRetentionSchedule
+  weeklySchedule: azureRecoveryPolicyWeeklyRetentionSchedule
+  monthlySchedule: azureRecoveryPolicyMonthlyRetentionSchedule
+  yearlySchedule: azureRecoveryPolicyYearlyRetentionSchedule
   retentionDurationCount: Int @search
   retentionDurationType: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicySubProtectionPolicy
+type azureRecoveryPolicySubProtectionPolicy
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -155,11 +155,11 @@ type azureBackupPolicySubProtectionPolicy
   @key(fields: "id") {
   id: String! @id @search(by: [hash])
   policyType: String @search(by: [hash, regexp])
-  schedulePolicy: azureBackupPolicySchedulePolicyUnion
-  retentionPolicy: azureBackupPolicyRetentionPolicyUnion
+  schedulePolicy: azureRecoveryPolicySchedulePolicyUnion
+  retentionPolicy: azureRecoveryPolicyRetentionPolicyUnion
 }
 
-type azureBackupPolicyInstantRPAdditionalDetails
+type azureRecoveryPolicyInstantRPAdditionalDetails
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -169,7 +169,7 @@ type azureBackupPolicyInstantRPAdditionalDetails
   azureBackupRGNameSuffix: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicyProperties
+type azureRecoveryPolicyProperties
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -179,19 +179,19 @@ type azureBackupPolicyProperties
   protectedItemsCount: Int @search
   resourceGuardOperationRequests: [String] @search(by: [hash, regexp])
   workLoadType: String @search(by: [hash, regexp])
-  settings: azureBackupPolicySettings
-  subProtectionPolicy: [azureBackupPolicySubProtectionPolicy]
+  settings: azureRecoveryPolicySettings
+  subProtectionPolicy: [azureRecoveryPolicySubProtectionPolicy]
   makePolicyConsistent: Boolean @search
-  schedulePolicy: azureBackupPolicySchedulePolicyUnion
-  retentionPolicy: azureBackupPolicyRetentionPolicyUnion
+  schedulePolicy: azureRecoveryPolicySchedulePolicyUnion
+  retentionPolicy: azureRecoveryPolicyRetentionPolicyUnion
   timeZone: String @search(by: [hash, regexp])
-  instantRPDetails: azureBackupPolicyInstantRPAdditionalDetails
+  instantRPDetails: azureRecoveryPolicyInstantRPAdditionalDetails
   instantRpRetentionRangeInDays: Int @search
   policyType: String @search(by: [hash, regexp])
   fabricName: String @search(by: [hash, regexp])
 }
 
-type azureBackupPolicy implements azureBaseResource
+type azureRecoveryPolicy implements azureBaseResource
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }
@@ -201,7 +201,7 @@ type azureBackupPolicy implements azureBaseResource
   region: String @search(by: [hash, regexp])
   resourceGroupId: String @search(by: [hash, regexp])
   eTag: String @search(by: [hash, regexp])
-  properties: azureBackupPolicyProperties
-  resourceGroup: [azureResourceGroup] @hasInverse(field: backupPolicies)
-  # backupVault: [azureBackupVault] @hasInverse(field: backupPolicies)
+  properties: azureRecoveryPolicyProperties
+  resourceGroup: [azureResourceGroup] @hasInverse(field: recoveryPolicies)
+  recoveryVault: [azureRecoveryVault] @hasInverse(field: recoveryPolicies)
 }

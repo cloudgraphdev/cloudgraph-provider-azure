@@ -1,3 +1,123 @@
+# [0.64.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0...0.64.0-beta.1) (2022-11-10)
+
+
+### Bug Fixes
+
+* initialization bugfixes ([073b716](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/073b7166d05c0b7cdf80811ea8f9c7d1dc500857))
+* **integrationRuntimes,logAnalyticsWorkspace,sqlServers:** several fixes ([8c19d90](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8c19d9065667dbba638b4932b1dea5628f0ff5bd))
+* reduce the scope of trycatch block while connecting entities ([c969d25](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c969d25dc7bd761620805bc5e6769fec19235541))
+* **services:** deprecate backup vault and fix an issue with function app schema ([7b10fa4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/7b10fa417ff13f780a680a4cdf1683525de62649))
+* **services:** fix schema map ([641b454](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/641b4547dd642611e0764ee3f3b2fe1b034559e5))
+* virtualMachine null fields ([648b51e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/648b51ec38fd7465fbaacae979a440325f7811f4))
+* **virtualMachine:** add missing id ([46e2f3e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/46e2f3e36cc9ecb83f8c56b02f53046f885154f2))
+* **virtualMachine:** add more fields to specify plan and size ([7cf2636](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/7cf26365af12fe390f780b214e9861d49364b96e))
+* **virtualMachine:** fixes to storageImageReference property ([e9cf808](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/e9cf8082389159491885a9da0eb7f15d9aacb5dd))
+
+
+### Features
+
+* Add backupVaults, backupInstances and backupPolicies services ([fcb0560](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/fcb05608e8c983f23fd7f62057ccd51cc0bbbee5))
+* Add backupVaults, backupInstances and buackupPolicies services ([8dd4326](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8dd4326562dc1d2179dbe8534718608d41fd04ba))
+* Add backupVaults, backupInstances and buackupPolicies services ([10e9918](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/10e991825760c8fd02de46b98279a68371413869))
+* **aksManagedCluster:** CG-1270 add VMSS connection ([6c2268b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/6c2268baa3ccf8ad40b873fcd13274019b22d2ea))
+* **CG-901:** add application gateway support ([9367fe5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/9367fe5ec3303641c491f968eaf4d0a4d54b459c))
+* **CG-901:** update README ([4acc3ee](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/4acc3eea7dec788a6fd94689d659546eaba708fa))
+* **VMSS:** add VM connections ([277bb2c](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/277bb2cbb9c1825a72b67ed31cc5551e1b5773c1))
+
+# [0.64.0-alpha.10](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.9...0.64.0-alpha.10) (2022-11-10)
+
+
+### Bug Fixes
+
+* initialization bugfixes ([073b716](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/073b7166d05c0b7cdf80811ea8f9c7d1dc500857))
+
+# [0.64.0-alpha.9](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.8...0.64.0-alpha.9) (2022-11-10)
+
+
+### Bug Fixes
+
+* reduce the scope of trycatch block while connecting entities ([c969d25](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c969d25dc7bd761620805bc5e6769fec19235541))
+
+# [0.64.0-alpha.8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.7...0.64.0-alpha.8) (2022-10-04)
+
+
+### Features
+
+* **CG-901:** add application gateway support ([9367fe5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/9367fe5ec3303641c491f968eaf4d0a4d54b459c))
+* **CG-901:** update README ([4acc3ee](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/4acc3eea7dec788a6fd94689d659546eaba708fa))
+
+# [0.64.0-alpha.7](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.6...0.64.0-alpha.7) (2022-08-29)
+
+
+### Bug Fixes
+
+* **integrationRuntimes,logAnalyticsWorkspace,sqlServers:** several fixes ([8c19d90](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8c19d9065667dbba638b4932b1dea5628f0ff5bd))
+
+# [0.64.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.5...0.64.0-alpha.6) (2022-08-26)
+
+
+### Features
+
+* **aksManagedCluster:** CG-1270 add VMSS connection ([6c2268b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/6c2268baa3ccf8ad40b873fcd13274019b22d2ea))
+
+# [0.64.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.4...0.64.0-alpha.5) (2022-08-25)
+
+
+### Bug Fixes
+
+* **virtualMachine:** fixes to storageImageReference property ([e9cf808](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/e9cf8082389159491885a9da0eb7f15d9aacb5dd))
+
+# [0.64.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.3...0.64.0-alpha.4) (2022-08-23)
+
+
+### Bug Fixes
+
+* **virtualMachine:** add missing id ([46e2f3e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/46e2f3e36cc9ecb83f8c56b02f53046f885154f2))
+
+# [0.64.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.2...0.64.0-alpha.3) (2022-08-22)
+
+
+### Bug Fixes
+
+* **virtualMachine:** add more fields to specify plan and size ([7cf2636](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/7cf26365af12fe390f780b214e9861d49364b96e))
+
+# [0.64.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.1...0.64.0-alpha.2) (2022-08-17)
+
+
+### Features
+
+* Add backupVaults, backupInstances and backupPolicies services ([fcb0560](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/fcb05608e8c983f23fd7f62057ccd51cc0bbbee5))
+* Add backupVaults, backupInstances and buackupPolicies services ([8dd4326](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8dd4326562dc1d2179dbe8534718608d41fd04ba))
+* Add backupVaults, backupInstances and buackupPolicies services ([10e9918](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/10e991825760c8fd02de46b98279a68371413869))
+
+# [0.64.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.3...0.64.0-alpha.1) (2022-08-17)
+
+
+### Features
+
+* **VMSS:** add VM connections ([277bb2c](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/277bb2cbb9c1825a72b67ed31cc5551e1b5773c1))
+
+## [0.63.1-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.2...0.63.1-alpha.3) (2022-08-17)
+
+
+### Bug Fixes
+
+* virtualMachine null fields ([648b51e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/648b51ec38fd7465fbaacae979a440325f7811f4))
+
+## [0.63.1-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.1-alpha.1...0.63.1-alpha.2) (2022-08-02)
+
+
+### Bug Fixes
+
+* **services:** fix schema map ([641b454](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/641b4547dd642611e0764ee3f3b2fe1b034559e5))
+
+## [0.63.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0...0.63.1-alpha.1) (2022-08-01)
+
+
+### Bug Fixes
+
+* **services:** deprecate backup vault and fix an issue with function app schema ([7b10fa4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/7b10fa417ff13f780a680a4cdf1683525de62649))
+
 # [0.63.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.62.0...0.63.0) (2022-08-01)
 
 
