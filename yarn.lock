@@ -1294,10 +1294,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cloudgraph/sdk@0.14.2":
-  version "0.14.2"
-  resolved "https://registry.npmjs.org/@cloudgraph/sdk/-/sdk-0.14.2.tgz"
-  integrity sha512-cpPqg/vbwbhUNxWWAXXUz8ZtNyrNwXCHxU4nBiEEgHtewQV7lmVjx5OgThspPZcZjb+bsYIR+Q19euY7oGFQkQ==
+"@cloudgraph/sdk@0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@cloudgraph/sdk/-/sdk-0.20.0.tgz#fb3febad5934c53c39c509783abc63a98637c94d"
+  integrity sha512-34vw0bf/8rsnPy8fBSRFp0muOLnEYkpy2zfT/fL7WCqy1+4POwUqErGkOM4JUU83N7Lwn5cz9woR8DbhGHfU9A==
   dependencies:
     "@graphql-tools/load-files" "^6.5.3"
     "@graphql-tools/merge" "^8.2.1"
@@ -1307,7 +1307,7 @@
     inquirer "^8.1.2"
     jsonpath "^1.1.1"
     lodash "^4.17.21"
-    node-jq "^2.1.0"
+    node-jq "^2.3.0"
     ora "^5.4.1"
 
 "@endemolshinegroup/cosmiconfig-typescript-loader@3.0.2":
@@ -8272,18 +8272,15 @@ node-int64@^0.4.0:
   resolved "https://registry.npmjs.org/node-int64/-/node-int64-0.4.0.tgz"
   integrity sha1-h6kGXNs1XTGC2PlM4RGIuCXGijs=
 
-node-jq@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.npmjs.org/node-jq/-/node-jq-2.1.0.tgz"
-  integrity sha512-4wv/W8rejWADH1Jqz+O2hCaZEFTIBp7EOcYo7orFcK9t11DtVQBBQHrN89MiGenk5HzrAMrZluOo5PQ0fP/AoQ==
+node-jq@^2.3.0:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/node-jq/-/node-jq-2.3.4.tgz#047b1717e86b269f3cd64fcc0b44ac8dbe21cd65"
+  integrity sha512-Zm0kJzDHUtVdS9a3Ypq07+rQfxJ9SdbUa5hEOP9Y+gwToLPme6onIptApQgsqIMByA1FIE7sw+EKZvrmIy1Jqw==
   dependencies:
-    "@semantic-release/changelog" "^6.0.1"
-    "@semantic-release/git" "^10.0.1"
     bin-build "^3.0.0"
     download "^8.0.0"
     is-valid-path "^0.1.1"
     joi "^17.4.0"
-    strip-eof "^2.0.0"
     strip-final-newline "^2.0.0"
     tempfile "^3.0.0"
 
@@ -10328,11 +10325,6 @@ strip-eof@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/strip-eof/-/strip-eof-1.0.0.tgz"
   integrity sha1-u0P/VZim6wXYm1n80SnJgzE2Br8=
-
-strip-eof@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npmjs.org/strip-eof/-/strip-eof-2.0.0.tgz"
-  integrity sha512-zLsJC+5P5hGu4Zmoq6I4uo6bTf1Nx6Z/vnZedxwnrcfkc38Vz6UiuqGOtS9bewFaoTCDErpqkV7v02htp9KEow==
 
 strip-final-newline@^2.0.0:
   version "2.0.0"
