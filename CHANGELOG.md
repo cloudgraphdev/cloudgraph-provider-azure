@@ -1,3 +1,10 @@
+# [0.64.0-alpha.9](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.8...0.64.0-alpha.9) (2022-11-10)
+
+
+### Bug Fixes
+
+* reduce the scope of trycatch block while connecting entities ([c969d25](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/c969d25dc7bd761620805bc5e6769fec19235541))
+
 # [0.64.0-alpha.8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0-alpha.7...0.64.0-alpha.8) (2022-10-04)
 
 
