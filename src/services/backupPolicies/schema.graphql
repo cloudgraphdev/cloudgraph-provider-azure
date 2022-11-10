@@ -1,0 +1,176 @@
+type azureBackupPolicyBackupParams
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  backupType: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+}
+
+type azureBackupPolicyDataStoreInfoBase
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  dataStoreType: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+}
+
+type azureBackupPolicyRetentionTag
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash])
+  tagName: String @search(by: [hash, regexp])
+  eTag: String @search(by: [hash, regexp])
+}
+
+type azureBackupPolicyDay
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash])
+  date: Int @search
+  isLast: Boolean @search
+}
+
+type azureBackupPolicyScheduleBasedBackupCriteria
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  absoluteCriteria: [String] @search(by: [hash, regexp])
+  daysOfMonth: [azureBackupPolicyDay]
+  daysOfTheWeek: [String] @search(by: [hash, regexp])
+  monthsOfYear: [String] @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  scheduleTimes: [String] @search(by: [hash, regexp])
+  weeksOfTheMonth: [String] @search(by: [hash, regexp])
+}
+
+type azureBackupPolicyTaggingCriteria
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  tagInfo: azureBackupPolicyRetentionTag
+  isDefault: Boolean @search
+  taggingPriority: Int @search
+  criteria: [azureBackupPolicyScheduleBasedBackupCriteria]
+}
+
+type azureBackupPolicyBackupSchedule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  repeatingTimeIntervals: [String] @search(by: [hash, regexp])
+  timeZone: String @search(by: [hash, regexp])
+}
+
+type azureBackupPolicyTriggerContext
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  objectType: String @search(by: [hash, regexp])
+  schedule: azureBackupPolicyBackupSchedule
+  taggingCriteria: [azureBackupPolicyTaggingCriteria]
+}
+
+type azureBackupPolicyAbsoluteOption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  duration: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+}
+
+type azureBackupPolicyTargetCopySetting
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  copyAfter: azureBackupPolicyAbsoluteOption
+  dataStore: azureBackupPolicyDataStoreInfoBase
+}
+
+type azureBackupPolicySourceLifeCycle
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  deleteAfter: azureBackupPolicyAbsoluteOption
+  sourceDataStore: azureBackupPolicyDataStoreInfoBase
+  targetDataStoreCopySettings: [azureBackupPolicyTargetCopySetting]
+}
+
+type azureBackupPolicyBackupRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  backupParameters: azureBackupPolicyBackupParams
+  dataStore: azureBackupPolicyDataStoreInfoBase
+  name: String @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  trigger: azureBackupPolicyTriggerContext
+  isDefault: Boolean @search
+  lifecycles: [azureBackupPolicySourceLifeCycle]
+}
+
+type azureBackupPolicyProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  datasourceTypes: [String] @search(by: [hash, regexp])
+  objectType: String @search(by: [hash, regexp])
+  policyRules: [azureBackupPolicyBackupRule]
+}
+
+type azureBackupPolicy implements azureBaseResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
+  region: String @search(by: [hash, regexp])
+  resourceGroupId: String @search(by: [hash, regexp])
+  properties: azureBackupPolicyProperties
+  createdBy: String @search(by: [hash, regexp])
+  createdByType: String @search(by: [hash, regexp])
+  createdAt: String @search(by: [hash, regexp])
+  lastModifiedBy: String @search(by: [hash, regexp])
+  lastModifiedByType: String @search(by: [hash, regexp])
+  lastModifiedAt: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: backupPolicies)
+  backupVault: [azureBackupVault] @hasInverse(field: backupPolicies)
+}

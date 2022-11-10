@@ -5,6 +5,8 @@ type azureHostingEnvironmentProfile
     subscription: false
   ) {
   id: String @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
 }
 
 type azureExtendedLocation {

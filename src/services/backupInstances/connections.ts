@@ -3,15 +3,15 @@ import { isEmpty } from 'lodash'
 
 import services from '../../enums/services'
 import { caseInsensitiveEqual } from '../../utils'
-import { RawAzureProtectionPolicyResource } from './data'
 import { RawAzureResourceGroup } from '../resourceGroup/data'
+import { RawAzureBackupInstanceResource } from './data'
 
 export default ({
   service,
   data,
   region,
 }: {
-  service: RawAzureProtectionPolicyResource
+  service: RawAzureBackupInstanceResource
   data: Array<{ name: string; data: { [property: string]: any[] } }>
   region: string
 }): {
@@ -21,7 +21,7 @@ export default ({
   const { id, resourceGroupId: rgName } = service
 
   /**
-   * Find resource group related to this backup policy
+   * Find resource group related to this backup instance
    */
   const resourceGroups: {
     name: string

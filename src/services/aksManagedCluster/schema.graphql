@@ -193,4 +193,5 @@ type azureAksManagedCluster implements azureResource
   skuName: String @search(by: [hash, regexp])
   skuTier: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: aksManagedClusters)
+  virtualMachineScaleSets: [azureVirtualMachineScaleSet] @hasInverse(field: aksManagedClusters)
 }

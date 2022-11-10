@@ -1,5 +1,14 @@
 import cuid from 'cuid'
-import { AzureSqlServer } from '../../types/generated'
+import {
+  AzureSqlServer,
+  AzureSqlServerAdAdministrator,
+  AzureSqlServerBlobAuditingPolicy,
+  AzureSqlServerEncryptionProtector,
+  AzureSqlServerFirewallRule,
+  AzureSqlServerPrivateEndpointConnection,
+  AzureSqlServerSecurityAlertPolicy,
+  AzureSqlServerVulnerabilityAssessment,
+} from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureServer } from './data'
 
@@ -16,10 +25,13 @@ export default ({
     id,
     name,
     type,
-    identity,
+    identity: {
+      tenantId,
+      type: identityType,
+      principalId,
+      userAssignedIdentities = {},
+    } = {},
     kind,
-    administratorLogin,
-    administratorLoginPassword,
     version,
     state,
     fullyQualifiedDomainName,
@@ -29,7 +41,7 @@ export default ({
     primaryUserAssignedIdentityId,
     federatedClientId,
     keyId,
-    administrators,
+    administrators = {},
     workspaceFeature,
     restrictOutboundNetworkAccess,
     resourceGroupId,
@@ -49,31 +61,51 @@ export default ({
     subscriptionId: account,
     type,
     identity: {
-      ...identity,
-      userAssignedIdentities: Object.keys(
-        identity?.userAssignedIdentities ?? {}
-      ).map(key => ({
-        id: cuid(),
-        key,
-        value: identity?.userAssignedIdentities[key],
-      })),
+      tenantId,
+      type: identityType,
+      principalId,
+      ...(userAssignedIdentities
+        ? {
+            userAssignedIdentities: Object.keys(userAssignedIdentities).map(
+              key => ({
+                id: cuid(),
+                key,
+                value: userAssignedIdentities[key],
+              })
+            ),
+          }
+        : {}),
     },
     kind,
-    administratorLogin,
-    administratorLoginPassword,
     version,
     state,
     fullyQualifiedDomainName,
     privateEndpointConnections:
-      privateEndpointConnections?.map(c => ({
-        id: c.id || cuid(),
-        properties: {
-          privateEndpointId: c.properties?.privateEndpoint?.id,
-          privateLinkServiceConnectionState:
-            c.properties?.privateLinkServiceConnectionState,
-          provisioningState: c.properties?.provisioningState,
-        },
-      })) || [],
+      privateEndpointConnections?.map(
+        ({
+          id: privateEndpointConnectionId,
+          properties: {
+            privateEndpoint = {},
+            privateLinkServiceConnectionState: {
+              description,
+              status,
+              actionsRequired,
+            } = {},
+            provisioningState,
+          } = {},
+        }): AzureSqlServerPrivateEndpointConnection => ({
+          id: privateEndpointConnectionId ?? cuid(),
+          properties: {
+            privateEndpointId: privateEndpoint.id,
+            privateLinkServiceConnectionState: {
+              description,
+              status,
+              actionsRequired,
+            },
+            provisioningState,
+          },
+        })
+      ) ?? [],
     minimalTlsVersion,
     publicNetworkAccess,
     primaryUserAssignedIdentityId,
@@ -84,24 +116,140 @@ export default ({
     restrictOutboundNetworkAccess,
     resourceGroupId,
     firewallRules:
-      firewallRules?.map(r => ({ id: r.id || cuid(), ...r })) || [],
-    serverSecurityAlertPolicies: serverSecurityAlertPolicies?.map(alertPolicy => ({
-      ...alertPolicy,
-      id: alertPolicy.id || cuid(),
-      creationTime: alertPolicy?.creationTime?.toISOString(),
-    })),
+      firewallRules?.map(
+        ({
+          id: firewallRuleId,
+          name: firewallRuleName,
+          type: firewallRuleType,
+          startIpAddress,
+          endIpAddress,
+        }): AzureSqlServerFirewallRule => ({
+          id: firewallRuleId ?? cuid(),
+          name: firewallRuleName,
+          type: firewallRuleType,
+          startIpAddress,
+          endIpAddress,
+        })
+      ) ?? [],
+    serverSecurityAlertPolicies: serverSecurityAlertPolicies?.map(
+      ({
+        id: srvSecurityAlertPolicyId,
+        creationTime,
+        name: srvSecurityAlertPolicyName,
+        type: srvSecurityAlertPolicyType,
+        state: srvSecurityAlertPolicyState,
+        disabledAlerts = [],
+        emailAddresses = [],
+        emailAccountAdmins,
+        storageEndpoint,
+        retentionDays,
+      }): AzureSqlServerSecurityAlertPolicy => ({
+        id: srvSecurityAlertPolicyId ?? cuid(),
+        name: srvSecurityAlertPolicyName,
+        type: srvSecurityAlertPolicyType,
+        state: srvSecurityAlertPolicyState,
+        disabledAlerts,
+        emailAddresses,
+        emailAccountAdmins,
+        storageEndpoint,
+        retentionDays,
+        creationTime: creationTime?.toISOString(),
+      })
+    ) ?? [],
     adAdministrators:
-      adAdministrators?.map(a => ({ id: a.id || cuid(), ...a })) || [],
+      adAdministrators?.map(
+        ({
+          id: adAdministratorId,
+          name: adAdministratorName,
+          type: adAdministratorType,
+          administratorType: adAdministratorAdminType,
+          sid,
+          tenantId: adAdministratorTenantId,
+        }): AzureSqlServerAdAdministrator => ({
+          id: adAdministratorId ?? cuid(),
+          name: adAdministratorName,
+          type: adAdministratorType,
+          administratorType: adAdministratorAdminType,
+          sid,
+          tenantId: adAdministratorTenantId,
+        })
+      ) ?? [],
     encryptionProtectors:
-      encryptionProtectors?.map(e => ({ id: e.id || cuid(), ...e })) || [],
-    serverBlobAuditingPolicies: serverBlobAuditingPolicies?.map(policy => ({
-      ...policy,
-      id: policy.id || cuid(),
-    })),
-    vulnerabilityAssessments: vulnerabilityAssessments?.map(va => ({
-      ...va,
-      id: va.id || cuid(),
-    })),
+      encryptionProtectors?.map(
+        ({
+          id: encryptionProtectorId,
+          name: encryptionProtectorName,
+          type: encryptionProtectorType,
+          kind: encryptionProtectorKind,
+          location: encryptionProtectorLocation,
+          subregion,
+          serverKeyName,
+          serverKeyType,
+          uri,
+          thumbprint,
+          autoRotationEnabled,
+        }): AzureSqlServerEncryptionProtector => ({
+          id: encryptionProtectorId ?? cuid(),
+          name: encryptionProtectorName,
+          type: encryptionProtectorType,
+          kind: encryptionProtectorKind,
+          location: encryptionProtectorLocation,
+          subregion,
+          serverKeyName,
+          serverKeyType,
+          uri,
+          thumbprint,
+          autoRotationEnabled,
+        })
+      ) ?? [],
+    serverBlobAuditingPolicies: serverBlobAuditingPolicies?.map(
+      ({
+        id: serverBlobAuditingPolicyId,
+        name: serverBlobAuditingPolicyName,
+        type: serverBlobAuditingPolicyType,
+        isDevopsAuditEnabled,
+        retentionDays,
+        auditActionsAndGroups,
+        isStorageSecondaryKeyInUse,
+        isAzureMonitorTargetEnabled,
+        queueDelayMs,
+        state: serverBlobAuditingPolicyState,
+        storageEndpoint,
+        storageAccountSubscriptionId,
+      }): AzureSqlServerBlobAuditingPolicy => ({
+        id: serverBlobAuditingPolicyId || cuid(),
+        name: serverBlobAuditingPolicyName,
+        type: serverBlobAuditingPolicyType,
+        isDevopsAuditEnabled,
+        retentionDays,
+        auditActionsAndGroups,
+        isStorageSecondaryKeyInUse,
+        isAzureMonitorTargetEnabled,
+        queueDelayMs,
+        state: serverBlobAuditingPolicyState,
+        storageEndpoint,
+        storageAccountSubscriptionId,
+      })
+    ) ?? [],
+    vulnerabilityAssessments: vulnerabilityAssessments?.map(
+      ({
+        id: vaId,
+        name: vaName,
+        type: vaType,
+        storageContainerPath,
+        recurringScans: { isEnabled, emailSubscriptionAdmins, emails = [] },
+      }): AzureSqlServerVulnerabilityAssessment => ({
+        id: vaId ?? cuid(),
+        name: vaName,
+        type: vaType,
+        storageContainerPath,
+        recurringScans: {
+          isEnabled,
+          emailSubscriptionAdmins,
+          emails,
+        },
+      })
+    ) ?? [],
     tags: formatTagsFromMap(Tags),
   }
 }

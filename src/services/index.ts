@@ -26,7 +26,7 @@ import {
   GLOBAL_REGION,
 } from '../config/constants'
 import { obfuscateSensitiveString } from '../utils/format'
-import { sortResourcesDependencies } from '../utils'
+import { checkAndMergeConnections, sortResourcesDependencies } from '../utils'
 import { createDiffSecs } from '../utils/dateutils'
 import {
   getClientSecretCredentials,
@@ -592,11 +592,12 @@ export default class Provider extends CloudGraph.Client {
       this.logger.debug(error)
     }
 
-    try {
-      for (const serviceData of rawData) {
+    for (const serviceData of rawData) {
+      try {
         const serviceClass = this.getService(serviceData.name)
         const entities: any[] = []
         for (const region of Object.keys(serviceData.data)) {
+          await new Promise(resolve => setTimeout(resolve, 10))
           const data = serviceData.data[region]
           if (!isEmpty(data)) {
             data.forEach((service: any) => {
@@ -693,12 +694,12 @@ export default class Provider extends CloudGraph.Client {
             data: entities,
           })
         }
+      } catch (error: any) {
+        this.logger.error(
+          `There was an error formatting/connecting service ${serviceData.name} `
+        )
+        this.logger.debug(error)
       }
-    } catch (error: any) {
-      this.logger.error(
-        'There was an error building connections for Azure data'
-      )
-      this.logger.debug(error)
     }
 
     return this.enhanceData({

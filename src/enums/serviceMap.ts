@@ -8,6 +8,7 @@ import AzureADServicePrincipal from '../services/adServicePrincipal'
 import AzureADUser from '../services/adUser'
 import AzureAksManagedCluster from '../services/aksManagedCluster'
 import AzureMetricAlert from '../services/metricAlert'
+import AzureApplicationGateway from '../services/applicationGateway'
 import AzureAppServiceEnvironment from '../services/appServiceEnvironment'
 // import AzureAppServiceKubeEnvironment from '../services/appServiceKubeEnvironment'
 import AzureAppServicePlan from '../services/appServicePlan'
@@ -51,6 +52,8 @@ import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
 import AzureRecoveryVault from '../services/recoveryVaults'
+import AzureRecoveryInstance from '../services/recoveryInstances'
+import AzureRecoveryPolicy from '../services/recoveryPolicies'
 import AzureRedisCache from '../services/redisCache'
 import AzureReplicationAppliance from '../services/replicationAppliances'
 import AzureReplicationCenter from '../services/replicationCenters'
@@ -79,9 +82,9 @@ import AzureCosmosDb from '../services/cosmosDb'
 import AzureAppInsights from '../services/appInsights'
 import AzureIntegrationRuntime from '../services/integrationRuntimes' 
 import AzureServiceBus from '../services/serviceBus'
-// import AzureBackupVault from '../services/backupVault'
-import AzureBackupInstance from '../services/backupInstance'
-import AzureBackupPolicy from '../services/backupPolicy'
+import AzureBackupVault from '../services/backupVaults'
+import AzureBackupInstance from '../services/backupInstances'
+import AzureBackupPolicy from '../services/backupPolicies'
 import AzureBilling from '../services/billing'
 import AzureLogProfiles from '../services/logProfiles'
 import Subscription from '../services/subscription'
@@ -102,6 +105,7 @@ export default {
   [services.adUser]: AzureADUser,
   [services.aksManagedCluster]: AzureAksManagedCluster,
   [services.metricAlert]: AzureMetricAlert,
+  [services.applicationGateway]: AzureApplicationGateway,
   [services.appServiceEnvironment]: AzureAppServiceEnvironment,
   // [services.appServiceKubeEnvironment]: AzureAppServiceKubeEnvironment,
   [services.appInsights]: AzureAppInsights,
@@ -111,9 +115,9 @@ export default {
   [services.authRoleAssignment]: AzureAuthRoleAssignment,
   [services.authRoleDefinition]: AzureAuthRoleDefinition,
   [services.autoProvisioningSettings]: AzureAutoProvisioningSettings,
-  // [services.backupVault]: AzureBackupVault,
-  [services.backupInstance]: AzureBackupInstance,
-  [services.backupPolicy]: AzureBackupPolicy,
+  [services.backupVaults]: AzureBackupVault,
+  [services.backupInstances]: AzureBackupInstance,
+  [services.backupPolicies]: AzureBackupPolicy,
   [services.billing]: AzureBilling,
   [services.cdnCustomDomains]: AzureCdnCustomDomains,
   [services.cdnEndpoints]: AzureCdnEndpoints,
@@ -155,6 +159,8 @@ export default {
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
   [services.recoveryVaults]: AzureRecoveryVault,
+  [services.recoveryInstances]: AzureRecoveryInstance,
+  [services.recoveryPolicies]: AzureRecoveryPolicy,
   [services.redisCaches]: AzureRedisCache,
   [services.replicationAppliances]: AzureReplicationAppliance,
   [services.replicationCenters]: AzureReplicationCenter,

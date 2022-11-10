@@ -311,4 +311,8 @@ type azureVirtualMachineScaleSet implements azureResource
   scaleInPolicy: azureVirtualMachineScaleSetScaleInPolicy
   resourceGroup: [azureResourceGroup]
     @hasInverse(field: virtualMachineScaleSets)
+  virtualMachines: [azureVirtualMachine]
+    @hasInverse(field: virtualMachineScaleSets)
+  aksManagedClusters: [azureAksManagedCluster]
+    @hasInverse(field: virtualMachineScaleSets)
 }

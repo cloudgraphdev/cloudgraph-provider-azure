@@ -18,34 +18,82 @@ export default ({
     id,
     name,
     type,
+    plan: {
+      name: planName,
+      publisher: planPublisher,
+      product: planProduct,
+    } = {},
+    additionalCapabilities: { ultraSSDEnabled, hibernationEnabled } = {},
+    hardwareProfile: { vmSize } = {},
+    priority,
+    billingProfile: { maxPrice } = {},
+    vmId,
     diagnosticsProfile: {
       bootDiagnostics: { enabled: bootDiagnostics = false } = {},
     } = {},
-    osProfile: { adminUsername, adminPassword, secrets, ...restOsProfile } = {},
-    storageProfile: { imageReference } = {},
+    osProfile: {
+      computerName,
+      windowsConfiguration: {
+        provisionVMAgent: wProvisionVMAgent,
+        enableAutomaticUpdates,
+        timeZone,
+      } = {},
+      linuxConfiguration: {
+        disablePasswordAuthentication,
+        provisionVMAgent: lProvisionVMAgent,
+      } = {},
+      allowExtensionOperations,
+      requireGuestProvisionSignal,
+    } = {},
+    storageProfile: { imageReference = {} } = {},
     licenseType,
     resourceGroupId,
     Tags,
   } = service
   const {
-    linuxConfiguration: {
-      patchSettings: lps,
-      ssh: lssh,
-      ...linuxConfiguration
-    } = {},
-    windowsConfiguration: { patchSettings: wps, ...windowsConfiguration } = {},
-    ...osProfile
-  } = restOsProfile
-  const storageImageReference: AzureVirtualMachineStorageImageReference =
-    imageReference || {}
+    id: imageReferenceId,
+    exactVersion,
+    offer,
+    sku,
+    publisher,
+    version,
+    sharedGalleryImageId,
+  }: AzureVirtualMachineStorageImageReference = imageReference
   return {
     id,
     subscriptionId: account,
     name,
     type,
     region,
-    osProfile: { linuxConfiguration, windowsConfiguration, ...osProfile },
-    storageImageReference,
+    plan: { name: planName, publisher: planPublisher, product: planProduct },
+    vmSize,
+    vmId,
+    priority,
+    billingProfileMaxPrice: maxPrice,
+    additionalCapabilities: { ultraSSDEnabled, hibernationEnabled },
+    osProfile: {
+      computerName,
+      windowsConfiguration: {
+        provisionVMAgent: wProvisionVMAgent,
+        enableAutomaticUpdates,
+        timeZone,
+      },
+      linuxConfiguration: {
+        disablePasswordAuthentication,
+        provisionVMAgent: lProvisionVMAgent,
+      },
+      allowExtensionOperations,
+      requireGuestProvisionSignal,
+    },
+    storageImageReference: {
+      id: imageReferenceId,
+      exactVersion,
+      offer,
+      sku,
+      publisher,
+      version,
+      sharedGalleryImageId,
+    },
     bootDiagnostics,
     licenseType,
     resourceGroupId,

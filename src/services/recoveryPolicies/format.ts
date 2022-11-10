@@ -1,30 +1,29 @@
-import cuid from 'cuid'
 import {
+  DailyRetentionSchedule,
+  DailySchedule,
+  HourlySchedule,
+  IaasvmPolicyType,
+  InstantRPAdditionalDetails,
+  MonthlyRetentionSchedule,
   ProtectionPolicy,
+  RetentionDuration,
+  RetentionPolicy,
+  SchedulePolicy,
   Settings,
   SubProtectionPolicy,
-  InstantRPAdditionalDetails,
-  IaasvmPolicyType,
-  SchedulePolicy,
-  HourlySchedule,
-  DailySchedule,
-  WeeklySchedule,
-  RetentionPolicy,
-  DailyRetentionSchedule,
   WeeklyRetentionSchedule,
-  MonthlyRetentionSchedule,
+  WeeklySchedule,
   YearlyRetentionSchedule,
-  RetentionDuration,
 } from '@azure/arm-recoveryservicesbackup'
+import cuid from 'cuid'
 import { isEmpty } from 'lodash'
-import { RawAzureProtectionPolicyResource } from './data'
 import {
-  AzureBackupPolicy,
-  AzureBackupPolicyProperties,
-  AzureBackupPolicySchedulePolicyUnion,
-  AzureBackupPolicyRetentionPolicyUnion,
+  AzureRecoveryPolicy,
+  AzureRecoveryPolicyProperties,
+  AzureRecoveryPolicyRetentionPolicyUnion,
+  AzureRecoveryPolicySchedulePolicyUnion,
 } from '../../types/generated'
-import { formatTagsFromMap } from '../../utils/format'
+import { RawAzureProtectionPolicyResource } from './data'
 
 export interface RawAzureSchedulePolicy extends SchedulePolicy {
   scheduleFrequencyInMins?: number
@@ -67,7 +66,7 @@ export interface RawAzureProtectedItem extends ProtectionPolicy {
 
 const formatSchedulePolicy = (
   schedulePolicy?: RawAzureSchedulePolicy
-): AzureBackupPolicySchedulePolicyUnion => {
+): AzureRecoveryPolicySchedulePolicyUnion => {
   if (isEmpty(schedulePolicy)) {
     return {}
   }
@@ -100,7 +99,7 @@ const formatSchedulePolicy = (
 
 const formatRetentionPolicy = (
   retentionPolicy?: RawAzureRetentionPolicy
-): AzureBackupPolicyRetentionPolicyUnion => {
+): AzureRecoveryPolicyRetentionPolicyUnion => {
   if (isEmpty(retentionPolicy)) {
     return {}
   }
@@ -173,7 +172,7 @@ const formatRetentionPolicy = (
 
 const formatProperties = (
   properties?: RawAzureProtectedItem
-): AzureBackupPolicyProperties => {
+): AzureRecoveryPolicyProperties => {
   if (isEmpty(properties)) {
     return {}
   }
@@ -206,7 +205,7 @@ export default ({
 }: {
   service: RawAzureProtectionPolicyResource
   account: string
-}): AzureBackupPolicy => {
+}): AzureRecoveryPolicy => {
   const { id, name, type, region, eTag, properties, resourceGroupId } = service
   return {
     id: id || cuid(),

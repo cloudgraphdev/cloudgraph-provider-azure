@@ -66,9 +66,6 @@ type azureIntegrationRuntimeSsisCatalogInfo
     subscription: false
   ) {
   catalogServerEndpoint: String @search(by: [hash, regexp])
-  catalogAdminUserName: String @search(by: [hash, regexp])
-  catalogAdminPasswordType: String @search(by: [hash, regexp])
-  catalogAdminPasswordValue: String @search(by: [hash, regexp])
   catalogPricingTier: String @search(by: [hash, regexp])
   dualStandbyPairName: String @search(by: [hash, regexp])
 }
@@ -80,8 +77,6 @@ type azureIntegrationRuntimeCustomSetupScriptProperties
     subscription: false
   ) {
   blobContainerUri: String @search(by: [hash, regexp])
-  sasTokenType: String @search(by: [hash, regexp])
-  sasTokenValue: String @search(by: [hash, regexp])
 }
 
 type azureIntegrationRuntimeDataProxyProperties
@@ -155,12 +150,9 @@ type azureCustomSetupBaseUnion
   id: String! @id @search(by: [hash])
   type: String @search(by: [hash, regexp])
   targetName: String @search(by: [hash, regexp])
-  userName: String @search(by: [hash, regexp])
-  password: azureSecretBaseUnion
   variableName: String @search(by: [hash, regexp])
   variableValue: String @search(by: [hash, regexp])
   componentName: String @search(by: [hash, regexp])
-  licenseKey: azureSecretBaseUnion
   version: String @search(by: [hash, regexp])
 }
 
