@@ -196,7 +196,7 @@ export default ({
     storageAccountRequired,
     keyVaultReferenceIdentity,
     virtualNetworkSubnetId,
-    siteAuthSettings,
+    siteAuthSettings = { enabled: false },
   } = service
 
   return {
