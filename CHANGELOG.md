@@ -1,3 +1,10 @@
+## [0.64.1-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.0...0.64.1-alpha.1) (2022-11-14)
+
+
+### Bug Fixes
+
+* initialization and iterables bugfixes ([83a5dd3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/83a5dd30d7d18de1acc1912303502703f5e7bff0))
+
 # [0.64.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.63.0...0.64.0) (2022-11-10)
 
 
