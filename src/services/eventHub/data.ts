@@ -38,7 +38,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const namespace of namespacesIterable) {
-          namespaces.push(namespace)
+          namespace && namespaces.push(namespace)
         }
       },
       {
@@ -60,7 +60,9 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const eventuHub of eventHubIterable) {
-              eventHubs.push(eventuHub)
+              if (eventuHub) {
+                eventHubs.push(eventuHub)
+              }
             }
           },
           {

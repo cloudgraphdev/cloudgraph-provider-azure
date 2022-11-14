@@ -1,4 +1,8 @@
-import { CosmosDBManagementClient, DatabaseAccountGetResults, OptionsResource } from '@azure/arm-cosmosdb'
+import {
+  CosmosDBManagementClient,
+  DatabaseAccountGetResults,
+  OptionsResource,
+} from '@azure/arm-cosmosdb'
 import { tryCatchWrapper } from '../../utils'
 import { TagMap } from '../../types'
 
@@ -59,14 +63,25 @@ export const listSqlDatabases = async (
             sqlDatabase.name
           )
           for await (const container of containersIterable) {
-            const { id, name, type } = container
-            containers.push({ id, name, type } as RawAzureCosmosDbDatabaseData)
+            if (container) {
+              const { id, name, type } = container
+              containers.push({
+                id,
+                name,
+                type,
+              } as RawAzureCosmosDbDatabaseData)
+            }
           }
           const { resource, ...rest } = sqlDatabase
           const { id, rid, ts, etag } = resource
           sqlDatabases.push({
             ...rest,
-            resource: { id, rid, ts, etag } as RawAzureCosmosDbDatabaseProperties,
+            resource: {
+              id,
+              rid,
+              ts,
+              etag,
+            } as RawAzureCosmosDbDatabaseProperties,
             data: containers,
           } as RawAzureCosmosDbDatabase)
         }
@@ -104,14 +119,25 @@ export const listMongoDBDatabases = async (
               mongoDb.name
             )
           for await (const collection of collectionsIterable) {
-            const { id, name, type } = collection
-            collections.push({ id, name, type } as RawAzureCosmosDbDatabaseData)
+            if (collection) {
+              const { id, name, type } = collection
+              collections.push({
+                id,
+                name,
+                type,
+              } as RawAzureCosmosDbDatabaseData)
+            }
           }
           const { resource, ...rest } = mongoDb
           const { id, rid, ts, etag } = resource
           mongoDbDatabases.push({
             ...rest,
-            resource: { id, rid, ts, etag } as RawAzureCosmosDbDatabaseProperties,
+            resource: {
+              id,
+              rid,
+              ts,
+              etag,
+            } as RawAzureCosmosDbDatabaseProperties,
             data: collections,
           } as RawAzureCosmosDbDatabase)
         }
@@ -148,14 +174,21 @@ export const listGremlinDatabases = async (
             gremlinDatabase.name
           )
           for await (const graph of graphsIterable) {
-            const { id, name, type } = graph
-            graphs.push({ id, name, type } as RawAzureCosmosDbDatabaseData)
+            if (graph) {
+              const { id, name, type } = graph
+              graphs.push({ id, name, type } as RawAzureCosmosDbDatabaseData)
+            }
           }
           const { resource, ...rest } = gremlinDatabase
           const { id, rid, ts, etag } = resource
           gremlinDatabases.push({
             ...rest,
-            resource: { id, rid, ts, etag } as RawAzureCosmosDbDatabaseProperties,
+            resource: {
+              id,
+              rid,
+              ts,
+              etag,
+            } as RawAzureCosmosDbDatabaseProperties,
             data: graphs,
           } as RawAzureCosmosDbDatabase)
         }
@@ -192,14 +225,21 @@ export const listCassandraKeyspaces = async (
             keyspace.name
           )
           for await (const table of tablesIterable) {
-            const { id, name, type } = table
-            tables.push({ id, name, type } as RawAzureCosmosDbDatabaseData)
+            if (table) {
+              const { id, name, type } = table
+              tables.push({ id, name, type } as RawAzureCosmosDbDatabaseData)
+            }
           }
           const { resource, ...rest } = keyspace
           const { id, rid, ts, etag } = resource
           keyspaces.push({
             ...rest,
-            resource: { id, rid, ts, etag } as RawAzureCosmosDbDatabaseProperties,
+            resource: {
+              id,
+              rid,
+              ts,
+              etag,
+            } as RawAzureCosmosDbDatabaseProperties,
             data: tables,
           } as RawAzureCosmosDbDatabase)
         }
@@ -233,7 +273,12 @@ export const listAzureCosmoDbTables = async (
           const { id, rid, ts, etag } = resource
           tables.push({
             ...rest,
-            resource: { id, rid, ts, etag } as RawAzureCosmosDbDatabaseProperties,
+            resource: {
+              id,
+              rid,
+              ts,
+              etag,
+            } as RawAzureCosmosDbDatabaseProperties,
           } as RawAzureCosmosDbTable)
         }
       }
@@ -255,9 +300,17 @@ export const listAzureCosmoDbDatabases = async (
 ): Promise<RawAzureCosmosDbDatabase[]> => {
   const databasesPromises = []
   databasesPromises.push(listSqlDatabases(client, resourceGroup, accountName))
-  databasesPromises.push(listMongoDBDatabases(client, resourceGroup, accountName))
-  databasesPromises.push(listGremlinDatabases(client, resourceGroup, accountName))
-  databasesPromises.push(listCassandraKeyspaces(client, resourceGroup, accountName))
-  const databases : RawAzureCosmosDbDatabase[] = await Promise.all(databasesPromises)
+  databasesPromises.push(
+    listMongoDBDatabases(client, resourceGroup, accountName)
+  )
+  databasesPromises.push(
+    listGremlinDatabases(client, resourceGroup, accountName)
+  )
+  databasesPromises.push(
+    listCassandraKeyspaces(client, resourceGroup, accountName)
+  )
+  const databases: RawAzureCosmosDbDatabase[] = await Promise.all(
+    databasesPromises
+  )
   return databases?.reduce((acc, val) => acc.concat(val), []) || []
 }

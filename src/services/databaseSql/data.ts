@@ -1,4 +1,9 @@
-import { SqlManagementClient, Database, Server, LogicalDatabaseTransparentDataEncryption } from '@azure/arm-sql'
+import {
+  SqlManagementClient,
+  Database,
+  Server,
+  LogicalDatabaseTransparentDataEncryption,
+} from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -25,16 +30,17 @@ export interface RawAzureDatabaseSql
 }
 
 const listTransparentDataEncryptions = async (
-  client: SqlManagementClient, 
-  resourceGroup: string, 
+  client: SqlManagementClient,
+  resourceGroup: string,
   serverName: string,
-  databaseName: string,
+  databaseName: string
 ): Promise<LogicalDatabaseTransparentDataEncryption[]> => {
-  const transparentDataEncryptions: LogicalDatabaseTransparentDataEncryption[] = []
+  const transparentDataEncryptions: LogicalDatabaseTransparentDataEncryption[] =
+    []
   const tdeIterable = client.transparentDataEncryptions.listByDatabase(
     resourceGroup,
     serverName,
-    databaseName,
+    databaseName
   )
   await tryCatchWrapper(
     async () => {
@@ -62,17 +68,14 @@ export default async ({
 }> => {
   try {
     const { tokenCredentials, subscriptionId } = config
-    const client = new SqlManagementClient(
-      tokenCredentials,
-      subscriptionId
-    )
+    const client = new SqlManagementClient(tokenCredentials, subscriptionId)
     const sqlServers: Server[] = []
     const sqlServerIterable: PagedAsyncIterableIterator<Server> =
       client.servers.list()
     await tryCatchWrapper(
       async () => {
         for await (const server of sqlServerIterable) {
-          sqlServers.push(server)
+          server && sqlServers.push(server)
         }
       },
       {
@@ -94,10 +97,12 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const database of databaseIterable) {
-              databases.push({
-                ...database,
-                serverName: name,
-              })
+              if (database) {
+                databases.push({
+                  ...database,
+                  serverName: name,
+                })
+              }
             }
           },
           {
@@ -112,27 +117,29 @@ export default async ({
     logger.debug(lt.foundDatabaseSql(databases.length))
 
     const result: { [property: string]: RawAzureDatabaseSql[] } = {}
-    await Promise.all(databases.map(async ({ tags, location, name, serverName, ...rest }) => {
-      const region = lowerCaseLocation(location)
-      if (regions.includes(region)) {
-        if (!result[region]) {
-          result[region] = []
+    await Promise.all(
+      databases.map(async ({ tags, location, name, serverName, ...rest }) => {
+        const region = lowerCaseLocation(location)
+        if (regions.includes(region)) {
+          if (!result[region]) {
+            result[region] = []
+          }
+          const resourceGroupId = getResourceGroupFromEntity(rest)
+          result[region].push({
+            ...rest,
+            resourceGroupId,
+            region,
+            transparentDataEncryptions: await listTransparentDataEncryptions(
+              client,
+              resourceGroupId,
+              serverName,
+              name
+            ),
+            Tags: tags || {},
+          })
         }
-        const resourceGroupId = getResourceGroupFromEntity(rest)
-        result[region].push({
-          ...rest,
-          resourceGroupId,
-          region,
-          transparentDataEncryptions: await listTransparentDataEncryptions(
-            client, 
-            resourceGroupId, 
-            serverName, 
-            name
-          ),
-          Tags: tags || {},
-        })
-      }
-    }))
+      })
+    )
     return result
   } catch (e) {
     logger.error(e)

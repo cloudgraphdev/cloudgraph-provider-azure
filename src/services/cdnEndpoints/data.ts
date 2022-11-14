@@ -49,10 +49,10 @@ export default async ({
         })
       ).flat()
 
-      let cdnEndpoints: RawAzureCdnEndpoint[] = []
+      const cdnEndpoints: RawAzureCdnEndpoint[] = []
       await tryCatchWrapper(
         async () => {
-          cdnEndpoints = await Promise.all(
+          await Promise.all(
             cdnProfiles.map(async cdnProfile => {
               const { resourceGroupId, name } = cdnProfile
               const cdnEndpointsIterable: PagedAsyncIterableIterator<Endpoint> =
@@ -62,14 +62,14 @@ export default async ({
                   const { location, tags, ...rest } = cdnEndpoint
                   const region =
                     (location && lowerCaseLocation(location)) || 'global'
-                  return {
+                  cdnEndpoints.push({
                     ...rest,
                     profileId: cdnProfile.id,
                     profileName: cdnProfile.name,
                     region,
                     resourceGroupId,
                     Tags: tags || {},
-                  }
+                  })
                 }
               }
             })

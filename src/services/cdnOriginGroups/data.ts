@@ -43,10 +43,10 @@ export default async ({
     ).flat()
 
     if (!isEmpty(cdnEndpoints)) {
-      let cdnOriginGroups: RawAzureCdnOriginGroup[] = []
+      const cdnOriginGroups: RawAzureCdnOriginGroup[] = []
       await tryCatchWrapper(
         async () => {
-          cdnOriginGroups = await Promise.all(
+          await Promise.all(
             cdnEndpoints.map(async cdnEndpoint => {
               const {
                 resourceGroupId,
@@ -65,12 +65,12 @@ export default async ({
                 if (cdnOrigin) {
                   const region = endpointRegion || 'global'
                   const { ...rest } = cdnOrigin
-                  return {
+                  cdnOriginGroups.push({
                     ...rest,
                     endpointId: cdnEndpoint.id,
                     region,
                     resourceGroupId,
-                  }
+                  })
                 }
               }
             })

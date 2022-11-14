@@ -40,7 +40,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const location of locationsIterable) {
-          locations.push(location.name)
+          location && locations.push(location.name)
         }
       },
       {

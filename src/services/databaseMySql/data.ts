@@ -27,17 +27,14 @@ export default async ({
 }> => {
   try {
     const { tokenCredentials, subscriptionId } = config
-    const client = new MySQLManagementClient(
-      tokenCredentials,
-      subscriptionId
-    )
+    const client = new MySQLManagementClient(tokenCredentials, subscriptionId)
     const sqlServers: Server[] = []
     const sqlServerIterable: PagedAsyncIterableIterator<Server> =
       client.servers.list()
     await tryCatchWrapper(
       async () => {
         for await (const server of sqlServerIterable) {
-          sqlServers.push(server)
+          server && sqlServers.push(server)
         }
       },
       {
@@ -59,13 +56,15 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const database of databaseIterable) {
-              const resourceGroupId = getResourceGroupFromEntity(rest)
-              databases.push({
-                region: lowerCaseLocation(location),
-                ...database,
-                resourceGroupId,
-                serverName: name,
-              })
+              if (database) {
+                const resourceGroupId = getResourceGroupFromEntity(rest)
+                databases.push({
+                  region: lowerCaseLocation(location),
+                  ...database,
+                  resourceGroupId,
+                  serverName: name,
+                })
+              }
             }
           },
           {

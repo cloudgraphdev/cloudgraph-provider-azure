@@ -41,7 +41,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const server of sqlServerIterable) {
-          sqlServers.push(server)
+          server && sqlServers.push(server)
         }
       },
       {
@@ -63,12 +63,14 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const database of databaseIterable) {
-              databases.push({
-                region: lowerCaseLocation(location),
-                ...database,
-                resourceGroupId,
-                serverName: name,
-              })
+              if (database) {
+                databases.push({
+                  region: lowerCaseLocation(location),
+                  ...database,
+                  resourceGroupId,
+                  serverName: name,
+                })
+              }
             }
           },
           {

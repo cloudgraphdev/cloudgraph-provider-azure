@@ -69,14 +69,17 @@ export default async ({
       try {
         await tryCatchWrapper(
           async () => {
-            for await (const { tags, ...blob } of blobsIterable) {
-              storageBlobData.push({
-                ...blob,
-                storageContainerId,
-                resourceGroupId: storageContainer.resourceGroupId,
-                region: storageContainer.region,
-                Tags: tags,
-              })
+            for await (const blobItem of blobsIterable) {
+              if (blobItem) {
+                const { tags, ...blob } = blobItem
+                storageBlobData.push({
+                  ...blob,
+                  storageContainerId,
+                  resourceGroupId: storageContainer.resourceGroupId,
+                  region: storageContainer.region,
+                  Tags: tags,
+                })
+              }
             }
           },
           {

@@ -1,5 +1,6 @@
 import {
-  ProtectedItemResource, RecoveryServicesBackupClient
+  ProtectedItemResource,
+  RecoveryServicesBackupClient,
 } from '@azure/arm-recoveryservicesbackup'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
