@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { RawAzureDataCollectionRule } from './data'
 import { AzureDataCollectionRule } from '../../types/generated'
 import { formatTagsFromMap, transformSystemData } from '../../utils/format'
@@ -34,7 +34,7 @@ export default ({
     provisioningState,
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -53,7 +53,9 @@ export default ({
             counterSpecifiers = [],
             name: pName,
           }) => ({
-            id: cuid(),
+            id: generateUniqueId({
+              id, name: pName,
+            }),
             streams,
             samplingFrequencyInSeconds,
             counterSpecifiers,
@@ -63,7 +65,9 @@ export default ({
       windowsEventLogs:
         windowsEventLogs?.map(
           ({ streams = [], xPathQueries = [], name: wName }) => ({
-            id: cuid(),
+            id: generateUniqueId({
+              id, name:wName
+            }),
             streams,
             xPathQueries,
             name: wName,
@@ -71,28 +75,38 @@ export default ({
         ) || [],
       syslog:
         syslog?.map(({ ...sls }) => ({
-          id: cuid(),
+          id: generateUniqueId({
+            id,
+            name: sls.name,
+          }),
           ...sls,
         })) || [],
       extensions:
         extensions?.map(({ ...es }) => ({
-          id: cuid(),
+          id: generateUniqueId({
+            id, name: es.name
+          }),
           ...es,
         })) || [],
     },
     destinations: {
       azureMonitorMetricsName,
       logAnalyticsDestinations: logAnalyticsDestinations.map(
-        ({ workspaceResourceId, workspaceId, name }) => ({
-          id: cuid(),
+        ({ workspaceResourceId, workspaceId, name: lADName }) => ({
+          id: generateUniqueId({
+            id,
+            name: lADName
+          }),
           workspaceResourceId,
           workspaceId,
-          name,
+          name: lADName,
         })
       ),
     },
     dataFlows: dataFlows.map(({ destinations, streams }) => ({
-      id: cuid(),
+      id: generateUniqueId({
+        id, destinations
+      }),
       destinations,
       streams,
     })),

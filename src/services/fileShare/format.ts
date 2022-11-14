@@ -1,5 +1,3 @@
-import cuid from 'cuid'
-
 import { AzureFileShare } from '../../types/generated'
 import { RawAzureFileShareItem } from './data'
 
@@ -35,7 +33,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     subscriptionId: account,
     resourceGroupId,

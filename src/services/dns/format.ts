@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureDnsZone, AzureDnsZoneRecordSet } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDnsZone, RawAzureDnsRecordSet } from './data'
@@ -41,7 +41,10 @@ const formatRecordSet = (
     mxRecords:
       mxRecords?.map(({ exchange, preference }) => {
         return {
-          id: cuid(),
+          id: generateUniqueId({
+            id,
+            exchange,
+          }),
           exchange,
           preference,
         }
@@ -51,7 +54,9 @@ const formatRecordSet = (
     srvRecords:
       srvRecords?.map(({ priority, weight, port, target }) => {
         return {
-          id: cuid(),
+          id: generateUniqueId({
+            id, target
+          }),
           priority,
           weight,
           port,
@@ -61,7 +66,10 @@ const formatRecordSet = (
     txtRecords:
       txtRecords?.map(({ value }) => {
         return {
-          id: cuid(),
+          id: generateUniqueId({
+            id,
+            value
+          }),
           value,
         }
       }) || [],
@@ -79,7 +87,11 @@ const formatRecordSet = (
     caaRecords:
       caaRecords?.map(({ flags, tag, value }) => {
         return {
-          id: cuid(),
+          id: generateUniqueId({
+            id,
+            tag,
+            value,
+          }),
           flags,
           tag,
           value,
@@ -111,7 +123,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

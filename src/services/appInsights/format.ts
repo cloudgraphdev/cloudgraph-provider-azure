@@ -1,5 +1,3 @@
-import cuid from 'cuid'
-
 import { AzureAppInsights } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureAppInsight } from './data'
@@ -36,7 +34,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     type,
     etag,
     resourceGroupId,

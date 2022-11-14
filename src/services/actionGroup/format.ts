@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { RawAzureActionGroup } from './data'
 import { AzureActionGroup } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
@@ -24,7 +24,7 @@ export default ({
     Tags = {},
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -32,9 +32,27 @@ export default ({
     resourceGroupId,
     enabled,
     groupShortName,
-    emailReceivers: emailReceivers.map(e => ({ id: cuid(), ...e })),
-    smsReceivers: smsReceivers.map(s => ({ id: cuid(), ...s })),
-    webhookReceivers: webhookReceivers.map(w => ({ id: cuid(), ...w })),
+    emailReceivers: emailReceivers.map(e => ({
+      id: generateUniqueId({
+        id,
+        ...e,
+      }),
+      ...e,
+    })),
+    smsReceivers: smsReceivers.map(s => ({
+      id: generateUniqueId({
+        id,
+        ...s,
+      }),
+      ...s,
+    })),
+    webhookReceivers: webhookReceivers.map(w => ({
+      id: generateUniqueId({
+        id,
+        ...w,
+      }),
+      ...w,
+    })),
     tags: formatTagsFromMap(Tags),
   }
 }

@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { RawAzureSecurityContact } from './data'
 import { AzureSecurityContact } from '../../types/generated'
 
@@ -20,7 +19,7 @@ export default ({
     alertsToAdmins,
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

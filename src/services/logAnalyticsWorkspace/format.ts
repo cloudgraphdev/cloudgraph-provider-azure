@@ -1,5 +1,3 @@
-import cuid from 'cuid'
-
 import { AzureLogAnalyticsWorkspace } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureLogAnalyticsWorkspace } from './data'
@@ -35,7 +33,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     type,
     resourceGroupId,
     subscriptionId: account,

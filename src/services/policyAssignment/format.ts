@@ -1,7 +1,7 @@
 import isArray from 'lodash/isArray'
 import isObject from 'lodash/isObject'
 import { isString } from 'lodash'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   AzurePolicyAssignment,
   AzurePolicyAssignmentParameters,
@@ -37,10 +37,14 @@ export default ({
 
   const parameters: AzurePolicyAssignmentParameters[] =
     Object.entries(params).map(([k, v]) => ({
-      id: cuid(),
+      id: generateUniqueId({
+        value: v
+      }),
       key: k,
       value: Object.entries(v.value).map(([k2, v2]) => ({
-        id: isObject(v) ? cuid() : `${k2}:${v2}`,
+        id: isObject(v) ? generateUniqueId({
+          ...v,
+        }) : `${k2}:${v2}`,
         key: k,
         value:
           (isString(v2) && v2) ||
@@ -64,7 +68,9 @@ export default ({
     enforcementMode,
     identity,
     nonComplianceMessages: nonComplianceMessages.map(item => ({
-      id: cuid(),
+      id: generateUniqueId({
+        ...item,
+      }),
       ...item,
     })),
     notScopes,

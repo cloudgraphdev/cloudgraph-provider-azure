@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import {
   AzureNetworkInterface,
   AzureNetworkInterfaceIpConfiguration,
@@ -66,7 +65,7 @@ export default ({
     privateIpAddress = ipConfigurations[0].privateIPAddress
   }
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     region,
     resourceGroupId,

@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { RawAzureCdnOrigin } from './data'
 import { AzureCdnOrigin } from '../../types/generated'
 import { transformSystemData } from '../../utils/format'
@@ -31,11 +30,11 @@ export default ({
     resourceState,
     provisioningState,
     privateEndpointStatus,
-    resourceGroupId
+    resourceGroupId,
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -55,6 +54,6 @@ export default ({
     resourceState,
     provisioningState,
     privateEndpointStatus,
-    resourceGroupId
+    resourceGroupId,
   }
 }

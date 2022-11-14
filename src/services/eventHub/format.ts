@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureEventHub } from '../../types/generated'
 import { transformSystemData } from '../../utils/format'
 import { RawAzureEventHub } from './data'
@@ -27,7 +26,7 @@ export default ({
     resourceGroupId,
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,

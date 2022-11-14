@@ -1,13 +1,13 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { RawAzureSynapseWorkspace } from './data'
 import { AzureSynapseWorkspace } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 
 export default ({
   service,
-  account: subscriptionId
+  account: subscriptionId,
 }: {
-  service : RawAzureSynapseWorkspace
+  service: RawAzureSynapseWorkspace
   account: string
 }): AzureSynapseWorkspace => {
   const {
@@ -38,15 +38,21 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
     subscriptionId,
     identity: {
       ...identity,
-      userAssignedIdentities: Object.entries(identity?.userAssignedIdentities || {}).map(([key, value]) => ({
-        id: cuid(),
+      userAssignedIdentities: Object.entries(
+        identity?.userAssignedIdentities || {}
+      ).map(([key, value]) => ({
+        id: generateUniqueId({
+          id,
+          key,
+          value,
+        }),
         key,
         value,
       })),
@@ -60,7 +66,7 @@ export default ({
     managedVirtualNetwork,
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
       ...connection,
-      id: cuid(),
+      id: connection.id,
     })),
     encryption,
     workspaceUID,

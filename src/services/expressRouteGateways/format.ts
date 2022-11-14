@@ -1,8 +1,9 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 
 import { AzureExpressRouteGateway } from '../../types/generated'
 import { RawAzureExpressRouteGateway } from './data'
 import { formatTagsFromMap } from '../../utils/format'
+
 
 export default ({
   service,
@@ -25,7 +26,7 @@ export default ({
     Tags = {},
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -33,8 +34,8 @@ export default ({
     etag,
     autoScaleConfiguration,
     expressRouteConnections: expressRouteConnections?.map(connection => ({
-      id: cuid(),
-      connectionId: id,
+      id: connection.id,
+      connectionId: connection.id,
       name: connection?.name,
       provisioningState: connection?.provisioningState,
       authorizationKey: connection?.authorizationKey,
@@ -46,22 +47,33 @@ export default ({
       },
       routingConfiguration: {
         associatedRouteTable: {
-          id: connection?.routingConfiguration?.associatedRouteTable?.id || cuid(),
+          id: connection?.routingConfiguration?.associatedRouteTable?.id,
         },
         propagatedRouteTables: {
           ...connection?.routingConfiguration?.propagatedRouteTables,
-          ids: connection?.routingConfiguration?.propagatedRouteTables?.ids?.map(id => ({
-            id: id?.id,
-          })),
+          ids: connection?.routingConfiguration?.propagatedRouteTables?.ids?.map(
+            id => ({
+              id: id?.id,
+            })
+          ),
         },
         vnetRoutes: {
-          staticRoutes: connection?.routingConfiguration?.vnetRoutes?.staticRoutes?.map(staticRoute => ({
-            id: cuid(),
-            ...staticRoute,
-          })),
-          bgpConnections: connection?.routingConfiguration?.vnetRoutes?.bgpConnections?.map(bgpConnection => ({
-            id: bgpConnection?.id,
-          })),
+          staticRoutes:
+            connection?.routingConfiguration?.vnetRoutes?.staticRoutes?.map(
+              staticRoute => ({
+                id: generateUniqueId({
+                  id,
+                  name: staticRoute.name,
+                }),
+                ...staticRoute,
+              })
+            ),
+          bgpConnections:
+            connection?.routingConfiguration?.vnetRoutes?.bgpConnections?.map(
+              bgpConnection => ({
+                id: bgpConnection?.id,
+              })
+            ),
         },
       },
     })),

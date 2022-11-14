@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import isEmpty from 'lodash/isEmpty'
 import { SynapseManagementClient, Workspace, SqlPool } from '@azure/arm-synapse'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
@@ -65,7 +64,7 @@ export default async ({
                   const { id, tags, ...rest } = sqlPool
                   sqlPools.push({
                     ...rest,
-                    id: id || cuid(),
+                    id,
                     region: regionMap.global,
                     resourceGroupId,
                     Tags: tags || {},

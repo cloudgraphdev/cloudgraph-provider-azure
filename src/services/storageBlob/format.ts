@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   BlobProperties,
   ObjectReplicationPolicy,
@@ -30,7 +30,10 @@ const formatReplicationPolicy = ({
   rules,
 }: ObjectReplicationPolicy): AzureStorageBlobReplicationPolicy => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      policyId,
+      rules,
+    }),
     policyId,
     rules: rules?.map(rule => formatReplicationRule(rule)) || [],
   }

@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { MetricAlertCriteriaUnion } from '@azure/arm-monitor'
 import { RawAzureMetricAlert } from './data'
 import {
@@ -15,43 +15,56 @@ const formatCriteria = ({
   webTestId,
 }: MetricAlertCriteriaUnion): AzureMetricAlertCriteria => {
   return {
-    allOf: allOf?.map(
-      ({
-        criterionType,
-        name,
-        metricName,
-        metricNamespace,
-        timeAggregation,
-        dimensions = [],
-        skipMetricValidation,
-        operator,
-        threshold,
-        alertSensitivity,
-        failingPeriods = {},
-        ignoreDataBefore,
-      }) => ({
-        id: cuid(),
-        criterionType,
-        name,
-        metricName,
-        metricNamespace,
-        timeAggregation,
-        dimensions: dimensions?.map(
-          ({ name: dName, operator: dOperator, values }) => ({
-            id: cuid(),
-            name: dName,
-            operator: dOperator,
-            values,
-          })
-        ) || [],
-        skipMetricValidation,
-        operator,
-        threshold,
-        alertSensitivity,
-        failingPeriods,
-        ignoreDataBefore,
-      })
-    ) || [],
+    allOf:
+      allOf?.map(
+        ({
+          criterionType,
+          name,
+          metricName,
+          metricNamespace,
+          timeAggregation,
+          dimensions = [],
+          skipMetricValidation,
+          operator,
+          threshold,
+          alertSensitivity,
+          failingPeriods = {},
+          ignoreDataBefore,
+        }) => ({
+          id: generateUniqueId({
+            name,
+            metricName,
+            metricNamespace,
+            criterionType,
+            operator,
+          }),
+          criterionType,
+          name,
+          metricName,
+          metricNamespace,
+          timeAggregation,
+          dimensions:
+            dimensions?.map(
+              ({ name: dName, operator: dOperator, values }, index) => ({
+                id: generateUniqueId({
+                  name: dName,
+                  operator,
+                  values,
+                  index,
+                }),
+                name: dName,
+                operator: dOperator,
+                values,
+              })
+            ) || [],
+          skipMetricValidation,
+          operator,
+          threshold,
+          alertSensitivity,
+          failingPeriods,
+          ignoreDataBefore,
+        })
+      ) || [],
     componentId,
     failedLocationCount,
     odataType,
@@ -87,7 +100,7 @@ export default ({
     Tags = {},
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -103,10 +116,15 @@ export default ({
     criteria: formatCriteria(criteria),
     autoMitigate,
     isMigrated,
-    actions: actions?.map(({ actionGroupId }) => ({
-      id: cuid(),
-      actionGroupId,
-    })) || [],
+    actions:
+      actions?.map(({ actionGroupId }, index) => ({
+        id: generateUniqueId({
+          actionGroupId,
+          id,
+          index,
+        }),
+        actionGroupId,
+      })) || [],
     lastUpdatedTime: lastUpdatedTime?.toISOString(),
     tags: formatTagsFromMap(Tags),
   }

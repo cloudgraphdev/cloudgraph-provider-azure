@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { RawAzureCdnCustomDomain } from './data'
 import { AzureCdnCustomDomain } from '../../types/generated'
 import { transformSystemData } from '../../utils/format'
@@ -28,7 +27,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,

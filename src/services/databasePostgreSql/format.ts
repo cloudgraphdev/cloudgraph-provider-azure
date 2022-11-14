@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureDatabasePostgreSql } from '../../types/generated'
 import { RawAzureDatabasePostgreSql } from './data'
 
@@ -21,7 +20,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,

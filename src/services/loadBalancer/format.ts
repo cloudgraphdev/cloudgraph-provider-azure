@@ -7,7 +7,6 @@ import {
   OutboundRule,
   Probe,
 } from '@azure/arm-network'
-import cuid from 'cuid'
 import {
   AzureLbBackendAddressPool,
   AzureLbFrontendIpConfiguration,
@@ -42,7 +41,7 @@ const formatFrontendIpConfigurations = (
       // Skipping the rest of the props because they are going probably be used for connections
       // Candidates: subnet, privateIP and publicIP related props, can point to another gateway load balancer
     }) => ({
-      id: id || cuid(),
+      id,
       name,
       etag,
       type,
@@ -76,7 +75,7 @@ const formatBackendAddressPools = (
       // tunnelInterfaces points to multiple potential load balancers?
       // possible connections to virtual network, subnet, networkInterface
     }) => ({
-      id: id || cuid(),
+      id,
       name,
       etag,
       type,
@@ -100,12 +99,12 @@ const formatLoadBalancingRules = (
       probe,
       ...rest
     }) => ({
-      id: id || cuid(),
+      id,
       ...rest,
     })
   )
 const formatProbes = (arr: Probe[]): AzureLbProbe[] =>
-  arr.map(({ id = cuid(), loadBalancingRules, ...rest }) => ({ id, ...rest }))
+  arr.map(({ id, loadBalancingRules, ...rest }) => ({ id, ...rest }))
 
 const formatInboundNatRules = (
   arr: InboundNatRule[]
@@ -117,20 +116,20 @@ const formatInboundNatRules = (
       backendIPConfiguration,
       backendAddressPool,
       ...rest
-    }) => ({ id: id || cuid(), ...rest })
+    }) => ({ id, ...rest })
   )
 
 const formatInboundNatPools = (
   arr: InboundNatPool[]
 ): AzureLbInboundNatPool[] =>
-  arr.map(({ id = cuid(), frontendIPConfiguration, ...rest }) => ({
+  arr.map(({ id, frontendIPConfiguration, ...rest }) => ({
     id,
     ...rest,
   }))
 
 const formatOutboundRules = (arr: OutboundRule[]): AzureLbOutboundRule[] =>
   arr.map(({ id, frontendIPConfigurations, backendAddressPool, ...rest }) => ({
-    id: id || cuid(),
+    id,
     ...rest,
   }))
 
@@ -160,7 +159,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     region,
     resourceGroupId,

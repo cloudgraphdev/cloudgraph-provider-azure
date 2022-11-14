@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import isEmpty from 'lodash/isEmpty'
 import {
   SynapseManagementClient,
@@ -69,7 +68,7 @@ export default async ({
                   const { id, tags, ...rest } = bigDataPool
                   bigDataPools.push({
                     ...rest,
-                    id: id || cuid(),
+                    id,
                     region: regionMap.global,
                     resourceGroupId,
                     Tags: tags || {},

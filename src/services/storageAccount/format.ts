@@ -4,6 +4,7 @@ import {
   IPRule,
   PrivateEndpointConnection,
 } from '@azure/arm-storage'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import cuid from 'cuid'
 import t from '../../properties/translations'
 
@@ -23,7 +24,11 @@ const formatPrivateEndpointConnection = ({
   provisioningState,
 }: PrivateEndpointConnection): AzureStorageAccountPrivateEndpointConnection => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      privateEndpoint,
+      privateLinkServiceConnectionState,
+      provisioningState,
+    }),
     privateEndpointId: privateEndpoint?.id || '',
     privateLinkServiceConnectionStateStatus:
       privateLinkServiceConnectionState?.status || '',
@@ -40,7 +45,10 @@ const formatResourceAccessRule = ({
   resourceId,
 }: ResourceAccessRule): AzureStorageAccountResourceAccessRule => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      tenantId,
+      resourceId,
+    }),
     tenantId,
     resourceId,
   }
@@ -51,7 +59,11 @@ const formatVirtualNetworkRule = ({
   state,
 }: VirtualNetworkRule): AzureStorageAccountVirtualNetworkRule => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      virtualNetworkResourceId,
+      action,
+      state,
+    }),
     virtualNetworkResourceId,
     action,
     state,
@@ -62,7 +74,10 @@ const formatIpRule = ({
   action,
 }: IPRule): AzureStorageAccountIpRule => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      iPAddressOrRange,
+      action,
+    }),
     iPAddressOrRange,
     action,
   }
@@ -115,7 +130,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     subscriptionId: account,
     resourceGroupId,
@@ -257,11 +272,13 @@ export default ({
     region,
     tags: formatTagsFromMap(Tags),
     blobServiceProperties: {
-      id: blobServiceProperties?.id || cuid(),
+      id: blobServiceProperties?.id,
       name: blobServiceProperties?.name,
       type: blobServiceProperties?.type,
       corsRules: blobServiceProperties?.cors?.corsRules?.map(({ ...rest }) => ({
-        id: cuid(),
+        id: generateUniqueId({
+          ...rest,
+        }),
         ...rest,
       })),
       deleteRetentionPolicyEnabled:
@@ -272,14 +289,22 @@ export default ({
       skuTier: blobServiceProperties?.sku?.tier,
     },
     queueServiceProperties: {
-      logging: queueServiceProperties ? {
-        version: queueServiceProperties.queueAnalyticsLogging?.version,
-        read : queueServiceProperties.queueAnalyticsLogging?.read ?? false,
-        write : queueServiceProperties.queueAnalyticsLogging?.write ?? false,
-        delete : queueServiceProperties.queueAnalyticsLogging?.deleteProperty ?? false,
-        retentionPolicyEnabled : queueServiceProperties.queueAnalyticsLogging?.retentionPolicy?.enabled ?? false,
-        retentionPolicyDays: queueServiceProperties.queueAnalyticsLogging?.retentionPolicy?.days
-      } : {},
+      logging: queueServiceProperties
+        ? {
+            version: queueServiceProperties.queueAnalyticsLogging?.version,
+            read: queueServiceProperties.queueAnalyticsLogging?.read ?? false,
+            write: queueServiceProperties.queueAnalyticsLogging?.write ?? false,
+            delete:
+              queueServiceProperties.queueAnalyticsLogging?.deleteProperty ??
+              false,
+            retentionPolicyEnabled:
+              queueServiceProperties.queueAnalyticsLogging?.retentionPolicy
+                ?.enabled ?? false,
+            retentionPolicyDays:
+              queueServiceProperties.queueAnalyticsLogging?.retentionPolicy
+                ?.days,
+          }
+        : {},
     },
   }
 }

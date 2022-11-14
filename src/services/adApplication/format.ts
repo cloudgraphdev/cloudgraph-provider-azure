@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureAdApplication } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureADApplication } from './data'
@@ -42,7 +41,7 @@ export default ({
     } = {},
   } = service
   return {
-    id: id || cuid(),
+    id,
     region,
     appId,
     applicationTemplateId,
@@ -52,7 +51,7 @@ export default ({
       ({ appId: preAuthAppId }) => preAuthAppId
     ),
     appRoles: appRoles.map(({ id: appRoleId, ...restOfAppRole }) => ({
-      id: appRoleId || cuid(),
+      id: appRoleId,
       ...restOfAppRole,
     })),
     createdDateTime,

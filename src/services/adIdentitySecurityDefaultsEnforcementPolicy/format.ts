@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureAdIdentitySecurityDefaultsEnforcementPolicy } from '../../types/generated'
 import { RawAzureADIdentitySecurityDefaultsEnforcementPolicyClient } from './data'
 
@@ -8,15 +7,9 @@ export default ({
   service: RawAzureADIdentitySecurityDefaultsEnforcementPolicyClient
   account: string
 }): AzureAdIdentitySecurityDefaultsEnforcementPolicy => {
-  const {
-    id,
-    region,
-    description,
-    displayName,
-    isEnabled,
-  } = service
+  const { id, region, description, displayName, isEnabled } = service
   return {
-    id: id || cuid(),
+    id,
     region,
     description,
     displayName,
