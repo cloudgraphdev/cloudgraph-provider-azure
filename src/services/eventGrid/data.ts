@@ -39,7 +39,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const domain of domainsIterable) {
-          domains.push(domain)
+          domain && domains.push(domain)
         }
       },
       {
@@ -62,7 +62,9 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const domainTopic of eventHubIterable) {
-              domainTopics.push({ domainName: name, ...domainTopic })
+              if (domainTopic) {
+                domainTopics.push({ domainName: name, ...domainTopic })
+              }
             }
           },
           {

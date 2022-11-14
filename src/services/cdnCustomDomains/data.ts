@@ -43,10 +43,10 @@ export default async ({
     ).flat()
 
     if (!isEmpty(cdnEndpoints)) {
-      let cdnCustomDomains: RawAzureCdnCustomDomain[] = []
+      const cdnCustomDomains: RawAzureCdnCustomDomain[] = []
       await tryCatchWrapper(
         async () => {
-          cdnCustomDomains = await Promise.all(
+          await Promise.all(
             cdnEndpoints.map(async cdnEndpoint => {
               const {
                 resourceGroupId,
@@ -65,12 +65,12 @@ export default async ({
                 if (cdnCustomDomain) {
                   const region = endpointRegion || 'global'
                   const { ...rest } = cdnCustomDomain
-                  return {
+                  cdnCustomDomains.push({
                     ...rest,
                     endpointId: cdnEndpoint.id,
                     region,
                     resourceGroupId,
-                  }
+                  })
                 }
               }
             })

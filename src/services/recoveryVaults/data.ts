@@ -46,7 +46,7 @@ export default async ({
       await tryCatchWrapper(
         async () => {
           for await (const vault of vaultsIterable) {
-            vaults.push(vault)
+            vault && vaults.push(vault)
           }
         },
         {

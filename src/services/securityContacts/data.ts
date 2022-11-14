@@ -36,7 +36,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const location of locationsIterable) {
-          locations.push(location.name)
+          location && locations.push(location.name)
         }
       },
       {
@@ -49,14 +49,18 @@ export default async ({
 
     await Promise.all(
       (locations || []).map(async (location: string) => {
-        const client = new SecurityCenter(tokenCredentials, subscriptionId, location)
+        const client = new SecurityCenter(
+          tokenCredentials,
+          subscriptionId,
+          location
+        )
         // Security Contacts
         const contactsIterableForRegion: PagedAsyncIterableIterator<SecurityContact> =
           client.securityContacts.list()
         await tryCatchWrapper(
           async () => {
             for await (const contact of contactsIterableForRegion) {
-              contactsData.push({ ...contact, region: location })
+              contact && contactsData.push({ ...contact, region: location })
             }
           },
           {

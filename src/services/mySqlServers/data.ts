@@ -36,7 +36,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const server of sqlServerIterable) {
-          sqlServers.push(server)
+          server && sqlServers.push(server)
         }
       },
       {

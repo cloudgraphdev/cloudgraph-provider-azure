@@ -94,51 +94,54 @@ export default async ({
       const result = {}
       let numOfAccounts = 0
 
-      for await (const { id, tags, location, ...rest } of storageAccounts) {
-        const region = lowerCaseLocation(location)
+      for await (const storageAccount of storageAccounts) {
+        if (storageAccount) {
+          const { id, tags, location, ...rest } = storageAccount
+          const region = lowerCaseLocation(location)
 
-        if (regions.includes(region)) {
-          if (!result[region]) {
-            result[region] = []
-          }
-          const resourceGroupId = getResourceGroupFromEntity({ id })
-          // Fetch Storage Account Keys
-          const storageAccountKeys = await client.storageAccounts.listKeys(
-            resourceGroupId,
-            rest.name
-          )
-          const { keys = [] } = storageAccountKeys
-
-          // Fetch Storage Account Blob Service Properties
-          const blobServiceProperties =
-            await client.blobServices.getServiceProperties(
+          if (regions.includes(region)) {
+            if (!result[region]) {
+              result[region] = []
+            }
+            const resourceGroupId = getResourceGroupFromEntity({ id })
+            // Fetch Storage Account Keys
+            const storageAccountKeys = await client.storageAccounts.listKeys(
               resourceGroupId,
               rest.name
             )
+            const { keys = [] } = storageAccountKeys
 
-          // Fetch Storage Account Queue Service Properties
-          const [mainKey] = keys
-          const queueServiceProperties = await getQueueServiceProperties(
-            rest.name,
-            mainKey.value
-          )
+            // Fetch Storage Account Blob Service Properties
+            const blobServiceProperties =
+              await client.blobServices.getServiceProperties(
+                resourceGroupId,
+                rest.name
+              )
 
-          result[region].push({
-            id,
-            ...rest,
-            resourceGroupId,
-            region,
-            keys,
-            Tags: tags || {},
-            blobServiceProperties,
-            queueServiceProperties,
-          })
-          numOfAccounts += 1
+            // Fetch Storage Account Queue Service Properties
+            const [mainKey] = keys
+            const queueServiceProperties =
+              mainKey && mainKey.value
+                ? await getQueueServiceProperties(rest.name, mainKey.value)
+                : {}
+
+            result[region].push({
+              id,
+              ...rest,
+              resourceGroupId,
+              region,
+              keys,
+              Tags: tags || {},
+              blobServiceProperties,
+              queueServiceProperties,
+            })
+            numOfAccounts += 1
+          }
         }
       }
 
       logger.debug(lt.foundStorageAccounts(numOfAccounts))
-      
+
       return result
     }
     return existingData

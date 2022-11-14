@@ -54,10 +54,10 @@ export default async ({
       })
     ).flat()
 
-    let appServiceWebApps: RawAzureAppServiceWebApp[] = []
+    const appServiceWebApps: RawAzureAppServiceWebApp[] = []
     await tryCatchWrapper(
       async () => {
-        appServiceWebApps = await Promise.all(
+        await Promise.all(
           appServicePlans.map(async appService => {
             const { resourceGroupId, name } = appService
             const webAppsIterable: PagedAsyncIterableIterator<Site> =
@@ -67,13 +67,13 @@ export default async ({
                 const { location, extendedLocation, identity, tags, ...rest } =
                   webApp
                 const region = lowerCaseLocation(location)
-                return {
+                appServiceWebApps.push({
                   ...rest,
                   appServicePlanId: appService.id,
                   region,
                   resourceGroupId,
                   Tags: tags || {},
-                }
+                })
               }
             }
           })

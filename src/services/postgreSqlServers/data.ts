@@ -43,7 +43,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const server of sqlServerIterable) {
-          sqlServers.push(server)
+          server && sqlServers.push(server)
         }
       },
       {
@@ -70,7 +70,9 @@ export default async ({
           await tryCatchWrapper(
             async () => {
               for await (const configObj of sqlServerConfigurationsIterable) {
-                configurations.push(configObj)
+                if (configObj) {
+                  configurations.push(configObj)
+                }
               }
             },
             {
@@ -86,7 +88,9 @@ export default async ({
           await tryCatchWrapper(
             async () => {
               for await (const firewallRule of sqlServerFirewallRulesIterable) {
-                firewallRules.push(firewallRule)
+                if (firewallRule) {
+                  firewallRules.push(firewallRule)
+                }
               }
             },
             {

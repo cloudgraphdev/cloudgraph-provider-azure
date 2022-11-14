@@ -34,7 +34,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const databaseAccount of databaseAccountIterable) {
-          databaseAccounts.push(databaseAccount)
+          databaseAccount && databaseAccounts.push(databaseAccount)
         }
       },
       {

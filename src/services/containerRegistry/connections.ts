@@ -65,7 +65,7 @@ export default ({
   if (keyVaults?.data?.[region]) {
     const keyVaultsInRegion: RawAzureKeyVault[] = keyVaults.data[region].filter(
       ({ properties: { vaultUri } }: RawAzureKeyVault) =>
-        keyVaultUri.includes(vaultUri)
+        keyVaultUri?.includes(vaultUri)
     )
 
     if (!isEmpty(keyVaultsInRegion)) {

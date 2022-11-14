@@ -7,7 +7,9 @@ import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
 import { tryCatchWrapper } from '../../utils/index'
 import services from '../../enums/services'
-import getSynapseWorkspacesData, { RawAzureSynapseWorkspace } from '../synapseWorkspaces/data'
+import getSynapseWorkspacesData, {
+  RawAzureSynapseWorkspace,
+} from '../synapseWorkspaces/data'
 import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
@@ -31,7 +33,8 @@ export default async ({
 }> => {
   try {
     let workspaces: { [property: string]: RawAzureSynapseWorkspace[] } =
-      rawData.find(({ name }) => name === services.synapseWorkspaces)?.data || {}
+      rawData.find(({ name }) => name === services.synapseWorkspaces)?.data ||
+      {}
 
     if (isEmpty(workspaces)) {
       workspaces = await getSynapseWorkspacesData({
@@ -49,23 +52,28 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         await Promise.all(
-          (Object.values(workspaces).flat() || []).map(async ({ name, resourceGroupId }: RawAzureSynapseWorkspace) => {
-            const client = new SynapseManagementClient(tokenCredentials, subscriptionId)
-            const sqlPoolsIterable: PagedAsyncIterableIterator<Workspace> =
-              client.sqlPools.listByWorkspace(resourceGroupId, name)
-            for await (const sqlPool of sqlPoolsIterable) {
-              if (sqlPool) {
-                const { id, tags, ...rest } = sqlPool
-                sqlPools.push({
-                  ...rest,
-                  id: id || cuid(),
-                  region: regionMap.global,
-                  resourceGroupId,
-                  Tags: tags || {},
-                })
+          (Object.values(workspaces).flat() || []).map(
+            async ({ name, resourceGroupId }: RawAzureSynapseWorkspace) => {
+              const client = new SynapseManagementClient(
+                tokenCredentials,
+                subscriptionId
+              )
+              const sqlPoolsIterable: PagedAsyncIterableIterator<Workspace> =
+                client.sqlPools.listByWorkspace(resourceGroupId, name)
+              for await (const sqlPool of sqlPoolsIterable) {
+                if (sqlPool) {
+                  const { id, tags, ...rest } = sqlPool
+                  sqlPools.push({
+                    ...rest,
+                    id: id || cuid(),
+                    region: regionMap.global,
+                    resourceGroupId,
+                    Tags: tags || {},
+                  })
+                }
               }
             }
-          })
+          )
         )
       },
       {
