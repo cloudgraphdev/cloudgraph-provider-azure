@@ -1,24 +1,26 @@
-import CloudGraph, { Service, Opts, ProviderData } from '@cloudgraph/sdk'
+import { Subscription, SubscriptionClient } from '@azure/arm-subscriptions'
 import { TokenCredential } from '@azure/core-http'
 import { ClientSecretCredential } from '@azure/identity'
-import { Subscription, SubscriptionClient } from '@azure/arm-subscriptions'
+import CloudGraph, { Opts, ProviderData, Service } from '@cloudgraph/sdk'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs } from '@graphql-tools/merge'
 import chalk from 'chalk'
-import { print } from 'graphql'
 import { isEmpty, merge, unionBy } from 'lodash'
 import path from 'path'
 
+import { DocumentNode } from 'graphql'
+import {
+  DEFAULT_REGION,
+  DEFAULT_RESOURCES,
+  GLOBAL_REGION
+} from '../config/constants'
 import regions from '../enums/regions'
 import resources from '../enums/resources'
-import serviceMap from '../enums/serviceMap'
 import schemasMap from '../enums/schemasMap'
+import serviceMap from '../enums/serviceMap'
 import services from '../enums/services'
 import {
-  AzureCredentials,
-  AzureConfig,
-  rawDataInterface,
-  AzureServiceInput,
+  AzureConfig, AzureCredentials, AzureServiceInput, rawDataInterface
 } from '../types'
 import {
   DEFAULT_REGION,
@@ -30,8 +32,10 @@ import { checkAndMergeConnections, sortResourcesDependencies } from '../utils'
 import { createDiffSecs } from '../utils/dateutils'
 import {
   getClientSecretCredentials,
-  getTokenCredentials,
+  getTokenCredentials
 } from '../utils/authUtils'
+import { createDiffSecs } from '../utils/dateutils'
+import { obfuscateSensitiveString } from '../utils/format'
 import enhancers, { EnhancerConfig } from './base/enhancers'
 
 export const enums = {
@@ -341,12 +345,12 @@ export default class Provider extends CloudGraph.Client {
    * getSchema is used to get the schema for provider
    * @returns A string of graphql sub schemas
    */
-  getSchema(): string {
+  getSchema(): DocumentNode {
     const typesArray = loadFilesSync(path.join(__dirname), {
       recursive: true,
       extensions: ['graphql'],
     })
-    return print(mergeTypeDefs(typesArray))
+    return mergeTypeDefs(typesArray)
   }
 
   /**

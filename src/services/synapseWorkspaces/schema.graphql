@@ -12,7 +12,7 @@ type azureSynapseWorkspace implements azureResource
   sqlAdministratorLogin: String @search(by: [hash, regexp])
   virtualNetworkProfile: azureSynapseWorkspaceVirtualNetworkProfile
   managedVirtualNetwork: String @search(by: [hash, regexp])
-  privateEndpointConnections: [azureSynapseWorkspacePrivateEndpointConnection]
+  privateEndpointConnections: [azureSynapseWorkspacePrivateEndpointConn]
   encryption: azureSynapseWorkspaceEncryptionDetails
   workspaceUID: String @search(by: [hash, regexp])
   managedVirtualNetworkSettings: azureSynapseWorkspaceManagedVirtualNetworkSettings
@@ -61,7 +61,7 @@ type azureSynapseWorkspaceVirtualNetworkProfile
   computeSubnetId: String @search(by: [hash, regexp])
 }
 
-type azureSynapseWorkspacePrivateEndpointConnection
+type azureSynapseWorkspacePrivateEndpointConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

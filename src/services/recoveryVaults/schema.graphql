@@ -15,6 +15,15 @@ type azureRecoveryVaultUpgradeDetails
   previousResourceId: String @search(by: [hash, regexp])
 }
 
+type azureRecoveryVaultPrivateEndpoint
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  id: String @search(by: [hash, regexp])
+}
+
 type azureRecoveryVaultPrivateLinkServiceConnectionState
   @generate(
     query: { get: false, query: true, aggregate: false }
@@ -26,7 +35,7 @@ type azureRecoveryVaultPrivateLinkServiceConnectionState
   actionsRequired: String @search(by: [hash, regexp])
 }
 
-type azureRecoveryVaultPrivateEndpointConnection
+type azureRecoveryVaultPrivateEndpointConn
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -45,10 +54,41 @@ type azureRecoveryVaultPrivateEndpointConnectionVaultProperties
   )
   @key(fields: "id") {
   id: String! @id @search(by: [hash])
-  properties: azureRecoveryVaultPrivateEndpointConnection
+  properties: azureRecoveryVaultPrivateEndpointConn
   name: String @search(by: [hash, regexp])
   type: String @search(by: [hash, regexp])
   location: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultPrivateEndpointConn
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  provisioningState: String @search(by: [hash, regexp])
+  privateEndpoint: azureRecoveryVaultPrivateEndpoint
+  privateLinkServiceConnectionState: azureRecoveryVaultPrivateLinkServiceConnectionState
+}
+
+type azureRecoveryVaultPropertiesEncryption
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyVaultProperties: azureRecoveryVaultCmkKeyVaultProperties
+  kekIdentity: azureRecoveryVaultCmkKekIdentity
+  infrastructureEncryption: String @search(by: [hash, regexp])
+}
+
+type azureRecoveryVaultCmkKeyVaultProperties
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  keyUri: String @search(by: [hash, regexp])
 }
 
 type azureRecoveryVaultCmkKekIdentity

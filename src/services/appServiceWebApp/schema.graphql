@@ -54,7 +54,7 @@ type azureAppServiceWebAppSiteConfigVirtualDirectory
   physicalPath: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigVirtualApplication
+type azureAppServiceWebAppSiteConfigVirtualApp
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -213,7 +213,7 @@ type azureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers
   timeInterval: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger
+type azureAppServiceWebAppSiteConfigStatusCodes
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -227,7 +227,7 @@ type azureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger
   timeInterval: String @search(by: [hash, regexp])
 }
 
-type azureAppServiceWebAppSiteConfigAutoHealTriggers
+type azureAppServiceWebAppSiteConfigTriggers
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -238,7 +238,7 @@ type azureAppServiceWebAppSiteConfigAutoHealTriggers
   statusCodes: [azureAppServiceWebAppSiteConfigStatusCodesBasedTrigger]
   slowRequests: azureAppServiceWebAppSiteConfigSlowRequestsBasedTrigger
   slowRequestsWithPath: [azureAppServiceWebAppSiteConfigSlowRequestsBasedTriggers]
-  statusCodesRange: [azureAppServiceWebAppSiteConfigStatusCodesRangeBasedTrigger]
+  statusCodesRange: [azureAppServiceWebAppSiteConfigStatusCodes]
 }
 
 type azureAppServiceWebAppSiteConfigAutoHealCustomAction
@@ -268,7 +268,7 @@ type azureAppServiceWebAppSiteConfigAutoHealRules
     mutation: { add: false, delete: false }
     subscription: false
   ) {
-  triggers: azureAppServiceWebAppSiteConfigAutoHealTriggers
+  triggers: azureAppServiceWebAppSiteConfigTriggers
   actions: azureAppServiceWebAppSiteConfigAutoHealActions
 }
 
@@ -326,7 +326,7 @@ type azureAppServiceWebAppSiteConfig
   javaContainerVersion: String @search(by: [hash, regexp])
   appCommandLine: String @search(by: [hash, regexp])
   managedPipelineMode: String @search(by: [hash, regexp])
-  virtualApplications: [azureAppServiceWebAppSiteConfigVirtualApplication]
+  virtualApplications: [azureAppServiceWebAppSiteConfigVirtualApp]
   loadBalancing: String @search(by: [hash, regexp])
   experiments: azureAppServiceWebAppSiteConfigExperiments
   limits: azureAppServiceWebAppSiteConfigLimits

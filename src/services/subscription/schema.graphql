@@ -23,7 +23,7 @@ type azureSubscription implements azureBaseResource @key(fields: "id") {
   cognitiveServicesAccounts: [azureCognitiveServicesAccount]
   containerRegistries: [azureContainerRegistry]
   cosmosDbs: [azureCosmosDb]
-  databaseManagedSqlInstances: [azureDatabaseManagedSqlInstance]
+  databaseManagedSqlInstances: [azureDbManagedSqlInstance]
   databaseMySql: [azureDatabaseMySql]
   databasePostgreSql: [azureDatabasePostgreSql]
   databaseSql: [azureDatabaseSql]
@@ -80,6 +80,6 @@ type azureSubscription implements azureBaseResource @key(fields: "id") {
   synapseWorkspaces: [azureSynapseWorkspace]
   trafficManagerProfiles: [azureTrafficManagerProfile]
   virtualMachines: [azureVirtualMachine]
-  virtualMachineScaleSets: [azureVirtualMachineScaleSet]
+  virtualMachineScaleSets: [azureVmScaleSet]
   virtualNetworks: [azureVirtualNetwork]
 }

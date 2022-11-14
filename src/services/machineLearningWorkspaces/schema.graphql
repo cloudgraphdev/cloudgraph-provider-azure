@@ -26,7 +26,7 @@ type azureMachineLearningWorkspace implements azureResource
   imageBuildCompute: String @search(by: [hash, regexp])
   allowPublicAccessWhenBehindVnet: Boolean @search
   publicNetworkAccess: String @search(by: [hash, regexp])
-  privateEndpointConnections: [azureMachineLearningWorkspacePrivateEndpointConnection]
+  privateEndpointConnections: [azureMachineLearningWorkspacePrivateEndpointConn]
   sharedPrivateLinkResources: [azureMachineLearningWorkspaceSharedPrivateLinkResource]
   notebookInfo: azureMachineLearningWorkspaceNotebookResourceInfo
   serviceManagedResourcesSettings: azureMachineLearningWorkspaceServiceManagedResourcesSettings
@@ -78,7 +78,7 @@ type azureMachineLearningWorkspaceKeyVaultProperties
   identityClientId: String @search(by: [hash, regexp])
 }
 
-type azureMachineLearningWorkspacePrivateEndpointConnection   
+type azureMachineLearningWorkspacePrivateEndpointConn   
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -95,7 +95,7 @@ type azureMachineLearningWorkspacePrivateEndpointConnection
   lastModifiedByType: String @search(by: [hash, regexp])
   lastModifiedAt: String @search(by: [hash, regexp])
   privateEndpoint: azureMachineLearningWorkspacePrivateEndpoint
-  privateLinkServiceConnectionState: azureMachineLearningWorkspacePrivateLinkServiceConnectionState
+  privateLinkServiceConnectionState: azureMachineLearningWorkspacePrivateLinkState
   provisioningState: String @search(by: [hash, regexp])
 }
 
@@ -109,7 +109,7 @@ type azureMachineLearningWorkspacePrivateEndpoint
   subnetArmId: String @search(by: [hash, regexp])
 }
 
-type azureMachineLearningWorkspacePrivateLinkServiceConnectionState
+type azureMachineLearningWorkspacePrivateLinkState
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

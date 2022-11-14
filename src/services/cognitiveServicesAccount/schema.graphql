@@ -108,12 +108,12 @@ type azureCognitiveServicesAccountPrivateEndpointConnection
   lastModifiedByType: String @search(by: [hash, regexp])
   lastModifiedAt: DateTime @search(by: [day])
   privateEndpointId: String @search(by: [hash, regexp])
-  privateLinkServiceConnectionState: azureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus
+  privateLinkServiceConnectionState: azureCognitiveServicesAccountConnStatus
   provisioningState: String @search(by: [hash, regexp])
   groupIds: [String] @search(by: [hash, regexp])
 }
 
-type azureCognitiveServicesAccountPrivateEndpointServiceConnectionStatus
+type azureCognitiveServicesAccountConnStatus
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -200,7 +200,7 @@ type azureCognitiveServicesAccountCapability implements azureNameValueProperty
   id: String! @id @search(by: [hash])
 }
 
-type azureCognitiveServicesAccountEndpoint implements azureKeyValueProperty
+type azureCognitiveServicesAccountEndpoint
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }
@@ -208,6 +208,8 @@ type azureCognitiveServicesAccountEndpoint implements azureKeyValueProperty
   )
   @key(fields: "id") {
   id: String! @id @search(by: [hash])
+  key: String @search(by: [hash, regexp])
+  value: String @search(by: [hash, regexp])
 }
 
 type azureCognitiveServicesAccount implements azureResource

@@ -1,5 +1,5 @@
-export default `mutation($input: [AddazureApplicationGatewayInput!]!) {
-  addazureApplicationGateway(input: $input, upsert: true) {
+export default `mutation($input: [AddazureAppGatewayInput!]!) {
+  addazureAppGateway(input: $input, upsert: true) {
     numUids
   }
 }`;

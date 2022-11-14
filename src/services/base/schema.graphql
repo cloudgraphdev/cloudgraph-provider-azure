@@ -1,4 +1,4 @@
-interface azureKeyValueProperty
+type azureKeyValueProperty
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -20,7 +20,7 @@ interface azureNameValueProperty
   value: String @search(by: [hash, regexp])
 }
 
-interface azureSubResource
+type azureSubResource
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -40,7 +40,7 @@ interface azureBaseResource
   type: String @search(by: [hash, regexp])
 }
 
-interface azureOptionalResource
+type azureOptionalResource
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }

@@ -61,7 +61,7 @@ type azureMySqlServerServerPrivateEndpointConnectionProperties
     mutation: { add: true, delete: false }
   ) {
   privateEndpoint: azureMySqlServerPrivateEndpointProperty
-  privateLinkServiceConnectionState: azureMySqlServerServerPrivateLinkServiceConnectionStateProperty
+  privateLinkServiceConnectionState: azureMySqlServerServerPrivateLinkState
   provisioningState: String @search(by: [hash, regexp])
 }
 
@@ -73,7 +73,7 @@ type azureMySqlServerPrivateEndpointProperty
   id: String @search(by: [hash, regexp])
 }
 
-type azureMySqlServerServerPrivateLinkServiceConnectionStateProperty
+type azureMySqlServerServerPrivateLinkState
   @generate(
     query: { get: true, query: true, aggregate: true }
     mutation: { add: true, delete: false }

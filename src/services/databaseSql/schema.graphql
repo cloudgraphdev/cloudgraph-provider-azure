@@ -47,7 +47,7 @@ type azureDatabaseSql implements azureResource
   isInfraEncryptionEnabled: Boolean @search
   federatedClientId: String @search(by: [hash, regexp])
   primaryDelegatedIdentityClientId: String @search(by: [hash, regexp])
-  transparentDataEncryptions: [azureDatabaseSqlLogicalDatabaseTransparentDataEncryption]
+  transparentDataEncryptions: [azureDatabaseSqlDataEncryption]
   resourceGroup: [azureResourceGroup] @hasInverse(field: databaseSql)
   sqlServers: [azureSqlServer] @hasInverse(field: databaseSql)
 }
@@ -133,7 +133,7 @@ type azureDatabaseSqlSku
   capacity: Int @search
 }
 
-type azureDatabaseSqlLogicalDatabaseTransparentDataEncryption implements azureResource
+type azureDatabaseSqlDataEncryption implements azureResource
   @generate(
     query: { get: false, query: true, aggregate: false }
     mutation: { add: false, delete: false }

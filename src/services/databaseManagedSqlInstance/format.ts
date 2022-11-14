@@ -1,5 +1,5 @@
 import cuid from 'cuid'
-import { AzureDatabaseManagedSqlInstance } from '../../types/generated'
+import { AzureDbManagedSqlInstance } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDatabaseManagedSqlInstance } from './data'
 
@@ -11,7 +11,7 @@ export default ({
   service: RawAzureDatabaseManagedSqlInstance
   account: string
   region: string
-}): AzureDatabaseManagedSqlInstance => {
+}): AzureDbManagedSqlInstance => {
   const {
     id,
     name,
