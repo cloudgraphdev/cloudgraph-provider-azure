@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureDatabaseSql } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDatabaseSql } from './data'
@@ -65,7 +65,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     subscriptionId: account,
@@ -77,12 +77,12 @@ export default ({
     identity: {
       ...identity,
       userAssignedIdentities: Object.keys(identity?.userAssignedIdentities ?? {}).map(key => ({
-        id: cuid(),
+        id: generateUniqueId({id, key}),
         key,
         value: identity?.userAssignedIdentities[key],
       })),
       delegatedResources: Object.keys(identity?.delegatedResources ?? {}).map(key => ({
-        id: cuid(),
+        id: generateUniqueId({id, key}),
         key,
         value: identity?.delegatedResources[key],
       })),
@@ -128,7 +128,7 @@ export default ({
     primaryDelegatedIdentityClientId,
     transparentDataEncryptions: transparentDataEncryptions?.map(tde => ({
       ...tde,
-      id: tde.id || cuid(),
+      id: tde.id,
     })),
     tags: formatTagsFromMap(Tags),
   }

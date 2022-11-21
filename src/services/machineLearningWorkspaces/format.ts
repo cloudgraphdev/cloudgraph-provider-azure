@@ -1,8 +1,7 @@
-import cuid from 'cuid'
-import { formatTagsFromMap } from '../../utils/format'
+import { generateUniqueId } from '@cloudgraph/sdk'
+import { formatTagsFromMap, transformSystemData } from '../../utils/format'
 import { RawAzureMachineLearningWorkspace } from './data'
 import { AzureMachineLearningWorkspace } from '../../types/generated'
-import { transformSystemData } from '../../utils/format'
 
 export default ({
   service,
@@ -48,7 +47,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -73,12 +72,14 @@ export default ({
     allowPublicAccessWhenBehindVnet,
     publicNetworkAccess,
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
-      id: connection?.id || cuid(),
+      id: connection?.id,
       ...connection,
       ...transformSystemData(connection?.systemData),
     })),
     sharedPrivateLinkResources: sharedPrivateLinkResources?.map(resource => ({
-      id: cuid(),
+      id: generateUniqueId({
+        ...resource
+      }),
       ...resource,
     })),
     notebookInfo: {

@@ -1,11 +1,10 @@
-import cuid from 'cuid'
 import isEmpty from 'lodash/isEmpty'
 import {
   SiteRecoveryManagementClient,
   ReplicationAppliance,
 } from '@azure/arm-recoveryservices-siterecovery'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
-import CloudGraph from '@cloudgraph/sdk'
+import CloudGraph, { generateUniqueId } from '@cloudgraph/sdk'
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput } from '../../types'
 import { tryCatchWrapper } from '../../utils/index'
@@ -68,7 +67,11 @@ export default async ({
                   const { ...rest } = replicationAppliance
                   replicationAppliances.push({
                     ...rest,
-                    id: cuid(),
+                    id: generateUniqueId({
+                      ...rest,
+                      region: regionMap.global,
+                      resourceGroupId,
+                    }),
                     region: regionMap.global,
                     resourceGroupId,
                   })

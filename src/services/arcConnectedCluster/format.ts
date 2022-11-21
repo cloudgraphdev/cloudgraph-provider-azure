@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureArcConnectedCluster } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureArcConnectedCluster } from './data'
@@ -43,7 +42,7 @@ export default ({
     {}
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,

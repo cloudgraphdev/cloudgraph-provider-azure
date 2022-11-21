@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureDataFactory } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDataFactory } from './data'
@@ -27,7 +26,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,

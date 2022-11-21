@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { RawAzureCdnOriginGroup } from './data'
 import { AzureCdnOriginGroup } from '../../types/generated'
 import { transformSystemData } from '../../utils/format'
@@ -22,11 +22,11 @@ export default ({
     responseBasedOriginErrorDetectionSettings: settings,
     resourceState,
     provisioningState,
-    resourceGroupId
+    resourceGroupId,
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -39,14 +39,18 @@ export default ({
         settings?.responseBasedDetectedErrorTypes,
       responseBasedFailoverThresholdPercentage:
         settings?.responseBasedFailoverThresholdPercentage,
-      httpErrorRanges: settings?.httpErrorRanges?.map(error => ({
-        id: cuid(),
-        begin: error.begin,
-        end: error.end,
-      })) || [],
+      httpErrorRanges:
+        settings?.httpErrorRanges?.map(error => ({
+          id: generateUniqueId({
+            begin: error.begin,
+            end: error.end,
+          }),
+          begin: error.begin,
+          end: error.end,
+        })) || [],
     },
     resourceState,
     provisioningState,
-    resourceGroupId
+    resourceGroupId,
   }
 }

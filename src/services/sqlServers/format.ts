@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   AzureSqlServer,
   AzureSqlServerAdAdministrator,
@@ -55,7 +55,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     subscriptionId: account,
@@ -68,7 +68,10 @@ export default ({
         ? {
             userAssignedIdentities: Object.keys(userAssignedIdentities).map(
               key => ({
-                id: cuid(),
+                id: generateUniqueId({
+                  key,
+                  value: userAssignedIdentities[key],
+                }),
                 key,
                 value: userAssignedIdentities[key],
               })
@@ -94,7 +97,7 @@ export default ({
             provisioningState,
           } = {},
         }): AzureSqlServerPrivateEndpointConnection => ({
-          id: privateEndpointConnectionId ?? cuid(),
+          id: privateEndpointConnectionId,
           properties: {
             privateEndpointId: privateEndpoint.id,
             privateLinkServiceConnectionState: {
@@ -124,38 +127,39 @@ export default ({
           startIpAddress,
           endIpAddress,
         }): AzureSqlServerFirewallRule => ({
-          id: firewallRuleId ?? cuid(),
+          id: firewallRuleId,
           name: firewallRuleName,
           type: firewallRuleType,
           startIpAddress,
           endIpAddress,
         })
       ) ?? [],
-    serverSecurityAlertPolicies: serverSecurityAlertPolicies?.map(
-      ({
-        id: srvSecurityAlertPolicyId,
-        creationTime,
-        name: srvSecurityAlertPolicyName,
-        type: srvSecurityAlertPolicyType,
-        state: srvSecurityAlertPolicyState,
-        disabledAlerts = [],
-        emailAddresses = [],
-        emailAccountAdmins,
-        storageEndpoint,
-        retentionDays,
-      }): AzureSqlServerSecurityAlertPolicy => ({
-        id: srvSecurityAlertPolicyId ?? cuid(),
-        name: srvSecurityAlertPolicyName,
-        type: srvSecurityAlertPolicyType,
-        state: srvSecurityAlertPolicyState,
-        disabledAlerts,
-        emailAddresses,
-        emailAccountAdmins,
-        storageEndpoint,
-        retentionDays,
-        creationTime: creationTime?.toISOString(),
-      })
-    ) ?? [],
+    serverSecurityAlertPolicies:
+      serverSecurityAlertPolicies?.map(
+        ({
+          id: srvSecurityAlertPolicyId,
+          creationTime,
+          name: srvSecurityAlertPolicyName,
+          type: srvSecurityAlertPolicyType,
+          state: srvSecurityAlertPolicyState,
+          disabledAlerts = [],
+          emailAddresses = [],
+          emailAccountAdmins,
+          storageEndpoint,
+          retentionDays,
+        }): AzureSqlServerSecurityAlertPolicy => ({
+          id: srvSecurityAlertPolicyId,
+          name: srvSecurityAlertPolicyName,
+          type: srvSecurityAlertPolicyType,
+          state: srvSecurityAlertPolicyState,
+          disabledAlerts,
+          emailAddresses,
+          emailAccountAdmins,
+          storageEndpoint,
+          retentionDays,
+          creationTime: creationTime?.toISOString(),
+        })
+      ) ?? [],
     adAdministrators:
       adAdministrators?.map(
         ({
@@ -166,7 +170,7 @@ export default ({
           sid,
           tenantId: adAdministratorTenantId,
         }): AzureSqlServerAdAdministrator => ({
-          id: adAdministratorId ?? cuid(),
+          id: adAdministratorId,
           name: adAdministratorName,
           type: adAdministratorType,
           administratorType: adAdministratorAdminType,
@@ -189,7 +193,7 @@ export default ({
           thumbprint,
           autoRotationEnabled,
         }): AzureSqlServerEncryptionProtector => ({
-          id: encryptionProtectorId ?? cuid(),
+          id: encryptionProtectorId,
           name: encryptionProtectorName,
           type: encryptionProtectorType,
           kind: encryptionProtectorKind,
@@ -202,54 +206,56 @@ export default ({
           autoRotationEnabled,
         })
       ) ?? [],
-    serverBlobAuditingPolicies: serverBlobAuditingPolicies?.map(
-      ({
-        id: serverBlobAuditingPolicyId,
-        name: serverBlobAuditingPolicyName,
-        type: serverBlobAuditingPolicyType,
-        isDevopsAuditEnabled,
-        retentionDays,
-        auditActionsAndGroups,
-        isStorageSecondaryKeyInUse,
-        isAzureMonitorTargetEnabled,
-        queueDelayMs,
-        state: serverBlobAuditingPolicyState,
-        storageEndpoint,
-        storageAccountSubscriptionId,
-      }): AzureSqlServerBlobAuditingPolicy => ({
-        id: serverBlobAuditingPolicyId || cuid(),
-        name: serverBlobAuditingPolicyName,
-        type: serverBlobAuditingPolicyType,
-        isDevopsAuditEnabled,
-        retentionDays,
-        auditActionsAndGroups,
-        isStorageSecondaryKeyInUse,
-        isAzureMonitorTargetEnabled,
-        queueDelayMs,
-        state: serverBlobAuditingPolicyState,
-        storageEndpoint,
-        storageAccountSubscriptionId,
-      })
-    ) ?? [],
-    vulnerabilityAssessments: vulnerabilityAssessments?.map(
-      ({
-        id: vaId,
-        name: vaName,
-        type: vaType,
-        storageContainerPath,
-        recurringScans: { isEnabled, emailSubscriptionAdmins, emails = [] },
-      }): AzureSqlServerVulnerabilityAssessment => ({
-        id: vaId ?? cuid(),
-        name: vaName,
-        type: vaType,
-        storageContainerPath,
-        recurringScans: {
-          isEnabled,
-          emailSubscriptionAdmins,
-          emails,
-        },
-      })
-    ) ?? [],
+    serverBlobAuditingPolicies:
+      serverBlobAuditingPolicies?.map(
+        ({
+          id: serverBlobAuditingPolicyId,
+          name: serverBlobAuditingPolicyName,
+          type: serverBlobAuditingPolicyType,
+          isDevopsAuditEnabled,
+          retentionDays,
+          auditActionsAndGroups,
+          isStorageSecondaryKeyInUse,
+          isAzureMonitorTargetEnabled,
+          queueDelayMs,
+          state: serverBlobAuditingPolicyState,
+          storageEndpoint,
+          storageAccountSubscriptionId,
+        }): AzureSqlServerBlobAuditingPolicy => ({
+          id: serverBlobAuditingPolicyId,
+          name: serverBlobAuditingPolicyName,
+          type: serverBlobAuditingPolicyType,
+          isDevopsAuditEnabled,
+          retentionDays,
+          auditActionsAndGroups,
+          isStorageSecondaryKeyInUse,
+          isAzureMonitorTargetEnabled,
+          queueDelayMs,
+          state: serverBlobAuditingPolicyState,
+          storageEndpoint,
+          storageAccountSubscriptionId,
+        })
+      ) ?? [],
+    vulnerabilityAssessments:
+      vulnerabilityAssessments?.map(
+        ({
+          id: vaId,
+          name: vaName,
+          type: vaType,
+          storageContainerPath,
+          recurringScans: { isEnabled, emailSubscriptionAdmins, emails = [] },
+        }): AzureSqlServerVulnerabilityAssessment => ({
+          id: vaId,
+          name: vaName,
+          type: vaType,
+          storageContainerPath,
+          recurringScans: {
+            isEnabled,
+            emailSubscriptionAdmins,
+            emails,
+          },
+        })
+      ) ?? [],
     tags: formatTagsFromMap(Tags),
   }
 }

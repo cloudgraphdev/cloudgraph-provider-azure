@@ -15,6 +15,7 @@ import {
   WeeklySchedule,
   YearlyRetentionSchedule,
 } from '@azure/arm-recoveryservicesbackup'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import cuid from 'cuid'
 import { isEmpty } from 'lodash'
 import {
@@ -136,7 +137,14 @@ const formatRetentionPolicy = (
         retentionMonthlySchedule?.retentionScheduleFormatType,
       retentionScheduleDaily:
         retentionMonthlySchedule?.retentionScheduleDaily?.daysOfTheMonth?.map(
-          ({ date, isLast }) => ({ id: cuid(), date, isLast })
+          ({ date, isLast }) => ({
+            id: generateUniqueId({
+              date,
+              isLast,
+            }),
+            date,
+            isLast,
+          })
         ) || [],
       retentionScheduleWeekly:
         retentionMonthlySchedule?.retentionScheduleWeekly,
@@ -154,7 +162,11 @@ const formatRetentionPolicy = (
       monthsOfYear: retentionYearlySchedule?.monthsOfYear,
       retentionScheduleDaily:
         retentionYearlySchedule?.retentionScheduleDaily?.daysOfTheMonth?.map(
-          ({ date, isLast }) => ({ id: cuid(), date, isLast })
+          ({ date, isLast }) => ({
+            id: generateUniqueId({ date, isLast }),
+            date,
+            isLast,
+          })
         ) || [],
       retentionScheduleWeekly: retentionYearlySchedule?.retentionScheduleWeekly,
       retentionTimes:
@@ -187,7 +199,9 @@ const formatProperties = (
           retentionPolicy: subRetentionPolicy,
           ...p
         }) => ({
-          id: cuid(),
+          id: generateUniqueId({
+            ...subProtectionPolicy,
+          }),
           schedulePolicy: formatSchedulePolicy(subSchedulePolicy),
           retentionPolicy: formatRetentionPolicy(subRetentionPolicy),
           ...p,
@@ -208,7 +222,7 @@ export default ({
 }): AzureRecoveryPolicy => {
   const { id, name, type, region, eTag, properties, resourceGroupId } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

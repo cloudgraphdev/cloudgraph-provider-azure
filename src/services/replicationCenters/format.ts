@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureReplicationCenter } from '../../types/generated'
 import { RawAzureReplicationCenter } from './data'
 
@@ -26,10 +26,14 @@ export default ({
       ...properties,
       healthErrors: properties?.healthErrors?.map(error => ({
         ...error,
-        id: cuid(),
+        id: generateUniqueId({
+          ...error,
+        }),
         creationTimeUtc: error?.creationTimeUtc?.toISOString(),
         innerHealthErrors: error?.innerHealthErrors?.map(innerError => ({
-          id: cuid(),
+          id: generateUniqueId({
+            ...innerError,
+          }),
           ...innerError,
           creationTimeUtc: innerError?.creationTimeUtc?.toISOString(),
         })),

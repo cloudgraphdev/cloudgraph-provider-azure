@@ -8,7 +8,7 @@ import {
   AzureFirewallNetworkRule as FirewallNetworkRule,
   AzureFirewallIPConfiguration as FirewallIPConfiguration,
 } from '@azure/arm-network'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   AzureFirewall,
   AzureFirewallAdditionalProperty,
@@ -30,7 +30,7 @@ const formatAzureFirewallApplicationRuleProtocol = ({
   port,
 }: FirewallApplicationRuleProtocol): AzureFirewallApplicationRuleProtocol => {
   return {
-    id: cuid(),
+    id: generateUniqueId({ protocolType, port }),
     protocolType,
     port,
   }
@@ -45,7 +45,7 @@ const formatAzureFirewallApplicationRule = ({
   sourceIpGroups,
 }: FirewallApplicationRule): AzureFirewallApplicationRule => {
   return {
-    id: cuid(),
+    id: generateUniqueId({ name }),
     name,
     description,
     sourceAddresses,
@@ -68,7 +68,7 @@ const formatAzureFirewallApplicationRuleCollection = ({
   provisioningState,
 }: FirewallApplicationRuleCollection): AzureFirewallApplicationRuleCollection => {
   return {
-    id: id || cuid(),
+    id,
     name,
     priority,
     action: action?.type || '',
@@ -91,7 +91,7 @@ const formatAzureFirewallNatRule = ({
   sourceIpGroups,
 }: FirewallNatRule): AzureFirewallNatRule => {
   return {
-    id: cuid(),
+    id: generateUniqueId({ name }),
     name,
     description,
     sourceAddresses,
@@ -114,7 +114,7 @@ const formatNatRuleCollection = ({
   name,
 }: FirewallNatRuleCollection): AzureFirewallNatRuleCollection => {
   return {
-    id: id || cuid(),
+    id,
     name,
     priority,
     action: action?.type || '',
@@ -136,7 +136,7 @@ const formatAzureFirewallNetworkRule = ({
   destinationIpGroups,
 }: FirewallNetworkRule): AzureFirewallNetworkRule => {
   return {
-    id: cuid(),
+    id: generateUniqueId({ name }),
     name,
     description,
     protocols,
@@ -158,7 +158,7 @@ const formatNetworkRuleCollection = ({
   provisioningState,
 }: FirewallNetworkRuleCollection): AzureFirewallNetworkRuleCollection => {
   return {
-    id: id || cuid(),
+    id,
     name,
     priority,
     action: action?.type || '',
@@ -178,7 +178,7 @@ const formatIpConfiguration = ({
   type,
 }: FirewallIPConfiguration): AzureFirewallIpConfiguration => {
   return {
-    id: id || cuid(),
+    id,
     name,
     privateIPAddress,
     subnet: subnet?.id || '',
@@ -228,7 +228,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     subscriptionId: account,
@@ -249,7 +249,7 @@ export default ({
         formatIpConfiguration(ipConfiguration)
       ) || [],
     managementIpConfiguration: {
-      id: managementIpConfiguration?.id || cuid(),
+      id: managementIpConfiguration?.id,
       name: managementIpConfiguration?.name || '',
       privateIPAddress: managementIpConfiguration?.privateIPAddress || '',
       subnet: managementIpConfiguration?.subnet?.id || '',

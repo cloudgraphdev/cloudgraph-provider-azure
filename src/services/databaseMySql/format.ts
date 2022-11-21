@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureDatabaseMySql } from '../../types/generated'
 import { RawAzureDatabaseMySql } from './data'
 
@@ -21,7 +20,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,

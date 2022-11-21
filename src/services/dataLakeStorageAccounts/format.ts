@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureDataLakeStorageAccount } from '../../types/generated'
 import { RawAzureDataLakeStorageAccount } from './data'
 
@@ -20,7 +19,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,

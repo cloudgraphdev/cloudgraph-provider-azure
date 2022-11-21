@@ -2,7 +2,7 @@ import {
   AzureStorageInfoValue,
   SiteConfigResource,
 } from '@azure/arm-appservice'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import isArray from 'lodash/isArray'
 import toString from 'lodash/toString'
 import { formatTagsFromMap } from '../../utils/format'
@@ -29,14 +29,20 @@ const formatAzureStorageAccounts = (azureStorageAccounts: {
 }): RawAzureStorageInfoValue[] => {
   return Object.entries(azureStorageAccounts).map(([key, value]) => {
     if (!value) return {} as RawAzureStorageInfoValue
-    return {
-      id: cuid(),
+    const obj = {
       name: key,
       type: value.type,
       accountName: value.accountName,
       shareName: value.shareName,
       accessKey: value.accessKey,
       mountPath: value.mountPath,
+    }
+    return {
+      id: generateUniqueId({
+        key,
+        ...obj,
+      }),
+      ...obj,
       state: value.state,
     }
   })
@@ -47,7 +53,10 @@ const formatHeaders = headers => {
   return Object.entries(headers).map(([key, value]) => {
     const conVal = (isArray(value) ? value : [value]) || []
     return {
-      id: cuid(),
+      id: generateUniqueId({
+        key,
+        value: conVal.map(val => toString(val)),
+      }),
       key,
       value: conVal.map(val => toString(val)),
     }
@@ -74,7 +83,7 @@ const formatSiteConfig = ({
   ...restConfig
 }: RawSiteConfigResource): AzureAppServiceWebAppSiteConfig => {
   return {
-    id: id || cuid(),
+    id,
     autoHealRules: {
       triggers:
         {
@@ -82,18 +91,18 @@ const formatSiteConfig = ({
           privateBytesInKB: autoHealRules?.triggers?.privateBytesInKB,
           statusCodes:
             autoHealRules?.triggers?.statusCodes?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({ id, ...s }),
               ...s,
             })) || [],
           slowRequests: autoHealRules?.triggers?.slowRequests,
           slowRequestsWithPath:
             autoHealRules?.triggers?.slowRequestsWithPath?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({ id, ...s }),
               ...s,
             })) || [],
           statusCodesRange:
             autoHealRules?.triggers?.statusCodesRange?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({ id, ...s }),
               ...s,
             })) || [],
         } || {},
@@ -101,43 +110,53 @@ const formatSiteConfig = ({
     },
     appSettings:
       appSettings?.map(({ name, value }) => ({
-        id: cuid(),
+        id: generateUniqueId({ id, name, value }),
         name,
         value,
       })) || [],
     apiDefinitionInfoUrl: apiDefinition?.url || '',
     apiManagementConfigId: apiManagementConfig?.id || '',
     connectionStrings:
-      connectionStrings?.map(c => ({ id: cuid(), ...c })) || [],
+      connectionStrings?.map(c => ({
+        id: generateUniqueId({ id, ...c }),
+        ...c,
+      })) || [],
     requestTracingExpirationTime: requestTracingExpirationTime?.toISOString(),
     isPushEnabled: push?.isPushEnabled || false,
     virtualApplications:
       virtualApplications?.map(({ virtualDirectories, ...v }) => ({
-        id: cuid(),
+        id: generateUniqueId({ id, ...v }),
         virtualDirectories:
           virtualDirectories?.map(d => ({
-            id: cuid(),
+            id: generateUniqueId({ id, ...d }),
             ...d,
           })) || [],
         ...v,
       })) || [],
     experiments: {
       rampUpRules:
-        experiments?.rampUpRules?.map(r => ({ id: cuid(), ...r })) || [],
+        experiments?.rampUpRules?.map(r => ({
+          id: generateUniqueId({ id, ...r }),
+          ...r,
+        })) || [],
     },
     ipSecurityRestrictions:
       ipSecurityRestrictions?.map(({ headers, ...i }) => ({
-        id: cuid(),
+        id: generateUniqueId({ id, ...i }),
         headers: formatHeaders(headers),
         ...i,
       })) || [],
     scmIpSecurityRestrictions:
       scmIpSecurityRestrictions?.map(({ headers, ...s }) => ({
-        id: cuid(),
+        id: generateUniqueId({ id, ...s }),
         headers: formatHeaders(headers),
         ...s,
       })) || [],
-    handlerMappings: handlerMappings?.map(h => ({ id: cuid(), ...h })) || [],
+    handlerMappings:
+      handlerMappings?.map(h => ({
+        id: generateUniqueId({ id, ...h }),
+        ...h,
+      })) || [],
     azureStorageAccounts: formatAzureStorageAccounts(azureStorageAccounts),
     tags: formatTagsFromMap(tags),
     ...restConfig,
@@ -200,7 +219,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -219,7 +238,7 @@ export default ({
     availabilityState,
     hostNameSslStates:
       hostNameSslStates?.map(h => ({
-        id: cuid(),
+        id: generateUniqueId({ id, ...h }),
         ...(h as AzureAppServiceWebAppHostNameSslState),
       })) || [],
     serverFarmId,

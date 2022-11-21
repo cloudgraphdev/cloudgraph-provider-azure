@@ -1,5 +1,5 @@
 import { UpdateHistoryProperty, TagProperty } from '@azure/arm-storage'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   AzureStorageContainer,
   AzureStorageContainerImmutabilityPolicyUpdateHistory,
@@ -17,7 +17,14 @@ const formatImmutabilityPolicyUpdateHistory = ({
   upn,
 }: UpdateHistoryProperty): AzureStorageContainerImmutabilityPolicyUpdateHistory => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      update,
+      immutabilityPeriodSinceCreationInDays,
+      timestamp,
+      objectIdentifier,
+      tenantId,
+      upn,
+    }),
     update,
     immutabilityPeriodSinceCreationInDays,
     timestamp: timestamp?.toUTCString() || '',
@@ -35,7 +42,13 @@ const formatLegalHoldTag = ({
   upn,
 }: TagProperty): AzureStorageContainerLegalHoldTag => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      tag,
+      timestamp,
+      objectIdentifier,
+      tenantId,
+      upn,
+    }),
     tag,
     timestamp: timestamp?.toUTCString() || '',
     objectIdentifier,
@@ -74,7 +87,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

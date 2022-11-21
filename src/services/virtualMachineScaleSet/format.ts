@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { isEmpty } from 'lodash'
 import {
   VirtualMachineScaleSetOSProfile,
@@ -40,14 +40,16 @@ const formatOsProfile = (
       ? {
           additionalUnattendContent:
             windowsConfiguration.additionalUnattendContent?.map(auc => ({
-              id: cuid(),
+              id: generateUniqueId({ auc }),
               ...auc,
             })) || [],
           winRM: windowsConfiguration.winRM
             ? {
                 listeners:
                   windowsConfiguration.winRM.listeners?.map(l => ({
-                    id: cuid(),
+                    id: generateUniqueId({
+                      ...l,
+                    }),
                     ...l,
                   })) || [],
               }
@@ -61,7 +63,9 @@ const formatOsProfile = (
             ? {
                 publicKeys:
                   linuxConfiguration.ssh.publicKeys?.map(pk => ({
-                    id: cuid(),
+                    id: generateUniqueId({
+                      ...pk,
+                    }),
                     ...pk,
                   })) || [],
               }
@@ -70,13 +74,15 @@ const formatOsProfile = (
       : {},
     secrets:
       secrets?.map(s => ({
-        id: cuid(),
+        id: generateUniqueId({ ...s }),
         sourceVault: {
-          id: s.sourceVault?.id || cuid(),
+          id: s.sourceVault?.id,
         },
         vaultCertificates:
           s.vaultCertificates?.map(vc => ({
-            id: cuid(),
+            id: generateUniqueId({
+              ...vc,
+            }),
             ...vc,
           })) || [],
       })) || [],
@@ -95,7 +101,7 @@ const formatStorageProfile = (
   return {
     imageReference: imageReference
       ? {
-          id: imageReference.id || cuid(),
+          id: imageReference.id,
           publisher: imageReference.publisher,
           offer: imageReference.offer,
           sku: imageReference.sku,
@@ -138,10 +144,10 @@ const formatNetworkProfile = (
           ...networkInterface
         }) => {
           return {
-            id: id || cuid(),
+            id,
             ...networkInterface,
             networkSecurityGroup: {
-              id: networkSecurityGroup?.id || cuid(),
+              id: networkSecurityGroup?.id,
             },
             ipConfigurations:
               ipConfigurations?.map(
@@ -154,27 +160,27 @@ const formatNetworkProfile = (
                   loadBalancerInboundNatPools,
                   ...ipConfiguration
                 }) => ({
-                  id: cuid(),
+                  id: ipConfiguration.id,
                   ...ipConfiguration,
                   subnetId: subnet?.id,
                   applicationGatewayBackendAddressPools:
                     applicationGatewayBackendAddressPools?.map(agb => ({
-                      id: agb.id || cuid(),
+                      id: agb.id,
                       ...agb,
                     })) || [],
                   applicationSecurityGroups:
                     applicationSecurityGroups?.map(asg => ({
-                      id: asg.id || cuid(),
+                      id: asg.id,
                       ...asg,
                     })) || [],
                   loadBalancerBackendAddressPools:
                     loadBalancerBackendAddressPools?.map(lbb => ({
-                      id: lbb.id || cuid(),
+                      id: lbb.id,
                       ...lbb,
                     })) || [],
                   loadBalancerInboundNatPools:
                     loadBalancerInboundNatPools?.map(lbi => ({
-                      id: lbi.id || cuid(),
+                      id: lbi.id,
                       ...lbi,
                     })) || [],
                 })
@@ -196,7 +202,7 @@ const formatExtensionProfile = (
 
   return (
     extensionsList?.map(e => ({
-      id: e.id || cuid(),
+      id: e.id,
       name: e.name,
       forceUpdateTag: e.forceUpdateTag,
       type: e.type,
@@ -281,7 +287,7 @@ export default ({
     // If the id is not present use uniqueId
     // uniqueId is an additional unique Guid that identifies the resource
     // if uniqueId doesn't exist, then create a random uid to ensure id consistency for connections
-    id: id || uniqueId || cuid(),
+    id: id || uniqueId,
     name,
     region,
     subscriptionId: account,

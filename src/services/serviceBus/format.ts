@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { Encryption } from '@azure/arm-servicebus'
 import { isEmpty } from 'lodash'
 import {
@@ -17,7 +17,7 @@ const formatEncryption = (
   const { keyVaultProperties, ...rest } = encryption
   return {
     keyVaultProperties:
-      keyVaultProperties?.map(kv => ({ id: cuid(), ...kv })) || [],
+      keyVaultProperties?.map(kv => ({ id: generateUniqueId(kv), ...kv })) || [],
     ...rest,
   }
 }
@@ -52,7 +52,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     subscriptionId: account,
@@ -64,7 +64,7 @@ export default ({
       userAssignedIdentities: Object.keys(
         identity?.userAssignedIdentities ?? {}
       ).map(key => ({
-        id: cuid(),
+        id: generateUniqueId({id, key}),
         key,
         value: identity?.userAssignedIdentities[key],
       })),
@@ -80,7 +80,7 @@ export default ({
     privateEndpointConnections:
       privateEndpointConnections?.map(
         ({ id: endpointId, systemData, ...pe }) => ({
-          id: endpointId || cuid(),
+          id: endpointId,
           ...transformSystemData(systemData),
           ...pe,
         })
