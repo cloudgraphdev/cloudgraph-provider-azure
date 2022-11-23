@@ -1,6 +1,7 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { RawAzureSynapseBigDataPool } from './data'
 import { AzureSynapseBigDataPool } from '../../types/generated'
+
 
 export default ({
   service,
@@ -34,7 +35,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -52,9 +53,13 @@ export default ({
       ...libraryRequirements,
       time: libraryRequirements?.time?.toISOString(),
     },
-    customLibraries: customLibraries?.map(lib => ({
+    customLibraries: customLibraries?.map((lib, index) => ({
       ...lib,
-      id: cuid(),
+      id: generateUniqueId({
+        name: lib.name,
+        path: lib.path,
+        index,
+      }),
       uploadedTimestamp: lib?.uploadedTimestamp?.toISOString(),
     })),
     sparkConfigProperties: {

@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { RawAzureSecuritySetting } from './data'
 import { AzureSecuritySetting } from '../../types/generated'
 
@@ -18,7 +17,7 @@ export default ({
     enabled
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

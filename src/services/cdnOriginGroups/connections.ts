@@ -56,7 +56,7 @@ export default ({
     data: { [property: string]: RawAzureCdnOrigin[] }
   } = data.find(({ name }) => name === services.cdnOrigins)
 
-  const originIds = origins?.map(o => o.id)
+  const originIds = origins?.map(o => o.id) || []
 
   if (cdnOrigins?.data?.[region] && !isEmpty(originIds)) {
     const cdnOriginsInRegion: RawAzureCdnOrigin[] = cdnOrigins.data[

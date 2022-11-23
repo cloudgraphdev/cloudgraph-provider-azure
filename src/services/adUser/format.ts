@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureAdUser } from '../../types/generated'
 import { RawAzureADUser } from './data'
 
@@ -52,7 +51,7 @@ export default ({
     appRoleAssignments = [],
   } = service
   return {
-    id: id || cuid(),
+    id,
     deletedDateTime,
     accountEnabled,
     ageGroup,
@@ -91,6 +90,9 @@ export default ({
     userType,
     preferredName,
     responsibilities,
-    appRoleAssignments: appRoleAssignments.map(aRA => ({ id: cuid(), ...aRA })),
+    appRoleAssignments: appRoleAssignments.map(aRA => ({
+      id: aRA.id,
+      ...aRA,
+    })),
   }
 }

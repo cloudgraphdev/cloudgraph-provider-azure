@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureDiagnosticSetting } from '../../types/generated'
 import { RawAzureDiagnosticSetting } from './data'
 
@@ -41,7 +41,7 @@ export default ({
   const appropiateCategories = evalCategories()
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     subscriptionId: account,
@@ -60,7 +60,10 @@ export default ({
         category,
         enabled,
       }) => ({
-        id: cuid(),
+        id: generateUniqueId({
+          id,
+          category,
+        }),
         retentionPolicyEnabled,
         retentionPolicyDays,
         timeGrain,
@@ -77,7 +80,9 @@ export default ({
         category,
         enabled,
       }) => ({
-        id: cuid(),
+        id: generateUniqueId({
+          id, category
+        }),
         retentionPolicyEnabled,
         retentionPolicyDays,
         category,

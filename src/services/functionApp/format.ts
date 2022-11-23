@@ -1,14 +1,16 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import isArray from 'lodash/isArray'
 import toString from 'lodash/toString'
-import { AzureStorageInfoValue, SiteConfigResource } from '@azure/arm-appservice'
+import {
+  AzureStorageInfoValue,
+  SiteConfigResource,
+} from '@azure/arm-appservice'
 import {
   AzureFunctionApp,
   AzureAppServiceWebAppSiteConfig,
 } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureFunctionApp } from './data'
-
 
 export interface RawAzureStorageInfoValue extends AzureStorageInfoValue {
   id: string
@@ -27,7 +29,10 @@ const formatAzureStorageAccounts = (azureStorageAccounts: {
   return Object.entries(azureStorageAccounts).map(([key, value]) => {
     if (!value) return {} as RawAzureStorageInfoValue
     return {
-      id: cuid(),
+      id: generateUniqueId({
+        name: key,
+        type: value.type,
+      }),
       name: key,
       type: value.type,
       accountName: value.accountName,
@@ -41,14 +46,16 @@ const formatAzureStorageAccounts = (azureStorageAccounts: {
 
 const formatHeaders = headers => {
   if (!headers) return null
-   return Object.entries(headers).map(([key, value]) => {
+  return Object.entries(headers).map(([key, value]) => {
     const conVal = (isArray(value) ? value : [value]) || []
     return {
-      id: cuid(),
+      id: generateUniqueId({
+        key,
+      }),
       key,
       value: conVal.map(val => toString(val)),
     }
-   })
+  })
 }
 
 const formatSiteConfig = ({
@@ -71,7 +78,7 @@ const formatSiteConfig = ({
   ...restConfig
 }: RawSiteConfigResource): AzureAppServiceWebAppSiteConfig => {
   return {
-    id: id || cuid(),
+    id,
     autoHealRules: {
       triggers:
         {
@@ -79,18 +86,18 @@ const formatSiteConfig = ({
           privateBytesInKB: autoHealRules?.triggers?.privateBytesInKB,
           statusCodes:
             autoHealRules?.triggers?.statusCodes?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({ path: s.path }),
               ...s,
             })) || [],
           slowRequests: autoHealRules?.triggers?.slowRequests,
           slowRequestsWithPath:
             autoHealRules?.triggers?.slowRequestsWithPath?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({ path: s.path }),
               ...s,
             })) || [],
           statusCodesRange:
             autoHealRules?.triggers?.statusCodesRange?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({ path: s.path }),
               ...s,
             })) || [],
         } || {},
@@ -98,42 +105,53 @@ const formatSiteConfig = ({
     },
     appSettings:
       appSettings?.map(({ name, value }) => ({
-        id: cuid(),
+        id: generateUniqueId({ name }),
         name,
         value,
       })) || [],
     apiDefinitionInfoUrl: apiDefinition?.url || '',
     apiManagementConfigId: apiManagementConfig?.id || '',
     connectionStrings:
-      connectionStrings?.map(c => ({ id: cuid(), ...c })) || [],
+      connectionStrings?.map(c => ({ id: generateUniqueId({}), ...c })) || [],
     requestTracingExpirationTime: requestTracingExpirationTime?.toISOString(),
     isPushEnabled: push?.isPushEnabled || false,
     virtualApplications:
-      virtualApplications?.map(({virtualDirectories, ...v}) => ({ 
-        id: cuid(),
-        virtualDirectories: virtualDirectories?.map(d => ({
-          id: cuid(),
-          ...d
-        })) || [],
-        ...v 
+      virtualApplications?.map(({ virtualDirectories, ...v }) => ({
+        id: generateUniqueId({ physicalPath: v.physicalPath }),
+        virtualDirectories:
+          virtualDirectories?.map(d => ({
+            id: generateUniqueId({
+              vPhysicalPath: v.physicalPath,
+              physicalPath: d.physicalPath,
+            }),
+            ...d,
+          })) || [],
+        ...v,
       })) || [],
     experiments: {
       rampUpRules:
-        experiments?.rampUpRules?.map(r => ({ id: cuid(), ...r })) || [],
+        experiments?.rampUpRules?.map(r => ({
+          id: generateUniqueId({ name: r.name }),
+          ...r,
+        })) || [],
     },
     ipSecurityRestrictions:
-      ipSecurityRestrictions?.map(({ headers, ...i}) => ({ 
-        id: cuid(), 
+      ipSecurityRestrictions?.map(({ headers, ...i }) => ({
+        id: generateUniqueId({ name: i.name }),
         headers: formatHeaders(headers),
-        ...i 
+        ...i,
       })) || [],
     scmIpSecurityRestrictions:
-      scmIpSecurityRestrictions?.map(({ headers, ...s}) => ({ 
-        id: cuid(), 
+      scmIpSecurityRestrictions?.map(({ headers, ...s }) => ({
+        id: generateUniqueId({ name: s.name }),
         headers: formatHeaders(headers),
-        ...s 
+        ...s,
       })) || [],
-    handlerMappings: handlerMappings?.map(h => ({ id: cuid(), ...h })) || [],
+    handlerMappings:
+      handlerMappings?.map((h, index) => ({
+        id: generateUniqueId({ ...h, id, index }),
+        ...h,
+      })) || [],
     azureStorageAccounts: formatAzureStorageAccounts(azureStorageAccounts),
     tags: formatTagsFromMap(tags),
     ...restConfig,
@@ -166,7 +184,7 @@ export default ({
     ...rest
   } = service
   return {
-    id: id || cuid(),
+    id,
     ...rest,
     subscriptionId: account,
     region,
@@ -178,7 +196,10 @@ export default ({
     extendedLocation,
     lastModifiedTimeUtc: lastModifiedTimeUtc?.toUTCString(),
     suspendedTill: suspendedTill?.toUTCString(),
-    functions: functions.map(({ ...data }) => ({ ...data, id: cuid() })),
+    functions: functions.map(({ ...data }) => ({
+      ...data,
+      id: generateUniqueId({}),
+    })),
     siteConfig: formatSiteConfig(siteConfig),
     tags: formatTagsFromMap(Tags),
   }

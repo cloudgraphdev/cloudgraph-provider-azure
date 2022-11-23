@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureBackupVault } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureBackupVault } from './data'
@@ -22,7 +22,7 @@ export default ({
     resourceGroupId,
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -34,7 +34,10 @@ export default ({
           provisioningState: properties?.provisioningState,
           storageSettings:
             properties?.storageSettings?.map(s => ({
-              id: cuid(),
+              id: generateUniqueId({
+                datastoreType: s.datastoreType,
+                type: s.type,
+              }),
               datastoreType: s.datastoreType,
               type: s.type,
             })) || [],

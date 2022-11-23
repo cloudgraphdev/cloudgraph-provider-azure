@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { isEmpty } from 'lodash'
 import { BackupInstance } from '../../types'
 import {
@@ -58,7 +58,12 @@ const formatProperties = (
       policyParameters: {
         dataStoreParametersList:
           policyInfo?.policyParameters?.dataStoreParametersList?.map(p => ({
-            id: cuid(),
+            id: generateUniqueId({
+              policyId: policyInfo?.policyId,
+              dataStoreType: p.dataStoreType,
+              objectType: p.objectType,
+              resourceGroupId: p.resourceGroupId,
+            }),
             dataStoreType: p.dataStoreType,
             objectType: p.objectType,
             resourceGroupId: p.resourceGroupId,
@@ -78,7 +83,10 @@ const formatProperties = (
           Object.keys(
             protectionErrorDetails?.innerError?.additionalInfo ?? {}
           ).map(key => ({
-            id: cuid(),
+            id: generateUniqueId({
+              key,
+              value: protectionErrorDetails?.innerError?.additionalInfo?.[key],
+            }),
             key,
             value: protectionErrorDetails?.innerError?.additionalInfo?.[key],
           })) || [],
@@ -86,7 +94,10 @@ const formatProperties = (
       },
       properties:
         Object.keys(protectionErrorDetails?.properties ?? {}).map(key => ({
-          id: cuid(),
+          id: generateUniqueId({
+            key,
+            value: protectionErrorDetails?.properties?.[key],
+          }),
           key,
           value: protectionErrorDetails?.properties?.[key],
         })) || [],
@@ -105,7 +116,13 @@ const formatProperties = (
             Object.keys(
               protectionStatus?.errorDetails?.innerError?.additionalInfo ?? {}
             ).map(key => ({
-              id: cuid(),
+              id: generateUniqueId({
+                key,
+                value:
+                  protectionStatus?.errorDetails?.innerError?.additionalInfo?.[
+                    key
+                  ],
+              }),
               key,
               value:
                 protectionStatus?.errorDetails?.innerError?.additionalInfo?.[
@@ -117,7 +134,10 @@ const formatProperties = (
         properties:
           Object.keys(protectionStatus?.errorDetails?.properties ?? {}).map(
             key => ({
-              id: cuid(),
+              id: generateUniqueId({
+                key,
+                value: protectionStatus?.errorDetails?.properties?.[key],
+              }),
               key,
               value: protectionStatus?.errorDetails?.properties?.[key],
             })
@@ -137,7 +157,7 @@ export default ({
   const { id, name, type, region, properties, resourceGroupId, systemData } =
     service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

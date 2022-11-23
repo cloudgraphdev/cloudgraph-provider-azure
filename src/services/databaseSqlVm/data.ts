@@ -40,7 +40,7 @@ export default async ({
         const sqlVmIterable: SqlVirtualMachinesListResponse =
           await client.sqlVirtualMachines.list()
         for await (const vm of sqlVmIterable) {
-          sqlVms.push(vm)
+          vm && sqlVms.push(vm)
         }
       },
       {

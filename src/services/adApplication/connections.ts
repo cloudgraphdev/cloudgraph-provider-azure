@@ -22,7 +22,7 @@ export default ({
 } => {
   const connections: ServiceConnection[] = []
   const { id, appId, owners = [] } = service
-  const ownerIds = owners.map(({ id: ownerId }) => ownerId)
+  const ownerIds = owners.map(({ id: ownerId }) => ownerId) || []
 
   if (region === regionMap.global) {
     /**

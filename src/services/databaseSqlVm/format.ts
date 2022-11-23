@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureDatabaseSqlVm } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDatabaseSqlVm } from './data'
@@ -35,7 +34,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,

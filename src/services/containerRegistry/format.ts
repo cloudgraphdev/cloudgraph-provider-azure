@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureContainerRegistry } from './data'
 import { AzureContainerRegistry } from '../../types/generated'
@@ -49,7 +48,7 @@ export default ({
     zoneRedundancy,
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -85,7 +84,7 @@ export default ({
     dataEndpointHostNames,
     privateEndpointConnections:
       privateEndpointConnections.map(({ id: privateEndpointId, privateLinkServiceConnectionState, ...rest }) => ({
-        id: privateEndpointId || cuid(),
+        id: privateEndpointId,
         privateLinkServiceConnectionStateStatus: privateLinkServiceConnectionState?.status,
         privateLinkServiceConnectionStateActionsRequired: privateLinkServiceConnectionState?.actionsRequired,
         privateLinkServiceConnectionStateDescription: privateLinkServiceConnectionState?.description,

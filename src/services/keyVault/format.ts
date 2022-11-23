@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AccessPolicyEntry } from '@azure/arm-keyvault'
 import { AzureKeyVault, AzureKeyVaultAccessPolicy } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
@@ -11,7 +11,10 @@ const formatKeyVaultAccessPolicyEntry = ({
   permissions,
 }: AccessPolicyEntry): AzureKeyVaultAccessPolicy => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      objectId,
+      applicationId,
+    }),
     objectId,
     applicationId,
     permissionKeys: permissions?.keys || [],
@@ -43,7 +46,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     subscriptionId: account,
@@ -77,7 +80,7 @@ export default ({
     resourceGroupId,
     keys:
       keys?.map(k => ({
-        id: k.id || cuid(),
+        id: k.id,
         name: k.name,
         type: k.type,
         location: k.location,
@@ -96,7 +99,7 @@ export default ({
       })) || [],
     secrets:
       secrets?.map(s => ({
-        id: s.id || cuid(),
+        id: s.id,
         name: s.name,
         type: s.type,
         location: s.location,
@@ -120,7 +123,7 @@ export default ({
       })) || [],
     diagnosticSettings:
       diagnosticSettings?.map(ds => ({
-        id: ds.id || cuid(),
+        id: ds.id,
         name: ds.name,
         type: ds.type,
         storageAccountId: ds.storageAccountId,
@@ -129,25 +132,25 @@ export default ({
         eventHubName: ds.eventHubName,
         workspaceId: ds.workspaceId,
         logAnalyticsDestinationType: ds.logAnalyticsDestinationType,
-        metrics: ds.metrics?.map(
-          ({
-            retentionPolicy: {
-              enabled: retentionPolicyEnabled,
-              days: retentionPolicyDays,
-            } = {},
-            timeGrain,
-            category,
-            enabled,
-          }) =>
+        metrics:
+          ds.metrics?.map(
             ({
-              id: cuid(),
+              retentionPolicy: {
+                enabled: retentionPolicyEnabled,
+                days: retentionPolicyDays,
+              } = {},
+              timeGrain,
+              category,
+              enabled,
+            }) => ({
+              id: generateUniqueId({ category, type: 'metrics' }),
               retentionPolicyEnabled,
               retentionPolicyDays,
               timeGrain,
               category,
               enabled,
             })
-        ) || [],
+          ) || [],
         logs:
           ds.logs?.map(
             ({
@@ -158,7 +161,7 @@ export default ({
               category,
               enabled,
             }) => ({
-              id: cuid(),
+              id: generateUniqueId({ category, type: 'logs' }),
               retentionPolicyEnabled,
               retentionPolicyDays,
               category,

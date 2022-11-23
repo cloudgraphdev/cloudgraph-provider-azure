@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { Capability } from '@azure/arm-appservice'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureAppServicePlan } from './data'
@@ -41,7 +41,7 @@ export default ({
     zoneRedundant,
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: subscription || account,
     name,
     type,
@@ -61,7 +61,13 @@ export default ({
     resourceGroupId,
     skuDescription: {
       capabilities:
-        capabilities?.map((c: Capability) => ({ id: cuid(), ...c })) || [],
+        capabilities?.map((c: Capability) => ({
+          id: generateUniqueId({
+            id,
+            ...c,
+          }),
+          ...c,
+        })) || [],
       ...restOfSku,
     },
     spotExpirationTime: spotExpirationTime?.toISOString(),

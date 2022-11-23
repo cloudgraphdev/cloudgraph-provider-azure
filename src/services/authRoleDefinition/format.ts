@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureAuthRoleDefinition } from '../../types/generated'
 import { RawAzureAuthRoleDefinition } from './data'
 
@@ -31,7 +31,11 @@ export default ({
     description,
     roleType,
     permissions: permissions.map(item => ({
-      id: cuid(),
+      id: generateUniqueId({
+        id,
+        name,
+        ...item,
+      }),
       ...item,
     })),
     assignableScopes,

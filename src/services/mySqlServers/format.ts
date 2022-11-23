@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureMySqlServer } from './data'
 import { AzureMySqlServer } from '../../types/generated'
@@ -37,7 +36,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -60,7 +59,7 @@ export default ({
     publicNetworkAccess,
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
       ...connection,
-      id: connection.id || cuid(),
+      id: connection.id,
     })), 
     tags: formatTagsFromMap(Tags),
   }

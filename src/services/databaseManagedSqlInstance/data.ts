@@ -35,7 +35,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const instance of managedInstancesIterable) {
-          managedInstances.push(instance)
+          instance && managedInstances.push(instance)
         }
       },
       {

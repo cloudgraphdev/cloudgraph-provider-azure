@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzurePrivateDnsZone } from './data'
 import { AzurePrivateDnsZone } from '../../types/generated'
@@ -29,7 +28,7 @@ export default ({
     resourceGroupId
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,

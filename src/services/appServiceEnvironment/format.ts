@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureAppServiceEnvironment } from './data'
 import { AzureAppServiceEnvironment } from '../../types/generated'
@@ -36,7 +36,7 @@ export default ({
     zoneRedundant,
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     kind,
@@ -54,7 +54,7 @@ export default ({
     frontEndScaleFactor,
     suspended,
     clusterSettings: clusterSettings?.map(({ name: settingsName, value }) => ({
-      id: cuid(),
+      id: generateUniqueId({ id, settingsName }),
       name: settingsName,
       value,
     })),

@@ -52,7 +52,7 @@ export default async ({
         service: serviceName,
         client,
         scope: 'networkSecurityGroups',
-        operation: 'listAll'
+        operation: 'listAll',
       }
     )
 
@@ -73,10 +73,10 @@ export default async ({
       }
     )
 
-    let flowLogs: RawAzureFlowLog[] = []
+    const flowLogs: RawAzureFlowLog[] = []
     await tryCatchWrapper(
       async () => {
-        flowLogs = await Promise.all(
+        await Promise.all(
           networkWatchers.map(async networkWatcher => {
             const { name } = networkWatcher
             const resourceGroup = getResourceGroupFromEntity(networkWatcher)
@@ -87,10 +87,10 @@ export default async ({
             for await (const flowLog of flowLogsIterable) {
               if (flowLog) {
                 const { tags, ...rest } = flowLog
-                return {
+                flowLogs.push({
                   ...rest,
                   Tags: tags || {},
-                }
+                })
               }
             }
           })

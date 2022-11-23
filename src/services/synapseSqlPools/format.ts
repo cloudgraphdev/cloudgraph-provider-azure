@@ -1,6 +1,6 @@
-import cuid from 'cuid'
 import { RawAzureSynapseSqlPool } from './data'
 import { AzureSynapseSqlPool } from '../../types/generated'
+import { formatTagsFromMap } from '../../utils/format'
 
 export default ({
   service,
@@ -30,7 +30,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -47,5 +47,6 @@ export default ({
     creationDate: creationDate?.toISOString(),
     storageAccountType,
     sourceDatabaseDeletionDate: sourceDatabaseDeletionDate?.toISOString(),
+    tags: formatTagsFromMap(Tags),
   }
 }

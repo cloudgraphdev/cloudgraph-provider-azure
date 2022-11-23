@@ -36,7 +36,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const location of locationsIterable) {
-          locations.push(location.name)
+          location && locations.push(location.name)
         }
       },
       {
@@ -60,7 +60,8 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const assesment of assesmentsIterableForRegion) {
-              assestmentData.push({ ...assesment, region: location })
+              assesment &&
+                assestmentData.push({ ...assesment, region: location })
             }
           },
           {

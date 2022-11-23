@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureAdServicePrincipal } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureADServicePrincipal } from './data'
@@ -42,7 +41,7 @@ export default ({
     endpoints = [],
   } = service
   return {
-    id: id || cuid(),
+    id,
     region,
     deletedDateTime,
     accountEnabled,
@@ -54,7 +53,7 @@ export default ({
     appOwnerOrganizationId,
     appRoleAssignmentRequired,
     appRoles: appRoles.map(({ id: aRId, ...aR }) => ({
-      id: aRId || cuid(),
+      id: aRId,
       ...aR,
     })),
     description,
@@ -73,15 +72,15 @@ export default ({
     tags: formatTagsFromMap(Tags),
     tokenEncryptionKeyId,
     appRoleAssignedTo: appRoleAssignedTo.map(({ id: aRaTId, ...aRaT }) => ({
-      id: aRaTId || cuid(),
+      id: aRaTId,
       ...aRaT,
     })),
     appRoleAssignments: appRoleAssignments.map(({ id: aRAId, ...aRA }) => ({
-      id: aRAId || cuid(),
+      id: aRAId,
       ...aRA,
     })),
     endpoints: endpoints.map(({ id: eId, ...e }) => ({
-      id: eId || cuid(),
+      id: eId,
       ...e,
     })),
   }

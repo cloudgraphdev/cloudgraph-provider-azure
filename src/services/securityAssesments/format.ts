@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureSecurityAssesment } from '../../types/generated'
 import { toCamel } from '../../utils'
 import { RawAzureSecurityAssesment } from './data'
@@ -32,7 +31,7 @@ export default ({
     value: v,
   }))
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

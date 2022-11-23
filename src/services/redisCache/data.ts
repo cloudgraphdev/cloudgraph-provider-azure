@@ -11,7 +11,7 @@ const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
 const serviceName = 'RedisCache'
 
-export interface RawAzureRedisCache 
+export interface RawAzureRedisCache
   extends Omit<RedisResource, 'tags' | 'location'> {
   resourceGroupId: string
   region: string

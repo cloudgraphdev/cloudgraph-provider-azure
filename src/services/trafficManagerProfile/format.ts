@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureTrafficManagerProfile } from './data'
 import { AzureTrafficManagerProfile } from '../../types/generated'
@@ -28,7 +28,7 @@ export default ({
     maxReturn,
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -50,22 +50,32 @@ export default ({
           customHeaders:
             monitorConfig.customHeaders?.map(
               ({ name: customHeadersName, value: customHeadersValue }) => ({
-                id: cuid(),
+                id: generateUniqueId({
+                  id,
+                  customHeadersName,
+                  customHeadersValue,
+                }),
                 name: customHeadersName,
                 value: customHeadersValue,
               })
             ) || [],
           expectedStatusCodeRanges:
-            monitorConfig.expectedStatusCodeRanges?.map(({ min, max }) => ({
-              id: cuid(),
-              min,
-              max,
-            })) || [],
+            monitorConfig.expectedStatusCodeRanges?.map(
+              ({ min, max }, index) => ({
+                id: generateUniqueId({
+                  id,
+                  index,
+                }),
+                min,
+                max,
+              })
+            ) || [],
         }
       : {},
     endpoints:
       endpoints.map(
         ({
+          id: endpointId,
           targetResourceId,
           target,
           endpointStatus,
@@ -80,7 +90,7 @@ export default ({
           subnets = [],
           customHeaders = [],
         }) => ({
-          id: cuid(),
+          id: endpointId,
           targetResourceId,
           target,
           endpointStatus,
@@ -92,8 +102,11 @@ export default ({
           minChildEndpointsIPv4,
           minChildEndpointsIPv6,
           geoMapping,
-          subnets: subnets.map(({ first, last, scope }) => ({
-            id: cuid(),
+          subnets: subnets.map(({ first, last, scope }, index) => ({
+            id: generateUniqueId({
+              endpointId,
+              index,
+            }),
             first,
             last,
             scope,
@@ -101,7 +114,7 @@ export default ({
           customHeaders:
             customHeaders.map(
               ({ name: customHeadersName, value: customHeadersValue }) => ({
-                id: cuid(),
+                id: generateUniqueId({ customHeadersName, customHeadersValue }),
                 name: customHeadersName,
                 value: customHeadersValue,
               })

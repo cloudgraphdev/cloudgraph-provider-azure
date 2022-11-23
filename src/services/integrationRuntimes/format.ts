@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   IntegrationRuntimeCustomerVirtualNetwork,
   CustomSetupBase,
@@ -192,7 +192,11 @@ const formatProperties = (
             type: expressCustomSetupPropertiesType,
             componentName,
           }): AzureCustomSetupBaseUnion => ({
-            id: cuid(),
+            id: generateUniqueId({
+              targetName,
+              variableName,
+              componentName,
+            }),
             targetName: Object.values(targetName ?? {}).join(''),
             variableName,
             variableValue,
@@ -210,7 +214,11 @@ const formatProperties = (
               referenceName: packageStoreLinkedServiceReferenceName,
             },
           }): AzurePackageStore => ({
-            id: cuid(),
+            id: generateUniqueId({
+              name,
+              packageStoreLinkedServiceType,
+              packageStoreLinkedServiceReferenceName,
+            }),
             name,
             packageStoreLinkedServiceType,
             packageStoreLinkedServiceReferenceName,
@@ -279,7 +287,7 @@ export default ({
   const { id, name, type, resourceGroupId, etag, properties = {} } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,
