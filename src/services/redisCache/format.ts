@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureRedisCache } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureRedisCache } from './data'
@@ -50,8 +50,13 @@ export default ({
     zones,
     identity: {
       ...identity,
-      userAssignedIdentities: Object.keys(identity?.userAssignedIdentities || {}).map(key => ({
-        id: cuid(),
+      userAssignedIdentities: Object.keys(
+        identity?.userAssignedIdentities || {}
+      ).map(key => ({
+        id: generateUniqueId({
+          key,
+          value: identity?.userAssignedIdentities[key],
+        }),
         key,
         value: identity?.userAssignedIdentities[key],
       })),
@@ -62,7 +67,9 @@ export default ({
     replicasPerMaster,
     replicasPerPrimary,
     tenantSettings: Object.keys(tenantSettings || {}).map(key => ({
-      id: cuid(),
+      id: generateUniqueId({
+        ...tenantSettings,
+      }),
       key,
       value: tenantSettings[key],
     })),
@@ -81,11 +88,15 @@ export default ({
       id: server?.id,
     })),
     instances: instances?.map(instance => ({
-      id: cuid(),
+      id: generateUniqueId({
+        ...instance,
+      }),
       ...instance,
     })),
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
-      id: cuid(),
+      id: generateUniqueId({
+        ...connection,
+      }),
       ...connection,
     })),
     tags: formatTagsFromMap(Tags),

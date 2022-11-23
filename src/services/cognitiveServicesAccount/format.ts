@@ -1,5 +1,5 @@
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { ThrottlingRule } from '@azure/arm-cognitiveservices'
-import cuid from 'cuid'
 import { RawAzureCognitiveServicesAccount } from './data'
 import {
   AzureCognitiveServicesAccount,
@@ -26,7 +26,7 @@ const formatThrottlingRules = (
         minCount,
         dynamicThrottlingEnabled,
         matchPatterns: matchPatterns.map(({ path, method }) => ({
-          id: cuid(),
+          id: generateUniqueId({ path, method }),
           path,
           method,
         })),
@@ -115,7 +115,7 @@ export default ({
     } = {},
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -135,7 +135,10 @@ export default ({
     endpoint,
     internalId,
     capabilities: capabilities.map(({ name: cName, value }) => ({
-      id: cuid(),
+      id: generateUniqueId({
+        name: cName,
+        value,
+      }),
       name: cName,
       value,
     })),
@@ -163,7 +166,7 @@ export default ({
     },
     userOwnedStorage: userOwnedStorage.map(
       ({ resourceId, identityClientId: uOSIdentityClientId }) => ({
-        id: cuid(),
+        id: resourceId,
         resourceId,
         identityClientId: uOSIdentityClientId,
       })
@@ -222,7 +225,7 @@ export default ({
     disableLocalAuth,
     endpoints: endpoints
       ? Object.entries(endpoints).map(([key, value]) => ({
-          id: cuid(),
+          id: generateUniqueId({key, value}),
           key,
           value,
         }))

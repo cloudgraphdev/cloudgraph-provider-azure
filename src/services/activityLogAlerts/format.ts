@@ -1,15 +1,15 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { RawAzureActivityLogAlert } from './data'
 import { AzureActivityLogAlert } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 
 export default ({
   service,
-  account: subscriptionId
+  account: subscriptionId,
 }: {
   service: RawAzureActivityLogAlert
   account: string
-}) : AzureActivityLogAlert  => {
+}): AzureActivityLogAlert => {
   const {
     id,
     name,
@@ -23,7 +23,7 @@ export default ({
     Tags = {},
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -32,7 +32,7 @@ export default ({
     enabled,
     condition: {
       allOf: condition?.allOf?.map(leaf => ({
-        id: cuid(),
+        id: generateUniqueId({ id, ...leaf }),
         field: leaf?.field,
         equals: leaf?.equals,
       })),
@@ -41,11 +41,17 @@ export default ({
       actionGroups: actions?.actionGroups?.map(group => ({
         id: group.actionGroupId,
         actionGroupId: group.actionGroupId,
-        webhookProperties: Object.entries(group?.webhookProperties || {}).map(([key, value]) => ({
-          id: cuid(),
-          key,
-          value
-        })),
+        webhookProperties: Object.entries(group?.webhookProperties || {}).map(
+          ([key, value]) => ({
+            id: generateUniqueId({
+              id,
+              actionGroupId: group.actionGroupId,
+              key
+            }),
+            key,
+            value,
+          })
+        ),
       })),
     },
     description,

@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzurePostgreSqlServer } from './data'
 import { AzurePostgreSqlServer } from '../../types/generated'
@@ -39,7 +38,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,
@@ -62,7 +61,7 @@ export default ({
     publicNetworkAccess,
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
       ...connection,
-      id: connection.id || cuid(),
+      id: connection.id,
     })),
     tags: formatTagsFromMap(Tags),
     configurations: configurations.map(
@@ -77,7 +76,7 @@ export default ({
         allowedValues,
         source,
       }) => ({
-        id: confId || cuid(),
+        id: confId,
         name: confName,
         type: confType,
         value,
@@ -96,7 +95,7 @@ export default ({
         startIpAddress,
         endIpAddress
       }) => ({
-        id: confId || cuid(),
+        id: confId,
         name: confName,
         type: confType,
         startIpAddress,

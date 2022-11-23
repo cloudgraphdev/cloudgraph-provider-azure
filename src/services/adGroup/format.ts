@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureAdGroup } from '../../types/generated'
 import { RawAzureADGroup } from './data'
 
@@ -38,7 +38,7 @@ export default ({ service }: { service: RawAzureADGroup }): AzureAdGroup => {
     settings = [],
   } = service
   return {
-    id: id || cuid(),
+    id,
     deletedDateTime,
     classification,
     createdDateTime,
@@ -67,11 +67,20 @@ export default ({ service }: { service: RawAzureADGroup }): AzureAdGroup => {
     allowExternalSenders,
     isSubscribedByMail,
     isArchived,
-    appRoleAssignments: appRoleAssignments.map(aRA => ({ id: cuid(), ...aRA })),
-    permissionGrants: permissionGrants.map(pG => ({ id: cuid(), ...pG })),
+    appRoleAssignments: appRoleAssignments.map(aRA => ({
+      id: aRA.id,
+      ...aRA,
+    })),
+    permissionGrants: permissionGrants.map(pG => ({
+      id: pG.id,
+      ...pG,
+    })),
     settings: settings.map(({ id: sId, values: sValues = [], ...s }) => ({
-      id: sId || cuid(),
-      values: sValues.map(sValue => ({ id: cuid(), ...sValue })),
+      id: sId,
+      values: sValues.map(sValue => ({
+        id: generateUniqueId({ id, ...sValue }),
+        ...sValue,
+      })),
       ...s,
     })),
   }

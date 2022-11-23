@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { AzureReplicationNetwork } from '../../types/generated'
 import { RawAzureReplicationNetwork } from './data'
 
@@ -26,7 +26,10 @@ export default ({
       ...properties,
       subnets: properties?.subnets?.map(subnet => ({
         ...subnet,
-        id: cuid(),
+        id: generateUniqueId({
+          name: subnet.name,
+          friendlyName: subnet.friendlyName,
+        }),
       })),
     },
   }

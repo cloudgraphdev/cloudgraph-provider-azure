@@ -8,7 +8,7 @@ import {
   ProtectedItemHealthStatus,
   ProtectionState,
 } from '@azure/arm-recoveryservicesbackup'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { isEmpty } from 'lodash'
 import {
   AzureRecoveryInstance,
@@ -86,20 +86,33 @@ const formatProperties = (
       ...restExtendedInfo,
     },
     kpisHealths: Object.keys(kpisHealths ?? {}).map(key => ({
-      id: cuid(),
+      id: generateUniqueId({
+        ...kpisHealths[key]
+      }),
       key,
       value: {
         resourceHealthStatus: kpisHealths[key]?.resourceHealthStatus,
         resourceHealthDetails:
           kpisHealths[key]?.resourceHealthDetails?.map(hd => ({
-            id: cuid(),
+            id: generateUniqueId({
+              ...hd
+            }),
             ...hd,
           })) || [],
       },
     })),
-    healthDetails: healthDetails?.map(hd => ({ id: cuid(), ...hd })) || [],
+    healthDetails:
+      healthDetails?.map(hd => ({
+        id: generateUniqueId({
+          ...hd,
+        }),
+        ...hd,
+      })) || [],
     sourceAssociations: Object.keys(sourceAssociations ?? {}).map(key => ({
-      id: cuid(),
+      id: generateUniqueId({
+        key,
+        value: sourceAssociations[key],
+      }),
       key,
       value: sourceAssociations[key],
     })),
@@ -116,7 +129,7 @@ export default ({
 }): AzureRecoveryInstance => {
   const { id, name, type, region, eTag, properties, resourceGroupId } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

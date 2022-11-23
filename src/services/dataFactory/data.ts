@@ -45,18 +45,17 @@ export default async ({
         client.factories.list()
       await tryCatchWrapper(
         async () => {
-          for await (const {
-            location,
-            tags,
-            ...restOfFactory
-          } of factoriesIterable) {
-            const resourceGroupId = getResourceGroupFromEntity(restOfFactory)
-            factories.push({
-              region: lowerCaseLocation(location),
-              Tags: tags || {},
-              resourceGroupId,
-              ...restOfFactory,
-            })
+          for await (const factory of factoriesIterable) {
+            if (factory) {
+              const { location, tags, ...restOfFactory } = factory
+              const resourceGroupId = getResourceGroupFromEntity(restOfFactory)
+              factories.push({
+                region: lowerCaseLocation(location),
+                Tags: tags || {},
+                resourceGroupId,
+                ...restOfFactory,
+              })
+            }
           }
         },
         {

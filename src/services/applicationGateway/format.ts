@@ -45,7 +45,7 @@ import {
   Subnet,
   VirtualNetworkTap,
 } from '@azure/arm-network'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   AzureApplicationGateway,
   AzureApplicationGatewayApplicationGatewayBackendAddressPool,
@@ -96,20 +96,20 @@ import {
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureApplicationGateway } from './data'
 
-export const formatUserAssignedIdentities = (
-  userAssignedIdentities?: {
-    [propertyName: string]: Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties
-  }
-): AzureApplicationGatewayUserAssignedIdentities[] => {
+export const formatUserAssignedIdentities = (userAssignedIdentities?: {
+  [
+    propertyName: string
+  ]: Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties
+}): AzureApplicationGatewayUserAssignedIdentities[] => {
   const result: AzureApplicationGatewayUserAssignedIdentities[] = []
   for (const [key, value] of Object.entries(userAssignedIdentities)) {
-    result.push({ 
-      id: `${key}:${value}`, 
-      key, 
+    result.push({
+      id: `${key}:${value}`,
+      key,
       property: {
         principalId: value?.principalId,
         clientId: value?.clientId,
-      }
+      },
     })
   }
   return result
@@ -129,53 +129,83 @@ export const formatApplicationGatewaySslPolicy = (
 
 export const formatApplicationGatewaySslProfile = (
   profile: ApplicationGatewaySslProfile
-): AzureApplicationGatewayApplicationGatewaySslProfile=> {
+): AzureApplicationGatewayApplicationGatewaySslProfile => {
   return {
     id: profile.id,
     name: profile.name,
     type: profile.type,
-    trustedClientCertificates: profile.trustedClientCertificates?.map(c => {return {id: c.id}}) || [],
+    trustedClientCertificates:
+      profile.trustedClientCertificates?.map(c => {
+        return { id: c.id }
+      }) || [],
     sslPolicy: formatApplicationGatewaySslPolicy(profile.sslPolicy),
-    clientAuthConfiguration: profile.clientAuthConfiguration?.verifyClientCertIssuerDN,
+    clientAuthConfiguration:
+      profile.clientAuthConfiguration?.verifyClientCertIssuerDN,
     provisioningState: profile.provisioningState,
   }
 }
 
-export const formatBackendAddressPool = (pool: BackendAddressPool): AzureApplicationGatewayBackendAddressPool | undefined => {
+export const formatBackendAddressPool = (
+  pool: BackendAddressPool
+): AzureApplicationGatewayBackendAddressPool | undefined => {
   return {
     id: pool.id,
     name: pool.name,
     type: pool.type,
     location: pool.location,
-    tunnelInterfaces: pool.tunnelInterfaces?.map(r => {
-      return {
-        id: cuid(),
-        port: r.port,
-        identifier: r.identifier,
-        protocol: r.protocol,
-        type: r.type,
-      }
-    }) || [],
-    loadBalancerBackendAddresses: pool.loadBalancerBackendAddresses?.map(r => {
-      return {
-        id: cuid(),
-        name: r.name,
-        virtualNetwork: r.virtualNetwork?.id,
-        subnet: r.subnet?.id,
-        ipAddress: r.ipAddress,
-        networkInterfaceIPConfiguration: r.networkInterfaceIPConfiguration?.id,
-        loadBalancerFrontendIPConfiguration: r.loadBalancerFrontendIPConfiguration?.id,
-        inboundNatRulesPortMapping: r.inboundNatRulesPortMapping?.map(m => {
-          return {
-            id: cuid(),
-            inboundNatRuleName: m.inboundNatRuleName,
-            frontendPort: m.frontendPort,
-            backendPort: m.backendPort,
-          }
-        }) || []
-      }
-    }) || [],
-    backendIPConfigurations: pool.backendIPConfigurations?.map(config => config),
+    tunnelInterfaces:
+      pool.tunnelInterfaces?.map(r => {
+        return {
+          id: generateUniqueId({
+            port: r.port,
+            identifier: r.identifier,
+            protocol: r.protocol,
+            type: r.type,
+          }),
+          port: r.port,
+          identifier: r.identifier,
+          protocol: r.protocol,
+          type: r.type,
+        }
+      }) || [],
+    loadBalancerBackendAddresses:
+      pool.loadBalancerBackendAddresses?.map(r => {
+        return {
+          id: generateUniqueId({
+            name: r.name,
+            virtualNetwork: r.virtualNetwork?.id,
+            subnet: r.subnet?.id,
+            networkInterfaceIPConfiguration:
+              r.networkInterfaceIPConfiguration?.id,
+            loadBalancerFrontendIPConfiguration:
+              r.loadBalancerFrontendIPConfiguration?.id,
+          }),
+          name: r.name,
+          virtualNetwork: r.virtualNetwork?.id,
+          subnet: r.subnet?.id,
+          ipAddress: r.ipAddress,
+          networkInterfaceIPConfiguration:
+            r.networkInterfaceIPConfiguration?.id,
+          loadBalancerFrontendIPConfiguration:
+            r.loadBalancerFrontendIPConfiguration?.id,
+          inboundNatRulesPortMapping:
+            r.inboundNatRulesPortMapping?.map(m => {
+              return {
+                id: generateUniqueId({
+                  inboundNatRuleName: m.inboundNatRuleName,
+                  frontendPort: m.frontendPort,
+                  backendPort: m.backendPort,
+                }),
+                inboundNatRuleName: m.inboundNatRuleName,
+                frontendPort: m.frontendPort,
+                backendPort: m.backendPort,
+              }
+            }) || [],
+        }
+      }) || [],
+    backendIPConfigurations: pool.backendIPConfigurations?.map(
+      config => config
+    ),
     loadBalancingRules: pool.loadBalancingRules.map(r => r.id) || [],
     outboundRule: pool.outboundRule?.id,
     outboundRules: pool.outboundRules.map(r => r.id) || [],
@@ -184,7 +214,9 @@ export const formatBackendAddressPool = (pool: BackendAddressPool): AzureApplica
   }
 }
 
-export const formatApplicationSecurityGroup = (group: ApplicationSecurityGroup): AzureApplicationGatewayApplicationSecurityGroup => {
+export const formatApplicationSecurityGroup = (
+  group: ApplicationSecurityGroup
+): AzureApplicationGatewayApplicationSecurityGroup => {
   return {
     id: group.id,
     resourceGuid: group.resourceGuid,
@@ -192,7 +224,9 @@ export const formatApplicationSecurityGroup = (group: ApplicationSecurityGroup):
   }
 }
 
-export const formatSecurityRule = (securityRule: SecurityRule): AzureApplicationGatewaySecurityRule => {
+export const formatSecurityRule = (
+  securityRule: SecurityRule
+): AzureApplicationGatewaySecurityRule => {
   return {
     id: securityRule.id,
     name: securityRule.name,
@@ -203,14 +237,16 @@ export const formatSecurityRule = (securityRule: SecurityRule): AzureApplication
     destinationPortRange: securityRule.destinationPortRange,
     sourceAddressPrefix: securityRule.sourceAddressPrefix,
     sourceAddressPrefixes: securityRule.sourceAddressPrefixes,
-    sourceApplicationSecurityGroups: securityRule.sourceApplicationSecurityGroups?.map(
-      group => formatApplicationSecurityGroup(group)
-    ) || [],
+    sourceApplicationSecurityGroups:
+      securityRule.sourceApplicationSecurityGroups?.map(group =>
+        formatApplicationSecurityGroup(group)
+      ) || [],
     destinationAddressPrefix: securityRule.destinationAddressPrefix,
     destinationAddressPrefixes: securityRule.destinationAddressPrefixes,
-    destinationApplicationSecurityGroups: securityRule.destinationApplicationSecurityGroups?.map(
-      group => formatApplicationSecurityGroup(group)
-    ) || [],
+    destinationApplicationSecurityGroups:
+      securityRule.destinationApplicationSecurityGroups?.map(group =>
+        formatApplicationSecurityGroup(group)
+      ) || [],
     sourcePortRanges: securityRule.sourcePortRanges,
     destinationPortRanges: securityRule.destinationPortRanges,
     access: securityRule.access,
@@ -260,7 +296,9 @@ export const formatPrivateEndpointIPConfiguration = (
   }
 }
 
-export const formatPrivateEndpoint = (pe: PrivateEndpoint): AzureApplicationGatewayPrivateEndpoint => {
+export const formatPrivateEndpoint = (
+  pe: PrivateEndpoint
+): AzureApplicationGatewayPrivateEndpoint => {
   return {
     extendedLocation: {
       name: pe.extendedLocation?.name,
@@ -269,11 +307,24 @@ export const formatPrivateEndpoint = (pe: PrivateEndpoint): AzureApplicationGate
     subnet: pe.subnet,
     networkInterfaces: pe.networkInterfaces?.map(ni => ni) || [],
     provisioningState: pe.provisioningState,
-    privateLinkServiceConnections: pe.privateLinkServiceConnections?.map(c => formatPrivateLinkServiceConnection(c)) || [],
-    manualPrivateLinkServiceConnections: pe.manualPrivateLinkServiceConnections?.map(c => formatPrivateLinkServiceConnection(c)) || [],
-    customDnsConfigs: pe.customDnsConfigs?.map(c => formatCustomDnsConfigPropertiesFormat(c)) || [],
-    applicationSecurityGroups: pe.applicationSecurityGroups?.map(sg => formatApplicationSecurityGroup(sg)) || [],
-    ipConfigurations: pe.ipConfigurations?.map(c => formatPrivateEndpointIPConfiguration(c)) || [],
+    privateLinkServiceConnections:
+      pe.privateLinkServiceConnections?.map(c =>
+        formatPrivateLinkServiceConnection(c)
+      ) || [],
+    manualPrivateLinkServiceConnections:
+      pe.manualPrivateLinkServiceConnections?.map(c =>
+        formatPrivateLinkServiceConnection(c)
+      ) || [],
+    customDnsConfigs:
+      pe.customDnsConfigs?.map(c => formatCustomDnsConfigPropertiesFormat(c)) ||
+      [],
+    applicationSecurityGroups:
+      pe.applicationSecurityGroups?.map(sg =>
+        formatApplicationSecurityGroup(sg)
+      ) || [],
+    ipConfigurations:
+      pe.ipConfigurations?.map(c => formatPrivateEndpointIPConfiguration(c)) ||
+      [],
     customNetworkInterfaceName: pe.customNetworkInterfaceName,
   }
 }
@@ -285,17 +336,25 @@ export const formatFrontendIPConfiguration = (
     name: c.name,
     type: c.type,
     zones: c.zones,
-    inboundNatRuleIds: c.inboundNatRules.map(rule => {return {id: rule.id}}),
-    inboundNatPools: c.inboundNatPools.map(pool => {return {id: pool.id}}),
-    outboundRules: c.outboundRules.map(rule => {return {id: rule.id}}),
-    loadBalancingRules: c.loadBalancingRules.map(rule => {return {id: rule.id}}),
+    inboundNatRuleIds: c.inboundNatRules.map(rule => {
+      return { id: rule.id }
+    }),
+    inboundNatPools: c.inboundNatPools.map(pool => {
+      return { id: pool.id }
+    }),
+    outboundRules: c.outboundRules.map(rule => {
+      return { id: rule.id }
+    }),
+    loadBalancingRules: c.loadBalancingRules.map(rule => {
+      return { id: rule.id }
+    }),
     privateIPAddress: c.privateIPAddress,
     privateIPAllocationMethod: c.privateIPAllocationMethod,
     privateIPAddressVersion: c.privateIPAddressVersion,
     subnet: c.subnet,
     publicIPAddress: c.publicIPAddress,
-    publicIPPrefix: {id: c.publicIPPrefix?.id},
-    gatewayLoadBalancer: {id: c.gatewayLoadBalancer?.id},
+    publicIPPrefix: { id: c.publicIPPrefix?.id },
+    gatewayLoadBalancer: { id: c.gatewayLoadBalancer?.id },
     provisioningState: c.provisioningState,
   }
 }
@@ -330,34 +389,47 @@ export const formatApplicationGatewayPrivateEndpointConnection = (
   }
 }
 
-export const formatPrivateLinkService = (pls: PrivateLinkService): AzureApplicationGatewayPrivateLinkService => {
+export const formatPrivateLinkService = (
+  pls: PrivateLinkService
+): AzureApplicationGatewayPrivateLinkService => {
   return {
     id: pls.id,
     extendedLocation: {
       name: pls.extendedLocation?.name,
       type: pls.extendedLocation?.type,
     },
-    loadBalancerFrontendIpConfigurations: pls.loadBalancerFrontendIpConfigurations?.map(c => formatFrontendIPConfiguration(c)) || [],
-    ipConfigurations: pls.ipConfigurations?.map(c => formatPrivateLinkServiceIpConfiguration(c)) || [],
+    loadBalancerFrontendIpConfigurations:
+      pls.loadBalancerFrontendIpConfigurations?.map(c =>
+        formatFrontendIPConfiguration(c)
+      ) || [],
+    ipConfigurations:
+      pls.ipConfigurations?.map(c =>
+        formatPrivateLinkServiceIpConfiguration(c)
+      ) || [],
     networkInterfaces: pls.networkInterfaces?.map(ni => ni) || [],
     provisioningState: pls.provisioningState,
-    privateEndpointConnections: pls.privateEndpointConnections?.map(c => formatApplicationGatewayPrivateEndpointConnection(c)) || [],
-    visibility: {subscriptions: pls.visibility?.subscriptions},
-    autoApproval: {subscriptions: pls.autoApproval?.subscriptions},
+    privateEndpointConnections:
+      pls.privateEndpointConnections?.map(c =>
+        formatApplicationGatewayPrivateEndpointConnection(c)
+      ) || [],
+    visibility: { subscriptions: pls.visibility?.subscriptions },
+    autoApproval: { subscriptions: pls.autoApproval?.subscriptions },
     fqdns: pls.fqdns,
     alias: pls.alias,
     enableProxyProtocol: pls.enableProxyProtocol,
   }
 }
 
-export const formatNetworkInterface = (ni: NetworkInterface): AzureApplicationGatewayNetworkInterface => {
+export const formatNetworkInterface = (
+  ni: NetworkInterface
+): AzureApplicationGatewayNetworkInterface => {
   return {
     id: ni.id,
     extendedLocation: {
       name: ni.extendedLocation?.name,
       type: ni.extendedLocation?.type,
     },
-    virtualMachine: {id: ni.virtualMachine?.id},
+    virtualMachine: { id: ni.virtualMachine?.id },
     networkSecurityGroup: ni.networkSecurityGroup,
     privateEndpoint: formatPrivateEndpoint(ni.privateEndpoint),
     ipConfigurations: ni.ipConfigurations?.map(config => config) || [],
@@ -375,7 +447,7 @@ export const formatNetworkInterface = (ni: NetworkInterface): AzureApplicationGa
     enableAcceleratedNetworking: ni.enableAcceleratedNetworking,
     enableIPForwarding: ni.enableIPForwarding,
     hostedWorkloads: ni.hostedWorkloads,
-    dscpConfiguration: {id: ni.dscpConfiguration?.id},
+    dscpConfiguration: { id: ni.dscpConfiguration?.id },
     resourceGuid: ni.resourceGuid,
     provisioningState: ni.provisioningState,
     workloadType: ni.workloadType,
@@ -384,7 +456,6 @@ export const formatNetworkInterface = (ni: NetworkInterface): AzureApplicationGa
     migrationPhase: ni.migrationPhase,
   }
 }
-
 
 export const formatFlowLog = (fl: FlowLog): AzureApplicationGatewayFlowLog => {
   return {
@@ -403,23 +474,40 @@ export const formatFlowLog = (fl: FlowLog): AzureApplicationGatewayFlowLog => {
     },
     flowAnalyticsConfiguration: {
       networkWatcherFlowAnalyticsConfiguration: {
-        enabled: fl.flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration?.enabled,
-        workspaceId: fl.flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration?.workspaceId,
-        workspaceRegion: fl.flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration?.workspaceRegion,
-        workspaceResourceId: fl.flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration?.workspaceResourceId,
-        trafficAnalyticsInterval: fl.flowAnalyticsConfiguration?.networkWatcherFlowAnalyticsConfiguration?.trafficAnalyticsInterval,
+        enabled:
+          fl.flowAnalyticsConfiguration
+            ?.networkWatcherFlowAnalyticsConfiguration?.enabled,
+        workspaceId:
+          fl.flowAnalyticsConfiguration
+            ?.networkWatcherFlowAnalyticsConfiguration?.workspaceId,
+        workspaceRegion:
+          fl.flowAnalyticsConfiguration
+            ?.networkWatcherFlowAnalyticsConfiguration?.workspaceRegion,
+        workspaceResourceId:
+          fl.flowAnalyticsConfiguration
+            ?.networkWatcherFlowAnalyticsConfiguration?.workspaceResourceId,
+        trafficAnalyticsInterval:
+          fl.flowAnalyticsConfiguration
+            ?.networkWatcherFlowAnalyticsConfiguration
+            ?.trafficAnalyticsInterval,
       },
     },
-    provisioningState: fl.provisioningState
+    provisioningState: fl.provisioningState,
   }
 }
 
-export const formatNetworkSecurityGroup = (sg: NetworkSecurityGroup): AzureApplicationGatewayNetworkSecurityGroup => {
+export const formatNetworkSecurityGroup = (
+  sg: NetworkSecurityGroup
+): AzureApplicationGatewayNetworkSecurityGroup => {
   return {
     id: sg.id,
-    securityRules: sg.securityRules?.map(rule => formatSecurityRule(rule)) || [],
-    defaultSecurityRules: sg.defaultSecurityRules?.map(rule => formatSecurityRule(rule)) || [],
-    networkInterfaces: sg.networkInterfaces?.map(ni => formatNetworkInterface(ni)),
+    securityRules:
+      sg.securityRules?.map(rule => formatSecurityRule(rule)) || [],
+    defaultSecurityRules:
+      sg.defaultSecurityRules?.map(rule => formatSecurityRule(rule)) || [],
+    networkInterfaces: sg.networkInterfaces?.map(ni =>
+      formatNetworkInterface(ni)
+    ),
     subnets: sg.subnets?.map(subnet => subnet) || [],
     flowLogs: sg.flowLogs?.map(fl => formatFlowLog(fl)) || [],
     resourceGuid: sg.resourceGuid,
@@ -431,7 +519,11 @@ export const formatServiceEndpointPropertiesFormat = (
   format: ServiceEndpointPropertiesFormat
 ): AzureApplicationGatewayServiceEndpointPropertiesFormat => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      service: format.service,
+      locations: format.locations,
+      provisioningState: format.provisioningState,
+    }),
     service: format.service,
     locations: format.locations,
     provisioningState: format.provisioningState,
@@ -452,11 +544,16 @@ export const formatServiceEndpointPolicyDefinition = (
   }
 }
 
-export const formatServiceEndpointPolicy = (sep: ServiceEndpointPolicy): AzureApplicationGatewayServiceEndpointPolicy => {
+export const formatServiceEndpointPolicy = (
+  sep: ServiceEndpointPolicy
+): AzureApplicationGatewayServiceEndpointPolicy => {
   return {
     id: sep.id,
     kind: sep.kind,
-    serviceEndpointPolicyDefinitions: sep.serviceEndpointPolicyDefinitions?.map(def => formatServiceEndpointPolicyDefinition(def)) || [],
+    serviceEndpointPolicyDefinitions:
+      sep.serviceEndpointPolicyDefinitions?.map(def =>
+        formatServiceEndpointPolicyDefinition(def)
+      ) || [],
     subnets: sep.subnets?.map(subnet => subnet) || [],
     resourceGuid: sep.resourceGuid,
     provisioningState: sep.provisioningState,
@@ -465,7 +562,9 @@ export const formatServiceEndpointPolicy = (sep: ServiceEndpointPolicy): AzureAp
   }
 }
 
-export const formatIPConfigurationProfile = (profile: IPConfigurationProfile): AzureApplicationGatewayIpConfigurationProfile => {
+export const formatIPConfigurationProfile = (
+  profile: IPConfigurationProfile
+): AzureApplicationGatewayIpConfigurationProfile => {
   return {
     id: profile.id,
     name: profile.name,
@@ -475,7 +574,9 @@ export const formatIPConfigurationProfile = (profile: IPConfigurationProfile): A
   }
 }
 
-export const formatResourceNavigationLink = (link: ResourceNavigationLink): AzureApplicationGatewayResourceNavigationLink => {
+export const formatResourceNavigationLink = (
+  link: ResourceNavigationLink
+): AzureApplicationGatewayResourceNavigationLink => {
   return {
     id: link.id,
     name: link.name,
@@ -486,9 +587,11 @@ export const formatResourceNavigationLink = (link: ResourceNavigationLink): Azur
   }
 }
 
-export const formatServiceAssociationLink = (link: ServiceAssociationLink): AzureApplicationGatewayServiceAssociationLink => {
+export const formatServiceAssociationLink = (
+  link: ServiceAssociationLink
+): AzureApplicationGatewayServiceAssociationLink => {
   return {
-    id: link .id,
+    id: link.id,
     name: link.name,
     type: link.type,
     linkedResourceType: link.linkedResourceType,
@@ -499,7 +602,9 @@ export const formatServiceAssociationLink = (link: ServiceAssociationLink): Azur
   }
 }
 
-export const formatDelegation = (delegation: Delegation): AzureApplicationGatewayDelegation => {
+export const formatDelegation = (
+  delegation: Delegation
+): AzureApplicationGatewayDelegation => {
   return {
     id: delegation.id,
     name: delegation.name,
@@ -528,7 +633,9 @@ export const formatSubnet = (subnet: Subnet): AzureApplicationGatewaySubnet => {
     type: subnet.type,
     addressPrefix: subnet.addressPrefix,
     addressPrefixes: subnet.addressPrefixes,
-    networkSecurityGroup: subnet.networkSecurityGroup ? formatNetworkSecurityGroup(subnet.networkSecurityGroup) : {},
+    networkSecurityGroup: subnet.networkSecurityGroup
+      ? formatNetworkSecurityGroup(subnet.networkSecurityGroup)
+      : {},
     routeTable: {
       id: subnet.routeTable?.id,
       routes: subnet.routeTable?.routes?.map(route => {
@@ -548,31 +655,51 @@ export const formatSubnet = (subnet: Subnet): AzureApplicationGatewaySubnet => {
       provisioningState: subnet.routeTable?.provisioningState,
       resourceGuid: subnet.routeTable?.resourceGuid,
     },
-    natGateway: {id: subnet.natGateway?.id},
-    serviceEndpoints: subnet.serviceEndpoints?.map(e => formatServiceEndpointPropertiesFormat(e)) || [],
-    serviceEndpointPolicies: subnet.serviceEndpointPolicies?.map(policy => formatServiceEndpointPolicy(policy)) || [],
+    natGateway: { id: subnet.natGateway?.id },
+    serviceEndpoints:
+      subnet.serviceEndpoints?.map(e =>
+        formatServiceEndpointPropertiesFormat(e)
+      ) || [],
+    serviceEndpointPolicies:
+      subnet.serviceEndpointPolicies?.map(policy =>
+        formatServiceEndpointPolicy(policy)
+      ) || [],
     privateEndpoints: subnet.privateEndpoints?.map(endpoint => endpoint) || [],
     ipConfigurations: subnet.ipConfigurations?.map(config => config) || [],
-    ipConfigurationProfiles: subnet.ipConfigurationProfiles?.map(profile => formatIPConfigurationProfile(profile)) || [],
-    ipAllocations: subnet.ipAllocations?.map(allocation => {
-      return {
-        id: allocation.id,
-      }
-    }) || [],
-    resourceNavigationLinks: subnet.resourceNavigationLinks?.map(link => formatResourceNavigationLink(link)) || [],
-    serviceAssociationLinks: subnet.serviceAssociationLinks?.map(link => formatServiceAssociationLink(link)) || [],
-    delegations: subnet.delegations?.map(delegation => formatDelegation(delegation)) || [],
+    ipConfigurationProfiles:
+      subnet.ipConfigurationProfiles?.map(profile =>
+        formatIPConfigurationProfile(profile)
+      ) || [],
+    ipAllocations:
+      subnet.ipAllocations?.map(allocation => {
+        return {
+          id: allocation.id,
+        }
+      }) || [],
+    resourceNavigationLinks:
+      subnet.resourceNavigationLinks?.map(link =>
+        formatResourceNavigationLink(link)
+      ) || [],
+    serviceAssociationLinks:
+      subnet.serviceAssociationLinks?.map(link =>
+        formatServiceAssociationLink(link)
+      ) || [],
+    delegations:
+      subnet.delegations?.map(delegation => formatDelegation(delegation)) || [],
     purpose: subnet.purpose,
     provisioningState: subnet.provisioningState,
     privateEndpointNetworkPolicies: subnet.privateEndpointNetworkPolicies,
     privateLinkServiceNetworkPolicies: subnet.privateLinkServiceNetworkPolicies,
-    applicationGatewayIpConfigurations: subnet.applicationGatewayIpConfigurations?.map(
-      config => formatApplicationGatewayIPConfiguration(config)
-    ) || [],
+    applicationGatewayIpConfigurations:
+      subnet.applicationGatewayIpConfigurations?.map(config =>
+        formatApplicationGatewayIPConfiguration(config)
+      ) || [],
   }
 }
 
-export const formatIPConfiguration = (config: IPConfiguration): AzureApplicationGatewayIpConfiguration => {
+export const formatIPConfiguration = (
+  config: IPConfiguration
+): AzureApplicationGatewayIpConfiguration => {
   return {
     id: config.id,
     name: config.id,
@@ -584,140 +711,160 @@ export const formatIPConfiguration = (config: IPConfiguration): AzureApplication
   }
 }
 
-const formatVirtualNetworkTap = (tap: VirtualNetworkTap): AzureApplicationGatewayVirtualNetworkTap | undefined => {
-  return tap 
+const formatVirtualNetworkTap = (
+  tap: VirtualNetworkTap
+): AzureApplicationGatewayVirtualNetworkTap | undefined => {
+  return tap
     ? {
-      id: tap.id,
-      name: tap.name,
-      type: tap.type,
-      networkInterfaceTapConfigurations: tap.networkInterfaceTapConfigurations?.map(
-        config => {
-          return {
-            id: config.id,
-            name: config.name,
-            type: config.type,
-            virtualNetworkTap: formatVirtualNetworkTap(config.virtualNetworkTap),
-            provisioningState: config.provisioningState,
-          }
-        }
-      ),
-      resourceGuid: tap.resourceGuid,
-      destinationNetworkInterfaceIPConfiguration: tap.destinationNetworkInterfaceIPConfiguration,
-      destinationLoadBalancerFrontEndIPConfiguration: 
-        tap.destinationLoadBalancerFrontEndIPConfiguration 
-        ? formatFrontendIPConfiguration(tap.destinationLoadBalancerFrontEndIPConfiguration)
-        : {},
-      destinationPort: tap.destinationPort,
-      provisioningState: tap.provisioningState,
-    }
+        id: tap.id,
+        name: tap.name,
+        type: tap.type,
+        networkInterfaceTapConfigurations:
+          tap.networkInterfaceTapConfigurations?.map(config => {
+            return {
+              id: config.id,
+              name: config.name,
+              type: config.type,
+              virtualNetworkTap: formatVirtualNetworkTap(
+                config.virtualNetworkTap
+              ),
+              provisioningState: config.provisioningState,
+            }
+          }),
+        resourceGuid: tap.resourceGuid,
+        destinationNetworkInterfaceIPConfiguration:
+          tap.destinationNetworkInterfaceIPConfiguration,
+        destinationLoadBalancerFrontEndIPConfiguration:
+          tap.destinationLoadBalancerFrontEndIPConfiguration
+            ? formatFrontendIPConfiguration(
+                tap.destinationLoadBalancerFrontEndIPConfiguration
+              )
+            : {},
+        destinationPort: tap.destinationPort,
+        provisioningState: tap.provisioningState,
+      }
     : undefined
 }
 
-const formatPublicIPAddress = (pIp: PublicIPAddress): AzureApplicationGatewayPublicIpAddress | undefined => {
+const formatPublicIPAddress = (
+  pIp: PublicIPAddress
+): AzureApplicationGatewayPublicIpAddress | undefined => {
   return pIp
     ? {
-      id: pIp.id,
-      extendedLocation: {
-        name: pIp.extendedLocation?.name,
-        type: pIp.extendedLocation?.type,
-      },
-      zones: pIp.zones,
-      publicIPAllocationMethod: pIp.publicIPAllocationMethod,
-      publicIPAddressVersion: pIp.publicIPAddressVersion,
-      ipConfiguration: pIp.ipConfiguration ? formatIPConfiguration(pIp.ipConfiguration) : undefined,
-      dnsDomainNameLabel: pIp.dnsSettings?.domainNameLabel,
-      dnsFqdn: pIp.dnsSettings?.fqdn,
-      dnsReverseFqdn: pIp.dnsSettings?.reverseFqdn,
-      ipTags: pIp.ipTags?.map(tag => {
-        return {
-          id: cuid(),
-          ipTagType: tag.ipTagType,
-          tag: tag.tag,
-        }
-      }) || [],
-      ipAddress: pIp.ipAddress,
-      publicIPPrefix: {id: pIp.publicIPPrefix?.id},
-      idleTimeoutInMinutes: pIp.idleTimeoutInMinutes,
-      resourceGuid: pIp.resourceGuid,
-      provisioningState: pIp.provisioningState,
-      servicePublicIPAddress: pIp.servicePublicIPAddress,
-      natGateway: {
-        id: pIp.natGateway?.id,
-        zones: pIp.natGateway?.zones,
-        idleTimeoutInMinutes: pIp.natGateway?.idleTimeoutInMinutes,
-        publicIpAddresses: pIp.natGateway?.publicIpAddresses?.map(r => {return {id: r.id}}),
-        publicIpPrefixes: pIp.natGateway?.publicIpPrefixes?.map(r => {return {id: r.id}}),
-        subnets: pIp.natGateway?.subnets?.map(r => {return {id: r.id}}),
-        resourceGuid: pIp.natGateway?.resourceGuid,
-        provisioningState: pIp.natGateway?.provisioningState,
-      },
-      migrationPhase: pIp.migrationPhase,
-      linkedPublicIPAddress: pIp.linkedPublicIPAddress,
-      deleteOption: pIp.deleteOption,
-    }
+        id: pIp.id,
+        extendedLocation: {
+          name: pIp.extendedLocation?.name,
+          type: pIp.extendedLocation?.type,
+        },
+        zones: pIp.zones,
+        publicIPAllocationMethod: pIp.publicIPAllocationMethod,
+        publicIPAddressVersion: pIp.publicIPAddressVersion,
+        ipConfiguration: pIp.ipConfiguration
+          ? formatIPConfiguration(pIp.ipConfiguration)
+          : undefined,
+        dnsDomainNameLabel: pIp.dnsSettings?.domainNameLabel,
+        dnsFqdn: pIp.dnsSettings?.fqdn,
+        dnsReverseFqdn: pIp.dnsSettings?.reverseFqdn,
+        ipTags:
+          pIp.ipTags?.map(tag => {
+            return {
+              id: generateUniqueId({ ipTagType: tag.ipTagType, tag: tag.tag }),
+              ipTagType: tag.ipTagType,
+              tag: tag.tag,
+            }
+          }) || [],
+        ipAddress: pIp.ipAddress,
+        publicIPPrefix: { id: pIp.publicIPPrefix?.id },
+        idleTimeoutInMinutes: pIp.idleTimeoutInMinutes,
+        resourceGuid: pIp.resourceGuid,
+        provisioningState: pIp.provisioningState,
+        servicePublicIPAddress: pIp.servicePublicIPAddress,
+        natGateway: {
+          id: pIp.natGateway?.id,
+          zones: pIp.natGateway?.zones,
+          idleTimeoutInMinutes: pIp.natGateway?.idleTimeoutInMinutes,
+          publicIpAddresses: pIp.natGateway?.publicIpAddresses?.map(r => {
+            return { id: r.id }
+          }),
+          publicIpPrefixes: pIp.natGateway?.publicIpPrefixes?.map(r => {
+            return { id: r.id }
+          }),
+          subnets: pIp.natGateway?.subnets?.map(r => {
+            return { id: r.id }
+          }),
+          resourceGuid: pIp.natGateway?.resourceGuid,
+          provisioningState: pIp.natGateway?.provisioningState,
+        },
+        migrationPhase: pIp.migrationPhase,
+        linkedPublicIPAddress: pIp.linkedPublicIPAddress,
+        deleteOption: pIp.deleteOption,
+      }
     : undefined
 }
 
 const formatNetworkInterfaceIPConfiguration = (
   config: NetworkInterfaceIPConfiguration
 ): AzureApplicationGatewayNetworkInterfaceIpConfiguration | undefined => {
-  return config 
-  ? {
-    id: config.id,
-    name: config.name,
-    type: config.type,
-    gatewayLoadBalancer: {id: config.gatewayLoadBalancer?.id},
-    virtualNetworkTaps: config.virtualNetworkTaps?.map(
-      tap => formatVirtualNetworkTap(tap)
-    ),
-    applicationGatewayBackendAddressPools: config.applicationGatewayBackendAddressPools?.map(
-      p => p
-    ) || [],
-    loadBalancerBackendAddressPools: config.loadBalancerBackendAddressPools?.map(
-      p => formatBackendAddressPool(p)
-    ) || [],
-    loadBalancerInboundNatRules: config.loadBalancerInboundNatRules?.map(r => {
-      return {
-        id: r.id,
-        name: r.name,
-        type: r.type,
-        frontendIPConfiguration: {id: r.frontendIPConfiguration?.id},
-        backendIPConfiguration: formatNetworkInterfaceIPConfiguration(r.backendIPConfiguration),
-        protocol: r.protocol,
-        frontendPort: r.frontendPort, 
-        backendPort: r.backendPort, 
-        idleTimeoutInMinutes: r.idleTimeoutInMinutes, 
-        enableFloatingIP: r.enableFloatingIP, 
-        enableTcpReset: r.enableTcpReset, 
-        frontendPortRangeStart: r.frontendPortRangeStart, 
-        frontendPortRangeEnd: r.frontendPortRangeEnd, 
-        backendAddressPool: {id: r.backendAddressPool?.id}, 
-        provisioningState: r.provisioningState, 
+  return config
+    ? {
+        id: config.id,
+        name: config.name,
+        type: config.type,
+        gatewayLoadBalancer: { id: config.gatewayLoadBalancer?.id },
+        virtualNetworkTaps: config.virtualNetworkTaps?.map(tap =>
+          formatVirtualNetworkTap(tap)
+        ),
+        applicationGatewayBackendAddressPools:
+          config.applicationGatewayBackendAddressPools?.map(p => p) || [],
+        loadBalancerBackendAddressPools:
+          config.loadBalancerBackendAddressPools?.map(p =>
+            formatBackendAddressPool(p)
+          ) || [],
+        loadBalancerInboundNatRules:
+          config.loadBalancerInboundNatRules?.map(r => {
+            return {
+              id: r.id,
+              name: r.name,
+              type: r.type,
+              frontendIPConfiguration: { id: r.frontendIPConfiguration?.id },
+              backendIPConfiguration: formatNetworkInterfaceIPConfiguration(
+                r.backendIPConfiguration
+              ),
+              protocol: r.protocol,
+              frontendPort: r.frontendPort,
+              backendPort: r.backendPort,
+              idleTimeoutInMinutes: r.idleTimeoutInMinutes,
+              enableFloatingIP: r.enableFloatingIP,
+              enableTcpReset: r.enableTcpReset,
+              frontendPortRangeStart: r.frontendPortRangeStart,
+              frontendPortRangeEnd: r.frontendPortRangeEnd,
+              backendAddressPool: { id: r.backendAddressPool?.id },
+              provisioningState: r.provisioningState,
+            }
+          }) || [],
+        privateIPAddress: config.privateIPAddress,
+        privateIPAllocationMethod: config.privateIPAllocationMethod,
+        privateIPAddressVersion: config.privateIPAddressVersion,
+        subnet: config.subnet ? formatSubnet(config.subnet) : {},
+        primary: config.primary,
+        publicIPAddress: formatPublicIPAddress(config.publicIPAddress),
+        applicationSecurityGroups:
+          config.applicationSecurityGroups?.map(g => {
+            return {
+              id: g.id,
+              resourceGuid: g.resourceGuid,
+              provisioningState: g.provisioningState,
+            }
+          }) || [],
+        provisioningState: config.provisioningState,
+        privateLinkConnectionProperties: {
+          groupId: config.privateLinkConnectionProperties?.groupId,
+          requiredMemberName:
+            config.privateLinkConnectionProperties?.requiredMemberName,
+          fqdns: config.privateLinkConnectionProperties?.fqdns,
+        },
       }
-    }) || [],
-    privateIPAddress: config.privateIPAddress,
-    privateIPAllocationMethod: config.privateIPAllocationMethod,
-    privateIPAddressVersion: config.privateIPAddressVersion,
-    subnet: config.subnet ? formatSubnet(config.subnet) : {},
-    primary: config.primary,
-    publicIPAddress: formatPublicIPAddress(config.publicIPAddress),
-    applicationSecurityGroups: config.applicationSecurityGroups?.map(
-      g => {
-        return {
-          id: cuid(),
-          resourceGuid: g.resourceGuid,
-          provisioningState: g.provisioningState,
-        }
-      }
-    ) || [],
-    provisioningState: config.provisioningState,
-    privateLinkConnectionProperties: {
-      groupId: config.privateLinkConnectionProperties?.groupId,
-      requiredMemberName: config.privateLinkConnectionProperties?.requiredMemberName,
-      fqdns: config.privateLinkConnectionProperties?.fqdns,
-    }
-  }
-  : undefined
+    : undefined
 }
 
 const formatApplicationGatewayBackendAddressPool = (
@@ -725,23 +872,24 @@ const formatApplicationGatewayBackendAddressPool = (
 ): AzureApplicationGatewayApplicationGatewayBackendAddressPool | undefined => {
   return pool
     ? {
-      id: pool.id,
-      name: pool.name,
-      type: pool.type,
-      backendIPConfigurations: pool.backendIPConfigurations?.map(
-        c => formatNetworkInterfaceIPConfiguration(c)
-      ),
-      backendAddresses: pool.backendAddresses?.map(
-        a => {
+        id: pool.id,
+        name: pool.name,
+        type: pool.type,
+        backendIPConfigurations: pool.backendIPConfigurations?.map(c =>
+          formatNetworkInterfaceIPConfiguration(c)
+        ),
+        backendAddresses: pool.backendAddresses?.map(a => {
           return {
-            id: cuid(),
+            id: generateUniqueId({
+              fqdn: a.fqdn,
+              ipAddress: a.ipAddress,
+            }),
             fqdn: a.fqdn,
             ipAddress: a.ipAddress,
           }
-        }
-      ),
-      provisioningState: pool.provisioningState,
-    }
+        }),
+        provisioningState: pool.provisioningState,
+      }
     : undefined
 }
 
@@ -754,7 +902,6 @@ const formatApplicationGatewayConnectionDraining = (
   }
 }
 
-
 const formatApplicationGatewayBackendHttpSettings = (
   setting: ApplicationGatewayBackendHttpSettings
 ): AzureApplicationGatewayApplicationGatewayBackendHttpSettings => {
@@ -766,14 +913,18 @@ const formatApplicationGatewayBackendHttpSettings = (
     protocol: setting.protocol,
     cookieBasedAffinity: setting.cookieBasedAffinity,
     requestTimeout: setting.requestTimeout,
-    probe: {id: setting.probe?.id},
-    authenticationCertificates: setting.authenticationCertificates?.map(
-      certificate => {return {id: certificate.id}}
-    ) || [],
-    trustedRootCertificates: setting.trustedRootCertificates?.map(
-      certificate => {return {id: certificate.id}}
-    ) || [],
-    connectionDraining: setting.connectionDraining ? formatApplicationGatewayConnectionDraining(setting.connectionDraining) : {},
+    probe: { id: setting.probe?.id },
+    authenticationCertificates:
+      setting.authenticationCertificates?.map(certificate => {
+        return { id: certificate.id }
+      }) || [],
+    trustedRootCertificates:
+      setting.trustedRootCertificates?.map(certificate => {
+        return { id: certificate.id }
+      }) || [],
+    connectionDraining: setting.connectionDraining
+      ? formatApplicationGatewayConnectionDraining(setting.connectionDraining)
+      : {},
     hostName: setting.hostName,
     pickHostNameFromBackendAddress: setting.pickHostNameFromBackendAddress,
     affinityCookieName: setting.affinityCookieName,
@@ -790,22 +941,26 @@ const formatApplicationGatewayHttpListener = (
     id: listener.id,
     name: listener.name,
     type: listener.type,
-    frontendIPConfiguration: {id: listener.frontendIPConfiguration?.id},
-    frontendPort: {id: listener.frontendPort?.id},
+    frontendIPConfiguration: { id: listener.frontendIPConfiguration?.id },
+    frontendPort: { id: listener.frontendPort?.id },
     protocol: listener.protocol,
     hostName: listener.hostName,
-    sslCertificate: {id: listener.sslCertificate?.id},
-    sslProfile: {id: listener.sslProfile?.id},
+    sslCertificate: { id: listener.sslCertificate?.id },
+    sslProfile: { id: listener.sslProfile?.id },
     requireServerNameIndication: listener.requireServerNameIndication,
     provisioningState: listener.provisioningState,
-    customErrorConfigurations: listener.customErrorConfigurations?.map(config => {
-      return {
-        id: cuid(),
-        statusCode: config.statusCode,
-        customErrorPageUrl: config.customErrorPageUrl,
-      }
-    }) || [],
-    firewallPolicy: {id: listener.firewallPolicy?.id},
+    customErrorConfigurations:
+      listener.customErrorConfigurations?.map(config => {
+        return {
+          id: generateUniqueId({
+            statusCode: config.statusCode,
+            customErrorPageUrl: config.customErrorPageUrl,
+          }),
+          statusCode: config.statusCode,
+          customErrorPageUrl: config.customErrorPageUrl,
+        }
+      }) || [],
+    firewallPolicy: { id: listener.firewallPolicy?.id },
     hostNames: listener.hostNames,
   }
 }
@@ -818,13 +973,13 @@ const formatApplicationGatewayPathRule = (
     name: map.name,
     type: map.type,
     paths: map.paths,
-    backendAddressPool: {id: map.backendAddressPool?.id},
-    backendHttpSettings: {id: map.backendHttpSettings?.id},
-    redirectConfiguration: {id: map.redirectConfiguration?.id},
-    rewriteRuleSet: {id: map.rewriteRuleSet?.id},
-    loadDistributionPolicy: {id: map.loadDistributionPolicy?.id},
+    backendAddressPool: { id: map.backendAddressPool?.id },
+    backendHttpSettings: { id: map.backendHttpSettings?.id },
+    redirectConfiguration: { id: map.redirectConfiguration?.id },
+    rewriteRuleSet: { id: map.rewriteRuleSet?.id },
+    loadDistributionPolicy: { id: map.loadDistributionPolicy?.id },
     provisioningState: map.provisioningState,
-    firewallPolicy: {id: map.firewallPolicy?.id},
+    firewallPolicy: { id: map.firewallPolicy?.id },
   }
 }
 
@@ -835,12 +990,15 @@ const formatApplicationGatewayUrlPathMap = (
     id: map.id,
     name: map.name,
     type: map.type,
-    defaultBackendAddressPool: {id: map.defaultBackendAddressPool?.id},
-    defaultBackendHttpSettings: {id: map.defaultBackendHttpSettings?.id},
-    defaultRewriteRuleSet: {id: map.defaultRewriteRuleSet?.id},
-    defaultRedirectConfiguration: {id: map.defaultRedirectConfiguration?.id},
-    defaultLoadDistributionPolicy: {id: map.defaultLoadDistributionPolicy?.id},
-    pathRules: map.pathRules?.map(rule => formatApplicationGatewayPathRule(rule)) || [],
+    defaultBackendAddressPool: { id: map.defaultBackendAddressPool?.id },
+    defaultBackendHttpSettings: { id: map.defaultBackendHttpSettings?.id },
+    defaultRewriteRuleSet: { id: map.defaultRewriteRuleSet?.id },
+    defaultRedirectConfiguration: { id: map.defaultRedirectConfiguration?.id },
+    defaultLoadDistributionPolicy: {
+      id: map.defaultLoadDistributionPolicy?.id,
+    },
+    pathRules:
+      map.pathRules?.map(rule => formatApplicationGatewayPathRule(rule)) || [],
     provisioningState: map.provisioningState,
   }
 }
@@ -854,13 +1012,13 @@ const formatApplicationGatewayRequestRoutingRule = (
     type: rule.type,
     ruleType: rule.ruleType,
     priority: rule.priority,
-    backendAddressPool: {id: rule.backendAddressPool?.id},
-    backendHttpSettings: {id: rule.backendHttpSettings?.id},
-    httpListener: {id: rule.httpListener?.id},
-    urlPathMap: {id: rule.urlPathMap?.id},
-    rewriteRuleSet: {id: rule.rewriteRuleSet?.id},
-    redirectConfiguration: {id: rule.redirectConfiguration?.id},
-    loadDistributionPolicy: {id: rule.loadDistributionPolicy?.id},
+    backendAddressPool: { id: rule.backendAddressPool?.id },
+    backendHttpSettings: { id: rule.backendHttpSettings?.id },
+    httpListener: { id: rule.httpListener?.id },
+    urlPathMap: { id: rule.urlPathMap?.id },
+    rewriteRuleSet: { id: rule.rewriteRuleSet?.id },
+    redirectConfiguration: { id: rule.redirectConfiguration?.id },
+    loadDistributionPolicy: { id: rule.loadDistributionPolicy?.id },
     provisioningState: rule.provisioningState,
   }
 }
@@ -871,7 +1029,10 @@ const formatApplicationGatewayRewriteRuleSet = (
   return {
     id: ruleSet.id,
     name: ruleSet.name,
-    rewriteRules: ruleSet.rewriteRules?.map(rule => formatApplicationGatewayRequestRoutingRule(rule)) || [],
+    rewriteRules:
+      ruleSet.rewriteRules?.map(rule =>
+        formatApplicationGatewayRequestRoutingRule(rule)
+      ) || [],
     provisioningState: ruleSet.provisioningState,
   }
 }
@@ -884,13 +1045,22 @@ const formatApplicationGatewayRedirectConfiguration = (
     name: config.name,
     type: config.type,
     redirectType: config.redirectType,
-    targetListener: {id: config.targetListener?.id},
+    targetListener: { id: config.targetListener?.id },
     targetUrl: config.targetUrl,
     includePath: config.includePath,
     includeQueryString: config.includeQueryString,
-    requestRoutingRules: config.requestRoutingRules?.map(rule => {return {id: rule.id}}) || [],
-    urlPathMaps: config.urlPathMaps?.map(map => {return {id: map.id}}) || [],
-    pathRules: config.pathRules?.map(rule => {return {id: rule.id}}) || [],
+    requestRoutingRules:
+      config.requestRoutingRules?.map(rule => {
+        return { id: rule.id }
+      }) || [],
+    urlPathMaps:
+      config.urlPathMaps?.map(map => {
+        return { id: map.id }
+      }) || [],
+    pathRules:
+      config.pathRules?.map(rule => {
+        return { id: rule.id }
+      }) || [],
   }
 }
 
@@ -898,7 +1068,9 @@ const formatApplicationGatewayFirewallDisabledRuleGroup = (
   ruleGroup: ApplicationGatewayFirewallDisabledRuleGroup
 ): AzureApplicationGatewayApplicationGatewayFirewallDisabledRuleGroup => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      ruleGroupName: ruleGroup.ruleGroupName,
+    }),
     ruleGroupName: ruleGroup.ruleGroupName,
     rules: ruleGroup.rules,
   }
@@ -908,7 +1080,11 @@ const formatApplicationGatewayFirewallExclusion = (
   exclusion: ApplicationGatewayFirewallExclusion
 ): AzureApplicationGatewayApplicationGatewayFirewallExclusion => {
   return {
-    id: cuid(),
+    id: generateUniqueId({
+      matchVariable: exclusion.matchVariable,
+      selectorMatchOperator: exclusion.selectorMatchOperator,
+      selector: exclusion.selector,
+    }),
     matchVariable: exclusion.matchVariable,
     selectorMatchOperator: exclusion.selectorMatchOperator,
     selector: exclusion.selector,
@@ -923,12 +1099,18 @@ const formatApplicationGatewayWebApplicationFirewallConfiguration = (
     firewallMode: config.firewallMode,
     ruleSetType: config.ruleSetType,
     ruleSetVersion: config.ruleSetVersion,
-    disabledRuleGroups: config.disabledRuleGroups?.map(ruleGroup => formatApplicationGatewayFirewallDisabledRuleGroup(ruleGroup)) || [],
+    disabledRuleGroups:
+      config.disabledRuleGroups?.map(ruleGroup =>
+        formatApplicationGatewayFirewallDisabledRuleGroup(ruleGroup)
+      ) || [],
     requestBodyCheck: config.requestBodyCheck,
     maxRequestBodySize: config.maxRequestBodySize,
     maxRequestBodySizeInKb: config.maxRequestBodySizeInKb,
     fileUploadLimitInMb: config.fileUploadLimitInMb,
-    exclusions: config.exclusions?.map(exclusion => formatApplicationGatewayFirewallExclusion(exclusion)) || [],
+    exclusions:
+      config.exclusions?.map(exclusion =>
+        formatApplicationGatewayFirewallExclusion(exclusion)
+      ) || [],
   }
 }
 
@@ -941,7 +1123,7 @@ const formatApplicationGatewayPrivateLinkIpConfiguration = (
     type: config.type,
     privateIPAddress: config.privateIPAddress,
     privateIPAllocationMethod: config.privateIPAllocationMethod,
-    subnet: {id: config.subnet?.id},
+    subnet: { id: config.subnet?.id },
     primary: config.primary,
     provisioningState: config.provisioningState,
   }
@@ -954,7 +1136,10 @@ const formatApplicationGatewayPrivateLinkConfiguration = (
     id: config.id,
     name: config.name,
     type: config.type,
-    ipConfigurations: config.ipConfigurations?.map(c => formatApplicationGatewayPrivateLinkIpConfiguration(c)) || [],
+    ipConfigurations:
+      config.ipConfigurations?.map(c =>
+        formatApplicationGatewayPrivateLinkIpConfiguration(c)
+      ) || [],
     provisioningState: config.provisioningState,
   }
 }
@@ -966,15 +1151,16 @@ const formatApplicationGatewayLoadDistributionPolicy = (
     id: config.id,
     name: config.name,
     type: config.type,
-    loadDistributionTargets: config.loadDistributionTargets?.map(target => {
-      return {
-        id: target.id,
-        name: target.name,
-        type: target.type,
-        weightPerServer: target.weightPerServer,
-        backendAddressPool: {id: target.backendAddressPool?.id},
-      }
-    }) || [],
+    loadDistributionTargets:
+      config.loadDistributionTargets?.map(target => {
+        return {
+          id: target.id,
+          name: target.name,
+          type: target.type,
+          weightPerServer: target.weightPerServer,
+          backendAddressPool: { id: target.backendAddressPool?.id },
+        }
+      }) || [],
     loadDistributionAlgorithm: config.loadDistributionAlgorithm,
     provisioningState: config.provisioningState,
   }
@@ -1028,7 +1214,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     region,
     tags: formatTagsFromMap(Tags),
@@ -1037,166 +1223,162 @@ export default ({
       principalId: identity?.principalId,
       tenantId: identity?.tenantId,
       type: identity?.type,
-      userAssignedIdentities: identity?.userAssignedIdentities ? formatUserAssignedIdentities(identity?.userAssignedIdentities) : [],
+      userAssignedIdentities: identity?.userAssignedIdentities
+        ? formatUserAssignedIdentities(identity?.userAssignedIdentities)
+        : [],
     },
     sslPolicy: formatApplicationGatewaySslPolicy(sslPolicy),
     operationalState,
-    gatewayIPConfigurations: gatewayIPConfigurations.map(
-      config => {
-        return {
-          id: config.id,
-          name: config.name,
-          type: config.type,
-          subnetId: config.subnet?.id,
-          provisioningState: config.provisioningState,
-        }
+    gatewayIPConfigurations: gatewayIPConfigurations.map(config => {
+      return {
+        id: config.id,
+        name: config.name,
+        type: config.type,
+        subnetId: config.subnet?.id,
+        provisioningState: config.provisioningState,
       }
-    ),
-    authenticationCertificates: authenticationCertificates.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          data: c.data,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    authenticationCertificates: authenticationCertificates.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        data: c.data,
+        provisioningState: c.provisioningState,
       }
-    ),
-    trustedRootCertificates: trustedRootCertificates.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          data: c.data,
-          keyVaultSecretId: c.keyVaultSecretId,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    trustedRootCertificates: trustedRootCertificates.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        data: c.data,
+        keyVaultSecretId: c.keyVaultSecretId,
+        provisioningState: c.provisioningState,
       }
-    ),
-    trustedClientCertificates: trustedClientCertificates.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          data: c.data,
-          validatedCertData: c.validatedCertData,
-          clientCertIssuerDN: c.clientCertIssuerDN,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    trustedClientCertificates: trustedClientCertificates.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        data: c.data,
+        validatedCertData: c.validatedCertData,
+        clientCertIssuerDN: c.clientCertIssuerDN,
+        provisioningState: c.provisioningState,
       }
-    ),
-    sslCertificates: sslCertificates.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          data: c.data,
-          password: c.password,
-          publicCertData: c.publicCertData,
-          keyVaultSecretId: c.keyVaultSecretId,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    sslCertificates: sslCertificates.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        data: c.data,
+        password: c.password,
+        publicCertData: c.publicCertData,
+        keyVaultSecretId: c.keyVaultSecretId,
+        provisioningState: c.provisioningState,
       }
-    ),
-    frontendIPConfigurations: frontendIPConfigurations.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          privateIPAddress: c.privateIPAddress,
-          privateIPAllocationMethod: c.privateIPAllocationMethod,
-          subnetId: c.subnet?.id,
-          publicIPAddressId: c.publicIPAddress?.id,
-          privateLinkConfigurationId: c.privateLinkConfiguration?.id,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    frontendIPConfigurations: frontendIPConfigurations.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        privateIPAddress: c.privateIPAddress,
+        privateIPAllocationMethod: c.privateIPAllocationMethod,
+        subnetId: c.subnet?.id,
+        publicIPAddressId: c.publicIPAddress?.id,
+        privateLinkConfigurationId: c.privateLinkConfiguration?.id,
+        provisioningState: c.provisioningState,
       }
-    ),
-    frontendPorts: frontendPorts.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          port: c.port,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    frontendPorts: frontendPorts.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        port: c.port,
+        provisioningState: c.provisioningState,
       }
-    ),
-    probes: probes.map(
-      c => {
-        return {
-          id: c.id,
-          name: c.name,
-          type: c.type,
-          protocol: c.protocol,
-          host: c.host,
-          path: c.path,
-          interval: c.interval,
-          timeout: c.timeout,
-          unhealthyThreshold: c.unhealthyThreshold,
-          pickHostNameFromBackendHttpSettings: c.pickHostNameFromBackendHttpSettings,
-          minServers: c.minServers,
-          matchBody: c.match?.body,
-          matchStatusCodes: c.match?.statusCodes,
-          port: c.port,
-          provisioningState: c.provisioningState,
-        }
+    }),
+    probes: probes.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        type: c.type,
+        protocol: c.protocol,
+        host: c.host,
+        path: c.path,
+        interval: c.interval,
+        timeout: c.timeout,
+        unhealthyThreshold: c.unhealthyThreshold,
+        pickHostNameFromBackendHttpSettings:
+          c.pickHostNameFromBackendHttpSettings,
+        minServers: c.minServers,
+        matchBody: c.match?.body,
+        matchStatusCodes: c.match?.statusCodes,
+        port: c.port,
+        provisioningState: c.provisioningState,
       }
-    ),
-    backendAddressPools: backendAddressPools.map(
-      pool => formatApplicationGatewayBackendAddressPool(pool)
+    }),
+    backendAddressPools: backendAddressPools.map(pool =>
+      formatApplicationGatewayBackendAddressPool(pool)
     ),
     backendHttpSettingsCollection: backendHttpSettingsCollection.map(
       collection => formatApplicationGatewayBackendHttpSettings(collection)
     ),
-    httpListeners: httpListeners.map(
-      listener => formatApplicationGatewayHttpListener(listener)
+    httpListeners: httpListeners.map(listener =>
+      formatApplicationGatewayHttpListener(listener)
     ),
-    sslProfiles: sslProfiles.map(
-      profile => formatApplicationGatewaySslProfile(profile)
+    sslProfiles: sslProfiles.map(profile =>
+      formatApplicationGatewaySslProfile(profile)
     ),
-    urlPathMaps: urlPathMaps.map(
-      pathMap => formatApplicationGatewayUrlPathMap(pathMap)
+    urlPathMaps: urlPathMaps.map(pathMap =>
+      formatApplicationGatewayUrlPathMap(pathMap)
     ),
-    requestRoutingRules: requestRoutingRules.map(
-      rule => formatApplicationGatewayRequestRoutingRule(rule)
+    requestRoutingRules: requestRoutingRules.map(rule =>
+      formatApplicationGatewayRequestRoutingRule(rule)
     ),
-    rewriteRuleSets: rewriteRuleSets.map(
-      ruleSet => formatApplicationGatewayRewriteRuleSet(ruleSet)
+    rewriteRuleSets: rewriteRuleSets.map(ruleSet =>
+      formatApplicationGatewayRewriteRuleSet(ruleSet)
     ),
-    redirectConfigurations: redirectConfigurations.map(
-      config => formatApplicationGatewayRedirectConfiguration(config)
+    redirectConfigurations: redirectConfigurations.map(config =>
+      formatApplicationGatewayRedirectConfiguration(config)
     ),
-    webApplicationFirewallConfiguration: 
-      webApplicationFirewallConfiguration
-      ? formatApplicationGatewayWebApplicationFirewallConfiguration(webApplicationFirewallConfiguration) 
+    webApplicationFirewallConfiguration: webApplicationFirewallConfiguration
+      ? formatApplicationGatewayWebApplicationFirewallConfiguration(
+          webApplicationFirewallConfiguration
+        )
       : {},
-    firewallPolicy: firewallPolicy ? {id: firewallPolicy.id} : {},
+    firewallPolicy: firewallPolicy ? { id: firewallPolicy.id } : {},
     enableHttp2,
     enableFips,
     autoscaleConfiguration: {
       minCapacity: autoscaleConfiguration?.minCapacity,
       maxCapacity: autoscaleConfiguration?.maxCapacity,
     },
-    privateLinkConfigurations: privateLinkConfigurations.map(c => formatApplicationGatewayPrivateLinkConfiguration(c)),
-    privateEndpointConnections: privateEndpointConnections.map(c => formatApplicationGatewayPrivateEndpointConnection(c)),
+    privateLinkConfigurations: privateLinkConfigurations.map(c =>
+      formatApplicationGatewayPrivateLinkConfiguration(c)
+    ),
+    privateEndpointConnections: privateEndpointConnections.map(c =>
+      formatApplicationGatewayPrivateEndpointConnection(c)
+    ),
     resourceGuid,
     provisioningState,
     customErrorConfigurations: customErrorConfigurations?.map(config => {
       return {
-        id: cuid(),
+        id: generateUniqueId({
+          customErrorPageUrl: config.customErrorPageUrl
+        }),
         statusCode: config.statusCode,
         customErrorPageUrl: config.customErrorPageUrl,
       }
     }),
     forceFirewallPolicyAssociation,
-    loadDistributionPolicies: loadDistributionPolicies?.map(policy => formatApplicationGatewayLoadDistributionPolicy(policy)),
+    loadDistributionPolicies: loadDistributionPolicies?.map(policy =>
+      formatApplicationGatewayLoadDistributionPolicy(policy)
+    ),
     globalConfiguration,
   }
 }

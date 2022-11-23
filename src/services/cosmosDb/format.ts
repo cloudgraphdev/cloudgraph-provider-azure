@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { BackupPolicyUnion, RestoreParameters } from '@azure/arm-cosmosdb'
 import { isEmpty } from 'lodash'
 import { AzureCosmosDb, AzureCosmosDbBackupPolicy, AzureCosmosDbRestoreParameters } from '../../types/generated'
@@ -31,7 +31,9 @@ const formatRestoreParameters = (
   const { restoreTimestampInUtc, databasesToRestore, ...rest } = restoreParameters
   return {
     restoreTimestampInUtc: restoreTimestampInUtc?.toISOString(),
-    databasesToRestore: databasesToRestore?.map(db => ({ id: cuid(), ...db })) || [],
+    databasesToRestore: databasesToRestore?.map(db => ({ id: generateUniqueId({
+      ...db
+    }), ...db })) || [],
     ...rest,
   }
 }
@@ -93,7 +95,7 @@ export default ({
   } = service
 
   return {
-    id: id || cuid(),
+    id,
     name,
     region,
     type,
@@ -105,7 +107,10 @@ export default ({
       userAssignedIdentities: Object.keys(
         identity?.userAssignedIdentities ?? {}
       ).map(key => ({
-        id: cuid(),
+        id: generateUniqueId({
+          id,
+          key
+        }),
         key,
         value: identity?.userAssignedIdentities[key],
       })),
@@ -114,22 +119,22 @@ export default ({
     provisioningState,
     documentEndpoint,
     databaseAccountOfferType,
-    ipRules: ipRules?.map(r => ({ id: cuid(), ...r })) || [],
+    ipRules: ipRules?.map(r => ({ id: r.ipAddressOrRange, ...r })) || [],
     isVirtualNetworkFilterEnabled,
     enableAutomaticFailover,
     consistencyPolicy,
-    capabilities: capabilities?.map(c => ({ id: cuid(), ...c })) || [],
+    capabilities: capabilities?.map(c => ({ id: c.name, ...c })) || [],
     writeLocations:
-      writeLocations?.map(wl => ({ id: id || cuid(), ...wl })) || [],
+      writeLocations?.map(wl => ({ id: wl.id, ...wl })) || [],
     readLocations:
-      readLocations?.map(rl => ({ id: id || cuid(), ...rl })) || [],
-    locations: locations?.map(l => ({ id: id || cuid(), ...l })) || [],
+      readLocations?.map(rl => ({ id: rl.id, ...rl })) || [],
+    locations: locations?.map(l => ({ id: l.id, ...l })) || [],
     failoverPolicies:
-      failoverPolicies?.map(fp => ({ id: id || cuid(), ...fp })) || [],
+      failoverPolicies?.map(fp => ({ id: fp.id, ...fp })) || [],
     virtualNetworkRules:
-      virtualNetworkRules?.map(vn => ({ id: id || cuid(), ...vn })) || [],
+      virtualNetworkRules?.map(vn => ({ id: vn.id, ...vn })) || [],
     privateEndpointConnections: privateEndpointConnections?.map(({ id: endpointId, privateEndpoint, ...pe}) => ({ 
-      id: endpointId || cuid(), 
+      id: endpointId, 
       privateEndpointId: privateEndpoint?.id,
       ...pe 
     })) || [],
@@ -149,20 +154,20 @@ export default ({
     createMode,
     restoreParameters: formatRestoreParameters(restoreParameters),
     backupPolicy: formatBackupPolicy(backupPolicy),
-    cors: cors?.map(cp => ({ id: cuid(), ...cp })) || [],
+    cors: cors?.map(cp => ({ id: generateUniqueId(cp), ...cp })) || [],
     networkAclBypass,
     networkAclBypassResourceIds,
     disableLocalAuth,
     capacityTotalThroughputLimit: capacity?.totalThroughputLimit,
     tags: formatTagsFromMap(Tags),
     databases: databases?.map(({ id: databaseId, options, ...rest }) => ({
-      id: databaseId || cuid(),
+      id: databaseId,
       ...rest,
       options: {
         throughput: options?.throughput,
         maxThroughput: options?.autoscaleSettings?.maxThroughput,
       },
     })) || [],
-    azureTables: tables?.map(at => ({ id: id || cuid(), ...at })) || [],
+    azureTables: tables?.map(at => ({ id: at.id, ...at })) || [],
   }
 }

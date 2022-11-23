@@ -1,5 +1,5 @@
 import { VaultProperties } from '@azure/arm-recoveryservices'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { isEmpty } from 'lodash'
 import {
   AzureRecoveryVault,
@@ -43,7 +43,7 @@ const formatProperties = (
     privateEndpointConnections:
       privateEndpointConnections?.map(
         ({ id: endpointId, properties, ...pe }) => ({
-          id: endpointId || cuid(),
+          id: endpointId,
           properties: {
             provisioningState: properties?.provisioningState,
             privateEndpointId: properties?.privateEndpoint?.id,
@@ -88,7 +88,7 @@ export default ({
     resourceGroupId,
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,
@@ -102,7 +102,9 @@ export default ({
       userAssignedIdentities: Object.keys(
         identity?.userAssignedIdentities ?? {}
       ).map(key => ({
-        id: cuid(),
+        id: generateUniqueId({
+
+        }),
         key,
         value: identity?.userAssignedIdentities[key],
       })),

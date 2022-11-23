@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { RawAzureSecurityPricing } from './data'
 import { AzureSecurityPricing } from '../../types/generated'
 
@@ -18,7 +17,7 @@ export default ({
     freeTrialRemainingTime
   } = service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

@@ -1,4 +1,4 @@
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import { isEmpty } from 'lodash'
 import { BackupPolicy, TriggerContext } from '../../types'
 import {
@@ -25,7 +25,11 @@ const formatTrigger = (
     taggingCriteria:
       trigger?.taggingCriteria?.map(
         ({ criteria, tagInfo, isDefault, taggingPriority }) => ({
-          id: cuid(),
+          id: generateUniqueId({
+            id: tagInfo?.id,
+            tagName: tagInfo?.tagName,
+            eTag: tagInfo?.eTag,
+          }),
           tagInfo: {
             id: tagInfo?.id,
             tagName: tagInfo?.tagName,
@@ -44,10 +48,16 @@ const formatTrigger = (
                 scheduleTimes,
                 weeksOfTheMonth,
               }) => ({
-                id: cuid(),
+                id: generateUniqueId({
+                  daysOfMonth,
+                  daysOfTheWeek,
+                  monthsOfYear,
+                  scheduleTimes,
+                  weeksOfTheMonth,
+                }),
                 daysOfMonth:
                   daysOfMonth?.map(d => ({
-                    id: cuid(),
+                    id: generateUniqueId({ date: d.date }),
                     date: d.date,
                     isLast: d.isLast,
                   })) || [],
@@ -87,7 +97,10 @@ const formatProperties = (
           objectType: policyRuleObjectType,
           isDefault,
         }) => ({
-          id: cuid(),
+          id: generateUniqueId({
+            name,
+            objectType,
+          }),
           name,
           objectType: policyRuleObjectType,
           isDefault,
@@ -111,7 +124,11 @@ const formatProperties = (
                 deleteAfter,
                 sourceDataStore,
               }) => ({
-                id: cuid(),
+                id: generateUniqueId({
+                  targetDataStoreCopySettings,
+                  deleteAfter,
+                  sourceDataStore,
+                }),
                 deleteAfter: deleteAfter
                   ? {
                       duration: deleteAfter.duration,
@@ -127,7 +144,10 @@ const formatProperties = (
                 targetDataStoreCopySettings:
                   targetDataStoreCopySettings?.map(
                     ({ copyAfter, dataStore: dataStoreCopySettings }) => ({
-                      id: cuid(),
+                      id: generateUniqueId({
+                        copyAfter,
+                        dataStoreCopySettings,
+                      }),
                       copyAfter: copyAfter
                         ? {
                             duration: copyAfter.duration,
@@ -159,7 +179,7 @@ export default ({
   const { id, name, type, region, properties, systemData, resourceGroupId } =
     service
   return {
-    id: id || cuid(),
+    id,
     name,
     type,
     region,

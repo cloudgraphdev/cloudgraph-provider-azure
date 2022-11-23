@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureCdnProfile } from './data'
 import { AzureCdnProfile } from '../../types/generated'
@@ -24,7 +23,7 @@ export default ({
     sku,
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,

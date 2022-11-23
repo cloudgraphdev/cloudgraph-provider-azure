@@ -62,10 +62,11 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const keyVault of keyVaultsIterable) {
-          keyVaults.push({
-            ...keyVault,
-            resourceGroup: getResourceGroupFromEntity(keyVault),
-          })
+          keyVault &&
+            keyVaults.push({
+              ...keyVault,
+              resourceGroup: getResourceGroupFromEntity(keyVault),
+            })
         }
       },
       {
@@ -108,12 +109,15 @@ export default async ({
               const vaultKeys: PagedAsyncIterableIterator<Key> =
                 client.keys.list(resourceGroup, vaultName)
               if (vaultKeys) {
-                for await (const { tags = {}, ...vaultKey } of vaultKeys) {
-                  keys.push({
-                    tags,
-                    ...vaultKey,
-                    keyVaultName: vaultName,
-                  })
+                for await (const vk of vaultKeys) {
+                  if (vk) {
+                    const { tags = {}, ...vaultKey } = vk
+                    keys.push({
+                      tags,
+                      ...vaultKey,
+                      keyVaultName: vaultName,
+                    })
+                  }
                 }
               }
             }
@@ -138,15 +142,15 @@ export default async ({
               const vaultSecrets: PagedAsyncIterableIterator<Secret> =
                 client.secrets.list(resourceGroup, vaultName)
               if (vaultSecrets) {
-                for await (const {
-                  tags = {},
-                  ...vaultSecret
-                } of vaultSecrets) {
-                  secrets.push({
-                    tags,
-                    ...vaultSecret,
-                    keyVaultName: vaultName,
-                  })
+                for await (const vs of vaultSecrets) {
+                  if (vs) {
+                    const { tags = {}, ...vaultSecret } = vs
+                    secrets.push({
+                      tags,
+                      ...vaultSecret,
+                      keyVaultName: vaultName,
+                    })
+                  }
                 }
               }
             }

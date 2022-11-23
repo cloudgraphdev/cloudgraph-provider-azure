@@ -3,7 +3,7 @@ import {
   ManagedClusterAADProfile,
   ManagedClusterAgentPoolProfile,
 } from '@azure/arm-containerservice'
-import cuid from 'cuid'
+import { generateUniqueId } from '@cloudgraph/sdk'
 import {
   AzureAksManagedCluster,
   AzureAksManagedClusterAadProfile,
@@ -26,7 +26,7 @@ const formatAgentPoolProfiles = (
       tags,
       ...rest
     }) => ({
-      id: cuid(),
+      id: generateUniqueId({ powerStateCode, upgradeMaxSurge, ...rest }),
       powerStateCode,
       upgradeMaxSurge,
       ...rest,
@@ -113,7 +113,7 @@ export default ({
     {}
 
   return {
-    id: id || cuid(),
+    id,
     subscriptionId: account,
     name,
     type,

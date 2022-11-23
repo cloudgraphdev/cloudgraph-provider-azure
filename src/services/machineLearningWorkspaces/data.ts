@@ -36,7 +36,7 @@ export default async ({
     await tryCatchWrapper(
       async () => {
         for await (const workspace of workspaceIterable) {
-          workspaces.push(workspace)
+          workspace && workspaces.push(workspace)
         }
       },
       {

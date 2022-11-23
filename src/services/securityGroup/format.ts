@@ -1,5 +1,4 @@
 import { ApplicationSecurityGroup, SecurityRule } from '@azure/arm-network'
-import cuid from 'cuid'
 import {
   AzureNetworkSecurityGroup,
   AzureNetworkSecurityGroupApplication,
@@ -13,7 +12,7 @@ const normalizeApplicationSecurityGroups = (
   asgArr: Array<ApplicationSecurityGroup>
 ): Array<AzureNetworkSecurityGroupApplication> =>
   asgArr.map(({ id: asgId, ...restData }) => ({
-    id: asgId || cuid(),
+    id: asgId,
     ...restData,
   }))
 
@@ -27,7 +26,7 @@ const normalizeSecurityRules = (
       destinationApplicationSecurityGroups: dASG = [],
       ...dataSR
     }) => ({
-      id: sgId || cuid(),
+      id: sgId,
       ...dataSR,
       destinationApplicationSecurityGroups:
         normalizeApplicationSecurityGroups(dASG),
@@ -54,7 +53,7 @@ const normalizeFlowLogs = (
       format,
       flowAnalyticsConfiguration,
     }) => ({
-      id: flowLogId || cuid(),
+      id: flowLogId,
       name,
       type,
       etag,
@@ -111,7 +110,7 @@ export default ({
     flowLogs = [],
   } = service
   return {
-    id: id || cuid(),
+    id,
     subscriptionId,
     name,
     type,

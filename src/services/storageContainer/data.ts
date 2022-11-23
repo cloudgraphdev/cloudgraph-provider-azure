@@ -64,9 +64,7 @@ export default async ({
         await tryCatchWrapper(
           async () => {
             for await (const blobContainer of blobContainerListIterable) {
-              if (blobContainer) {
-                blobContainers.push(blobContainer)
-              }
+              blobContainer && blobContainers.push(blobContainer)
             }
           },
           {

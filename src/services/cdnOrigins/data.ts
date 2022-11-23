@@ -43,10 +43,10 @@ export default async ({
     ).flat()
 
     if (!isEmpty(cdnEndpoints)) {
-      let cdnOrigins: RawAzureCdnOrigin[] = []
+      const cdnOrigins: RawAzureCdnOrigin[] = []
       await tryCatchWrapper(
         async () => {
-          cdnOrigins = await Promise.all(
+          await Promise.all(
             cdnEndpoints.map(async cdnEndpoint => {
               const {
                 resourceGroupId,
@@ -55,18 +55,22 @@ export default async ({
                 region: endpointRegion,
               } = cdnEndpoint
               const cdnOriginsIterable: PagedAsyncIterableIterator<Origin> =
-                client.origins.listByEndpoint(resourceGroupId, profileName, name)
+                client.origins.listByEndpoint(
+                  resourceGroupId,
+                  profileName,
+                  name
+                )
 
               for await (const cdnOrigin of cdnOriginsIterable) {
                 if (cdnOrigin) {
                   const region = endpointRegion || 'global'
                   const { ...rest } = cdnOrigin
-                  return {
+                  cdnOrigins.push({
                     ...rest,
                     endpointId: cdnEndpoint.id,
                     region,
                     resourceGroupId,
-                  }
+                  })
                 }
               }
             })

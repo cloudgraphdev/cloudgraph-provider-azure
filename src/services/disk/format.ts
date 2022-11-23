@@ -1,4 +1,3 @@
-import cuid from 'cuid'
 import { AzureDisk } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDisk } from './data'
@@ -42,7 +41,7 @@ export default ({
     // If the id is not present use uniqueId 
     // uniqueId is an additional unique Guid that identifies the resource
     // if uniqueId doesn't exist, then create a random uid to ensure id consistency for connections
-    id: id || uniqueId || cuid(),
+    id: id || uniqueId,
     name,
     region,
     subscriptionId: account,
