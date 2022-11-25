@@ -73,7 +73,7 @@
     "@azure/identity": "^2.0.4",
     "@azure/storage-blob": "^12.8.0",
     "@azure/storage-queue": "^12.9.0",
-    "@cloudgraph/sdk": "0.22.0",
+    "@cloudgraph/sdk": "0.22.1",
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.3",
     "@microsoft/microsoft-graph-client": "^3.0.2",
@@ -96,7 +96,7 @@
     "@semantic-release/github": "^8.0.1",
     "@semantic-release/npm": "^9.0.1",
     "@types/isomorphic-fetch": "^0.0.36",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.0",
     "@types/lodash": "^4.14.170",
     "@types/node": "^15.12.4",
     "@types/pino": "^6.3.8",
@@ -107,18 +107,23 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-prettier": "^3.4.0",
-    "husky": "^7.0.0",
+    "husky": "^8.0.2",
     "jest": "^27.0.6",
     "lint-staged": "^11.1.1",
     "prettier": "^2.3.2",
     "semantic-release": "^19.0.2",
-    "shx": "^0.3.3",
-    "ts-jest": "^27.0.4"
+    "shx": "^0.3.4",
+    "ts-jest": "^27.1.5"
   },
   "lint-staged": {
     "*.{ts,graphql,json}": [
       "yarn lint:fix",
       "git add --force"
     ]
+  },
+  "resolutions": {
+    "**/braces": "^2.3.1",
+    "**/glob-parent": "^5.1.2",
+    "**/uri-js": "^3.0.1"
   }
 }
