@@ -1,3 +1,10 @@
+## [0.64.2-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.1...0.64.2-beta.1) (2022-11-28)
+
+
+### Bug Fixes
+
+* cve vulnerabilities remediations ([b8fc985](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/b8fc9852612ff8944cbd493a11397029f4fb8e7b))
+
 ## [0.64.2-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.1...0.64.2-alpha.1) (2022-11-28)
 
 
