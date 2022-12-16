@@ -140,6 +140,9 @@ type azureRecoveryInstanceProperties
   fabricName: String @search(by: [hash, regexp])
   computerName: String @search(by: [hash, regexp])
   deferredDeleteSyncTimeInUTC: Int @search
+  softDeleteRetentionPeriod: Int @search
+  configuredRPGenerationFrequency: String @search(by: [hash, regexp])
+  vaultId: String @search(by: [hash, regexp])
 }
 
 type azureRecoveryInstance implements azureBaseResource

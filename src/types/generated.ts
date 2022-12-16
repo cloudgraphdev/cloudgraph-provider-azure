@@ -4484,6 +4484,7 @@ export type AzureRecoveryInstanceProperties = {
   backupManagementType?: Maybe<Scalars['String']>;
   backupSetName?: Maybe<Scalars['String']>;
   computerName?: Maybe<Scalars['String']>;
+  configuredRPGenerationFrequency?: Maybe<Scalars['String']>;
   containerName?: Maybe<Scalars['String']>;
   createMode?: Maybe<Scalars['String']>;
   deferredDeleteSyncTimeInUTC?: Maybe<Scalars['Int']>;
@@ -4518,8 +4519,10 @@ export type AzureRecoveryInstanceProperties = {
   protectionStatus?: Maybe<Scalars['String']>;
   resourceGuardOperationRequests?: Maybe<Array<Maybe<Scalars['String']>>>;
   serverName?: Maybe<Scalars['String']>;
+  softDeleteRetentionPeriod?: Maybe<Scalars['Int']>;
   sourceAssociations?: Maybe<Array<Maybe<AzureRecoveryInstanceKeyValue>>>;
   sourceResourceId?: Maybe<Scalars['String']>;
+  vaultId?: Maybe<Scalars['String']>;
   virtualMachineId?: Maybe<Scalars['String']>;
   workloadType?: Maybe<Scalars['String']>;
 };
@@ -6190,7 +6193,7 @@ export type AzureVirtualMachineScaleSetNetworkProfileConfiguration = {
   id: Scalars['String'];
   ipConfigurations?: Maybe<Array<Maybe<AzureVirtualMachineScaleSetNetworkIpConfiguration>>>;
   name?: Maybe<Scalars['String']>;
-  networkSecurityGroup?: Maybe<AzureSubResource>;
+  networkSecurityGroupId?: Maybe<Scalars['String']>;
   primary?: Maybe<Scalars['Boolean']>;
 };
 
@@ -6270,10 +6273,6 @@ export type AzureVirtualMachineScaleSetStorageProfileOsDisk = {
   managedDisk?: Maybe<AzureVirtualMachineScaleSetStorageProfileManagedDisk>;
   osType?: Maybe<Scalars['String']>;
   writeAcceleratorEnabled?: Maybe<Scalars['Boolean']>;
-};
-
-export type AzureVirtualMachineScaleSetSubResource = {
-  id: Scalars['String'];
 };
 
 export type AzureVirtualMachineStorageImageReference = {

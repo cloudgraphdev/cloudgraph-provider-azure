@@ -75,6 +75,7 @@ const formatTrigger = (
 }
 
 const formatProperties = (
+  id: string,
   properties?: BackupPolicy
 ): AzureBackupPolicyProperties => {
   if (isEmpty(properties)) {
@@ -98,6 +99,7 @@ const formatProperties = (
           isDefault,
         }) => ({
           id: generateUniqueId({
+            id,
             name,
             objectType,
           }),
@@ -106,15 +108,15 @@ const formatProperties = (
           isDefault,
           backupParameters: backupParameters
             ? {
-                backupType: backupParameters.backupType,
-                objectType: backupParameters.objectType,
-              }
+              backupType: backupParameters.backupType,
+              objectType: backupParameters.objectType,
+            }
             : {},
           dataStore: dataStore
             ? {
-                dataStoreType: dataStore.dataStoreType,
-                objectType: dataStore.objectType,
-              }
+              dataStoreType: dataStore.dataStoreType,
+              objectType: dataStore.objectType,
+            }
             : {},
           trigger: formatTrigger(trigger),
           lifecycles:
@@ -131,15 +133,15 @@ const formatProperties = (
                 }),
                 deleteAfter: deleteAfter
                   ? {
-                      duration: deleteAfter.duration,
-                      objectType: deleteAfter.objectType,
-                    }
+                    duration: deleteAfter.duration,
+                    objectType: deleteAfter.objectType,
+                  }
                   : {},
                 sourceDataStore: sourceDataStore
                   ? {
-                      dataStoreType: sourceDataStore.dataStoreType,
-                      objectType: sourceDataStore.objectType,
-                    }
+                    dataStoreType: sourceDataStore.dataStoreType,
+                    objectType: sourceDataStore.objectType,
+                  }
                   : {},
                 targetDataStoreCopySettings:
                   targetDataStoreCopySettings?.map(
@@ -150,15 +152,15 @@ const formatProperties = (
                       }),
                       copyAfter: copyAfter
                         ? {
-                            duration: copyAfter.duration,
-                            objectType: copyAfter.objectType,
-                          }
+                          duration: copyAfter.duration,
+                          objectType: copyAfter.objectType,
+                        }
                         : {},
                       dataStore: dataStoreCopySettings
                         ? {
-                            dataStoreType: dataStoreCopySettings.dataStoreType,
-                            objectType: dataStoreCopySettings.objectType,
-                          }
+                          dataStoreType: dataStoreCopySettings.dataStoreType,
+                          objectType: dataStoreCopySettings.objectType,
+                        }
                         : {},
                     })
                   ) || [],
@@ -185,7 +187,7 @@ export default ({
     region,
     subscriptionId,
     resourceGroupId,
-    properties: formatProperties(properties),
+    properties: formatProperties(id, properties),
     ...transformSystemData(systemData),
   }
 }

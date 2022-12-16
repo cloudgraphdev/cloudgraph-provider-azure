@@ -50,6 +50,9 @@ export interface RawAzureProtectedItem extends ProtectedItem {
   fabricName?: string
   computerName?: string
   deferredDeleteSyncTimeInUTC?: number
+  softDeleteRetentionPeriod?: number
+  ConfiguredRPGenerationFrequency?: string
+  vaultId?: string
 }
 
 const formatProperties = (
@@ -66,6 +69,7 @@ const formatProperties = (
     kpisHealths = {},
     healthDetails = [],
     sourceAssociations = [],
+    ConfiguredRPGenerationFrequency,
     ...rest
   } = properties
   const {
@@ -116,6 +120,7 @@ const formatProperties = (
       key,
       value: sourceAssociations[key],
     })),
+    configuredRPGenerationFrequency: ConfiguredRPGenerationFrequency,
     ...rest,
   }
 }
