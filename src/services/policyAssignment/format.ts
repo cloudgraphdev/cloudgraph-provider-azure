@@ -35,26 +35,39 @@ export default ({
     metadata,
   } = service
 
+  const getParameterValue = (value) => {
+    // Set parameter value
+    let parameterValue = JSON.stringify(value)
+    if (isString(value)) parameterValue = value
+    if (isArray(value)) {
+      parameterValue = (value as Array<any>)
+        .map(i => (isString(i) && i) || JSON.stringify(i))
+        .join(',')
+    }
+    return parameterValue
+  }
+
   const parameters: AzurePolicyAssignmentParameters[] =
-    Object.entries(params).map(([k, v]) => ({
-      id: generateUniqueId({
-        value: v
-      }),
-      key: k,
-      value: Object.entries(v.value).map(([k2, v2]) => ({
-        id: isObject(v) ? generateUniqueId({
-          ...v,
-        }) : `${k2}:${v2}`,
+    Object.entries(params).map(([k, v]) => {
+
+      return ({
+        id: generateUniqueId({
+          key: k,
+          value: v
+        }),
         key: k,
-        value:
-          (isString(v2) && v2) ||
-          (isArray(v2) &&
-            (v2 as Array<any>)
-              .map(i => (isString(i) && i) || JSON.stringify(i))
-              .join(',')) ||
-          JSON.stringify(v2), // not sure about this one
-      })),
-    })) || []
+        value: Object.entries(v.value).map(([k2, v2]) => ({
+          id: isObject(v) ? generateUniqueId({
+            id,
+            ...v,
+          }) : `${k2}:${v2}`,
+          key: k,
+          value: getParameterValue(v.value)
+        })
+        ),
+      })
+    }
+    ) || []
 
   return {
     id,

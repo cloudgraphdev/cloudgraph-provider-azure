@@ -194,19 +194,24 @@ const formatProperties = (
   return {
     subProtectionPolicy:
       subProtectionPolicy?.map(
-        ({
-          schedulePolicy: subSchedulePolicy,
-          retentionPolicy: subRetentionPolicy,
-          ...p
-        }) => ({
-          id: generateUniqueId({
-            ...subProtectionPolicy,
-          }),
-          schedulePolicy: formatSchedulePolicy(subSchedulePolicy),
-          retentionPolicy: formatRetentionPolicy(subRetentionPolicy),
-          ...p,
+        (protectionPolicy
+        ) => {
+          const {
+            schedulePolicy: subSchedulePolicy,
+            retentionPolicy: subRetentionPolicy,
+            ...p
+          } = protectionPolicy
+
+          return {
+            id: generateUniqueId({
+              ...protectionPolicy,
+            }),
+            schedulePolicy: formatSchedulePolicy(subSchedulePolicy),
+            retentionPolicy: formatRetentionPolicy(subRetentionPolicy),
+            ...p,
+          }
         })
-      ) || [],
+      || [],
     schedulePolicy: formatSchedulePolicy(schedulePolicy),
     retentionPolicy: formatRetentionPolicy(retentionPolicy),
     ...rest,

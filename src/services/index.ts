@@ -151,10 +151,9 @@ export default class Provider extends CloudGraph.Client {
       )}`
     )
     this.logger.success(
-      `subscriptionIds: ${
-        this.subscriptions.length > 1
-          ? this.subscriptions.join(', ')
-          : this.subscriptions[0]
+      `subscriptionIds: ${this.subscriptions.length > 1
+        ? this.subscriptions.join(', ')
+        : this.subscriptions[0]
       }`
     )
     this.logger.success(
@@ -340,7 +339,7 @@ export default class Provider extends CloudGraph.Client {
    * getSchema is used to get the schema for provider
    * @returns A string of graphql sub schemas
    */
-   getSchema(): any {
+  getSchema(): any {
     const typesArray = loadFilesSync(path.join(__dirname), {
       recursive: true,
       extensions: ['graphql'],
