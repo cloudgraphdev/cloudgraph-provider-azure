@@ -1,3 +1,14 @@
+## [0.64.3-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.2...0.64.3-alpha.1) (2022-12-16)
+
+
+### Bug Fixes
+
+* Added missing attributes for recoveryInstances ([4d68222](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/4d68222bf1aaf0497d14ad82e45ab53ff1c2af0e))
+* Fixed missing attributes and duplicated ids for virtualMachineScaleSet ([94230d1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/94230d14a821da1f9f0382bf4f9d550a9f552bc4))
+* Fixed policyAssingment duplication ([076b257](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/076b2570231f88091bf34ea8478e5bac76fb9b95))
+* Solved duplication issues for backupVaults and backupPolicies ([cb9114c](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/cb9114cef0e5e125b2f628b81bb1bffdc60bf842))
+* Solved recoveryPolicies id duplication ([28bd758](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/28bd758b2d8192c17bcfb959c5222d8ef6c2db28))
+
 ## [0.64.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.1...0.64.2) (2022-11-28)
 
 
