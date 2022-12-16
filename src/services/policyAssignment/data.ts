@@ -8,7 +8,6 @@ import { AzureServiceInput } from '../../types'
 import { tryCatchWrapper } from '../../utils'
 import { lowerCaseLocation } from '../../utils/format'
 import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
-import { regionMap } from '../../enums/regions'
 
 const { logger } = CloudGraph
 const lt = { ...azureLoggerText }
