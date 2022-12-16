@@ -38,39 +38,39 @@ const formatOsProfile = (
     allowExtensionOperations,
     windowsConfiguration: windowsConfiguration
       ? {
-          additionalUnattendContent:
-            windowsConfiguration.additionalUnattendContent?.map(auc => ({
-              id: generateUniqueId({ auc }),
-              ...auc,
-            })) || [],
-          winRM: windowsConfiguration.winRM
-            ? {
-                listeners:
-                  windowsConfiguration.winRM.listeners?.map(l => ({
-                    id: generateUniqueId({
-                      ...l,
-                    }),
-                    ...l,
-                  })) || [],
-              }
-            : {},
-          ...windowsConfiguration,
-        }
+        additionalUnattendContent:
+          windowsConfiguration.additionalUnattendContent?.map(auc => ({
+            id: generateUniqueId({ auc }),
+            ...auc,
+          })) || [],
+        winRM: windowsConfiguration.winRM
+          ? {
+            listeners:
+              windowsConfiguration.winRM.listeners?.map(l => ({
+                id: generateUniqueId({
+                  ...l,
+                }),
+                ...l,
+              })) || [],
+          }
+          : {},
+        ...windowsConfiguration,
+      }
       : {},
     linuxConfiguration: linuxConfiguration
       ? {
-          ssh: linuxConfiguration.ssh
-            ? {
-                publicKeys:
-                  linuxConfiguration.ssh.publicKeys?.map(pk => ({
-                    id: generateUniqueId({
-                      ...pk,
-                    }),
-                    ...pk,
-                  })) || [],
-              }
-            : {},
-        }
+        ssh: linuxConfiguration.ssh
+          ? {
+            publicKeys:
+              linuxConfiguration.ssh.publicKeys?.map(pk => ({
+                id: generateUniqueId({
+                  ...pk,
+                }),
+                ...pk,
+              })) || [],
+          }
+          : {},
+      }
       : {},
     secrets:
       secrets?.map(s => ({
@@ -101,26 +101,26 @@ const formatStorageProfile = (
   return {
     imageReference: imageReference
       ? {
-          id: imageReference.id,
-          publisher: imageReference.publisher,
-          offer: imageReference.offer,
-          sku: imageReference.sku,
-          version: imageReference.version,
-        }
+        id: imageReference.id,
+        publisher: imageReference.publisher,
+        offer: imageReference.offer,
+        sku: imageReference.sku,
+        version: imageReference.version,
+      }
       : {},
     osDisk: osDisk
       ? {
-          caching: osDisk.caching,
-          createOption: osDisk.createOption,
-          osType: osDisk.osType,
-          diskSizeGB: osDisk.diskSizeGB,
-          writeAcceleratorEnabled: osDisk.writeAcceleratorEnabled,
-          managedDisk: osDisk.managedDisk
-            ? {
-                storageAccountType: osDisk.managedDisk.storageAccountType,
-              }
-            : {},
-        }
+        caching: osDisk.caching,
+        createOption: osDisk.createOption,
+        osType: osDisk.osType,
+        diskSizeGB: osDisk.diskSizeGB,
+        writeAcceleratorEnabled: osDisk.writeAcceleratorEnabled,
+        managedDisk: osDisk.managedDisk
+          ? {
+            storageAccountType: osDisk.managedDisk.storageAccountType,
+          }
+          : {},
+      }
       : {},
   }
 }
@@ -137,54 +137,57 @@ const formatNetworkProfile = (
   return {
     networkInterfaceConfigurations:
       networkInterfaceConfigurations?.map(
-        ({
-          id,
-          ipConfigurations = [],
-          networkSecurityGroup,
-          ...networkInterface
-        }) => {
+        (networkInterfaceConfiguration) => {
+          const {
+            ipConfigurations = [],
+            networkSecurityGroup,
+            ...networkInterface
+          } = networkInterfaceConfiguration
+
           return {
-            id,
+            id: generateUniqueId({
+              ...networkInterfaceConfiguration
+            }),
             ...networkInterface,
-            networkSecurityGroup: {
-              id: networkSecurityGroup?.id,
-            },
+            networkSecurityGroupId: networkSecurityGroup?.id,
             ipConfigurations:
               ipConfigurations?.map(
-                ({
-                  subnet,
-                  publicIPAddressConfiguration,
-                  applicationGatewayBackendAddressPools,
-                  applicationSecurityGroups,
-                  loadBalancerBackendAddressPools,
-                  loadBalancerInboundNatPools,
-                  ...ipConfiguration
-                }) => ({
-                  id: ipConfiguration.id,
-                  ...ipConfiguration,
-                  subnetId: subnet?.id,
-                  applicationGatewayBackendAddressPools:
-                    applicationGatewayBackendAddressPools?.map(agb => ({
-                      id: agb.id,
-                      ...agb,
-                    })) || [],
-                  applicationSecurityGroups:
-                    applicationSecurityGroups?.map(asg => ({
-                      id: asg.id,
-                      ...asg,
-                    })) || [],
-                  loadBalancerBackendAddressPools:
-                    loadBalancerBackendAddressPools?.map(lbb => ({
-                      id: lbb.id,
-                      ...lbb,
-                    })) || [],
-                  loadBalancerInboundNatPools:
-                    loadBalancerInboundNatPools?.map(lbi => ({
-                      id: lbi.id,
-                      ...lbi,
-                    })) || [],
-                })
-              ) || [],
+                (ipConfiguration) => {
+                  const { subnet,
+                    publicIPAddressConfiguration,
+                    applicationGatewayBackendAddressPools,
+                    applicationSecurityGroups,
+                    loadBalancerBackendAddressPools,
+                    loadBalancerInboundNatPools, ...rest } = ipConfiguration
+                  return {
+                    id: generateUniqueId({
+                      ...ipConfiguration
+                    }),
+                    ...rest,
+                    subnetId: subnet?.id,
+                    applicationGatewayBackendAddressPools:
+                      applicationGatewayBackendAddressPools?.map(agb => ({
+                        id: agb.id,
+                        ...agb,
+                      })) || [],
+                    applicationSecurityGroups:
+                      applicationSecurityGroups?.map(asg => ({
+                        id: asg.id,
+                        ...asg,
+                      })) || [],
+                    loadBalancerBackendAddressPools:
+                      loadBalancerBackendAddressPools?.map(lbb => ({
+                        id: lbb.id,
+                        ...lbb,
+                      })) || [],
+                    loadBalancerInboundNatPools:
+                      loadBalancerInboundNatPools?.map(lbi => ({
+                        id: lbi.id,
+                        ...lbi,
+                      })) || [],
+                  }
+
+                }) || [],
           }
         }
       ) || [],
@@ -192,6 +195,7 @@ const formatNetworkProfile = (
 }
 
 const formatExtensionProfile = (
+  id: string,
   extensionProfile?: VirtualMachineScaleSetExtensionProfile
 ): AzureVirtualMachineScaleSetExtension[] => {
   if (isEmpty(extensionProfile)) {
@@ -202,7 +206,10 @@ const formatExtensionProfile = (
 
   return (
     extensionsList?.map(e => ({
-      id: e.id,
+      id: generateUniqueId({
+        id,
+        ...e
+      }),
       name: e.name,
       forceUpdateTag: e.forceUpdateTag,
       type: e.type,
@@ -262,7 +269,7 @@ export default ({
   // Setting Extension Profile
   let extensions: AzureVirtualMachineScaleSetExtension[] = []
   if (!isEmpty(extensionProfile)) {
-    extensions = formatExtensionProfile(extensionProfile)
+    extensions = formatExtensionProfile(id, extensionProfile)
   }
 
   // Setting OS Profile

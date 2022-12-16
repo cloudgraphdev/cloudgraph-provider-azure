@@ -6193,7 +6193,7 @@ export type AzureVirtualMachineScaleSetNetworkProfileConfiguration = {
   id: Scalars['String'];
   ipConfigurations?: Maybe<Array<Maybe<AzureVirtualMachineScaleSetNetworkIpConfiguration>>>;
   name?: Maybe<Scalars['String']>;
-  networkSecurityGroup?: Maybe<AzureSubResource>;
+  networkSecurityGroupId?: Maybe<Scalars['String']>;
   primary?: Maybe<Scalars['Boolean']>;
 };
 
@@ -6273,10 +6273,6 @@ export type AzureVirtualMachineScaleSetStorageProfileOsDisk = {
   managedDisk?: Maybe<AzureVirtualMachineScaleSetStorageProfileManagedDisk>;
   osType?: Maybe<Scalars['String']>;
   writeAcceleratorEnabled?: Maybe<Scalars['Boolean']>;
-};
-
-export type AzureVirtualMachineScaleSetSubResource = {
-  id: Scalars['String'];
 };
 
 export type AzureVirtualMachineStorageImageReference = {
