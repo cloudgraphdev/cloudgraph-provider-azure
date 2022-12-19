@@ -14,19 +14,6 @@ export type Scalars = {
   Int64: number;
 };
 
-export type AwsServiceBillingInfo = {
-  cost?: Maybe<Scalars['Float']>;
-  currency?: Maybe<Scalars['String']>;
-  formattedCost?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-};
-
-export type AwsTotalBillingInfo = {
-  cost?: Maybe<Scalars['Float']>;
-  currency?: Maybe<Scalars['String']>;
-  formattedCost?: Maybe<Scalars['String']>;
-};
-
 export type AzureAdApplication = {
   apiAcceptMappedClaims?: Maybe<Scalars['Boolean']>;
   apiKnownClientApplications?: Maybe<Array<Maybe<Scalars['String']>>>;
@@ -2005,14 +1992,14 @@ export type AzureBaseResource = {
 };
 
 export type AzureBilling = AzureBaseResource & {
-  last30Days?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
-  last30DaysDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
-  monthToDate?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
-  monthToDateDailyAverage?: Maybe<Array<Maybe<AwsServiceBillingInfo>>>;
+  last30Days?: Maybe<Array<Maybe<AzureServiceBillingInfo>>>;
+  last30DaysDailyAverage?: Maybe<Array<Maybe<AzureServiceBillingInfo>>>;
+  monthToDate?: Maybe<Array<Maybe<AzureServiceBillingInfo>>>;
+  monthToDateDailyAverage?: Maybe<Array<Maybe<AzureServiceBillingInfo>>>;
   region?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
-  totalCostLast30Days?: Maybe<AwsTotalBillingInfo>;
-  totalCostMonthToDate?: Maybe<AwsTotalBillingInfo>;
+  totalCostLast30Days?: Maybe<AzureTotalBillingInfo>;
+  totalCostMonthToDate?: Maybe<AzureTotalBillingInfo>;
 };
 
 export type AzureCdnCertificateSourceParameters = {
@@ -5158,6 +5145,13 @@ export type AzureSecuritySetting = AzureBaseResource & {
   subscriptionId?: Maybe<Scalars['String']>;
 };
 
+export type AzureServiceBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+};
+
 export type AzureServiceBus = AzureResource & {
   createdAt?: Maybe<Scalars['DateTime']>;
   disableLocalAuth?: Maybe<Scalars['Boolean']>;
@@ -5990,6 +5984,12 @@ export type AzureTag = {
   virtualMachineScaleSets?: Maybe<Array<Maybe<AzureVirtualMachineScaleSet>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
   virtualNetworks?: Maybe<Array<Maybe<AzureVirtualNetwork>>>;
+};
+
+export type AzureTotalBillingInfo = {
+  cost?: Maybe<Scalars['Float']>;
+  currency?: Maybe<Scalars['String']>;
+  formattedCost?: Maybe<Scalars['String']>;
 };
 
 export type AzureTrafficManagerProfile = AzureResource & {

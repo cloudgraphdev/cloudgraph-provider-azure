@@ -1,15 +1,15 @@
 type azureBilling implements azureBaseResource @key(fields: "id") {
   subscriptionId: String @search(by: [hash, regexp])
   region: String @search(by: [hash, regexp])
-  totalCostMonthToDate: awsTotalBillingInfo
-  totalCostLast30Days: awsTotalBillingInfo
-  monthToDateDailyAverage: [awsServiceBillingInfo]
-  last30DaysDailyAverage: [awsServiceBillingInfo]
-  monthToDate: [awsServiceBillingInfo]
-  last30Days: [awsServiceBillingInfo]
+  totalCostMonthToDate: azureTotalBillingInfo
+  totalCostLast30Days: azureTotalBillingInfo
+  monthToDateDailyAverage: [azureServiceBillingInfo]
+  last30DaysDailyAverage: [azureServiceBillingInfo]
+  monthToDate: [azureServiceBillingInfo]
+  last30Days: [azureServiceBillingInfo]
 }
 
-type awsServiceBillingInfo
+type azureServiceBillingInfo
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
@@ -21,7 +21,7 @@ type awsServiceBillingInfo
   formattedCost: String @search(by: [hash, regexp])
 }
 
-type awsTotalBillingInfo
+type azureTotalBillingInfo
   @generate(
     query: { get: false, query: false, aggregate: false }
     mutation: { add: false, delete: false }
