@@ -17,7 +17,7 @@ Scan cloud infrastructure via the [Azure SDK](https://github.com/Azure/azure-sdk
 
 ## Install
 
-Install the aws provider in CloudGraph
+Install the azure provider in CloudGraph
 
 ```console
 cg init azure

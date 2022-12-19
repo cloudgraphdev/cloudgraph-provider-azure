@@ -14,7 +14,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
-1. Run command '...' NOTE: please run the command in DEBUG mode for additional debugging info [e.g. `CG_DEBUG=5 cg scan aws`]
+1. Run command '...' NOTE: please run the command in DEBUG mode for additional debugging info [e.g. `CG_DEBUG=5 cg scan azure`]
 2. Run GraphQL query '....'
 4. See error
 
