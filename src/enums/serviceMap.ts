@@ -80,7 +80,7 @@ import AzureLogAnalyticsSolutions from '../services/logAnalyticsSolution'
 import AzureLogAnalyticsWorkspaces from '../services/logAnalyticsWorkspace'
 import AzureCosmosDb from '../services/cosmosDb'
 import AzureAppInsights from '../services/appInsights'
-import AzureIntegrationRuntime from '../services/integrationRuntimes' 
+import AzureIntegrationRuntime from '../services/integrationRuntimes'
 import AzureServiceBus from '../services/serviceBus'
 import AzureBackupVault from '../services/backupVaults'
 import AzureBackupInstance from '../services/backupInstances'
@@ -90,7 +90,7 @@ import AzureLogProfiles from '../services/logProfiles'
 import Subscription from '../services/subscription'
 
 /**
- * serviceMap is an object that contains all currently supported services for AWS
+ * serviceMap is an object that contains all currently supported services for AZURE
  * serviceMap is used by the serviceFactory to produce instances of service classes
  */
 export default {
