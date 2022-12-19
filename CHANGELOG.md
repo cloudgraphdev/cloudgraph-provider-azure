@@ -1,3 +1,10 @@
+## [0.64.4-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.3...0.64.4-alpha.1) (2022-12-19)
+
+
+### Bug Fixes
+
+* Removed aws references on azure provider ([036bd13](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/036bd135a51d2d2a5afb6272c7599a9df4190e80))
+
 ## [0.64.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.2...0.64.3) (2022-12-16)
 
 
