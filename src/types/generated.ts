@@ -5239,6 +5239,7 @@ export type AzureSqlServer = AzureResource & {
   serverBlobAuditingPolicies?: Maybe<Array<Maybe<AzureSqlServerBlobAuditingPolicy>>>;
   serverSecurityAlertPolicies?: Maybe<Array<Maybe<AzureSqlServerSecurityAlertPolicy>>>;
   state?: Maybe<Scalars['String']>;
+  subscriptionId?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
   vulnerabilityAssessments?: Maybe<Array<Maybe<AzureSqlServerVulnerabilityAssessment>>>;
   workspaceFeature?: Maybe<Scalars['String']>;
