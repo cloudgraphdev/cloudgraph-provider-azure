@@ -51,6 +51,7 @@ export default {
   [services.metricAlert]: 'metricAlerts',
   [services.mySqlServers]: 'mySqlServers',
   [services.networkInterface]: 'networkInterfaces',
+  [services.networkWatcher]: 'networkWatchers',
   [services.policyAssignment]: 'policyAssignments',
   [services.postgreSqlServers]: 'postgreSqlServers',
   [services.privateDns]: 'privateDnsZones',

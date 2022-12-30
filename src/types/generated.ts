@@ -4226,6 +4226,11 @@ export type AzureNetworkSecurityGroupRule = AzureBaseResource & {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureNetworkWatcher = AzureResource & {
+  provisioningState?: Maybe<Scalars['String']>;
+  resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+};
+
 export type AzureNetworkWatcherFlowAnalyticsConfiguration = {
   enabled?: Maybe<Scalars['Boolean']>;
   trafficAnalyticsInterval?: Maybe<Scalars['Int']>;
@@ -5026,6 +5031,7 @@ export type AzureResourceGroup = AzureResource & {
   metricAlerts?: Maybe<Array<Maybe<AzureMetricAlert>>>;
   mySqlServer?: Maybe<Array<Maybe<AzureMySqlServer>>>;
   networkInterfaces?: Maybe<Array<Maybe<AzureNetworkInterface>>>;
+  networkWatchers?: Maybe<Array<Maybe<AzureNetworkWatcher>>>;
   postgreSqlServer?: Maybe<Array<Maybe<AzurePostgreSqlServer>>>;
   privateDns?: Maybe<Array<Maybe<AzurePrivateDnsZone>>>;
   publicIps?: Maybe<Array<Maybe<AzurePublicIp>>>;

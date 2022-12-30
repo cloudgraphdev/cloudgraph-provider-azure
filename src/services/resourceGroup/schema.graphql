@@ -50,6 +50,7 @@ type azureResourceGroup implements azureResource
   metricAlerts: [azureMetricAlert] @hasInverse(field: resourceGroup)
   mySqlServer: [azureMySqlServer] @hasInverse(field: resourceGroup)
   networkInterfaces: [azureNetworkInterface] @hasInverse(field: resourceGroup)
+  networkWatchers: [azureNetworkWatcher] @hasInverse(field: resourceGroup)
   postgreSqlServer: [azurePostgreSqlServer] @hasInverse(field: resourceGroup)
   privateDns: [azurePrivateDnsZone] @hasInverse(field: resourceGroup)
   publicIps: [azurePublicIp] @hasInverse(field: resourceGroup)
