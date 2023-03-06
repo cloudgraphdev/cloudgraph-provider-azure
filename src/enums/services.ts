@@ -57,6 +57,7 @@ export default {
   metricAlert: 'metricAlert',
   mySqlServers: 'mySqlServers',
   networkInterface: 'networkInterface',
+  networkWatcher: 'networkWatcher',
   policyAssignment: 'policyAssignment',
   postgreSqlServers: 'postgreSqlServers',
   privateDns: 'privateDns',

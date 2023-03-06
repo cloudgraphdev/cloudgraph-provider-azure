@@ -141,6 +141,9 @@ export default {
   // Network Interface
   foundNetworkInterfaces: (num: number): string =>
     `Found ${num} network interfaces`,
+  // Network Watcher
+  foundNetworkWatchers: (num: number): string =>
+    `Found ${num} network watchers`,
   // Policies
   foundPolicyAssignments: (num: number): string =>
     `Found ${num} policy assignments`,

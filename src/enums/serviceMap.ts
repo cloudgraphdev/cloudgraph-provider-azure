@@ -88,6 +88,7 @@ import AzureBackupPolicy from '../services/backupPolicies'
 import AzureBilling from '../services/billing'
 import AzureLogProfiles from '../services/logProfiles'
 import Subscription from '../services/subscription'
+import AzureNetworkWatcher from '../services/networkWatcher'
 
 /**
  * serviceMap is an object that contains all currently supported services for AZURE
@@ -154,6 +155,7 @@ export default {
   [services.machineLearningWorkspaces]: AzureMachineLearningWorkspace,
   [services.mySqlServers]: AzureMySqlServer,
   [services.networkInterface]: AzureNetworkInterface,
+  [services.networkWatcher]: AzureNetworkWatcher,
   [services.policyAssignment]: AzurePolicyAssignment,
   [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
