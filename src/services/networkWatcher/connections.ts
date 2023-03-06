@@ -21,7 +21,7 @@ export default ({
   const { id, resourceGroupId: rgName } = service
 
   /**
-   * Find resource group related to MySQL Server
+   * Find resource group related to Network Watcher
    */
   const resourceGroups: {
     name: string
