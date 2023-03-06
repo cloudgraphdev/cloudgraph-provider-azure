@@ -1,3 +1,17 @@
+# [0.65.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.4...0.65.0-alpha.1) (2023-03-06)
+
+
+### Features
+
+* **CG-1324:** add azure network watcher ([ba18765](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/ba18765c4bdc11cd2e25316b6f6bd727934b1257))
+
+## [0.64.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.3...0.64.4) (2022-12-19)
+
+
+### Bug Fixes
+
+* Removed aws references on azure provider ([036bd13](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/036bd135a51d2d2a5afb6272c7599a9df4190e80))
+
 ## [0.64.4-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.3...0.64.4-beta.1) (2022-12-19)
 
 

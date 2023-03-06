@@ -82,14 +82,15 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | functionApp                                 | resourceGroup, actionGroup                                                    |
 | integrationRuntime                          | dataFactory, resourceGroup                                                    |
 | keyVault                                    | resourceGroup                                                                 |
-| machineLearningWorkspaces                   | resourceGroup                                                                 |
-| metricAlert                                 | resourceGroup                                                                 |
-| mySqlServers                                | resourceGroup, databaseMySql                                                  |
 | loadBalancer                                | loadBalancer, publicIp, resourceGroup, virtualNetwork                         |
 | logAnalyticsSolution                        | resourceGroup, logAnalyticsWorkspace                                          |
 | logAnalyticsWorkspace                       | resourceGroup, dataCollectionRule, logAnalyticsSolution                       |
 | logProfiles                                 | storageAccount                                                                |
+| machineLearningWorkspaces                   | resourceGroup                                                                 |
+| metricAlert                                 | resourceGroup                                                                 |
+| mySqlServers                                | resourceGroup, databaseMySql                                                  |
 | networkInterface                            | publicIp, resourceGroup, securityGroup, virtualMachine, virtualNetwork        |
+| networkWatcher                              | resourceGroup                                                                 |
 | policyAssignment                            |                                                                               |
 | postgreSqlServers                           | resourceGroup, databasePostgreSql                                             |
 | privateDns                                  | resourceGroup                                                                 |

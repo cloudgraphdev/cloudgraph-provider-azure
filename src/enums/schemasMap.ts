@@ -63,6 +63,7 @@ export default {
   [services.metricAlert]: 'azureMetricAlert',
   [services.mySqlServers]: 'azureMySqlServer',
   [services.networkInterface]: 'azureNetworkInterface',
+  [services.networkWatcher]: 'azureNetworkWatcher',
   [services.policyAssignment]: 'azurePolicyAssignment',
   [services.postgreSqlServers]: 'azurePostgreSqlServer',
   [services.privateDns]: 'azurePrivateDnsZone',

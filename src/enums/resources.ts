@@ -46,6 +46,7 @@ export default {
   appServicePlan: 'azurerm_app_service_plan',
   storageContainer: 'azurerm_storage_container',
   networkInterface: 'azurerm_network_interface',
+  networkWatcher: 'azurerm_network_watcher',
   dataFactoryDataset: 'azurerm_data_factory_dataset', // Not a real TF resource
   dataFactoryDataFlow: 'azurerm_data_factory_data_flow', // Not a real TF resource
   dataFactoryPipeline: 'azurerm_data_factory_pipeline',

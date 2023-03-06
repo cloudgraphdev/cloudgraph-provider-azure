@@ -154,6 +154,7 @@ type azureSqlServer implements azureResource
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
+  subscriptionId: String @search(by: [hash, regexp])
   identity: azureSqlServerIdentity
   version: String @search(by: [hash, regexp])
   state: String @search(by: [hash, regexp])
