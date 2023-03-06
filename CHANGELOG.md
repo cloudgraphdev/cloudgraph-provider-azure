@@ -1,3 +1,10 @@
+# [0.65.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.4...0.65.0) (2023-03-06)
+
+
+### Features
+
+* **CG-1324:** add azure network watcher ([ba18765](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/ba18765c4bdc11cd2e25316b6f6bd727934b1257))
+
 # [0.65.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.4...0.65.0-beta.1) (2023-03-06)
 
 
