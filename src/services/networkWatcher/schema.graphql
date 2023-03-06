@@ -1,0 +1,9 @@
+type azureNetworkWatcher implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  resourceGroup: [azureResourceGroup] @hasInverse(field: networkWatchers)
+}
