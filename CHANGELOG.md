@@ -1,3 +1,10 @@
+# [0.66.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.65.0...0.66.0-alpha.1) (2023-05-03)
+
+
+### Features
+
+* add new regions ([6e79b4d](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/6e79b4dbc6d1adb8f6c2893e5c4e8fb03b0060c3))
+
 # [0.65.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.64.4...0.65.0) (2023-03-06)
 
 
