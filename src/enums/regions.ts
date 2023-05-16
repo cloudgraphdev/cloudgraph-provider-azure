@@ -10,6 +10,7 @@ export const regionMap = {
   eastUs2Euap: 'eastus2euap',
   westUs: 'westus',
   westUs2: 'westus2',
+  westUs3: 'westus3',
   westUsStage: 'westusstage',
   westUs2Stage: 'westus2stage',
   westCentralUs: 'westcentralus',
@@ -20,6 +21,7 @@ export const regionMap = {
   centralUsEuap: 'centraluseuap',
   northCentralus: 'northcentralus',
   northCentralUsStage: 'northcentralusstage',
+  unitedStatesEuap: 'unitedstateseuap',
   // Canada
   canada: 'canada',
   canadaCentral: 'canadacentral',
@@ -37,6 +39,7 @@ export const regionMap = {
   eastAsia: 'eastasia',
   eastAsiaStage: 'eastasiastage',
   southeastAsiaStage: 'southeastasiastage',
+  singapore: 'singapore',
   // Europe
   europe: 'europe',
   northEurope: 'northeurope',
@@ -49,11 +52,18 @@ export const regionMap = {
   norwayEast: 'norwayeast',
   switzerlandNorth: 'switzerlandnorth',
   switzerlandWest: 'switzerlandwest',
+  polandCentral: 'polandcentral',
+  swedenCentral: 'swedenCentral',
+  france: 'france',
+  germany: 'germany',
+  norway: 'norway',
+  switzerland: 'switzerland',
   // Uk
   uk: 'uk',
   ukWest: 'ukwest',
   ukSouth: 'uksouth',
   // Africa
+  southAfrica: 'southafrica',
   southAfricaWest: 'southafricawest',
   southAfricaNorth: 'southafricanorth',
   // India
@@ -68,13 +78,17 @@ export const regionMap = {
   // Korea
   koreaSouth: 'koreasouth',
   koreaCentral: 'koreacentral',
+  korea: 'korea',
   // Brazil
   brazil: 'brazil',
   brazilSouth: 'brazilsouth',
   brazilSouthEast: 'brazilsoutheast',
+  brazilUs: 'brazilus',
   // UAE
   uaeCentral: 'uaecentral',
   uaeNorth: 'uaenorth',
+  uae: 'uae',
+  qatarCentral: 'qatarcentral',
 }
 
 const {
@@ -91,6 +105,7 @@ const {
   westUs2,
   westUsStage,
   westUs2Stage,
+  westUs3,
   westCentralUs,
   southCentralUs,
   southCentralUsStage,
@@ -99,6 +114,7 @@ const {
   centralUsEuap,
   northCentralus,
   northCentralUsStage,
+  unitedStatesEuap,
   // Canada
   canada,
   canadaCentral,
@@ -116,6 +132,7 @@ const {
   eastAsia,
   eastAsiaStage,
   southeastAsiaStage,
+  singapore,
   // Europe
   europe,
   northEurope,
@@ -128,6 +145,12 @@ const {
   norwayEast,
   switzerlandNorth,
   switzerlandWest,
+  polandCentral,
+  swedenCentral,
+  france,
+  germany,
+  norway,
+  switzerland,
   // Uk
   uk,
   ukWest,
@@ -135,6 +158,7 @@ const {
   // Africa
   southAfricaWest,
   southAfricaNorth,
+  southAfrica,
   // India
   india,
   westIndia,
@@ -147,13 +171,17 @@ const {
   // Korea
   koreaSouth,
   koreaCentral,
+  korea,
   // Brazil
   brazil,
   brazilSouth,
   brazilSouthEast,
+  brazilUs,
   // UAE
   uaeCentral,
   uaeNorth,
+  uae,
+  qatarCentral,
 } = regionMap
 
 export default [
@@ -170,6 +198,7 @@ export default [
   westUs2,
   westUsStage,
   westUs2Stage,
+  westUs3,
   westCentralUs,
   southCentralUs,
   southCentralUsStage,
@@ -178,6 +207,7 @@ export default [
   centralUsEuap,
   northCentralus,
   northCentralUsStage,
+  unitedStatesEuap,
   // Canada
   canada,
   canadaCentral,
@@ -195,6 +225,7 @@ export default [
   eastAsia,
   eastAsiaStage,
   southeastAsiaStage,
+  singapore,
   // Europe
   europe,
   northEurope,
@@ -207,6 +238,12 @@ export default [
   norwayEast,
   switzerlandNorth,
   switzerlandWest,
+  polandCentral,
+  swedenCentral,
+  france,
+  germany,
+  norway,
+  switzerland,
   // Uk
   uk,
   ukWest,
@@ -214,6 +251,7 @@ export default [
   // Africa
   southAfricaWest,
   southAfricaNorth,
+  southAfrica,
   // India
   india,
   westIndia,
@@ -226,11 +264,15 @@ export default [
   // Korea
   koreaSouth,
   koreaCentral,
+  korea,
   // Brazil
   brazil,
   brazilSouth,
   brazilSouthEast,
+  brazilUs,
   // UAE
   uaeCentral,
   uaeNorth,
+  uae,
+  qatarCentral,
 ]
