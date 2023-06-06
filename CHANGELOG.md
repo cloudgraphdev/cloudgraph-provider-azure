@@ -1,3 +1,11 @@
+# [0.67.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.66.0...0.67.0-alpha.1) (2023-06-06)
+
+
+### Features
+
+* **azure:** Add missing SQL Server services ([41bffd4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/41bffd48c728303d0d697509c9efa9a5c7442166))
+* **azure:** Support missing storageBlob and storageContainer services ([b179ebf](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/b179ebf76107a6285c978067b79f544e995df66f))
+
 # [0.66.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.65.0...0.66.0) (2023-05-16)
 
 
