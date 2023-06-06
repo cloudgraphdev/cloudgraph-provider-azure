@@ -17,6 +17,8 @@ export interface RawAzureStorageBlob extends Omit<BlobItem, 'tags'> {
   region: string
   resourceGroupId: string
   storageContainerId: string
+  storageAccountName: string
+  storageContainerName: string
   Tags: TagMap
 }
 
@@ -75,6 +77,8 @@ export default async ({
                 storageBlobData.push({
                   ...blob,
                   storageContainerId,
+                  storageAccountName: accountName,
+                  storageContainerName: containerName,
                   resourceGroupId: storageContainer.resourceGroupId,
                   region: storageContainer.region,
                   Tags: tags,

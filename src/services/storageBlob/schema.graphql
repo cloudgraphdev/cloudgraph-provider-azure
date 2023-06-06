@@ -74,6 +74,7 @@ type azureStorageBlob implements azureResource
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
+  url: String @search(by: [hash, regexp])
   deleted: String @search(by: [hash, regexp])
   snapshot: String @search(by: [hash, regexp])
   versionId: String @search(by: [hash, regexp])

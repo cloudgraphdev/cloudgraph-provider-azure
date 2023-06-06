@@ -35,6 +35,7 @@ type azureStorageContainer implements azureResource
     mutation: { add: true, delete: false }
   )
   @key(fields: "id") {
+  url: String @search(by: [hash, regexp])
   version: String @search(by: [hash, regexp])
   deleted: String @search(by: [hash, regexp])
   deletedTime: String @search(by: [hash, regexp])
