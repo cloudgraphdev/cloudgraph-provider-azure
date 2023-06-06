@@ -1,3 +1,15 @@
+# [0.67.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.1...0.67.0-alpha.2) (2023-06-06)
+
+
+### Bug Fixes
+
+* Added missing attribute for cosmosdb schema ([cde0c79](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/cde0c791374d648f77541b1189ddbd3062ea67aa))
+
+
+### Features
+
+* Exposed containersIds for cosmosdb account ([8b45320](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8b4532048fc8137539489adb38eee101ff867039))
+
 # [0.67.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.66.0...0.67.0-alpha.1) (2023-06-06)
 
 
