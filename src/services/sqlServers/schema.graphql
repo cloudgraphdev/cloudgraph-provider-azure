@@ -168,7 +168,10 @@ type azureSqlServer implements azureResource
   administrators: azureSqlServerExternalAdministrator
   workspaceFeature: String @search(by: [hash, regexp])
   restrictOutboundNetworkAccess: String @search(by: [hash, regexp])
+  elasticPools: [azureSqlServerElasticPool]
+  failoverGroups: [azureSqlServerFailoverGroup]
   firewallRules: [azureSqlServerFirewallRule]
+  virtualNetworkRules: [azureSqlServerVirtualNetworkRule]
   serverSecurityAlertPolicies: [azureSqlServerSecurityAlertPolicy]
   adAdministrators: [azureSqlServerADAdministrator]
   encryptionProtectors: [azureSqlServerEncryptionProtector]
@@ -222,4 +225,40 @@ type azureSqlServerBlobAuditingPolicy
   state: String @search(by: [hash, regexp])  
   storageEndpoint: String @search(by: [hash, regexp])  
   storageAccountSubscriptionId: String @search(by: [hash, regexp])  
+}
+
+type azureSqlServerElasticPool
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureSqlServerFailoverGroup
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureSqlServerVirtualNetworkRule
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
 }
