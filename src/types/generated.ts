@@ -5544,6 +5544,7 @@ export type AzureStorageBlob = AzureResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   snapshot?: Maybe<Scalars['String']>;
   storageContainer?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+  url?: Maybe<Scalars['String']>;
   versionId?: Maybe<Scalars['String']>;
 };
 
@@ -5620,6 +5621,7 @@ export type AzureStorageContainer = AzureResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
+  url?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
 };
 
