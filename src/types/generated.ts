@@ -2497,6 +2497,7 @@ export type AzureCosmosDb = AzureResource & {
   capacityTotalThroughputLimit?: Maybe<Scalars['Int']>;
   connectorOffer?: Maybe<Scalars['String']>;
   consistencyPolicy?: Maybe<AzureCosmosDbConsistencyPolicy>;
+  containersIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   cors?: Maybe<Array<Maybe<AzureCosmosDbCorsPolicy>>>;
   createMode?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['String']>;
