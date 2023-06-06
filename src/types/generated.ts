@@ -5230,7 +5230,9 @@ export type AzureSqlServer = AzureResource & {
   adAdministrators?: Maybe<Array<Maybe<AzureSqlServerAdAdministrator>>>;
   administrators?: Maybe<AzureSqlServerExternalAdministrator>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
+  elasticPools?: Maybe<Array<Maybe<AzureSqlServerElasticPool>>>;
   encryptionProtectors?: Maybe<Array<Maybe<AzureSqlServerEncryptionProtector>>>;
+  failoverGroups?: Maybe<Array<Maybe<AzureSqlServerFailoverGroup>>>;
   federatedClientId?: Maybe<Scalars['String']>;
   firewallRules?: Maybe<Array<Maybe<AzureSqlServerFirewallRule>>>;
   fullyQualifiedDomainName?: Maybe<Scalars['String']>;
@@ -5247,6 +5249,7 @@ export type AzureSqlServer = AzureResource & {
   state?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureSqlServerVirtualNetworkRule>>>;
   vulnerabilityAssessments?: Maybe<Array<Maybe<AzureSqlServerVulnerabilityAssessment>>>;
   workspaceFeature?: Maybe<Scalars['String']>;
 };
@@ -5275,6 +5278,12 @@ export type AzureSqlServerBlobAuditingPolicy = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureSqlServerElasticPool = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureSqlServerEncryptionProtector = {
   autoRotationEnabled?: Maybe<Scalars['Boolean']>;
   id: Scalars['String'];
@@ -5296,6 +5305,12 @@ export type AzureSqlServerExternalAdministrator = {
   principalType?: Maybe<Scalars['String']>;
   sid?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerFailoverGroup = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureSqlServerFirewallRule = {
@@ -5353,6 +5368,12 @@ export type AzureSqlServerUserAssignedIdentity = {
 export type AzureSqlServerUserIdentity = {
   clientId?: Maybe<Scalars['String']>;
   principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerVirtualNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureSqlServerVulnerabilityAssessment = {
