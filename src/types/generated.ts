@@ -4078,8 +4078,10 @@ export type AzureMetricAlertMultiMetricCriteria = {
 export type AzureMySqlServer = AzureResource & {
   administratorLogin?: Maybe<Scalars['String']>;
   byokEnforcement?: Maybe<Scalars['String']>;
+  configurations?: Maybe<Array<Maybe<AzureMySqlServerConfiguration>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
   earliestRestoreDate?: Maybe<Scalars['String']>;
+  firewallRules?: Maybe<Array<Maybe<AzureMySqlServerFirewallRule>>>;
   fullyQualifiedDomainName?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureMySqlServerResourceIdentity>;
   infrastructureEncryption?: Maybe<Scalars['String']>;
@@ -4094,6 +4096,21 @@ export type AzureMySqlServer = AzureResource & {
   storageProfile?: Maybe<AzureMySqlServerStorageProfile>;
   userVisibleState?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureMySqlServerVirtualNetworkRule>>>;
+};
+
+export type AzureMySqlServerConfiguration = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerFirewallRule = {
+  endIpAddress?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  startIpAddress?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureMySqlServerPrivateEndpointProperty = {
@@ -4128,6 +4145,12 @@ export type AzureMySqlServerStorageProfile = {
   geoRedundantBackup?: Maybe<Scalars['String']>;
   storageAutogrow?: Maybe<Scalars['String']>;
   storageMB?: Maybe<Scalars['Int']>;
+};
+
+export type AzureMySqlServerVirtualNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureNameValueProperty = {
