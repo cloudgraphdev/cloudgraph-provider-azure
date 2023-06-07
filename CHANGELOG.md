@@ -1,3 +1,10 @@
+# [0.67.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.2...0.67.0-alpha.3) (2023-06-07)
+
+
+### Features
+
+* **azure:** Add missing postgreSql server services ([8aeff96](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8aeff969f44cfa8751fefacbbca6597cf7213cd1))
+
 # [0.67.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.1...0.67.0-alpha.2) (2023-06-06)
 
 
