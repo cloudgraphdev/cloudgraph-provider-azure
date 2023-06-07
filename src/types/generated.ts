@@ -4316,6 +4316,7 @@ export type AzurePostgreSqlServer = AzureResource & {
   storageProfile?: Maybe<AzurePostgreSqlServerStorageProfile>;
   userVisibleState?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzurePostgreSqlServerVirtualNetworkRule>>>;
 };
 
 export type AzurePostgreSqlServerConfiguration = {
@@ -4370,6 +4371,12 @@ export type AzurePostgreSqlServerStorageProfile = {
   geoRedundantBackup?: Maybe<Scalars['String']>;
   storageAutogrow?: Maybe<Scalars['String']>;
   storageMB?: Maybe<Scalars['Int']>;
+};
+
+export type AzurePostgreSqlServerVirtualNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzurePrivateDnsZone = AzureResource & {
