@@ -25,8 +25,19 @@ export default ({
     numberOfVirtualNetworkLinksWithRegistration,
     provisioningState,
     internalId,
-    resourceGroupId
+    resourceGroupId,
+    records = []
   } = service
+
+  const aRecords = records.filter(r => r.type === 'A').map(r => r.id)
+  const aaaRecords = records.filter(r => r.type === 'AAA').map(r => r.id)
+  const mxRecords = records.filter(r => r.type === 'MX').map(r => r.id)
+  const ptrRecords = records.filter(r => r.type === 'PTR').map(r => r.id)
+  const soaRecord = records.filter(r => r.type === 'SOA').map(r => r.id)
+  const srvRecords = records.filter(r => r.type === 'SRV').map(r => r.id)
+  const txtRecords = records.filter(r => r.type === 'TXT').map(r => r.id)
+  const cnameRecord = records.filter(r => r.type === 'CNAME').pop()?.id
+
   return {
     id,
     subscriptionId: account,
@@ -43,6 +54,14 @@ export default ({
     provisioningState,
     internalId,
     tags: formatTagsFromMap(Tags),
-    resourceGroupId
+    resourceGroupId,
+    aRecords,
+    aaaRecords,
+    mxRecords,
+    ptrRecords,
+    soaRecord,
+    srvRecords,
+    txtRecords,
+    cnameRecord,
   }
 }

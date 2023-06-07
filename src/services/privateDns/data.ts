@@ -16,7 +16,49 @@ export interface RawAzurePrivateDnsZone
   extends Omit<PrivateZone, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
+  records: RawAzureRecordSet[]
   Tags: TagMap
+}
+
+export interface RawAzureRecordSet {
+  id: string
+  name: string
+  type: string
+}
+
+export const listRecordSets = async (
+  client: PrivateDnsManagementClient,
+  resourceGroup: string,
+  databaseAccountName: string
+): Promise<RawAzureRecordSet[]> => {
+  const records: RawAzureRecordSet[] = []
+  const recordsIterable = client.recordSets.list(
+    resourceGroup,
+    databaseAccountName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const record of recordsIterable) {
+        if (record) {
+          const { id, name, type } = record
+          const recordType = type?.split('/').pop()
+          records.push({
+            id,
+            name,
+            type: recordType,
+          } as RawAzureRecordSet)
+        }
+
+      }
+    }
+    , {
+      service: 'Records Sets',
+      client,
+      scope: 'recordSets',
+      operation: 'listRecordSets',
+    }
+  )
+  return records
 }
 
 export default async ({
@@ -46,6 +88,7 @@ export default async ({
               ...rest,
               region,
               resourceGroupId,
+              records: await listRecordSets(client, resourceGroupId, privateDnsZone.name),
               Tags: tags || {},
             })
           }
