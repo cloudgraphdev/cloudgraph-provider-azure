@@ -26,11 +26,13 @@ export default ({
     provisioningState,
     internalId,
     resourceGroupId,
-    records = []
+    records = [],
+    virtualNetworkLinks = []
   } = service
 
+  // Records
   const aRecords = records.filter(r => r.type === 'A').map(r => r.id)
-  const aaaRecords = records.filter(r => r.type === 'AAA').map(r => r.id)
+  const aaaaRecords = records.filter(r => r.type === 'AAAA').map(r => r.id)
   const mxRecords = records.filter(r => r.type === 'MX').map(r => r.id)
   const ptrRecords = records.filter(r => r.type === 'PTR').map(r => r.id)
   const soaRecord = records.filter(r => r.type === 'SOA').map(r => r.id)
@@ -56,12 +58,13 @@ export default ({
     tags: formatTagsFromMap(Tags),
     resourceGroupId,
     aRecords,
-    aaaRecords,
+    aaaaRecords,
     mxRecords,
     ptrRecords,
     soaRecord,
     srvRecords,
     txtRecords,
     cnameRecord,
+    virtualNetworkLinks: virtualNetworkLinks.map(r => r.id)
   }
 }
