@@ -3,6 +3,7 @@ import {
   FirewallRule,
   PostgreSQLManagementClient,
   Server,
+  VirtualNetworkRule,
 } from '@azure/arm-postgresql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
@@ -23,6 +24,7 @@ export interface RawAzurePostgreSqlServer
   Tags: TagMap
   configurations: Configuration[]
   firewallRules: FirewallRule[]
+  virtualNetworkRules: VirtualNetworkRule[]
 }
 
 export default async ({
@@ -100,6 +102,24 @@ export default async ({
               operation: `listByServer for ${name}`,
             }
           )
+          const virtualNetworkRules: VirtualNetworkRule[] = []
+          const virtualNetworkRulesIterable: PagedAsyncIterableIterator<VirtualNetworkRule> =
+            client.virtualNetworkRules.listByServer(resourceGroupId, name)
+          await tryCatchWrapper(
+            async () => {
+              for await (const virtualNetworkRule of virtualNetworkRulesIterable) {
+                if (virtualNetworkRule) {
+                  virtualNetworkRules.push(virtualNetworkRule)
+                }
+              }
+            },
+            {
+              service: serviceName,
+              client,
+              scope: 'virtualNetworkRules',
+              operation: `listByServer for ${name}`,
+            }
+          )
           result[region].push({
             name,
             region,
@@ -107,6 +127,7 @@ export default async ({
             resourceGroupId,
             configurations,
             firewallRules,
+            virtualNetworkRules,
             Tags: tags || {},
           })
         }
