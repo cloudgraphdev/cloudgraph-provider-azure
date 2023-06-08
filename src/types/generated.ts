@@ -6306,6 +6306,8 @@ export type AzureVirtualNetwork = AzureResource & {
   provisioningState?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGuid?: Maybe<Scalars['String']>;
+  serviceEndpointPoliciesIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subnetsIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
 };
 
