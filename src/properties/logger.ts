@@ -173,6 +173,10 @@ export default {
     `Found ${num} replication policies`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
+  // Route Filters
+  foundRouteFilters: (num: number): string => `Found ${num} route filters`,
+  // Route Tables
+  foundRouteTables: (num: number): string => `Found ${num} route tables`,
   // Security Assesments
   foundSecurityAssesments: (num: number): string =>
     `Found ${num} security assesments`,

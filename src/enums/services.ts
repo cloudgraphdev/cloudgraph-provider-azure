@@ -71,6 +71,8 @@ export default {
   replicationNetworks: 'replicationNetworks',
   replicationPolicies: 'replicationPolicies',
   resourceGroup: 'resourceGroup',
+  routeFilter: 'routeFilter',
+  routeTable: 'routeTable',
   securityAssesments: 'securityAssesments',
   securityContacts: 'securityContacts',
   securityGroup: 'securityGroup',

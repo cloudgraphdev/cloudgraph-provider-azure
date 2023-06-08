@@ -104,6 +104,8 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | replicationNetworks                         | resourceGroup                                                                 |
 | replicationPolicies                         | resourceGroup                                                                 |
 | resourceGroup                               | **all services**                                                              |
+| routeFilter                                 |                                                                               |
+| routeTable                                  |                                                                               |
 | securityAssessments                         |                                                                               |
 | securityContacts                            |                                                                               |
 | securityGroup                               | networkInterface, resourceGroup                                               |
