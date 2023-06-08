@@ -1,4 +1,10 @@
-import { DataFactoryManagementClient, Factory } from '@azure/arm-datafactory'
+import {
+  DataFactoryManagementClient,
+  DataFlowResource,
+  DatasetResource,
+  Factory,
+  PipelineResource,
+} from '@azure/arm-datafactory'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 
@@ -19,6 +25,102 @@ export interface RawAzureDataFactory
   region: string
   resourceGroupId: string
   Tags: TagMap
+  pipelines: PipelineResource[]
+  dataFlows: DataFlowResource[]
+  datasets: DatasetResource[]
+}
+
+const getPipelines = async ({
+  client,
+  resourceGroupName,
+  factoryName,
+}: {
+  client: DataFactoryManagementClient
+  resourceGroupName: string
+  factoryName: string
+}): Promise<PipelineResource[]> => {
+  const pipelines: PipelineResource[] = []
+  const pipelinesIterable: PagedAsyncIterableIterator<PipelineResource> =
+    client.pipelines.listByFactory(resourceGroupName, factoryName)
+
+  await tryCatchWrapper(
+    async () => {
+      for await (const pipeline of pipelinesIterable) {
+        if (pipeline) {
+          pipelines.push(pipeline)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'pipelines',
+      operation: 'listByFactory',
+    }
+  )
+  return pipelines
+}
+
+const getDataFlows = async ({
+  client,
+  resourceGroupName,
+  factoryName,
+}: {
+  client: DataFactoryManagementClient
+  resourceGroupName: string
+  factoryName: string
+}): Promise<DataFlowResource[]> => {
+  const flows: DataFlowResource[] = []
+  const flowsIterable: PagedAsyncIterableIterator<DataFlowResource> =
+    client.dataFlows.listByFactory(resourceGroupName, factoryName)
+
+  await tryCatchWrapper(
+    async () => {
+      for await (const flow of flowsIterable) {
+        if (flow) {
+          flows.push(flow)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'flows',
+      operation: 'listByFactory',
+    }
+  )
+  return flows
+}
+
+const getDatasets = async ({
+  client,
+  resourceGroupName,
+  factoryName,
+}: {
+  client: DataFactoryManagementClient
+  resourceGroupName: string
+  factoryName: string
+}): Promise<DatasetResource[]> => {
+  const datasets: DatasetResource[] = []
+  const datasetsIterable: PagedAsyncIterableIterator<DatasetResource> =
+    client.datasets.listByFactory(resourceGroupName, factoryName)
+
+  await tryCatchWrapper(
+    async () => {
+      for await (const dataset of datasetsIterable) {
+        if (dataset) {
+          datasets.push(dataset)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'datasets',
+      operation: 'listByFactory',
+    }
+  )
+  return datasets
 }
 
 export default async ({
@@ -49,10 +151,28 @@ export default async ({
             if (factory) {
               const { location, tags, ...restOfFactory } = factory
               const resourceGroupId = getResourceGroupFromEntity(restOfFactory)
+              const pipelines = await getPipelines({
+                client,
+                resourceGroupName: resourceGroupId,
+                factoryName: factory.name,
+              })
+              const dataFlows = await getDataFlows({
+                client,
+                resourceGroupName: resourceGroupId,
+                factoryName: factory.name,
+              })
+              const datasets = await getDatasets({
+                client,
+                resourceGroupName: resourceGroupId,
+                factoryName: factory.name,
+              })
               factories.push({
                 region: lowerCaseLocation(location),
                 Tags: tags || {},
                 resourceGroupId,
+                pipelines,
+                dataFlows,
+                datasets,
                 ...restOfFactory,
               })
             }
@@ -68,7 +188,7 @@ export default async ({
       logger.debug(lt.foundDataFactory(factories.length))
 
       const result: { [property: string]: RawAzureDataFactory[] } = {}
-      factories.map(({ region, tags, ...rest }) => {
+      factories.forEach(({ region, tags, ...rest }) => {
         if (regions.includes(region)) {
           if (!result[region]) {
             result[region] = []

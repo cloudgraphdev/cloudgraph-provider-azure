@@ -2772,9 +2772,12 @@ export type AzureDataCollectionRuleWindowsEventLogDataSource = {
 
 export type AzureDataFactory = AzureResource & {
   createTime?: Maybe<Scalars['String']>;
+  dataFlows?: Maybe<Array<Maybe<AzureDataFactorySubResource>>>;
+  datasets?: Maybe<Array<Maybe<AzureDataFactorySubResource>>>;
   eTag?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureDataFactoryIdentity>;
   integrationRuntimes?: Maybe<Array<Maybe<AzureIntegrationRuntime>>>;
+  pipelines?: Maybe<Array<Maybe<AzureDataFactorySubResource>>>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccess?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
@@ -2785,6 +2788,11 @@ export type AzureDataFactoryIdentity = {
   principalId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactorySubResource = {
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
 export type AzureDataLakeStorageAccount = AzureResource & {

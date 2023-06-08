@@ -23,6 +23,9 @@ export default ({
     createTime,
     version,
     publicNetworkAccess,
+    pipelines,
+    dataFlows,
+    datasets,
   } = service
 
   return {
@@ -45,5 +48,8 @@ export default ({
     createTime,
     version,
     publicNetworkAccess,
+    pipelines,
+    dataFlows,
+    datasets,
   }
 }

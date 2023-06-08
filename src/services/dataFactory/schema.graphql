@@ -18,4 +18,12 @@ type azureDataFactory implements azureResource
   publicNetworkAccess: String @search(by: [hash, regexp])
   resourceGroup: [azureResourceGroup] @hasInverse(field: dataFactories)
   integrationRuntimes: [azureIntegrationRuntime] @hasInverse(field: dataFactory)
+  pipelines: [azureDataFactorySubResource]
+  dataFlows: [azureDataFactorySubResource]
+  datasets: [azureDataFactorySubResource]
+}
+
+type azureDataFactorySubResource {
+  id: String
+  name: String
 }
