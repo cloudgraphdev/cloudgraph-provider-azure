@@ -1,6 +1,11 @@
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureMySqlServer } from './data'
-import { AzureMySqlServer } from '../../types/generated'
+import {
+  AzureMySqlServer,
+  AzureMySqlServerConfiguration,
+  AzureMySqlServerFirewallRule,
+  AzureMySqlServerVirtualNetworkRule,
+} from '../../types/generated'
 
 export default ({
   service,
@@ -33,6 +38,9 @@ export default ({
     privateEndpointConnections,
     resourceGroupId,
     Tags,
+    configurations = [],
+    firewallRules = [],
+    virtualNetworkRules = [],
   } = service
 
   return {
@@ -60,7 +68,47 @@ export default ({
     privateEndpointConnections: privateEndpointConnections?.map(connection => ({
       ...connection,
       id: connection.id,
-    })), 
+    })),
     tags: formatTagsFromMap(Tags),
+    configurations:
+      configurations?.map(
+        ({
+          id: configurationId,
+          name: configurationName,
+          type: configurationType,
+        }): AzureMySqlServerConfiguration => ({
+          id: configurationId,
+          name: configurationName,
+          type: configurationType,
+        })
+      ) ?? [],
+    firewallRules:
+      firewallRules?.map(
+        ({
+          id: firewallRuleId,
+          name: firewallRuleName,
+          type: firewallRuleType,
+          startIpAddress,
+          endIpAddress,
+        }): AzureMySqlServerFirewallRule => ({
+          id: firewallRuleId,
+          name: firewallRuleName,
+          type: firewallRuleType,
+          startIpAddress,
+          endIpAddress,
+        })
+      ) ?? [],
+    virtualNetworkRules:
+      virtualNetworkRules?.map(
+        ({
+          id: virtualNetworkRuleId,
+          name: virtualNetworkRuleName,
+          type: virtualNetworkRuleType,
+        }): AzureMySqlServerVirtualNetworkRule => ({
+          id: virtualNetworkRuleId,
+          name: virtualNetworkRuleName,
+          type: virtualNetworkRuleType,
+        })
+      ) ?? [],
   }
 }
