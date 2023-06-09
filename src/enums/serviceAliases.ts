@@ -56,6 +56,7 @@ export default {
   [services.postgreSqlServers]: 'postgreSqlServers',
   [services.privateDns]: 'privateDnsZones',
   [services.publicIp]: 'publicIps',
+  [services.publicIpPrefix]: 'publicIpPrefixes',
   [services.recoveryVaults]: 'recoveryVaults',
   [services.recoveryInstances]: 'recoveryInstances',
   [services.recoveryPolicies]: 'recoveryPolicies',

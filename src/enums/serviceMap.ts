@@ -51,6 +51,7 @@ import AzurePolicyAssignment from '../services/policyAssignment'
 import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
+import AzurePublicIpPrefix from '../services/publicIpPrefix'
 import AzureRecoveryVault from '../services/recoveryVaults'
 import AzureRecoveryInstance from '../services/recoveryInstances'
 import AzureRecoveryPolicy from '../services/recoveryPolicies'
@@ -160,6 +161,7 @@ export default {
   [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
+  [services.publicIpPrefix]: AzurePublicIpPrefix,
   [services.recoveryVaults]: AzureRecoveryVault,
   [services.recoveryInstances]: AzureRecoveryInstance,
   [services.recoveryPolicies]: AzureRecoveryPolicy,

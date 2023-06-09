@@ -4438,6 +4438,10 @@ export type AzurePublicIpDnsSettings = {
   reverseFqdn?: Maybe<Scalars['String']>;
 };
 
+export type AzurePublicIpPrefix = AzureResource & {
+  ipTags?: Maybe<Array<Maybe<AzurePublicIpTags>>>;
+};
+
 export type AzurePublicIpTags = {
   ipTagType?: Maybe<Scalars['String']>;
   tag?: Maybe<Scalars['String']>;
