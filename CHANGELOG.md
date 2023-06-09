@@ -1,3 +1,10 @@
+# [0.67.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.3...0.67.0-alpha.4) (2023-06-09)
+
+
+### Features
+
+* **azure:** add missing mySQL Server services ([90131c8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/90131c83d231a8ef3d2f29b23412e978688e32dc))
+
 # [0.67.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.2...0.67.0-alpha.3) (2023-06-07)
 
 
