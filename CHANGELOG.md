@@ -1,3 +1,15 @@
+# [0.67.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.4...0.67.0-alpha.5) (2023-06-14)
+
+
+### Features
+
+* add publicIp missing services ([33ae7da](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/33ae7da24dd69264344016bf4af3b25a6264c43d))
+* Added missing subnets ids and endpoint policies for subnets ([baa0a6e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/baa0a6e72510f70e217a5c516479db8d5d05294f))
+* **azure:** Add missing dataFactory services ([2b9a48b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/2b9a48b9e848aad2775069167dcb406ad0dc8f77))
+* **azure:** add route table services ([5573e8e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/5573e8eeee9387d50e440e7d1aecd4c529f3c531))
+* Fetched records for private dns ([83cbdd8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/83cbdd809f81e750d5abc83bf503dba47e12fe50))
+* Fetched virtual network links for private zone ([414ceec](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/414ceece3af505c18a76d6141d63a8d85e20067b))
+
 # [0.67.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.3...0.67.0-alpha.4) (2023-06-09)
 
 
