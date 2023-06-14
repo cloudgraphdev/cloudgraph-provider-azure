@@ -2772,18 +2772,59 @@ export type AzureDataCollectionRuleWindowsEventLogDataSource = {
 
 export type AzureDataFactory = AzureResource & {
   createTime?: Maybe<Scalars['String']>;
+  dataFlows?: Maybe<Array<Maybe<AzureDataFactoryDataFlow>>>;
+  datasets?: Maybe<Array<Maybe<AzureDataFactoryDataset>>>;
   eTag?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureDataFactoryIdentity>;
   integrationRuntimes?: Maybe<Array<Maybe<AzureIntegrationRuntime>>>;
+  linkedServices?: Maybe<Array<Maybe<AzureDataFactoryLinkedService>>>;
+  pipelines?: Maybe<Array<Maybe<AzureDataFactoryPipeline>>>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccess?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  triggers?: Maybe<Array<Maybe<AzureDataFactoryTrigger>>>;
   version?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryDataFlow = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryDataset = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureDataFactoryIdentity = {
   principalId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryIntegrationRuntime = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryLinkedService = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryPipeline = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryTrigger = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 

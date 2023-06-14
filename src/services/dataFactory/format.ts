@@ -1,4 +1,12 @@
-import { AzureDataFactory } from '../../types/generated'
+import {
+  AzureDataFactory,
+  AzureDataFactoryDataFlow,
+  AzureDataFactoryDataset,
+  AzureDataFactoryIntegrationRuntime,
+  AzureDataFactoryLinkedService,
+  AzureDataFactoryPipeline,
+  AzureDataFactoryTrigger,
+} from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzureDataFactory } from './data'
 
@@ -23,6 +31,12 @@ export default ({
     createTime,
     version,
     publicNetworkAccess,
+    pipelines = [],
+    dataFlows = [],
+    datasets = [],
+    integrationRuntimes = [],
+    linkedServices = [],
+    triggers = [],
   } = service
 
   return {
@@ -45,5 +59,77 @@ export default ({
     createTime,
     version,
     publicNetworkAccess,
+    pipelines:
+      pipelines?.map(
+        ({
+          id: pipelineId,
+          name: pipelineName,
+          type: pipelineType,
+        }): AzureDataFactoryPipeline => ({
+          id: pipelineId,
+          name: pipelineName,
+          type: pipelineType,
+        })
+      ) ?? [],
+    dataFlows:
+      dataFlows?.map(
+        ({
+          id: dataFlowId,
+          name: dataFlowName,
+          type: dataFlowType,
+        }): AzureDataFactoryDataFlow => ({
+          id: dataFlowId,
+          name: dataFlowName,
+          type: dataFlowType,
+        })
+      ) ?? [],
+    datasets:
+      datasets?.map(
+        ({
+          id: datasetId,
+          name: datasetName,
+          properties: { type: datasetType },
+        }): AzureDataFactoryDataset => ({
+          id: datasetId,
+          name: datasetName,
+          type: datasetType,
+        })
+      ) ?? [],
+    integrationRuntimes:
+      integrationRuntimes?.map(
+        ({
+          id: runtimeId,
+          name: runtimeName,
+          properties: { type: runtimeType },
+        }): AzureDataFactoryIntegrationRuntime => ({
+          id: runtimeId,
+          name: runtimeName,
+          type: runtimeType,
+        })
+      ) ?? [],
+    linkedServices:
+      linkedServices?.map(
+        ({
+          id: runtimeId,
+          name: runtimeName,
+          properties: { type: runtimeType },
+        }): AzureDataFactoryLinkedService => ({
+          id: runtimeId,
+          name: runtimeName,
+          type: runtimeType,
+        })
+      ) ?? [],
+    triggers:
+      triggers?.map(
+        ({
+          id: triggerId,
+          name: triggerName,
+          properties: { type: triggerType },
+        }): AzureDataFactoryTrigger => ({
+          id: triggerId,
+          name: triggerName,
+          type: triggerType,
+        })
+      ) ?? [],
   }
 }
