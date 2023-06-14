@@ -4403,16 +4403,25 @@ export type AzurePostgreSqlServerVirtualNetworkRule = {
 };
 
 export type AzurePrivateDnsZone = AzureResource & {
+  aRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  aaaaRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cnameRecord?: Maybe<Scalars['String']>;
   etag?: Maybe<Scalars['String']>;
   internalId?: Maybe<Scalars['String']>;
   maxNumberOfRecordSets?: Maybe<Scalars['Int']>;
   maxNumberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
   maxNumberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
+  mxRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
   numberOfRecordSets?: Maybe<Scalars['Int']>;
   numberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
   numberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
   provisioningState?: Maybe<Scalars['String']>;
+  ptrRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  soaRecord?: Maybe<Array<Maybe<Scalars['String']>>>;
+  srvRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  txtRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  virtualNetworkLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type AzurePublicIp = AzureResource & {
