@@ -62,6 +62,7 @@ export default {
   postgreSqlServers: 'postgreSqlServers',
   privateDns: 'privateDns',
   publicIp: 'publicIp',
+  publicIpPrefix: 'publicIpPrefix',
   recoveryVaults: 'recoveryVaults',
   recoveryInstances: 'recoveryInstances',
   recoveryPolicies: 'recoveryPolicies',

@@ -4,10 +4,13 @@ Scan cloud infrastructure via the [Azure SDK](https://github.com/Azure/azure-sdk
 
 <!-- toc -->
 
-- [Install](#install)
-- [Authentication](#authentication)
-- [Supported Services](#supported-services)
-<!-- tocstop -->
+- [CloudGraph Azure Provider](#cloudgraph-azure-provider)
+  - [Docs](#docs)
+  - [Install](#install)
+  - [Authentication](#authentication)
+  - [Supported Services](#supported-services)
+  - [Development](#development)
+  - [Testing](#testing)
 
 ## Docs
 
@@ -95,6 +98,7 @@ CloudGraph needs read permissions in order to ingest your data. To keep things e
 | postgreSqlServers                           | resourceGroup, databasePostgreSql                                             |
 | privateDns                                  | resourceGroup                                                                 |
 | publicIp                                    | networkInterface, resourceGroup                                               |
+| publicIpPrefix                              |                                                                               |
 | recoveryInstances                           | recoveryVaults, resourceGroup                                                 |
 | recoveryPolicies                            | recoveryVaults, resourceGroup                                                 |
 | recoveryVaults                              | recoveryInstances, recoveryPolicies, resourceGroup                            |
