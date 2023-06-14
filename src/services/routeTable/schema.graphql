@@ -1,0 +1,22 @@
+type azureRouteTableRoute
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureRouteTable implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  name: String @search(by: [hash, regexp])
+  routes: [azureRouteTableRoute]
+}

@@ -89,6 +89,8 @@ import AzureBilling from '../services/billing'
 import AzureLogProfiles from '../services/logProfiles'
 import Subscription from '../services/subscription'
 import AzureNetworkWatcher from '../services/networkWatcher'
+import AzureRouteTable from '../services/routeTable'
+import AzureRouteFilter from '../services/routeFilter'
 
 /**
  * serviceMap is an object that contains all currently supported services for AZURE
@@ -169,6 +171,8 @@ export default {
   [services.replicationNetworks]: AzureReplicationNetwork,
   [services.replicationPolicies]: AzureReplicationPolicy,
   [services.resourceGroup]: AzureResourceGroup,
+  [services.routeFilter]: AzureRouteFilter,
+  [services.routeTable]: AzureRouteTable,
   [services.securityAssesments]: AzureSecurityAssesments,
   [services.securityContacts]: AzureSecurityContacts,
   [services.securityGroup]: AzureNetworkSecurityGroup,

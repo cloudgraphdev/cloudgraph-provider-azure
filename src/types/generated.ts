@@ -5107,6 +5107,21 @@ export type AzureResourceSystemData = {
   lastModifiedByType?: Maybe<Scalars['String']>;
 };
 
+export type AzureRouteFilter = AzureResource & {
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureRouteTable = AzureResource & {
+  name?: Maybe<Scalars['String']>;
+  routes?: Maybe<Array<Maybe<AzureRouteTableRoute>>>;
+};
+
+export type AzureRouteTableRoute = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureSecretBaseUnion = {
   secretName?: Maybe<Scalars['String']>;
   secretVersion?: Maybe<Scalars['String']>;

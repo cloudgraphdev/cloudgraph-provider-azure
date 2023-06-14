@@ -65,6 +65,8 @@ export default {
   [services.replicationNetworks]: 'replicationNetworks',
   [services.replicationPolicies]: 'replicationPolicies',
   [services.resourceGroup]: 'resourceGroups',
+  [services.routeFilter]: 'routeFilters',
+  [services.routeTable]: 'routeTables',
   [services.securityAssesments]: 'securityAssesments',
   [services.securityContacts]: 'securityContacts',
   [services.securityGroup]: 'securityGroups',
