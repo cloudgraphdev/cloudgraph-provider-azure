@@ -1,3 +1,10 @@
+# [0.67.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.5...0.67.0-alpha.6) (2023-07-19)
+
+
+### Features
+
+* collect crawl error logs ([bd58d1d](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/bd58d1dce0cd55d86828b0a463d41061352f2517))
+
 # [0.67.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.4...0.67.0-alpha.5) (2023-06-14)
 
 
