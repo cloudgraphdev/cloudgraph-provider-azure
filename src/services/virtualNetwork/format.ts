@@ -25,7 +25,17 @@ export default ({
     enableVmProtection,
     resourceGroupId,
     Tags,
+    subnets = []
   } = service
+  const subnetsIds = []
+  const serviceEndpointPoliciesIds = []
+
+  subnets.forEach(s => {
+    const { id, serviceEndpointPolicies = [] } = s
+    subnetsIds.push(id)
+    serviceEndpointPoliciesIds.push(...serviceEndpointPolicies.map(p => p.id))
+  })
+
   return {
     id,
     name,
@@ -55,6 +65,8 @@ export default ({
     provisioningState,
     resourceGuid,
     resourceGroupId,
+    subnetsIds,
+    serviceEndpointPoliciesIds,
     tags: formatTagsFromMap(Tags),
   }
 }

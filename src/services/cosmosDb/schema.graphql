@@ -303,4 +303,5 @@ type azureCosmosDb implements azureResource
   databases: [azureCosmosDbDatabase]
   azureTables: [azureCosmosDbTable]
   resourceGroup: [azureResourceGroup] @hasInverse(field: cosmosDb)
+  containersIds: [String] @search(by: [hash])
 }

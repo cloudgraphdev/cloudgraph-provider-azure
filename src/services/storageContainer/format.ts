@@ -8,6 +8,12 @@ import {
 import { RawAzureStorageContainer } from './data'
 import t from '../../properties/translations'
 
+const formatContainerUrl = (
+  storageAccountName: string,
+  containerName: string
+): string =>
+  `https://${storageAccountName}.blob.core.windows.net/${containerName}/`
+
 const formatImmutabilityPolicyUpdateHistory = ({
   update,
   immutabilityPeriodSinceCreationInDays,
@@ -84,11 +90,13 @@ export default ({
     hasLegalHold,
     hasImmutabilityPolicy,
     resourceGroupId,
+    storageAccountName,
   } = service
 
   return {
     id,
     name,
+    url: formatContainerUrl(storageAccountName, name),
     type,
     region,
     subscriptionId: account,

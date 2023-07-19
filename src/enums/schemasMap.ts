@@ -77,6 +77,8 @@ export default {
   [services.replicationNetworks]: 'azureReplicationNetwork',
   [services.replicationPolicies]: 'azureReplicationPolicy',
   [services.resourceGroup]: 'azureResourceGroup',
+  [services.routeFilter]: 'azureRouteFilter',
+  [services.routeTable]: 'azureRouteTable',
   [services.securityAssesments]: 'azureSecurityAssesment',
   [services.securityContacts]: 'azureSecurityContact',
   [services.securityGroup]: 'azureNetworkSecurityGroup',

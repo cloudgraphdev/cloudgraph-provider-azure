@@ -1,0 +1,18 @@
+type azurePublicIpTags
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  ) {
+  ipTagType: String @search(by: [hash, regexp])
+  tag: String @search(by: [hash, regexp])
+}
+
+type azurePublicIpPrefix implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  ipTags: [azurePublicIpTags]
+}

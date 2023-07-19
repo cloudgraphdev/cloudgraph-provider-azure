@@ -22,6 +22,8 @@ type azureVirtualNetwork implements azureResource
   flowTimeoutInMinutes: Int @search
   provisioningState: String @search(by: [hash, regexp])
   resourceGuid: String @search(by: [hash, regexp])
+  subnetsIds: [String] @search(by: [hash])
+  serviceEndpointPoliciesIds: [String] @search(by: [hash])
   appServiceEnvironments: [azureAppServiceEnvironment] @hasInverse(field: virtualNetwork)
   firewalls: [azureFirewall] @hasInverse(field: virtualNetworks)
   lbVirtualNetworkOf: [azureLoadBalancer] @hasInverse(field: loadBalancerBackendVirtualNetworks)

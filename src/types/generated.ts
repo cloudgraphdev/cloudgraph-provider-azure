@@ -2497,6 +2497,7 @@ export type AzureCosmosDb = AzureResource & {
   capacityTotalThroughputLimit?: Maybe<Scalars['Int']>;
   connectorOffer?: Maybe<Scalars['String']>;
   consistencyPolicy?: Maybe<AzureCosmosDbConsistencyPolicy>;
+  containersIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   cors?: Maybe<Array<Maybe<AzureCosmosDbCorsPolicy>>>;
   createMode?: Maybe<Scalars['String']>;
   createdAt?: Maybe<Scalars['String']>;
@@ -2771,18 +2772,59 @@ export type AzureDataCollectionRuleWindowsEventLogDataSource = {
 
 export type AzureDataFactory = AzureResource & {
   createTime?: Maybe<Scalars['String']>;
+  dataFlows?: Maybe<Array<Maybe<AzureDataFactoryDataFlow>>>;
+  datasets?: Maybe<Array<Maybe<AzureDataFactoryDataset>>>;
   eTag?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureDataFactoryIdentity>;
   integrationRuntimes?: Maybe<Array<Maybe<AzureIntegrationRuntime>>>;
+  linkedServices?: Maybe<Array<Maybe<AzureDataFactoryLinkedService>>>;
+  pipelines?: Maybe<Array<Maybe<AzureDataFactoryPipeline>>>;
   provisioningState?: Maybe<Scalars['String']>;
   publicNetworkAccess?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  triggers?: Maybe<Array<Maybe<AzureDataFactoryTrigger>>>;
   version?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryDataFlow = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryDataset = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureDataFactoryIdentity = {
   principalId?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryIntegrationRuntime = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryLinkedService = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryPipeline = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureDataFactoryTrigger = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
 };
 
@@ -4077,8 +4119,10 @@ export type AzureMetricAlertMultiMetricCriteria = {
 export type AzureMySqlServer = AzureResource & {
   administratorLogin?: Maybe<Scalars['String']>;
   byokEnforcement?: Maybe<Scalars['String']>;
+  configurations?: Maybe<Array<Maybe<AzureMySqlServerConfiguration>>>;
   databaseMySql?: Maybe<Array<Maybe<AzureDatabaseMySql>>>;
   earliestRestoreDate?: Maybe<Scalars['String']>;
+  firewallRules?: Maybe<Array<Maybe<AzureMySqlServerFirewallRule>>>;
   fullyQualifiedDomainName?: Maybe<Scalars['String']>;
   identity?: Maybe<AzureMySqlServerResourceIdentity>;
   infrastructureEncryption?: Maybe<Scalars['String']>;
@@ -4093,6 +4137,21 @@ export type AzureMySqlServer = AzureResource & {
   storageProfile?: Maybe<AzureMySqlServerStorageProfile>;
   userVisibleState?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureMySqlServerVirtualNetworkRule>>>;
+};
+
+export type AzureMySqlServerConfiguration = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureMySqlServerFirewallRule = {
+  endIpAddress?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  startIpAddress?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureMySqlServerPrivateEndpointProperty = {
@@ -4127,6 +4186,12 @@ export type AzureMySqlServerStorageProfile = {
   geoRedundantBackup?: Maybe<Scalars['String']>;
   storageAutogrow?: Maybe<Scalars['String']>;
   storageMB?: Maybe<Scalars['Int']>;
+};
+
+export type AzureMySqlServerVirtualNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureNameValueProperty = {
@@ -4315,6 +4380,7 @@ export type AzurePostgreSqlServer = AzureResource & {
   storageProfile?: Maybe<AzurePostgreSqlServerStorageProfile>;
   userVisibleState?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzurePostgreSqlServerVirtualNetworkRule>>>;
 };
 
 export type AzurePostgreSqlServerConfiguration = {
@@ -4371,17 +4437,32 @@ export type AzurePostgreSqlServerStorageProfile = {
   storageMB?: Maybe<Scalars['Int']>;
 };
 
+export type AzurePostgreSqlServerVirtualNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzurePrivateDnsZone = AzureResource & {
+  aRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  aaaaRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  cnameRecord?: Maybe<Scalars['String']>;
   etag?: Maybe<Scalars['String']>;
   internalId?: Maybe<Scalars['String']>;
   maxNumberOfRecordSets?: Maybe<Scalars['Int']>;
   maxNumberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
   maxNumberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
+  mxRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
   numberOfRecordSets?: Maybe<Scalars['Int']>;
   numberOfVirtualNetworkLinks?: Maybe<Scalars['Int']>;
   numberOfVirtualNetworkLinksWithRegistration?: Maybe<Scalars['Int']>;
   provisioningState?: Maybe<Scalars['String']>;
+  ptrRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
+  soaRecord?: Maybe<Array<Maybe<Scalars['String']>>>;
+  srvRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  txtRecords?: Maybe<Array<Maybe<Scalars['String']>>>;
+  virtualNetworkLinks?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type AzurePublicIp = AzureResource & {
@@ -4405,6 +4486,10 @@ export type AzurePublicIpDnsSettings = {
   domainNameLabel?: Maybe<Scalars['String']>;
   fqdn?: Maybe<Scalars['String']>;
   reverseFqdn?: Maybe<Scalars['String']>;
+};
+
+export type AzurePublicIpPrefix = AzureResource & {
+  ipTags?: Maybe<Array<Maybe<AzurePublicIpTags>>>;
 };
 
 export type AzurePublicIpTags = {
@@ -5067,6 +5152,21 @@ export type AzureResourceSystemData = {
   lastModifiedByType?: Maybe<Scalars['String']>;
 };
 
+export type AzureRouteFilter = AzureResource & {
+  name?: Maybe<Scalars['String']>;
+};
+
+export type AzureRouteTable = AzureResource & {
+  name?: Maybe<Scalars['String']>;
+  routes?: Maybe<Array<Maybe<AzureRouteTableRoute>>>;
+};
+
+export type AzureRouteTableRoute = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureSecretBaseUnion = {
   secretName?: Maybe<Scalars['String']>;
   secretVersion?: Maybe<Scalars['String']>;
@@ -5230,7 +5330,9 @@ export type AzureSqlServer = AzureResource & {
   adAdministrators?: Maybe<Array<Maybe<AzureSqlServerAdAdministrator>>>;
   administrators?: Maybe<AzureSqlServerExternalAdministrator>;
   databaseSql?: Maybe<Array<Maybe<AzureDatabaseSql>>>;
+  elasticPools?: Maybe<Array<Maybe<AzureSqlServerElasticPool>>>;
   encryptionProtectors?: Maybe<Array<Maybe<AzureSqlServerEncryptionProtector>>>;
+  failoverGroups?: Maybe<Array<Maybe<AzureSqlServerFailoverGroup>>>;
   federatedClientId?: Maybe<Scalars['String']>;
   firewallRules?: Maybe<Array<Maybe<AzureSqlServerFirewallRule>>>;
   fullyQualifiedDomainName?: Maybe<Scalars['String']>;
@@ -5247,6 +5349,7 @@ export type AzureSqlServer = AzureResource & {
   state?: Maybe<Scalars['String']>;
   subscriptionId?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
+  virtualNetworkRules?: Maybe<Array<Maybe<AzureSqlServerVirtualNetworkRule>>>;
   vulnerabilityAssessments?: Maybe<Array<Maybe<AzureSqlServerVulnerabilityAssessment>>>;
   workspaceFeature?: Maybe<Scalars['String']>;
 };
@@ -5275,6 +5378,12 @@ export type AzureSqlServerBlobAuditingPolicy = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type AzureSqlServerElasticPool = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureSqlServerEncryptionProtector = {
   autoRotationEnabled?: Maybe<Scalars['Boolean']>;
   id: Scalars['String'];
@@ -5296,6 +5405,12 @@ export type AzureSqlServerExternalAdministrator = {
   principalType?: Maybe<Scalars['String']>;
   sid?: Maybe<Scalars['String']>;
   tenantId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerFailoverGroup = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureSqlServerFirewallRule = {
@@ -5353,6 +5468,12 @@ export type AzureSqlServerUserAssignedIdentity = {
 export type AzureSqlServerUserIdentity = {
   clientId?: Maybe<Scalars['String']>;
   principalId?: Maybe<Scalars['String']>;
+};
+
+export type AzureSqlServerVirtualNetworkRule = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
 };
 
 export type AzureSqlServerVulnerabilityAssessment = {
@@ -5544,6 +5665,7 @@ export type AzureStorageBlob = AzureResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   snapshot?: Maybe<Scalars['String']>;
   storageContainer?: Maybe<Array<Maybe<AzureStorageContainer>>>;
+  url?: Maybe<Scalars['String']>;
   versionId?: Maybe<Scalars['String']>;
 };
 
@@ -5620,6 +5742,7 @@ export type AzureStorageContainer = AzureResource & {
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   storageAccount?: Maybe<Array<Maybe<AzureStorageAccount>>>;
   storageBlobs?: Maybe<Array<Maybe<AzureStorageBlob>>>;
+  url?: Maybe<Scalars['String']>;
   version?: Maybe<Scalars['String']>;
 };
 
@@ -6306,6 +6429,8 @@ export type AzureVirtualNetwork = AzureResource & {
   provisioningState?: Maybe<Scalars['String']>;
   resourceGroup?: Maybe<Array<Maybe<AzureResourceGroup>>>;
   resourceGuid?: Maybe<Scalars['String']>;
+  serviceEndpointPoliciesIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  subnetsIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   virtualMachines?: Maybe<Array<Maybe<AzureVirtualMachine>>>;
 };
 

@@ -1,6 +1,9 @@
 import { formatTagsFromMap } from '../../utils/format'
 import { RawAzurePostgreSqlServer } from './data'
-import { AzurePostgreSqlServer } from '../../types/generated'
+import {
+  AzurePostgreSqlServer,
+  AzurePostgreSqlServerVirtualNetworkRule,
+} from '../../types/generated'
 
 export default ({
   service,
@@ -33,8 +36,9 @@ export default ({
     privateEndpointConnections,
     resourceGroupId,
     Tags,
-    configurations,
-    firewallRules
+    configurations = [],
+    firewallRules = [],
+    virtualNetworkRules = [],
   } = service
 
   return {
@@ -93,14 +97,26 @@ export default ({
         name: confName,
         type: confType,
         startIpAddress,
-        endIpAddress
+        endIpAddress,
       }) => ({
         id: confId,
         name: confName,
         type: confType,
         startIpAddress,
-        endIpAddress
+        endIpAddress,
       })
     ),
+    virtualNetworkRules:
+      virtualNetworkRules?.map(
+        ({
+          id: virtualNetworkRuleId,
+          name: virtualNetworkRuleName,
+          type: virtualNetworkRuleType,
+        }): AzurePostgreSqlServerVirtualNetworkRule => ({
+          id: virtualNetworkRuleId,
+          name: virtualNetworkRuleName,
+          type: virtualNetworkRuleType,
+        })
+      ) ?? [],
   }
 }

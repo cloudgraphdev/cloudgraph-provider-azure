@@ -1,3 +1,75 @@
+type azureDataFactoryIntegrationRuntime
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureDataFactoryDataset
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureDataFactoryDataFlow
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureDataFactoryPipeline
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureDataFactoryLinkedService
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureDataFactoryTrigger
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
 type azureDataFactoryIdentity {
   type: String @search(by: [hash, regexp])
   principalId: String @search(by: [hash, regexp])
@@ -16,6 +88,12 @@ type azureDataFactory implements azureResource
   createTime: String @search(by: [hash, regexp])
   version: String @search(by: [hash, regexp])
   publicNetworkAccess: String @search(by: [hash, regexp])
+  pipelines: [azureDataFactoryPipeline]
+  dataFlows: [azureDataFactoryDataFlow]
+  datasets: [azureDataFactoryDataset]
+  integrationRuntimes: [azureDataFactoryIntegrationRuntime]
+  linkedServices: [azureDataFactoryLinkedService]
+  triggers: [azureDataFactoryTrigger]
   resourceGroup: [azureResourceGroup] @hasInverse(field: dataFactories)
   integrationRuntimes: [azureIntegrationRuntime] @hasInverse(field: dataFactory)
 }

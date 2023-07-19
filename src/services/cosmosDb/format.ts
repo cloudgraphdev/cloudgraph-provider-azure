@@ -31,9 +31,11 @@ const formatRestoreParameters = (
   const { restoreTimestampInUtc, databasesToRestore, ...rest } = restoreParameters
   return {
     restoreTimestampInUtc: restoreTimestampInUtc?.toISOString(),
-    databasesToRestore: databasesToRestore?.map(db => ({ id: generateUniqueId({
-      ...db
-    }), ...db })) || [],
+    databasesToRestore: databasesToRestore?.map(db => ({
+      id: generateUniqueId({
+        ...db
+      }), ...db
+    })) || [],
     ...rest,
   }
 }
@@ -94,6 +96,20 @@ export default ({
     tables = [],
   } = service
 
+  let containersIds: string[] = []
+  const sqlDatabases = databases?.map(({ id: databaseId, options, data, ...rest }) => {
+    const containers = new Set(data.map(d => d.id))
+    containersIds = Array.from(containers)
+    return ({
+      id: databaseId,
+      ...rest,
+      options: {
+        throughput: options?.throughput,
+        maxThroughput: options?.autoscaleSettings?.maxThroughput,
+      },
+    })
+  }) || []
+
   return {
     id,
     name,
@@ -133,10 +149,10 @@ export default ({
       failoverPolicies?.map(fp => ({ id: fp.id, ...fp })) || [],
     virtualNetworkRules:
       virtualNetworkRules?.map(vn => ({ id: vn.id, ...vn })) || [],
-    privateEndpointConnections: privateEndpointConnections?.map(({ id: endpointId, privateEndpoint, ...pe}) => ({ 
-      id: endpointId, 
+    privateEndpointConnections: privateEndpointConnections?.map(({ id: endpointId, privateEndpoint, ...pe }) => ({
+      id: endpointId,
       privateEndpointId: privateEndpoint?.id,
-      ...pe 
+      ...pe
     })) || [],
     enableMultipleWriteLocations,
     enableCassandraConnector,
@@ -160,14 +176,8 @@ export default ({
     disableLocalAuth,
     capacityTotalThroughputLimit: capacity?.totalThroughputLimit,
     tags: formatTagsFromMap(Tags),
-    databases: databases?.map(({ id: databaseId, options, ...rest }) => ({
-      id: databaseId,
-      ...rest,
-      options: {
-        throughput: options?.throughput,
-        maxThroughput: options?.autoscaleSettings?.maxThroughput,
-      },
-    })) || [],
+    databases: sqlDatabases,
     azureTables: tables?.map(at => ({ id: at.id, ...at })) || [],
+    containersIds
   }
 }
