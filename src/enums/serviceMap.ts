@@ -51,6 +51,7 @@ import AzurePolicyAssignment from '../services/policyAssignment'
 import AzurePostgreSqlServer from '../services/postgreSqlServers'
 import AzurePrivateDns from '../services/privateDns'
 import AzurePublicIp from '../services/publicIp'
+import AzurePublicIpPrefix from '../services/publicIpPrefix'
 import AzureRecoveryVault from '../services/recoveryVaults'
 import AzureRecoveryInstance from '../services/recoveryInstances'
 import AzureRecoveryPolicy from '../services/recoveryPolicies'
@@ -89,6 +90,8 @@ import AzureBilling from '../services/billing'
 import AzureLogProfiles from '../services/logProfiles'
 import Subscription from '../services/subscription'
 import AzureNetworkWatcher from '../services/networkWatcher'
+import AzureRouteTable from '../services/routeTable'
+import AzureRouteFilter from '../services/routeFilter'
 
 /**
  * serviceMap is an object that contains all currently supported services for AZURE
@@ -160,6 +163,7 @@ export default {
   [services.postgreSqlServers]: AzurePostgreSqlServer,
   [services.privateDns]: AzurePrivateDns,
   [services.publicIp]: AzurePublicIp,
+  [services.publicIpPrefix]: AzurePublicIpPrefix,
   [services.recoveryVaults]: AzureRecoveryVault,
   [services.recoveryInstances]: AzureRecoveryInstance,
   [services.recoveryPolicies]: AzureRecoveryPolicy,
@@ -169,6 +173,8 @@ export default {
   [services.replicationNetworks]: AzureReplicationNetwork,
   [services.replicationPolicies]: AzureReplicationPolicy,
   [services.resourceGroup]: AzureResourceGroup,
+  [services.routeFilter]: AzureRouteFilter,
+  [services.routeTable]: AzureRouteTable,
   [services.securityAssesments]: AzureSecurityAssesments,
   [services.securityContacts]: AzureSecurityContacts,
   [services.securityGroup]: AzureNetworkSecurityGroup,

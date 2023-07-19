@@ -1,3 +1,63 @@
+# [0.67.0-alpha.6](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.5...0.67.0-alpha.6) (2023-07-19)
+
+
+### Features
+
+* collect crawl error logs ([bd58d1d](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/bd58d1dce0cd55d86828b0a463d41061352f2517))
+
+# [0.67.0-alpha.5](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.4...0.67.0-alpha.5) (2023-06-14)
+
+
+### Features
+
+* add publicIp missing services ([33ae7da](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/33ae7da24dd69264344016bf4af3b25a6264c43d))
+* Added missing subnets ids and endpoint policies for subnets ([baa0a6e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/baa0a6e72510f70e217a5c516479db8d5d05294f))
+* **azure:** Add missing dataFactory services ([2b9a48b](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/2b9a48b9e848aad2775069167dcb406ad0dc8f77))
+* **azure:** add route table services ([5573e8e](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/5573e8eeee9387d50e440e7d1aecd4c529f3c531))
+* Fetched records for private dns ([83cbdd8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/83cbdd809f81e750d5abc83bf503dba47e12fe50))
+* Fetched virtual network links for private zone ([414ceec](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/414ceece3af505c18a76d6141d63a8d85e20067b))
+
+# [0.67.0-alpha.4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.3...0.67.0-alpha.4) (2023-06-09)
+
+
+### Features
+
+* **azure:** add missing mySQL Server services ([90131c8](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/90131c83d231a8ef3d2f29b23412e978688e32dc))
+
+# [0.67.0-alpha.3](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.2...0.67.0-alpha.3) (2023-06-07)
+
+
+### Features
+
+* **azure:** Add missing postgreSql server services ([8aeff96](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8aeff969f44cfa8751fefacbbca6597cf7213cd1))
+
+# [0.67.0-alpha.2](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0-alpha.1...0.67.0-alpha.2) (2023-06-06)
+
+
+### Bug Fixes
+
+* Added missing attribute for cosmosdb schema ([cde0c79](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/cde0c791374d648f77541b1189ddbd3062ea67aa))
+
+
+### Features
+
+* Exposed containersIds for cosmosdb account ([8b45320](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/8b4532048fc8137539489adb38eee101ff867039))
+
+# [0.67.0-alpha.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.66.0...0.67.0-alpha.1) (2023-06-06)
+
+
+### Features
+
+* **azure:** Add missing SQL Server services ([41bffd4](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/41bffd48c728303d0d697509c9efa9a5c7442166))
+* **azure:** Support missing storageBlob and storageContainer services ([b179ebf](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/b179ebf76107a6285c978067b79f544e995df66f))
+
+# [0.66.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.65.0...0.66.0) (2023-05-16)
+
+
+### Features
+
+* add new regions ([6e79b4d](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/6e79b4dbc6d1adb8f6c2893e5c4e8fb03b0060c3))
+
 # [0.66.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.65.0...0.66.0-beta.1) (2023-05-16)
 
 

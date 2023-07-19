@@ -25,7 +25,7 @@ import {
   GLOBAL_REGION,
 } from '../config/constants'
 import { obfuscateSensitiveString } from '../utils/format'
-import { checkAndMergeConnections, sortResourcesDependencies } from '../utils'
+import { getAllProviderErrors, sortResourcesDependencies } from '../utils'
 import { createDiffSecs } from '../utils/dateutils'
 import {
   getClientSecretCredentials,
@@ -151,9 +151,10 @@ export default class Provider extends CloudGraph.Client {
       )}`
     )
     this.logger.success(
-      `subscriptionIds: ${this.subscriptions.length > 1
-        ? this.subscriptions.join(', ')
-        : this.subscriptions[0]
+      `subscriptionIds: ${
+        this.subscriptions.length > 1
+          ? this.subscriptions.join(', ')
+          : this.subscriptions[0]
       }`
     )
     this.logger.success(
@@ -700,11 +701,15 @@ export default class Provider extends CloudGraph.Client {
       }
     }
 
-    return this.enhanceData({
+    const enhancedData = await this.enhanceData({
       subscriptions: subscriptions.data[GLOBAL_REGION],
       configuredRegions,
       rawData,
       data: result,
     })
+
+    const errors = getAllProviderErrors()
+
+    return { ...enhancedData, errors }
   }
 }

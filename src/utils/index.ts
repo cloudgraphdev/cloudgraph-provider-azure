@@ -3,6 +3,7 @@ import camelCase from 'lodash/camelCase'
 import isEmpty from 'lodash/isEmpty'
 import unionWith from 'lodash/unionWith'
 import isEqual from 'lodash/isEqual'
+import { ProviderError } from '@cloudgraph/sdk/dist/src/types'
 import relations from '../enums/relations'
 import {
   AzureDebugScope,
@@ -65,6 +66,12 @@ export function initTestConfig(): void {
   jest.setTimeout(900000)
 }
 
+const errorsHistory: ProviderError[] = []
+
+export function getAllProviderErrors(): ProviderError[] {
+  return errorsHistory
+}
+
 export function generateAzureErrorLog(
   service: string,
   functionName: string,
@@ -86,6 +93,13 @@ export function generateAzureErrorLog(
     logger.debug(`Rate exceeded for ${service}:${functionName}`)
   } else {
     logger.debug(err.message)
+  }
+  if (err?.statusCode !== 429) {
+    errorsHistory.push({
+      service,
+      function: functionName,
+      message: err?.message || 'Unknown error',
+    })
   }
   throw new Error()
 }

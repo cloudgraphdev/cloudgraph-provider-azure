@@ -3,10 +3,13 @@ import {
   AzureSqlServer,
   AzureSqlServerAdAdministrator,
   AzureSqlServerBlobAuditingPolicy,
+  AzureSqlServerElasticPool,
   AzureSqlServerEncryptionProtector,
+  AzureSqlServerFailoverGroup,
   AzureSqlServerFirewallRule,
   AzureSqlServerPrivateEndpointConnection,
   AzureSqlServerSecurityAlertPolicy,
+  AzureSqlServerVirtualNetworkRule,
   AzureSqlServerVulnerabilityAssessment,
 } from '../../types/generated'
 import { formatTagsFromMap } from '../../utils/format'
@@ -45,7 +48,10 @@ export default ({
     workspaceFeature,
     restrictOutboundNetworkAccess,
     resourceGroupId,
+    elasticPools = [],
+    failoverGroups = [],
     firewallRules = [],
+    virtualNetworkRules = [],
     serverSecurityAlertPolicies = [],
     adAdministrators = [],
     encryptionProtectors = [],
@@ -118,6 +124,30 @@ export default ({
     workspaceFeature,
     restrictOutboundNetworkAccess,
     resourceGroupId,
+    elasticPools:
+      elasticPools?.map(
+        ({
+          id: elasticPoolId,
+          name: elasticPoolName,
+          type: elasticPoolType,
+        }): AzureSqlServerElasticPool => ({
+          id: elasticPoolId,
+          name: elasticPoolName,
+          type: elasticPoolType,
+        })
+      ) ?? [],
+    failoverGroups:
+      failoverGroups?.map(
+        ({
+          id: failoverGroupId,
+          name: failoverGroupName,
+          type: failoverGroupType,
+        }): AzureSqlServerFailoverGroup => ({
+          id: failoverGroupId,
+          name: failoverGroupName,
+          type: failoverGroupType,
+        })
+      ) ?? [],
     firewallRules:
       firewallRules?.map(
         ({
@@ -132,6 +162,18 @@ export default ({
           type: firewallRuleType,
           startIpAddress,
           endIpAddress,
+        })
+      ) ?? [],
+    virtualNetworkRules:
+      virtualNetworkRules?.map(
+        ({
+          id: virtualNetworkRuleId,
+          name: virtualNetworkRuleName,
+          type: virtualNetworkRuleType,
+        }): AzureSqlServerVirtualNetworkRule => ({
+          id: virtualNetworkRuleId,
+          name: virtualNetworkRuleName,
+          type: virtualNetworkRuleType,
         })
       ) ?? [],
     serverSecurityAlertPolicies:

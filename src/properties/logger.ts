@@ -20,7 +20,8 @@ export default {
   foundAKSManagedClusters: (num: number): string =>
     `Found ${num} AKS managed clusters`,
   /* App Gateway */
-  foundApplicationGateway: (num: number): string => `Found ${num} Application Gateways`,
+  foundApplicationGateway: (num: number): string =>
+    `Found ${num} Application Gateways`,
   /* App Service */
   foundAppServiceEnvironments: (num: number): string =>
     `Found ${num} app service environments`,
@@ -152,11 +153,14 @@ export default {
     `Found ${num} private dns zones`,
   // Public Ips
   foundPublicIps: (num: number): string => `Found ${num} public ips`,
+  foundPublicIpPrefixes: (num: number): string =>
+    `Found ${num} public ip prefixes`,
   // Recovery Vaults
   foundRecoveryVaults: (num: number): string => `Found ${num} recovery vaults`,
   foundRecoveryInstances: (num: number): string =>
-  `Found ${num} recovery instances`,
-  foundRecoveryPolicies: (num: number): string => `Found ${num} recovery policies`,
+    `Found ${num} recovery instances`,
+  foundRecoveryPolicies: (num: number): string =>
+    `Found ${num} recovery policies`,
   // RedisCache
   foundRedisCaches: (num: number): string => `Found ${num} Redis caches`,
   // Replication Appliances
@@ -173,6 +177,10 @@ export default {
     `Found ${num} replication policies`,
   // Resource Groups
   foundResourceGroups: (num: number): string => `Found ${num} resource groups`,
+  // Route Filters
+  foundRouteFilters: (num: number): string => `Found ${num} route filters`,
+  // Route Tables
+  foundRouteTables: (num: number): string => `Found ${num} route tables`,
   // Security Assesments
   foundSecurityAssesments: (num: number): string =>
     `Found ${num} security assesments`,

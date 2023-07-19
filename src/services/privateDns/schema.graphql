@@ -13,5 +13,14 @@ type azurePrivateDnsZone implements azureResource
   numberOfVirtualNetworkLinksWithRegistration: Int @search
   provisioningState: String @search(by: [hash, regexp])
   internalId: String @search(by: [hash, regexp])
+  aRecords: [String] @search(by: [hash])
+  aaaaRecords: [String] @search(by: [hash])
+  cnameRecord: String @search(by: [hash])
+  mxRecords: [String] @search(by: [hash])
+  ptrRecords: [String] @search(by: [hash])
+  soaRecord: [String] @search(by: [hash])
+  srvRecords: [String] @search(by: [hash])
+  txtRecords: [String] @search(by: [hash])
+  virtualNetworkLinks: [String] @search(by: [hash])
   resourceGroup: [azureResourceGroup] @hasInverse(field: privateDns)
 }

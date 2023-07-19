@@ -1,19 +1,22 @@
 import {
-  SqlManagementClient,
-  Server,
-  FirewallRule,
-  ServerSecurityAlertPolicy,
-  ServerAzureADAdministrator,
+  ElasticPool,
   EncryptionProtector,
+  FailoverGroup,
+  FirewallRule,
+  Server,
+  ServerAzureADAdministrator,
   ServerBlobAuditingPolicy,
+  ServerSecurityAlertPolicy,
   ServerVulnerabilityAssessment,
+  SqlManagementClient,
+  VirtualNetworkRule,
 } from '@azure/arm-sql'
 import { PagedAsyncIterableIterator } from '@azure/core-paging'
 import CloudGraph from '@cloudgraph/sdk'
 import azureLoggerText from '../../properties/logger'
 import { AzureServiceInput, TagMap } from '../../types'
-import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { lowerCaseLocation } from '../../utils/format'
+import { getResourceGroupFromEntity } from '../../utils/idParserUtils'
 import { tryCatchWrapper } from '../../utils/index'
 
 const { logger } = CloudGraph
@@ -24,12 +27,99 @@ export interface RawAzureServer extends Omit<Server, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
   Tags: TagMap
+  elasticPools: ElasticPool[]
+  failoverGroups: FailoverGroup[]
   firewallRules: FirewallRule[]
+  virtualNetworkRules: VirtualNetworkRule[]
   serverSecurityAlertPolicies: ServerSecurityAlertPolicy[]
   adAdministrators: ServerAzureADAdministrator[]
   encryptionProtectors: EncryptionProtector[]
   serverBlobAuditingPolicies: ServerBlobAuditingPolicy[]
   vulnerabilityAssessments: ServerVulnerabilityAssessment[]
+}
+
+const listElasticPools = async (
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
+): Promise<ElasticPool[]> => {
+  const elasticPools: ElasticPool[] = []
+  const elasticPoolsIterable = client.elasticPools.listByServer(
+    resourceGroup,
+    serverName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const elasticPool of elasticPoolsIterable) {
+        if (elasticPool) {
+          elasticPools.push(elasticPool)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'elasticPools',
+      operation: 'listByServer',
+    }
+  )
+  return elasticPools
+}
+
+const listFileoverGroups = async (
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
+): Promise<FailoverGroup[]> => {
+  const failoverGroups: FailoverGroup[] = []
+  const failoverGroupsIterable = client.failoverGroups.listByServer(
+    resourceGroup,
+    serverName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const failoverGroup of failoverGroupsIterable) {
+        if (failoverGroup) {
+          failoverGroups.push(failoverGroup)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'failoverGroups',
+      operation: 'listByServer',
+    }
+  )
+  return failoverGroups
+}
+
+const listVirtualNetworkRules = async (
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
+): Promise<VirtualNetworkRule[]> => {
+  const virtualNetworkRules: VirtualNetworkRule[] = []
+  const virtualNetworkRulesIterable = client.virtualNetworkRules.listByServer(
+    resourceGroup,
+    serverName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const virtualNetworkRule of virtualNetworkRulesIterable) {
+        if (virtualNetworkRule) {
+          virtualNetworkRules.push(virtualNetworkRule)
+        }
+      }
+    },
+    {
+      service: serviceName,
+      client,
+      scope: 'virtualNetworkRules',
+      operation: 'listByServer',
+    }
+  )
+  return virtualNetworkRules
 }
 
 const listFirewallRules = async (
@@ -143,15 +233,16 @@ const listEncryptionProtectors = async (
 }
 
 const listServerVulnerabilityAssessments = async (
-  client: SqlManagementClient, 
-  resourceGroup: string, 
-  serverName: string,
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
 ): Promise<ServerVulnerabilityAssessment[]> => {
   const databaseVulnerabilityAssessments: ServerVulnerabilityAssessment[] = []
-  const vulnerabilityAssessmentIterable = client.serverVulnerabilityAssessments.listByServer(
-    resourceGroup,
-    serverName,
-  )
+  const vulnerabilityAssessmentIterable =
+    client.serverVulnerabilityAssessments.listByServer(
+      resourceGroup,
+      serverName
+    )
   await tryCatchWrapper(
     async () => {
       for await (const vulnerabilityAssessment of vulnerabilityAssessmentIterable) {
@@ -171,15 +262,13 @@ const listServerVulnerabilityAssessments = async (
 }
 
 const listServerBlobAuditingPolicies = async (
-  client: SqlManagementClient, 
-  resourceGroup: string, 
-  serverName: string,
+  client: SqlManagementClient,
+  resourceGroup: string,
+  serverName: string
 ): Promise<ServerBlobAuditingPolicy[]> => {
   const serverBlobAuditingPolicies: ServerBlobAuditingPolicy[] = []
-  const serverBlobAuditingPolicyIterable = client.serverBlobAuditingPolicies.listByServer(
-    resourceGroup,
-    serverName,
-  )
+  const serverBlobAuditingPolicyIterable =
+    client.serverBlobAuditingPolicies.listByServer(resourceGroup, serverName)
   await tryCatchWrapper(
     async () => {
       for await (const policy of serverBlobAuditingPolicyIterable) {
@@ -226,48 +315,66 @@ export default async ({
     logger.debug(lt.foundSqlServers(sqlServers.length))
 
     const result: { [property: string]: RawAzureServer[] } = {}
-    await Promise.all(sqlServers.map(async ({ name, tags, location, ...rest }) => {
-      const region = lowerCaseLocation(location)
-      if (regions.includes(region)) {
-        if (!result[region]) {
-          result[region] = []
+    await Promise.all(
+      sqlServers.map(async ({ name, tags, location, ...rest }) => {
+        const region = lowerCaseLocation(location)
+        if (regions.includes(region)) {
+          if (!result[region]) {
+            result[region] = []
+          }
+          const resourceGroupId = getResourceGroupFromEntity(rest)
+          result[region].push({
+            name,
+            ...rest,
+            resourceGroupId,
+            region,
+            Tags: tags || {},
+            elasticPools: await listElasticPools(client, resourceGroupId, name),
+            failoverGroups: await listFileoverGroups(
+              client,
+              resourceGroupId,
+              name
+            ),
+            firewallRules: await listFirewallRules(
+              client,
+              resourceGroupId,
+              name
+            ),
+            virtualNetworkRules: await listVirtualNetworkRules(
+              client,
+              resourceGroupId,
+              name
+            ),
+            serverSecurityAlertPolicies: await listServerSecurityAlertPolicies(
+              client,
+              resourceGroupId,
+              name
+            ),
+            adAdministrators: await listADAdministrators(
+              client,
+              resourceGroupId,
+              name
+            ),
+            encryptionProtectors: await listEncryptionProtectors(
+              client,
+              resourceGroupId,
+              name
+            ),
+            serverBlobAuditingPolicies: await listServerBlobAuditingPolicies(
+              client,
+              resourceGroupId,
+              name
+            ),
+            vulnerabilityAssessments: await listServerVulnerabilityAssessments(
+              client,
+              resourceGroupId,
+              name
+            ),
+          })
         }
-        const resourceGroupId = getResourceGroupFromEntity(rest)
-        result[region].push({
-          name,
-          ...rest,
-          resourceGroupId,
-          region,
-          Tags: tags || {},
-          firewallRules: await listFirewallRules(client, resourceGroupId, name),
-          serverSecurityAlertPolicies: await listServerSecurityAlertPolicies(
-            client,
-            resourceGroupId,
-            name
-          ),
-          adAdministrators: await listADAdministrators(
-            client,
-            resourceGroupId,
-            name
-          ),
-          encryptionProtectors: await listEncryptionProtectors(
-            client,
-            resourceGroupId,
-            name
-          ),
-          serverBlobAuditingPolicies: await listServerBlobAuditingPolicies(
-            client,
-            resourceGroupId,
-            name
-          ),
-          vulnerabilityAssessments: await listServerVulnerabilityAssessments(
-            client, 
-            resourceGroupId, 
-            name
-          ),
-        })
-      }
-    }))
+      })
+    )
+
     return result
   } catch (e) {
     logger.error(e)

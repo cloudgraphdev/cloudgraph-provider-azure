@@ -15,6 +15,13 @@ import { RawAzureStorageBlob } from './data'
 import t from '../../properties/translations'
 import { formatTagsFromMap } from '../../utils/format'
 
+const formatBlobUrl = (
+  storageAccountName: string,
+  storageContainerName: string,
+  blobName: string
+): string =>
+  `https://${storageAccountName}.blob.core.windows.net/${storageContainerName}/${blobName}`
+
 const formatReplicationRule = ({
   ruleId,
   replicationStatus,
@@ -148,6 +155,8 @@ export default ({
     isCurrentVersion,
     hasVersionsOnly,
     storageContainerId,
+    storageAccountName,
+    storageContainerName,
     Tags = {},
     objectReplicationSourceProperties,
     resourceGroupId,
@@ -156,6 +165,7 @@ export default ({
   return {
     id: `${storageContainerId}/${name}`,
     name,
+    url: formatBlobUrl(storageAccountName, storageContainerName, name),
     region,
     subscriptionId: account,
     snapshot,

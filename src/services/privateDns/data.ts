@@ -16,7 +16,85 @@ export interface RawAzurePrivateDnsZone
   extends Omit<PrivateZone, 'tags' | 'location'> {
   region: string
   resourceGroupId: string
+  records: RawAzurePrivateDnsMetadata[]
+  virtualNetworkLinks: RawAzurePrivateDnsMetadata[]
   Tags: TagMap
+}
+
+export interface RawAzurePrivateDnsMetadata {
+  id: string
+  name: string
+  type: string
+}
+
+export const listVirtualNetworkLinks = async (
+  client: PrivateDnsManagementClient,
+  resourceGroup: string,
+  privateZoneName: string
+): Promise<RawAzurePrivateDnsMetadata[]> => {
+  const vnetworkLinks: RawAzurePrivateDnsMetadata[] = []
+  const vnetworkLinksIterable = client.virtualNetworkLinks.list(
+    resourceGroup,
+    privateZoneName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const vnetworkLink of vnetworkLinksIterable) {
+        if (vnetworkLink) {
+          const { id, name, type } = vnetworkLink
+          const recordType = type?.split('/').pop()
+          vnetworkLinks.push({
+            id,
+            name,
+            type: recordType,
+          } as RawAzurePrivateDnsMetadata)
+        }
+
+      }
+    }
+    , {
+      service: 'Virtual Network Links',
+      client,
+      scope: 'virtualNetworkLinks',
+      operation: 'listVirtualNetworkLinks',
+    }
+  )
+  return vnetworkLinks
+}
+
+export const listRecordSets = async (
+  client: PrivateDnsManagementClient,
+  resourceGroup: string,
+  privateZoneName: string
+): Promise<RawAzurePrivateDnsMetadata[]> => {
+  const records: RawAzurePrivateDnsMetadata[] = []
+  const recordsIterable = client.recordSets.list(
+    resourceGroup,
+    privateZoneName
+  )
+  await tryCatchWrapper(
+    async () => {
+      for await (const record of recordsIterable) {
+        if (record) {
+          const { id, name, type } = record
+          const recordType = type?.split('/').pop()
+          records.push({
+            id,
+            name,
+            type: recordType,
+          } as RawAzurePrivateDnsMetadata)
+        }
+
+      }
+    }
+    , {
+      service: 'Records Sets',
+      client,
+      scope: 'recordSets',
+      operation: 'listRecordSets',
+    }
+  )
+  return records
 }
 
 export default async ({
@@ -35,6 +113,7 @@ export default async ({
     const privateDnsZones: RawAzurePrivateDnsZone[] = []
     const privateDnsZoneIterable: PagedAsyncIterableIterator<PrivateZone> =
       client.privateZones.list()
+    client.virtualNetworkLinks
     await tryCatchWrapper(
       async () => {
         for await (const privateDnsZone of privateDnsZoneIterable) {
@@ -46,6 +125,8 @@ export default async ({
               ...rest,
               region,
               resourceGroupId,
+              virtualNetworkLinks: await listVirtualNetworkLinks(client, resourceGroupId, privateDnsZone.name),
+              records: await listRecordSets(client, resourceGroupId, privateDnsZone.name),
               Tags: tags || {},
             })
           }
