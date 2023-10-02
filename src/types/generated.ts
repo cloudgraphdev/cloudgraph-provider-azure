@@ -2391,6 +2391,54 @@ export type AzureCognitiveServicesAccountVirtualNetworkRules = {
   state?: Maybe<Scalars['String']>;
 };
 
+export type AzureContainerApp = AzureResource & {
+  customDomainVerificationId?: Maybe<Scalars['String']>;
+  environmentId?: Maybe<Scalars['String']>;
+  latestReadyRevisionName?: Maybe<Scalars['String']>;
+  latestRevisionFqdn?: Maybe<Scalars['String']>;
+  latestRevisionName?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  managedEnvironmentId?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  workloadProfileName?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerAppEnvironment = AzureResource & {
+  certificates?: Maybe<Array<Maybe<AzureContainerAppEnvironmentCertificate>>>;
+  daprComponents?: Maybe<Array<Maybe<AzureContainerAppEnvironmentDaprComponent>>>;
+  defaultDomain?: Maybe<Scalars['String']>;
+  eventStreamEndpoint?: Maybe<Scalars['String']>;
+  infrastructureResourceGroup?: Maybe<Scalars['String']>;
+  provisioningState?: Maybe<Scalars['String']>;
+  staticIp?: Maybe<Scalars['String']>;
+  storages?: Maybe<Array<Maybe<AzureContainerAppEnvironmentStorage>>>;
+  subscriptionId?: Maybe<Scalars['String']>;
+  zoneRedundant?: Maybe<Scalars['Boolean']>;
+};
+
+export type AzureContainerAppEnvironmentCertificate = {
+  id: Scalars['String'];
+  location?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerAppEnvironmentDaprComponent = {
+  componentType?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  ignoreErrors?: Maybe<Scalars['Boolean']>;
+  name?: Maybe<Scalars['String']>;
+  secretStoreComponent?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['String']>;
+};
+
+export type AzureContainerAppEnvironmentStorage = {
+  id: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
 export type AzureContainerRegistry = AzureResource & {
   adminUserEnabled?: Maybe<Scalars['Boolean']>;
   creationDate?: Maybe<Scalars['String']>;

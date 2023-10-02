@@ -1,6 +1,6 @@
 {
   "name": "@cloudgraph/cg-provider-azure",
-  "version": "0.67.0-beta.1",
+  "version": "0.68.0-alpha.1",
   "description": "CloudGraph provider plugin for Azure used to fetch Azure cloud data.",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
@@ -31,6 +31,7 @@
     "terraform:cleanup": "rimraf ./tests/terraform/{.terraform,.terraform.lock.hcl,tfplan} ./tests/terraform/*.{tfstate,tfplan,backup}"
   },
   "dependencies": {
+    "@azure/arm-appcontainers": "^2.0.0",
     "@azure/arm-appinsights": "^4.0.0",
     "@azure/arm-appservice": "^11.0.0",
     "@azure/arm-authorization": "^8.4.1",

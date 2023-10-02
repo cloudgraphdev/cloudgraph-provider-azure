@@ -1,0 +1,58 @@
+
+type azureContainerAppEnvironmentCertificate
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  location: String @search(by: [hash, regexp])
+}
+type azureContainerAppEnvironmentDaprComponent
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+  componentType: String @search(by: [hash, regexp])
+  version: String
+  ignoreErrors: Boolean
+  secretStoreComponent: String
+}
+type azureContainerAppEnvironmentStorage
+  @generate(
+    query: { get: false, query: true, aggregate: false }
+    mutation: { add: false, delete: false }
+    subscription: false
+  )
+  @key(fields: "id") {
+  id: String! @id @search(by: [hash, regexp])
+  name: String @search(by: [hash, regexp])
+  type: String @search(by: [hash, regexp])
+}
+
+type azureContainerAppEnvironment implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  provisioningState: String @search(by: [hash, regexp])
+  defaultDomain: String @search(by: [hash, regexp])
+  staticIp: String @search(by: [hash, regexp])
+  infrastructureResourceGroup: String @search(by: [hash, regexp])
+  zoneRedundant: Boolean @search
+  eventStreamEndpoint: String @search(by: [hash, regexp])
+  subscriptionId: String @search(by: [hash, regexp])
+  certificates: [azureContainerAppEnvironmentCertificate]
+  daprComponents: [azureContainerAppEnvironmentDaprComponent]
+  storages: [azureContainerAppEnvironmentStorage]
+}

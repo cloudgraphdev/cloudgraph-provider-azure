@@ -1,0 +1,16 @@
+type azureContainerApp implements azureResource
+  @generate(
+    query: { get: true, query: true, aggregate: true }
+    mutation: { add: true, delete: false }
+  )
+  @key(fields: "id") {
+  location: String @search(by: [hash, regexp])
+  provisioningState: String @search(by: [hash, regexp])
+  managedEnvironmentId: String @search(by: [hash, regexp])
+  environmentId: String @search(by: [hash, regexp])
+  workloadProfileName: String @search(by: [hash, regexp])
+  latestRevisionName: String @search(by: [hash, regexp])
+  latestReadyRevisionName: String @search(by: [hash, regexp])
+  latestRevisionFqdn: String @search(by: [hash, regexp])
+  customDomainVerificationId: String @search(by: [hash, regexp])
+}

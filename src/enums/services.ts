@@ -29,6 +29,8 @@ export default {
   cdnProfiles: 'cdnProfiles',
   cognitiveServicesAccount: 'cognitiveServicesAccount',
   containerRegistry: 'containerRegistry',
+  containerApp: 'containerApp',
+  containerAppEnvironment: 'containerAppEnvironment',
   cosmosDb: 'cosmosDb',
   dataCollectionRule: 'dataCollectionRule',
   dataFactory: 'dataFactory',
