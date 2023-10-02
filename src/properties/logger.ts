@@ -70,6 +70,9 @@ export default {
     `Found ${num} CDN origin groups`,
   foundContainerRegistries: (num: number): string =>
     `Found ${num} container registries`,
+  foundContainerApps: (num: number): string => `Found ${num} container apps`,
+  foundContainerAppEnvironment: (num: number): string =>
+    `Found ${num} container environments`,
   /* Cosmos DB */
   foundCosmosDbAccounts: (num: number): string =>
     `Found ${num} cosmos DB accounts`,
