@@ -24,6 +24,8 @@ import AzureCdnOrigins from '../services/cdnOrigins'
 import AzureCdnProfiles from '../services/cdnProfiles'
 import AzureCognitiveServicesAccount from '../services/cognitiveServicesAccount'
 import AzureContainerRegistry from '../services/containerRegistry'
+import AzureContainerApp from '../services/containerApp'
+import AzureContainerAppEnvironment from '../services/containerAppEnvironment'
 import AzureDataCollectionRule from '../services/dataCollectionRule'
 import AzureDataFactory from '../services/dataFactory'
 import AzureDatabaseManagedSqlInstance from '../services/databaseManagedSqlInstance'
@@ -131,6 +133,8 @@ export default {
   [services.cdnProfiles]: AzureCdnProfiles,
   [services.cognitiveServicesAccount]: AzureCognitiveServicesAccount,
   [services.containerRegistry]: AzureContainerRegistry,
+  [services.containerApp]: AzureContainerApp,
+  [services.containerAppEnvironment]: AzureContainerAppEnvironment,
   [services.cosmosDb]: AzureCosmosDb,
   [services.dataCollectionRule]: AzureDataCollectionRule,
   [services.dataFactory]: AzureDataFactory,
