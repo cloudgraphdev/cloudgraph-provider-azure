@@ -1,3 +1,10 @@
+# [0.68.0](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0...0.68.0) (2023-10-17)
+
+
+### Features
+
+* **azure:** Add ContainerApp services ([6a0c656](https://github.com/cloudgraphdev/cloudgraph-provider-azure/commit/6a0c656e3b99361ada25cbc40f58cba90cd0bef5))
+
 # [0.68.0-beta.1](https://github.com/cloudgraphdev/cloudgraph-provider-azure/compare/0.67.0...0.68.0-beta.1) (2023-10-02)
 
 
